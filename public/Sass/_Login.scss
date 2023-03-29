@@ -1,0 +1,68 @@
+.login-wrapper { 
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+
+     
+    .software-name {
+        background: black;
+        color: #aaa;
+        font-size: 5rem;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .wrapper-inner {
+        align-items: center;
+        background: rgba(0, 0, 0, 0.1);
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        width: 100vw;  
+
+        .login-inner { 
+            background-color: #fff; 
+            border-radius: 1rem;
+            padding: 2rem;
+            translate: 0 -4rem;
+            width: 26rem; 
+    
+            .company-logo {
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 3rem;
+                padding-block: 1rem;
+            }
+    
+            .login-inputs {
+                padding-block: 0.5rem;
+    
+                input {
+                    border: none;
+                    border-bottom: 1px solid $Color-1;
+                    color: $Color-1;
+                    margin-block: 0.5rem;
+                    outline: none;
+                    padding-block: 0.5rem;
+                    width: 100%;
+                    -webkit-box-shadow: 0 0 0 30px white inset !important;
+
+                    &[placeholder] { 
+                        -webkit-text-fill-color: darken($color: $Color-1, $amount: 20) !important;
+
+                    }
+
+                    &:focus {
+                        border-bottom: 3px solid $Color-1;
+                    }
+                }
+            }
+
+            p {
+                text-align: right; 
+            }
+        } 
+    }
+}

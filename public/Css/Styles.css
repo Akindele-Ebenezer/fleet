@@ -1,0 +1,412 @@
+* {
+  box-sizing: border-box;
+  color: #333;
+  font-family: "Kanit", sans-serif;
+  font-size: small;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  word-wrap: break-word;
+}
+
+.active, .report-inner ul a li:hover {
+  background: #fff;
+  border-radius: 0.5rem;
+  color: #333 !important;
+}
+.active span, .report-inner ul a li:hover span {
+  background: #333 !important;
+  color: #fff !important;
+}
+.active svg, .report-inner ul a li:hover svg {
+  fill: #000;
+}
+
+button {
+  background: #333;
+  border: none;
+  border-radius: 0.2em;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 1rem;
+  outline: none;
+  padding: 0.5rem;
+}
+
+.modal-vehicle-data {
+  align-items: center;
+  background: rgba(10, 24, 76, 0.4);
+  display: flex;
+  display: none;
+  height: 100vh;
+  justify-content: center;
+  position: absolute;
+  width: 100vw;
+  z-index: 10;
+}
+.modal-vehicle-data .inner {
+  background: #fff;
+  border-radius: 1em;
+  height: 80%;
+  overflow-y: scroll;
+  padding: 1em;
+  width: 40rem;
+}
+.modal-vehicle-data .inner .active-status {
+  align-items: center;
+  background: #FFF2CC;
+  border-radius: 0.5em;
+  display: flex;
+  margin-block: 0.5em;
+  padding: 0.5em;
+}
+.modal-vehicle-data .inner .cancel-modal {
+  background: #fff;
+  cursor: pointer;
+  font-size: 2em;
+  font-weight: bold;
+  position: fixed;
+}
+.modal-vehicle-data .inner .heading {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2em;
+  padding-block: 0.5em;
+}
+.modal-vehicle-data .inner .heading h1 {
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 0.35em;
+  display: flex;
+  font-family: "Bitter", serif !important;
+  font-size: 2em;
+  padding: 0.35em;
+}
+.modal-vehicle-data .inner h1 {
+  align-items: center;
+  display: flex;
+  font-family: system-ui;
+  justify-content: space-between;
+  padding: 0.7em 0.5em;
+}
+.modal-vehicle-data .inner img {
+  margin-right: 1em;
+  width: 3rem;
+}
+.modal-vehicle-data .inner svg {
+  fill: #111;
+}
+.modal-vehicle-data .inner ul li {
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8em 0.5em;
+}
+.modal-vehicle-data .inner ul li span:first-of-type {
+  align-items: center;
+  display: flex;
+}
+
+svg {
+  fill: #eee;
+  height: 2rem;
+  padding-right: 1rem;
+  width: 2.5rem;
+}
+
+.login-wrapper {
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+.login-wrapper .software-name {
+  background: black;
+  color: #aaa;
+  font-size: 5rem;
+  padding: 1rem;
+  text-align: center;
+}
+.login-wrapper .wrapper-inner {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+.login-wrapper .wrapper-inner .login-inner {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  translate: 0 -4rem;
+  width: 26rem;
+}
+.login-wrapper .wrapper-inner .login-inner .company-logo {
+  text-align: center;
+}
+.login-wrapper .wrapper-inner .login-inner h2 {
+  font-size: 3rem;
+  padding-block: 1rem;
+}
+.login-wrapper .wrapper-inner .login-inner .login-inputs {
+  padding-block: 0.5rem;
+}
+.login-wrapper .wrapper-inner .login-inner .login-inputs input {
+  border: none;
+  border-bottom: 1px solid #333;
+  color: #333;
+  margin-block: 0.5rem;
+  outline: none;
+  padding-block: 0.5rem;
+  width: 100%;
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+.login-wrapper .wrapper-inner .login-inner .login-inputs input[placeholder] {
+  -webkit-text-fill-color: black !important;
+}
+.login-wrapper .wrapper-inner .login-inner .login-inputs input:focus {
+  border-bottom: 3px solid #333;
+}
+.login-wrapper .wrapper-inner .login-inner p {
+  text-align: right;
+}
+
+.report {
+  background: #eee;
+  display: flex;
+}
+.report-data {
+  width: 80vw;
+}
+.report-data-heading {
+  margin-left: 2rem;
+  padding-bottom: 1rem;
+}
+.report-data-heading .inner {
+  align-items: center;
+  border-bottom: 1px solid;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5em;
+}
+.report-data-heading .inner button {
+  background: #333;
+  border-radius: 0.2rem;
+  margin-right: 0.5rem;
+  margin-top: unset;
+}
+.report-data-heading .inner button:nth-child(2) {
+  background: #333;
+}
+.report-data-heading .inner button:nth-child(4) {
+  background: #DF2E38;
+}
+.report-data-heading .inner h1 {
+  color: #fff;
+  font-family: "Kanit", sans-serif !important;
+  font-size: 5em;
+  letter-spacing: 0.02em;
+}
+.report-data-heading .inner h1 span {
+  border: 1px solid #333;
+  color: #fff;
+  display: block;
+  font-family: system-ui;
+  padding-inline: 0.5em;
+  text-align: right;
+}
+.report-data-heading .inner h1 svg {
+  fill: #333;
+  height: 2rem;
+  width: 4rem;
+}
+.report-data-heading .inner.wrapper .search {
+  background: #111;
+  border: 1px solid;
+  margin-right: 1em;
+  padding: 1em;
+}
+.report-data-heading .inner.wrapper .search h2 {
+  color: #fff;
+  font-weight: unset;
+  text-decoration: overline;
+  text-decoration-color: #fff;
+}
+.report-data-heading .inner.wrapper .search input {
+  border: 1px solid #ccc;
+  border-radius: 0.34em;
+  color: blue;
+  margin-right: 0.5em;
+  outline: none;
+  padding: 0.2em;
+}
+.report-data-heading .inner-x {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.report-data-heading .inner-x button {
+  background: #333;
+  margin-top: unset;
+}
+.report-data-heading .inner-x.deposit {
+  background: #111;
+  border: 1px solid;
+  margin-block: 0.5rem;
+  padding-block: 1rem;
+  padding-left: 0.5em;
+}
+.report-data-heading .inner-x p {
+  align-items: center;
+  border: 1px solid #333;
+  color: #fff;
+  display: flex;
+  margin-right: 1rem;
+  padding: 0.5em;
+}
+.report-data-heading .inner-x p img {
+  border: 1px solid #ddd;
+  padding: 0.25em;
+  margin-right: 0.5rem;
+  width: 2rem;
+}
+.report-data-heading .inner-x table {
+  border-collapse: collapse;
+  margin-right: 1rem;
+}
+.report-data-heading .inner-x table td {
+  border: 1px solid #ccc;
+  text-align: center;
+}
+.report-data-heading .inner-x table td, .report-data-heading .inner-x table th {
+  color: #fff;
+}
+.report-data-heading .inner-x table th {
+  font-weight: unset;
+  font-style: italic;
+  padding-right: 0.5em;
+}
+.report-data-heading .inner-x table th svg {
+  float: left;
+  translate: 0.4rem -0.3rem;
+}
+.report-inner {
+  background: rgba(0, 0, 0, 0.7);
+  height: 100vh;
+  overflow: hidden;
+}
+.report-inner .action {
+  display: flex;
+  justify-content: center;
+}
+.report-inner .action .inner {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5em;
+  padding: 0.5em 0 0 0;
+  width: 20rem;
+}
+.report-inner .action .inner button {
+  background: #333;
+  margin: 0 0.5em 0.5em 0;
+}
+.report-inner .action .inner button:last-of-type {
+  background: unset;
+  border: 3px solid #fff;
+  border-radius: unset;
+  color: #fff;
+}
+.report-inner h1 {
+  color: #eee;
+  font-family: system-ui;
+}
+.report-inner-heading {
+  align-items: center;
+  display: flex;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+.report-inner .nav-footer {
+  bottom: 0;
+  position: absolute;
+}
+.report-inner .table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.report-inner .table td {
+  color: #eee !important;
+}
+.report-inner .table td,
+.report-inner .table th {
+  background: #111;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 0.5rem;
+}
+.report-inner .table th {
+  font-family: system-ui;
+}
+.report-inner .table tr {
+  border-bottom: 1px solid #333;
+}
+.report-inner .table tr:nth-child(2n+3) {
+  background: #eee;
+}
+.report-inner .table tr.table-head {
+  border: 2px solid #000;
+  position: sticky;
+  top: 0;
+  translate: 0 -0.1rem;
+}
+.report-inner .table-wrapper {
+  height: 60%;
+  margin-left: 2rem;
+  overflow-y: scroll;
+  padding-bottom: 4rem;
+}
+.report-inner ul a li {
+  align-items: center;
+  color: #eee;
+  display: flex;
+  padding: 0.5rem;
+}
+.report-inner ul a li span {
+  background: #eee;
+  border-radius: 0.15em;
+  color: #333;
+  margin-left: 1rem;
+  padding-inline: 0.25em;
+}
+.report-inner ul input {
+  background: #1a1a1a;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  margin-block: 1em;
+  outline: none;
+  padding: 0.5rem;
+  width: 100%;
+}
+.report-inner ul input[placeholder] {
+  -webkit-text-fill-color: #eee !important;
+}
+.report .left-nav {
+  background: #0d0d0d;
+  padding-inline: 0.5rem;
+  width: 17rem;
+}
+.report .left-nav center img {
+  border-radius: 0.25em;
+  margin-top: 0.5em;
+}
+.report .left-nav .sub-nav {
+  padding-left: 1em;
+}
+
+/*# sourceMappingURL=Styles.css.map */

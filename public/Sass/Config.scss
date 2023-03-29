@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box; 
+    color: #333;
+    // font-family: 'Source Sans Pro', sans-serif !important;
+    font-family: 'Kanit', sans-serif;
+    // font-size: small;
+    font-size: small;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    word-wrap: break-word;
+} 
+
+$Color-1: #333;
+$Color-2: #DF2E38; 
+ 
+.active {
+    background: #fff;
+    border-radius: 0.5rem;
+    color: $Color-1 !important;
+
+    span {
+        background: $Color-1 !important;
+        color: #fff !important;
+    }
+
+    svg {
+        fill: #000;
+    }
+}
+
+button {
+    background: $Color-1;
+    border: none;
+    border-radius: .2em;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 1rem;
+    outline: none; 
+    padding: 0.5rem; 
+}
+
+.modal-vehicle-data {
+    align-items: center;
+    background: rgb(10 24 76 / 40%);
+    display: flex;
+    display: none;
+    height: 100vh;
+    justify-content: center;
+    position: absolute;
+    width: 100vw;
+    z-index: 10;
+
+    .inner {
+        background: #fff;
+        border-radius: 1em;
+        height: 80%;
+        overflow-y: scroll;
+        padding: 1em; 
+        width: 40rem;
+
+        .active-status {
+            align-items: center;
+            background: #FFF2CC;
+            border-radius: 0.5em;
+            display: flex;
+            margin-block: 0.5em;
+            padding: 0.5em;
+        }
+
+        .cancel-modal {
+            background: #fff;
+            cursor: pointer;
+            font-size: 2em;
+            font-weight: bold;
+            position: fixed;
+        }
+
+        .heading {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2em;
+            padding-block: 0.5em;
+
+            h1 {
+                align-items: center;
+                border: 1px solid #eee;
+                border-radius: 0.35em;
+                display: flex;
+                font-family: "Bitter", serif !important;
+                font-size: 2em;
+                padding: 0.35em;
+            }
+        }
+
+        h1 {
+            align-items: center;
+            display: flex;
+            font-family: system-ui;
+            justify-content: space-between;
+            padding: 0.7em 0.5em;
+        }
+
+        img {
+            margin-right: 1em;
+            width: 3rem;
+        }
+
+        svg {
+            fill: #111;
+        }
+
+        ul {
+            li {
+                align-items: center;
+                border-bottom: 1px solid #eee;
+                display: flex;
+                justify-content: space-between;
+                padding: 0.8em 0.5em;
+
+                span {
+                    &:first-of-type {
+                        align-items: center;
+                        display: flex; 
+                    }
+                }
+            }
+        }
+    }
+}
+
+svg {
+    fill: #eee;
+    height: 2rem;
+    padding-right: 1rem;
+    width: 2.5rem;
+}
+
