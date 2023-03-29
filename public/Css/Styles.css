@@ -180,7 +180,7 @@ svg {
   display: flex;
 }
 .report-data {
-  width: 80vw;
+  width: -webkit-fill-available;
 }
 .report-data-heading {
   margin-left: 2rem;
