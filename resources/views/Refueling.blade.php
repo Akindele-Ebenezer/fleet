@@ -1,0 +1,86 @@
+@extends('Layouts.Layout2')
+
+@section('Content')
+    <div class="table-wrapper"> 
+        <table class="table">
+            <tr>
+                <th>RFL NO</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>K.METER</th>
+                <th>Terminal No</th>
+                <th>Card No</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>Receipt No</th>
+                <th>KM</th>
+                <th>[KM/LITER]</th>
+            </tr>
+            <tr>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+            </tr>
+            <tr>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+            </tr>
+            <tr>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+            </tr>
+            <tr>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+            </tr>
+            <tr>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+                <td>28478f9WUR</td>
+            </tr>
+        </table>
+    </div>
+@endsection

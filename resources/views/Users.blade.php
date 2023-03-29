@@ -1,0 +1,48 @@
+@extends('Layouts.Layout2')
+
+@section('Content')
+    <div class="table-wrapper"> 
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Records</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+            </tr>
+            <tr>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+            </tr>
+            <tr>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+            </tr>
+            <tr>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+                <td>FHJ#JJF</td>
+            </tr>
+        </table>
+    </div>
+@endsection

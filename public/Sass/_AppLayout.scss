@@ -1,5 +1,5 @@
 .report {
-    background: #eee;
+    background: #000;
     display: flex;   
     
     &-data {
@@ -280,7 +280,7 @@
     .left-nav {
         background: darken($color: $Color-1, $amount: 15);
         padding-inline: .5rem;
-        width: 17rem;
+        width: 19rem;
 
         center {
             img {

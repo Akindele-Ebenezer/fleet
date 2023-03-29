@@ -118,6 +118,7 @@ svg {
 }
 
 .login-wrapper {
+  background-color: #000;
   background-position: center;
   background-size: cover;
   overflow: hidden;
@@ -175,7 +176,7 @@ svg {
 }
 
 .report {
-  background: #eee;
+  background: #000;
   display: flex;
 }
 .report-data {
@@ -399,7 +400,7 @@ svg {
 .report .left-nav {
   background: #0d0d0d;
   padding-inline: 0.5rem;
-  width: 17rem;
+  width: 19rem;
 }
 .report .left-nav center img {
   border-radius: 0.25em;
