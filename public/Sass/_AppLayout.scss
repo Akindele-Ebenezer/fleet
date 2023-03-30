@@ -69,9 +69,7 @@
                     }
 
                     input {
-                        border: 1px solid #ccc;
-                        border-radius: 0.34em;
-                        color: blue;
+                        border: none; 
                         margin-right: 0.5em;
                         outline: none;
                         padding: 0.2em;
@@ -208,6 +206,16 @@
                 border: 1px solid #333;
                 color: #fff;
                 padding: 0.5rem;
+
+                input {
+                    background: #444;
+                    border: none; 
+                    -webkit-text-fill-color: #ddd !important;
+                    margin-block: 1em;
+                    outline: none;
+                    padding-inline: 0.25rem;
+                    text-align: center;
+                }
             }
 
             th {  
@@ -226,6 +234,10 @@
                     position: sticky;
                     top: 0;
                     translate: 0 -0.1rem;
+
+                    &.filter {
+                        top: 2em;
+                    }
                 } 
             }
         }

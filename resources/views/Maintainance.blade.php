@@ -2,31 +2,32 @@
 
 @section('Content')
     <div class="table-wrapper"> 
-        <table class="table">
+        <table class="table" id="Table">
             <tr class="table-head"> 
-                <th>S/N</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Maintainance Action</th>
-                <th>Release Date</th>
-                <th>Release Time</th>
-                <th>Cost</th>
-                <th>Invoice No</th>
-                <th>Supplier No</th>
+                <th onclick="sortTable(0)">S/N</th>
+                <th onclick="sortTable(1)">Vehicle no</th>
+                <th onclick="sortTable(2)">Date</th>
+                <th onclick="sortTable(3)">Time</th>
+                <th onclick="sortTable(4)">Maintainance Action</th>
+                <th onclick="sortTable(5)">Release Date</th>
+                <th onclick="sortTable(6)">Release Time</th>
+                <th onclick="sortTable(7)">Cost</th>
+                <th onclick="sortTable(8)">Invoice No</th>
+                <th onclick="sortTable(9)">Supplier No</th>
             </tr> 
             <tr> 
-                <td>S/N</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintainance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
+                <td>S/N1</td>
+                <td>Vehicle no1</td>
+                <td>Time1</td>
+                <td>Maintainance Action1</td>
+                <td>Release Date1</td>
+                <td>Release Time1</td>
+                <td>Cost1</td>
+                <td>Invoice No1</td>
+                <td>Supplier No1</td>
             </tr> 
             <td>S/N</td>
-            <td>Date</td>
+            <td>Vehicle no</td>
             <td>Time</td>
             <td>Maintainance Action</td>
             <td>Release Date</td>
@@ -36,7 +37,7 @@
             <td>Supplier No</td>
         </tr> 
         <td>S/N</td>
-        <td>Date</td>
+        <td>Vehicle no</td>
         <td>Time</td>
         <td>Maintainance Action</td>
         <td>Release Date</td>
@@ -46,7 +47,7 @@
         <td>Supplier No</td>
     </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -56,7 +57,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -66,7 +67,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -76,7 +77,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -86,7 +87,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -96,7 +97,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -106,7 +107,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -116,7 +117,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -126,7 +127,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -136,7 +137,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -146,7 +147,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -156,7 +157,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -166,7 +167,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -176,7 +177,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -186,7 +187,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -196,7 +197,7 @@
                 <td>Supplier No</td>
             </tr> 
                 <td>S/N</td>
-                <td>Date</td>
+                <td>Vehicle no</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>

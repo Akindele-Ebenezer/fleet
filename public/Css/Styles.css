@@ -34,6 +34,27 @@ button {
   padding: 0.5rem;
 }
 
+.cancel-modal {
+  background: #fff;
+  border-radius: 0.1em;
+  color: #DF2E38;
+  cursor: pointer;
+  font-size: 2em;
+  font-weight: bold;
+  padding-inline: 0.25em;
+  position: fixed;
+  right: 1em;
+  top: 0.5em;
+  z-index: 30;
+}
+
+.edit-modal-vehicle-data .inner ul li input,
+.edit-modal-vehicle-data .inner ul li select {
+  border: 1px solid #aaa;
+  outline: none;
+  padding-inline: 0.5em;
+}
+
 .modal-vehicle-data {
   align-items: center;
   background: rgba(10, 24, 76, 0.4);
@@ -60,13 +81,6 @@ button {
   display: flex;
   margin-block: 0.5em;
   padding: 0.5em;
-}
-.modal-vehicle-data .inner .cancel-modal {
-  background: #fff;
-  cursor: pointer;
-  font-size: 2em;
-  font-weight: bold;
-  position: fixed;
 }
 .modal-vehicle-data .inner .heading {
   align-items: center;
@@ -115,6 +129,58 @@ svg {
   height: 2rem;
   padding-right: 1rem;
   width: 2.5rem;
+}
+
+.form {
+  display: none;
+  background: rgba(20, 32, 112, 0.4);
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 20;
+}
+.form .inner {
+  background: #111;
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 1em;
+  position: fixed;
+  right: 0;
+  width: 30rem;
+}
+.form .inner form .new-car-inputs {
+  border: 1px solid;
+  margin-block: 0.5em;
+  padding: 0.5em;
+}
+.form .inner form .new-car-inputs-inner {
+  align-items: center;
+  color: #fff;
+  display: flex;
+}
+.form .inner form .new-car-inputs input {
+  background: #444;
+  border: none;
+  border-radius: 0.5em;
+  color: #fff;
+  margin-left: 2.5em;
+  margin-top: 0.5em;
+  outline: none;
+  padding: 0.5em;
+  width: 90%;
+}
+.form .inner form .heading {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3em;
+}
+.form .inner form .heading h1 {
+  align-items: center;
+  color: #fff;
+  display: flex;
+  font-family: system-ui;
 }
 
 .login-wrapper {
@@ -237,9 +303,7 @@ svg {
   text-decoration-color: #fff;
 }
 .report-data-heading .inner.wrapper .search input {
-  border: 1px solid #ccc;
-  border-radius: 0.34em;
-  color: blue;
+  border: none;
   margin-right: 0.5em;
   outline: none;
   padding: 0.2em;
@@ -350,6 +414,16 @@ svg {
   color: #fff;
   padding: 0.5rem;
 }
+.report-inner .table td input,
+.report-inner .table th input {
+  background: #444;
+  border: none;
+  -webkit-text-fill-color: #ddd !important;
+  margin-block: 1em;
+  outline: none;
+  padding-inline: 0.25rem;
+  text-align: center;
+}
 .report-inner .table th {
   font-family: system-ui;
 }
@@ -364,6 +438,9 @@ svg {
   position: sticky;
   top: 0;
   translate: 0 -0.1rem;
+}
+.report-inner .table tr.table-head.filter {
+  top: 2em;
 }
 .report-inner .table-wrapper {
   height: 60%;

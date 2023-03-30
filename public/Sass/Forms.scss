@@ -1,0 +1,59 @@
+.form { 
+    display: none;
+    background: rgb(20 32 112 / 40%);
+    height: 100vh;
+    position: absolute; 
+    top: 0;
+    width: 100vw;
+    z-index: 20;
+
+    .inner {
+        background: #111;
+        height: 100vh;
+        overflow-y: scroll;
+        padding: 1em; 
+        position: fixed;
+        right: 0;
+        width: 30rem;
+    
+        form {
+            .new-car-inputs {
+                border: 1px solid;
+                margin-block: 0.5em;
+                padding: 0.5em;
+
+                &-inner {
+                    align-items: center;
+                    color: #fff;
+                    display: flex;
+                }
+
+                input {
+                    background: #444;
+                    border: none;
+                    border-radius: 0.5em;
+                    color: #fff;
+                    margin-left: 2.5em;
+                    margin-top: 0.5em;
+                    outline: none;
+                    padding: 0.5em;
+                    width: 90%;
+                }
+            }
+
+            .heading {
+                align-items: center;
+                display: flex;
+                justify-content: space-between;
+                margin-top: 3em;
+
+                h1 {
+                    align-items: center;
+                    color: #fff;
+                    display: flex;
+                    font-family: system-ui;
+                }
+            }
+        }
+    }
+}
