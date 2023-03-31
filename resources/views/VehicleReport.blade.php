@@ -17,22 +17,7 @@
                 <th onclick="sortTable(10)">Balance</th>
                 <th onclick="sortTable(11)">To Deposit</th>
                 <th onclick="sortTable(12)">Comments</th>
-            </tr>
-            <tr class="table-head filter"> 
-                <th><input type="text" id="SearchInput0" placeholder="Filter By ORG" onkeyup="FilterORG()"></th> 
-                <th><input type="text" id="SearchInput1" placeholder="Filter By Car Number" onkeyup="FilterCarNumber()"></th> 
-                <th><input type="text" id="SearchInput2" placeholder="Filter By Used By" onkeyup="FilterUsedBy()"></th> 
-                <th><input type="text" id="SearchInput3" placeholder="Filter By Driver" onkeyup="FilterDriver()"></th> 
-                <th><input type="text" id="SearchInput4" placeholder="Filter By Maker" onkeyup="FilterMaker()"></th> 
-                <th><input type="text" id="SearchInput5" placeholder="Filter By Model" onkeyup="FilterModel()"></th> 
-                <th><input type="text" id="SearchInput6" placeholder="Filter By Total (CARD NO)" onkeyup="FilterTotal()"></th> 
-                <th><input type="text" id="SearchInput7" placeholder="Filter By Monthly Budget" onkeyup="FilterMonthlyBudget()"></th> 
-                <th><input type="text" id="SearchInput8" placeholder="Filter By Deposits" onkeyup="FilterDeposits()"></th> 
-                <th><input type="text" id="SearchInput9" placeholder="Filter By Refueling" onkeyup="FilterRefueling()"></th> 
-                <th><input type="text" id="SearchInput10" placeholder="Filter By Balance" onkeyup="FilterBalance()"></th> 
-                <th><input type="text" id="SearchInput11" placeholder="Filter By To Deposit" onkeyup="FilterToDeposit()"></th> 
-                <th><input type="text" id="SearchInput12" placeholder="Filter By Comments.." onkeyup="FilterComments()"></th> 
-            </tr>
+            </tr> 
             <tr> 
                 <td>ORG1</td>
                 <td>Car Number1</td>
@@ -348,6 +333,21 @@
                 <td>To Deposit</td>
                 <td>Comments..</td>
             </tr>
+            <div class="table-head filter"> 
+                <span><input type="text" id="SearchInput0" placeholder="Filter By ORG" onkeyup="FilterORG()"></span> 
+                <span><input type="text" id="SearchInput1" placeholder="Filter By Car Number" onkeyup="FilterCarNumber()"></span> 
+                <span><input type="text" id="SearchInput2" placeholder="Filter By Used By" onkeyup="FilterUsedBy()"></span> 
+                <span><input type="text" id="SearchInput3" placeholder="Filter By Driver" onkeyup="FilterDriver()"></span> 
+                <span><input type="text" id="SearchInput4" placeholder="Filter By Maker" onkeyup="FilterMaker()"></span> 
+                <span><input type="text" id="SearchInput5" placeholder="Filter By Model" onkeyup="FilterModel()"></span> 
+                <span><input type="text" id="SearchInput6" placeholder="Filter By Total (CARD NO)" onkeyup="FilterTotal()"></span> 
+                <span><input type="text" id="SearchInput7" placeholder="Filter By Monthly Budget" onkeyup="FilterMonthlyBudget()"></span> 
+                <span><input type="text" id="SearchInput8" placeholder="Filter By Deposits" onkeyup="FilterDeposits()"></span> 
+                <span><input type="text" id="SearchInput9" placeholder="Filter By Refueling" onkeyup="FilterRefueling()"></span> 
+                <span><input type="text" id="SearchInput10" placeholder="Filter By Balance" onkeyup="FilterBalance()"></span> 
+                <span><input type="text" id="SearchInput11" placeholder="Filter By To Deposit" onkeyup="FilterToDeposit()"></span> 
+                <span><input type="text" id="SearchInput12" placeholder="Filter By Comments.." onkeyup="FilterComments()"></span> 
+            </div>
         </table>
     </div> 
 @endsection

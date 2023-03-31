@@ -18,6 +18,7 @@
             <tr> 
                 <td>S/N1</td>
                 <td>Vehicle no1</td>
+                <td>Date1</td>
                 <td>Time1</td>
                 <td>Maintainance Action1</td>
                 <td>Release Date1</td>
@@ -28,6 +29,7 @@
             </tr> 
             <td>S/N</td>
             <td>Vehicle no</td>
+            <td>Date</td>
             <td>Time</td>
             <td>Maintainance Action</td>
             <td>Release Date</td>
@@ -38,6 +40,7 @@
         </tr> 
         <td>S/N</td>
         <td>Vehicle no</td>
+        <td>Date</td>
         <td>Time</td>
         <td>Maintainance Action</td>
         <td>Release Date</td>
@@ -48,6 +51,7 @@
     </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -58,6 +62,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -68,6 +73,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -78,6 +84,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -88,6 +95,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -98,6 +106,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -108,6 +117,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -118,6 +128,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -128,6 +139,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -138,6 +150,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -148,6 +161,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -158,6 +172,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -168,6 +183,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -178,6 +194,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -188,6 +205,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -198,6 +216,7 @@
             </tr> 
                 <td>S/N</td>
                 <td>Vehicle no</td>
+                <td>Date</td>
                 <td>Time</td>
                 <td>Maintainance Action</td>
                 <td>Release Date</td>
@@ -206,6 +225,18 @@
                 <td>Invoice No</td>
                 <td>Supplier No</td>
             </tr> 
+            <div class="table-head filter"> 
+                <span><input type="text" id="SearchInput0" placeholder="Filter By S/N" onkeyup="FilterSN()"></span> 
+                <span><input type="text" id="SearchInput1" placeholder="Filter By Vehicle no" onkeyup="FilterCarVehicleNo()"></span> 
+                <span><input type="text" id="SearchInput2" placeholder="Filter By Date" onkeyup="FilterDate()"></span> 
+                <span><input type="text" id="SearchInput3" placeholder="Filter By Time" onkeyup="FilterTime()"></span> 
+                <span><input type="text" id="SearchInput4" placeholder="Filter By Maintainance Action" onkeyup="FilterMaintainanceAction()"></span> 
+                <span><input type="text" id="SearchInput5" placeholder="Filter By Release Date" onkeyup="FilterReleaseDate()"></span> 
+                <span><input type="text" id="SearchInput6" placeholder="Filter By Release Time" onkeyup="FilterReleaseTime()"></span> 
+                <span><input type="text" id="SearchInput7" placeholder="Filter By Cost" onkeyup="FilterCost()"></span> 
+                <span><input type="text" id="SearchInput8" placeholder="Filter By Invoice No" onkeyup="FilterInvoiceNo()"></span> 
+                <span><input type="text" id="SearchInput9" placeholder="Filter By Supplier No" onkeyup="FilterSupplierNo()"></span>  
+            </div>
         </table>
     </div>
 @endsection

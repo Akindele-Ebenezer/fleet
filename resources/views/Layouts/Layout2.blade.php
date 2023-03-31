@@ -187,22 +187,128 @@
                     </div>
                     @php
             
-                        $SearchInputs = [
-                            "ORG",
-                            "CarNumber",
-                            "UsedBy",
-                            "Driver",
-                            "Maker",
-                            "Model",
-                            "Total",
-                            "MonthlyBudget",
-                            "Deposits",
-                            "Refueling",
-                            "Balance",
-                            "ToDeposit",
-                            "Comments",
-                        ];
+                        $SearchInputs = [];
+
+                        if($_SERVER['REQUEST_URI'] === '/Cars') {
+                            $SearchInputs = [
+                                "ID",
+                                "VehicleNo",
+                                "Status",
+                                "Price",
+                                "Driver",
+                                "Consumption",
+                                "Refueling",
+                                "Balance", 
+                            ];
+                        }
+                        
+                        if($_SERVER['REQUEST_URI'] === '/MyRecords') {
+                            $SearchInputs = [
+                                "ORG",
+                                "CarNumber",
+                                "UsedBy",
+                                "Driver",
+                                "Maker",
+                                "Model",
+                                "Total",
+                                "MonthlyBudget",
+                                "Deposits",
+                                "Refueling",
+                                "Balance",
+                                "ToDeposit",
+                                "Comments",
+                            ];
+                        }
+
+                        if($_SERVER['REQUEST_URI'] === '/VehicleReport') {
+                            $SearchInputs = [
+                                "ORG",
+                                "CarNumber",
+                                "UsedBy",
+                                "Driver",
+                                "Maker",
+                                "Model",
+                                "Total",
+                                "MonthlyBudget",
+                                "Deposits",
+                                "Refueling",
+                                "Balance",
+                                "ToDeposit",
+                                "Comments",
+                            ];
+                        }
              
+                        if($_SERVER['REQUEST_URI'] === '/Repairs') {
+                            $SearchInputs = [
+                                "SN",
+                                "CarVehicleNo",
+                                "Date",
+                                "Time",
+                                "RepairAction",
+                                "ReleaseDate",
+                                "ReleaseTime",
+                                "Cost",
+                                "InvoiceNo",
+                                "SupplierNo", 
+                            ];
+                        }
+                
+                        if($_SERVER['REQUEST_URI'] === '/Maintainance') {
+                            $SearchInputs = [
+                                "SN",
+                                "VehicleNo",
+                                "Date",
+                                "Time",
+                                "MaintainanceAction",
+                                "ReleaseDate",
+                                "ReleaseTime",
+                                "Cost",
+                                "InvoiceNo",
+                                "SupplierNo", 
+                            ];
+                        }
+                
+                        if($_SERVER['REQUEST_URI'] === '/Deposits') {
+                            $SearchInputs = [
+                                "LNO",
+                                "VehicleNo",
+                                "Date",
+                                "CardNo",
+                                "Amount",
+                                "Year",
+                                "Week",
+                                "Month", 
+                            ];
+                        } 
+
+                        if($_SERVER['REQUEST_URI'] === '/Refueling') {
+                            $SearchInputs = [
+                                "SN",
+                                "VehicleNo",
+                                "Date",
+                                "Time",
+                                "KMETER",
+                                "TerminalNo",
+                                "CardNo",
+                                "Quantity", 
+                                "Amount", 
+                                "ReceiptNo", 
+                                "KM", 
+                                "KMLITER", 
+                            ];
+                        }
+
+                        if($_SERVER['REQUEST_URI'] === '/Users') {
+                            $SearchInputs = [
+                                "ID",
+                                "Email",
+                                "Username",
+                                "Role",
+                                "Records",
+                                "Status", 
+                            ];
+                        }
+
                     @endphp
                     <div class="search">
                         <h2>Master Card No: 83783742</h2>

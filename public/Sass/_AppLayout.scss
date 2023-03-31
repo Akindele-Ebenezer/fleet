@@ -144,7 +144,7 @@
     }
 
     &-inner {
-        background: rgba(0,0,0,.7);
+        background: rgba(0,0,0,.9);
         height: 100vh; 
         overflow: hidden;
  
@@ -206,16 +206,6 @@
                 border: 1px solid #333;
                 color: #fff;
                 padding: 0.5rem;
-
-                input {
-                    background: #444;
-                    border: none; 
-                    -webkit-text-fill-color: #ddd !important;
-                    margin-block: 1em;
-                    outline: none;
-                    padding-inline: 0.25rem;
-                    text-align: center;
-                }
             }
 
             th {  
@@ -247,6 +237,20 @@
             margin-left: 2rem;
             overflow-y: scroll;
             padding-bottom: 4rem;
+        }
+
+        .table-head.filter { 
+            span {
+                input {
+                    background: #444;
+                    border: none; 
+                    -webkit-text-fill-color: #ddd !important;
+                    margin-block: .1em;
+                    outline: none;
+                    padding-inline: 0.25rem;
+                    text-align: center;
+                }
+            }
         }
 
         ul {
