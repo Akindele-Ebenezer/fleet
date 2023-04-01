@@ -15,6 +15,7 @@
 $Color-1: #333;
 $Color-2: #DF2E38; 
 $Color-3: #41a341; 
+$Color-4: #3034b5; 
  
 .active {
     background: #fff;
@@ -40,6 +41,15 @@ button {
     margin-top: 1rem;
     outline: none; 
     padding: 0.5rem; 
+}
+
+.big-figure {
+    background: #000;
+    border: none;
+    display: block;
+    font-size: 4em;
+    font-weight: bold;
+    text-align: center;
 }
 
 .cancel-modal {

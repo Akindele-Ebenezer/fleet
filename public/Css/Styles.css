@@ -34,6 +34,15 @@ button {
   padding: 0.5rem;
 }
 
+.big-figure, .report-inner .table.list .consumption, .report-inner .table.list .id {
+  background: #000;
+  border: none;
+  display: block;
+  font-size: 4em;
+  font-weight: bold;
+  text-align: center;
+}
+
 .cancel-modal {
   background: #fff;
   border-radius: 0.1em;
@@ -247,10 +256,9 @@ svg {
 }
 .report-data-heading .inner {
   align-items: center;
-  border-bottom: 1px solid;
   display: flex;
   justify-content: space-between;
-  padding-bottom: 0.5em;
+  padding-block: 0.5em;
 }
 .report-data-heading .inner button {
   background: #333;
@@ -271,7 +279,6 @@ svg {
   letter-spacing: 0.02em;
 }
 .report-data-heading .inner h1 span {
-  border: 1px solid #333;
   color: #fff;
   display: block;
   font-family: system-ui;
@@ -283,9 +290,11 @@ svg {
   height: 2rem;
   width: 4rem;
 }
+.report-data-heading .inner.wrapper {
+  background: #000;
+}
 .report-data-heading .inner.wrapper .search {
   background: #111;
-  border: 1px solid;
   margin-right: 1em;
   padding: 1em;
 }
@@ -312,7 +321,6 @@ svg {
 }
 .report-data-heading .inner-x.deposit {
   background: #111;
-  border: 1px solid;
   margin-block: 0.5rem;
   padding-block: 1rem;
   padding-left: 0.5em;
@@ -344,7 +352,7 @@ svg {
 }
 .report-data-heading .inner-x table th {
   font-weight: unset;
-  font-style: italic;
+  font-family: system-ui;
   padding-right: 0.5em;
 }
 .report-data-heading .inner-x table th svg {
@@ -362,7 +370,6 @@ svg {
 }
 .report-inner .action .inner {
   background: rgba(0, 0, 0, 0.5);
-  border: 1px solid;
   display: flex;
   justify-content: center;
   margin-bottom: 0.5em;
@@ -397,20 +404,25 @@ svg {
   border-collapse: collapse;
   width: 100%;
 }
-.report-inner .table.list .id {
-  background: #000;
-  border: none;
-  display: block;
-  font-size: 4em;
-  font-weight: bold;
-  text-align: center;
+.report-inner .table.list .car-info .stats-heading {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.report-inner .table.list .car-info .stats-heading button {
+  background-color: #3236bd;
+  padding: 0 0.5em;
+}
+.report-inner .table.list .consumption {
+  display: table-cell;
+  font-family: system-ui;
 }
 .report-inner .table.list .car-info .info-inner {
   align-items: center;
   display: flex;
   justify-content: space-between;
 }
-.report-inner .table.list .car-info .info-inner .inner:last-of-type {
+.report-inner .table.list .car-info .info-inner .inner:not(.report-inner .table.list .car-info .info-inner .inner:first-of-type) {
   border-left: 2px solid;
 }
 .report-inner .table.list .car-info .info-inner .inner-x {
@@ -427,6 +439,10 @@ svg {
 }
 .report-inner .table.list .car-info .info-inner .inner-x span:last-of-type {
   color: #ccc;
+}
+.report-inner .table.list .refueling,
+.report-inner .table.list .balance {
+  text-align: center;
 }
 .report-inner .table.list td .car-info .active, .report-inner .table.list td .car-info ul a li:hover, .report-inner ul a .table.list td .car-info li:hover,
 .report-inner .table.list td .car-info .inactive {
@@ -457,26 +473,22 @@ svg {
 }
 .report-inner .table.list td .car-info .stats {
   align-items: center;
-  border: 1px solid;
   display: flex;
-  justify-content: space-between;
-  margin-block: 2em;
+  flex-wrap: wrap;
+  height: 7em;
+  overflow-y: scroll;
   padding-block: 0.5em;
+  width: 40em;
 }
 .report-inner .table.list td .car-info .stats .inner {
+  padding-inline: 0.2em;
+  flex-basis: 9em;
   text-align: center;
-}
-.report-inner .table.list td .car-info .stats .inner:nth-child(2) {
-  border-inline: 1px solid;
-  padding-inline: 1em;
-}
-.report-inner .table.list td .car-info .stats .inner:not(.report-inner .table.list td .car-info .stats .inner:nth-child(2)) {
-  padding-inline: 1em;
 }
 .report-inner .table.list td .car-info .stats .inner h3 {
   background: #eee;
   color: #000 !important;
-  padding: 0.1em 0.5em;
+  padding-block: 0.1em;
   font-family: system-ui;
   text-align: center;
 }
@@ -497,7 +509,7 @@ svg {
 .report-inner .table td,
 .report-inner .table th {
   background: #111;
-  border: 1px solid #333;
+  border: 1px solid #000;
   color: #fff;
   padding: 0.5rem;
 }
@@ -505,7 +517,7 @@ svg {
   font-family: system-ui;
 }
 .report-inner .table tr {
-  border-bottom: 1px solid #333;
+  border-bottom: 3px solid #000;
 }
 .report-inner .table tr.table-head {
   border: 2px solid #000;
