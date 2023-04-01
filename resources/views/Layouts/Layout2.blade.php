@@ -192,10 +192,7 @@
                         if($_SERVER['REQUEST_URI'] === '/Cars') {
                             $SearchInputs = [
                                 "ID",
-                                "VehicleNo",
-                                "Status",
-                                "Price",
-                                "Driver",
+                                "Cars", 
                                 "Consumption",
                                 "Refueling",
                                 "Balance", 

@@ -3,7 +3,7 @@
 @section('Content')
     <div class="table-wrapper"> 
         <table class="table" id="Table">
-            <tr>
+            <tr class="table-head">
                 <th onclick="sortTable(0)">LNO</th>
                 <th onclick="sortTable(1)">Vehicle no</th>
                 <th onclick="sortTable(2)">Date</th>

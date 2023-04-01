@@ -1,10 +1,7 @@
 @extends('Layouts.Layout1')
 
 @section('Content')
-    <div class="login-wrapper" style="background-image: url('{{ asset('Images/Car.jpg') }}')">
-        <div class="software-name">
-            <h1>VEHICLE MANGEMENT SYSTEM</h1>
-        </div>
+    <div class="login-wrapper" style="background-image: url('{{ asset('Images/Car.jpg') }}')"> 
         <div class="wrapper-inner">
             <div class="login-inner"> 
                 <p class="company-logo">

@@ -3,7 +3,7 @@
 @section('Content')
     <div class="table-wrapper"> 
         <table class="table" id="Table">
-            <tr>
+            <tr class="table-head">
                 <th>#</th>
                 <th>Email</th>
                 <th>Username</th>

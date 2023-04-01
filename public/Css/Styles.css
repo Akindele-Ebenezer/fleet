@@ -189,13 +189,6 @@ svg {
   background-size: cover;
   overflow: hidden;
 }
-.login-wrapper .software-name {
-  background: black;
-  color: #aaa;
-  font-size: 5rem;
-  padding: 1rem;
-  text-align: center;
-}
 .login-wrapper .wrapper-inner {
   align-items: center;
   background: rgba(0, 0, 0, 0.1);
@@ -404,6 +397,100 @@ svg {
   border-collapse: collapse;
   width: 100%;
 }
+.report-inner .table.list .id {
+  background: #000;
+  border: none;
+  display: block;
+  font-size: 4em;
+  font-weight: bold;
+  text-align: center;
+}
+.report-inner .table.list .car-info .info-inner {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.report-inner .table.list .car-info .info-inner .inner:last-of-type {
+  border-left: 2px solid;
+}
+.report-inner .table.list .car-info .info-inner .inner-x {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3em;
+  width: 14em;
+}
+.report-inner .table.list .car-info .info-inner .inner-x span:first-of-type {
+  background: #333;
+  border-radius: 0.2em;
+  color: #eee;
+  padding-inline: 0.3em;
+}
+.report-inner .table.list .car-info .info-inner .inner-x span:last-of-type {
+  color: #ccc;
+}
+.report-inner .table.list td .car-info .active, .report-inner .table.list td .car-info ul a li:hover, .report-inner ul a .table.list td .car-info li:hover,
+.report-inner .table.list td .car-info .inactive {
+  background: #41a341;
+  border-radius: 0.35em;
+  color: #fff !important;
+  display: inline-block;
+  font-size: smaller;
+  margin-block: 1em;
+  padding: 0.15em 0.35em;
+}
+.report-inner .table.list td .car-info h1 {
+  font-size: 2em;
+}
+.report-inner .table.list td .car-info h2 {
+  border-bottom: 5px solid;
+  color: #fff;
+  display: inline-block;
+  font-family: system-ui;
+  letter-spacing: 0.1em;
+  padding-block: 0.4em;
+}
+.report-inner .table.list td .car-info hr {
+  border: 1px solid;
+}
+.report-inner .table.list td .car-info .inactive {
+  background: #DF2E38;
+}
+.report-inner .table.list td .car-info .stats {
+  align-items: center;
+  border: 1px solid;
+  display: flex;
+  justify-content: space-between;
+  margin-block: 2em;
+  padding-block: 0.5em;
+}
+.report-inner .table.list td .car-info .stats .inner {
+  text-align: center;
+}
+.report-inner .table.list td .car-info .stats .inner:nth-child(2) {
+  border-inline: 1px solid;
+  padding-inline: 1em;
+}
+.report-inner .table.list td .car-info .stats .inner:not(.report-inner .table.list td .car-info .stats .inner:nth-child(2)) {
+  padding-inline: 1em;
+}
+.report-inner .table.list td .car-info .stats .inner h3 {
+  background: #eee;
+  color: #000 !important;
+  padding: 0.1em 0.5em;
+  font-family: system-ui;
+  text-align: center;
+}
+.report-inner .table.list td .car-info .stats .inner h3, .report-inner .table.list td .car-info .stats .inner span {
+  border-radius: 0.2em;
+  color: #fff;
+}
+.report-inner .table.list td .car-info .stats .inner span {
+  font-size: smaller;
+}
+.report-inner .table.list td .car-info .used-by {
+  color: #fff;
+  display: block;
+}
 .report-inner .table td {
   color: #eee !important;
 }
@@ -420,9 +507,6 @@ svg {
 .report-inner .table tr {
   border-bottom: 1px solid #333;
 }
-.report-inner .table tr:nth-child(2n+3) {
-  background: #eee;
-}
 .report-inner .table tr.table-head {
   border: 2px solid #000;
   position: sticky;
@@ -437,6 +521,11 @@ svg {
   margin-left: 2rem;
   overflow-y: scroll;
   padding-bottom: 4rem;
+}
+.report-inner .table-head.filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 .report-inner .table-head.filter span input {
   background: #444;

@@ -196,6 +196,135 @@
             border-collapse: collapse; 
             width: 100%;
 
+            &.list {
+                .id {
+                    background: #000;
+                    border: none;
+                    display: block;
+                    font-size: 4em;
+                    font-weight: bold;
+                    text-align: center;
+
+                    .inner {
+
+                    }
+                }
+
+                .car-info {
+                    .info-inner {
+                        align-items: center;
+                        display: flex;
+                        justify-content: space-between;
+
+                        .inner {
+                            &:last-of-type {
+                                border-left: 2px solid;
+                            }
+
+                            &-x {
+                                display: flex;
+                                justify-content: space-between;
+                                padding: 0.3em;
+                                width: 14em;
+
+                                span {
+                                    &:first-of-type {
+                                        background: #333;
+                                        border-radius: 0.2em;
+                                        color: #eee;
+                                        padding-inline: 0.3em;
+                                    }
+
+                                    &:last-of-type {
+                                        color: #ccc;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                td {
+                    .car-info {
+                        .active, 
+                        .inactive {
+                            background: $Color-3;
+                            border-radius: 0.35em;
+                            color: #fff !important;
+                            display: inline-block;
+                            font-size: smaller;
+                            margin-block: 1em;
+                            padding: 0.15em 0.35em;
+                        }
+
+                        h1 { 
+                            font-size: 2em;
+                        }
+
+                        h2 {
+                            border-bottom: 5px solid;
+                            color: #fff;
+                            display: inline-block;
+                            font-family: system-ui;
+                            letter-spacing: .1em;
+                            padding-block: 0.4em;
+                        }
+
+                        hr {
+                            border: 1px solid;
+                        }
+
+                        .inactive {
+                            background: $Color-2;
+                        }
+
+                        .stats {
+                            align-items: center;
+                            border: 1px solid;
+                            display: flex;
+                            justify-content: space-between;
+                            margin-block: 2em;
+                            padding-block: .5em;
+
+                            .inner {
+                                text-align: center;
+
+                                &:nth-child(2) {
+                                    border-inline: 1px solid;
+                                    padding-inline: 1em;
+                                }
+
+                                &:not(&:nth-child(2)) {
+                                    padding-inline: 1em;
+                                }
+
+                                h3 { 
+                                    background: #eee;
+                                    color: #000 !important;
+                                    padding: 0.1em .5em;
+                                    font-family: system-ui;
+                                    text-align: center;
+                                }
+
+                                h3, span {
+                                    border-radius: 0.2em;
+                                    color: #fff;
+                                }
+
+                                span {
+                                    font-size: smaller;
+                                }
+                            }
+                        }
+
+                        .used-by {
+                            color: #fff;
+                            display: block;
+                        }
+                    }
+                }
+            }
+
             td {
                 color: #eee !important;
             }
@@ -215,9 +344,9 @@
             tr {
                 border-bottom: 1px solid #333;
 
-                &:nth-child(2n+3) {
-                    background: #eee;
-                }
+                // &:nth-child(2n+3) {
+                //     background: #eee;
+                // }
                 
                 &.table-head {
                     border: 2px solid #000;
@@ -240,6 +369,10 @@
         }
 
         .table-head.filter { 
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+
             span {
                 input {
                     background: #444;
