@@ -9,7 +9,7 @@
                     New Car 
                 </h1>
                 <button>
-                    Maintainance
+                    Maintenance
                 </button>
             </div>
             <div class="new-car-inputs">

@@ -188,6 +188,12 @@
             position: absolute;
         }
         
+        .sub-nav-wrapper {
+            .my-records {
+                cursor: pointer;
+            }
+        }
+
         .table { 
             border-collapse: collapse; 
             width: 100%;
@@ -242,6 +248,7 @@
                                         background: #333;
                                         border-radius: 0.2em;
                                         color: #eee;
+                                        margin-right: 0.5em;
                                         padding-inline: 0.3em;
                                     }
 
@@ -303,13 +310,14 @@
                             width: 40em;
 
                             .inner {
+                                height: 3em;
                                 padding-inline: .2em; 
                                 flex-basis: 9em;
                                 text-align: center;  
 
                                 h3 { 
-                                    background: #eee;
-                                    color: #000 !important;
+                                    background: #333; 
+                                    font-weight: unset;
                                     padding-block: 0.1em;
                                     font-family: system-ui;
                                     text-align: center;
@@ -402,6 +410,7 @@
                     color: #eee;
                     display: flex;
                     padding: .5rem;
+                    position: relative;
  
                     &:hover {
                         @extend .active;
@@ -437,6 +446,7 @@
 
     .left-nav {
         background: darken($color: $Color-1, $amount: 15);
+        overflow-y: scroll;
         padding-inline: .5rem;
         width: 19rem;
 
@@ -448,7 +458,8 @@
         }
 
         .sub-nav {
-            padding-left: 1em;
+            display: none;
+            padding: 1em;
         }
     }
 }

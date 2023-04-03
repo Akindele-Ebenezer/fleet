@@ -23,6 +23,28 @@
   fill: #000;
 }
 
+.alert {
+  align-items: center;
+  display: none;
+  justify-content: center;
+  translate: 0 2em;
+}
+.alert .inner {
+  background-color: #41a341;
+  border-radius: 0.5em;
+  color: #fff;
+  padding: 1em;
+  position: absolute;
+}
+
+.arrow {
+  height: 3em;
+  padding: unset;
+  position: absolute;
+  right: 0;
+  width: 3em;
+}
+
 button {
   background: #333;
   border: none;
@@ -62,6 +84,28 @@ button {
   border: 1px solid #aaa;
   outline: none;
   padding-inline: 0.5em;
+}
+
+.Hide {
+  display: none !important;
+}
+
+.loader {
+  align-items: center;
+  display: flex;
+  display: none;
+  height: 100vh;
+  justify-content: center;
+  position: absolute;
+  width: 100vw;
+  z-index: 2;
+}
+.loader .inner {
+  height: 15em;
+  border-radius: 50%;
+  background-position: center !important;
+  background-size: cover !important;
+  width: 15em;
 }
 
 .modal-vehicle-data {
@@ -131,6 +175,10 @@ button {
 .modal-vehicle-data .inner ul li span:first-of-type {
   align-items: center;
   display: flex;
+}
+
+.Show {
+  display: block !important;
 }
 
 svg {
@@ -400,6 +448,9 @@ svg {
   bottom: 0;
   position: absolute;
 }
+.report-inner .sub-nav-wrapper .my-records {
+  cursor: pointer;
+}
 .report-inner .table {
   border-collapse: collapse;
   width: 100%;
@@ -435,6 +486,7 @@ svg {
   background: #333;
   border-radius: 0.2em;
   color: #eee;
+  margin-right: 0.5em;
   padding-inline: 0.3em;
 }
 .report-inner .table.list .car-info .info-inner .inner-x span:last-of-type {
@@ -481,13 +533,14 @@ svg {
   width: 40em;
 }
 .report-inner .table.list td .car-info .stats .inner {
+  height: 3em;
   padding-inline: 0.2em;
   flex-basis: 9em;
   text-align: center;
 }
 .report-inner .table.list td .car-info .stats .inner h3 {
-  background: #eee;
-  color: #000 !important;
+  background: #333;
+  font-weight: unset;
   padding-block: 0.1em;
   font-family: system-ui;
   text-align: center;
@@ -553,6 +606,7 @@ svg {
   color: #eee;
   display: flex;
   padding: 0.5rem;
+  position: relative;
 }
 .report-inner ul a li span {
   background: #eee;
@@ -576,6 +630,7 @@ svg {
 }
 .report .left-nav {
   background: #0d0d0d;
+  overflow-y: scroll;
   padding-inline: 0.5rem;
   width: 19rem;
 }
@@ -584,7 +639,8 @@ svg {
   margin-top: 0.5em;
 }
 .report .left-nav .sub-nav {
-  padding-left: 1em;
+  display: none;
+  padding: 1em;
 }
 
 /*# sourceMappingURL=Styles.css.map */

@@ -8,7 +8,7 @@
                     FUEL Monthly Deposits 
                 </h1>
                 <button>
-                    Maintainance
+                    Maintenance
                 </button>
             </div> 
             <div class="new-car-inputs">

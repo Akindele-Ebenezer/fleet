@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{ asset('Css/Styles.css') }}">
 </head>
 <body> 
+    @include('Components.LoaderComponent')
     @yield('Content') 
+    <script src="{{ asset('Js/Loader.js') }}"></script>
 </body>
 </html>

@@ -32,6 +32,30 @@ $Color-4: #3034b5;
     }
 }
 
+.alert {
+    align-items: center;
+    // display: flex;
+    display: none;
+    justify-content: center;
+    translate: 0 2em;
+
+    .inner {
+        background-color: $Color-3;
+        border-radius: .5em;
+        color: #fff;
+        padding: 1em;
+        position: absolute;
+    }
+}
+
+.arrow {
+    height: 3em;
+    padding: unset;
+    position: absolute;
+    right: 0;
+    width: 3em;
+}
+
 button {
     background: $Color-1;
     border: none;
@@ -78,6 +102,29 @@ button {
                 }
             }
         }
+    }
+}
+
+.Hide {
+    display: none !important;
+}
+
+.loader {
+    align-items: center;
+    display: flex;
+    display: none;
+    height: 100vh;
+    justify-content: center;
+    position: absolute;
+    width: 100vw;
+    z-index: 2;
+
+    .inner {
+        height: 15em;
+        border-radius: 50%;
+        background-position: center !important;
+        background-size: cover !important;
+        width: 15em;
     }
 }
 
@@ -161,6 +208,10 @@ button {
             }
         }
     }
+}
+
+.Show {
+    display: block !important;
 }
 
 svg {
