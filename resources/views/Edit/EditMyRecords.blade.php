@@ -6,9 +6,9 @@
             <tr class="table-head">
                 <th onclick="sortTable(0)">ID</th>
                 <th onclick="sortTable(1)">CARS</th> 
-                <th onclick="sortTable(5)">Engine Volume</th>
-                <th onclick="sortTable(6)">Refueling</th>
-                <th onclick="sortTable(7)">Balance</th>
+                <th onclick="sortTable(2)">Engine Volume</th>
+                <th onclick="sortTable(3)">Refueling</th>
+                <th onclick="sortTable(4)">Balance</th>
             </tr>  
             @foreach ($Cars__MyRecords as $Car)
                 @php include('../resources/views/Includes/CompanyName.php') @endphp

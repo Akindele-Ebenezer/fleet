@@ -237,12 +237,11 @@
                         
                         if($_SERVER['REQUEST_URI'] === '/MyRecords') {
                             $SearchInputs = [
-                                "ORG",
-                                "CarNumber", 
+                                "ID",
+                                "Cars", 
+                                "EngineVolume",
                                 "Refueling",
                                 "Balance",
-                                "ToDeposit",
-                                "Comments",
                             ];
                         }
 
@@ -302,6 +301,67 @@
                         } 
 
                         if($_SERVER['REQUEST_URI'] === '/Refueling') {
+                            $SearchInputs = [
+                                "SN",
+                                "VehicleNo",
+                                "Date",
+                                "Time",
+                                "KMETER",
+                                "TerminalNo",
+                                "CardNo",
+                                "Quantity", 
+                                "Amount", 
+                                "ReceiptNo", 
+                                "KM", 
+                                "KMLITER", 
+                            ];
+                        }
+             
+                        if($_SERVER['REQUEST_URI'] === '/EditRepairs') {
+                            $SearchInputs = [
+                                "SN",
+                                "CarVehicleNo",
+                                "Date",
+                                "Time",
+                                "RepairAction",
+                                "ReleaseDate",
+                                "ReleaseTime",
+                                "Cost",
+                                "InvoiceNo",
+                                "Weeks", 
+                            ];
+                        }
+                
+                        if($_SERVER['REQUEST_URI'] === '/EditMaintenance') {
+                            $SearchInputs = [
+                                "SN",
+                                "VehicleNo",
+                                "Date",
+                                "Time",
+                                "MaintenanceAction",
+                                "ReleaseDate",
+                                "ReleaseTime",
+                                "Cost",
+                                "InvoiceNo",
+                                "SupplierNo", 
+                            ];
+                        }
+                
+                        if($_SERVER['REQUEST_URI'] === '/EditDeposits') {
+                            $SearchInputs = [
+                                "LNO",
+                                "VehicleNo",
+                                "Date",
+                                "CardNo",
+                                "Amount",
+                                "Year",
+                                "Week",
+                                "Month", 
+                                "Comments", 
+                            ];
+                        } 
+
+                        if($_SERVER['REQUEST_URI'] === '/EditRefueling') {
                             $SearchInputs = [
                                 "SN",
                                 "VehicleNo",

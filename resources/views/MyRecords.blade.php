@@ -302,7 +302,7 @@
                 <td class="comments">Comments1</td>
             </tr>  
             <div class="table-head filter"> 
-                <span><input type="text" id="SearchInput0" placeholder="Filter By ORG" onkeyup="FilterORG()"></span> 
+                <span><input type="text" id="SearchInput0" placeholder="Filter By ID" onkeyup="FilterID()"></span> 
                 <span><input type="text" id="SearchInput1" placeholder="Filter By Car Number" onkeyup="FilterCarNumber()"></span>  
                 <span><input type="text" id="SearchInput2" placeholder="Filter By Refueling" onkeyup="FilterRefueling()"></span> 
                 <span><input type="text" id="SearchInput3" placeholder="Filter By Balance" onkeyup="FilterBalance()"></span> 

@@ -13,7 +13,7 @@
                 <th onclick="sortTable(6)">Release Time</th>
                 <th onclick="sortTable(7)">Cost</th>
                 <th onclick="sortTable(8)">Invoice No</th>
-                <th onclick="sortTable(9)">Supplier No</th>
+                <th onclick="sortTable(9)">Weeks</th>
             </tr>
             @foreach ($Repairs__MyRecords as $Repair)
             <tr> 
@@ -39,7 +39,7 @@
                 <span><input type="text" id="SearchInput6" placeholder="Filter By Release Time" onkeyup="FilterReleaseTime()"></span> 
                 <span><input type="text" id="SearchInput7" placeholder="Filter By Cost" onkeyup="FilterCost()"></span> 
                 <span><input type="text" id="SearchInput8" placeholder="Filter By Invoice No" onkeyup="FilterInvoiceNo()"></span> 
-                <span><input type="text" id="SearchInput9" placeholder="Filter By Supplier No" onkeyup="FilterSupplierNo()"></span>  
+                <span><input type="text" id="SearchInput9" placeholder="Filter By Weeks" onkeyup="FilterWeeks()"></span>  
             </div>
         </table>
         {{ $Repairs__MyRecords->onEachSide(5)->links() }}

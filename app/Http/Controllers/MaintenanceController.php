@@ -23,7 +23,7 @@ class MaintenanceController extends Controller
     {
         $Config = self::config();
         
-        return view('EditMaintenance', $Config);
+        return view('Maintenance', $Config);
     }
 
     public function my_records_maintenance()
