@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route; 
 use App\Http\Controllers\CarController; 
+use App\Http\Controllers\RepairController; 
+use App\Http\Controllers\MaintenanceController; 
+use App\Http\Controllers\DepositsController; 
+use App\Http\Controllers\RefuelingController; 
+use App\Http\Controllers\UserController; 
 
 Route::get('/', function () {
     return view('Login');
@@ -25,26 +30,16 @@ Route::get('/EditRefueling', function () {
     return view('Edit.EditRefueling');
 })->name('EditRefueling');
 
-Route::get('/Repairs', function () {
-    return view('Edit.EditRepairs');
-})->name('Repairs');
+Route::get('/Repairs', [RepairController::class, 'index'])->name('Repairs');
 
-Route::get('/Maintenance', function () {
-    return view('Maintenance');
-})->name('Maintenance');
+Route::get('/Maintenance', [MaintenanceController::class, 'index'])->name('Maintenance');
 
-Route::get('/Deposits', function () {
-    return view('Deposits');
-})->name('Deposits');
+Route::get('/Deposits', [DepositsController::class, 'index'])->name('Deposits');
 
-Route::get('/Refueling', function () {
-    return view('Refueling');
-})->name('Refueling');
-
-Route::get('/Users', function () {
-    return view('Users');
-})->name('Users');
-
+Route::get('/Refueling', [RefuelingController::class, 'index'])->name('Refueling');
+  
+Route::get('/Users', [UserController::class, 'index'])->name('Users');
+   
 Route::get('/MyRecords', function () {
     return view('MyRecords');
 })->name('MyRecords');

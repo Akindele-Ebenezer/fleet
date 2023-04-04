@@ -12,107 +12,21 @@
                 <th onclick="sortTable(5)">Year</th>
                 <th onclick="sortTable(6)">Week</th>
                 <th onclick="sortTable(7)">Month</th>
+                <th onclick="sortTable(8)">Comments</th>
             </tr>
-            <tr>
-                <td>TESTSZ1</td>
-                <td>Vehicle no1</td>
-                <td>TESTSZ1</td>
-                <td>TESTSZ1</td>
-                <td>TESTSZ1</td>
-                <td>TESTSZ1</td>
-                <td>TESTSZ1</td>
-                <td>TESTSZ1</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
+            @foreach ($Deposits as $Deposit) 
+            <tr> 
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $Deposit->VehicleNumber }}</td> 
+                <td>{{ $Deposit->Date }}</td>
+                <td>{{ $Deposit->CardNumber }}</td>
+                <td>{{ $Deposit->Amount }}</td> 
+                <td>{{ $Deposit->Year }}</td>
+                <td>{{ $Deposit->Week }}</td>
+                <td>{{ $Deposit->Month }}</td>
+                <td>{{ $Deposit->Comments }}</td>
+            </tr> 
+            @endforeach 
             <div class="table-head filter"> 
                 <span><input type="text" id="SearchInput0" placeholder="Filter By LNO" onkeyup="FilterLNO()"></span> 
                 <span><input type="text" id="SearchInput1" placeholder="Filter By Vehicle no" onkeyup="FilterVehicleNo()"></span> 
@@ -122,6 +36,7 @@
                 <span><input type="text" id="SearchInput5" placeholder="Filter By Year" onkeyup="FilterYear()"></span> 
                 <span><input type="text" id="SearchInput6" placeholder="Filter By Week " onkeyup="FilterWeek()"></span> 
                 <span><input type="text" id="SearchInput7" placeholder="Filter By Month" onkeyup="FilterMonth()"></span> 
+                <span><input type="text" id="SearchInput8" placeholder="Filter By Comments" onkeyup="FilterComments()"></span> 
             </div>
         </table>
     </div>

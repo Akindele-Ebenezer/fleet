@@ -11,38 +11,16 @@
                 <th>Records</th>
                 <th>Status</th>
             </tr>
+            @foreach ($Users as $User)
             <tr>
-                <td>FHJ#JJF1</td>
-                <td>FHJ#JJF1</td>
-                <td>FHJ#JJF1</td>
-                <td>FHJ#JJF1</td>
-                <td>FHJ#JJF1</td>
-                <td>FHJ#JJF1</td>
-            </tr>
-            <tr>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-            </tr>
-            <tr>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-            </tr>
-            <tr>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-                <td>FHJ#JJF</td>
-            </tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $User->email }}</td>
+                <td>{{ $User->name }}</td>
+                <td>{{ $User->role }}</td>
+                <td>{{ $User->id }}</td>
+                <td>{{ $User->status }}</td>
+            </tr> 
+            @endforeach 
             <div class="table-head filter"> 
                 <span><input type="text" id="SearchInput0" placeholder="Filter By #" onkeyup="FilterID()"></span> 
                 <span><input type="text" id="SearchInput1" placeholder="Filter By Email " onkeyup="FilterEmail()"></span> 

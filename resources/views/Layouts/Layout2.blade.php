@@ -229,7 +229,7 @@
                             $SearchInputs = [
                                 "ID",
                                 "Cars", 
-                                "Consumption",
+                                "EngineVolume",
                                 "Refueling",
                                 "Balance", 
                             ];
@@ -268,7 +268,7 @@
                                 "ReleaseTime",
                                 "Cost",
                                 "InvoiceNo",
-                                "SupplierNo", 
+                                "Weeks", 
                             ];
                         }
                 
@@ -297,6 +297,7 @@
                                 "Year",
                                 "Week",
                                 "Month", 
+                                "Comments", 
                             ];
                         } 
 

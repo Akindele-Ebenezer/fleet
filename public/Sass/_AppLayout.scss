@@ -220,7 +220,7 @@
                     }
                 }
 
-                .consumption {
+                .engine-volume {
                     @extend .big-figure;
                     display: table-cell;
                     font-family: system-ui;
@@ -233,8 +233,13 @@
                         justify-content: space-between;
 
                         .inner {
+                            &:first-of-type {
+                                width: 20em;
+                            }
+
                             &:not(&:first-of-type) {
                                 border-left: 2px solid;
+                                translate: -3em;
                             }
 
                             &-x {

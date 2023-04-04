@@ -4,15 +4,15 @@
     <div class="table-wrapper"> 
         <table class="table list" id="Table">
             <tr class="table-head">
-                <th onclick="sortTable(0)">#</th>
+                <th onclick="sortTable(0)">ID</th>
                 <th onclick="sortTable(1)">CARS</th> 
-                <th onclick="sortTable(5)">Consumption</th>
+                <th onclick="sortTable(5)">Engine Volume</th>
                 <th onclick="sortTable(6)">Refueling</th>
                 <th onclick="sortTable(7)">Balance</th>
             </tr>  
             @foreach ($Cars as $Car)
                 <tr> 
-                    <td class="id">{{ $Car->id }}</td>
+                    <td class="id">{{ $loop->iteration }}</td>
                     <td>
                         <div class="car-info">
                             <div class="info-inner">
@@ -24,7 +24,7 @@
                                 <div class="inner">
                                     <div class="inner-x">
                                         <span>Monthly Budget</span>
-                                        <span>₦ {{ $Car->MonthlyBudget }}</span>
+                                        <span>₦ {{ number_format($Car->MonthlyBudget) }}</span>
                                     </div>
                                     <div class="inner-x">
                                         <span>CARD Number</span>
@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="inner-x">
                                         <span>Total Deposits</span>
-                                        <span>₦ {{ $Car->TotalDeposits }}</span>
+                                        <span>₦ {{ number_format($Car->TotalDeposits) }}</span>
                                     </div>
                                 </div>
                                 <div class="inner">
@@ -69,11 +69,11 @@
                                 </div> 
                                 <div class="inner">
                                     <h3>Refueling</h3>
-                                    <span>₦ {{ $Car->TotalRefueling }}</span>
+                                    <span>₦ {{ number_format( $Car->TotalRefueling) }}</span>
                                 </div> 
                                 <div class="inner">
                                     <h3>Price</h3>
-                                    <span>₦ {{ $Car->Price }}</span>
+                                    <span>₦ {{ number_format( $Car->Price) }}</span>
                                 </div>
                                 <div class="inner">
                                     <h3>Driver</h3>
@@ -122,15 +122,15 @@
                             </div> 
                         </div>
                     </td>
-                    <td class="consumption">4.9</td>
-                    <td class="refueling">₦ {{ $Car->TotalRefueling }}</td>
-                    <td class="balance">₦ {{ $Car->Balance }}</td>
+                    <td class="engine-volume">{{ $Car->EngineVolume }}</td>
+                    <td class="refueling">₦ {{ number_format($Car->TotalRefueling) }}</td>
+                    <td class="balance">₦ {{ number_format($Car->Balance) }}</td>
                 </tr>
             @endforeach
             <div class="table-head filter"> 
-                <span><input type="text" id="SearchInput0" placeholder="Filter By #" onkeyup="FilterID()"></span> 
+                <span><input type="text" id="SearchInput0" placeholder="Filter By ID" onkeyup="FilterID()"></span> 
                 <span><input type="text" id="SearchInput1" placeholder="Filter By Cars Column.. " onkeyup="FilterCars()"></span> 
-                <span><input type="text" id="SearchInput2" placeholder="Filter By Consumption" onkeyup="FilterConsumption()"></span>  
+                <span><input type="text" id="SearchInput2" placeholder="Filter By Engine Volume" onkeyup="FilterEngineVolume()"></span>  
                 <span><input type="text" id="SearchInput3" placeholder="Filter By Refueling" onkeyup="FilterRefueling()"></span>  
                 <span><input type="text" id="SearchInput4" placeholder="Filter By Balance" onkeyup="FilterBalance()"></span>   
             </div>

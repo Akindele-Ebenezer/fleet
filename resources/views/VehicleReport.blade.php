@@ -13,7 +13,14 @@
             </tr> 
             @foreach ($Cars as $Car)
             <tr> 
-                <td class="id">{{ $Car->id }}</td>
+                @php
+                    $Companies = \App\Models\Organisation::first();
+                @endphp
+                <td class="id">
+                    {{ $Car->CompanyCode }}
+                    <br>
+                    <button class="action-x">{{ $Companies->CompanyName }}</button>
+                </td>
                 <td>
                     <div class="car-info">
                         <div class="info-inner">
@@ -29,7 +36,7 @@
                                 </div>
                                 <div class="inner-x">
                                     <span>Monthly Budget</span>
-                                    <span>₦ {{ $Car->MonthlyBudget }}</span>
+                                    <span>₦ {{ number_format($Car->MonthlyBudget) }}</span>
                                 </div>
                                 <div class="inner-x">
                                     <span>Chassis Number</span>
@@ -47,7 +54,7 @@
                                 </div>
                                 <div class="inner-x">
                                     <span>Deposits</span>
-                                    <span>₦ {{ $Car->TotalDeposits }}</span>
+                                    <span>₦ {{ number_format($Car->TotalDeposits) }}</span>
                                 </div>
                                 <div class="inner-x">
                                     <span>PIN Code</span>
@@ -65,9 +72,9 @@
                         </div> 
                     </div>
                 </td>
-                <td class="refueling">₦ {{ $Car->TotalRefueling }}</td>
-                <td class="balance">₦ {{ $Car->Balance }}</td>
-                <td class="to-deposit">₦ {{ $Car->TotalDeposits }}</td>
+                <td class="refueling">₦ {{ number_format($Car->TotalRefueling) }}</td>
+                <td class="balance">₦ {{ number_format($Car->Balance) }}</td>
+                <td class="to-deposit">₦ {{ number_format($Car->TotalDeposits) }}</td>
                 <td class="comments"> {{ substr($Car->Comments, 0, 25) }}{{ strlen($Car->Comments) > 25 ? '...' : '' }}</td>
             </tr>  
             @endforeach 
