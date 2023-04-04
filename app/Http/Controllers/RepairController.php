@@ -9,9 +9,12 @@ class RepairController extends Controller
 {
     public function config() {
         $Repairs = Repair::orderBy('Date', 'DESC')->paginate(14); 
+        $Id = 'amina';
+        $Repairs__MyRecords = Repair::where('UserId', $Id)->orderBy('Date', 'DESC')->paginate(14);
  
         return [
             'Repairs' => $Repairs,
+            'Repairs__MyRecords' => $Repairs__MyRecords,
         ];
     }
  
@@ -20,6 +23,13 @@ class RepairController extends Controller
         $Config = self::config();
 
         return view('Repairs', $Config);
+    }
+
+    public function my_records_repairs()
+    {
+        $Config = self::config();
+
+        return view('Edit.EditRepairs', $Config);
     }
 
     /**

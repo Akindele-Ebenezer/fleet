@@ -9,9 +9,12 @@ class CarController extends Controller
 {
     public function config() {
         $Cars = Car::orderBy('PurchaseDate', 'DESC')->paginate(7);
+        $Id = 'amina';
+        $Cars__MyRecords = Car::where('UserId', $Id)->orderBy('PurchaseDate', 'DESC')->paginate(7);
  
         return [
             'Cars' => $Cars,
+            'Cars__MyRecords' => $Cars__MyRecords,
         ];
     }
 
@@ -20,6 +23,13 @@ class CarController extends Controller
         $Config = self::config();
 
         return view('Cars', $Config);
+    }
+
+    public function my_records_activity()
+    {
+        $Config = self::config();
+
+        return view('Edit.EditMyRecords', $Config);
     }
 
     public function vehicle_report()

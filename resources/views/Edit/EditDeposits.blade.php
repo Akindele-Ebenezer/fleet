@@ -13,106 +13,18 @@
                 <th onclick="sortTable(6)">Week</th>
                 <th onclick="sortTable(7)">Month</th>
             </tr>
-            <tr>
-                <td>TESTSZ1</td>
-                <td>Vehicle no1</td>
-                <td>TESTSZ1</td>
-                <td>TESTSZ1</td>
-                <td>TESTSZ1</td>
-                <td>TESTSZ1</td>
-                <td>TESTSZ1</td>
-                <td>TESTSZ1</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
-            <tr>
-                <td>TESTSZ</td>
-                <td>Vehicle no</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-                <td>TESTSZ</td>
-            </tr>
+            @foreach ($Deposits__MyRecords as $Deposit)
+            <tr> 
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $Deposit->VehicleNumber }}</td>
+                <td>{{ $Deposit->Date }}</td>
+                <td>{{ $Deposit->CardNumber }}</td>
+                <td>{{ $Deposit->Amount }}</td>
+                <td>{{ $Deposit->Year }}</td>
+                <td>{{ $Deposit->Week }}</td>
+                <td>{{ $Deposit->Month }}</td> 
+            </tr> 
+            @endforeach  
             <div class="table-head filter"> 
                 <span><input type="text" id="SearchInput0" placeholder="Filter By LNO" onkeyup="FilterLNO()"></span> 
                 <span><input type="text" id="SearchInput1" placeholder="Filter By Vehicle no" onkeyup="FilterVehicleNo()"></span> 
@@ -124,5 +36,6 @@
                 <span><input type="text" id="SearchInput7" placeholder="Filter By Month" onkeyup="FilterMonth()"></span> 
             </div>
         </table>
+        {{ $Deposits__MyRecords->onEachSide(5)->links() }}
     </div>
 @endsection

@@ -15,216 +15,20 @@
                 <th onclick="sortTable(8)">Invoice No</th>
                 <th onclick="sortTable(9)">Supplier No</th>
             </tr> 
+            @foreach ($Maintenance__MyRecords as $Maintenance)
             <tr> 
-                <td>S/N1</td>
-                <td>Vehicle no1</td>
-                <td>Date1</td>
-                <td>Time1</td>
-                <td>Maintenance Action1</td>
-                <td>Release Date1</td>
-                <td>Release Time1</td>
-                <td>Cost1</td>
-                <td>Invoice No1</td>
-                <td>Supplier No1</td>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $Maintenance->VehicleNumber }}</td>
+                <td>{{ $Maintenance->Date }}</td>
+                <td>{{ $Maintenance->Time }}</td>
+                <td>{{ $Maintenance->MaintenanceAction }}</td>
+                <td>{{ $Maintenance->ReleaseDate }}</td>
+                <td>{{ $Maintenance->ReleaseTime }}</td>
+                <td>{{ $Maintenance->Cost }}</td>
+                <td>{{ $Maintenance->InvoiceNumber }}</td>
+                <td>{{ $Maintenance->Week }}</td>
             </tr> 
-            <td>S/N</td>
-            <td>Vehicle no</td>
-            <td>Date</td>
-            <td>Time</td>
-            <td>Maintenance Action</td>
-            <td>Release Date</td>
-            <td>Release Time</td>
-            <td>Cost</td>
-            <td>Invoice No</td>
-            <td>Supplier No</td>
-        </tr> 
-        <td>S/N</td>
-        <td>Vehicle no</td>
-        <td>Date</td>
-        <td>Time</td>
-        <td>Maintenance Action</td>
-        <td>Release Date</td>
-        <td>Release Time</td>
-        <td>Cost</td>
-        <td>Invoice No</td>
-        <td>Supplier No</td>
-    </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
-                <td>S/N</td>
-                <td>Vehicle no</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Maintenance Action</td>
-                <td>Release Date</td>
-                <td>Release Time</td>
-                <td>Cost</td>
-                <td>Invoice No</td>
-                <td>Supplier No</td>
-            </tr> 
+            @endforeach  
             <div class="table-head filter"> 
                 <span><input type="text" id="SearchInput0" placeholder="Filter By S/N" onkeyup="FilterSN()"></span> 
                 <span><input type="text" id="SearchInput1" placeholder="Filter By Vehicle no" onkeyup="FilterVehicleNo()"></span> 
@@ -238,5 +42,6 @@
                 <span><input type="text" id="SearchInput9" placeholder="Filter By Supplier No" onkeyup="FilterSupplierNo()"></span>  
             </div>
         </table>
+        {{ $Maintenance__MyRecords->onEachSide(5)->links() }}
     </div>
 @endsection

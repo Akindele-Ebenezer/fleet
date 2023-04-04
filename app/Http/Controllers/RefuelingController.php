@@ -9,8 +9,13 @@ class RefuelingController extends Controller
 {
     
     public function config() {
+        $Refueling = Refueling::orderBy('Date', 'DESC')->paginate(14); 
+        $Id = 'amina';
+        $Refueling__MyRecords = Refueling::where('UserId', $Id)->orderBy('Date', 'DESC')->paginate(14);
+
         return [
-            'Refuelings' => Refueling::orderBy('Date', 'DESC')->paginate(14),
+            'Refuelings' => $Refueling,
+            'Refueling__MyRecords' => $Refueling__MyRecords,
         ];
     }
 
@@ -19,6 +24,13 @@ class RefuelingController extends Controller
         $Config = self::config();
         
         return view('Refueling', $Config);
+    }
+
+    public function my_records_refueling()
+    {
+        $Config = self::config();
+
+        return view('Edit.EditRefueling', $Config);
     }
 
     /**

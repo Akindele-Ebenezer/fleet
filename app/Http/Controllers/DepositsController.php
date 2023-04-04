@@ -9,9 +9,12 @@ class DepositsController extends Controller
 {
     public function config() {
         $Deposits = Deposits::orderBy('Date', 'DESC')->paginate(14); 
+        $Id = 'amina';
+        $Deposits__MyRecords = Deposits::where('UserId', $Id)->orderBy('Date', 'DESC')->paginate(14);
  
         return [
             'Deposits' => $Deposits,
+            'Deposits__MyRecords' => $Deposits__MyRecords,
         ];
     }
  
@@ -21,6 +24,14 @@ class DepositsController extends Controller
 
         return view('Deposits', $Config);
     }
+
+    public function my_records_deposits()
+    {
+        $Config = self::config();
+
+        return view('Edit.EditDeposits', $Config);
+    }
+
 
     /**
      * Show the form for creating a new resource.

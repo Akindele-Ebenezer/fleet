@@ -12,23 +12,17 @@ Route::get('/', function () {
     return view('Login');
 });
 
+Route::get('/MyRecords', [CarController::class, 'my_records_activity'])->name('MyRecords');
+ 
+Route::get('/EditRepairs', [RepairController::class, 'my_records_repairs'])->name('EditRepairs'); 
+ 
+Route::get('/EditMaintenance', [MaintenanceController::class, 'my_records_maintenance'])->name('EditMaintenance'); 
+ 
+Route::get('/EditDeposits', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
+ 
+Route::get('/EditRefueling', [RefuelingController::class, 'my_records_refueling'])->name('EditRefueling'); 
+   
 Route::get('/VehicleReport', [CarController::class, 'vehicle_report'])->name('VehicleReport');
-
-Route::get('/EditRepairs', function () {
-    return view('Edit.EditRepairs');
-})->name('EditRepairs');
-
-Route::get('/EditMaintenance', function () {
-    return view('Edit.EditMaintenance');
-})->name('EditMaintenance');
-
-Route::get('/EditDeposits', function () {
-    return view('Edit.EditDeposits');
-})->name('EditDeposits');
-
-Route::get('/EditRefueling', function () {
-    return view('Edit.EditRefueling');
-})->name('EditRefueling');
 
 Route::get('/Repairs', [RepairController::class, 'index'])->name('Repairs');
 
@@ -39,10 +33,6 @@ Route::get('/Deposits', [DepositsController::class, 'index'])->name('Deposits');
 Route::get('/Refueling', [RefuelingController::class, 'index'])->name('Refueling');
   
 Route::get('/Users', [UserController::class, 'index'])->name('Users');
-   
-Route::get('/MyRecords', function () {
-    return view('MyRecords');
-})->name('MyRecords');
 
 Route::get('/Cars', [CarController::class, 'index'])->name('Cars');
  

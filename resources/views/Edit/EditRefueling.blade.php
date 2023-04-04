@@ -17,76 +17,22 @@
                 <th onclick="sortTable(10)">KM</th>
                 <th onclick="sortTable(11)">[KM/LITER]</th>
             </tr>
-            <tr>
-                <td>28478f9WUR1</td>
-                <td>Vehicle no1</td>
-                <td>28478f9WUR1</td>
-                <td>28478f9WUR1</td>
-                <td>28478f9WUR1</td>
-                <td>28478f9WUR1</td>
-                <td>28478f9WUR1</td>
-                <td>28478f9WUR1</td>
-                <td>28478f9WUR1</td>
-                <td>28478f9WUR1</td>
-                <td>28478f9WUR1</td>
-                <td>28478f9WUR1</td>
-            </tr>
-            <tr>
-                <td>28478f9WUR</td>
-                <td>Vehicle no</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-            </tr>
-            <tr>
-                <td>28478f9WUR</td>
-                <td>Vehicle no</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-            </tr>
-            <tr>
-                <td>28478f9WUR</td>
-                <td>Vehicle no</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-            </tr>
-            <tr>
-                <td>28478f9WUR</td>
-                <td>Vehicle no</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-                <td>28478f9WUR</td>
-            </tr>
+            @foreach ($Refueling__MyRecords as $Refueling)
+            <tr> 
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $Refueling->VehicleNumber }}</td>
+                <td>{{ $Refueling->Date }}</td>
+                <td>{{ $Refueling->Time }}</td>
+                <td>{{ $Refueling->KMETER }}</td>
+                <td>{{ $Refueling->TerminalNumber }}</td>
+                <td>{{ $Refueling->CardNumber }}</td>
+                <td>{{ $Refueling->Quantity }}</td>
+                <td>{{ $Refueling->Amount }}</td>
+                <td>{{ $Refueling->ReceiptNumber }}</td>
+                <td>{{ $Refueling->KM }}</td>
+                <td>{{ $Refueling->Consumption }}</td>
+            </tr> 
+            @endforeach  
             <div class="table-head filter"> 
                 <span><input type="text" id="SearchInput0" placeholder="Filter By S/N" onkeyup="FilterSN()"></span> 
                 <span><input type="text" id="SearchInput1" placeholder="Filter By Vehicle no" onkeyup="FilterVehicleNo()"></span> 
@@ -102,5 +48,6 @@
                 <span><input type="text" id="SearchInput11" placeholder="Filter By [KM/LITER]" onkeyup="FilterKMLITER()"></span>  
             </div>
         </table>
+        {{ $Refueling__MyRecords->onEachSide(5)->links() }}
     </div>
 @endsection
