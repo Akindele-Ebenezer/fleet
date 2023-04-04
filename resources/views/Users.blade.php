@@ -30,5 +30,6 @@
                 <span><input type="text" id="SearchInput5" placeholder="Filter By Status" onkeyup="FilterStatus()"></span>  
             </div>
         </table>
+        {{ $Users->onEachSide(5)->links() }}
     </div>
 @endsection

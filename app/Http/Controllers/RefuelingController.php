@@ -10,7 +10,7 @@ class RefuelingController extends Controller
     
     public function config() {
         return [
-            'Refuelings' => Refueling::orderBy('Date', 'DESC')->get(),
+            'Refuelings' => Refueling::orderBy('Date', 'DESC')->paginate(14),
         ];
     }
 

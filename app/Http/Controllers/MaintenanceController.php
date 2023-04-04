@@ -10,7 +10,7 @@ class MaintenanceController extends Controller
     
     public function config() {
         return [
-            'Maintenance' => Maintenance::orderBy('Date', 'DESC')->get(),
+            'Maintenance' => Maintenance::orderBy('Date', 'DESC')->paginate(14),
         ];
     }
 

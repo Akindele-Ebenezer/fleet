@@ -12,10 +12,8 @@
                 <th onclick="sortTable(5)">Comments</th> 
             </tr> 
             @foreach ($Cars as $Car)
+            @php include('../resources/views/Includes/CompanyName.php') @endphp
             <tr> 
-                @php
-                    $Companies = \App\Models\Organisation::first();
-                @endphp
                 <td class="id">
                     {{ $Car->CompanyCode }}
                     <br>
@@ -87,5 +85,6 @@
                 <span><input type="text" id="SearchInput5" placeholder="Filter By Comments.." onkeyup="FilterComments()"></span> 
             </div>
         </table>
+        {{ $Cars->onEachSide(5)->links() }}
     </div> 
 @endsection

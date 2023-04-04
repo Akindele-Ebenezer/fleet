@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CarController extends Controller
 {
     public function config() {
-        $Cars = Car::orderBy('PurchaseDate', 'DESC')->get(); 
+        $Cars = Car::orderBy('PurchaseDate', 'DESC')->paginate(7);
  
         return [
             'Cars' => $Cars,

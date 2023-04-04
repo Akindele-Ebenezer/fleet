@@ -4,7 +4,7 @@
     <div class="table-wrapper"> 
         <table class="table" id="Table">
             <tr class="table-head">
-                <th onclick="sortTable(0)">RFL NO</th>
+                <th onclick="sortTable(0)">S/N</th>
                 <th onclick="sortTable(1)">Vehicle no</th>
                 <th onclick="sortTable(2)">Date</th>
                 <th onclick="sortTable(3)">Time</th>
@@ -48,5 +48,6 @@
                 <span><input type="text" id="SearchInput11" placeholder="Filter By [KM/LITER]" onkeyup="FilterKMLITER()"></span>  
             </div>
         </table>
+        {{ $Refuelings->onEachSide(5)->links() }}
     </div>
 @endsection

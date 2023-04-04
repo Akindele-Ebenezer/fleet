@@ -42,5 +42,6 @@
                 <span><input type="text" id="SearchInput9" placeholder="Filter By Supplier No" onkeyup="FilterSupplierNo()"></span>  
             </div>
         </table>
+        {{ $Maintenance->onEachSide(5)->links() }}
     </div>
 @endsection

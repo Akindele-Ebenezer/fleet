@@ -37,7 +37,9 @@ $Color-4: #3034b5;
     // display: flex;
     display: none;
     justify-content: center;
+    position: relative;
     translate: 0 2em;
+    z-index: 100;
 
     .inner {
         background-color: $Color-3;

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class RepairController extends Controller
 {
     public function config() {
-        $Repairs = Repair::orderBy('Date', 'DESC')->get(); 
+        $Repairs = Repair::orderBy('Date', 'DESC')->paginate(14); 
  
         return [
             'Repairs' => $Repairs,

@@ -39,5 +39,6 @@
                 <span><input type="text" id="SearchInput8" placeholder="Filter By Comments" onkeyup="FilterComments()"></span> 
             </div>
         </table>
+        {{ $Deposits->onEachSide(5)->links() }}
     </div>
 @endsection

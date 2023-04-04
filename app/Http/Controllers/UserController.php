@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function config() {
-        $Users = User::orderBy('id')->get(); 
+        $Users = User::orderBy('id')->paginate(14); 
  
         return [
             'Users' => $Users,

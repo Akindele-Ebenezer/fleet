@@ -42,5 +42,6 @@
                 <span><input type="text" id="SearchInput9" placeholder="Filter By Weeks" onkeyup="FilterWeeks()"></span>  
             </div>
         </table>
+        {{ $Repairs->onEachSide(5)->links() }}
     </div>
 @endsection

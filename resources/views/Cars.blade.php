@@ -11,8 +11,10 @@
                 <th onclick="sortTable(7)">Balance</th>
             </tr>  
             @foreach ($Cars as $Car)
+                @php include('../resources/views/Includes/CompanyName.php') @endphp
                 <tr> 
-                    <td class="id">{{ $loop->iteration }}</td>
+                    {{-- <td class="id">{{ $loop->iteration }}</td> --}}
+                    <td class="id">{{ $Car->id }}</td>
                     <td>
                         <div class="car-info">
                             <div class="info-inner">
@@ -85,7 +87,7 @@
                                 </div>
                                 <div class="inner">
                                     <h3>Organisation</h3>
-                                    <span>{{ $Car->CompanyCode }} (LCM)</span>
+                                    <span>{{ $Car->CompanyCode }} - {{ $Companies->CompanyName }}</span>
                                 </div>
                                 <div class="inner">
                                     <h3>Engine Type</h3>
@@ -134,6 +136,7 @@
                 <span><input type="text" id="SearchInput3" placeholder="Filter By Refueling" onkeyup="FilterRefueling()"></span>  
                 <span><input type="text" id="SearchInput4" placeholder="Filter By Balance" onkeyup="FilterBalance()"></span>   
             </div>
+            {{ $Cars->onEachSide(1)->links() }}
         </table>
     </div>
 @endsection

@@ -144,6 +144,7 @@
         background: rgba(0,0,0,.9);
         height: 100vh; 
         overflow: hidden;
+        width: 90%;
  
         .action {
             display: flex;
@@ -388,6 +389,47 @@
             margin-left: 2rem;
             overflow-y: scroll;
             padding-bottom: 4rem;
+
+            nav {
+                &[aria-label] {
+                    align-items: center;
+                    display: flex;
+                    justify-content: space-between;
+
+                    span, div p {
+                        color: #fff;
+                    }
+
+                    .flex, .hidden { 
+                        background: #111;
+                        padding-inline: .5em;
+                    }
+
+                    .flex {
+                        a {
+                            background: $Color-4;
+                            border-radius: .2em;
+                            color: #fff;
+                            padding-inline: .5em;
+                            margin-inline: .24em;
+                        }
+                    }
+
+                    .leading-5 {
+                        background: #000;
+                        color: #fff;
+                    }
+
+                    span[aria-current] {
+                        span {
+                            background: $Color-3;
+                            border-radius: 0.1em;
+                            margin-inline: .2em;
+                            padding-inline: .45em;
+                        }
+                    }
+                }
+            }
         }
 
         .table-head.filter { 

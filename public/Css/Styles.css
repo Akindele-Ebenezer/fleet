@@ -27,7 +27,9 @@
   align-items: center;
   display: none;
   justify-content: center;
+  position: relative;
   translate: 0 2em;
+  z-index: 100;
 }
 .alert .inner {
   background-color: #41a341;
@@ -412,6 +414,7 @@ svg {
   background: rgba(0, 0, 0, 0.9);
   height: 100vh;
   overflow: hidden;
+  width: 90%;
 }
 .report-inner .action {
   display: flex;
@@ -591,6 +594,35 @@ svg {
   margin-left: 2rem;
   overflow-y: scroll;
   padding-bottom: 4rem;
+}
+.report-inner .table-wrapper nav[aria-label] {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.report-inner .table-wrapper nav[aria-label] span, .report-inner .table-wrapper nav[aria-label] div p {
+  color: #fff;
+}
+.report-inner .table-wrapper nav[aria-label] .flex, .report-inner .table-wrapper nav[aria-label] .hidden {
+  background: #111;
+  padding-inline: 0.5em;
+}
+.report-inner .table-wrapper nav[aria-label] .flex a {
+  background: #3034b5;
+  border-radius: 0.2em;
+  color: #fff;
+  padding-inline: 0.5em;
+  margin-inline: 0.24em;
+}
+.report-inner .table-wrapper nav[aria-label] .leading-5 {
+  background: #000;
+  color: #fff;
+}
+.report-inner .table-wrapper nav[aria-label] span[aria-current] span {
+  background: #41a341;
+  border-radius: 0.1em;
+  margin-inline: 0.2em;
+  padding-inline: 0.45em;
 }
 .report-inner .table-head.filter {
   display: flex;

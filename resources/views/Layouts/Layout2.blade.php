@@ -257,7 +257,7 @@
                             ];
                         }
              
-                        if($_SERVER['REQUEST_URI'] === '/Repairs' || $_SERVER['REQUEST_URI'] === '/EditRepairs') {
+                        if($_SERVER['REQUEST_URI'] === '/Repairs') {
                             $SearchInputs = [
                                 "SN",
                                 "CarVehicleNo",
@@ -272,7 +272,7 @@
                             ];
                         }
                 
-                        if($_SERVER['REQUEST_URI'] === '/Maintenance' || $_SERVER['REQUEST_URI'] === '/EditMaintenance') {
+                        if($_SERVER['REQUEST_URI'] === '/Maintenance') {
                             $SearchInputs = [
                                 "SN",
                                 "VehicleNo",
@@ -287,7 +287,7 @@
                             ];
                         }
                 
-                        if($_SERVER['REQUEST_URI'] === '/Deposits' || $_SERVER['REQUEST_URI'] === '/EditDeposits') {
+                        if($_SERVER['REQUEST_URI'] === '/Deposits') {
                             $SearchInputs = [
                                 "LNO",
                                 "VehicleNo",
@@ -301,7 +301,7 @@
                             ];
                         } 
 
-                        if($_SERVER['REQUEST_URI'] === '/Refueling' || $_SERVER['REQUEST_URI'] === '/EditRefueling') {
+                        if($_SERVER['REQUEST_URI'] === '/Refueling') {
                             $SearchInputs = [
                                 "SN",
                                 "VehicleNo",

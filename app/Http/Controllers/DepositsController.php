@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class DepositsController extends Controller
 {
     public function config() {
-        $Deposits = Deposits::orderBy('Date', 'DESC')->get(); 
+        $Deposits = Deposits::orderBy('Date', 'DESC')->paginate(14); 
  
         return [
             'Deposits' => $Deposits,
