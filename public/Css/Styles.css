@@ -84,7 +84,8 @@ button {
 
 .edit-modal-vehicle-data .inner ul li input,
 .edit-modal-vehicle-data .inner ul li select {
-  border: 1px solid #aaa;
+  border: 1px solid #c2c3ef;
+  color: #3034b5;
   outline: none;
   padding-inline: 0.5em;
 }
@@ -170,13 +171,17 @@ button {
 }
 .modal-vehicle-data .inner ul li {
   align-items: center;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #d6d7f4;
   display: flex;
   justify-content: space-between;
   padding: 0.8em 0.5em;
 }
+.modal-vehicle-data .inner ul li span {
+  color: #494dcf;
+}
 .modal-vehicle-data .inner ul li span:first-of-type {
   align-items: center;
+  color: #9a9ce4;
   display: flex;
 }
 
@@ -207,12 +212,23 @@ svg {
   padding: 1em;
   position: fixed;
   right: 0;
-  width: 30rem;
+  width: 60rem;
+}
+.form .inner form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.form .inner form button {
+  align-self: end;
+  background: #3034b5;
+  height: 3em;
 }
 .form .inner form .new-car-inputs {
   border: 1px solid;
   margin-block: 0.5em;
   padding: 0.5em;
+  width: 49%;
 }
 .form .inner form .new-car-inputs-inner {
   align-items: center;
@@ -230,13 +246,13 @@ svg {
   padding: 0.5em;
   width: 90%;
 }
-.form .inner form .heading {
+.form .inner .heading {
   align-items: center;
   display: flex;
   justify-content: space-between;
   margin-top: 3em;
 }
-.form .inner form .heading h1 {
+.form .inner .heading h1 {
   align-items: center;
   color: #fff;
   display: flex;
@@ -349,10 +365,10 @@ svg {
   padding: 1em;
 }
 .report-data-heading .inner.wrapper .search h2 {
-  color: #fff;
+  color: #eee;
   font-weight: unset;
   text-decoration: overline;
-  text-decoration-color: #fff;
+  text-decoration-color: #eee;
 }
 .report-data-heading .inner.wrapper .search input {
   border: none;
@@ -398,7 +414,7 @@ svg {
   text-align: center;
 }
 .report-data-heading .inner-x table td, .report-data-heading .inner-x table th {
-  color: #fff;
+  color: #eee;
 }
 .report-data-heading .inner-x table th {
   font-weight: unset;
@@ -433,9 +449,9 @@ svg {
 }
 .report-inner .action .inner button:last-of-type {
   background: unset;
-  border: 3px solid #fff;
+  border: 3px solid #eee;
   border-radius: unset;
-  color: #fff;
+  color: #eee;
 }
 .report-inner h1 {
   color: #eee;

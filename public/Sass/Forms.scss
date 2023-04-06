@@ -14,13 +14,24 @@
         padding: 1em; 
         position: fixed;
         right: 0;
-        width: 30rem;
+        width: 60rem;
     
         form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            button {
+                align-self: end;
+                background: $Color-4;
+                height: 3em; 
+            }
+
             .new-car-inputs {
                 border: 1px solid;
                 margin-block: 0.5em;
                 padding: 0.5em;
+                width: 49%;
 
                 &-inner {
                     align-items: center;
@@ -39,20 +50,20 @@
                     padding: 0.5em;
                     width: 90%;
                 }
-            }
+            } 
+        }
+        
+        .heading {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3em;
 
-            .heading {
+            h1 {
                 align-items: center;
+                color: #fff;
                 display: flex;
-                justify-content: space-between;
-                margin-top: 3em;
-
-                h1 {
-                    align-items: center;
-                    color: #fff;
-                    display: flex;
-                    font-family: system-ui;
-                }
+                font-family: system-ui;
             }
         }
     }

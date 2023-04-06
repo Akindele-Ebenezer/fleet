@@ -24,7 +24,7 @@
                 <td>{{ $Maintenancee->MaintenanceAction }}</td>
                 <td>{{ $Maintenancee->ReleaseDate }}</td>
                 <td>{{ $Maintenancee->ReleaseTime }}</td>
-                <td>{{ $Maintenancee->Cost }}</td>
+                <td>{{ number_format($Maintenancee->Cost) }}</td>
                 <td>{{ $Maintenancee->InvoiceNumber }}</td>
                 <td>{{ $Maintenancee->Week }}</td>
             </tr>  

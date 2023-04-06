@@ -59,10 +59,10 @@
                     padding: 1em;
 
                     h2 {
-                        color: #fff;
+                        color: #eee;
                         font-weight: unset;
                         text-decoration: overline;
-                        text-decoration-color: #fff;
+                        text-decoration-color: #eee;
                     }
 
                     input {
@@ -117,7 +117,7 @@
                     }
 
                     td, th {
-                        color: #fff;
+                        color: #eee;
                     }
 
                     th {
@@ -163,9 +163,9 @@
 
                     &:last-of-type {
                         background: unset;
-                        border: 3px solid #fff;
+                        border: 3px solid #eee;
                         border-radius: unset;
-                        color: #fff;
+                        color: #eee;
                     }
                 }
             }

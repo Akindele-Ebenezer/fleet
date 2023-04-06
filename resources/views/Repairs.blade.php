@@ -18,13 +18,22 @@
             @foreach ($Repairs as $Repair) 
             <tr> 
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $Repair->VehicleNumber }}</td>
+                <td class="show-record-x">{{ $Repair->VehicleNumber }}</td>
+                <span class="VehicleNumber_X_DATA Hide">{{ $Repair->VehicleNumber }}</span>
+                <span class="Date_X_DATA Hide">{{ $Repair->Date }}</span>
+                <span class="Time_X_DATA Hide">{{ $Repair->Time }}</span>
+                <span class="RepairAction_X_DATA Hide">{{ $Repair->RepairAction }}</span>
+                <span class="ReleaseDate_X_DATA Hide">{{ $Repair->ReleaseDate }}</span>
+                <span class="ReleaseTime_X_DATA Hide">{{ $Repair->ReleaseTime }}</span>
+                <span class="Cost_X_DATA Hide">{{ number_format($Repair->Cost) }}</span>
+                <span class="InvoiceNumber_X_DATA Hide">{{ $Repair->InvoiceNumber }}</span>
+                <span class="Week_X_DATA Hide">{{ $Repair->Week }}</span>
                 <td>{{ $Repair->Date }}</td>
                 <td>{{ $Repair->Time }}</td>
                 <td>{{ $Repair->RepairAction }}</td>
                 <td>{{ $Repair->ReleaseDate }}</td>
                 <td>{{ $Repair->ReleaseTime }}</td>
-                <td>{{ $Repair->Cost }}</td>
+                <td>{{ number_format($Repair->Cost) }}</td>
                 <td>{{ $Repair->InvoiceNumber }}</td>
                 <td>{{ $Repair->Week }}</td>
             </tr> 

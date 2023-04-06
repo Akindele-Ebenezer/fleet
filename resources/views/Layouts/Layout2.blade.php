@@ -34,10 +34,23 @@
     @include('Components.AddCarComponent')
     @include('Components.VehicleDataComponent')
     @include('Components.EditVehicleDataComponent')
-    @include('Components.EditRepairComponent')
-    @include('Components.EditMonthlyDepositsComponent')
-    @include('Components.EditMaintenanceComponent')
-    @include('Components.EditRefuelingComponent')   
+
+    @if (Route::is('EditRepairs'))
+        @include('Components.EditRepairComponent')
+    @endif
+    
+    @if (Route::is('EditMaintenance'))
+        @include('Components.EditMaintenanceComponent')
+    @endif
+
+    @if (Route::is('EditDeposits'))
+        @include('Components.EditMonthlyDepositsComponent')
+    @endif
+
+    @if (Route::is('EditRefueling'))
+        @include('Components.EditRefuelingComponent')   
+    @endif
+
     @include('Components.AlertComponent')   
 
     <div class="report" style="background-image: url('Images/bg-3.gif');">
@@ -225,7 +238,7 @@
             
                         $SearchInputs = [];
 
-                        if($_SERVER['REQUEST_URI'] === '/Cars') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Cars') {
                             $SearchInputs = [
                                 "ID",
                                 "Cars", 
@@ -235,7 +248,7 @@
                             ];
                         }
                         
-                        if($_SERVER['REQUEST_URI'] === '/MyRecords') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/MyRecords') {
                             $SearchInputs = [
                                 "ID",
                                 "Cars", 
@@ -245,7 +258,7 @@
                             ];
                         }
 
-                        if($_SERVER['REQUEST_URI'] === '/VehicleReport') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/VehicleReport') {
                             $SearchInputs = [
                                 "ORG",
                                 "CarNumber", 
@@ -256,7 +269,7 @@
                             ];
                         }
              
-                        if($_SERVER['REQUEST_URI'] === '/Repairs') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Repairs') {
                             $SearchInputs = [
                                 "SN",
                                 "CarVehicleNo",
@@ -271,7 +284,7 @@
                             ];
                         }
                 
-                        if($_SERVER['REQUEST_URI'] === '/Maintenance') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Maintenance') {
                             $SearchInputs = [
                                 "SN",
                                 "VehicleNo",
@@ -286,7 +299,7 @@
                             ];
                         }
                 
-                        if($_SERVER['REQUEST_URI'] === '/Deposits') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Deposits') {
                             $SearchInputs = [
                                 "LNO",
                                 "VehicleNo",
@@ -300,7 +313,7 @@
                             ];
                         } 
 
-                        if($_SERVER['REQUEST_URI'] === '/Refueling') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Refueling') {
                             $SearchInputs = [
                                 "SN",
                                 "VehicleNo",
@@ -317,7 +330,7 @@
                             ];
                         }
              
-                        if($_SERVER['REQUEST_URI'] === '/EditRepairs') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/EditRepairs') {
                             $SearchInputs = [
                                 "SN",
                                 "CarVehicleNo",
@@ -332,7 +345,7 @@
                             ];
                         }
                 
-                        if($_SERVER['REQUEST_URI'] === '/EditMaintenance') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/EditMaintenance') {
                             $SearchInputs = [
                                 "SN",
                                 "VehicleNo",
@@ -347,7 +360,7 @@
                             ];
                         }
                 
-                        if($_SERVER['REQUEST_URI'] === '/EditDeposits') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/EditDeposits') {
                             $SearchInputs = [
                                 "LNO",
                                 "VehicleNo",
@@ -361,7 +374,7 @@
                             ];
                         } 
 
-                        if($_SERVER['REQUEST_URI'] === '/EditRefueling') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/EditRefueling') {
                             $SearchInputs = [
                                 "SN",
                                 "VehicleNo",
@@ -378,7 +391,7 @@
                             ];
                         }
 
-                        if($_SERVER['REQUEST_URI'] === '/Users') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Users') {
                             $SearchInputs = [
                                 "ID",
                                 "Email",
@@ -430,8 +443,21 @@
                 }
             }
         @endfor
-    </script>
-    <script src="{{ asset('Js/Scripts.js') }}"></script>
-    <script src="{{ asset('Js/Loader.js') }}"></script>
+        </script>
+        <script src="{{ asset('Js/Scripts.js') }}"></script>
+        @if (Route::is('MyRecords'))
+            <script src="{{ asset('Js/Edit/MyRecords.js') }}"></script>
+        @endif
+        @if (Route::is('EditRepairs'))
+            <script src="{{ asset('Js/Edit/Repair.js') }}"></script>
+        @endif
+        @if (Route::is('EditMaintenance'))
+            <script src="{{ asset('Js/Edit/Maintenance.js') }}"></script>
+        @endif
+        @if (Route::is('EditDeposits'))
+            <script src="{{ asset('Js/Edit/MonthlyDeposits.js') }}"></script>
+        @endif
+        <script src="{{ asset('Js/Loader.js') }}"></script>
+        {{-- <script src="{{ asset('Js/Edit/Repair.js') }}"></script>  --}}
 </body>
 </html>

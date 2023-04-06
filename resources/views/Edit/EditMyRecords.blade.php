@@ -62,7 +62,34 @@
                             </div>
                             <div class="stats-heading">
                                 <h2>STATS</h2>
-                                <button class="action-x">action</button>
+                                <button class="action-x show-record-button">action</button>
+                                <span class="Deposits_X_DATA Hide">₦ {{ number_format($Car->TotalDeposits) }}</span>
+                                <span class="Refueling_X_DATA Hide">₦ {{ number_format($Car->TotalRefueling) }}</span>
+                                <span class="Balance_X_DATA Hide">₦ {{ number_format($Car->Balance) }}</span>
+                                <span class="UsedBy_X_DATA Hide">{{ $Car->CarOwner }}</span>
+                                <span class="RegistrationNo_X_DATA Hide">{{ $Car->VehicleNumber }}</span>
+                                <span class="Maker_X_DATA Hide">{{ $Car->Maker }}</span>
+                                <span class="Model_X_DATA Hide">{{ $Car->Model }}</span>
+                                <span class="SubModel_X_DATA Hide">{{ $Car->SubModel }}</span>
+                                <span class="EngineType_X_DATA Hide">{{ $Car->EngineType }}</span>
+                                <span class="GearType_X_DATA Hide">{{ $Car->GearType }}</span>
+                                <span class="EngineNo_X_DATA Hide">{{ $Car->EngineNumber }}</span>
+                                <span class="ChasisNo_X_DATA Hide">{{ $Car->ChassisNumber }}</span>
+                                <span class="PurchaseDate_X_DATA Hide">{{ $Car->PurchaseDate }}</span>
+                                <span class="Supplier_X_DATA Hide">{{ $Car->Supplier }}</span>
+                                <span class="Price_X_DATA Hide">₦ {{ number_format($Car->Price) }}</span>
+                                <span class="CompanyCode_X_DATA Hide">{{ $Car->CompanyCode }}</span>
+                                <span class="LicenceExpiryDate_X_DATA Hide">{{ $Car->LicenceExpiryDate }}</span>
+                                <span class="InsuranceExpiryDate_X_DATA Hide">{{ $Car->InsuranceExpiryDate }}</span>
+                                <span class="CardNo_X_DATA Hide">{{ $Car->CardNumber }}</span>
+                                <span class="PinCode_X_DATA Hide">{{ $Car->PinCode }}</span>
+                                <span class="FuelMonthly_X_DATA Hide">₦ {{ number_format($Car->MonthlyBudget) }}</span>
+                                <span class="FuelTankCapacity_X_DATA Hide">{{ $Car->FuelTankCapacity }}</span>
+                                <span class="EngineVolume_X_DATA Hide">{{ $Car->EngineVolume }}</span>
+                                <span class="ModelYear_X_DATA Hide">{{ $Car->ModelYear }}</span>
+                                <span class="StopDate_X_DATA Hide">{{ $Car->StopDate }}</span>
+                                <span class="Driver_X_DATA Hide">{{ $Car->Driver }}</span>
+                                <span class="Status_X_DATA Hide">{{ $Car->Status  === 'ACTIVE' ? 'This CAR is active since ' . $Car->PurchaseDate . '. Licence Expires on ' . $Car->LicenceExpiryDate . '.'  : 'This CAR is inactive. Licence Expires on ' . $Car->LicenceExpiryDate . '..' }}</span>
                             </div>
                             <div class="stats">
                                 <div class="inner">

@@ -27,7 +27,7 @@
                 <td>{{ $Refueling->TERNO }}</td>
                 <td>{{ $Refueling->CardNumber }}</td>
                 <td>{{ $Refueling->Quantity }}</td>
-                <td>{{ $Refueling->Amount }}</td>
+                <td>{{ number_format($Refueling->Amount) }}</td>
                 <td>{{ $Refueling->ReceiptNumber }}</td>
                 <td>{{ $Refueling->KM }}</td>
                 <td>{{ $Refueling->Consumption }}</td>

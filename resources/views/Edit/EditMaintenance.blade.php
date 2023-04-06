@@ -18,13 +18,22 @@
             @foreach ($Maintenance__MyRecords as $Maintenance)
             <tr> 
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $Maintenance->VehicleNumber }}</td>
+                <td class="show-record-x-edit">{{ $Maintenance->VehicleNumber }}</td>
+                <span class="VehicleNumber_X_DATA_Edit Hide">{{ $Maintenance->VehicleNumber }}</span>
+                <span class="Date_X_DATA_Edit Hide">{{ $Maintenance->Date }}</span>
+                <span class="Time_X_DATA_Edit Hide">{{ $Maintenance->Time }}</span>
+                <span class="MaintenanceAction_X_DATA_Edit Hide">{{ $Maintenance->MaintenanceAction }}</span>
+                <span class="ReleaseDate_X_DATA_Edit Hide">{{ $Maintenance->ReleaseDate }}</span>
+                <span class="ReleaseTime_X_DATA_Edit Hide">{{ $Maintenance->ReleaseTime }}</span>
+                <span class="Cost_X_DATA_Edit Hide">{{ number_format($Maintenance->Cost) }}</span>
+                <span class="InvoiceNumber_X_DATA_Edit Hide">{{ $Maintenance->InvoiceNumber }}</span>
+                <span class="Week_X_DATA_Edit Hide">{{ $Maintenance->Week }}</span>
                 <td>{{ $Maintenance->Date }}</td>
                 <td>{{ $Maintenance->Time }}</td>
                 <td>{{ $Maintenance->MaintenanceAction }}</td>
                 <td>{{ $Maintenance->ReleaseDate }}</td>
                 <td>{{ $Maintenance->ReleaseTime }}</td>
-                <td>{{ $Maintenance->Cost }}</td>
+                <td>{{ number_format($Maintenance->Cost) }}</td>
                 <td>{{ $Maintenance->InvoiceNumber }}</td>
                 <td>{{ $Maintenance->Week }}</td>
             </tr> 

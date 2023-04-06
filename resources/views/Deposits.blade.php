@@ -20,7 +20,7 @@
                 <td>{{ $Deposit->VehicleNumber }}</td> 
                 <td>{{ $Deposit->Date }}</td>
                 <td>{{ $Deposit->CardNumber }}</td>
-                <td>{{ $Deposit->Amount }}</td> 
+                <td>{{ number_format($Deposit->Amount) }}</td> 
                 <td>{{ $Deposit->Year }}</td>
                 <td>{{ $Deposit->Week }}</td>
                 <td>{{ $Deposit->Month }}</td>
