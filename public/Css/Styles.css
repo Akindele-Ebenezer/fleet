@@ -259,6 +259,11 @@ svg {
   font-family: system-ui;
 }
 
+.readonly input {
+  background-color: unset !important;
+  pointer-events: none;
+}
+
 .login-wrapper {
   background-color: #000;
   background-position: center;
@@ -581,6 +586,12 @@ svg {
 }
 .report-inner .table td {
   color: #eee !important;
+}
+.report-inner .table td.show-record-x-edit, .report-inner .table td.show-record-x {
+  cursor: pointer;
+}
+.report-inner .table td.show-record-x-edit:hover, .report-inner .table td.show-record-x:hover {
+  color: #333 !important;
 }
 .report-inner .table td,
 .report-inner .table th {

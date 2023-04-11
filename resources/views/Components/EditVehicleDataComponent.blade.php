@@ -10,10 +10,10 @@
                 PRINT
             </button>
         </div>
-        <div class="active-status">
+        {{-- <div class="active-status">
             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 856v-60h84V490q0-84 49.5-149.5T424 258v-29q0-23 16.5-38t39.5-15q23 0 39.5 15t16.5 38v29q81 17 131 82.5T717 490v306h83v60H160Zm320-295Zm0 415q-32 0-56-23.5T400 896h160q0 33-23.5 56.5T480 976ZM304 796h353V490q0-74-51-126t-125-52q-74 0-125.5 52T304 490v306Z"/></svg>
             This Car is ACTIVE Since 19-23-2020 and consu
-        </div>
+        </div> --}}
         <h1>
             Vehicle Data
             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 936q-151 0-255.5-46.5T120 776V376q0-66 105.5-113T480 216q149 0 254.5 47T840 376v400q0 67-104.5 113.5T480 936Zm0-488q86 0 176.5-26.5T773 362q-27-32-117.5-59T480 276q-88 0-177 26t-117 60q28 35 116 60.5T480 448Zm-1 214q42 0 84-4.5t80.5-13.5q38.5-9 73.5-22t63-29V438q-29 16-64 29t-74 22q-39 9-80 14t-83 5q-42 0-84-5t-80.5-14q-38.5-9-73-22T180 438v155q27 16 61 29t72.5 22q38.5 9 80.5 13.5t85 4.5Zm1 214q48 0 99-8.5t93.5-22.5q42.5-14 72-31t35.5-35V654q-28 16-63 28.5T643.5 704q-38.5 9-80 13.5T479 722q-43 0-85-4.5T313.5 704q-38.5-9-72.5-21.5T180 654v126q5 17 34 34.5t72 31q43 13.5 94 22t100 8.5Z"/></svg>
@@ -74,10 +74,9 @@
                         Maker
                     </span> 
                     <select name="Maker" class="Maker_X">
-                        <option value="TOYOTA">TOYOTA</option>
-                        <option value="HYUNDAI">HYUNDAI</option>
-                        <option value="JEEP">JEEP</option>
-                        <option value="NISSAN">NISSAN</option>
+                        @foreach ($Cars_Maker_GROUPED as $Car)
+                            <option value="{{ $Car->Maker }}">{{ $Car->Maker }}</option>
+                        @endforeach 
                     </select>
                 </li>
                 <li>
@@ -100,9 +99,9 @@
                         Engine Type
                     </span>
                     <select name="EngineType" class="EngineType_X">
-                        <option value="PETROL">PETROL</option>
-                        <option value="DIESEL">DIESEL</option>
-                        <option value="HYBRID">HYBRID</option> 
+                        @foreach ($Cars_EngineType_GROUPED as $Car)
+                            <option value="{{ $Car->EngineType }}">{{ $Car->EngineType }}</option>
+                        @endforeach 
                     </select>
                 </li>
                 <li>
@@ -111,8 +110,9 @@
                         Gear Type
                     </span>
                     <select name="GearType" class="GearType_X">
-                        <option value="AUTOMATIC">AUTOMATIC</option>
-                        <option value="MANUEL">MANUEL</option> 
+                        @foreach ($Cars_GearType_GROUPED as $Car)
+                            <option value="{{ $Car->GearType }}">{{ $Car->GearType }}</option>
+                        @endforeach 
                     </select>
                 </li>
                 <li>

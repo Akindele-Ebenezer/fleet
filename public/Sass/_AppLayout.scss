@@ -349,6 +349,15 @@
 
             td {
                 color: #eee !important;
+
+                &.show-record-x-edit,
+                &.show-record-x {
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #333 !important;
+                    }
+                }
             }
 
             td, 

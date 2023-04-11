@@ -38,19 +38,35 @@
     @if (Route::is('EditRepairs'))
         @include('Components.EditRepairComponent')
     @endif
+
+    @if (Route::is('Repairs'))
+        @include('Components.ReadOnly.RepairComponent')
+    @endif
     
     @if (Route::is('EditMaintenance'))
         @include('Components.EditMaintenanceComponent')
+    @endif
+
+    @if (Route::is('Maintenance'))
+        @include('Components.ReadOnly.MaintenanceComponent')
     @endif
 
     @if (Route::is('EditDeposits'))
         @include('Components.EditMonthlyDepositsComponent')
     @endif
 
+    @if (Route::is('Deposits'))
+        @include('Components.ReadOnly.DepositsComponent')
+    @endif
+    
     @if (Route::is('EditRefueling'))
         @include('Components.EditRefuelingComponent')   
     @endif
 
+    @if (Route::is('Refueling'))
+        @include('Components.ReadOnly.RefuelingComponent')
+    @endif
+    
     @include('Components.AlertComponent')   
 
     <div class="report" style="background-image: url('Images/bg-3.gif');">
@@ -457,7 +473,23 @@
         @if (Route::is('EditDeposits'))
             <script src="{{ asset('Js/Edit/MonthlyDeposits.js') }}"></script>
         @endif
+        @if (Route::is('EditRefueling'))
+            <script src="{{ asset('Js/Edit/Refueling.js') }}"></script>
+        @endif
+        {{--  --}}
+        
+        @if (Route::is('Repairs'))
+            <script src="{{ asset('Js/ReadOnly/Repair.js') }}"></script>
+        @endif
+        @if (Route::is('Maintenance'))
+            <script src="{{ asset('Js/ReadOnly/Maintenance.js') }}"></script>
+        @endif
+        @if (Route::is('Deposits'))
+            <script src="{{ asset('Js/ReadOnly/Deposits.js') }}"></script>
+        @endif
+        @if (Route::is('Refueling'))
+            <script src="{{ asset('Js/ReadOnly/Refueling.js') }}"></script>
+        @endif
         <script src="{{ asset('Js/Loader.js') }}"></script>
-        {{-- <script src="{{ asset('Js/Edit/Repair.js') }}"></script>  --}}
 </body>
 </html>

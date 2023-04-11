@@ -1,9 +1,9 @@
-<div class="edit-repair-form form">
+<div class="maintenance-readonly readonly form">
     <div class="inner">
         <div class="heading">
             <h1>
                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="m80 619 85-253q5-14 17-22t26-8h125v-73h153q-9 32-8 66.5t9 66.5H218l-54 166h478q23 8 42.5 12t44.5 4q18 0 36-2.5t35-7.5v378q0 12-9 21t-21 9h-21q-12 0-21-9t-9-21v-54H161v54q0 12-9 21t-21 9h-21q-12 0-21-9t-9-21V619Zm60 3v210-210Zm106 160q23 0 39.5-15.5T302 728q0-23-16.5-39.5T246 672q-23 0-38.5 16.5T192 728q0 23 15.5 38.5T246 782Zm388 0q23 0 39.5-15.5T690 728q0-23-16.5-39.5T634 672q-23 0-38.5 16.5T580 728q0 23 15.5 38.5T634 782Zm95-264q-79 0-135-56t-56-135q0-80 56-135.5T729 136q80 0 135.5 55.5T920 327q0 79-55.5 135T729 518Zm-15-161h35V214h-35v143Zm18 85q9 0 15.5-6t6.5-16q0-10-6.5-16t-15.5-6q-10 0-16 6t-6 16q0 10 6 16t16 6ZM140 832h600V622H140v210Z"></path></svg>
-                Repair 
+                Maintenance 
             </h1>
             <button>
                 Maintenance
@@ -35,9 +35,9 @@
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M880 316v520q0 24-18 42t-42 18H140q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42ZM140 425h680V316H140v109Zm0 129v282h680V554H140Zm0 282V316v520Z"></path></svg>
-                    Repair Action	
+                    Maintenance Action	
                 </div>
-                <input class="RepairAction_X" type="text" placeholder="Repair Action	..">
+                <input class="MaintenanceAction_X" type="text" placeholder="Maintenance Action	..">
             </div>
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">
@@ -70,11 +70,11 @@
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M386 677h87q24.75 0 42.375-18T533 617V415q0-24-17.625-42T473 355h-71q-24 0-42 18t-18 42v71q0 24 18 42t42 18h71v71h-87v60Zm87-191h-71v-71h71v71ZM260 856q-24 0-42-18t-18-42V236q0-24 18-42t42-18h560q24 0 42 18t18 42v560q0 24-18 42t-42 18H260Zm0-60h560V236H260v560ZM140 976q-24 0-42-18t-18-42V296h60v620h620v60H140Zm120-740v560-560Zm406 395h60v-87h83v-60h-83v-83h-60v83h-83v60h83v87Z"></path></svg>
-                    Weeks
+                    Sup No
                 </div>
                 <input class="Week_X" type="text" placeholder="Weeks..">
             </div> 
-            <button>+ Add Repair</button>
+            <button>+ Print Maintenance</button>
         </form>
     </div>
 </div>

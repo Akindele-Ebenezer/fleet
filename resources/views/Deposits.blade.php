@@ -17,7 +17,14 @@
             @foreach ($Deposits as $Deposit) 
             <tr> 
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $Deposit->VehicleNumber }}</td> 
+                <td class="show-record-x">{{ $Deposit->VehicleNumber }}</td>
+                <span class="VehicleNumber_X_DATA_Edit Hide">{{ $Deposit->VehicleNumber }}</span>
+                <span class="Date_X_DATA_Edit Hide">{{ $Deposit->Date }}</span>
+                <span class="CardNumber_X_DATA_Edit Hide">{{ $Deposit->CardNumber }}</span>
+                <span class="Amount_X_DATA_Edit Hide">{{ $Deposit->Amount }}</span>
+                <span class="Year_X_DATA_Edit Hide">{{ $Deposit->Year }}</span>
+                <span class="Week_X_DATA_Edit Hide">{{ $Deposit->Week }}</span> 
+                <span class="Month_X_DATA_Edit Hide">{{ $Deposit->Month }}</span> 
                 <td>{{ $Deposit->Date }}</td>
                 <td>{{ $Deposit->CardNumber }}</td>
                 <td>{{ number_format($Deposit->Amount) }}</td> 

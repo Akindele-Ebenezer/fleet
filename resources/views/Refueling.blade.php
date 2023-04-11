@@ -20,7 +20,18 @@
             @foreach ($Refuelings as $Refueling) 
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $Refueling->VehicleNumber }}</td>
+                <td class="show-record-x">{{ $Refueling->VehicleNumber }}</td>
+                <span class="VehicleNumber_X_DATA_Edit Hide">{{ $Refueling->VehicleNumber }}</span>
+                <span class="Date_X_DATA_Edit Hide">{{ $Refueling->Date }}</span>
+                <span class="Time_X_DATA_Edit Hide">{{ $Refueling->Time }}</span>
+                <span class="KMETER_X_DATA_Edit Hide">{{ $Refueling->KMETER }}</span>
+                <span class="TerminalNo_X_DATA_Edit Hide">{{ $Refueling->TerminalNo }}</span>
+                <span class="CardNumber_X_DATA_Edit Hide">{{ $Refueling->CardNumber }}</span>
+                <span class="Quantity_X_DATA_Edit Hide">{{ number_format($Refueling->Quantity) }}</span>
+                <span class="Amount_X_DATA_Edit Hide">{{ $Refueling->Amount }}</span>
+                <span class="ReceiptNo_X_DATA_Edit Hide">{{ $Refueling->ReceiptNo }}</span>
+                <span class="KM_X_DATA_Edit Hide">{{ $Refueling->KM }}</span>
+                <span class="KMLITER_X_DATA_Edit Hide">{{ $Refueling->KMLITER }}</span>
                 <td>{{ $Refueling->Date }}</td>
                 <td>{{ $Refueling->Time }}</td>
                 <td>{{ $Refueling->KMETER }}</td>

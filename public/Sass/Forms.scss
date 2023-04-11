@@ -50,7 +50,7 @@
                     padding: 0.5em;
                     width: 90%;
                 }
-            } 
+            }  
         }
         
         .heading {
@@ -66,5 +66,12 @@
                 font-family: system-ui;
             }
         }
+    }
+}
+
+.readonly {
+    input {
+        background-color: unset !important;
+        pointer-events: none;
     }
 }

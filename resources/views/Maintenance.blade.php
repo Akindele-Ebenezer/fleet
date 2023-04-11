@@ -18,7 +18,16 @@
             @foreach ($Maintenance as $Maintenancee) 
             <tr> 
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $Maintenancee->VehicleNumber }}</td>
+                <td class="show-record-x">{{ $Maintenancee->VehicleNumber }}</td>
+                <span class="VehicleNumber_X_DATA Hide">{{ $Maintenancee->VehicleNumber }}</span>
+                <span class="Date_X_DATA Hide">{{ $Maintenancee->Date }}</span>
+                <span class="Time_X_DATA Hide">{{ $Maintenancee->Time }}</span>
+                <span class="MaintenanceAction_X_DATA Hide">{{ $Maintenancee->MaintenanceAction }}</span>
+                <span class="ReleaseDate_X_DATA Hide">{{ $Maintenancee->ReleaseDate }}</span>
+                <span class="ReleaseTime_X_DATA Hide">{{ $Maintenancee->ReleaseTime }}</span>
+                <span class="Cost_X_DATA Hide">{{ number_format($Maintenancee->Cost) }}</span>
+                <span class="InvoiceNumber_X_DATA Hide">{{ $Maintenancee->InvoiceNumber }}</span>
+                <span class="Week_X_DATA Hide">{{ $Maintenancee->Week }}</span>
                 <td>{{ $Maintenancee->Date }}</td>
                 <td>{{ $Maintenancee->Time }}</td>
                 <td>{{ $Maintenancee->MaintenanceAction }}</td>
