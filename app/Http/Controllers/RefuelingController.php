@@ -10,7 +10,7 @@ class RefuelingController extends Controller
     
     public function config() {
         $Refueling = Refueling::orderBy('Date', 'DESC')->paginate(14); 
-        $Id = 'amina';
+        $Id = request()->get('Id');
         $Refueling__MyRecords = Refueling::where('UserId', $Id)->orderBy('Date', 'DESC')->paginate(14);
 
         return [

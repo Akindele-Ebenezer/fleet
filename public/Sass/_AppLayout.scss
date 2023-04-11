@@ -250,7 +250,7 @@
 
                                 span {
                                     &:first-of-type {
-                                        background: #333;
+                                        background: #222;
                                         border-radius: 0.2em;
                                         color: #eee;
                                         margin-right: 0.5em;
@@ -370,6 +370,7 @@
 
             th {  
                 font-family: system-ui;
+                font-weight: unset;
             }
 
             tr {

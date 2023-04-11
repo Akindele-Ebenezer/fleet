@@ -9,22 +9,12 @@ class CarController extends Controller
 {
     public function config() {
         $Cars = Car::orderBy('PurchaseDate', 'DESC')->paginate(7);
-        $Id = 'amina';
+        $Id = request()->get('Id');
         $Cars__MyRecords = Car::where('UserId', $Id)->orderBy('PurchaseDate', 'DESC')->paginate(7);
- // GLOBAL
  
-        $Cars_Absolute = Car::all();
-        $Cars_Maker_GROUPED = Car::select('Maker')->distinct()->get();
-        $Cars_EngineType_GROUPED = Car::select('EngineType')->distinct()->get();
-        $Cars_GearType_GROUPED = Car::select('GearType')->distinct()->get();
-         
         return [
             'Cars' => $Cars,
-            'Cars__MyRecords' => $Cars__MyRecords,
-            'Cars_Absolute' => $Cars_Absolute,
-            'Cars_Maker_GROUPED' => $Cars_Maker_GROUPED,
-            'Cars_EngineType_GROUPED' => $Cars_EngineType_GROUPED,
-            'Cars_GearType_GROUPED' => $Cars_GearType_GROUPED,
+            'Cars__MyRecords' => $Cars__MyRecords, 
         ];
     }
 

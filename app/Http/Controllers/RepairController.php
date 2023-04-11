@@ -9,7 +9,7 @@ class RepairController extends Controller
 {
     public function config() {
         $Repairs = Repair::orderBy('Date', 'DESC')->paginate(14); 
-        $Id = 'amina';
+        $Id = request()->get('Id');
         $Repairs__MyRecords = Repair::where('UserId', $Id)->orderBy('Date', 'DESC')->paginate(14);
  
         return [

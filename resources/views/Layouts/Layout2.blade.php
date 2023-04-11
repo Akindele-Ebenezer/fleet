@@ -1,3 +1,6 @@
+@if (Session::missing('Id')) 
+    <script>window.location = "/";</script>
+@else
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +32,9 @@
     <link rel="stylesheet" href="{{ asset('Css/Styles.css') }}">
 </head>
 <body> 
+    @php
+        include('../resources/Globals.php')
+    @endphp
     @include('Components.LoaderComponent')
     @include('Components.EditCarComponent')
     @include('Components.AddCarComponent')
@@ -176,7 +182,7 @@
                         <span>24</span>
                     </li>
                 </a>
-                <a href='/'>
+                <a href='{{ route('Logout') }}'>
                     <li>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h291v60H180v600h291v60H180Zm486-185-43-43 102-102H375v-60h348L621 444l43-43 176 176-174 174Z"/></svg>                  
                         LOGOUT 
@@ -490,6 +496,7 @@
         @if (Route::is('Refueling'))
             <script src="{{ asset('Js/ReadOnly/Refueling.js') }}"></script>
         @endif
-        <script src="{{ asset('Js/Loader.js') }}"></script>
+        <script src="{{ asset('Js/Loader.js') }}"></script> 
 </body>
 </html>
+@endif

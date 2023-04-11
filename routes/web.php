@@ -7,10 +7,14 @@ use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\DepositsController; 
 use App\Http\Controllers\RefuelingController; 
 use App\Http\Controllers\UserController; 
+use App\Http\Controllers\AuthController; 
 
 Route::get('/', function () {
     return view('Login');
 });
+
+Route::post('/Login', [AuthController::class, 'Auth'])->name('Auth');
+Route::get('/Logout', [AuthController::class, 'Logout'])->name('Logout');
 
 Route::get('/MyRecords', [CarController::class, 'my_records_activity'])->name('MyRecords');
  
