@@ -90,6 +90,15 @@ button {
   padding-inline: 0.5em;
 }
 
+.error {
+  color: #DF2E38;
+  text-align: center;
+}
+.error span {
+  color: #DF2E38 !important;
+  display: block;
+}
+
 .Hide {
   display: none !important;
 }
@@ -303,18 +312,18 @@ svg {
 .login-wrapper .wrapper-inner .login-inner .login-inputs input {
   border: none;
   border-bottom: 1px solid #333;
-  color: #333;
+  color: #3034b5;
   margin-block: 0.5rem;
   outline: none;
   padding-block: 0.5rem;
   width: 100%;
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
-.login-wrapper .wrapper-inner .login-inner .login-inputs input[placeholder] {
-  -webkit-text-fill-color: black !important;
-}
 .login-wrapper .wrapper-inner .login-inner .login-inputs input:focus {
-  border-bottom: 3px solid #333;
+  border-bottom: 3px solid #3034b5;
+}
+.login-wrapper .wrapper-inner .login-inner .login-inputs label {
+  color: #3034b5;
 }
 .login-wrapper .wrapper-inner .login-inner p {
   text-align: right;

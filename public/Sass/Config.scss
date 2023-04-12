@@ -109,6 +109,16 @@ button {
     }
 }
 
+.error {
+    color: $Color-2;
+    text-align: center;
+
+    span {
+        color: $Color-2 !important;
+        display: block;
+    }
+}
+
 .Hide {
     display: none !important;
 }

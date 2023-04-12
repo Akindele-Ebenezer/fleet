@@ -1,6 +1,6 @@
 @if (Session::missing('Id')) 
     <script>window.location = "/";</script>
-@else
+@else 
 <!DOCTYPE html>
 <html lang="en">
 <head>

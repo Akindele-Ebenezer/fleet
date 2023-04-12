@@ -34,21 +34,20 @@
                 input {
                     border: none;
                     border-bottom: 1px solid $Color-1;
-                    color: $Color-1;
+                    color: $Color-4; 
                     margin-block: 0.5rem;
                     outline: none;
                     padding-block: 0.5rem;
                     width: 100%;
-                    -webkit-box-shadow: 0 0 0 30px white inset !important;
-
-                    &[placeholder] { 
-                        -webkit-text-fill-color: darken($color: $Color-1, $amount: 20) !important;
-
-                    }
+                    -webkit-box-shadow: 0 0 0 30px white inset !important; 
 
                     &:focus {
-                        border-bottom: 3px solid $Color-1;
+                        border-bottom: 3px solid $Color-4;
                     }
+                }
+
+                label {
+                    color: $Color-4;
                 }
             }
 

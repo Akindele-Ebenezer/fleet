@@ -17,7 +17,7 @@
                 <td>{{ $User->email }}</td>
                 <td>{{ $User->name }}</td>
                 <td>{{ $User->role }}</td>
-                <td>{{ $User->id }}</td>
+                <td>{{ $User->records }}</td>
                 <td>{{ $User->status }}</td>
             </tr> 
             @endforeach 

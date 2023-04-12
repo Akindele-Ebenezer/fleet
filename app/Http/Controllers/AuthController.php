@@ -12,21 +12,28 @@ class AuthController extends Controller
         $Email = request()->Email;
         $Password = request()->Password;
  
+        $Validated = request()->validate([
+            'Email' => 'email',
+            'Password' => 'required',
+        ]);
+
         $Query = User::where('email', $Email)
                         ->where('password', $Password)
                         ->get();
 
 
-        if(count($Query) === 1) {
+        if(count($Query) == 1) {
             foreach ($Query as $User) {
                 request()->session()->put('Id', $User->id);
                 request()->session()->put('Email', $User->email);
                 request()->session()->put('Name', $User->name);
+                request()->session()->put('Role', $User->role);
             }
             
             return redirect('Cars');
         } else {
-            return redirect('/');
+            $Error = 'Your credentials are Invalid';
+            return redirect('/')->with('Error', $Error);
         }                   
     }
 

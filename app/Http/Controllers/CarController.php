@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
-    public function config() {
+    public function config() { 
         $Cars = Car::orderBy('PurchaseDate', 'DESC')->paginate(7);
-        $Id = request()->get('Id');
-        $Cars__MyRecords = Car::where('UserId', $Id)->orderBy('PurchaseDate', 'DESC')->paginate(7);
+        $Cars__MyRecords = Car::where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7);
  
         return [
             'Cars' => $Cars,

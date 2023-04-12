@@ -9,8 +9,7 @@ class DepositsController extends Controller
 {
     public function config() {
         $Deposits = Deposits::orderBy('Date', 'DESC')->paginate(14); 
-        $Id = request()->get('Id');
-        $Deposits__MyRecords = Deposits::where('UserId', $Id)->orderBy('Date', 'DESC')->paginate(14);
+        $Deposits__MyRecords = Deposits::where('UserId', self::USER_ID())->orderBy('Date', 'DESC')->paginate(14);
  
         return [
             'Deposits' => $Deposits,
