@@ -60,5 +60,8 @@
             </div>
         </table>
         {{ $Refueling__MyRecords->onEachSide(5)->links() }}
+        @unless (count($Refueling__MyRecords) > 1)
+        @include('Includes.EmptyProjectTemplate') 
+        @endunless
     </div>
 @endsection

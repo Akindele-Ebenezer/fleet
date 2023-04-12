@@ -165,5 +165,8 @@
             </div>
             {{ $Cars__MyRecords->onEachSide(1)->links() }}
         </table>
+        @unless (count($Cars__MyRecords) > 1)
+        @include('Includes.EmptyProjectTemplate') 
+        @endunless
     </div>
 @endsection

@@ -44,5 +44,8 @@
             </div>
         </table>
         {{ $Deposits__MyRecords->onEachSide(5)->links() }}
+        @unless (count($Deposits__MyRecords) > 1)
+        @include('Includes.EmptyProjectTemplate') 
+        @endunless
     </div>
 @endsection

@@ -109,6 +109,41 @@ button {
     }
 }
 
+.empty-records-wrapper {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+
+    .inner {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; 
+
+        .empty-records {
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            height: 24em;
+            width: 50em;  
+
+            &-2 {
+                padding: 1em;
+                
+                p, strong {
+                    color: #eee;
+                    font-family: system-ui; 
+                    font-size: 1.5em;
+                }
+
+                button {
+                    background-color: $Color-2;
+                }
+            }
+        } 
+    }
+} 
+
 .error {
     color: $Color-2;
     text-align: center;
@@ -241,5 +276,15 @@ svg {
 @media (max-width: 1400px) {
     * {
         font-size: 11px;
+    }
+}
+
+@media (max-width: 1176px) {
+    .empty-records-wrapper .inner {
+        justify-content: center; 
+    }
+
+    .empty-records-wrapper .inner .empty-records-2 p {
+        font-size: unset;
     }
 }

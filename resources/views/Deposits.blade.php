@@ -47,5 +47,10 @@
             </div>
         </table>
         {{ $Deposits->onEachSide(5)->links() }}
+        @unless (count($Deposits) > 1)
+        <center>
+            <div class="empty-records" style="background: url('{{ asset('Images/empty-records.png') }}')"></div> 
+        </center>
+        @endunless
     </div>
 @endsection

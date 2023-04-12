@@ -90,6 +90,36 @@ button {
   padding-inline: 0.5em;
 }
 
+.empty-records-wrapper {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+.empty-records-wrapper .inner {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.empty-records-wrapper .inner .empty-records {
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  height: 24em;
+  width: 50em;
+}
+.empty-records-wrapper .inner .empty-records-2 {
+  padding: 1em;
+}
+.empty-records-wrapper .inner .empty-records-2 p, .empty-records-wrapper .inner .empty-records-2 strong {
+  color: #eee;
+  font-family: system-ui;
+  font-size: 1.5em;
+}
+.empty-records-wrapper .inner .empty-records-2 button {
+  background-color: #DF2E38;
+}
+
 .error {
   color: #DF2E38;
   text-align: center;
@@ -208,6 +238,14 @@ svg {
 @media (max-width: 1400px) {
   * {
     font-size: 11px;
+  }
+}
+@media (max-width: 1176px) {
+  .empty-records-wrapper .inner {
+    justify-content: center;
+  }
+  .empty-records-wrapper .inner .empty-records-2 p {
+    font-size: unset;
   }
 }
 .form {

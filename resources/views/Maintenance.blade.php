@@ -52,5 +52,8 @@
             </div>
         </table>
         {{ $Maintenance->onEachSide(5)->links() }}
+        @unless (count($Maintenance) > 1)
+        @include('Includes.EmptyProjectTemplate') 
+        @endunless
     </div>
 @endsection
