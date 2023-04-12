@@ -42,6 +42,7 @@
     @include('Components.EditVehicleDataComponent')
 
     @if (Route::is('EditRepairs'))
+        @include('Components.AddRepairComponent')
         @include('Components.EditRepairComponent')
     @endif
 
@@ -50,6 +51,7 @@
     @endif
     
     @if (Route::is('EditMaintenance'))
+        @include('Components.AddMaintenanceComponent')
         @include('Components.EditMaintenanceComponent')
     @endif
 
@@ -58,6 +60,7 @@
     @endif
 
     @if (Route::is('EditDeposits'))
+        @include('Components.AddMonthlyDepositsComponent')
         @include('Components.EditMonthlyDepositsComponent')
     @endif
 
@@ -66,6 +69,7 @@
     @endif
     
     @if (Route::is('EditRefueling'))
+        @include('Components.AddRefuelingComponent')
         @include('Components.EditRefuelingComponent')   
     @endif
 
@@ -435,7 +439,7 @@
             </div>
             <div class="action">
                 <div class="inner">
-                    <button class="action-x">+ Add Vehicle</button><button>Export to EXCEL</button>
+                    <button class="action-x {{ Route::is('MyRecords') ? 'add-car' : '' }} {{ Route::is('EditRepairs') ? 'add-repair' : '' }} {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }}">+ Add {{ Route::is('MyRecords') ? 'Vehicle' : '' }} {{ Route::is('EditRepairs') ? 'Repairs' : '' }} {{ Route::is('EditMaintenance') ? 'Maintenance' : '' }} {{ Route::is('EditDeposits') ? 'Deposits' : '' }} {{ Route::is('EditRefueling') ? 'Refueling' : '' }}</button><button>Export to EXCEL</button>
                 </div>
             </div> 
             @yield('Content') 

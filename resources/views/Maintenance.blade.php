@@ -17,7 +17,7 @@
             </tr> 
             @foreach ($Maintenance as $Maintenancee) 
             <tr> 
-                <td>{{ $loop->iteration }}</td>
+                <td>{{ $loop->iteration  + (($Maintenance->currentPage() -1) * $Maintenance->perPage()) }}</td>
                 <td class="show-record-x">{{ $Maintenancee->VehicleNumber }}</td>
                 <span class="VehicleNumber_X_DATA Hide">{{ $Maintenancee->VehicleNumber }}</span>
                 <span class="Date_X_DATA Hide">{{ $Maintenancee->Date }}</span>

@@ -42,3 +42,18 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         });
     });
 });
+
+let ModalAddRepair = document.querySelector('.add-repair-form');
+let AddRepairButton = document.querySelectorAll('.add-repair'); 
+
+AddRepairButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        ModalAddRepair.style.display = 'block';
+    }); 
+
+    CancelModalIcons.forEach(CancelModalIcon => {
+        CancelModalIcon.addEventListener('click', () => {
+            ModalAddRepair.style.display = 'none';
+        });
+    });
+});

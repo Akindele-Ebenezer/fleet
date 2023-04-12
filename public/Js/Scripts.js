@@ -8,7 +8,7 @@ MyRecords.addEventListener('click', (e) => {
 });
 
 let ModalVehicleData = document.querySelector('.modal-vehicle-data');
-let CancelModalIcons = document.querySelectorAll('.cancel-modal')
+let CancelModalIcons = document.querySelectorAll('.cancel-modal');
 let ActionButtons = document.querySelectorAll('.show-record-button');
 
 let Deposits_X = document.querySelector('.Deposits_X');

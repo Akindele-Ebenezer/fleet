@@ -115,3 +115,18 @@ Edit_INPUTS_AND_SELECTS_Arr.forEach(Inputs_And_Selects => {
         });
     });
 });
+
+let ModalAddCar = document.querySelector('.add-vehicle-form');
+let AddCarButton = document.querySelectorAll('.add-car'); 
+
+AddCarButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        ModalAddCar.style.display = 'block';
+    }); 
+
+    CancelModalIcons.forEach(CancelModalIcon => {
+        CancelModalIcon.addEventListener('click', () => {
+            ModalAddCar.style.display = 'none';
+        });
+    });
+});

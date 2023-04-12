@@ -48,3 +48,18 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         });
     });
 });
+
+let ModalAddRefueling = document.querySelector('.add-refueling-form');
+let AddRefuelingButton = document.querySelectorAll('.add-refueling'); 
+
+AddRefuelingButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        ModalAddRefueling.style.display = 'block';
+    }); 
+
+    CancelModalIcons.forEach(CancelModalIcon => {
+        CancelModalIcon.addEventListener('click', () => {
+            ModalAddRefueling.style.display = 'none';
+        });
+    });
+});

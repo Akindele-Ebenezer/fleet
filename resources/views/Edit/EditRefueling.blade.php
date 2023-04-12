@@ -19,7 +19,7 @@
             </tr>
             @foreach ($Refueling__MyRecords as $Refueling)
             <tr> 
-                <td>{{ $loop->iteration }}</td>
+                <td>{{ $loop->iteration  + (($Refueling__MyRecords->currentPage() -1) * $Refueling__MyRecords->perPage()) }}</td>
                 <td class="show-record-x-edit">{{ $Refueling->VehicleNumber }}</td>
                 <span class="VehicleNumber_X_DATA_Edit Hide">{{ $Refueling->VehicleNumber }}</span>
                 <span class="Date_X_DATA_Edit Hide">{{ $Refueling->Date }}</span>

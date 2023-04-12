@@ -35,3 +35,18 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         });
     });
 });
+
+let ModalAddMonthlyDeposits = document.querySelector('.add-monthly-deposits-form');
+let AddMonthlyDepositsButton = document.querySelectorAll('.add-monthly-deposits'); 
+
+AddMonthlyDepositsButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        ModalAddMonthlyDeposits.style.display = 'block';
+    }); 
+
+    CancelModalIcons.forEach(CancelModalIcon => {
+        CancelModalIcon.addEventListener('click', () => {
+            ModalAddMonthlyDeposits.style.display = 'none';
+        });
+    });
+});

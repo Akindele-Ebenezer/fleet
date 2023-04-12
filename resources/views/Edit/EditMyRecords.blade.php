@@ -13,7 +13,7 @@
             @foreach ($Cars__MyRecords as $Car)
                 @php include('../resources/views/Includes/CompanyName.php') @endphp
                 <tr> 
-                    {{-- <td class="id">{{ $loop->iteration }}</td> --}}
+                    {{-- <td class="id">{{ $loop->iteration  + (($Deposits->currentPage() -1) * $Deposits->perPage()) }}</td> --}}
                     <td class="id">{{ $Car->id }}</td>
                     <td>
                         <div class="car-info">

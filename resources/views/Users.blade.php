@@ -13,7 +13,7 @@
             </tr>
             @foreach ($Users as $User)
             <tr>
-                <td>{{ $loop->iteration }}</td>
+                <td>{{ $loop->iteration  + (($Users->currentPage() -1) * $Users->perPage()) }}</td>
                 <td>{{ $User->email }}</td>
                 <td>{{ $User->name }}</td>
                 <td>{{ $User->role }}</td>

@@ -9,7 +9,7 @@
                 <br>
                 creating your first saved project.
                 <br><br>
-                <button>Create new</button>
+                <button class="action-x <?= Route::is('MyRecords') ? 'add-car' : '' ?> <?= Route::is('EditRepairs') ? 'add-repair' : '' ?> <?= Route::is('EditMaintenance') ? 'add-maintenance' : '' ?> <?= Route::is('EditDeposits') ? 'add-monthly-deposits' : '' ?> <?= Route::is('EditRefueling') ? 'add-refueling' : '' ?>">Create new</button>
             </p> 
         </div>
     </div>

@@ -15,7 +15,7 @@
             </tr>
             @foreach ($Deposits__MyRecords as $Deposit)
             <tr> 
-                <td>{{ $loop->iteration }}</td>
+                <td>{{ $loop->iteration  + (($Deposits__MyRecords->currentPage() -1) * $Deposits__MyRecords->perPage()) }}</td>
                 <td class="show-record-x-edit">{{ $Deposit->VehicleNumber }}</td>
                 <span class="VehicleNumber_X_DATA_Edit Hide">{{ $Deposit->VehicleNumber }}</span>
                 <span class="Date_X_DATA_Edit Hide">{{ $Deposit->Date }}</span>

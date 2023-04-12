@@ -1,4 +1,4 @@
-<div class="repair-readonly readonly form"> 
+<div class="add-repair-form form">
     <div class="inner">
         <div class="heading">
             <h1>
@@ -74,7 +74,7 @@
                 </div>
                 <input class="Week_X" type="text" placeholder="Weeks..">
             </div> 
-            <button>+ Print Repair</button>
+            <button>+ Add Repair</button>
         </form>
     </div>
 </div>
