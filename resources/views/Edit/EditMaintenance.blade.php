@@ -36,6 +36,7 @@
                 <td>₦ {{ empty($Maintenance->Cost) ? '' : number_format($Maintenance->Cost) }}</td>
                 <td>{{ $Maintenance->InvoiceNumber }}</td>
                 <td>{{ $Maintenance->Week }}</td>
+                <td class="Hide">{{ $Maintenance->id }}</td>
             </tr> 
             @endforeach  
             <div class="table-head filter"> 

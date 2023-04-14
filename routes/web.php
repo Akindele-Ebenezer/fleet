@@ -21,14 +21,25 @@ Route::get('/AddCar', [CarController::class, 'store'])->name('store_MyRecords');
 Route::get('/Update', [CarController::class, 'update'])->name('UpdateCar');
 Route::get('/Delete/{Car}', [CarController::class, 'destroy'])->name('DeleteCar');
 
-Route::get('/EditRepairs', [RepairController::class, 'my_records_repairs'])->name('EditRepairs');  
-Route::get('/Add/{Repair}', [RepairController::class, 'store'])->name('store_Repairs'); 
-Route::get('/Update/{Repair}', [RepairController::class, 'update'])->name('UpdateRepair');
-Route::get('/Delete/{Repair}', [RepairController::class, 'destroy'])->name('DeleteRepair');
+Route::get('/Edit/Repairs', [RepairController::class, 'my_records_repairs'])->name('EditRepairs');  
+Route::get('/Add/Repair/{Repair}', [RepairController::class, 'store'])->name('store_Repairs'); 
+Route::get('/Update/Repair/{Repair}', [RepairController::class, 'update'])->name('UpdateRepair');
+Route::get('/Delete/Repair/{Repair}', [RepairController::class, 'destroy'])->name('DeleteRepair');
 
-Route::get('/EditMaintenance', [MaintenanceController::class, 'my_records_maintenance'])->name('EditMaintenance'); 
-Route::get('/EditDeposits', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
-Route::get('/EditRefueling', [RefuelingController::class, 'my_records_refueling'])->name('EditRefueling'); 
+Route::get('/Edit/Maintenance', [MaintenanceController::class, 'my_records_maintenance'])->name('EditMaintenance'); 
+Route::get('/Add/Maintenance/{Maintenance}', [MaintenanceController::class, 'store'])->name('store_Maintenance'); 
+Route::get('/Update/Maintenance/{Maintenance}', [MaintenanceController::class, 'update'])->name('UpdateMaintenance');
+Route::get('/Delete/Maintenance/{Maintenance}', [MaintenanceController::class, 'destroy'])->name('DeleteMaintenance');
+
+Route::get('/Edit/Deposits', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
+Route::get('/Add/Deposits/{Deposits}', [DepositsController::class, 'store'])->name('store_Deposits'); 
+Route::get('/Update/Deposits/{Deposits}', [DepositsController::class, 'update'])->name('UpdateDeposits');
+Route::get('/Delete/Deposits/{Deposits}', [DepositsController::class, 'destroy'])->name('DeleteDeposits');
+
+Route::get('/Edit/Refueling', [RefuelingController::class, 'my_records_refueling'])->name('EditRefueling'); 
+Route::get('/Add/Refueling/{Refueling}', [RefuelingController::class, 'store'])->name('store_Refueling'); 
+Route::get('/Update/Refueling/{Refueling}', [RefuelingController::class, 'update'])->name('UpdateRefueling');
+Route::get('/Delete/Refueling/{Refueling}', [RefuelingController::class, 'destroy'])->name('DeleteRefueling');
 
 Route::get('/Cars', [CarController::class, 'index'])->name('Cars');
 

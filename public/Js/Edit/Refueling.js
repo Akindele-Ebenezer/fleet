@@ -24,6 +24,12 @@ let Amount_X = document.querySelector('.Amount_X');
 let ReceiptNo_X = document.querySelector('.ReceiptNo_X');
 let KM_X = document.querySelector('.KM_X');
 let KMLITER_X = document.querySelector('.KMLITER_X');
+let RefuelingId_X = document.querySelector('.RefuelingId_X');
+
+let EditRefuelingButton = document.querySelector('.EditRefueling');
+let DeleteRefuelingButton = document.querySelector('.DeleteRefueling');
+let EditRefuelingForm = document.querySelector('.EditRefuelingForm');
+
 
 ShowRecord_X_Edit.forEach(VehicleNumber => {
     VehicleNumber.addEventListener('click', () => {
@@ -39,7 +45,18 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         Amount_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         ReceiptNo_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         KM_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
-        KMLITER_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        // KMLITER_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        RefuelingId_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+ 
+        EditRefuelingButton.addEventListener('click', () => {
+            EditRefuelingForm.setAttribute('action', '/Update/Refueling/' + RefuelingId_X.value);
+            EditRefuelingForm.submit();
+        });
+ 
+        DeleteRefuelingButton.addEventListener('click', () => {
+            EditRefuelingForm.setAttribute('action', '/Delete/Refueling/' + RefuelingId_X.value);
+            EditRefuelingForm.submit();
+        });
     });
     
     CancelModalIcons.forEach(CancelModalIcon => {
@@ -52,9 +69,17 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
 let ModalAddRefueling = document.querySelector('.add-refueling-form');
 let AddRefuelingButton = document.querySelectorAll('.add-refueling'); 
 
+let AddRefuelingForm = document.querySelector('.AddRefuelingForm');
+let AddRefuelingButton_X = document.querySelector('.AddRefueling');
+let VehicleNumber_REFUELING = document.querySelector('input[name="VehicleNumber_REFUELING"]');
 AddRefuelingButton.forEach(Button => {
     Button.addEventListener('click', () => {
         ModalAddRefueling.style.display = 'block';
+         
+        AddRefuelingButton_X.addEventListener('click', () => {  
+            AddRefuelingForm.setAttribute('action', '/Add/Refueling/' + VehicleNumber_REFUELING.value);
+            AddRefuelingForm.submit();
+        });
     }); 
 
     CancelModalIcons.forEach(CancelModalIcon => {

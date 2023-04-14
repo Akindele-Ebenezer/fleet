@@ -43,9 +43,26 @@ class RefuelingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($Refueling, Request $request)
     {
-        //
+        Refueling::insert([ 
+            'VehicleNumber' => $request->VehicleNumber_REFUELING, 
+            'CardNumber' => $request->CardNumber, 
+            'Amount' => $request->Amount, 
+            'Date' => $request->Date, 
+            'Time' => $request->Time, 
+            'KMETER' => $request->KMETER, 
+            'TERNO' => $request->TerminalNumber, 
+            'Quantity' => $request->Quantity, 
+            'Amount' => $request->Amount, 
+            'ReceiptNumber' => $request->ReceiptNumber, 
+            'KM' => $request->KM,  
+            'DateIn' => date('F j, Y'), 
+            'TimeIn' => date("g:i a"), 
+            'UserId' => request()->session()->get('Id'), 
+        ]);
+
+        return back();  
     }
 
     /**
@@ -67,16 +84,33 @@ class RefuelingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Refueling $refueling)
-    {
-        //
+    public function update($RefuelingId, Request $request, Refueling $refueling)
+    {  
+        Refueling::where('id', $RefuelingId)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber, 
+                'CardNumber' => $request->CardNumber, 
+                'Date' => $request->Date, 
+                'Time' => $request->Time, 
+                'Amount' => $request->Amount, 
+                'KMETER' => $request->KMETER, 
+                'TERNO' => $request->TerminalNumber, 
+                'Quantity' => $request->Quantity, 
+                'Amount' => $request->Amount, 
+                'ReceiptNumber' => $request->ReceiptNumber, 
+                'KM' => $request->KM,    
+            ]);
+
+            return back(); 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Refueling $refueling)
+    public function destroy($RefuelingId, Refueling $refueling)
     {
-        //
+        $DeleteRefueling = Refueling::where('id', $RefuelingId)->delete();
+
+        return back();
     }
 }

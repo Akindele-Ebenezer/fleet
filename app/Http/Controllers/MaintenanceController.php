@@ -43,9 +43,24 @@ class MaintenanceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($Maintenance, Request $request)
     {
-        //
+        Maintenance::insert([ 
+            'VehicleNumber' => $Maintenance, 
+            'MaintenanceAction' => $request->MaintenanceAction, 
+            'Date' => $request->Date, 
+            'Time' => $request->Time, 
+            'ReleaseDate' => $request->ReleaseDate, 
+            'ReleaseTime' => $request->ReleaseTime, 
+            'Cost' => $request->Cost, 
+            'InvoiceNumber' => $request->InvoiceNumber, 
+            'Week' => $request->Week, 
+            'DateIn' => date('F j, Y'), 
+            'TimeIn' => date("g:i a"), 
+            'UserId' => request()->session()->get('Id'), 
+        ]);
+
+        return back();  
     }
 
     /**
@@ -69,14 +84,29 @@ class MaintenanceController extends Controller
      */
     public function update(Request $request, Maintenance $maintenance)
     {
-        //
+        Maintenance::where('id', $request->MaintenanceId)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber,
+                'Date' => $request->Date,
+                'Time' => $request->Time,
+                'MaintenanceAction' => $request->MaintenanceAction,
+                'ReleaseDate' => $request->ReleaseDate,
+                'ReleaseTime' => $request->ReleaseTime,
+                'Cost' => $request->Cost,
+                'InvoiceNumber' => $request->InvoiceNumber,
+                'Week' => $request->Week, 
+            ]);
+
+        return back(); 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Maintenance $maintenance)
+    public function destroy($MaintenanceId, Maintenance $maintenance)
     {
-        //
+        $DeleteMaintenance = Maintenance::where('id', $MaintenanceId)->delete();
+
+        return back();
     }
 }

@@ -15,6 +15,11 @@ let  Amount_X = document.querySelector('.Amount_X');
 let Year_X = document.querySelector('.Year_X'); 
 let Week_X = document.querySelector('.Week_X');
 let Month_X = document.querySelector('.Month_X');
+let DepositsId_X = document.querySelector('.DepositsId_X');
+
+let EditDepositsButton = document.querySelector('.EditDeposits');
+let DeleteDepositsButton = document.querySelector('.DeleteDeposits');
+let EditDepositsForm = document.querySelector('.EditDepositsForm');
 
 ShowRecord_X_Edit.forEach(VehicleNumber => {
     VehicleNumber.addEventListener('click', () => {
@@ -27,6 +32,17 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         Year_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Week_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Month_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
+        DepositsId_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
+ 
+        EditDepositsButton.addEventListener('click', () => {
+            EditDepositsForm.setAttribute('action', '/Update/Deposits/' + DepositsId_X.value);
+            EditDepositsForm.submit();
+        });
+ 
+        DeleteDepositsButton.addEventListener('click', () => {
+            EditDepositsForm.setAttribute('action', '/Delete/Deposits/' + DepositsId_X.value);
+            EditDepositsForm.submit();
+        });
     });
     
     CancelModalIcons.forEach(CancelModalIcon => {
@@ -39,9 +55,18 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
 let ModalAddMonthlyDeposits = document.querySelector('.add-monthly-deposits-form');
 let AddMonthlyDepositsButton = document.querySelectorAll('.add-monthly-deposits'); 
 
+let AddDepositsForm = document.querySelector('.AddDepositsForm');
+let AddDepositsButton_X = document.querySelector('.AddDeposits');
+let VehicleNumber_DEPOSITS = document.querySelector('input[name="VehicleNumber_DEPOSITS"]');
+
 AddMonthlyDepositsButton.forEach(Button => {
     Button.addEventListener('click', () => {
         ModalAddMonthlyDeposits.style.display = 'block';
+         
+        AddDepositsButton_X.addEventListener('click', () => {  
+            AddDepositsForm.setAttribute('action', '/Add/Deposits/' + VehicleNumber_DEPOSITS.value);
+            AddDepositsForm.submit();
+        });
     }); 
 
     CancelModalIcons.forEach(CancelModalIcon => {

@@ -43,9 +43,23 @@ class DepositsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($Deposits, Request $request)
     {
-        //
+        Deposits::insert([ 
+            'VehicleNumber' => $Deposits, 
+            'CardNumber' => $request->CardNumber, 
+            'Date' => $request->Date, 
+            'Amount' => $request->Amount, 
+            'Year' => $request->Year, 
+            'Month' => $request->Month, 
+            'Week' => $request->Week, 
+            'DateIn' => date('F j, Y'), 
+            'TimeIn' => date("g:i a"), 
+            'Comments' => $request->Comments, 
+            'UserId' => request()->session()->get('Id'), 
+        ]);
+
+        return back();  
     }
 
     /**
@@ -67,16 +81,30 @@ class DepositsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Deposits $deposits)
+    public function update($Deposits, Request $request, Deposits $deposits)
     {
-        //
+        Deposits::where('id', $request->DepositsId)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber, 
+                'CardNumber' => $request->CardNumber, 
+                'Date' => $request->Date, 
+                'Amount' => $request->Amount, 
+                'Year' => $request->Year, 
+                'Month' => $request->Month, 
+                'Week' => $request->Week,  
+                'Comments' => $request->Comments,  
+            ]);
+
+        return back(); 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Deposits $deposits)
+    public function destroy($DepositsId, Deposits $deposits)
     {
-        //
+        $DeleteDeposits = Deposits::where('id', $DepositsId)->delete();
+
+        return back();
     }
 }

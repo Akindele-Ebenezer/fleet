@@ -102,8 +102,10 @@ class RepairController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Repair $repair)
-    {
-        //
+    public function destroy($RepairId, Repair $repair)
+    { 
+        $DeleteRepair = Repair::where('id', $RepairId)->delete();
+
+        return back();
     }
 }

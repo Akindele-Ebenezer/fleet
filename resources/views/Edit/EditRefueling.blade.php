@@ -35,13 +35,14 @@
                 <td>{{ $Refueling->Date }}</td>
                 <td>{{ $Refueling->Time }}</td>
                 <td>{{ $Refueling->KMETER }}</td>
-                <td>{{ $Refueling->TerminalNumber }}</td>
+                <td>{{ $Refueling->TERNO }}</td>
                 <td>{{ $Refueling->CardNumber }}</td>
                 <td>{{ $Refueling->Quantity }}</td>
                 <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
                 <td>{{ $Refueling->ReceiptNumber }}</td>
                 <td>{{ $Refueling->KM }}</td>
                 <td>{{ $Refueling->Consumption }}</td>
+                <td class="Hide">{{ $Refueling->id }}</td>
             </tr> 
             @endforeach  
             <div class="table-head filter"> 

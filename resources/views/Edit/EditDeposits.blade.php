@@ -30,6 +30,7 @@
                 <td>{{ $Deposit->Year }}</td>
                 <td>{{ $Deposit->Week }}</td>
                 <td>{{ $Deposit->Month }}</td> 
+                <td class="Hide">{{ $Deposit->id }}</td>
             </tr> 
             @endforeach  
             <div class="table-head filter"> 

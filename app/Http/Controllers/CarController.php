@@ -75,8 +75,8 @@ class CarController extends Controller
                 'CardNumber' => $request->CardNumber,
                 'MonthlyBudget' => $request->MonthlyBudget,
                 'CompanyCode' => $request->CompanyCode,
-                'TotalDeposits' => $request->TotalDeposits,
-                'TotalRefueling' => $request->TotalRefueling,
+                'TotalDeposits' => $request->Deposits,
+                'TotalRefueling' => $request->Refueling,
                 'Balance' => $request->Balance,
                 'PinCode' => $request->PinCode, 
                 'Status' => $request->Status,
@@ -109,11 +109,11 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {  
-        $Deposits = str_replace(['₦', ',', ' '], '', $request->Deposits); 
-        $Refueling = str_replace(['₦', ',', ' '], '', $request->Refueling);
-        $Balance = str_replace(['₦', ',', ' '], '', $request->Balance);
-        $Price = str_replace(['₦', ',', ' '], '', $request->Price);
-        $MonthlyBudget = str_replace(['₦', ',', ' '], '', $request->MonthlyBudget);
+        // $Deposits = str_replace(['₦', ',', ' '], '', $request->Deposits); 
+        // $Refueling = str_replace(['₦', ',', ' '], '', $request->Refueling);
+        // $Balance = str_replace(['₦', ',', ' '], '', $request->Balance);
+        // $Price = str_replace(['₦', ',', ' '], '', $request->Price);
+        // $MonthlyBudget = str_replace(['₦', ',', ' '], '', $request->MonthlyBudget);
  
             Car::where('VehicleNumber', $request->VehicleNumber)
                 ->update([
@@ -129,18 +129,18 @@ class CarController extends Controller
                     'EngineVolume' => $request->EngineVolume,
                     'Comments' => $request->Comments,
                     'PurchaseDate' => $request->PurchaseDate,
-                    'Price' => $Price, 
+                    'Price' => $request->Price, 
                     'DateIn' => $request->DateIn,
                     'TimeIn' => $request->TimeIn,
                     'Supplier' => $request->Supplier,
                     'CarOwner' => $request->CarOwner,
                     'Driver' => $request->Driver,
                     'CardNumber' => $request->CardNumber,
-                    'MonthlyBudget' => $MonthlyBudget,
+                    'MonthlyBudget' => $request->MonthlyBudget,
                     'CompanyCode' => $request->CompanyCode,
-                    'TotalDeposits' => $Deposits,
-                    'TotalRefueling' => $Refueling,
-                    'Balance' => $Balance,
+                    'TotalDeposits' => $request->Deposits,
+                    'TotalRefueling' => $request->Refueling,
+                    'Balance' => $request->Balance,
                     'PinCode' => $request->PinCode, 
                     'Status' => $request->Status,
                     'StopDate' => $request->StopDate,

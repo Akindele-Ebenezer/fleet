@@ -20,21 +20,36 @@ let ReleaseTime_X = document.querySelector('.ReleaseTime_X');
 let Cost_X = document.querySelector('.Cost_X');
 let InvoiceNumber_X = document.querySelector('.InvoiceNumber_X');
 let Week_X = document.querySelector('.Week_X');
+let MaintenanceId_X = document.querySelector('.MaintenanceId_X');
+
+let EditMaintenanceButton = document.querySelector('.EditMaintenance');
+let DeleteMaintenanceButton = document.querySelector('.DeleteMaintenance');
+let EditMaintenanceForm = document.querySelector('.EditMaintenanceForm');
 
 ShowRecord_X_Edit.forEach(VehicleNumber => {
     VehicleNumber.addEventListener('click', () => {
         MaintenanceModal_Edit.style.display = 'block';
 
         VehicleNumber_X.value = VehicleNumber.textContent;
-        console.log(VehicleNumber_X)
         Date_X.value = VehicleNumber.nextElementSibling.textContent;
         Time_X.value = VehicleNumber.nextElementSibling.nextElementSibling.textContent;
         MaintenanceAction_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         ReleaseDate_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         ReleaseTime_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
-        Cost_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        Cost_X.value = BigInt(VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent.replace(/₦/g, '').replace(/,/g, ''));
         InvoiceNumber_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Week_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        MaintenanceId_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+ 
+        EditMaintenanceButton.addEventListener('click', () => {
+            EditMaintenanceForm.setAttribute('action', '/Update/Maintenance/' + MaintenanceId_X.value);
+            EditMaintenanceForm.submit();
+        });
+ 
+        DeleteMaintenanceButton.addEventListener('click', () => {
+            EditMaintenanceForm.setAttribute('action', '/Delete/Maintenance/' + MaintenanceId_X.value);
+            EditMaintenanceForm.submit();
+        });
     });
     
     CancelModalIcons.forEach(CancelModalIcon => {
@@ -47,9 +62,18 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
 let ModalAddMaintenance = document.querySelector('.add-maintenance-form');
 let AddMaintenanceButton = document.querySelectorAll('.add-maintenance'); 
 
+let AddMaintenanceForm = document.querySelector('.AddMaintenanceForm');
+let AddMaintenanceButton_X = document.querySelector('.AddMaintenance');
+let VehicleNumber_MAINTENANCE = document.querySelector('input[name="VehicleNumber_MAINTENANCE"]');
+
 AddMaintenanceButton.forEach(Button => {
     Button.addEventListener('click', () => {
         ModalAddMaintenance.style.display = 'block';
+         
+        AddMaintenanceButton_X.addEventListener('click', () => {  
+            AddMaintenanceForm.setAttribute('action', '/Add/Maintenance/' + VehicleNumber_MAINTENANCE.value);
+            AddMaintenanceForm.submit();
+        });
     }); 
 
     CancelModalIcons.forEach(CancelModalIcon => {

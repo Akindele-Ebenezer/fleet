@@ -22,7 +22,6 @@ let InvoiceNumber_X = document.querySelector('.InvoiceNumber_X');
 let Week_X = document.querySelector('.Week_X');
 let RepairId_X = document.querySelector('.RepairId_X');
 
-
 let EditRepairButton = document.querySelector('.EditRepair');
 let DeleteRepairButton = document.querySelector('.DeleteRepair');
 let EditRepairForm = document.querySelector('.EditRepairForm');
@@ -43,7 +42,12 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         RepairId_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
  
         EditRepairButton.addEventListener('click', () => {
-            EditRepairForm.setAttribute('action', '/Update/' + RepairId_X.value);
+            EditRepairForm.setAttribute('action', '/Update/Repair/' + RepairId_X.value);
+            EditRepairForm.submit();
+        });
+ 
+        DeleteRepairButton.addEventListener('click', () => {
+            EditRepairForm.setAttribute('action', '/Delete/Repair/' + RepairId_X.value);
             EditRepairForm.submit();
         });
     });
@@ -67,7 +71,7 @@ AddRepairButton.forEach(Button => {
         ModalAddRepair.style.display = 'block';
          
         AddRepairButton_X.addEventListener('click', () => {  
-            AddRepairForm.setAttribute('action', '/Add/' + VehicleNumber_REPAIR.value);
+            AddRepairForm.setAttribute('action', '/Add/Repair/' + VehicleNumber_REPAIR.value);
             AddRepairForm.submit();
         });
     }); 
@@ -76,6 +80,5 @@ AddRepairButton.forEach(Button => {
         CancelModalIcon.addEventListener('click', () => {
             ModalAddRepair.style.display = 'none';
         });
-    });
-
+    }); 
 });
