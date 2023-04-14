@@ -42,9 +42,24 @@ class RepairController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store($Repair, Request $request)
+    {     
+        Repair::insert([ 
+            'VehicleNumber' => $Repair, 
+            'RepairAction' => $request->RepairAction, 
+            'Date' => $request->Date, 
+            'Time' => $request->Time, 
+            'ReleaseDate' => $request->ReleaseDate, 
+            'ReleaseTime' => $request->ReleaseTime, 
+            'Cost' => $request->Cost, 
+            'InvoiceNumber' => $request->InvoiceNumber, 
+            'Week' => $request->Week, 
+            'DateIn' => date('F j, Y'), 
+            'TimeIn' => date("g:i a"), 
+            'UserId' => request()->session()->get('Id'), 
+        ]);
+
+        return back();  
     }
 
     /**
@@ -52,7 +67,7 @@ class RepairController extends Controller
      */
     public function show(Repair $repair)
     {
-        //
+        // 
     }
 
     /**
@@ -67,8 +82,21 @@ class RepairController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Repair $repair)
-    {
-        //
+    {  
+        Repair::where('id', $request->RepairId)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber,
+                'Date' => $request->Date,
+                'Time' => $request->Time,
+                'RepairAction' => $request->RepairAction,
+                'ReleaseDate' => $request->ReleaseDate,
+                'ReleaseTime' => $request->ReleaseTime,
+                'Cost' => $request->Cost,
+                'InvoiceNumber' => $request->InvoiceNumber,
+                'Week' => $request->Week, 
+            ]);
+
+        return back(); 
     }
 
     /**

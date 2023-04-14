@@ -19,7 +19,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 936q-151 0-255.5-46.5T120 776V376q0-66 105.5-113T480 216q149 0 254.5 47T840 376v400q0 67-104.5 113.5T480 936Zm0-488q86 0 176.5-26.5T773 362q-27-32-117.5-59T480 276q-88 0-177 26t-117 60q28 35 116 60.5T480 448Zm-1 214q42 0 84-4.5t80.5-13.5q38.5-9 73.5-22t63-29V438q-29 16-64 29t-74 22q-39 9-80 14t-83 5q-42 0-84-5t-80.5-14q-38.5-9-73-22T180 438v155q27 16 61 29t72.5 22q38.5 9 80.5 13.5t85 4.5Zm1 214q48 0 99-8.5t93.5-22.5q42.5-14 72-31t35.5-35V654q-28 16-63 28.5T643.5 704q-38.5 9-80 13.5T479 722q-43 0-85-4.5T313.5 704q-38.5-9-72.5-21.5T180 654v126q5 17 34 34.5t72 31q43 13.5 94 22t100 8.5Z"/></svg>
         </h1>
         <ul>
-            <form action=""> 
+            <form action="{{ route('UpdateCar') }}"> 
                 {{-- <li>
                     <span>
                         <img src="{{ asset('Images/km.png') }}" alt="">
@@ -32,28 +32,28 @@
                         <img src="{{ asset('Images/deposit.png') }}" alt="">
                         Deposits
                     </span>
-                    <input class="Deposits_X" type="text">
+                    <input class="Deposits_X" type="number" name="Deposits">
                 </li>
                 <li>
                     <span>
                         <img src="{{ asset('Images/refueling.png') }}" alt="">
                         Refueling
                     </span>
-                    <input class="Refueling_X" type="text">
+                    <input class="Refueling_X" type="number" name="Refueling">
                 </li>
                 <li>
                     <span>
                         <img src="{{ asset('Images/balance.png') }}" alt="">
                         Balance
                     </span>
-                    <input class="Balance_X" type="text">
+                    <input class="Balance_X" type="number" name="Balance">
                 </li>
                 <li>
                     <span>
                         <img src="{{ asset('Images/to-deposit.png') }}" alt="">
                         Used By
                     </span>
-                    <input class="UsedBy_X" type="text">
+                    <input class="UsedBy_X" type="text" name="CarOwner">
                 </li>
             </ul>
             <h1>
@@ -64,9 +64,9 @@
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M226 896q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm0-254q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm0-254q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm254 254q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47l-66 66Zm0-254q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm-40 508v-65l243-243 65 65-243 243h-65Zm294-508q-28 0-47-19t-19-47q0-28 19-47t47-19q28 0 47 19t19 47q0 28-19 47t-47 19Zm40 239-65-65 25-25q8-8 20-8.5t20 7.5l26 26q8 8 7.5 20t-8.5 20l-25 25Z"/></svg>
-                        Registration No
+                        Registration Number
                     </span>
-                    <input class="RegistrationNo_X" type="text">
+                    <input class="RegistrationNo_X" type="text" name="VehicleNumber">
                 </li>
                 <li>
                     <span>
@@ -84,14 +84,14 @@
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M405 782h361V524H405v258ZM140 896q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H140Zm0-60h680V316H140v520Zm0 0V316v520Z"/></svg>
                         Model
                     </span>
-                    <input class="Model_X" type="text">
+                    <input class="Model_X" type="text" name="Model">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M206 850q-41-48-63.5-107.5T120 616q0-150 105-254.5T480 257q10 0 20.5.5T519 259l-81-81 42-42 160 160-160 160-43-43 92-92q-11-2-26-3t-23-1q-125 0-212.5 87T180 616q0 51 17 102t52 89l-43 43Zm236-4q0-21-15-43t-32.5-45Q377 735 362 709.5T347 656q0-55 39-94t94-39q55 0 94 39t39 94q0 28-15 53.5T565.5 758Q548 781 533 803t-15 43h-76Zm-2 90v-50h80v50h-80Zm314-86-42-42q30-36 49-85t19-107q0-66-27.5-125.5T670 386l44-44q58 50 92 120.5T840 616q0 67-22.5 126.5T754 850Z"/></svg>
                         Sub Model
                     </span>
-                    <input class="SubModel_X" type="text">
+                    <input class="SubModel_X" type="text" name="SubModel">
                 </li>
                 <li>
                     <span>
@@ -120,105 +120,109 @@
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M680 976v-60h100v-30h-60v-60h60v-30H680v-60h120q17 0 28.5 11.5T840 776v40q0 17-11.5 28.5T800 856q17 0 28.5 11.5T840 896v40q0 17-11.5 28.5T800 976H680Zm0-280V586q0-17 11.5-28.5T720 546h60v-30H680v-60h120q17 0 28.5 11.5T840 496v70q0 17-11.5 28.5T800 606h-60v30h100v60H680Zm60-280V236h-60v-60h120v240h-60ZM120 847v-60h471v60H120Zm0-243v-60h471v60H120Zm0-243v-60h471v60H120Z"/></svg>
                         Engine No
                     </span>
-                    <input class="EngineNo_X" type="text">
+                    <input class="EngineNo_X" type="text" name="EngineNumber">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M386 677h87q24.75 0 42.375-18T533 617V415q0-24-17.625-42T473 355h-71q-24 0-42 18t-18 42v71q0 24 18 42t42 18h71v71h-87v60Zm87-191h-71v-71h71v71ZM260 856q-24 0-42-18t-18-42V236q0-24 18-42t42-18h560q24 0 42 18t18 42v560q0 24-18 42t-42 18H260Zm0-60h560V236H260v560ZM140 976q-24 0-42-18t-18-42V296h60v620h620v60H140Zm120-740v560-560Zm406 395h60v-87h83v-60h-83v-83h-60v83h-83v60h83v87Z"/></svg>
-                        Chasis No
+                        Chassis Number
                     </span>
-                    <input class="ChasisNo_X" type="text">
+                    <input class="ChasisNo_X" type="text" name="ChassisNumber">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="m450 696 200-129-200-129v258ZM100 976q-24 0-42-18t-18-42V457h60v459h609v60H100Zm120-120q-24 0-42-18t-18-42V278h242v-82q0-24 18-42t42-18h156q24 0 42 18t18 42v82h242v518q0 24-18 42t-42 18H220Zm0-60h640V338H220v458Zm242-518h156v-82H462v82ZM220 796V338v458Z"/></svg>
                         Purchase Date
                     </span>
-                    <input class="PurchaseDate_X" type="text">
+                    <input class="PurchaseDate_X" type="date" name="PurchaseDate">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M431 922H180q-24 0-42-18t-18-42V280q0-24 15.5-42t26.5-18h202q7-35 34.5-57.5T462 140q36 0 63.5 22.5T560 220h202q24 0 42 18t18 42v203h-60V280H656v130H286V280H180v582h251v60Zm189-25L460 737l43-43 117 117 239-239 43 43-282 282ZM480 276q17 0 28.5-11.5T520 236q0-17-11.5-28.5T480 196q-17 0-28.5 11.5T440 236q0 17 11.5 28.5T480 276Z"/></svg>
                         Supplier
                     </span>
-                    <input class="Supplier_X" type="text">
+                    <input class="Supplier_X" type="text" name="Supplier">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M450 855h60v-40h60q12.75 0 21.375-8.625T600 785V655q0-12.75-8.625-21.375T570 625H420v-70h180v-60h-90v-40h-60v40h-60q-12.75 0-21.375 8.625T360 525v130q0 12.75 8.625 21.375T390 685h150v70H360v60h90v40ZM220 976q-24 0-42-18t-18-42V236q0-24 18-42t42-18h361l219 219v521q0 24-18 42t-42 18H220Zm311-581V236H220v680h520V395H531ZM220 236v159-159 680-680Z"/></svg>
                         Price
                     </span>
-                    <input class="Price_X" type="text">
+                    <input class="Price_X" type="number" name="Price">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M40 856V296h85v560H40Zm120 0V296h80v560h-80Zm120 0V296h40v560h-40Zm120 0V296h80v560h-80Zm120 0V296h120v560H520Zm160 0V296h40v560h-40Zm120 0V296h120v560H800Z"/></svg>
-                        ORG
+                        Organisation
                     </span>
-                    <input class="CompanyCode_X" type="text">
+                    <select class="CompanyCode_X" name="CompanyCode">
+                        @foreach ($Cars_Org_GROUPED as $Car)
+                            <option value="{{ $Car->CompanyCode }}">{{ $Car->CompanyCode }} ::: {{ $Car->CompanyName }}</option>
+                        @endforeach 
+                    </select> 
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="m250 896 43-170H140l15-60h153l45-180H180l15-60h173l42-170h59l-42 170h181l42-170h59l-42 170h153l-15 60H652l-45 180h173l-15 60H592l-42 170h-60l43-170H352l-42 170h-60Zm117-230h181l45-180H412l-45 180Z"/></svg>
                         Licence Expiry Date
                     </span>
-                    <input class="LicenceExpiryDate_X" type="text">
+                    <input class="LicenceExpiryDate_X" type="date" name="LicenceExpiryDate">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M180 976q-24 0-42-18t-18-42V296q0-24 18-42t42-18h65v-60h65v60h340v-60h65v60h65q24 0 42 18t18 42v620q0 24-18 42t-42 18H180Zm0-60h600V486H180v430Zm0-490h600V296H180v130Zm0 0V296v130Zm300 230q-17 0-28.5-11.5T440 616q0-17 11.5-28.5T480 576q17 0 28.5 11.5T520 616q0 17-11.5 28.5T480 656Zm-160 0q-17 0-28.5-11.5T280 616q0-17 11.5-28.5T320 576q17 0 28.5 11.5T360 616q0 17-11.5 28.5T320 656Zm320 0q-17 0-28.5-11.5T600 616q0-17 11.5-28.5T640 576q17 0 28.5 11.5T680 616q0 17-11.5 28.5T640 656ZM480 816q-17 0-28.5-11.5T440 776q0-17 11.5-28.5T480 736q17 0 28.5 11.5T520 776q0 17-11.5 28.5T480 816Zm-160 0q-17 0-28.5-11.5T280 776q0-17 11.5-28.5T320 736q17 0 28.5 11.5T360 776q0 17-11.5 28.5T320 816Zm320 0q-17 0-28.5-11.5T600 776q0-17 11.5-28.5T640 736q17 0 28.5 11.5T680 776q0 17-11.5 28.5T640 816Z"/></svg>
                         Insurance Expiry Date
                     </span>
-                    <input class="InsuranceExpiryDate_X" type="text">
+                    <input class="InsuranceExpiryDate_X" type="date" name="InsuranceExpiryDate">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M880 316v520q0 24-18 42t-42 18H140q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42ZM140 425h680V316H140v109Zm0 129v282h680V554H140Zm0 282V316v520Z"/></svg>
                         Card No (TOTAL)
                     </span>
-                    <input class="CardNo_X" type="text">
+                    <input class="CardNo_X" type="text" name="CardNumber">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M140 896q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42v239H140v281h399v60H140Zm0-480h680V316H140v100Zm640 560V856H660v-60h120V676h60v120h120v60H840v120h-60ZM140 836V316v520Z"/></svg>
                         PIN Code
                     </span>
-                    <input class="PinCode_X" type="text">
+                    <input class="PinCode_X" type="text" name="PinCode">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936q-12 0-21-9t-9-21.5q0-12.5 9-21t21-8.5h40V606h-50q-12 0-21-9t-9-21.5q0-12.5 9-21t21-8.5h50V276h-40q-12 0-21-9t-9-21.5q0-12.5 9-21t21-8.5h640q12.75 0 21.375 8.625T830 246q0 12-8.625 21T800 276h-40v270h50q12.75 0 21.375 8.625T840 576q0 12-8.625 21T810 606h-50v270h40q12.75 0 21.375 8.625T830 906q0 12-8.625 21T800 936H160Zm100-60h440V606q-12 0-21-9t-9-21.5q0-12.5 9-21t21-8.5V276H260v270q12.75 0 21.375 8.625T290 576q0 12-8.625 21T260 606v270Zm220.118-153Q526 723 558 691.357q32-31.644 32-76.586Q590 579 569.5 554T480 449q-69 79-89.5 104.5T370 614.771q0 44.942 32.118 76.586 32.117 31.643 78 31.643ZM260 876V276v600Z"/></svg>
                         Fuel Monthly Buck
                     </span>
-                    <input class="FuelMonthly_X" type="text">
+                    <input class="FuelMonthly_X" type="number" name="MonthlyBudget">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"/></svg>
                         Fuel Tank Capacity
                     </span>
-                    <input class="FuelTankCapacity_X" type="text">
+                    <input class="FuelTankCapacity_X" type="text" name="FuelTankCapacity">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M452 770h56l10-54q20-6 34-15t26-21l62 19 26-54-47-30q4-21 4-39t-4-39l47-30-26-54-62 19q-12-12-26-21t-34-15l-10-54h-56l-10 54q-20 6-34 15t-26 21l-62-19-26 54 47 30q-4 21-4 39t4 39l-47 30 26 54 62-19q12 12 26 21t34 15l10 54Zm28-109q-36 0-60.5-24.5T395 576q0-36 24.5-60.5T480 491q36 0 60.5 24.5T565 576q0 36-24.5 60.5T480 661ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600V276H180v600Zm0-600v600-600Z"/></svg>
                         Engine Volume
                     </span>
-                    <input class="EngineVolume_X" type="text">
+                    <input class="EngineVolume_X" type="text" name="EngineVolume">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M306 662q-17 0-28.5-11.5T266 622q0-17 11.5-28.5T306 582q17 0 28.5 11.5T346 622q0 17-11.5 28.5T306 662Zm177 0q-17 0-28.5-11.5T443 622q0-17 11.5-28.5T483 582q17 0 28.5 11.5T523 622q0 17-11.5 28.5T483 662Zm170 0q-17 0-28.5-11.5T613 622q0-17 11.5-28.5T653 582q17 0 28.5 11.5T693 622q0 17-11.5 28.5T653 662ZM180 976q-24 0-42-18t-18-42V296q0-24 18-42t42-18h65v-60h65v60h340v-60h65v60h65q24 0 42 18t18 42v620q0 24-18 42t-42 18H180Zm0-60h600V486H180v430Zm0-490h600V296H180v130Zm0 0V296v130Z"/></svg>
                         Model Year
                     </span>
-                    <input class="ModelYear_X" type="text">
+                    <input class="ModelYear_X" type="text" name="ModelYear">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M483 936q-75 0-141-28.5T226.5 830q-49.5-49-78-115T120 574q0-75 28.5-140t78-113.5Q276 272 342 244t141-28q80 0 151.5 35T758 347V241h60v208H609v-60h105q-44-51-103.5-82T483 276q-125 0-214 85.5T180 571q0 127 88 216t215 89q125 0 211-88t86-213h60q0 150-104 255.5T483 936Zm122-197L451 587V373h60v189l137 134-43 43Z"/></svg>
                         Stop Date
                     </span>
-                    <input class="StopDate_X" type="text">
+                    <input class="StopDate_X" type="date" name="StopDate">
                 </li>
                 <li>
                     <span>
@@ -226,8 +230,9 @@
                         Status
                     </span>
                     <select name="Status" class="Status_X">
-                        <option value="ACTIVE">ACTIVE</option>
-                        <option value="INACTIVE">INACTIVE</option> 
+                        @foreach ($Cars_Status_GROUPED as $Car)
+                            <option value="{{ $Car->Status }}">{{ $Car->Status }}</option>
+                        @endforeach 
                     </select>
                 </li> 
                 <li>
@@ -235,16 +240,18 @@
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M730 656V526H600v-60h130V336h60v130h130v60H790v130h-60Zm-370-81q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM40 896v-94q0-35 17.5-63.5T108 696q75-33 133.338-46.5 58.339-13.5 118.5-13.5Q420 636 478 649.5 536 663 611 696q33 15 51 43t18 63v94H40Zm60-60h520v-34q0-16-9-30.5T587 750q-71-33-120-43.5T360 696q-58 0-107.5 10.5T132 750q-15 7-23.5 21.5T100 802v34Zm260-321q39 0 64.5-25.5T450 425q0-39-25.5-64.5T360 335q-39 0-64.5 25.5T270 425q0 39 25.5 64.5T360 515Zm0-90Zm0 411Z"/></svg>
                         Driver
                     </span>
-                    <input class="Driver_X" type="text">
+                    <input class="Driver_X" type="text" name="Driver">
                 </li>
                 <li>
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M730 656V526H600v-60h130V336h60v130h130v60H790v130h-60Zm-370-81q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM40 896v-94q0-35 17.5-63.5T108 696q75-33 133.338-46.5 58.339-13.5 118.5-13.5Q420 636 478 649.5 536 663 611 696q33 15 51 43t18 63v94H40Zm60-60h520v-34q0-16-9-30.5T587 750q-71-33-120-43.5T360 696q-58 0-107.5 10.5T132 750q-15 7-23.5 21.5T100 802v34Zm260-321q39 0 64.5-25.5T450 425q0-39-25.5-64.5T360 335q-39 0-64.5 25.5T270 425q0 39 25.5 64.5T360 515Zm0-90Zm0 411Z"/></svg>
                         Comment
                     </span>
-                    <input class="Comment_X" type="text" placeholder="Comment...">
+                    <input class="Comment_X" type="text" placeholder="Comment..." name="Comments">
                 </li>
+                <button name="UpdateCar">Edit</button>
             </form>    
+            <button class="DeleteCar">Delete</button>
         </ul>
     </div>
 </div>

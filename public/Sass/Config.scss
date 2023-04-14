@@ -103,6 +103,7 @@ button {
                     color: $Color-4;
                     outline: none;
                     padding-inline: 0.5em;
+                    width: 13em;
                 }
             }
         }
@@ -214,7 +215,7 @@ button {
 
             h1 {
                 align-items: center;
-                border: 1px solid #eee;
+                border: 1px solid lighten($color: $Color-4, $amount: 40);
                 border-radius: 0.35em;
                 display: flex;
                 font-family: "Bitter", serif !important;

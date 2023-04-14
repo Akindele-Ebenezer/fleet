@@ -26,7 +26,7 @@
                 <span class="Month_X_DATA_Edit Hide">{{ $Deposit->Month }}</span> 
                 <td>{{ $Deposit->Date }}</td>
                 <td>{{ $Deposit->CardNumber }}</td>
-                <td>{{ number_format($Deposit->Amount) }}</td>
+                <td>₦ {{ empty($Deposit->Amount) ? '' : number_format($Deposit->Amount) }}</td>
                 <td>{{ $Deposit->Year }}</td>
                 <td>{{ $Deposit->Week }}</td>
                 <td>{{ $Deposit->Month }}</td> 
@@ -44,7 +44,7 @@
             </div>
         </table>
         {{ $Deposits__MyRecords->onEachSide(5)->links() }}
-        @unless (count($Deposits__MyRecords) > 1)
+        @unless (count($Deposits__MyRecords) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>

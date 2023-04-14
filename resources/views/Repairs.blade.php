@@ -25,7 +25,7 @@
                 <span class="RepairAction_X_DATA Hide">{{ $Repair->RepairAction }}</span>
                 <span class="ReleaseDate_X_DATA Hide">{{ $Repair->ReleaseDate }}</span>
                 <span class="ReleaseTime_X_DATA Hide">{{ $Repair->ReleaseTime }}</span>
-                <span class="Cost_X_DATA Hide">{{ number_format($Repair->Cost) }}</span>
+                <span class="Cost_X_DATA Hide">₦ {{ empty($Repair->Cost) ? '' : number_format($Repair->Cost) }}</span>
                 <span class="InvoiceNumber_X_DATA Hide">{{ $Repair->InvoiceNumber }}</span>
                 <span class="Week_X_DATA Hide">{{ $Repair->Week }}</span>
                 <td>{{ $Repair->Date }}</td>
@@ -33,7 +33,7 @@
                 <td>{{ $Repair->RepairAction }}</td>
                 <td>{{ $Repair->ReleaseDate }}</td>
                 <td>{{ $Repair->ReleaseTime }}</td>
-                <td>{{ number_format($Repair->Cost) }}</td>
+                <td>₦ {{ empty($Repair->Cost) ? '' : number_format($Repair->Cost) }}</td>
                 <td>{{ $Repair->InvoiceNumber }}</td>
                 <td>{{ $Repair->Week }}</td>
             </tr> 
@@ -52,7 +52,7 @@
             </div>
         </table>
         {{ $Repairs->onEachSide(5)->links() }}
-        @unless (count($Repairs) > 1)
+        @unless (count($Repairs) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>

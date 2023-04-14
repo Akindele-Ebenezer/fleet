@@ -25,7 +25,7 @@
                 <span class="MaintenanceAction_X_DATA Hide">{{ $Maintenancee->MaintenanceAction }}</span>
                 <span class="ReleaseDate_X_DATA Hide">{{ $Maintenancee->ReleaseDate }}</span>
                 <span class="ReleaseTime_X_DATA Hide">{{ $Maintenancee->ReleaseTime }}</span>
-                <span class="Cost_X_DATA Hide">{{ number_format($Maintenancee->Cost) }}</span>
+                <span class="Cost_X_DATA Hide">₦ {{ empty($Maintenancee->Cost) ? '' : number_format($Maintenancee->Cost) }}</span>
                 <span class="InvoiceNumber_X_DATA Hide">{{ $Maintenancee->InvoiceNumber }}</span>
                 <span class="Week_X_DATA Hide">{{ $Maintenancee->Week }}</span>
                 <td>{{ $Maintenancee->Date }}</td>
@@ -33,7 +33,7 @@
                 <td>{{ $Maintenancee->MaintenanceAction }}</td>
                 <td>{{ $Maintenancee->ReleaseDate }}</td>
                 <td>{{ $Maintenancee->ReleaseTime }}</td>
-                <td>{{ number_format($Maintenancee->Cost) }}</td>
+                <td>₦ {{ empty($Maintenancee->Cost) ? '' : number_format($Maintenancee->Cost) }}</td>
                 <td>{{ $Maintenancee->InvoiceNumber }}</td>
                 <td>{{ $Maintenancee->Week }}</td>
             </tr>  
@@ -52,7 +52,7 @@
             </div>
         </table>
         {{ $Maintenance->onEachSide(5)->links() }}
-        @unless (count($Maintenance) > 1)
+        @unless (count($Maintenance) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>

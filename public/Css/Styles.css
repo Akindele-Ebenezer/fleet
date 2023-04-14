@@ -88,6 +88,7 @@ button {
   color: #3034b5;
   outline: none;
   padding-inline: 0.5em;
+  width: 13em;
 }
 
 .empty-records-wrapper {
@@ -187,7 +188,7 @@ button {
 }
 .modal-vehicle-data .inner .heading h1 {
   align-items: center;
-  border: 1px solid #eee;
+  border: 1px solid #c2c3ef;
   border-radius: 0.35em;
   display: flex;
   font-family: "Bitter", serif !important;
@@ -287,7 +288,7 @@ svg {
   color: #fff;
   display: flex;
 }
-.form .inner form .new-car-inputs input {
+.form .inner form .new-car-inputs input, .form .inner form .new-car-inputs select {
   background: #444;
   border: none;
   border-radius: 0.5em;
@@ -297,6 +298,9 @@ svg {
   outline: none;
   padding: 0.5em;
   width: 90%;
+}
+.form .inner form .new-car-inputs select option {
+  color: #eee;
 }
 .form .inner .heading {
   align-items: center;

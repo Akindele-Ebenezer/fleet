@@ -31,7 +31,7 @@
             </div>
         </table>
         {{ $Users->onEachSide(5)->links() }}
-        @unless (count($Users) > 1)
+        @unless (count($Users) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>

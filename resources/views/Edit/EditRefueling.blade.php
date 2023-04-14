@@ -27,7 +27,7 @@
                 <span class="KMETER_X_DATA_Edit Hide">{{ $Refueling->KMETER }}</span>
                 <span class="TerminalNo_X_DATA_Edit Hide">{{ $Refueling->TerminalNo }}</span>
                 <span class="CardNumber_X_DATA_Edit Hide">{{ $Refueling->CardNumber }}</span>
-                <span class="Quantity_X_DATA_Edit Hide">{{ number_format($Refueling->Quantity) }}</span>
+                <span class="Quantity_X_DATA_Edit Hide">₦ {{ empty($Refueling->Quantity) ? '' : number_format($Refueling->Quantity) }}</span>
                 <span class="Amount_X_DATA_Edit Hide">{{ $Refueling->Amount }}</span>
                 <span class="ReceiptNo_X_DATA_Edit Hide">{{ $Refueling->ReceiptNo }}</span>
                 <span class="KM_X_DATA_Edit Hide">{{ $Refueling->KM }}</span>
@@ -38,7 +38,7 @@
                 <td>{{ $Refueling->TerminalNumber }}</td>
                 <td>{{ $Refueling->CardNumber }}</td>
                 <td>{{ $Refueling->Quantity }}</td>
-                <td>{{ number_format($Refueling->Amount) }}</td>
+                <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
                 <td>{{ $Refueling->ReceiptNumber }}</td>
                 <td>{{ $Refueling->KM }}</td>
                 <td>{{ $Refueling->Consumption }}</td>
@@ -60,7 +60,7 @@
             </div>
         </table>
         {{ $Refueling__MyRecords->onEachSide(5)->links() }}
-        @unless (count($Refueling__MyRecords) > 1)
+        @unless (count($Refueling__MyRecords) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>

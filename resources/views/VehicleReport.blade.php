@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="inner-x">
                                     <span>Monthly Budget</span>
-                                    <span>₦ {{ number_format($Car->MonthlyBudget) }}</span>
+                                    <span>₦ {{ empty($Car->MonthlyBudget) ? '' : number_format($Car->MonthlyBudget) }}</span>
                                 </div>
                                 <div class="inner-x">
                                     <span>Chassis Number</span>
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="inner-x">
                                     <span>Deposits</span>
-                                    <span>₦ {{ number_format($Car->TotalDeposits) }}</span>
+                                    <span>₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</span>
                                 </div>
                                 <div class="inner-x">
                                     <span>PIN Code</span>
@@ -67,9 +67,9 @@
                         <div class="stats-heading">
                             <h2></h2>
                             <button class="action-x show-record-button">action</button>
-                            <span class="Deposits_X_DATA Hide">₦ {{ number_format($Car->TotalDeposits) }}</span>
-                            <span class="Refueling_X_DATA Hide">₦ {{ number_format($Car->TotalRefueling) }}</span>
-                            <span class="Balance_X_DATA Hide">₦ {{ number_format($Car->Balance) }}</span>
+                            <span class="Deposits_X_DATA Hide">₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</span>
+                            <span class="Refueling_X_DATA Hide">₦ {{ empty($Car->TotalRefueling) ? '' : number_format($Car->TotalRefueling) }}</span>
+                            <span class="Balance_X_DATA Hide">₦ {{ empty($Car->Balance) ? '' : number_format($Car->Balance) }}</span>
                             <span class="UsedBy_X_DATA Hide">{{ $Car->CarOwner }}</span>
                             <span class="RegistrationNo_X_DATA Hide">{{ $Car->VehicleNumber }}</span>
                             <span class="Maker_X_DATA Hide">{{ $Car->Maker }}</span>
@@ -81,13 +81,13 @@
                             <span class="ChasisNo_X_DATA Hide">{{ $Car->ChassisNumber }}</span>
                             <span class="PurchaseDate_X_DATA Hide">{{ $Car->PurchaseDate }}</span>
                             <span class="Supplier_X_DATA Hide">{{ $Car->Supplier }}</span>
-                            <span class="Price_X_DATA Hide">₦ {{ number_format($Car->Price) }}</span>
+                            <span class="Price_X_DATA Hide">₦ {{ empty($Car->Price) ? '' : number_format($Car->Price) }}</span>
                             <span class="CompanyCode_X_DATA Hide">{{ $Car->CompanyCode }}</span>
                             <span class="LicenceExpiryDate_X_DATA Hide">{{ $Car->LicenceExpiryDate }}</span>
                             <span class="InsuranceExpiryDate_X_DATA Hide">{{ $Car->InsuranceExpiryDate }}</span>
                             <span class="CardNo_X_DATA Hide">{{ $Car->CardNumber }}</span>
                             <span class="PinCode_X_DATA Hide">{{ $Car->PinCode }}</span>
-                            <span class="FuelMonthly_X_DATA Hide">₦ {{ number_format($Car->MonthlyBudget) }}</span>
+                            <span class="FuelMonthly_X_DATA Hide">₦ {{ empty($Car->MonthlyBudget) ? '' : number_format($Car->MonthlyBudget) }}</span>
                             <span class="FuelTankCapacity_X_DATA Hide">{{ $Car->FuelTankCapacity }}</span>
                             <span class="EngineVolume_X_DATA Hide">{{ $Car->EngineVolume }}</span>
                             <span class="ModelYear_X_DATA Hide">{{ $Car->ModelYear }}</span>
@@ -97,9 +97,9 @@
                         </div> 
                     </div>
                 </td>
-                <td class="refueling">₦ {{ number_format($Car->TotalRefueling) }}</td>
-                <td class="balance">₦ {{ number_format($Car->Balance) }}</td>
-                <td class="to-deposit">₦ {{ number_format($Car->TotalDeposits) }}</td>
+                <td class="refueling">₦ {{ empty($Car->TotalRefueling) ? '' : number_format($Car->TotalRefueling) }}</td>
+                <td class="balance">₦ {{ empty($Car->Balance) ? '' : number_format($Car->Balance) }}</td>
+                <td class="to-deposit">₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</td>
                 <td class="comments"> {{ substr($Car->Comments, 0, 25) }}{{ strlen($Car->Comments) > 25 ? '...' : '' }}</td>
             </tr>  
             @endforeach 
@@ -113,7 +113,7 @@
             </div>
         </table>
         {{ $Cars->onEachSide(5)->links() }}
-        @unless (count($Cars) > 1)
+        @unless (count($Cars) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div> 

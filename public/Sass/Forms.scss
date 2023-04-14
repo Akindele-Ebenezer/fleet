@@ -39,7 +39,7 @@
                     display: flex;
                 }
 
-                input {
+                input, select {
                     background: #444;
                     border: none;
                     border-radius: 0.5em;
@@ -49,6 +49,12 @@
                     outline: none;
                     padding: 0.5em;
                     width: 90%;
+                }
+
+                select {
+                    option {
+                        color: #eee;
+                    }
                 }
             }  
         }

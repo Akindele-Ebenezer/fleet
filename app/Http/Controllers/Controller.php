@@ -10,6 +10,7 @@ class Controller extends BaseController
 { 
     public function USER_ID() {
         return $Id = request()->session()->get('Id');
+        // return $Id = 'amina';
     }
 
     use AuthorizesRequests, ValidatesRequests;

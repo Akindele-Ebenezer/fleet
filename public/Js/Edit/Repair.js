@@ -20,6 +20,12 @@ let ReleaseTime_X = document.querySelector('.ReleaseTime_X');
 let Cost_X = document.querySelector('.Cost_X');
 let InvoiceNumber_X = document.querySelector('.InvoiceNumber_X');
 let Week_X = document.querySelector('.Week_X');
+let RepairId_X = document.querySelector('.RepairId_X');
+
+
+let EditRepairButton = document.querySelector('.EditRepair');
+let DeleteRepairButton = document.querySelector('.DeleteRepair');
+let EditRepairForm = document.querySelector('.EditRepairForm');
 
 ShowRecord_X_Edit.forEach(VehicleNumber => {
     VehicleNumber.addEventListener('click', () => {
@@ -31,9 +37,15 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         RepairAction_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         ReleaseDate_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         ReleaseTime_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
-        Cost_X.value = '₦ ' + VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        Cost_X.value = BigInt(VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent.replace(/₦/g, '').replace(/,/g, ''));
         InvoiceNumber_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Week_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        RepairId_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+ 
+        EditRepairButton.addEventListener('click', () => {
+            EditRepairForm.setAttribute('action', '/Update/' + RepairId_X.value);
+            EditRepairForm.submit();
+        });
     });
     
     CancelModalIcons.forEach(CancelModalIcon => {
@@ -46,9 +58,18 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
 let ModalAddRepair = document.querySelector('.add-repair-form');
 let AddRepairButton = document.querySelectorAll('.add-repair'); 
 
+let AddRepairForm = document.querySelector('.AddRepairForm');
+let AddRepairButton_X = document.querySelector('.AddRepair');
+let VehicleNumber_REPAIR = document.querySelector('input[name="VehicleNumber_REPAIR"]');
+
 AddRepairButton.forEach(Button => {
     Button.addEventListener('click', () => {
         ModalAddRepair.style.display = 'block';
+         
+        AddRepairButton_X.addEventListener('click', () => {  
+            AddRepairForm.setAttribute('action', '/Add/' + VehicleNumber_REPAIR.value);
+            AddRepairForm.submit();
+        });
     }); 
 
     CancelModalIcons.forEach(CancelModalIcon => {
@@ -56,4 +77,5 @@ AddRepairButton.forEach(Button => {
             ModalAddRepair.style.display = 'none';
         });
     });
+
 });

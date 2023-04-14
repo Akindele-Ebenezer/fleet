@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('deposits', function (Blueprint $table) {
+            $table->id();
             $table->string('VehicleNumber')->nullable();
             $table->string('LNO');
             $table->string('CardNumber')->nullable(); 
