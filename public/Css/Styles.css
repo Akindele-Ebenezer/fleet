@@ -267,6 +267,12 @@ svg {
   right: 0;
   width: 60rem;
 }
+.form .inner button:first-of-type {
+  background-color: #3034b5;
+}
+.form .inner button:nth-of-type(2) {
+  background-color: #DF2E38;
+}
 .form .inner form {
   display: flex;
   flex-wrap: wrap;

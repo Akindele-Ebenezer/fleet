@@ -106,3 +106,39 @@ ActionButtons.forEach(ActionButton => {
         });
     });
 });
+
+let MaintenanceRouteButton = document.querySelectorAll('.maintenance-route');
+let RefuelingRouteButton = document.querySelectorAll('.refueling-route');
+let RepairsRouteButton = document.querySelectorAll('.repairs-route');
+let DepositsRouteButton = document.querySelectorAll('.deposits-route');
+let CarsRouteButton = document.querySelectorAll('.cars-route');
+
+MaintenanceRouteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Maintenance';
+    });
+});
+
+RefuelingRouteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Refueling';
+    });
+});
+
+RepairsRouteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Repairs';
+    });
+});
+
+DepositsRouteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Deposits';
+    });
+});
+
+CarsRouteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Cars';
+    });
+});

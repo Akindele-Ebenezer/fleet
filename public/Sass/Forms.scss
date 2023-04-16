@@ -16,6 +16,16 @@
         right: 0;
         width: 60rem;
     
+        button {
+            &:first-of-type {
+                background-color: $Color-4;
+            }
+
+            &:nth-of-type(2) {
+                background-color: $Color-2;
+            }
+        }
+
         form {
             display: flex;
             flex-wrap: wrap;
