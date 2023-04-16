@@ -179,6 +179,12 @@ button {
   margin-block: 0.5em;
   padding: 0.5em;
 }
+.modal-vehicle-data .inner button.DeleteCar {
+  background-color: #DF2E38;
+}
+.modal-vehicle-data .inner button[name=UpdateCar] {
+  background-color: #3034b5;
+}
 .modal-vehicle-data .inner .heading {
   align-items: center;
   display: flex;
@@ -190,9 +196,11 @@ button {
   align-items: center;
   border: 1px solid #c2c3ef;
   border-radius: 0.35em;
+  color: #494dcf;
   display: flex;
   font-family: "Bitter", serif !important;
   font-size: 2em;
+  font-style: italic;
   padding: 0.35em;
 }
 .modal-vehicle-data .inner h1 {
@@ -295,7 +303,7 @@ svg {
   display: flex;
 }
 .form .inner form .new-car-inputs input, .form .inner form .new-car-inputs select {
-  background: #444;
+  background: #222;
   border: none;
   border-radius: 0.5em;
   color: #fff;
@@ -434,11 +442,11 @@ svg {
 .report-data-heading .inner.wrapper .search h2 {
   color: #eee;
   font-weight: unset;
-  text-decoration: overline;
-  text-decoration-color: #eee;
 }
 .report-data-heading .inner.wrapper .search input {
+  background-color: #222;
   border: none;
+  color: #eee;
   margin-right: 0.5em;
   outline: none;
   padding: 0.2em;
@@ -460,14 +468,12 @@ svg {
 }
 .report-data-heading .inner-x p {
   align-items: center;
-  border: 1px solid #333;
   color: #fff;
   display: flex;
   margin-right: 1rem;
   padding: 0.5em;
 }
 .report-data-heading .inner-x p img {
-  border: 1px solid #ddd;
   padding: 0.25em;
   margin-right: 0.5rem;
   width: 2rem;
@@ -477,7 +483,6 @@ svg {
   margin-right: 1rem;
 }
 .report-data-heading .inner-x table td {
-  border: 1px solid #ccc;
   text-align: center;
 }
 .report-data-heading .inner-x table td, .report-data-heading .inner-x table th {
@@ -516,7 +521,7 @@ svg {
 }
 .report-inner .action .inner button:last-of-type {
   background: unset;
-  border: 3px solid #eee;
+  border: 1px solid #aaa;
   border-radius: unset;
   color: #eee;
 }
@@ -563,7 +568,6 @@ svg {
   width: 20em;
 }
 .report-inner .table.list .car-info .info-inner .inner:not(.report-inner .table.list .car-info .info-inner .inner:first-of-type) {
-  border-left: 2px solid;
   translate: -3em;
 }
 .report-inner .table.list .car-info .info-inner .inner-x {
@@ -573,7 +577,6 @@ svg {
   width: 14em;
 }
 .report-inner .table.list .car-info .info-inner .inner-x span:first-of-type {
-  background: #222;
   border-radius: 0.2em;
   color: #eee;
   margin-right: 0.5em;
@@ -629,7 +632,7 @@ svg {
   text-align: center;
 }
 .report-inner .table.list td .car-info .stats .inner h3 {
-  background: #333;
+  background: #000;
   font-weight: unset;
   padding-block: 0.1em;
   font-family: system-ui;

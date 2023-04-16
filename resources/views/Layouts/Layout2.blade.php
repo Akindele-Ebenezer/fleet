@@ -102,7 +102,7 @@
                     <li class="{{ Route::is('Cars') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"/></svg>                  
                         Cars
-                        <span>24</span>
+                        <span>{{ $NumberOfCars }}</span>
                     </li>
                 </a>
                 <div class="sub-nav-wrapper">
@@ -110,7 +110,7 @@
                         <li class="{{ Route::is('MyRecords') ? 'active' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M222 976q-43.75 0-74.375-30.625T117 871V746h127V176l59.8 60 59.8-60 59.8 60 59.8-60 59.8 60 60-60 60 60 60-60 60 60 60-60v695q0 43.75-30.625 74.375T738 976H222Zm516-60q20 0 32.5-12.5T783 871V276H304v470h389v125q0 20 12.5 32.5T738 916ZM357 434v-60h240v60H357Zm0 134v-60h240v60H357Zm333-134q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9Zm0 129q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9ZM221 916h412V806H177v65q0 20 12.65 32.5T221 916Zm-44 0V806v110Z"/></svg>                  
                             My RECORDS 
-                            <span>24</span>
+                            <span>{{ MyRecords_TOTAL() }}</span>
                             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"/></svg>
                         </li> 
                     </a>
@@ -118,7 +118,7 @@
                         <a href='{{ route('MyRecords') }}'>
                             <li class="{{ Route::is('MyRecords') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
-                                Activity 
+                                Car Registration ({{ $NumberOfCars_MyRecords }})
                             </li>
                         </a>
                         <a href='{{ route('EditRepairs') }}'>
@@ -183,7 +183,7 @@
                     <li class="{{ Route::is('Users') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 575q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM160 896v-94q0-38 19-65t49-41q67-30 128.5-45T480 636q62 0 123 15.5t127.921 44.694q31.301 14.126 50.19 40.966Q800 764 800 802v94H160Zm60-60h520v-34q0-16-9.5-30.5T707 750q-64-31-117-42.5T480 696q-57 0-111 11.5T252 750q-14 7-23 21.5t-9 30.5v34Zm260-321q39 0 64.5-25.5T570 425q0-39-25.5-64.5T480 335q-39 0-64.5 25.5T390 425q0 39 25.5 64.5T480 515Zm0-90Zm0 411Z"/></svg>                   
                         USERS
-                        <span>24</span>
+                        <span>{{ $NumberOfFleetUsers }}</span>
                     </li>
                 </a>
                 <a href='{{ route('Logout') }}'>
@@ -207,7 +207,21 @@
                 <div class="inner">
                     <h1>
                         {{-- <img src="{{ asset('Images/car1.png') }}" alt=""> --}}
-                        FLEET DB 
+                        {{ Route::is('Cars') ? 'FLEET DB' : '' }}
+                        {{ Route::is('Maintenance') ? 'MAINTENANCE' : '' }}
+                        {{ Route::is('Repairs') ? 'REPAIRS' : '' }}
+                        {{ Route::is('Refueling') ? 'REFUELING' : '' }}
+                        {{ Route::is('Deposits') ? 'DEPOSITS' : '' }}
+
+                        {{ Route::is('MyRecords') ? 'Edit / CARS' : '' }}
+                        {{ Route::is('EditMaintenance') ? 'Edit / MAINTENANCE' : '' }}
+                        {{ Route::is('EditRepairs') ? 'Edit / REPAIRS' : '' }}
+                        {{ Route::is('EditRefueling') ? 'Edit / REFUELING' : '' }}
+                        {{ Route::is('EditDeposits') ? 'Edit / DEPOSITS' : '' }}
+
+                        {{ Route::is('VehicleReport') ? 'REPORT' : '' }}
+                        {{ Route::is('Users') ? 'USERS' : '' }}
+                         
                     <br>
                     <span>Vehicle Management System</span>
                     </h1> 

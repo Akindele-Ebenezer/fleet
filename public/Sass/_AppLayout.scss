@@ -60,13 +60,13 @@
 
                     h2 {
                         color: #eee;
-                        font-weight: unset;
-                        text-decoration: overline;
-                        text-decoration-color: #eee;
+                        font-weight: unset; 
                     }
 
                     input {
+                        background-color: #222;
                         border: none; 
+                        color: #eee;
                         margin-right: 0.5em;
                         outline: none;
                         padding: 0.2em;
@@ -92,15 +92,13 @@
                 }
 
                 p {
-                    align-items: center;  
-                    border: 1px solid #333;
+                    align-items: center;   
                     color: #fff;
                     display: flex;
                     margin-right: 1rem; 
                     padding: 0.5em;
 
-                    img {
-                        border: 1px solid #ddd;
+                    img { 
                         padding: 0.25em;
                         margin-right: .5rem;
                         width: 2rem;
@@ -111,8 +109,7 @@
                     border-collapse: collapse;
                     margin-right: 1rem;
 
-                    td {
-                        border: 1px solid #ccc; 
+                    td { 
                         text-align: center;
                     }
 
@@ -163,7 +160,7 @@
 
                     &:last-of-type {
                         background: unset;
-                        border: 3px solid #eee;
+                        border: 1px solid #aaa;
                         border-radius: unset;
                         color: #eee;
                     }
@@ -237,8 +234,7 @@
                                 width: 20em;
                             }
 
-                            &:not(&:first-of-type) {
-                                border-left: 2px solid;
+                            &:not(&:first-of-type) { 
                                 translate: -3em;
                             }
 
@@ -249,8 +245,7 @@
                                 width: 14em;
 
                                 span {
-                                    &:first-of-type {
-                                        background: #222;
+                                    &:first-of-type { 
                                         border-radius: 0.2em;
                                         color: #eee;
                                         margin-right: 0.5em;
@@ -321,7 +316,7 @@
                                 text-align: center;  
 
                                 h3 { 
-                                    background: #333; 
+                                    background: #000; 
                                     font-weight: unset;
                                     padding-block: 0.1em;
                                     font-family: system-ui;
