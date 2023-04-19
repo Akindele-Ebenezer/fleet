@@ -32,6 +32,25 @@ $Color-4: #3034b5;
     }
 }
 
+.active-x,
+.inactive-x,
+.total-x  {
+    border-radius: 0.35em;
+    color: #fff; 
+    font-size: smaller; 
+    padding: 0.15em 0.35em;
+}
+
+.active-x  {
+    background-color: $Color-3; 
+}
+.inactive-x {
+    background-color: $Color-2; 
+}
+.total-x {
+    background-color: $Color-4; 
+}
+
 .alert {
     align-items: center;
     // display: flex;
@@ -79,8 +98,7 @@ button {
     text-align: center;
 }
 
-.cancel-modal {
-    background: #fff;
+.cancel-modal { 
     border-radius: 0.1em;
     color: $Color-2;
     cursor: pointer;

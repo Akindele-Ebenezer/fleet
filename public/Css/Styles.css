@@ -23,6 +23,27 @@
   fill: #000;
 }
 
+.active-x,
+.inactive-x,
+.total-x {
+  border-radius: 0.35em;
+  color: #fff;
+  font-size: smaller;
+  padding: 0.15em 0.35em;
+}
+
+.active-x {
+  background-color: #41a341;
+}
+
+.inactive-x {
+  background-color: #DF2E38;
+}
+
+.total-x {
+  background-color: #3034b5;
+}
+
 .alert {
   align-items: center;
   display: none;
@@ -69,7 +90,6 @@ button {
 }
 
 .cancel-modal {
-  background: #fff;
   border-radius: 0.1em;
   color: #DF2E38;
   cursor: pointer;
@@ -281,6 +301,13 @@ svg {
 .form .inner button:nth-of-type(2) {
   background-color: #DF2E38;
 }
+.form .inner .error {
+  background: #DF2E38;
+  border-radius: 0.2em;
+  color: #fff;
+  padding: 0.3em;
+  width: fit-content;
+}
 .form .inner form {
   display: flex;
   flex-wrap: wrap;
@@ -327,6 +354,8 @@ svg {
   color: #fff;
   display: flex;
   font-family: system-ui;
+  font-style: italic;
+  font-size: 1.5em;
 }
 
 .readonly input {
@@ -565,6 +594,7 @@ svg {
   justify-content: space-between;
 }
 .report-inner .table.list .car-info .info-inner .inner:first-of-type {
+  color: #eee;
   width: 20em;
 }
 .report-inner .table.list .car-info .info-inner .inner:not(.report-inner .table.list .car-info .info-inner .inner:first-of-type) {

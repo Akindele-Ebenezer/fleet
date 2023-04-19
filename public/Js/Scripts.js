@@ -111,6 +111,7 @@ let MaintenanceRouteButton = document.querySelectorAll('.maintenance-route');
 let RefuelingRouteButton = document.querySelectorAll('.refueling-route');
 let RepairsRouteButton = document.querySelectorAll('.repairs-route');
 let DepositsRouteButton = document.querySelectorAll('.deposits-route');
+let DepositsRouteEditButton = document.querySelectorAll('.deposits-route-edit');
 let CarsRouteButton = document.querySelectorAll('.cars-route');
 
 MaintenanceRouteButton.forEach(Button => {
@@ -134,6 +135,17 @@ RepairsRouteButton.forEach(Button => {
 DepositsRouteButton.forEach(Button => {
     Button.addEventListener('click', () => {
         window.location = '/Deposits';
+    });
+});
+
+DepositsRouteEditButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Edit/Deposits';
+        
+        if (window.location.href === '/Edit/Deposits') {
+            let ModalAddMonthlyDeposits = document.querySelector('.add-monthly-deposits-form');
+            ModalAddMonthlyDeposits.style.display = 'block';
+        }
     });
 });
 

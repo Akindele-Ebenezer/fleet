@@ -36,10 +36,13 @@
         include('../resources/Globals.php')
     @endphp
     @include('Components.LoaderComponent')
-    @include('Components.EditCarComponent')
-    @include('Components.AddCarComponent')
-    @include('Components.VehicleDataComponent')
-    @include('Components.EditVehicleDataComponent')
+
+    @if (Route::is('MyRecords') || Route::is('Cars') || Route::is('VehicleReport'))
+        @include('Components.EditCarComponent')
+        @include('Components.AddCarComponent')
+        @include('Components.VehicleDataComponent')
+        @include('Components.EditVehicleDataComponent')
+    @endif
 
     @if (Route::is('EditRepairs'))
         @include('Components.AddRepairComponent')
@@ -72,11 +75,16 @@
         @include('Components.AddRefuelingComponent')
         @include('Components.EditRefuelingComponent')   
     @endif
-
+    
     @if (Route::is('Refueling'))
         @include('Components.ReadOnly.RefuelingComponent')
     @endif
     
+    @if (Route::is('Users'))
+        @include('Components.AddUserComponent')
+        @include('Components.EditUserComponent')   
+    @endif
+
     @include('Components.AlertComponent')   
 
     <div class="report" style="background-image: url('Images/bg-3.gif');">
@@ -109,7 +117,7 @@
                     <a class="my-records action-x">
                         <li class="{{ Route::is('MyRecords') ? 'active' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M222 976q-43.75 0-74.375-30.625T117 871V746h127V176l59.8 60 59.8-60 59.8 60 59.8-60 59.8 60 60-60 60 60 60-60 60 60 60-60v695q0 43.75-30.625 74.375T738 976H222Zm516-60q20 0 32.5-12.5T783 871V276H304v470h389v125q0 20 12.5 32.5T738 916ZM357 434v-60h240v60H357Zm0 134v-60h240v60H357Zm333-134q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9Zm0 129q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9ZM221 916h412V806H177v65q0 20 12.65 32.5T221 916Zm-44 0V806v110Z"/></svg>                  
-                            My RECORDS 
+                            My Records 
                             <span>{{ MyRecords_TOTAL() }}</span>
                             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"/></svg>
                         </li> 
@@ -136,7 +144,7 @@
                         <a href='{{ route('EditDeposits') }}'>
                             <li class="{{ Route::is('EditDeposits') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M451 936v-84q-57-10-93.5-43.5T305 724l56-23q17 48 49 71.5t77 23.5q48 0 79-24t31-66q0-44-27.5-68T466 589q-72-23-107.5-61T323 433q0-55 35.5-92t92.5-42v-83h60v83q45 5 77.5 29.5T638 391l-56 24q-14-32-37.5-46.5T483 354q-46 0-73 21t-27 57q0 38 30 61.5T524 542q68 21 100.5 60.5T657 702q0 63-37 101.5T511 853v83h-60Z"/></svg>            
-                                Fuel Monthly Deposits ({{ $NumberOfCarDeposits_MyRecords }})
+                                Monthly Deposits ({{ $NumberOfCarDeposits_MyRecords }})
                             </li>
                         </a>
                         <a href='{{ route('EditRefueling') }}'>
@@ -151,6 +159,13 @@
                     <li class="{{ Route::is('VehicleReport') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"/></svg>                   
                         Vehicle REPORT
+                    </li>
+                </a>
+                <a href='{{ route('CarOwners') }}'>
+                    <li class="{{ Route::is('CarOwners') ? 'active' : '' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 575q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM160 896v-94q0-38 19-65t49-41q67-30 128.5-45T480 636q62 0 123 15.5t127.921 44.694q31.301 14.126 50.19 40.966Q800 764 800 802v94H160Zm60-60h520v-34q0-16-9.5-30.5T707 750q-64-31-117-42.5T480 696q-57 0-111 11.5T252 750q-14 7-23 21.5t-9 30.5v34Zm260-321q39 0 64.5-25.5T570 425q0-39-25.5-64.5T480 335q-39 0-64.5 25.5T390 425q0 39 25.5 64.5T480 515Zm0-90Zm0 411Z"/></svg>                   
+                        Car Owners
+                        <span>{{ $NumberOfCarOwners }}</span>
                     </li>
                 </a>
                 <div class="">
@@ -169,7 +184,7 @@
                     <a href='{{ route('Deposits') }}'>
                         <li class="{{ Route::is('Deposits') ? 'active' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M451 936v-84q-57-10-93.5-43.5T305 724l56-23q17 48 49 71.5t77 23.5q48 0 79-24t31-66q0-44-27.5-68T466 589q-72-23-107.5-61T323 433q0-55 35.5-92t92.5-42v-83h60v83q45 5 77.5 29.5T638 391l-56 24q-14-32-37.5-46.5T483 354q-46 0-73 21t-27 57q0 38 30 61.5T524 542q68 21 100.5 60.5T657 702q0 63-37 101.5T511 853v83h-60Z"/></svg>            
-                            Fuel Monthly Deposits ({{ $NumberOfCarDeposits}})
+                            Monthly Deposits ({{ $NumberOfCarDeposits}})
                         </li>
                     </a>
                     <a href='{{ route('Refueling') }}'>
@@ -182,14 +197,14 @@
                 <a href='{{ route('Users') }}'>
                     <li class="{{ Route::is('Users') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 575q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM160 896v-94q0-38 19-65t49-41q67-30 128.5-45T480 636q62 0 123 15.5t127.921 44.694q31.301 14.126 50.19 40.966Q800 764 800 802v94H160Zm60-60h520v-34q0-16-9.5-30.5T707 750q-64-31-117-42.5T480 696q-57 0-111 11.5T252 750q-14 7-23 21.5t-9 30.5v34Zm260-321q39 0 64.5-25.5T570 425q0-39-25.5-64.5T480 335q-39 0-64.5 25.5T390 425q0 39 25.5 64.5T480 515Zm0-90Zm0 411Z"/></svg>                   
-                        USERS
+                        Users
                         <span>{{ $NumberOfFleetUsers }}</span>
                     </li>
                 </a>
                 <a href='{{ route('Logout') }}'>
                     <li>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h291v60H180v600h291v60H180Zm486-185-43-43 102-102H375v-60h348L621 444l43-43 176 176-174 174Z"/></svg>                  
-                        LOGOUT 
+                        Logout 
                     </li>
                 </a>
             </ul>
@@ -208,6 +223,9 @@
                     <h1>
                         {{-- <img src="{{ asset('Images/car1.png') }}" alt=""> --}}
                         {{ Route::is('Cars') ? 'FLEET DB' : '' }}
+                        {{ Route::is('CarOwners') ? 'CAR OWNERS' : '' }}
+                        {{ Route::is('VehicleReport') ? 'REPORT' : '' }}
+
                         {{ Route::is('Maintenance') ? 'MAINTENANCE' : '' }}
                         {{ Route::is('Repairs') ? 'REPAIRS' : '' }}
                         {{ Route::is('Refueling') ? 'REFUELING' : '' }}
@@ -219,7 +237,6 @@
                         {{ Route::is('EditRefueling') ? 'Edit / REFUELING' : '' }}
                         {{ Route::is('EditDeposits') ? 'Edit / DEPOSITS' : '' }}
 
-                        {{ Route::is('VehicleReport') ? 'REPORT' : '' }}
                         {{ Route::is('Users') ? 'USERS' : '' }}
                          
                     <br>
@@ -272,7 +289,7 @@
                                 <td>= {{ $NumberOfCarMaintenance }}</td>
                             </tr>
                         </table>
-                        <button>Deposit</button>
+                        <button class="deposits-route-edit">Deposit</button>
                     </div>
                     @php
             
@@ -306,6 +323,15 @@
                                 "Balance",
                                 "ToDeposit",
                                 "Comments",
+                            ];
+                        }
+             
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Cars/Owners') {
+                            $SearchInputs = [
+                                "ID",
+                                "Names", 
+                                "CarDetails",
+                                "RegistrationNumber", 
                             ];
                         }
              
@@ -453,7 +479,7 @@
             </div>
             <div class="action">
                 <div class="inner">
-                    <button class="action-x {{ Route::is('MyRecords') ? 'add-car' : '' }} {{ Route::is('EditRepairs') ? 'add-repair' : '' }} {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }}">+ Add {{ Route::is('MyRecords') ? 'Vehicle' : '' }} {{ Route::is('EditRepairs') ? 'Repairs' : '' }} {{ Route::is('EditMaintenance') ? 'Maintenance' : '' }} {{ Route::is('EditDeposits') ? 'Deposits' : '' }} {{ Route::is('EditRefueling') ? 'Refueling' : '' }}</button><button>Export to EXCEL</button>
+                    <button class="action-x {{ Route::is('MyRecords') ? 'add-car' : '' }} {{ Route::is('EditRepairs') ? 'add-repair' : '' }} {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') ? 'cars-route' : '' }}"> {{ Route::is('MyRecords') ? '+ Add Vehicle' : '' }} {{ Route::is('EditRepairs') ? '+ Add Repairs' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') ? 'Explore Cars' : '' }}</button><button>Export to EXCEL</button>
                 </div>
             </div> 
             @yield('Content') 
@@ -499,6 +525,9 @@
         @endif
         @if (Route::is('EditRefueling'))
             <script src="{{ asset('Js/Edit/Refueling.js') }}"></script>
+        @endif
+        @if (Route::is('Users'))
+            <script src="{{ asset('Js/Edit/Users.js') }}"></script>
         @endif
         {{--  --}}
         

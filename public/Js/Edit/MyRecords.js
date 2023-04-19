@@ -28,6 +28,10 @@ let StopDate_X_Edit = document.querySelector('input.StopDate_X');
 let Driver_X_Edit = document.querySelector('input.Driver_X');
 let Comment_X_Edit = document.querySelector('input.Comment_X');
 let Status_X_Edit = document.querySelectorAll('.Status_X');
+let CarId_X = document.querySelector('.CarId_X');
+
+let EditCarButton = document.querySelector('.EditCar'); 
+let EditCarForm = document.querySelector('.EditCarForm');
 
 ActionButtons.forEach(ActionButton => {
     ActionButton.addEventListener('click', () => {
@@ -62,7 +66,7 @@ ActionButtons.forEach(ActionButton => {
         let Status_X_DATA = ActionButton.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         let Status_X_DATA_X = ActionButton.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         let Comments_X_DATA = ActionButton.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
- 
+
         Deposits_X_Edit.value = BigInt(Deposits_X_DATA.replace(/₦/g, '').replace(/,/g, ''));
         Refueling_X_Edit.value = BigInt(Refueling_X_DATA.replace(/₦/g, '').replace(/,/g, ''));
         Balance_X_Edit.value = BigInt(Balance_X_DATA.replace(/₦/g, '').replace(/,/g, ''));
@@ -102,11 +106,17 @@ ActionButtons.forEach(ActionButton => {
             Status.value = Status_X_DATA_X;
         }); 
         Comment_X_Edit.value = Comments_X_DATA; 
+        CarId_X.value = ActionButton.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         
+        EditCarButton.addEventListener('click', () => {
+            EditCarForm.setAttribute('action', '/Update/Car/' + CarId_X.value);
+            EditCarForm.submit();
+        });
+ 
         let DeleteCarButton = document.querySelector('.DeleteCar');
         
         DeleteCarButton.addEventListener('click', () => {
-            window.location = '/Delete/' + RegistrationNo_X_Edit.value;
+            window.location = '/Delete/Car/' + CarId_X.value;
         });
     }); 
 
@@ -137,11 +147,25 @@ Edit_INPUTS_AND_SELECTS_Arr.forEach(Inputs_And_Selects => {
 });
 
 let ModalAddCar = document.querySelector('.add-vehicle-form');
+let AddCarForm = document.querySelector('.AddCarForm');
+let AddCarButton_X = document.querySelector('.AddCar');
 let AddCarButton = document.querySelectorAll('.add-car'); 
+let VehicleNumber_CAR = document.querySelector('input[name="VehicleNumber_CAR"]');
+
+let Error = document.querySelector('.error');
 
 AddCarButton.forEach(Button => {
     Button.addEventListener('click', () => {
         ModalAddCar.style.display = 'block';
+           
+        AddCarButton_X.addEventListener('click', () => {     
+            if (AddCarForm.children[0].lastElementChild.value === '') {
+                Error.textContent = 'Please fill out vehicle number for new Car';
+            } else {
+                AddCarForm.setAttribute('action', '/Add/Car/' + VehicleNumber_CAR.value);
+                AddCarForm.submit();
+            }
+        });
     }); 
 
     CancelModalIcons.forEach(CancelModalIcon => {

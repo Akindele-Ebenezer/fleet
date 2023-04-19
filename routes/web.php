@@ -17,9 +17,9 @@ Route::post('/Login', [AuthController::class, 'Auth'])->name('Auth');
 Route::get('/Logout', [AuthController::class, 'Logout'])->name('Logout');
 
 Route::get('/MyRecords', [CarController::class, 'my_records_activity'])->name('MyRecords'); 
-Route::get('/AddCar', [CarController::class, 'store'])->name('store_MyRecords'); 
-Route::get('/Update', [CarController::class, 'update'])->name('UpdateCar');
-Route::get('/Delete/{Car}', [CarController::class, 'destroy'])->name('DeleteCar');
+Route::get('/Add/Car/{Car}', [CarController::class, 'store'])->name('store_MyRecords'); 
+Route::get('/Update/Car/{Car}', [CarController::class, 'update'])->name('UpdateCar');
+Route::get('/Delete/Car/{Car}', [CarController::class, 'destroy'])->name('DeleteCar');
 
 Route::get('/Edit/Repairs', [RepairController::class, 'my_records_repairs'])->name('EditRepairs');  
 Route::get('/Add/Repair/{Repair}', [RepairController::class, 'store'])->name('store_Repairs'); 
@@ -42,6 +42,7 @@ Route::get('/Update/Refueling/{Refueling}', [RefuelingController::class, 'update
 Route::get('/Delete/Refueling/{Refueling}', [RefuelingController::class, 'destroy'])->name('DeleteRefueling');
 
 Route::get('/Cars', [CarController::class, 'index'])->name('Cars');
+Route::get('/Cars/Owners', [CarController::class, 'car_owners'])->name('CarOwners');
 
 Route::get('/VehicleReport', [CarController::class, 'vehicle_report'])->name('VehicleReport');
 Route::get('/Repairs', [RepairController::class, 'index'])->name('Repairs');
@@ -50,7 +51,10 @@ Route::get('/Deposits', [DepositsController::class, 'index'])->name('Deposits');
 Route::get('/Refueling', [RefuelingController::class, 'index'])->name('Refueling');
   
 Route::get('/Users', [UserController::class, 'index'])->name('Users');
- 
+Route::get('/Add/User/{User}', [UserController::class, 'store'])->name('store_User'); 
+Route::get('/Update/User/{User}', [UserController::class, 'update'])->name('UpdateUser');
+Route::get('/Delete/User/{User}', [UserController::class, 'destroy'])->name('DeleteUser');
+
 Route::get('/pdf', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) { 
     $fpdf->AddPage();
     $fpdf->SetFont('Courier', 'B', 18);

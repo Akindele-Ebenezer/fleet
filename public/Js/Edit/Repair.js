@@ -47,8 +47,7 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         });
  
         DeleteRepairButton.addEventListener('click', () => {
-            EditRepairForm.setAttribute('action', '/Delete/Repair/' + RepairId_X.value);
-            EditRepairForm.submit();
+            window.location = '/Delete/Repair/' + RepairId_X.value;    
         });
     });
     
@@ -66,13 +65,19 @@ let AddRepairForm = document.querySelector('.AddRepairForm');
 let AddRepairButton_X = document.querySelector('.AddRepair');
 let VehicleNumber_REPAIR = document.querySelector('input[name="VehicleNumber_REPAIR"]');
 
+let Error = document.querySelector('.error');
+
 AddRepairButton.forEach(Button => {
     Button.addEventListener('click', () => {
         ModalAddRepair.style.display = 'block';
          
-        AddRepairButton_X.addEventListener('click', () => {  
-            AddRepairForm.setAttribute('action', '/Add/Repair/' + VehicleNumber_REPAIR.value);
-            AddRepairForm.submit();
+        AddRepairButton_X.addEventListener('click', () => {   
+            if (AddRepairForm.children[1].lastElementChild.value === '') {
+                Error.textContent = 'Please fill out vehicle number for new Repair';
+            } else {
+                AddRepairForm.setAttribute('action', '/Add/Repair/' + VehicleNumber_REPAIR.value);
+                AddRepairForm.submit();
+            } 
         });
     }); 
 

@@ -2,22 +2,63 @@
 
 @section('Content')
     <div class="table-wrapper"> 
-        <table class="table" id="Table">
+        <table class="table list" id="Table">
             <tr class="table-head">
-                <th>#</th>
-                <th>Email</th>
-                <th>Username</th>
-                <th>Role</th>
-                <th>Records</th>
-                <th>Status</th>
+                <th onclick="sortTable(0)">#</th>
+                <th onclick="sortTable(1)">Email</th>
+                <th onclick="sortTable(2)">Username</th>
+                <th onclick="sortTable(3)">Role</th>
+                <th onclick="sortTable(4)">Records</th>
+                <th onclick="sortTable(5)">Status</th>
             </tr>
             @foreach ($Users as $User)
-            <tr>
-                <td>{{ $loop->iteration  + (($Users->currentPage() -1) * $Users->perPage()) }}</td>
-                <td>{{ $User->email }}</td>
+            @php
+                $Id_CURRENT_USER = $User->id;
+                $NumberOfMaintenance_CURRENT_USER = \App\Models\Maintenance::where('UserId', $Id_CURRENT_USER)->count();
+                $NumberOfRepairs_CURRENT_USER = \App\Models\Repair::where('UserId', $Id_CURRENT_USER)->count();
+                $NumberOfRefueling_CURRENT_USER = \App\Models\Refueling::where('UserId', $Id_CURRENT_USER)->count();
+                $NumberOfDeposits_CURRENT_USER = \App\Models\Deposits::where('UserId', $Id_CURRENT_USER)->count();
+ 
+                $NumberOfAllRecords_CURRENT_USER = $NumberOfMaintenance_CURRENT_USER + $NumberOfRepairs_CURRENT_USER + $NumberOfRefueling_CURRENT_USER + $NumberOfDeposits_CURRENT_USER;
+            @endphp
+            <tr> 
+                <td>{{ $loop->iteration  + (($Users->currentPage() -1) * $Users->perPage()) }}</td>  
+                <td class="{{ request()->session()->get('Role') === 'ADMIN' ? 'show-record-x-edit' : '' }}">{{ $User->email }}</td> 
                 <td>{{ $User->name }}</td>
                 <td>{{ $User->role }}</td>
-                <td>{{ $User->records }}</td>
+                @if (request()->session()->get('Role') === 'ADMIN')
+                <td class="Hide">{{ $User->password }}</td>
+                <td class="Hide">{{ $User->id }}</td>
+                @endif
+                <td>
+                    <div class="car-info">
+                        <div class="info-inner">
+                            <div class="inner">
+                                <h1>: {{ $NumberOfAllRecords_CURRENT_USER }}</h1> 
+                            </div>
+                            <div class="inner">
+                                <div class="inner-x">
+                                    <span>Maintenance</span>
+                                    <span>{{ $NumberOfMaintenance_CURRENT_USER }}</span> 
+                                </div>
+                                <div class="inner-x">
+                                    <span>Repairs</span>
+                                    <span>{{ $NumberOfRepairs_CURRENT_USER }}</span>
+                                </div>
+                            </div>
+                            <div class="inner">
+                                <div class="inner-x">
+                                    <span>Deposits</span>
+                                    <span>{{ $NumberOfDeposits_CURRENT_USER }}</span>
+                                </div>
+                                <div class="inner-x">
+                                    <span>Refueling</span>
+                                    <span>{{ $NumberOfRefueling_CURRENT_USER }}</span>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                    {{ $User->records }}</td>
                 <td>{{ $User->status }}</td>
             </tr> 
             @endforeach 

@@ -21,6 +21,8 @@ let EditDepositsButton = document.querySelector('.EditDeposits');
 let DeleteDepositsButton = document.querySelector('.DeleteDeposits');
 let EditDepositsForm = document.querySelector('.EditDepositsForm');
 
+let Error = document.querySelector('.error');
+
 ShowRecord_X_Edit.forEach(VehicleNumber => {
     VehicleNumber.addEventListener('click', () => {
         MonthlyDepositsModal_Edit.style.display = 'block';
@@ -40,8 +42,7 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         });
  
         DeleteDepositsButton.addEventListener('click', () => {
-            EditDepositsForm.setAttribute('action', '/Delete/Deposits/' + DepositsId_X.value);
-            EditDepositsForm.submit();
+            window.location = '/Delete/Deposits/' + DepositsId_X.value;  
         });
     });
     
@@ -64,8 +65,12 @@ AddMonthlyDepositsButton.forEach(Button => {
         ModalAddMonthlyDeposits.style.display = 'block';
          
         AddDepositsButton_X.addEventListener('click', () => {  
-            AddDepositsForm.setAttribute('action', '/Add/Deposits/' + VehicleNumber_DEPOSITS.value);
-            AddDepositsForm.submit();
+            if (AddDepositsForm.children[1].lastElementChild.value === '') {
+                Error.textContent = 'Please fill out vehicle number for new Deposits';
+            } else {
+                AddDepositsForm.setAttribute('action', '/Add/Deposits/' + VehicleNumber_DEPOSITS.value);
+                AddDepositsForm.submit();
+            }   
         });
     }); 
 

@@ -26,6 +26,14 @@
             }
         }
 
+        .error {
+            background: $Color-2;
+            border-radius: 0.2em;
+            color: #fff;
+            padding: 0.3em;
+            width: fit-content;
+        }
+
         form {
             display: flex;
             flex-wrap: wrap;
@@ -80,6 +88,8 @@
                 color: #fff;
                 display: flex;
                 font-family: system-ui;
+                font-style: italic;
+                font-size: 1.5em;
             }
         }
     }

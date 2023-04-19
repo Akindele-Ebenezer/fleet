@@ -26,6 +26,8 @@ let EditMaintenanceButton = document.querySelector('.EditMaintenance');
 let DeleteMaintenanceButton = document.querySelector('.DeleteMaintenance');
 let EditMaintenanceForm = document.querySelector('.EditMaintenanceForm');
 
+let Error = document.querySelector('.error');
+
 ShowRecord_X_Edit.forEach(VehicleNumber => {
     VehicleNumber.addEventListener('click', () => {
         MaintenanceModal_Edit.style.display = 'block';
@@ -47,8 +49,7 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         });
  
         DeleteMaintenanceButton.addEventListener('click', () => {
-            EditMaintenanceForm.setAttribute('action', '/Delete/Maintenance/' + MaintenanceId_X.value);
-            EditMaintenanceForm.submit();
+            window.location = '/Delete/Maintenance/' + MaintenanceId_X.value; 
         });
     });
     
@@ -70,9 +71,13 @@ AddMaintenanceButton.forEach(Button => {
     Button.addEventListener('click', () => {
         ModalAddMaintenance.style.display = 'block';
          
-        AddMaintenanceButton_X.addEventListener('click', () => {  
-            AddMaintenanceForm.setAttribute('action', '/Add/Maintenance/' + VehicleNumber_MAINTENANCE.value);
-            AddMaintenanceForm.submit();
+        AddMaintenanceButton_X.addEventListener('click', () => {   
+            if (AddMaintenanceForm.children[1].lastElementChild.value === '') {
+                Error.textContent = 'Please fill out vehicle number for new Maintenance';
+            } else {
+                AddMaintenanceForm.setAttribute('action', '/Add/Maintenance/' + VehicleNumber_MAINTENANCE.value); 
+                AddMaintenanceForm.submit(); 
+            }  
         });
     }); 
 

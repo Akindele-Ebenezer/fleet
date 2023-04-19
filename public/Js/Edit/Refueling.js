@@ -30,6 +30,8 @@ let EditRefuelingButton = document.querySelector('.EditRefueling');
 let DeleteRefuelingButton = document.querySelector('.DeleteRefueling');
 let EditRefuelingForm = document.querySelector('.EditRefuelingForm');
 
+let Error = document.querySelector('.error');
+
 
 ShowRecord_X_Edit.forEach(VehicleNumber => {
     VehicleNumber.addEventListener('click', () => {
@@ -54,8 +56,7 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         });
  
         DeleteRefuelingButton.addEventListener('click', () => {
-            EditRefuelingForm.setAttribute('action', '/Delete/Refueling/' + RefuelingId_X.value);
-            EditRefuelingForm.submit();
+            window.location = '/Delete/Refueling/' + RefuelingId_X.value;   
         });
     });
     
@@ -77,8 +78,12 @@ AddRefuelingButton.forEach(Button => {
         ModalAddRefueling.style.display = 'block';
          
         AddRefuelingButton_X.addEventListener('click', () => {  
-            AddRefuelingForm.setAttribute('action', '/Add/Refueling/' + VehicleNumber_REFUELING.value);
-            AddRefuelingForm.submit();
+            if (AddRefuelingForm.children[1].lastElementChild.value === '') {
+                Error.textContent = 'Please fill out vehicle number for new Refueling';
+            } else {
+                AddRefuelingForm.setAttribute('action', '/Add/Refueling/' + VehicleNumber_REFUELING.value);
+                AddRefuelingForm.submit();
+            }    
         });
     }); 
 
