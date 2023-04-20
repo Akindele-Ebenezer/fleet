@@ -7,8 +7,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>
+        Fleet Management |
+        {{ Route::is('Cars') ? 'FLEET DB' : '' }}
+        {{ Route::is('CarOwners') ? 'CAR OWNERS' : '' }}
+        {{ Route::is('VehicleReport') ? 'REPORT' : '' }}
 
+        {{ Route::is('Maintenance') ? 'MAINTENANCE' : '' }}
+        {{ Route::is('Repairs') ? 'REPAIRS' : '' }}
+        {{ Route::is('Refueling') ? 'REFUELING' : '' }}
+        {{ Route::is('Deposits') ? 'DEPOSITS' : '' }}
+
+        {{ Route::is('MyRecords') ? 'REGISTERATION' : '' }}
+        {{ Route::is('EditMaintenance') ? 'Edit / MAINTENANCE' : '' }}
+        {{ Route::is('EditRepairs') ? 'Edit / REPAIRS' : '' }}
+        {{ Route::is('EditRefueling') ? 'Edit / REFUELING' : '' }}
+        {{ Route::is('EditDeposits') ? 'Edit / DEPOSITS' : '' }}
+
+        {{ Route::is('Users') ? 'USERS' : '' }}
+    </title>
+
+    <link rel="shortcut icon" href="{{ asset('Images/car.jpg') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@900&display=swap" rel="stylesheet"> 
@@ -126,31 +145,31 @@
                         <a href='{{ route('MyRecords') }}'>
                             <li class="{{ Route::is('MyRecords') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
-                                Car Registration ({{ $NumberOfCars_MyRecords }})
+                                Car Registration ({{ number_format($NumberOfCars_MyRecords) }})
                             </li>
                         </a>
                         <a href='{{ route('EditRepairs') }}'>
                             <li class="{{ Route::is('EditRepairs') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M705 928 447 668q-23 8-46 13t-47 5q-97.083 0-165.042-67.667Q121 550.667 121 454q0-31 8.158-60.388Q137.316 364.223 152 338l145 145 92-86-149-149q25.915-15.158 54.957-23.579Q324 216 354 216q99.167 0 168.583 69.417Q592 354.833 592 454q0 24-5 47t-13 46l259 258q11 10.957 11 26.478Q844 847 833 858l-76 70q-10.696 11-25.848 11T705 928Zm28-57 40-40-273-273q16-21 24-49.5t8-54.5q0-75-55.5-127T350 274l101 103q9 9 9 22t-9 22L319 545q-9 9-22 9t-22-9l-97-96q3 77 54.668 127T354 626q25 0 53-8t49-24l277 277ZM476 572Z"/></svg>                 
-                                Repairs ({{ $NumberOfCarRepairs_MyRecords }})
+                                Repairs ({{ number_format($NumberOfCarRepairs_MyRecords) }})
                             </li>
                         </a>
                         <a href='{{ route('EditMaintenance') }}'>
                             <li class="{{ Route::is('EditMaintenance') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"/></svg>           
-                                Maintenance  ({{ $NumberOfCarMaintenance_MyRecords }})
+                                Maintenance  ({{ number_format($NumberOfCarMaintenance_MyRecords) }})
                             </li>
                         </a>
                         <a href='{{ route('EditDeposits') }}'>
                             <li class="{{ Route::is('EditDeposits') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M451 936v-84q-57-10-93.5-43.5T305 724l56-23q17 48 49 71.5t77 23.5q48 0 79-24t31-66q0-44-27.5-68T466 589q-72-23-107.5-61T323 433q0-55 35.5-92t92.5-42v-83h60v83q45 5 77.5 29.5T638 391l-56 24q-14-32-37.5-46.5T483 354q-46 0-73 21t-27 57q0 38 30 61.5T524 542q68 21 100.5 60.5T657 702q0 63-37 101.5T511 853v83h-60Z"/></svg>            
-                                Monthly Deposits ({{ $NumberOfCarDeposits_MyRecords }})
+                                Monthly Deposits ({{ number_format($NumberOfCarDeposits_MyRecords) }})
                             </li>
                         </a>
                         <a href='{{ route('EditRefueling') }}'>
                             <li class="{{ Route::is('EditRefueling') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"/></svg>                  
-                                Refueling ({{ $NumberOfCarRefueling_MyRecords }})
+                                Refueling ({{ number_format($NumberOfCarRefueling_MyRecords) }})
                             </li>
                         </a>
                     </div>
@@ -172,25 +191,25 @@
                     <a href='{{ route('Repairs') }}'>
                         <li class="{{ Route::is('Repairs') ? 'active' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M705 928 447 668q-23 8-46 13t-47 5q-97.083 0-165.042-67.667Q121 550.667 121 454q0-31 8.158-60.388Q137.316 364.223 152 338l145 145 92-86-149-149q25.915-15.158 54.957-23.579Q324 216 354 216q99.167 0 168.583 69.417Q592 354.833 592 454q0 24-5 47t-13 46l259 258q11 10.957 11 26.478Q844 847 833 858l-76 70q-10.696 11-25.848 11T705 928Zm28-57 40-40-273-273q16-21 24-49.5t8-54.5q0-75-55.5-127T350 274l101 103q9 9 9 22t-9 22L319 545q-9 9-22 9t-22-9l-97-96q3 77 54.668 127T354 626q25 0 53-8t49-24l277 277ZM476 572Z"/></svg>                 
-                            Repairs ({{ $NumberOfCarRepairs}})
+                            Repairs ({{ number_format($NumberOfCarRepairs) }})
                         </li>
                     </a>
                     <a href='{{ route('Maintenance') }}'>
                         <li class="{{ Route::is('Maintenance') ? 'active' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"/></svg>           
-                            Maintenance  ({{ $NumberOfCarMaintenance}})
+                            Maintenance  ({{ number_format($NumberOfCarMaintenance) }})
                         </li>
                     </a>
                     <a href='{{ route('Deposits') }}'>
                         <li class="{{ Route::is('Deposits') ? 'active' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M451 936v-84q-57-10-93.5-43.5T305 724l56-23q17 48 49 71.5t77 23.5q48 0 79-24t31-66q0-44-27.5-68T466 589q-72-23-107.5-61T323 433q0-55 35.5-92t92.5-42v-83h60v83q45 5 77.5 29.5T638 391l-56 24q-14-32-37.5-46.5T483 354q-46 0-73 21t-27 57q0 38 30 61.5T524 542q68 21 100.5 60.5T657 702q0 63-37 101.5T511 853v83h-60Z"/></svg>            
-                            Monthly Deposits ({{ $NumberOfCarDeposits}})
+                            Monthly Deposits ({{ number_format($NumberOfCarDeposits) }})
                         </li>
                     </a>
                     <a href='{{ route('Refueling') }}'>
                         <li class="{{ Route::is('Refueling') ? 'active' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"/></svg>                  
-                            Refueling ({{ $NumberOfCarRefueling}})
+                            Refueling ({{ number_format($NumberOfCarRefueling) }})
                         </li>
                     </a>
                 </div>
@@ -209,11 +228,13 @@
                 </a>
             </ul>
             <div class="nav-footer">
-                <div class="nav-footer-inner">
-                    <img src="{{ asset('Images/profile-pic.png')  }}" alt="">
+                <div class="inner">
+                    <img src="{{ asset('Images/profile-pic.jpg')  }}" alt="">
                 </div>
-                <div class="nav-footer-inner">
-
+                <div class="inner">
+                    <span>{{ request()->session()->get('Name')  }}</span>
+                    <br>
+                    <span>{{ request()->session()->get('Role')  }}</span>
                 </div>
             </div>
         </div>
@@ -231,7 +252,7 @@
                         {{ Route::is('Refueling') ? 'REFUELING' : '' }}
                         {{ Route::is('Deposits') ? 'DEPOSITS' : '' }}
 
-                        {{ Route::is('MyRecords') ? 'Edit / CARS' : '' }}
+                        {{ Route::is('MyRecords') ? 'REGISTERATION' : '' }}
                         {{ Route::is('EditMaintenance') ? 'Edit / MAINTENANCE' : '' }}
                         {{ Route::is('EditRepairs') ? 'Edit / REPAIRS' : '' }}
                         {{ Route::is('EditRefueling') ? 'Edit / REFUELING' : '' }}
@@ -245,19 +266,19 @@
                     <div class="inner-x">
                         <p>
                             <img src="{{ asset('Images/car.png') }}" alt="">
-                            Cars ({{ $NumberOfCars }})
+                            Cars ({{ number_format($NumberOfCars) }})
                         </p>
                         <p>
                             <img src="{{ asset('Images/active.png') }}" alt="">
-                            Active ({{ $NumberOfCars_ACTIVE }})
+                            Active ({{ number_format($NumberOfCars_ACTIVE) }})
                         </p>
                         <p>
                             <img src="{{ asset('Images/inactive.png') }}" alt="">
-                            Inactive ({{ $NumberOfCars_INACTIVE }})
+                            Inactive ({{ number_format($NumberOfCars_INACTIVE) }})
                         </p>
                         <p>
                             <img src="{{ asset('Images/driver.png') }}" alt="">
-                            Drivers ({{ $NumberOfDrivers }})
+                            Drivers ({{ number_format($NumberOfDrivers) }})
                         </p>
                     </div>
                 </div>
@@ -283,10 +304,10 @@
                                 </th>
                             </tr>
                             <tr>
-                                <td>= {{ $NumberOfCarRepairs }}</td>
-                                <td>= {{ $NumberOfCarRefueling }}</td>
-                                <td>= {{ $NumberOfCarDeposits }}</td>
-                                <td>= {{ $NumberOfCarMaintenance }}</td>
+                                <td>= {{ number_format($NumberOfCarRepairs) }}</td>
+                                <td>= {{ number_format($NumberOfCarRefueling) }}</td>
+                                <td>= {{ number_format($NumberOfCarDeposits) }}</td>
+                                <td>= {{ number_format($NumberOfCarMaintenance) }}</td>
                             </tr>
                         </table>
                         <button class="deposits-route-edit">Deposit</button>
@@ -465,6 +486,7 @@
                                 "Role",
                                 "Records",
                                 "Status", 
+                                "CarsRegistered", 
                             ];
                         }
 

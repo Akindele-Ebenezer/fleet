@@ -565,8 +565,21 @@ svg {
   justify-content: space-between;
 }
 .report-inner .nav-footer {
+  align-items: center;
   bottom: 0;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
   position: absolute;
+}
+.report-inner .nav-footer .inner img {
+  border-radius: 0.3em;
+  margin-right: 2em;
+  width: 2em;
+}
+.report-inner .nav-footer .inner span {
+  color: #fff;
 }
 .report-inner .sub-nav-wrapper .my-records {
   cursor: pointer;

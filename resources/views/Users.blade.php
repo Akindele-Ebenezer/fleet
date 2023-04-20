@@ -10,6 +10,7 @@
                 <th onclick="sortTable(3)">Role</th>
                 <th onclick="sortTable(4)">Records</th>
                 <th onclick="sortTable(5)">Status</th>
+                <th onclick="sortTable(6)">Cars Registered</th>
             </tr>
             @foreach ($Users as $User)
             @php
@@ -18,6 +19,7 @@
                 $NumberOfRepairs_CURRENT_USER = \App\Models\Repair::where('UserId', $Id_CURRENT_USER)->count();
                 $NumberOfRefueling_CURRENT_USER = \App\Models\Refueling::where('UserId', $Id_CURRENT_USER)->count();
                 $NumberOfDeposits_CURRENT_USER = \App\Models\Deposits::where('UserId', $Id_CURRENT_USER)->count();
+                $NumberOfCarsRegistered_CURRENT_USER = \App\Models\Car::where('UserId', $Id_CURRENT_USER)->count();
  
                 $NumberOfAllRecords_CURRENT_USER = $NumberOfMaintenance_CURRENT_USER + $NumberOfRepairs_CURRENT_USER + $NumberOfRefueling_CURRENT_USER + $NumberOfDeposits_CURRENT_USER;
             @endphp
@@ -55,11 +57,12 @@
                                     <span>Refueling</span>
                                     <span>{{ $NumberOfRefueling_CURRENT_USER }}</span>
                                 </div>
-                            </div>
+                            </div> 
                         </div>  
                     </div>
                     {{ $User->records }}</td>
                 <td>{{ $User->status }}</td>
+                <td>{{ $NumberOfCarsRegistered_CURRENT_USER }}</td>
             </tr> 
             @endforeach 
             <div class="table-head filter"> 
@@ -69,6 +72,7 @@
                 <span><input type="text" id="SearchInput3" placeholder="Filter By Role" onkeyup="FilterRole()"></span> 
                 <span><input type="text" id="SearchInput4" placeholder="Filter By Records" onkeyup="FilterRecords()"></span> 
                 <span><input type="text" id="SearchInput5" placeholder="Filter By Status" onkeyup="FilterStatus()"></span>  
+                <span><input type="text" id="SearchInput6" placeholder="Filter By Cars Registered" onkeyup="FilterCarsRegistered()"></span>  
             </div>
         </table>
         {{ $Users->onEachSide(5)->links() }}

@@ -181,8 +181,25 @@
         }
 
         .nav-footer {
+            align-items: center;
             bottom: 0;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: .5em;
             position: absolute;
+
+            .inner {
+                img {
+                    border-radius: 0.3em;
+                    margin-right: 2em;
+                    width: 2em;
+                }
+
+                span {
+                    color: #fff;
+                }
+            }
         }
         
         .sub-nav-wrapper {
