@@ -8,6 +8,7 @@ use App\Http\Controllers\DepositsController;
 use App\Http\Controllers\RefuelingController; 
 use App\Http\Controllers\UserController; 
 use App\Http\Controllers\AuthController; 
+use App\Http\Controllers\FleetReportController; 
 
 Route::get('/', function () {
     return view('Login');
@@ -55,10 +56,4 @@ Route::get('/Add/User/{User}', [UserController::class, 'store'])->name('store_Us
 Route::get('/Update/User/{User}', [UserController::class, 'update'])->name('UpdateUser');
 Route::get('/Delete/User/{User}', [UserController::class, 'destroy'])->name('DeleteUser');
 
-Route::get('/pdf', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) { 
-    $fpdf->AddPage();
-    $fpdf->SetFont('Courier', 'B', 18);
-    $fpdf->Cell(50, 25, 'Hello World!');
-    $fpdf->Output();
-    exit;
-});
+Route::get('/CarReport', [FleetReportController::class, 'car_report'])->name('CarReport');
