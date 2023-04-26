@@ -54,4 +54,4 @@ Route::get('/Add/User/{User}', [UserController::class, 'store'])->name('store_Us
 Route::get('/Update/User/{User}', [UserController::class, 'update'])->name('UpdateUser');
 Route::get('/Delete/User/{User}', [UserController::class, 'destroy'])->name('DeleteUser');
 
-Route::get('/CarReport', [FleetReportController::class, 'car_report'])->name('CarReport');
+Route::get('/CarReport/{CarReportId}', [FleetReportController::class, 'car_report'])->name('CarReport');

@@ -117,13 +117,22 @@ ActionButtons.forEach(ActionButton => {
         
         DeleteCarButton.addEventListener('click', () => {
             window.location = '/Delete/Car/' + CarId_X.value;
-        });
+        }); 
     }); 
 
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
             ModalVehicleData_Edit.style.display = 'none';
         });
+        
+        // let PrintButton = document.querySelectorAll('.Print');
+        
+        // PrintButton.forEach(Button => {
+        //     Button.addEventListener('click', () => {
+        //         // window.location = '/CarReport/' + RegistrationNo_X_DATA;
+        //         window.open('/CarReport/' + RegistrationNo_X_DATA, '_blank');
+        //     });
+        // });
     });
 });
 

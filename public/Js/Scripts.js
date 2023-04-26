@@ -98,6 +98,14 @@ ActionButtons.forEach(ActionButton => {
         StopDate_X.textContent = StopDate_X_DATA;
         Driver_X.textContent = Driver_X_DATA; 
         Status_X.innerHTML = Status_X_DATA; 
+
+        let PrintButton = document.querySelectorAll('.Print');
+        
+        PrintButton.forEach(Button => {
+            Button.addEventListener('click', () => { 
+                window.open('/CarReport/' + RegistrationNo_X.textContent, '_blank');
+            });
+        });
     }); 
 
     CancelModalIcons.forEach(CancelModalIcon => {
