@@ -220,4 +220,12 @@ class FleetReportController extends Controller
         $fpdf->Output();
         exit;
     }
+ // continue here
+    public function repair_report($RepairReportId, Fpdf $fpdf) {   
+        $fpdf->SetTitle('Vehicle Report - ' . $RepairReportId . ' | Fleet Management System');
+
+        $fpdf->AddPage();
+        $fpdf->Output();
+        exit; 
+    }
 }

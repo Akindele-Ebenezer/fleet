@@ -54,4 +54,8 @@ Route::get('/Add/User/{User}', [UserController::class, 'store'])->name('store_Us
 Route::get('/Update/User/{User}', [UserController::class, 'update'])->name('UpdateUser');
 Route::get('/Delete/User/{User}', [UserController::class, 'destroy'])->name('DeleteUser');
 
-Route::get('/CarReport/{CarReportId}', [FleetReportController::class, 'car_report'])->name('CarReport');
+Route::get('/Cars/Report/{CarReportId}', [FleetReportController::class, 'car_report'])->name('CarReport');
+Route::get('/Cars/Repairs/Report/{RepairReportId}', [FleetReportController::class, 'repair_report'])->name('RepairReport');
+Route::get('/Cars/Maintenance/Report/MaintenanceReportId}', [FleetReportController::class, 'maintenance_report'])->name('MaintenanceReport');
+Route::get('/Cars/Deposits/Report/{DepositReportId}', [FleetReportController::class, 'deposits_report'])->name('DepositsReport');
+Route::get('/Cars/Refueling/Report/{RefuelingReportId}', [FleetReportController::class, 'refueling_report'])->name('RefuelingReport');

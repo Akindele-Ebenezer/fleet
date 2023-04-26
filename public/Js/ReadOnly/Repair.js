@@ -41,4 +41,10 @@ ShowRecord_X.forEach(VehicleNumber => {
             RepairModal.style.display = 'none';
         });
     });
+
+    let PrintRepairButton = document.querySelector('.PrintRepair');
+
+    PrintRepairButton.addEventListener('click', () => {
+        window.open('/Cars/Repairs/Report/' + VehicleNumber.textContent.textContent, '_blank');
+    })
 });

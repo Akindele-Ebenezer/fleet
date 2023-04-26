@@ -103,7 +103,7 @@ ActionButtons.forEach(ActionButton => {
         
         PrintButton.forEach(Button => {
             Button.addEventListener('click', () => { 
-                window.open('/CarReport/' + RegistrationNo_X.textContent, '_blank');
+                window.open('/Cars/Report/' + RegistrationNo_X.textContent, '_blank');
             });
         });
     }); 
