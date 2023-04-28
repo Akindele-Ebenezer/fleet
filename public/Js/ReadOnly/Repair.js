@@ -45,6 +45,6 @@ ShowRecord_X.forEach(VehicleNumber => {
     let PrintRepairButton = document.querySelector('.PrintRepair');
 
     PrintRepairButton.addEventListener('click', () => {
-        window.open('/Cars/Repairs/Report/' + VehicleNumber.textContent.textContent, '_blank');
-    })
+        window.open('/Cars/Repairs/Report/' + VehicleNumber_X.value + '?Date=' + Date_X.value + '&Time=' + Time_X.value + '&RepairAction=' + RepairAction_X.value + '&ReleaseDate=' + ReleaseDate_X.value + '&ReleaseTime=' + ReleaseTime_X.value + '&Cost=' + Cost_X.value + '&InvoiceNo=' + InvoiceNumber_X.value + '&Week=' + Week_X.value, '_blank');
+    });
 });

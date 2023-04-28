@@ -74,7 +74,7 @@
                 </div>
                 <input class="Week_X" type="text" placeholder="Weeks..">
             </div> 
-            <button>+ Print Maintenance</button>
         </form>
+        <button class="PrintMaintenance">+ Print Maintenance</button>
     </div>
 </div>

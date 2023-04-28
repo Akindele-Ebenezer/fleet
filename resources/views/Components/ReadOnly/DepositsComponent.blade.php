@@ -60,7 +60,7 @@
                 </div>
                 <input class="Month_X" type="text" placeholder="Month	..">
             </div> 
-            <button>+ Print Monthly Deposits</button>
         </form>
+        <button class="PrintDeposit">+ Print Monthly Deposits</button>
     </div>
 </div>

@@ -156,6 +156,7 @@ button {
 
 .loader {
   align-items: center;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   display: none;
   height: 100vh;
@@ -566,6 +567,7 @@ svg {
 }
 .report-inner .nav-footer {
   align-items: center;
+  background: #111;
   bottom: 0;
   color: #fff;
   display: flex;

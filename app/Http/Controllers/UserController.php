@@ -19,6 +19,18 @@ class UserController extends Controller
     {
         $Config = self::config();
 
+        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
+            $FilterValue = $_GET['FilterValue']; 
+            $Users = User::where('name', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('email', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('role', 'LIKE', '%' . $FilterValue . '%') 
+                        ->paginate(7);
+ 
+                        $Users->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Users', $Config)->with('Users', $Users);
+        } 
+
         return view('Users', $Config);
     }
 

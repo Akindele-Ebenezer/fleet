@@ -21,7 +21,26 @@ class RefuelingController extends Controller
     public function index()
     {
         $Config = self::config();
-        
+
+        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
+            $FilterValue = $_GET['FilterValue']; 
+            $Refuelings = Refueling::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('KMETER', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('TERNO', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Quantity', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('ReceiptNumber', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('KM', 'LIKE', '%' . $FilterValue . '%') 
+                        ->paginate(7);
+  
+                        $Refuelings->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Refueling', $Config)->with('Refuelings', $Refuelings);
+        } 
         return view('Refueling', $Config);
     }
 
@@ -29,6 +48,26 @@ class RefuelingController extends Controller
     {
         $Config = self::config();
 
+        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
+            $FilterValue = $_GET['FilterValue']; 
+            $Refueling__MyRecords = Refueling::where('UserId', self::USER_ID())
+                                                ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                                                ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
+                                                ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                                                ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
+                                                ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
+                                                ->orWhere('KMETER', 'LIKE', '%' . $FilterValue . '%')
+                                                ->orWhere('TERNO', 'LIKE', '%' . $FilterValue . '%')
+                                                ->orWhere('Quantity', 'LIKE', '%' . $FilterValue . '%')
+                                                ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%') 
+                                                ->orWhere('ReceiptNumber', 'LIKE', '%' . $FilterValue . '%') 
+                                                ->orWhere('KM', 'LIKE', '%' . $FilterValue . '%') 
+                                                ->paginate(7);
+  
+            $Refueling__MyRecords->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Edit.EditRefueling', $Config)->with('Refueling__MyRecords', $Refueling__MyRecords);
+        } 
         return view('Edit.EditRefueling', $Config);
     }
 

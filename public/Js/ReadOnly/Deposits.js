@@ -34,4 +34,10 @@ ShowRecord_X.forEach(VehicleNumber => {
             MonthlyDepositsModal.style.display = 'none';
         });
     });
+    
+    let PrintDepositButton = document.querySelector('.PrintDeposit');
+
+    PrintDepositButton.addEventListener('click', () => {
+        window.open('/Cars/Deposits/Report/' + VehicleNumber_X.value + '?Date=' + Date_X.value + '&CardNumber=' + CardNumber.value + '&Amount=' + Amount_X.value + '&Year=' + Year_X.value + '&Week=' + Week_X.value + '&Month=' + Month_X.value, '_blank');
+    });
 });

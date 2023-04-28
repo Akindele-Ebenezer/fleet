@@ -47,4 +47,10 @@ ShowRecord_X.forEach(VehicleNumber => {
             RefuelingModal.style.display = 'none';
         });
     });
+    
+    let PrintRefuelingButton = document.querySelector('.PrintRefueling');
+
+    PrintRefuelingButton.addEventListener('click', () => {
+        window.open('/Cars/Refueling/Report/' + VehicleNumber_X.value + '?Date=' + Date_X.value + '&Time=' + Time_X.value + '&KMETER=' + KMETER_X.value + '&TerminalNo=' + TerminalNo_X.value + '&CardNumber=' + CardNumber_X.value + '&Quantity=' + Quantity_X.value + '&ReceiptNo=' + ReceiptNo_X.value + '&KM=' + KM_X.value + '&Amount=' + Amount_X.value + '&KMLITER=' + KMLITER_X.value, '_blank');
+    });
 });

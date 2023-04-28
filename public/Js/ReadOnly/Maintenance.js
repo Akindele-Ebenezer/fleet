@@ -25,7 +25,6 @@ ShowRecord_X.forEach(VehicleNumber => {
         MaintenanceModal.style.display = 'block';
 
         VehicleNumber_X.value = VehicleNumber.textContent;
-        console.log(VehicleNumber_X)
         Date_X.value = VehicleNumber.nextElementSibling.textContent;
         Time_X.value = VehicleNumber.nextElementSibling.nextElementSibling.textContent;
         MaintenanceAction_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
@@ -40,5 +39,11 @@ ShowRecord_X.forEach(VehicleNumber => {
         CancelModalIcon.addEventListener('click', () => {
             MaintenanceModal.style.display = 'none';
         });
+    });
+    
+    let PrintMaintenanceButton = document.querySelector('.PrintMaintenance');
+
+    PrintMaintenanceButton.addEventListener('click', () => {
+        window.open('/Cars/Maintenance/Report/' + VehicleNumber_X.value + '?Date=' + Date_X.value + '&Time=' + Time_X.value + '&MaintenanceAction=' + MaintenanceAction_X.value + '&ReleaseDate=' + ReleaseDate_X.value + '&ReleaseTime=' + ReleaseTime_X.value + '&Cost=' + Cost_X.value + '&InvoiceNo=' + InvoiceNumber_X.value + '&Week=' + Week_X.value, '_blank');
     });
 });

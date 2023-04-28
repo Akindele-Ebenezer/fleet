@@ -21,6 +21,22 @@ class DepositsController extends Controller
     {
         $Config = self::config();
 
+        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
+            $FilterValue = $_GET['FilterValue']; 
+            $Deposits = Deposits::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Year', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Month', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Comments', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                        ->paginate(7);
+ 
+                        $Deposits->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Deposits', $Config)->with('Deposits', $Deposits);
+        } 
         return view('Deposits', $Config);
     }
 
@@ -28,6 +44,23 @@ class DepositsController extends Controller
     {
         $Config = self::config();
 
+        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
+            $FilterValue = $_GET['FilterValue']; 
+            $Deposits__MyRecords = Deposits::where('UserId', self::USER_ID())
+                                            ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                                            ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                                            ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
+                                            ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
+                                            ->orWhere('Year', 'LIKE', '%' . $FilterValue . '%')
+                                            ->orWhere('Month', 'LIKE', '%' . $FilterValue . '%')
+                                            ->orWhere('Comments', 'LIKE', '%' . $FilterValue . '%')
+                                            ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                                            ->paginate(7);
+
+            $Deposits__MyRecords->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Edit.EditDeposits', $Config)->with('Deposits__MyRecords', $Deposits__MyRecords);
+        } 
         return view('Edit.EditDeposits', $Config);
     }
 

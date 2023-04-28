@@ -88,7 +88,7 @@
                 </div>
                 <input class="KMLITER_X" type="text" placeholder="KMLITER..">
             </div> 
-            <button>+ Print Refueling</button>
         </form>
+        <button class="PrintRefueling">+ Print Refueling</button>
     </div>
 </div>

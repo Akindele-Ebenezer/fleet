@@ -21,7 +21,24 @@ class MaintenanceController extends Controller
     public function index()
     {
         $Config = self::config();
-        
+  
+        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
+            $FilterValue = $_GET['FilterValue']; 
+            $Maintenance = Maintenance::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('MaintenanceAction', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('ReleaseDate', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('ReleaseTime', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('InvoiceNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                        ->paginate(7);
+ 
+                        $Maintenance->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Maintenance', $Config)->with('Maintenance', $Maintenance);
+        } 
         return view('Maintenance', $Config);
     }
 
@@ -29,6 +46,24 @@ class MaintenanceController extends Controller
     {
         $Config = self::config();
 
+        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
+            $FilterValue = $_GET['FilterValue']; 
+            $Maintenance__MyRecords = Maintenance::where('UserId', self::USER_ID())
+                                                    ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                                                    ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                                                    ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
+                                                    ->orWhere('MaintenanceAction', 'LIKE', '%' . $FilterValue . '%')
+                                                    ->orWhere('ReleaseDate', 'LIKE', '%' . $FilterValue . '%')
+                                                    ->orWhere('ReleaseTime', 'LIKE', '%' . $FilterValue . '%')
+                                                    ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
+                                                    ->orWhere('InvoiceNumber', 'LIKE', '%' . $FilterValue . '%')
+                                                    ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                                                    ->paginate(7);
+                            
+            $Maintenance__MyRecords->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Edit.EditMaintenance', $Config)->with('Maintenance__MyRecords', $Maintenance__MyRecords);
+        } 
         return view('Edit.EditMaintenance', $Config);
     }
 

@@ -9,8 +9,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 { 
     public function USER_ID() {
+        if (isset($_GET['ClearFilter']))  {
+            return redirect(strtok($_SERVER['REQUEST_URI'], '?'));
+        }
+
         return $Id = request()->session()->get('Id');
-        // return $Id = 'amina';
     }
 
     use AuthorizesRequests, ValidatesRequests;
