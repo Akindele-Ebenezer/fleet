@@ -9,11 +9,14 @@ use App\Http\Controllers\RefuelingController;
 use App\Http\Controllers\UserController; 
 use App\Http\Controllers\AuthController; 
 use App\Http\Controllers\FleetReportController; 
+use App\Http\Controllers\AnalyticsController; 
  
 Route::view('/', 'Login');
 
 Route::post('/Login', [AuthController::class, 'Auth'])->name('Auth');
 Route::get('/Logout', [AuthController::class, 'Logout'])->name('Logout');
+
+Route::get('/Analytics', [AnalyticsController::class, 'index'])->name('Analytics'); 
 
 Route::get('/MyRecords', [CarController::class, 'my_records_activity'])->name('MyRecords'); 
 Route::get('/Add/Car/{Car}', [CarController::class, 'store'])->name('store_MyRecords'); 

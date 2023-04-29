@@ -9,6 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>
         Fleet Management |
+        {{ Route::is('Analytics') ? 'ANALYTICS' : '' }}
+
         {{ Route::is('Cars') ? 'FLEET DB' : '' }}
         {{ Route::is('CarOwners') ? 'CAR OWNERS' : '' }}
         {{ Route::is('VehicleReport') ? 'REPORT' : '' }}
@@ -123,7 +125,7 @@
                         <input type="text" placeholder="Search.." name="FilterValue">
                     </form>
                 </li>
-                <a href='/'>
+                <a href='{{ route('Analytics') }}'>
                     <li>
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M120 936v-76l60-60v136h-60Zm165 0V700l60-60v296h-60Zm165 0V640l60 61v235h-60Zm165 0V701l60-60v295h-60Zm165 0V540l60-60v456h-60ZM120 700v-85l280-278 160 160 280-281v85L560 582 400 422 120 700Z"/></svg>                    
                         Analytics 
@@ -247,6 +249,8 @@
                 <div class="inner">
                     <h1>
                         {{-- <img src="{{ asset('Images/car1.png') }}" alt=""> --}}
+                        {{ Route::is('Analytics') ? 'Real Time Data' : '' }}
+
                         {{ Route::is('Cars') ? 'FLEET DB' : '' }}
                         {{ Route::is('CarOwners') ? 'CAR OWNERS' : '' }}
                         {{ Route::is('VehicleReport') ? 'REPORT' : '' }}
@@ -267,6 +271,7 @@
                     <br>
                     <span>Vehicle Management System</span>
                     </h1> 
+                    @unless (Route::is('Analytics'))
                     <div class="inner-x">
                         <p>
                             <img src="{{ asset('Images/car.png') }}" alt="">
@@ -285,7 +290,9 @@
                             Drivers ({{ number_format($NumberOfDrivers) }})
                         </p>
                     </div>
+                    @endunless
                 </div>
+                @unless (Route::is('Analytics'))
                 <div class="inner wrapper">
                     <div class="inner-x deposit">
                         <table>
@@ -509,10 +516,12 @@
                     <button class="action-x {{ Route::is('MyRecords') ? 'add-car' : '' }} {{ Route::is('EditRepairs') ? 'add-repair' : '' }} {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') ? 'cars-route' : '' }}"> {{ Route::is('MyRecords') ? '+ Add Vehicle' : '' }} {{ Route::is('EditRepairs') ? '+ Add Repairs' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') ? 'Explore Cars' : '' }}</button><button>Export to EXCEL</button>
                 </div>
             </div> 
+            @endunless
             @yield('Content') 
         </div>
     </div> 
     <script src="{{ asset('Js/SortTables.js') }}"></script>
+    @unless (Route::is('Analytics'))
     <script>
         // let NumberOfTableHeads = document.querySelectorAll('th').length;
 
@@ -537,6 +546,7 @@
             }
         @endfor
         </script>
+        @endunless
         <script src="{{ asset('Js/Scripts.js') }}"></script>
         @if (Route::is('MyRecords'))
             <script src="{{ asset('Js/Edit/MyRecords.js') }}"></script>

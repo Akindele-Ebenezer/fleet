@@ -1,0 +1,243 @@
+.analytics {
+    .inner-1 {
+        display: flex;
+        justify-content: space-between;
+        margin-block: 1.5em;
+        width: 98%;
+
+        .x {
+            align-items: center;
+            background: #111;
+            border-radius: 1em;
+            display: flex;
+            justify-content: space-around;
+            padding: .5em;
+            width: 20%;
+
+            .inner {
+                display: unset;
+                text-align: center;
+
+                img {
+                    width: 3em;
+                }
+
+                span {
+                    color: #fff;
+
+                    &:first-of-type {
+                        font-family: system-ui;
+                        font-size: 2em;
+                        font-weight: bold; 
+                    }
+                    &:last-of-type {
+                        color: #ddd;
+                    }
+                }
+            }
+        }
+    }
+
+    .inner-2 {
+        display: flex;
+        height: 26em;
+        justify-content: space-between;
+        margin-block: 1em;
+        width: 98%;
+
+        h2 {
+            color: #fff;
+            font-family: system-ui;
+            font-size: 1.55em;
+            padding-bottom: 1em;
+        }
+
+        .x {
+            background: #111;
+            border-radius: 1em;
+            padding: 1em;
+            width: 32%;
+
+            &:last-of-type {
+                background: unset;
+                border-radius: 1em;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: unset;
+
+                h2 {
+                    display: flex;
+                    justify-content: space-between;
+                    padding-top: 0.3em;
+
+                    svg {
+                        border: 1px solid;
+                        padding: 0.15em;
+                    }
+                }
+
+                .x-inner {
+                    border-radius: 1em;
+                    padding: 1em;
+                    padding-bottom: 2em;
+                }
+            }
+
+            .x-inner {
+                background: #111;
+                padding: 0.5em;
+
+                .inner-x {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .x {
+                    }
+
+                    .-x {
+                        color: #ddd;
+
+                        &:last-of-type {
+                            width: 50%;
+                        }
+
+                        big {
+                            color: #fff;
+                            font-size: 2em;
+                        }
+                        ul {
+                            li {
+                                align-items: center;
+                                border-bottom: 1px solid #222;
+                                display: flex;
+                                justify-content: space-between;
+
+                                .-xx {
+                                    align-items: center;
+                                    color: #fff;
+                                    display: flex;
+
+                                    &:last-of-type { 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .inner-3 {
+        display: flex;
+        height: 26em;
+        justify-content: space-between;
+        margin-block: 1.5em;
+        width: 98%;
+
+        .x {
+            background: #111;
+            border-radius: 1em;
+            padding: 1em;
+            width: 24%;
+
+            &:first-of-type {
+                width: 50%;
+            }
+
+            .x-inner {
+                h2 {
+                    color: #fff;
+                    font-family: system-ui;
+                    font-size: 1.55em;
+                    padding-bottom: 1em;
+
+                    small {
+                        color: #fff;
+                        font-family: system-ui;
+                    }
+                }
+            }
+
+            .inner-x {
+                align-items: unset;
+                display: flex;
+                justify-content: space-between;
+
+                .x1 {
+                    width: 40%;
+
+                    ul {
+                        li {
+                            align-items: center;
+                            display: flex;
+                            padding: 0.35em 1em;
+                            justify-content: space-between;
+                            margin-bottom: 0.5em;
+
+                            &.first {
+                                border: 1px solid #222;
+
+                                .x1-inner { 
+                                    span {
+                                        border-radius: .5em; 
+                                    }
+                                }
+                            } 
+
+                            .x1-inner { 
+                                align-items: center;
+                                color: #ddd;
+                                display: flex;
+
+                                img {
+                                    margin-right: 1em;
+                                    width: 2em;
+                                }
+
+                                span {
+                                    background: #222;
+                                    color: #ddd;
+                                    display: block;
+                                    margin-right: 1em;
+                                    padding: 0.5em;
+                                    width: 3em;
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+
+                    .x1-last {
+                        background: #222;
+                        border-radius: 0.5em;
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 0.5em;
+                        padding: 1em;
+
+                        .last-inner {
+                            color: #ddd;
+
+                            strong {
+                                color: #ddd;
+                                font-family: system-ui;
+                            }
+                        }
+                    }
+                }
+
+                .x2 {
+                    width: 100%;
+
+                    ul {
+                        li {
+                            border-bottom: 1px solid #222;
+                        }
+                    }
+                }
+            }
+        }
+    }
+} 
