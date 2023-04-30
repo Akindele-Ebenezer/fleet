@@ -49,7 +49,7 @@
             color: #fff;
             font-family: system-ui;
             font-size: 1.55em;
-            padding-bottom: 1em;
+            padding-bottom: .5em;
         }
 
         .x {
@@ -122,6 +122,24 @@
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+                
+                .info {
+                    display: flex;
+                    justify-content: space-around;
+                    margin-top: 0.5em;
+
+                    &-inner {
+                        border-top: 1px solid #222;
+                        color: #ddd;
+                        font-size: 1.5em;
+                        text-align: center;
+    
+                        span {
+                            color: #ddd;
+                            display: block;
                         }
                     }
                 }
@@ -318,122 +336,68 @@
         }
     }
 } 
-
-.progress-bar-radial {
+ 
+// CHART 
+.chart {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around; 
 
-    .radial-01 {
-        float: left;
-        position: relative;
-        width: 100px;
-        height: 100px;
-        text-align: center;
-        background-color: red;
-        padding-top: 40px;
-        border-radius: 100%;
-        margin-block: 2em;
-      } 
-      .radial-01 .radial-01-number {
-          position: absolute;
-          top: 0px;
-          left: 0px;
-          right: 0px;
-          bottom: 0px;
-          background-color: #222;
-          border-radius: 100%;
-          padding-top: 41px;
-          z-index: 20;
-      }
-      .radial-01 .radial-01-number {
-        font-size: 30px;
-        color: #ddd;
-        padding-top: 32px;
-      }
-      .radial-01 .radial-01-number .radial-01-syb {
-        font-size: 20px;
+    &-xx {
+        .xx-inner {
+            background-color: unset;
+            border-radius: unset;
+            color: #ddd !important;
+            margin-block: 2em;
+            padding-left: 1em;
 
-        sup {
-            color: #ddd;
-            font-size: .85em;
+            &.active {
+                border-left: 3px solid $Color-3;
+            }
+
+            &.aggregate {
+                border-left: 3px solid $Color-4;
+            }
+
+            &.inactive {
+                border-left: 3px solid $Color-2;
+            }
+
+            em {
+                color: #888;
+            }
         }
-      }
-      .radial-01 > span.radial-01-border-r:before {
-        content: " ";
-        display: block;
-        position: absolute;
-        top: -10px;
-        left: -10px;
-        right: -10px;
-        bottom: -10px;
-        background-color: #ccc;
-        border-radius: 100%;
-        z-index: 5;
-      }
-      .radial-01 > span.radial-01-border-r:after {
-        content: " ";
-        display: block;
-        position: absolute;
-        top: -10px;
-        left: -10px;
-        right: -10px;
-        bottom: -10px;
-        background-color: $Color-3;
-        border-radius: 100%;
-        z-index: 10;
-        clip: rect(0px,120px,120px,60px);
-      }
-      .radial-01 > span.radial-01-border-l:before {
-        content: " ";
-        display: block;
-        position: absolute;
-        top: -10px;
-        left: -10px;
-        right: -10px;
-        bottom: -10px;
-        background-color: #ccc;
-        border-radius: 100%;
-        z-index: 5;
-      }
-      .radial-three-quarters > span.radial-01-border-l:after {
-        content: " ";
-        display: block;
-        position: absolute;
-        top: -10px;
-        left: -10px;
-        right: -10px;
-        bottom: -10px;
-        background-color: $Color-3;
-        border-radius: 100%;
-        z-index: 10;
-        clip: rect(60px,120px,120px,0px);
-      }
-      .radial-01 > span.radial-02-border-l:after { 
-        background-color: $Color-2; 
-      }
-      .radial-01 > span.radial-02-border-r:before { 
-        background-color: $Color-2; 
-      }
-      .radial-01 > span.radial-02-border-r:after { 
-        background-color: $Color-2; 
-      } 
-    
-      .radial-inner {
+    }
+
+    &-inner {
+        border: 1px solid #222;
+        border-radius: 0.95em;
+        padding-block: 0.5em;
+
         h3 {
             color: #ddd;
             font-family: system-ui;
             font-size: 1em;
             text-align: center;
         }
+    }
 
-        .info {
-            color: #ddd;
-            font-size: 1.5em;
-            text-align: center;
-
-            span {
-                color: #ddd;
-            }
-        }
-      }
+    .block{
+        display:block;
+        position:relative;  
+        text-align:center;
+    }
+    #val, #val2, #val3{
+        display:block;
+        position:absolute;
+        z-index:2; 
+        left:31%; 
+        top:34%; 
+        font-size:3em;
+        color:#ddd;
+    }
+    #canvas, #canvas2, #canvas3{
+        height: 150px;
+        transform: scaleX(-1) rotate(-90deg);
+        width: 100%;
+    }
 }

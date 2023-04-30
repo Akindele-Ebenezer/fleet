@@ -188,7 +188,7 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: .5em;
-            position: absolute;
+            position: fixed;
 
             .inner {
                 img {
@@ -267,6 +267,7 @@
                                     &:first-of-type { 
                                         border-radius: 0.2em;
                                         color: #eee;
+                                        font-family: system-ui;
                                         margin-right: 0.5em;
                                         padding-inline: 0.3em;
                                     }

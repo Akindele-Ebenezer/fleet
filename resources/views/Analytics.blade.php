@@ -55,47 +55,230 @@
            <div class="x">
                 <div class="x-inner">
                     <h2>Total Vehicles</h2>
-                </div>
-           </div>
-           <div class="x">
-                <div class="x-inner">
-                    <h2>Vehicles Condition</h2>
-                    <div class="progress-bar-radial">
-                        <div class="radial-inner">
-                            <h3>Good</h3>
-                            <div class="radial-01 radial-three-quarters">
-                                <span class="radial-01-number">
-                                75
-                                    <span class="radial-01-syb">
-                                        <sup>%</sup>
-                                    </span>
-                                </span>
-                                <span class="radial-01-border-r"></span>
-                                <span class="radial-01-border-l"></span> 
+                    <div class="chart">  
+                        <div class="chart-inner">   
+                            <h3>Active</h3>                   
+                            <div class="block">
+                                <span id="val"></span>
+                                <canvas id="canvas" width="260" height="260">
+                                Your browser does not support the HTML5 canvas tag.
+                                </canvas>
                             </div>
-                            <div class="info">
+                            <p class="Hide">First Value <span id="val-1"></span></p>
+                            <p class="Hide">Second Value <span id="val-2"></span></p>
+                            <p class="Hide">Percentage of First Value and Second Value <span id="val-result"></span></p>
+                            <div class="info-inner">
                                 263 <br>
                                 <span>Vehicles</span>
                             </div>
                         </div>
-                        <div class="radial-inner">
-                            <h3>Inactive</h3>
-                            <div class="radial-01 radial-three-quarters">
-                                <span class="radial-01-number">
-                                75
-                                    <span class="radial-01-syb">
-                                        <sup>%</sup>
-                                    </span>
-                                </span>
-                                <span class="radial-01-border-r radial-02-border-r"></span>
-                                <span class="radial-01-border-l radial-02-border-l"></span> 
+                        <div class="chart-inner">    
+                            <h3>Inactive</h3>                     
+                            <div class="block">
+                                <span id="val2"></span>
+                                <canvas id="canvas2" width="260" height="260">
+                                Your browser does not support the HTML5 canvas tag.
+                                </canvas>
                             </div>
-                            <div class="info">
+                            <p class="Hide">First Value <span id="val2-1"></span></p>
+                            <p class="Hide">Second Value <span id="val2-2"></span></p>
+                            <p class="Hide">Percentage of First Value and Second Value <span id="val2-result"></span></p>
+                            <div class="info-inner">
+                                34 <br>
+                                <span>Vehicles</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function circle(s,f){
+
+                        document.getElementById('val-1').innerHTML = s;
+                        document.getElementById('val-2').innerHTML = f;
+
+                        var v = f/s*100;
+                        var s = 0/100 * 6.29;
+                        var f = v/100 * 6.29;
+                        var val = document.getElementById("val");
+                        var canvas = document.getElementById("canvas"); 
+                        var ctx = canvas.getContext("2d"); 
+
+                        //value alignment 
+                        if ( v < 10 ) {
+                        val.style.left = "40%";
+                        }
+                        if ( v == 100 ) {
+                        val.style.left = "26%";
+                        }
+                        val.innerHTML = Math.floor(v) + "%";
+
+                        document.getElementById('val-result').innerHTML = v + '%';
+
+                        //Outer gray circle 
+                        ctx.beginPath();
+                        ctx.arc(130, 130, 130, 0.0, 6.30);
+                        ctx.fillStyle = "#dddddd";
+                        // ctx.fill();
+                        ctx.closePath();
+
+
+                        //Main green progress bar
+                        ctx.beginPath();
+                        ctx.arc(130, 130, 110, s, f);
+                        ctx.lineWidth = 10;
+                        ctx.strokeStyle = "green";
+                        ctx.stroke();
+                        ctx.closePath();
+
+                        //Inner white circle 
+                        ctx.beginPath();
+                        ctx.arc(130, 130, 100, 0.0, 6.30);
+                        ctx.fillStyle = "#222";
+                        ctx.fill();
+                        ctx.closePath();
+
+                        }
+                        
+                    function circle2(s,f){
+
+                        document.getElementById('val-1').innerHTML = s;
+                        document.getElementById('val-2').innerHTML = f;
+
+                        var v = f/s*100;
+                        var s = 0/100 * 6.29;
+                        var f = v/100 * 6.29;
+                        var val2 = document.getElementById("val2");
+                        var canvas2 = document.getElementById("canvas2"); 
+                        var ctx2 = canvas2.getContext("2d"); 
+
+                        //value alignment 
+                        if ( v < 10 ) {
+                        val2.style.left = "40%";
+                        }
+                        if ( v == 100 ) {
+                        val2.style.left = "26%";
+                        }
+                        val2.innerHTML = Math.floor(v) + "%";
+
+                        document.getElementById('val2-result').innerHTML = v + '%';
+
+                        //Outer gray circle 
+                        ctx2.beginPath();
+                        ctx2.arc(130, 130, 130, 0.0, 6.30);
+                        ctx2.fillStyle = "#dddddd";
+                        // ctx2.fill();
+                        ctx2.closePath();
+
+
+                        //Main green progress bar
+                        ctx2.beginPath();
+                        ctx2.arc(130, 130, 110, s, f);
+                        ctx2.lineWidth = 10;
+                        ctx2.strokeStyle = "#DF2E38";
+                        ctx2.stroke();
+                        ctx2.closePath();
+
+                        //Inner white circle 
+                        ctx2.beginPath();
+                        ctx2.arc(130, 130, 100, 0.0, 6.30);
+                        ctx2.fillStyle = "#222";
+                        ctx2.fill();
+                        ctx2.closePath();
+
+                        }
+
+                        //Calling Circle function
+                        circle(100,90);
+                        circle2(100,25); 
+                    </script>
+           </div>
+           <div class="x">
+                <div class="x-inner">
+                    <h2>Vehicles Condition</h2> 
+                    <div class="chart">  
+                        <div class="chart-inner">   
+                            <h3>Active</h3>                   
+                            <div class="block">
+                                <span id="val3"></span>
+                                <canvas id="canvas3" width="260" height="260">
+                                Your browser does not support the HTML5 canvas tag.
+                                </canvas>
+                            </div>
+                            <p class="Hide">First Value <span id="val3-1"></span></p>
+                            <p class="Hide">Second Value <span id="val3-2"></span></p>
+                            <p class="Hide">Percentage of First Value and Second Value <span id="val3-result"></span></p>
+                            <div class="info-inner">
                                 263 <br>
                                 <span>Vehicles</span>
                             </div>
                         </div> 
-                    </div> 
+                        <div class="chart-xx">
+                            <div class="xx-inner active">
+                                ACTIVE <br>
+                                83 <em>+ 100%</em>
+                            </div>
+                            <div class="xx-inner inactive">
+                                INACTIVE <br>
+                                13 <em>+ 48%</em>
+                            </div>
+                            <div class="xx-inner aggregate">
+                                AGGREGATE <br>
+                                283 <em>+ 92%</em>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        function circle3(s,f){
+    
+                            document.getElementById('val-1').innerHTML = s;
+                            document.getElementById('val-2').innerHTML = f;
+    
+                            var v = f/s*100;
+                            var s = 0/100 * 6.29;
+                            var f = v/100 * 6.29;
+                            var val3 = document.getElementById("val3");
+                            var canvas3 = document.getElementById("canvas3"); 
+                            var ctx3 = canvas3.getContext("2d"); 
+    
+                            //value alignment 
+                            if ( v < 10 ) {
+                            val3.style.left = "40%";
+                            }
+                            if ( v == 100 ) {
+                            val3.style.left = "26%";
+                            }
+                            val3.innerHTML = Math.floor(v) + "%";
+    
+                            document.getElementById('val3-result').innerHTML = v + '%';
+    
+                            //Outer gray circle 
+                            ctx3.beginPath();
+                            ctx3.arc(130, 130, 130, 0.0, 6.30);
+                            ctx3.fillStyle = "#dddddd";
+                            // ctx3.fill();
+                            ctx3.closePath();
+    
+    
+                            //Main green progress bar
+                            ctx3.beginPath();
+                            ctx3.arc(130, 130, 110, s, f);
+                            ctx3.lineWidth = 10;
+                            ctx3.strokeStyle = "#3034b5";
+                            ctx3.stroke();
+                            ctx3.closePath();
+    
+                            //Inner white circle 
+                            ctx3.beginPath();
+                            ctx3.arc(130, 130, 100, 0.0, 6.30);
+                            ctx3.fillStyle = "#222";
+                            ctx3.fill();
+                            ctx3.closePath();
+    
+                            }
+    
+                            //Calling Circle function 
+                            circle3(100,100); 
+                        </script>
                 </div>
            </div>
            <div class="x">

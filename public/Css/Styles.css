@@ -573,7 +573,7 @@ svg {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.5em;
-  position: absolute;
+  position: fixed;
 }
 .report-inner .nav-footer .inner img {
   border-radius: 0.3em;
@@ -624,6 +624,7 @@ svg {
 .report-inner .table.list .car-info .info-inner .inner-x span:first-of-type {
   border-radius: 0.2em;
   color: #eee;
+  font-family: system-ui;
   margin-right: 0.5em;
   padding-inline: 0.3em;
 }
@@ -861,7 +862,7 @@ svg {
   color: #fff;
   font-family: system-ui;
   font-size: 1.55em;
-  padding-bottom: 1em;
+  padding-bottom: 0.5em;
 }
 .analytics .inner-2 .x {
   background: #111;
@@ -919,6 +920,21 @@ svg {
   align-items: center;
   color: #fff;
   display: flex;
+}
+.analytics .inner-2 .x .x-inner .info {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0.5em;
+}
+.analytics .inner-2 .x .x-inner .info-inner {
+  border-top: 1px solid #222;
+  color: #ddd;
+  font-size: 1.5em;
+  text-align: center;
+}
+.analytics .inner-2 .x .x-inner .info-inner span {
+  color: #ddd;
+  display: block;
 }
 .analytics .inner-3 {
   display: flex;
@@ -1073,116 +1089,58 @@ svg {
   border-bottom: 1px solid #222;
 }
 
-.progress-bar-radial {
+.chart {
   display: flex;
   justify-content: space-around;
 }
-.progress-bar-radial .radial-01 {
-  float: left;
-  position: relative;
-  width: 100px;
-  height: 100px;
-  text-align: center;
-  background-color: red;
-  padding-top: 40px;
-  border-radius: 100%;
+.chart-xx .xx-inner {
+  background-color: unset;
+  border-radius: unset;
+  color: #ddd !important;
   margin-block: 2em;
+  padding-left: 1em;
 }
-.progress-bar-radial .radial-01 .radial-01-number {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  background-color: #222;
-  border-radius: 100%;
-  padding-top: 41px;
-  z-index: 20;
+.chart-xx .xx-inner.active, .chart-xx .report-inner ul a li.xx-inner:hover, .report-inner ul a .chart-xx li.xx-inner:hover {
+  border-left: 3px solid #41a341;
 }
-.progress-bar-radial .radial-01 .radial-01-number {
-  font-size: 30px;
-  color: #ddd;
-  padding-top: 32px;
+.chart-xx .xx-inner.aggregate {
+  border-left: 3px solid #3034b5;
 }
-.progress-bar-radial .radial-01 .radial-01-number .radial-01-syb {
-  font-size: 20px;
+.chart-xx .xx-inner.inactive {
+  border-left: 3px solid #DF2E38;
 }
-.progress-bar-radial .radial-01 .radial-01-number .radial-01-syb sup {
-  color: #ddd;
-  font-size: 0.85em;
+.chart-xx .xx-inner em {
+  color: #888;
 }
-.progress-bar-radial .radial-01 > span.radial-01-border-r:before {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background-color: #ccc;
-  border-radius: 100%;
-  z-index: 5;
+.chart-inner {
+  border: 1px solid #222;
+  border-radius: 0.95em;
+  padding-block: 0.5em;
 }
-.progress-bar-radial .radial-01 > span.radial-01-border-r:after {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background-color: #41a341;
-  border-radius: 100%;
-  z-index: 10;
-  clip: rect(0px, 120px, 120px, 60px);
-}
-.progress-bar-radial .radial-01 > span.radial-01-border-l:before {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background-color: #ccc;
-  border-radius: 100%;
-  z-index: 5;
-}
-.progress-bar-radial .radial-three-quarters > span.radial-01-border-l:after {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background-color: #41a341;
-  border-radius: 100%;
-  z-index: 10;
-  clip: rect(60px, 120px, 120px, 0px);
-}
-.progress-bar-radial .radial-01 > span.radial-02-border-l:after {
-  background-color: #DF2E38;
-}
-.progress-bar-radial .radial-01 > span.radial-02-border-r:before {
-  background-color: #DF2E38;
-}
-.progress-bar-radial .radial-01 > span.radial-02-border-r:after {
-  background-color: #DF2E38;
-}
-.progress-bar-radial .radial-inner h3 {
+.chart-inner h3 {
   color: #ddd;
   font-family: system-ui;
   font-size: 1em;
   text-align: center;
 }
-.progress-bar-radial .radial-inner .info {
-  color: #ddd;
-  font-size: 1.5em;
+.chart .block {
+  display: block;
+  position: relative;
   text-align: center;
 }
-.progress-bar-radial .radial-inner .info span {
+.chart #val, .chart #val2, .chart #val3 {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  left: 31%;
+  top: 34%;
+  font-size: 3em;
   color: #ddd;
+}
+.chart #canvas, .chart #canvas2, .chart #canvas3 {
+  height: 150px;
+  transform: scaleX(-1) rotate(-90deg);
+  width: 100%;
 }
 
 /*# sourceMappingURL=Styles.css.map */
