@@ -158,6 +158,83 @@
                         font-family: system-ui;
                     }
                 }
+
+                .progress {
+                    background: #222;
+                    display: flex;
+                    height: 1.15em;
+                    margin-top: 1em;
+                    width: 100%;
+
+                    .data {
+                        height: 1.15em;
+
+                        &:nth-of-type(1) {
+                            background: $Color-3;
+                        }
+                        &:nth-of-type(2) {
+                            background: $Color-4;
+                        }
+                        &:nth-of-type(3) {
+                            background: $Color-2;
+                        }
+                        &:nth-of-type(4) {
+                            background: $Color-1;
+                        }
+                    }
+                }
+
+                .x-top {
+                    display: flex;
+                    justify-content: space-between;
+
+                    span,
+                    strong {
+                        color: #fff;
+                    }
+
+                    strong {
+                        font-weight: unset;
+                        margin-right: 0.5em;
+                    }
+                }
+
+                .x-middle {
+                    border-bottom: 1px solid #222;
+                    margin-bottom: 1em;
+
+                    .middle-x {
+                        display: flex;
+                        justify-content: space-between;
+                        margin-block: 2.55em;
+                        width: 80%;
+
+                        &-inner {
+                            color: #ddd;
+
+                            span {
+                                border-radius: 0.25em;
+                                color: #ddd;
+                                display: block;
+                                margin-top: 0.5em;
+                                padding-inline: 0.5em;
+
+                                &.x-1 {
+                                    background: $Color-1;
+                                }
+                                &.x-2 {
+                                    background: $Color-2;
+                                }
+                                &.x-3 {
+                                    background: $Color-3;
+                                }
+                                &.x-4 {
+                                    background: $Color-4;
+                                } 
+                            }
+                        }
+                    }
+                }
             }
 
             .inner-x {
@@ -241,3 +318,122 @@
         }
     }
 } 
+
+.progress-bar-radial {
+    display: flex;
+    justify-content: space-around;
+
+    .radial-01 {
+        float: left;
+        position: relative;
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        background-color: red;
+        padding-top: 40px;
+        border-radius: 100%;
+        margin-block: 2em;
+      } 
+      .radial-01 .radial-01-number {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          right: 0px;
+          bottom: 0px;
+          background-color: #222;
+          border-radius: 100%;
+          padding-top: 41px;
+          z-index: 20;
+      }
+      .radial-01 .radial-01-number {
+        font-size: 30px;
+        color: #ddd;
+        padding-top: 32px;
+      }
+      .radial-01 .radial-01-number .radial-01-syb {
+        font-size: 20px;
+
+        sup {
+            color: #ddd;
+            font-size: .85em;
+        }
+      }
+      .radial-01 > span.radial-01-border-r:before {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background-color: #ccc;
+        border-radius: 100%;
+        z-index: 5;
+      }
+      .radial-01 > span.radial-01-border-r:after {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background-color: $Color-3;
+        border-radius: 100%;
+        z-index: 10;
+        clip: rect(0px,120px,120px,60px);
+      }
+      .radial-01 > span.radial-01-border-l:before {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background-color: #ccc;
+        border-radius: 100%;
+        z-index: 5;
+      }
+      .radial-three-quarters > span.radial-01-border-l:after {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background-color: $Color-3;
+        border-radius: 100%;
+        z-index: 10;
+        clip: rect(60px,120px,120px,0px);
+      }
+      .radial-01 > span.radial-02-border-l:after { 
+        background-color: $Color-2; 
+      }
+      .radial-01 > span.radial-02-border-r:before { 
+        background-color: $Color-2; 
+      }
+      .radial-01 > span.radial-02-border-r:after { 
+        background-color: $Color-2; 
+      } 
+    
+      .radial-inner {
+        h3 {
+            color: #ddd;
+            font-family: system-ui;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        .info {
+            color: #ddd;
+            font-size: 1.5em;
+            text-align: center;
+
+            span {
+                color: #ddd;
+            }
+        }
+      }
+}

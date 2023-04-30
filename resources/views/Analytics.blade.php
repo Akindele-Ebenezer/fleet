@@ -60,6 +60,42 @@
            <div class="x">
                 <div class="x-inner">
                     <h2>Vehicles Condition</h2>
+                    <div class="progress-bar-radial">
+                        <div class="radial-inner">
+                            <h3>Good</h3>
+                            <div class="radial-01 radial-three-quarters">
+                                <span class="radial-01-number">
+                                75
+                                    <span class="radial-01-syb">
+                                        <sup>%</sup>
+                                    </span>
+                                </span>
+                                <span class="radial-01-border-r"></span>
+                                <span class="radial-01-border-l"></span> 
+                            </div>
+                            <div class="info">
+                                263 <br>
+                                <span>Vehicles</span>
+                            </div>
+                        </div>
+                        <div class="radial-inner">
+                            <h3>Inactive</h3>
+                            <div class="radial-01 radial-three-quarters">
+                                <span class="radial-01-number">
+                                75
+                                    <span class="radial-01-syb">
+                                        <sup>%</sup>
+                                    </span>
+                                </span>
+                                <span class="radial-01-border-r radial-02-border-r"></span>
+                                <span class="radial-01-border-l radial-02-border-l"></span> 
+                            </div>
+                            <div class="info">
+                                263 <br>
+                                <span>Vehicles</span>
+                            </div>
+                        </div> 
+                    </div> 
                 </div>
            </div>
            <div class="x">
@@ -261,7 +297,50 @@
            </div>
             <div class="x">
                 <div class="x-inner">
-                    <h2>Total Vehicles</h2>
+                    <h2>Trips Performance</h2>
+                    <div class="x-top">
+                        <span>
+                            <strong>345</strong>
+                            Planned for today
+                        </span>
+                        <span>
+                            23 Left
+                        </span>
+                    </div>
+                    <div class="progress">
+                        <div class="data" style="width: 30%;"></div>
+                        <div class="data" style="width: 40%;"></div>
+                        <div class="data" style="width: 70%;"></div>
+                        <div class="data" style="width: 75%;"></div>
+                    </div>
+                    <div class="x-middle">
+                        <div class="middle-x">
+                            <div class="middle-x-inner">
+                                40% / 567 <br>
+                                <span class="x-1">Live Trips</span>
+                            </div>
+                            <div class="middle-x-inner">
+                                40% / 567 <br>
+                                <span class="x-2">Completed</span>
+                            </div>
+                        </div>
+                        <div class="middle-x">
+                            <div class="middle-x-inner">
+                                40% / 567 <br>
+                                <span class="x-3">Live Trips</span>
+                            </div>
+                            <div class="middle-x-inner">
+                                40% / 567 <br>
+                                <span class="x-4">Completed</span>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="x-top">
+                        <span>
+                            <strong>134</strong>
+                            Planned for tommorrow
+                        </span> 
+                    </div>
                 </div>
            </div>
         </div>
