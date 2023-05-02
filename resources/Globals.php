@@ -66,7 +66,5 @@
         
         return $MyRecords_TOTAL;
 
-    }
-
-
+    }  
 ?>

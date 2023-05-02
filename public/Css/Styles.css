@@ -445,9 +445,10 @@ svg {
 }
 .report-data-heading .inner h1 {
   color: #fff;
-  font-family: "Kanit", sans-serif !important;
+  font-family: "Bitter" !important;
   font-size: 5em;
-  letter-spacing: 0.02em;
+  font-weight: unset;
+  letter-spacing: 0.01em;
 }
 .report-data-heading .inner h1 span {
   color: #fff;
@@ -831,11 +832,17 @@ svg {
   display: flex;
   justify-content: space-around;
   padding: 0.5em;
-  width: 20%;
+  width: 24%;
 }
 .analytics .inner-1 .x .inner {
   display: unset;
   text-align: center;
+}
+.analytics .inner-1 .x .inner:first-of-type {
+  border: 1px solid #222;
+  border-radius: 0.5em;
+  display: flex;
+  padding-inline: 0.5em;
 }
 .analytics .inner-1 .x .inner img {
   width: 3em;
@@ -845,8 +852,7 @@ svg {
 }
 .analytics .inner-1 .x .inner span:first-of-type {
   font-family: system-ui;
-  font-size: 2em;
-  font-weight: bold;
+  font-size: 3em;
 }
 .analytics .inner-1 .x .inner span:last-of-type {
   color: #ddd;
@@ -950,6 +956,7 @@ svg {
   width: 24%;
 }
 .analytics .inner-3 .x:first-of-type {
+  overflow-y: scroll;
   width: 50%;
 }
 .analytics .inner-3 .x .x-inner h2 {
@@ -973,16 +980,16 @@ svg {
   height: 1.15em;
 }
 .analytics .inner-3 .x .x-inner .progress .data:nth-of-type(1) {
-  background: #41a341;
+  background: #245953;
 }
 .analytics .inner-3 .x .x-inner .progress .data:nth-of-type(2) {
-  background: #3034b5;
+  background: #332;
 }
 .analytics .inner-3 .x .x-inner .progress .data:nth-of-type(3) {
-  background: #DF2E38;
+  background: #002B5B;
 }
 .analytics .inner-3 .x .x-inner .progress .data:nth-of-type(4) {
-  background: #333;
+  background: #393646;
 }
 .analytics .inner-3 .x .x-inner .x-top {
   display: flex;
@@ -1008,6 +1015,7 @@ svg {
 }
 .analytics .inner-3 .x .x-inner .x-middle .middle-x-inner {
   color: #ddd;
+  text-align: center;
 }
 .analytics .inner-3 .x .x-inner .x-middle .middle-x-inner span {
   border-radius: 0.25em;
@@ -1015,18 +1023,19 @@ svg {
   display: block;
   margin-top: 0.5em;
   padding-inline: 0.5em;
+  width: 6em;
 }
 .analytics .inner-3 .x .x-inner .x-middle .middle-x-inner span.x-1 {
-  background: #333;
+  background: #393646;
 }
 .analytics .inner-3 .x .x-inner .x-middle .middle-x-inner span.x-2 {
-  background: #DF2E38;
+  background: #002B5B;
 }
 .analytics .inner-3 .x .x-inner .x-middle .middle-x-inner span.x-3 {
-  background: #41a341;
+  background: #245953;
 }
 .analytics .inner-3 .x .x-inner .x-middle .middle-x-inner span.x-4 {
-  background: #3034b5;
+  background: #332;
 }
 .analytics .inner-3 .x .inner-x {
   align-items: unset;
@@ -1060,12 +1069,15 @@ svg {
 }
 .analytics .inner-3 .x .inner-x .x1 ul li .x1-inner span {
   background: #222;
+  border-radius: 0.25em;
   color: #ddd;
   display: block;
   margin-right: 1em;
-  padding: 0.5em;
-  width: 3em;
+  width: 4em;
   text-align: center;
+}
+.analytics .inner-3 .x .inner-x .x1 ul li .x1-inner strong {
+  color: #555;
 }
 .analytics .inner-3 .x .inner-x .x1 .x1-last {
   background: #222;
@@ -1082,11 +1094,60 @@ svg {
   color: #ddd;
   font-family: system-ui;
 }
+.analytics .inner-3 .x .inner-x .x1 .-x {
+  color: #fff;
+  margin-top: 2em;
+}
+.analytics .inner-3 .x .inner-x .x1 .-x big {
+  color: #fff;
+  font-size: 2em;
+}
 .analytics .inner-3 .x .inner-x .x2 {
   width: 100%;
 }
 .analytics .inner-3 .x .inner-x .x2 ul li {
   border-bottom: 1px solid #222;
+}
+.analytics .inner-4 {
+  display: flex;
+  height: 26em;
+  justify-content: space-between;
+  margin-block: 1.5em;
+  overflow-y: scroll;
+  width: 98%;
+}
+.analytics .inner-4 h2 {
+  color: #fff;
+  font-family: system-ui;
+  font-size: 1.55em;
+  padding-bottom: 1em;
+}
+.analytics .inner-4 h2 small {
+  color: #fff;
+  font-family: system-ui;
+}
+.analytics .inner-4 .x--inner {
+  background: #111;
+  border-radius: 1em;
+  height: fit-content;
+  padding: 1em;
+  width: 50%;
+}
+.analytics .inner-4 .x--inner .custom-chart .chart-label {
+  color: #ddd;
+}
+.analytics .inner-4 .x--inner .custom-chart .chart-data {
+  background: blue;
+  display: block;
+  height: 3em;
+}
+.analytics .inner-4 .x--inner .custom-chart .chart-data-2 {
+  height: 1em;
+}
+.analytics .inner-4 .x--inner .custom-chart-inner {
+  border: 1px solid #222;
+  margin-block: 0.5em;
+  padding: 0.5em;
 }
 
 .chart {
@@ -1132,10 +1193,11 @@ svg {
   display: block;
   position: absolute;
   z-index: 2;
-  left: 31%;
-  top: 34%;
+  left: 50%;
+  top: 50%;
   font-size: 3em;
   color: #ddd;
+  transform: translate(-50%, -50%);
 }
 .chart #canvas, .chart #canvas2, .chart #canvas3 {
   height: 150px;

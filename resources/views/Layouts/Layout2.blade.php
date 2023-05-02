@@ -54,8 +54,8 @@
 </head>
 <body> 
     @php
-        include('../resources/Globals.php')
-    @endphp
+        include('../resources/Globals.php');
+    @endphp 
     @include('Components.LoaderComponent')
 
     @if (Route::is('MyRecords') || Route::is('Cars') || Route::is('VehicleReport'))
@@ -126,7 +126,7 @@
                     </form>
                 </li>
                 <a href='{{ route('Analytics') }}'>
-                    <li>
+                    <li class="{{ Route::is('Analytics') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M120 936v-76l60-60v136h-60Zm165 0V700l60-60v296h-60Zm165 0V640l60 61v235h-60Zm165 0V701l60-60v295h-60Zm165 0V540l60-60v456h-60ZM120 700v-85l280-278 160 160 280-281v85L560 582 400 422 120 700Z"/></svg>                    
                         Analytics 
                     </li>
@@ -142,7 +142,7 @@
                     <a class="my-records action-x">
                         <li class="{{ Route::is('MyRecords') ? 'active' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M222 976q-43.75 0-74.375-30.625T117 871V746h127V176l59.8 60 59.8-60 59.8 60 59.8-60 59.8 60 60-60 60 60 60-60 60 60 60-60v695q0 43.75-30.625 74.375T738 976H222Zm516-60q20 0 32.5-12.5T783 871V276H304v470h389v125q0 20 12.5 32.5T738 916ZM357 434v-60h240v60H357Zm0 134v-60h240v60H357Zm333-134q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9Zm0 129q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9ZM221 916h412V806H177v65q0 20 12.65 32.5T221 916Zm-44 0V806v110Z"/></svg>                  
-                            My Records 
+                            Fleet Entries 
                             <span>{{ MyRecords_TOTAL() }}</span>
                             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"/></svg>
                         </li> 
@@ -249,7 +249,7 @@
                 <div class="inner">
                     <h1>
                         {{-- <img src="{{ asset('Images/car1.png') }}" alt=""> --}}
-                        {{ Route::is('Analytics') ? 'Real Time Data' : '' }}
+                        {{ Route::is('Analytics') ? 'FLEET DASHBOARD' : '' }}
 
                         {{ Route::is('Cars') ? 'FLEET DB' : '' }}
                         {{ Route::is('CarOwners') ? 'CAR OWNERS' : '' }}
@@ -257,7 +257,7 @@
 
                         {{ Route::is('Maintenance') ? 'MAINTENANCE' : '' }}
                         {{ Route::is('Repairs') ? 'REPAIRS' : '' }}
-                        {{ Route::is('Refueling') ? 'REFUELING' : '' }}
+                        {{ Route::is('Refueling') ? 'FUEL HISTORY' : '' }}
                         {{ Route::is('Deposits') ? 'DEPOSITS' : '' }}
 
                         {{ Route::is('MyRecords') ? 'REGISTERATION' : '' }}

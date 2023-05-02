@@ -1,5 +1,151 @@
 @extends('Layouts.Layout2')
 
+@php 
+    $NumberOfCars = \App\Models\Car::select('VehicleNumber')->distinct()->count();
+
+    $NumberOfCarRepairs = \App\Models\Repair::select('VehicleNumber')->count();
+    $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')->count();
+    $NumberOfCarDeposits = \App\Models\Deposits::select('VehicleNumber')->count();
+    $NumberOfCarRefueling = \App\Models\Refueling::select('VehicleNumber')->count();
+
+    $SumOfCarRepairs = \App\Models\Repair::select('Cost')->sum('Cost');
+    $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')->sum('Cost');
+    $SumOfCarDeposits = \App\Models\Deposits::select('Amount')->sum('Amount');
+    $SumOfCarRefueling = \App\Models\Refueling::select('Amount')->sum('Amount');
+ 
+    $FleetSurvey_TOTAL = $NumberOfCarRepairs + $NumberOfCarMaintenance + $NumberOfCarDeposits + $NumberOfCarRefueling;
+    $FleetSurvey_Repairs_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRepairs / $FleetSurvey_TOTAL * 100;
+    $FleetSurvey_Maintenance_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarMaintenance / $FleetSurvey_TOTAL * 100;
+    $FleetSurvey_Deposits_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarDeposits / $FleetSurvey_TOTAL * 100;
+    $FleetSurvey_Refueling_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRefueling / $FleetSurvey_TOTAL * 100;
+    
+    $NumberOfCars_ACTIVE = \App\Models\Car::select('Status')->where('Status', 'ACTIVE')->count();
+    $NumberOfCars_INACTIVE = \App\Models\Car::select('Status')->where('Status', 'INACTIVE')->count();
+    $NumberNumberOfCars_ACTIVE_PERCENTAGE = $NumberOfCars == 0 ? 0 : $NumberOfCars_ACTIVE / $NumberOfCars * 100;
+    $NumberNumberOfCars_INACTIVE_PERCENTAGE = $NumberOfCars == 0 ? 0 : $NumberOfCars_INACTIVE / $NumberOfCars * 100;
+
+    $NumberOfDrivers = \App\Models\Car::select('Drivers')->distinct()->count();
+   
+    function get_fleet_survey_currency_in_dollars($Value) {
+        // ONE NAIRA TO DOLLAR CURRENTLY
+        $USD = 0.0022;
+        //
+        $Result = $USD * $Value; 
+        return number_format(round($Result, 0));
+    } 
+    
+    $NumberOfCars_MAINTENANCE = \App\Models\Maintenance::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
+                                                        ->groupBy('VehicleNumber')
+                                                        ->get();
+    $NumberOfCars_MAINTENANCE_ = [];
+    foreach ($NumberOfCars_MAINTENANCE as $Car) {
+        array_push($NumberOfCars_MAINTENANCE_, $Car);
+    }
+    $NumberOfCars_MAINTENANCE = count($NumberOfCars_MAINTENANCE_);
+
+    $NumberOfCars_REPAIRS = \App\Models\Repair::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
+                                                        ->groupBy('VehicleNumber')
+                                                        ->get();
+    $NumberOfCars_REPAIRS_ = [];
+    foreach ($NumberOfCars_REPAIRS as $Car) {
+        array_push($NumberOfCars_REPAIRS_, $Car);
+    } 
+    $NumberOfCars_REPAIRS = count($NumberOfCars_REPAIRS_); 
+
+    $NumberOfCars_REEFUELING = \App\Models\Refueling::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
+                                                        ->groupBy('VehicleNumber')
+                                                        ->get();
+    $NumberOfCars_REEFUELING_ = [];
+    foreach ($NumberOfCars_REEFUELING as $Car) {
+        array_push($NumberOfCars_REEFUELING_, $Car);
+    } 
+    $NumberOfCars_REEFUELING = count($NumberOfCars_REEFUELING_); 
+     
+    $NumberOfCars_DEPOSITS = \App\Models\Deposits::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
+                                                        ->groupBy('VehicleNumber')
+                                                        ->get();
+    $NumberOfCars_DEPOSITS_ = [];
+    foreach ($NumberOfCars_DEPOSITS as $Car) {
+        array_push($NumberOfCars_DEPOSITS_, $Car);
+    } 
+    $NumberOfCars_DEPOSITS = count($NumberOfCars_DEPOSITS_); 
+
+    function get_average_cost($Sum, $Count) {
+        $Result = $Sum / $Count;
+        $Result = get_fleet_survey_currency_in_dollars($Result);
+        return $Result; 
+    }
+
+    $FirstDayOfCurrentYear = date('Y') . '-01-01';
+    $MaintenanceCosts_CURRENT_YEAR = \App\Models\Maintenance::select('Cost')
+                                                            ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
+                                                            ->sum('Cost');
+    $RepairCosts_CURRENT_YEAR = \App\Models\Repair::select('Cost')
+                                                            ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
+                                                            ->sum('Cost');
+    $RefuelingCosts_CURRENT_YEAR = \App\Models\Refueling::select('Cost')
+                                                            ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
+                                                            ->sum('Amount');
+    $DepositsCosts_CURRENT_YEAR = \App\Models\Deposits::select('Amount')
+                                                            ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
+                                                            ->sum('Amount');
+
+    $FirstDayOfPreviousYear = date('Y') - 1 . '-01-01';
+    $LastDayOfPreviousYear = date('Y') - 1 . '-12-31';
+    $MaintenanceCosts_PREVIOUS_YEAR = \App\Models\Maintenance::select('Cost')
+                                                            ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
+                                                            ->sum('Cost');
+    $RepairCosts_PREVIOUS_YEAR = \App\Models\Repair::select('Cost')
+                                                            ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
+                                                            ->sum('Cost');
+    $RefuelingCosts_PREVIOUS_YEAR = \App\Models\Refueling::select('Amount')
+                                                            ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
+                                                            ->sum('Amount');
+    $DepositsCosts_PREVIOUS_YEAR = \App\Models\Deposits::select('Amount')
+                                                            ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
+                                                            ->sum('Amount');
+    
+    $MonthNames = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+    ];                                                            
+ 
+    $FirstDaysOfEachMonths = [];
+    $LastDaysOfEachMonths = [];
+
+    for ($i = 0; $i < count($MonthNames); $i++) {   
+        ${"Timestamp_" . $MonthNames[$i]} = strtotime("" . $MonthNames[$i] . '' . "2023");           
+        ${$MonthNames[$i] . '_First'} = date('Y-m-01', ${"Timestamp_" . $MonthNames[$i]});
+        ${$MonthNames[$i] . '_Last'} = date('Y-m-t', ${"Timestamp_" . $MonthNames[$i]}); 
+        array_push($FirstDaysOfEachMonths, ${$MonthNames[$i] . '_First'});
+        array_push($LastDaysOfEachMonths, ${$MonthNames[$i] . '_Last'});
+ 
+        ${'NumberOfCarRepairs_' . $MonthNames[$i]} = \App\Models\Repair::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->count();
+        ${'NumberOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count();
+        ${'NumberOfCarDeposits_' . $MonthNames[$i]} = \App\Models\Deposits::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count();
+        ${'NumberOfCarRefueling_' . $MonthNames[$i]} = \App\Models\Refueling::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count(); 
+
+        ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} = ${'NumberOfCarRepairs_' . $MonthNames[$i]} + ${'NumberOfCarMaintenance_' . $MonthNames[$i]} + ${'NumberOfCarDeposits_' . $MonthNames[$i]} + ${'NumberOfCarRefueling_' . $MonthNames[$i]};
+        ${'FleetSurvey_Repairs_PERCENTAGE_' . $MonthNames[$i]} = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRepairs / $FleetSurvey_TOTAL * 100;
+        ${'FleetSurvey_Maintenance_PERCENTAGE_' . $MonthNames[$i]} = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarMaintenance / $FleetSurvey_TOTAL * 100;
+        ${'FleetSurvey_Deposits_PERCENTAGE_' . $MonthNames[$i]} = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarDeposits / $FleetSurvey_TOTAL * 100;
+        ${'FleetSurvey_Refueling_PERCENTAGE_' . $MonthNames[$i]} = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRefueling / $FleetSurvey_TOTAL * 100;
+    
+    }
+    // print_r( $LastDaysOfEachMonths); 
+    // die();
+@endphp 
+
 @section('Content')
     <style>
         .report-inner {
@@ -7,54 +153,54 @@
             overflow: unset; 
         }
     </style>
-
+ 
     <div class="analytics">  
         <div class="inner-1">
             <div class="x">
                 <div class="inner">
-                    <img src="{{ asset('Images/inactive.png') }}">
+                    <img src="{{ asset('Images/refueling.png') }}">
                 </div>
                 <div class="inner">
-                    <span>124</span>
+                    <span>${{ get_fleet_survey_currency_in_dollars($SumOfCarRefueling) }}</span>
                     <br>
-                    <span>Vehicle with errors</span>
+                    <span>Fuel Cost</span>
                 </div>
             </div>
             <div class="x">
                 <div class="inner">
-                    <img src="{{ asset('Images/inactive.png') }}">
+                    <img src="{{ asset('Images/service.png') }}">
                 </div>
                 <div class="inner">
-                    <span>124</span>
+                    <span>${{ get_fleet_survey_currency_in_dollars($SumOfCarMaintenance) }}</span>
                     <br>
-                    <span>Vehicle with errors</span>
+                    <span>Total Service</span>
                 </div>
             </div>
             <div class="x">
                 <div class="inner">
-                    <img src="{{ asset('Images/inactive.png') }}">
+                    <img src="{{ asset('Images/deposit.png') }}">
                 </div>
                 <div class="inner">
-                    <span>124</span>
+                    <span>${{ get_fleet_survey_currency_in_dollars($SumOfCarDeposits) }}</span>
                     <br>
-                    <span>Vehicle with errors</span>
+                    <span>Deposits</span>
                 </div>
             </div>
             <div class="x">
                 <div class="inner">
-                    <img src="{{ asset('Images/inactive.png') }}">
+                    <img src="{{ asset('Images/repair.png') }}">
                 </div>
                 <div class="inner">
-                    <span>124</span>
+                    <span>${{ get_fleet_survey_currency_in_dollars($SumOfCarRepairs) }}</span>
                     <br>
-                    <span>Vehicle with errors</span>
+                    <span>Repair Cost</span>
                 </div>
             </div>
         </div>
         <div class="inner-2">
            <div class="x">
                 <div class="x-inner">
-                    <h2>Total Vehicles</h2>
+                    <h2>Vehicles Condition</h2>
                     <div class="chart">  
                         <div class="chart-inner">   
                             <h3>Active</h3>                   
@@ -68,8 +214,8 @@
                             <p class="Hide">Second Value <span id="val-2"></span></p>
                             <p class="Hide">Percentage of First Value and Second Value <span id="val-result"></span></p>
                             <div class="info-inner">
-                                263 <br>
-                                <span>Vehicles</span>
+                                {{ $NumberOfCars_ACTIVE }} <br>
+                                <span>Operating</span>
                             </div>
                         </div>
                         <div class="chart-inner">    
@@ -84,8 +230,8 @@
                             <p class="Hide">Second Value <span id="val2-2"></span></p>
                             <p class="Hide">Percentage of First Value and Second Value <span id="val2-result"></span></p>
                             <div class="info-inner">
-                                34 <br>
-                                <span>Vehicles</span>
+                                {{ $NumberOfCars_INACTIVE }} <br>
+                                <span>Idle</span>
                             </div>
                         </div>
                     </div>
@@ -104,12 +250,12 @@
                         var ctx = canvas.getContext("2d"); 
 
                         //value alignment 
-                        if ( v < 10 ) {
-                        val.style.left = "40%";
-                        }
-                        if ( v == 100 ) {
-                        val.style.left = "26%";
-                        }
+                        // if ( v < 10 ) {
+                        // val.style.left = "40%";
+                        // }
+                        // if ( v == 100 ) {
+                        // val.style.left = "26%";
+                        // }
                         val.innerHTML = Math.floor(v) + "%";
 
                         document.getElementById('val-result').innerHTML = v + '%';
@@ -152,12 +298,12 @@
                         var ctx2 = canvas2.getContext("2d"); 
 
                         //value alignment 
-                        if ( v < 10 ) {
-                        val2.style.left = "40%";
-                        }
-                        if ( v == 100 ) {
-                        val2.style.left = "26%";
-                        }
+                        // if ( v < 10 ) {
+                        // val2.style.left = "40%";
+                        // }
+                        // if ( v == 100 ) {
+                        // val2.style.left = "26%";
+                        // }
                         val2.innerHTML = Math.floor(v) + "%";
 
                         document.getElementById('val2-result').innerHTML = v + '%';
@@ -188,16 +334,16 @@
                         }
 
                         //Calling Circle function
-                        circle(100,90);
-                        circle2(100,25); 
+                        circle(100,{{ round($NumberNumberOfCars_ACTIVE_PERCENTAGE, 0) }});
+                        circle2(100,{{ round($NumberNumberOfCars_INACTIVE_PERCENTAGE, 0) }}); 
                     </script>
            </div>
            <div class="x">
                 <div class="x-inner">
-                    <h2>Vehicles Condition</h2> 
+                    <h2>Total Vehicles</h2> 
                     <div class="chart">  
                         <div class="chart-inner">   
-                            <h3>Active</h3>                   
+                            <h3>Aggregate</h3>                   
                             <div class="block">
                                 <span id="val3"></span>
                                 <canvas id="canvas3" width="260" height="260">
@@ -208,22 +354,22 @@
                             <p class="Hide">Second Value <span id="val3-2"></span></p>
                             <p class="Hide">Percentage of First Value and Second Value <span id="val3-result"></span></p>
                             <div class="info-inner">
-                                263 <br>
+                                {{ $NumberOfCars }} <br>
                                 <span>Vehicles</span>
                             </div>
                         </div> 
                         <div class="chart-xx">
                             <div class="xx-inner active">
                                 ACTIVE <br>
-                                83 <em>+ 100%</em>
+                                {{ $NumberOfCars_ACTIVE }} <em>+ {{ round($NumberNumberOfCars_ACTIVE_PERCENTAGE, 0) }}%</em>
                             </div>
                             <div class="xx-inner inactive">
                                 INACTIVE <br>
-                                13 <em>+ 48%</em>
+                                {{ $NumberOfCars_INACTIVE }} <em>+ {{ round($NumberNumberOfCars_INACTIVE_PERCENTAGE, 0) }}%</em>
                             </div>
                             <div class="xx-inner aggregate">
                                 AGGREGATE <br>
-                                283 <em>+ 92%</em>
+                                {{ $NumberOfCars }} <em>+ 100%</em>
                             </div>
                         </div>
                     </div>
@@ -241,12 +387,12 @@
                             var ctx3 = canvas3.getContext("2d"); 
     
                             //value alignment 
-                            if ( v < 10 ) {
-                            val3.style.left = "40%";
-                            }
-                            if ( v == 100 ) {
-                            val3.style.left = "26%";
-                            }
+                            // if ( v < 10 ) {
+                            // val3.style.left = "40%";
+                            // }
+                            // if ( v == 100 ) {
+                            // val3.style.left = "26%";
+                            // }
                             val3.innerHTML = Math.floor(v) + "%";
     
                             document.getElementById('val3-result').innerHTML = v + '%';
@@ -284,12 +430,12 @@
            <div class="x">
                 <div class="x-inner">
                     <h2>
-                        Traffic Jam 
+                        Maintenance Cost 
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="m753 452-44-94-94-44 94-44 44-94 44 94 94 44-94 44-44 94Zm84 289-29.76-63.24L744 648l63.24-29.76L837 555l29.76 63.24L930 648l-63.24 29.76L837 741ZM314 976l-10-92q-14-2-29-9t-26-17l-78 33-88-144 76-50q-5-17-5-30t5-30l-76-50 88-144 78 33q11-10 26-17t29-9l10.075-92H482l10 92q14 2 29 9t26 17l78-33 88 144-76 50q5 17 5 30t-5 30l76 50-88 144-78-33q-11 10-26 17t-29 9l-10.075 92H314Zm84-194q50 0 82.5-32.5T513 667q0-50-32.5-82.5T398 552q-50 0-82.5 32.5T283 667q0 50 32.5 82.5T398 782Zm0-60q-24 0-39.5-15.5T343 667q0-24 15.5-39.5T398 612q24 0 39.5 15.5T453 667q0 24-15.5 39.5T398 722Zm-34 194h68l8-76q29-7 53-20t43.767-34L602 815l33-52-62-44q11-25 11-52t-11-52l62-44-33-52-65.233 29Q517 527 493 514q-24-13-53-20l-8-76h-68l-8 76q-29 7-53 20t-43.767 34L194 519l-33 52 62 44q-11 25-11 52t11 52l-62 44 33 52 65.233-29Q279 807 303 820q24 13 53 20l8 76Zm34-249Z"></path></svg>
                     </h2>
                     <div class="inner-x">
                         <div class="-x">
-                            <big>16</big>
+                            <big>{{ $NumberOfCars_MAINTENANCE }}</big>
                             <br>
                             Vehicles
                         </div>
@@ -298,23 +444,23 @@
                                 <li>
                                     <div class="-xx">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"></path></svg>
-                                        8
+                                        Average 
                                     </div>
-                                    <div class="-xx">> 10h</div>
+                                    <div class="-xx">$ {{ get_average_cost($SumOfCarMaintenance, $NumberOfCars_MAINTENANCE) }}</div>
                                 </li>
                                 <li>
                                     <div class="-xx">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"></path></svg>
-                                        8
+                                        Current Year
                                     </div>
-                                    <div class="-xx">> 10h</div>
+                                    <div class="-xx">$ {{ get_fleet_survey_currency_in_dollars($MaintenanceCosts_CURRENT_YEAR) }}</div>
                                 </li>
                                 <li>
                                     <div class="-xx">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"></path></svg>
-                                        8
+                                        Previous Year
                                     </div>
-                                    <div class="-xx">> 10min</div>
+                                    <div class="-xx">$ {{ get_fleet_survey_currency_in_dollars($MaintenanceCosts_PREVIOUS_YEAR) }}</div>
                                 </li>
                             </ul>
                         </div>
@@ -322,12 +468,12 @@
                 </div>
                 <div class="x-inner">
                     <h2>
-                        Accidents 
+                        Repair Cost 
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"></path></svg>
                     </h2>
                     <div class="inner-x">
                         <div class="-x">
-                            <big>2</big>
+                            <big>{{ $NumberOfCars_REPAIRS }}</big>
                             <br>
                             Vehicles
                         </div>
@@ -335,17 +481,24 @@
                             <ul>
                                 <li>
                                     <div class="-xx">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"></path></svg>
-                                        8
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"></path></svg>
+                                        Average
                                     </div>
-                                    <div class="-xx">EVACUATION NEEDED</div>
+                                    <div class="-xx">$ {{ get_average_cost($SumOfCarRepairs, $NumberOfCars_REPAIRS) }}</div>
                                 </li>
                                 <li>
                                     <div class="-xx">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"></path></svg>
-                                        8
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"></path></svg>
+                                        Current Year
                                     </div>
-                                    <div class="-xx">EVACUATED</div>
+                                    <div class="-xx">$ {{ get_fleet_survey_currency_in_dollars($RepairCosts_CURRENT_YEAR) }}</div>
+                                </li> 
+                                <li>
+                                    <div class="-xx">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"></path></svg>
+                                        Previous Year
+                                    </div>
+                                    <div class="-xx">$ {{ get_fleet_survey_currency_in_dollars($RepairCosts_PREVIOUS_YEAR) }}</div>
                                 </li> 
                             </ul>
                         </div>
@@ -357,67 +510,85 @@
             <div class="x">
                 <div class="x-inner">
                     <h2>
-                        Warnings
+                        Fuel Cost
                         <br>
-                         <small>Driving Policy Violations</small>
-                    </h2> 
+                        <small>Since January {{ date('Y') - 1 }}</small>
+                    </h2>  
                 </div>
                 <div class="inner-x">
                     <div class="x1">
                         <ul>
                             <li class="first">
                                 <div class="x1-inner">
-                                    <img src="{{ asset('Images/active.png') }}" alt=""> Driving
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"></path></svg> Average
                                 </div>
                                 <div class="x1-inner">
-                                    <span>1</span> >
+                                    <span>$ {{ get_average_cost($SumOfCarRefueling, $NumberOfCars_REEFUELING) }}</span> <strong>></strong>
                                 </div>
                             </li>
                             <li>
                                 <div class="x1-inner">
-                                    <img src="{{ asset('Images/active.png') }}" alt=""> Driving
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"></path></svg> Current Year
                                 </div>
                                 <div class="x1-inner">
-                                    <span>0</span> >
+                                    <span>$ {{ get_fleet_survey_currency_in_dollars($RefuelingCosts_CURRENT_YEAR) }}</span> <strong>></strong>
                                 </div>
                             </li>
                             <li>
                                 <div class="x1-inner">
-                                    <img src="{{ asset('Images/active.png') }}" alt=""> Driving
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"></path></svg> Previous Year
                                 </div>
                                 <div class="x1-inner">
-                                    <span>1</span> >
+                                    <span>$ {{ get_fleet_survey_currency_in_dollars($RefuelingCosts_PREVIOUS_YEAR) }}</span> <strong>></strong>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="x1-inner">
-                                    <img src="{{ asset('Images/active.png') }}" alt=""> Driving
-                                </div>
-                                <div class="x1-inner">
-                                    <span>20</span> >
-                                </div>
-                            </li>
+                            </li> 
                         </ul>
+                        <div class="-x">
+                            <big>{{ $NumberOfCars_REEFUELING }}</big>
+                            <br>
+                            Vehicles
+                        </div>
                     </div>
                     <div class="x1">
                         <div class="x1-last">
                             <div class="last-inner">
-                                <strong>Driving Time Exceeded</strong>
+                                <strong>Deposits</strong>
                                 <br>
-                                WO-12345
+                                $ {{ get_fleet_survey_currency_in_dollars($DepositsCosts_CURRENT_YEAR) }}
                             </div>
                             <div class="last-inner">
-                               > 2 hours
+                               This Year
                             </div>
                         </div>
                         <div class="x1-last">
                             <div class="last-inner">
-                                <strong>Driving Time Exceeded</strong>
+                                <strong>Average Cost</strong>
                                 <br>
-                                WO-12345
+                                $ {{ get_average_cost($SumOfCarDeposits, $NumberOfCars_DEPOSITS) }}
+                            </div> 
+                        </div>
+                        <div class="x1-last">
+                            <div class="last-inner">
+                                <strong>{{ $NumberOfCars_DEPOSITS }}</strong>
+                                <br>
+                                Vehicles
                             </div>
                             <div class="last-inner">
-                                > 2 hours
+                               Since {{ date('Y') - 1 }}
+                            </div>
+                        </div>
+                        <div class="x1-last">
+                            <div class="last-inner">
+                                <strong>Other Costs (Deposits)</strong>
+                                <br>
+                                $ {{ get_fleet_survey_currency_in_dollars($DepositsCosts_PREVIOUS_YEAR) }}
+                                <br><br>
+                                <strong>Current Year</strong>
+                                <br>
+                                $ {{ get_fleet_survey_currency_in_dollars($DepositsCosts_CURRENT_YEAR) }}
+                            </div>
+                            <div class="last-inner">
+                                Last Year
                             </div>
                         </div>
                     </div>
@@ -426,7 +597,7 @@
             <div class="x">
                 <div class="x-inner">
                     <h2>
-                        Trips
+                        Data Summary
                         <br>
                          <small>24 hours Trips Data</small>
                     </h2>
@@ -436,42 +607,42 @@
                         <ul>
                             <li class="first">
                                 <div class="x1-inner">
-                                    <img src="{{ asset('Images/active.png') }}" alt=""> Live Trips
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M705 928 447 668q-23 8-46 13t-47 5q-97.083 0-165.042-67.667Q121 550.667 121 454q0-31 8.158-60.388Q137.316 364.223 152 338l145 145 92-86-149-149q25.915-15.158 54.957-23.579Q324 216 354 216q99.167 0 168.583 69.417Q592 354.833 592 454q0 24-5 47t-13 46l259 258q11 10.957 11 26.478Q844 847 833 858l-76 70q-10.696 11-25.848 11T705 928Zm28-57 40-40-273-273q16-21 24-49.5t8-54.5q0-75-55.5-127T350 274l101 103q9 9 9 22t-9 22L319 545q-9 9-22 9t-22-9l-97-96q3 77 54.668 127T354 626q25 0 53-8t49-24l277 277ZM476 572Z"></path></svg> Repairs
                                 </div>
                                 <div class="x1-inner">
-                                    <span>1</span> >
-                                </div>
-                            </li>
-                            <li>
-                                <div class="x1-inner">
-                                    <img src="{{ asset('Images/active.png') }}" alt=""> Scheduled
-                                </div>
-                                <div class="x1-inner">
-                                    <span>0</span> >
+                                    <span>{{ number_format($NumberOfCarRepairs) }}</span> <strong>></strong>
                                 </div>
                             </li>
                             <li>
                                 <div class="x1-inner">
-                                    <img src="{{ asset('Images/active.png') }}" alt=""> Completed
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"></path></svg> Maintenance
                                 </div>
                                 <div class="x1-inner">
-                                    <span>1</span> >
-                                </div>
-                            </li>
-                            <li>
-                                <div class="x1-inner">
-                                    <img src="{{ asset('Images/active.png') }}" alt=""> Being Late
-                                </div>
-                                <div class="x1-inner">
-                                    <span>20</span> >
+                                    <span>{{ number_format($NumberOfCarMaintenance) }}</span> <strong>></strong>
                                 </div>
                             </li>
                             <li>
                                 <div class="x1-inner">
-                                    <img src="{{ asset('Images/active.png') }}" alt=""> Failed
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M451 936v-84q-57-10-93.5-43.5T305 724l56-23q17 48 49 71.5t77 23.5q48 0 79-24t31-66q0-44-27.5-68T466 589q-72-23-107.5-61T323 433q0-55 35.5-92t92.5-42v-83h60v83q45 5 77.5 29.5T638 391l-56 24q-14-32-37.5-46.5T483 354q-46 0-73 21t-27 57q0 38 30 61.5T524 542q68 21 100.5 60.5T657 702q0 63-37 101.5T511 853v83h-60Z"></path></svg> Deposits
                                 </div>
                                 <div class="x1-inner">
-                                    <span>20</span> >
+                                    <span>{{ number_format($NumberOfCarDeposits) }}</span> <strong>></strong>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="x1-inner">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"></path></svg> Refueling
+                                </div>
+                                <div class="x1-inner">
+                                    <span>{{ number_format($NumberOfCarRefueling) }}</span> <strong>></strong>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="x1-inner">
+                                    <img src="{{ asset('Images/service.png') }}" alt=""> Drivers
+                                </div>
+                                <div class="x1-inner">
+                                    <span>{{ $NumberOfDrivers }}</span> <strong>></strong>
                                 </div>
                             </li>
                         </ul>
@@ -480,52 +651,82 @@
            </div>
             <div class="x">
                 <div class="x-inner">
-                    <h2>Trips Performance</h2>
+                    <h2>Fleet Utilization</h2>
                     <div class="x-top">
                         <span>
-                            <strong>345</strong>
-                            Planned for today
+                            <strong>{{ number_format($FleetSurvey_TOTAL) }}</strong>
+                            Activities Completed
                         </span>
                         <span>
-                            23 Left
+                            Cars: {{ $NumberOfCars_ACTIVE }} Left
                         </span>
-                    </div>
+                    </div>  
                     <div class="progress">
-                        <div class="data" style="width: 30%;"></div>
-                        <div class="data" style="width: 40%;"></div>
-                        <div class="data" style="width: 70%;"></div>
-                        <div class="data" style="width: 75%;"></div>
+                        <div class="data" style="width: {{ $FleetSurvey_Repairs_PERCENTAGE }}%;"></div>
+                        <div class="data" style="width: {{ $FleetSurvey_Maintenance_PERCENTAGE }}%;"></div>
+                        <div class="data" style="width: {{ $FleetSurvey_Deposits_PERCENTAGE }}%;"></div>
+                        <div class="data" style="width: {{ $FleetSurvey_Refueling_PERCENTAGE }}%;"></div>
                     </div>
                     <div class="x-middle">
                         <div class="middle-x">
                             <div class="middle-x-inner">
-                                40% / 567 <br>
-                                <span class="x-1">Live Trips</span>
+                                {{ round($FleetSurvey_Refueling_PERCENTAGE, 1) }}% / {{ number_format($NumberOfCarRefueling) }} <br>
+                                <span class="x-1">Refueling</span>
                             </div>
                             <div class="middle-x-inner">
-                                40% / 567 <br>
-                                <span class="x-2">Completed</span>
+                                {{ round($FleetSurvey_Deposits_PERCENTAGE, 1) }}% / {{ number_format($NumberOfCarDeposits) }} <br>
+                                <span class="x-2">Deposits</span>
                             </div>
                         </div>
                         <div class="middle-x">
                             <div class="middle-x-inner">
-                                40% / 567 <br>
-                                <span class="x-3">Live Trips</span>
+                                {{ round($FleetSurvey_Repairs_PERCENTAGE, 1) }}% / {{ number_format($NumberOfCarRepairs) }} <br>
+                                <span class="x-3">Repairs</span>
                             </div>
                             <div class="middle-x-inner">
-                                40% / 567 <br>
-                                <span class="x-4">Completed</span>
+                                {{ round($FleetSurvey_Maintenance_PERCENTAGE, 1) }}% / {{ number_format($NumberOfCarMaintenance) }} <br>
+                                <span class="x-4">Service</span>
                             </div>
                         </div> 
                     </div>
                     <div class="x-top">
                         <span>
-                            <strong>134</strong>
-                            Planned for tommorrow
+                            <strong>{{ $NumberOfDrivers }}</strong>
+                            Drivers available 
                         </span> 
                     </div>
                 </div>
            </div>
+           
         </div>
+        <div class="inner-4">
+            <div class="x--inner">
+                <h2>
+                    Monthly Analysis
+                    <br>
+                    <small>Year {{ date('Y') }}</small>
+                </h2>
+                <div class="custom-chart">  
+                    @for ($i = 0; $i < count($MonthNames); $i++) 
+                        @unless (empty(${'NumberOfCarMaintenance_' . $MonthNames[$i]}) AND empty(${'NumberOfCarDeposits_' . $MonthNames[$i]}) AND empty(${'NumberOfCarRefueling_' . $MonthNames[$i]}) AND empty(${'NumberOfCarRepairs_' . $MonthNames[$i]}))
+                            <div class="custom-chart-inner">
+                                <div class="chart-label">{{ $MonthNames[$i] }}</div><div class="chart-data" style="width: {{ ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} }}%"></div>
+                                    @unless (empty(${'NumberOfCarMaintenance_' . $MonthNames[$i]}))
+                                        <div class="chart-label chart-label-2">Maintenance</div><div class="chart-data chart-data-2" style="width: {{ ${'NumberOfCarMaintenance_' . $MonthNames[$i]} }}%"></div>
+                                    @endunless
+                                    @unless (empty(${'NumberOfCarDeposits_' . $MonthNames[$i]}))
+                                    <div class="chart-label chart-label-2">Deposits</div><div class="chart-data chart-data-2" style="width: {{ ${'NumberOfCarDeposits_' . $MonthNames[$i]} }}%"></div>
+                                    @endunless
+                                    @unless (empty(${'NumberOfCarRefueling_' . $MonthNames[$i]}))
+                                    <div class="chart-label chart-label-2">Refueling</div><div class="chart-data chart-data-2" style="width: {{ ${'NumberOfCarRefueling_' . $MonthNames[$i]} }}%"></div>
+                                    @endunless
+                                    @unless (empty(${'NumberOfCarRepairs_' . $MonthNames[$i]}))
+                                    <div class="chart-label chart-label-2">Motor Repairs</div><div class="chart-data chart-data-2" style="width: {{ ${'NumberOfCarRepairs_' . $MonthNames[$i]} }}%"></div>
+                                    @endunless 
+                            </div>
+                        @endunless
+                    @endfor 
+                </div>
+            </div>
     </div>
 @endsection
