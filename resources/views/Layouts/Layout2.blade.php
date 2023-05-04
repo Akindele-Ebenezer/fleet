@@ -581,6 +581,7 @@
             <script src="{{ asset('Js/ReadOnly/Refueling.js') }}"></script>
         @endif
         <script src="{{ asset('Js/Loader.js') }}"></script> 
+        <script src="{{ asset('Js/Tooltips.js') }}"></script> 
 </body>
 </html>
 @endif

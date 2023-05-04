@@ -363,8 +363,7 @@
         display: flex;
         height: 26em;
         justify-content: space-between;
-        margin-block: 1.5em;
-        overflow-y: scroll;
+        margin-block: 1.5em; 
         width: 98%; 
 
         h2 {
@@ -386,30 +385,154 @@
             padding: 1em;
             width: 50%;
 
-            .custom-chart {   
-
+            .custom-chart {    
                 .chart-label {
-                    color: #ddd;
+                    color: #ddd; 
+
+                    &:first-of-type {  
+                        margin-right: 1em;
+                    }  
                 }
 
                 .chart-label-2 {
                      
                 }
 
-                .chart-data {
-                    background: blue;
-                    display: block;
-                    height: 3em; 
+                .chart-data { 
+                    border-radius: 0.15em;
+                    height: 1em; 
+                    position: relative;
+
+                    .tooltip-inner {
+                        background: #111;
+                        display: none;
+                        border-radius: 0.5em;
+                        padding: 0.5em;
+                        margin-left: 1em;
+                        position: absolute;
+                        top: -1em;
+                        width: 8em;
+                        z-index: 10;
+
+                        h3 {
+                            align-items: center;
+                            color: #ddd;
+                            display: flex;
+                            font-weight: unset;
+
+                            span {
+                                border-radius: 50%;
+                                display: block;
+                                height: 0.65em;
+                                margin-right: 0.5em;
+                                width: 0.65em;
+
+                                &.legend-maintenance {
+                                    background-color: $Color-2;
+                                }
+                                &.legend-repairs {
+                                    background-color: $Color-4;
+                                }
+                                &.legend-refueling {
+                                    background-color: $Color-3;
+                                }
+                                &.legend-deposits {
+                                    background-color: $Color-1;
+                                }
+                                &.legend-total {
+                                    background-color: #245953;
+                                }   
+                            }
+                        }
+
+                        span {
+                            color: #ddd;
+                                
+                            &.legend-data {
+                                margin-left: 1em;
+                            }
+                        }
+                    }
                 }
                 
-                .chart-data-2 {
-                    height: 1em;
+                .chart-data-2 { 
                 }
 
                 &-inner {
+                    align-items: center;
                     border: 1px solid #222;
+                    display: flex;
                     margin-block: 0.5em;
-                    padding: 0.5em;
+                    padding: 0.5em; 
+
+                    .chart-label { 
+                    }
+                    .Deposits {
+                        background-color: $Color-1;
+                    }
+
+                    .Maintenance {
+                        background-color: $Color-2;
+                    }
+
+                    .Refueling {
+                        background-color: $Color-3;
+                    }
+
+                    .Repairs {
+                        background-color: $Color-4;
+                    }
+
+                    .Total {
+                        background-color: #245953;
+                    } 
+                }
+            }
+
+            .chart-heading {
+                align-items: center;
+                display: flex;
+                justify-content: space-between;
+
+                .legend {
+                    border: 1px solid #222;
+                    border-radius: 0.5em;
+                    display: flex;
+                    padding: 0.25em;
+
+                    &-x {
+                        align-items: center;
+                        border: 1px solid #222;
+                        border-radius: 0.5em;
+                        color: #ddd;
+                        display: flex;
+                        margin-inline: 0.5em;
+                        padding-inline: 0.5em;
+
+                        span {
+                            border-radius: 50%;
+                            display: block;
+                            height: 0.65em;
+                            margin-right: 0.5em;
+                            width: 0.65em;
+
+                            &.legend-1 {
+                                background-color: $Color-2;
+                            }
+                            &.legend-2 {
+                                background-color: $Color-4;
+                            }
+                            &.legend-3 {
+                                background-color: $Color-3;
+                            }
+                            &.legend-4 {
+                                background-color: $Color-1;
+                            }
+                            &.legend-5 {
+                                background-color: #245953;
+                            }   
+                        }
+                    }
                 }
             }
         }
