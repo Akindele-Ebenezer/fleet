@@ -765,5 +765,46 @@
                     @endfor 
                 </div>
             </div>
+            <div class="x--inner">
+                <div class="chart-heading">
+                    <h2>
+                        Recent Comments
+                        <br>
+                        <small>Issues and observations</small>
+                    </h2> 
+                </div> 
+                <div class="comments">
+                    @foreach ($MaintenanceComments as $Comment) 
+                    @foreach (\App\Models\User::where('id', $Comment->UserId)->get() as $User)
+                    <div class="comments-x">
+                        <div class="x-inner-wrapper">
+                            <div class="x-inner"><img src="{{ asset('Images/profile-pic.jpg') }}" alt=""></div>
+                            <div class="x-inner">
+                                {{ $User->name }} commented on Maintenance
+                                <br>
+                                {{ $Comment->MaintenanceAction }}
+                            </div>
+                        </div>
+                        <div class="x-inner">{{ $Comment->Date }}</div>
+                    </div>
+                    @endforeach 
+                    @endforeach
+                    @foreach ($RepairComments as $Comment) 
+                    @foreach (\App\Models\User::where('id', $Comment->UserId)->get() as $User)
+                    <div class="comments-x">
+                        <div class="x-inner-wrapper">
+                            <div class="x-inner"><img src="{{ asset('Images/profile-pic.jpg') }}" alt=""></div>
+                            <div class="x-inner">
+                                {{ $User->name }} commented on Repair
+                                <br>
+                                {{ $Comment->RepairAction }}
+                            </div>
+                        </div>
+                        <div class="x-inner">{{ $Comment->Date }}</div>
+                    </div>
+                    @endforeach 
+                    @endforeach
+                </div>
+            </div>
     </div>
 @endsection

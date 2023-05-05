@@ -381,9 +381,37 @@
         .x--inner {
             background: #111;
             border-radius: 1em;
-            height: fit-content;
+            height: 26em;
             padding: 1em;
             width: 50%;
+
+            &:last-of-type {
+                overflow-y: scroll;
+                width: 49%;
+            }
+
+            .comments {
+                &-x {
+                    border-bottom: 1px solid #222;
+                    display: flex; 
+                    justify-content: space-between;
+                    padding-bottom: 0.5em;
+
+                    .x-inner {
+                        color: #ddd;
+                        padding-right: 1.5em;
+
+                        &-wrapper {
+                            display: flex;
+                        }
+
+                        img {
+                            width: 2em;
+                            border-radius: 0.5em
+                        }
+                    }
+                }
+            }
 
             .custom-chart {    
                 .chart-label {
@@ -398,8 +426,7 @@
                      
                 }
 
-                .chart-data { 
-                    border-radius: 0.15em;
+                .chart-data {  
                     height: 1em; 
                     position: relative;
 

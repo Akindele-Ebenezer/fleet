@@ -8,16 +8,10 @@ use AmrShawky\LaravelCurrency\Facade\Currency;
 
 class CarController extends Controller
 {
-    public function config() { 
+    public function config() {  
         $Cars = Car::orderBy('PurchaseDate', 'DESC')->paginate(7);
         $Cars__MyRecords = Car::where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7);
-        $CarOwners = Car::select(['id','CarOwner', 'VehicleNumber'])->paginate(7); 
-        // $TotalRefuel_IN_DOLLARS = Currency::convert()
-        //                             ->from('GBP')
-        //                             ->to('NGN')
-        //                             ->amount(200)
-        //                             ->get();
-        // dd($TotalRefuel_IN_DOLLARS);
+        $CarOwners = Car::select(['id','CarOwner', 'VehicleNumber'])->paginate(7);  
         return [
             'Cars' => $Cars,
             'Cars__MyRecords' => $Cars__MyRecords, 

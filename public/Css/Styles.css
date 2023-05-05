@@ -1128,9 +1128,30 @@ svg {
 .analytics .inner-4 .x--inner {
   background: #111;
   border-radius: 1em;
-  height: fit-content;
+  height: 26em;
   padding: 1em;
   width: 50%;
+}
+.analytics .inner-4 .x--inner:last-of-type {
+  overflow-y: scroll;
+  width: 49%;
+}
+.analytics .inner-4 .x--inner .comments-x {
+  border-bottom: 1px solid #222;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5em;
+}
+.analytics .inner-4 .x--inner .comments-x .x-inner {
+  color: #ddd;
+  padding-right: 1.5em;
+}
+.analytics .inner-4 .x--inner .comments-x .x-inner-wrapper {
+  display: flex;
+}
+.analytics .inner-4 .x--inner .comments-x .x-inner img {
+  width: 2em;
+  border-radius: 0.5em;
 }
 .analytics .inner-4 .x--inner .custom-chart .chart-label {
   color: #ddd;
@@ -1139,7 +1160,6 @@ svg {
   margin-right: 1em;
 }
 .analytics .inner-4 .x--inner .custom-chart .chart-data {
-  border-radius: 0.15em;
   height: 1em;
   position: relative;
 }
