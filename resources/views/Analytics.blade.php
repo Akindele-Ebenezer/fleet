@@ -155,6 +155,20 @@
             height: unset; 
             overflow: unset; 
         }
+
+        .report-data-heading .inner h1 {
+            background: #000;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .report-data-heading .inner h1 span {
+            background: #000;
+            position: absolute;
+        } 
+
     </style>
  
     <div class="analytics">  

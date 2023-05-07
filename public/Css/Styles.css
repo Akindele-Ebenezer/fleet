@@ -819,6 +819,9 @@ svg {
   padding: 1em;
 }
 
+.analytics {
+  margin-top: 7em;
+}
 .analytics .inner-1 {
   display: flex;
   justify-content: space-between;
