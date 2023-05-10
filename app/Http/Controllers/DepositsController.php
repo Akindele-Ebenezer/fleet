@@ -21,6 +21,51 @@ class DepositsController extends Controller
     {
         $Config = self::config();
 
+        if (isset($_GET['Filter_All_Deposits'])) { 
+            if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
+                return back();
+            }
+
+            $Deposits = Deposits::whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) 
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
+            $Deposits->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Deposits', $Config)->with('Deposits', $Deposits);
+        }
+
+        if (isset($_GET['Filter_Deposits_Yearly'])) {
+            if(empty($_GET['VehicleNo']) || empty($_GET['Year'])) {
+                return back();
+            }
+
+            $Deposits = Deposits::where('VehicleNumber', $_GET['VehicleNo']) 
+                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
+            $Deposits->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Deposits', $Config)->with('Deposits', $Deposits);
+        }
+
+        if (isset($_GET['Filter_Deposits_Range'])) {
+            if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
+                return back();
+            }
+
+            $Deposits = Deposits::where('VehicleNumber', $_GET['VehicleNo'])
+                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) //ANY DATE
+                                        // ->orWhereBetween('Date', ['2021-01-01', '2021-12-31']) //YEARLY
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
+            $Deposits->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Deposits', $Config)->with('Deposits', $Deposits);
+        }
+        ///////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
             $Deposits = Deposits::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
@@ -77,7 +122,11 @@ class DepositsController extends Controller
      * Store a newly created resource in storage.
      */
     public function store($Deposits, Request $request)
-    {
+    { 
+        $Balance = \App\Models\Car::where('CardNumber', $request->CardNumber)->first();
+        $Balance->Balance = $request->Amount + $Balance->Balance;
+        $Balance->save();
+        
         Deposits::insert([ 
             'VehicleNumber' => $Deposits, 
             'CardNumber' => $request->CardNumber, 

@@ -315,10 +315,26 @@
                                 </th>
                             </tr>
                             <tr>
-                                <td>= {{ number_format($NumberOfCarRepairs) }}</td>
-                                <td>= {{ number_format($NumberOfCarRefueling) }}</td>
-                                <td>= {{ number_format($NumberOfCarDeposits) }}</td>
-                                <td>= {{ number_format($NumberOfCarMaintenance) }}</td>
+                                @php
+                                                                    
+                                    $SumOfCarRepairs = \App\Models\Repair::select('Cost')->sum('Cost');
+                                    $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')->sum('Cost');
+                                    $SumOfCarDeposits = \App\Models\Deposits::select('Amount')->sum('Amount');
+                                    $SumOfCarRefueling = \App\Models\Refueling::select('Amount')->sum('Amount');
+                                
+                                    function get_fleet_survey_currency_in_dollars($Value) {
+                                        // ONE NAIRA TO DOLLAR CURRENTLY
+                                        $USD = 0.0022;
+                                        //
+                                        $Result = $USD * $Value; 
+                                        return number_format(round($Result, 0));
+                                    } 
+                                    
+                                @endphp
+                                <td>${{ get_fleet_survey_currency_in_dollars($SumOfCarRepairs) }}</td>
+                                <td>${{ get_fleet_survey_currency_in_dollars($SumOfCarRefueling) }}</td>
+                                <td>${{ get_fleet_survey_currency_in_dollars($SumOfCarDeposits) }}</td>
+                                <td>${{ get_fleet_survey_currency_in_dollars($SumOfCarMaintenance) }}</td>
                             </tr>
                         </table>
                         <button class="deposits-route-edit">Deposit</button>
@@ -512,6 +528,41 @@
                 </div> 
             </div>
             <div class="action">
+                @unless (!(Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling'))) 
+                <div class="FilterWrapper">
+                    <button class="action-x Filter-X">Vehicle {{ Route::is('Repairs') ? 'Repairs' : '' }}{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  :: (Specify)<svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg></button>
+                    <div class="inner-filter">
+                        <form action="">
+                            <h3>Global Time Period</h3>
+                            <p>All Vehicles</p>
+                            <ul>
+                                <li>From: <input type="date" name="Date_From"></li>
+                                <li>To: <input type="date" name="Date_To"></li>
+                            </ul>
+                            <button class="action-x" name="Filter_All_{{ Route::is('Repairs') ? 'Repairs' : '' }}{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}">Apply</button>
+                        </form>
+                        <form action="">
+                            <h3>Vehicle Time Period</h3>
+                            <p>{{ Route::is('Repairs') ? 'Repairs' : '' }}{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  Yearly</p>
+                            <ul>
+                                <li>Vehicle No.: <input type="text" name="VehicleNo"></li>
+                                <li>Specify Year: <input type="number" name="Year"></li>
+                            </ul>
+                            <button class="action-x" name="Filter_{{ Route::is('Repairs') ? 'Repairs' : '' }}{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Yearly">Apply</button>
+                        </form>
+                        <form action="">
+                            <h3>Time Period</h3>
+                            <p>{{ Route::is('Repairs') ? 'Repairs' : '' }}{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  (Range)</p>
+                            <ul>
+                                <li>Vehicle No.: <input type="text" name="VehicleNo"></li> 
+                                <li>Start Date: <input type="date" name="Date_From"></li>
+                                <li>End Date: <input type="date" name="Date_To"></li>
+                            </ul>
+                            <button class="action-x" name="Filter_{{ Route::is('Repairs') ? 'Repairs' : '' }}{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Range">Apply</button>
+                        </form>
+                    </div>
+                </div>
+                @endunless
                 <div class="inner">
                     <button class="action-x {{ Route::is('MyRecords') ? 'add-car' : '' }} {{ Route::is('EditRepairs') ? 'add-repair' : '' }} {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') ? 'cars-route' : '' }}"> {{ Route::is('MyRecords') ? '+ Add Vehicle' : '' }} {{ Route::is('EditRepairs') ? '+ Add Repairs' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') ? 'Explore Cars' : '' }}</button><button>Export to EXCEL</button>
                 </div>

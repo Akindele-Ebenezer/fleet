@@ -16,8 +16,11 @@
             </tr>
             @foreach ($Deposits as $Deposit) 
             <tr> 
+                @php
+                    $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Deposit->VehicleNumber)->first();  
+                @endphp
                 <td>{{ $loop->iteration  + (($Deposits->currentPage() -1) * $Deposits->perPage()) + (($Deposits->currentPage() -1) * $Deposits->perPage()) }}</td>
-                <td class="show-record-x">{{ $Deposit->VehicleNumber }}</td>
+                <td class="show-record-x show-record-x-2"><span class="{{ $CarStatus->Status ?? 'INACTIVE' }}"></span>{{ $Deposit->VehicleNumber }}</td>
                 <span class="VehicleNumber_X_DATA_Edit Hide">{{ $Deposit->VehicleNumber }}</span>
                 <span class="Date_X_DATA_Edit Hide">{{ $Deposit->Date }}</span>
                 <span class="CardNumber_X_DATA_Edit Hide">{{ $Deposit->CardNumber }}</span>

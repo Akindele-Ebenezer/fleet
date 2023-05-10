@@ -27,14 +27,14 @@
                     </span>
                     <input class="Consumption_X" type="text">
                 </li> --}}
-                <li>
+                <li class="readonly">
                     <span>
                         <img src="{{ asset('Images/deposit.png') }}" alt="">
                         Deposits
                     </span>
                     <input class="Deposits_X" type="number" name="Deposits">
                 </li>
-                <li>
+                <li class="readonly">
                     <span>
                         <img src="{{ asset('Images/refueling.png') }}" alt="">
                         Refueling
@@ -47,6 +47,13 @@
                         Balance
                     </span>
                     <input class="Balance_X" type="number" name="Balance">
+                </li>
+                <li class="readonly">
+                    <span>
+                        <img src="{{ asset('Images/balance-brought-forward.png') }}" alt="">
+                        Brought Forward
+                    </span>
+                    <input class="BroughtForward_X" type="number">
                 </li>
                 <li>
                     <span>

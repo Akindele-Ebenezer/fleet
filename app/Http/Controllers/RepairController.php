@@ -21,6 +21,51 @@ class RepairController extends Controller
     {
         $Config = self::config();
 
+        if (isset($_GET['Filter_All_Repairs'])) { 
+            if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
+                return back();
+            }
+
+            $Repairs = Repair::whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) 
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
+            $Repairs->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Repairs', $Config)->with('Repairs', $Repairs);
+        }
+
+        if (isset($_GET['Filter_Repairs_Yearly'])) {
+            if(empty($_GET['VehicleNo']) || empty($_GET['Year'])) {
+                return back();
+            }
+
+            $Repairs = Repair::where('VehicleNumber', $_GET['VehicleNo']) 
+                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
+            $Repairs->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Repairs', $Config)->with('Repairs', $Repairs);
+        }
+
+        if (isset($_GET['Filter_Repairs_Range'])) {
+            if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
+                return back();
+            }
+
+            $Repairs = Repair::where('VehicleNumber', $_GET['VehicleNo'])
+                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) //ANY DATE
+                                        // ->orWhereBetween('Date', ['2021-01-01', '2021-12-31']) //YEARLY
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
+            $Repairs->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Repairs', $Config)->with('Repairs', $Repairs);
+        }
+        ///////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
             $Repairs = Repair::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 

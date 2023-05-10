@@ -12,6 +12,7 @@ class CarController extends Controller
         $Cars = Car::orderBy('PurchaseDate', 'DESC')->paginate(7);
         $Cars__MyRecords = Car::where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7);
         $CarOwners = Car::select(['id','CarOwner', 'VehicleNumber'])->paginate(7);  
+         
         return [
             'Cars' => $Cars,
             'Cars__MyRecords' => $Cars__MyRecords, 
@@ -231,10 +232,7 @@ class CarController extends Controller
             'Driver' => $request->Driver,
             'CardNumber' => $request->CardNumber,
             'MonthlyBudget' => $request->MonthlyBudget,
-            'CompanyCode' => $request->CompanyCode,
-            'TotalDeposits' => $request->Deposits,
-            'TotalRefueling' => $request->Refueling,
-            'Balance' => $request->Balance,
+            'CompanyCode' => $request->CompanyCode, 
             'PinCode' => $request->PinCode, 
             'Status' => $request->Status,
             'StopDate' => $request->StopDate,

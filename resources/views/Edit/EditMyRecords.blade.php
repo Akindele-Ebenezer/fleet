@@ -93,6 +93,7 @@
                                 <span class="Status_X_DATA_X Hide">{{ $Car->Status }}</span>
                                 <span class="Comments_X_DATA_X Hide">{{ $Car->Comments }}</span>
                                 <span class="CarId_X_DATA_X Hide">{{ $Car->id }}</span> 
+                                <span class="BalanceBroughtForward_X_DATA Hide">{{ $Car->MonthlyBudget - $Car->Balance }}</span>
                             </div>
                             <div class="stats">
                                 <div class="inner">

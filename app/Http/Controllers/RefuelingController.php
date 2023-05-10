@@ -22,6 +22,51 @@ class RefuelingController extends Controller
     {
         $Config = self::config();
 
+        if (isset($_GET['Filter_All_Refueling'])) { 
+            if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
+                return back();
+            }
+
+            $Refueling = Refueling::whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) 
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
+            $Refueling->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Refueling', $Config)->with('Refuelings', $Refueling);
+        }
+
+        if (isset($_GET['Filter_Refueling_Yearly'])) {
+            if(empty($_GET['VehicleNo']) || empty($_GET['Year'])) {
+                return back();
+            }
+
+            $Refueling = Refueling::where('VehicleNumber', $_GET['VehicleNo']) 
+                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
+            $Refueling->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Refueling', $Config)->with('Refuelings', $Refueling);
+        }
+
+        if (isset($_GET['Filter_Refueling_Range'])) {
+            if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
+                return back();
+            }
+
+            $Refueling = Refueling::where('VehicleNumber', $_GET['VehicleNo'])
+                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) //ANY DATE
+                                        // ->orWhereBetween('Date', ['2021-01-01', '2021-12-31']) //YEARLY
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
+            $Refueling->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Refueling', $Config)->with('Refuelings', $Refueling);
+        }
+        ///////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
             $Refuelings = Refueling::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
@@ -84,12 +129,17 @@ class RefuelingController extends Controller
      */
     public function store($Refueling, Request $request)
     {
+        $Balance = \App\Models\Car::where('CardNumber', $request->CardNumber)->first();
+        $Balance->Balance = $Balance->Balance - $request->Amount;
+        $Balance->save();
+
         Refueling::insert([ 
             'VehicleNumber' => $request->VehicleNumber_REFUELING, 
             'CardNumber' => $request->CardNumber, 
             'Amount' => $request->Amount, 
             'Date' => $request->Date, 
             'Time' => $request->Time, 
+            'KMLITER' => $request->KMLITER, 
             'KMETER' => $request->KMETER, 
             'TERNO' => $request->TerminalNumber, 
             'Quantity' => $request->Quantity, 
@@ -124,7 +174,7 @@ class RefuelingController extends Controller
      * Update the specified resource in storage.
      */
     public function update($RefuelingId, Request $request, Refueling $refueling)
-    {  
+    {   
         Refueling::where('id', $RefuelingId)
             ->update([
                 'VehicleNumber' => $request->VehicleNumber, 
@@ -132,6 +182,7 @@ class RefuelingController extends Controller
                 'Date' => $request->Date, 
                 'Time' => $request->Time, 
                 'Amount' => $request->Amount, 
+                'KMLITER' => $request->KMLITER, 
                 'KMETER' => $request->KMETER, 
                 'TERNO' => $request->TerminalNumber, 
                 'Quantity' => $request->Quantity, 

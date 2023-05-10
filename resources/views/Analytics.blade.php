@@ -289,7 +289,7 @@
                         ctx.beginPath();
                         ctx.arc(130, 130, 110, s, f);
                         ctx.lineWidth = 10;
-                        ctx.strokeStyle = "green";
+                        ctx.strokeStyle = "green"; 
                         ctx.stroke();
                         ctx.closePath();
 
@@ -351,8 +351,26 @@
                         }
 
                         //Calling Circle function
-                        circle(100,{{ round($NumberNumberOfCars_ACTIVE_PERCENTAGE, 0) }});
-                        circle2(100,{{ round($NumberNumberOfCars_INACTIVE_PERCENTAGE, 0) }}); 
+                        circle(100,0);
+                        circle2(100,0);
+                        setTimeout(() => {  
+                            circle(100, 12); 
+                        }, 1000);
+                        setTimeout(() => {  
+                            circle(100, 41); 
+                        }, 2000);
+                        setTimeout(() => {  
+                            circle2(100, 24); 
+                        }, 1500);
+                        setTimeout(() => {  
+                            circle2(100, 41); 
+                        }, 2500);
+                        setTimeout(() => {  
+                            circle(100, {{ round($NumberNumberOfCars_ACTIVE_PERCENTAGE, 0) }}); 
+                        }, 3000);
+                        setTimeout(() => {   
+                            circle2(100, {{ round($NumberNumberOfCars_INACTIVE_PERCENTAGE, 0) }}); 
+                        }, 3000);
                     </script>
            </div>
            <div class="x">
@@ -440,7 +458,13 @@
                             }
     
                             //Calling Circle function 
-                            circle3(100,100); 
+                            circle3(100,0); 
+                        setTimeout(() => {   
+                            circle3(100, 75); 
+                        }, 2000);
+                        setTimeout(() => {   
+                            circle3(100, 100); 
+                        }, 3000);
                         </script>
                 </div>
            </div>

@@ -21,7 +21,52 @@ class MaintenanceController extends Controller
     public function index()
     {
         $Config = self::config();
-  
+  //////////////
+        if (isset($_GET['Filter_All_Maintenance'])) {
+            if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
+                return back();
+            }
+
+            $Maintenance = Maintenance::whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) 
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
+            $Maintenance->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Maintenance', $Config)->with('Maintenance', $Maintenance);
+        }
+
+        if (isset($_GET['Filter_Maintenance_Yearly'])) {
+            if(empty($_GET['VehicleNo']) || empty($_GET['Year'])) {
+                return back();
+            }
+
+            $Maintenance = Maintenance::where('VehicleNumber', $_GET['VehicleNo']) 
+                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
+            $Maintenance->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Maintenance', $Config)->with('Maintenance', $Maintenance);
+        }
+
+        if (isset($_GET['Filter_Maintenance_Range'])) {
+            if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
+                return back();
+            }
+
+            $Maintenance = Maintenance::where('VehicleNumber', $_GET['VehicleNo'])
+                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) //ANY DATE
+                                        // ->orWhereBetween('Date', ['2021-01-01', '2021-12-31']) //YEARLY
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
+            $Maintenance->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Maintenance', $Config)->with('Maintenance', $Maintenance);
+        }
+  //////////////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
             $Maintenance = Maintenance::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 

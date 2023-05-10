@@ -17,8 +17,11 @@
             </tr> 
             @foreach ($Maintenance as $Maintenancee) 
             <tr> 
+                @php
+                    $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Maintenancee->VehicleNumber)->first();  
+                @endphp
                 <td>{{ $loop->iteration  + (($Maintenance->currentPage() -1) * $Maintenance->perPage()) }}</td>
-                <td class="show-record-x">{{ $Maintenancee->VehicleNumber }}</td>
+                <td class="show-record-x show-record-x-2"><span class="{{ $CarStatus->Status ?? 'INACTIVE' }}"></span>{{ $Maintenancee->VehicleNumber }}</td>
                 <span class="VehicleNumber_X_DATA Hide">{{ $Maintenancee->VehicleNumber }}</span>
                 <span class="Date_X_DATA Hide">{{ $Maintenancee->Date }}</span>
                 <span class="Time_X_DATA Hide">{{ $Maintenancee->Time }}</span>

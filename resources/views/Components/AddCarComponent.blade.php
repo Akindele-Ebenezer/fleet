@@ -139,36 +139,13 @@
                     PIN Code
                 </div>
                 <input type="text" name="PinCode" placeholder="PIN Code..">
-            </div> 
-            {{--  --}} 
-            <div class="new-car-inputs">
-                <div class="new-car-inputs-inner">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M450 855h60v-40h60q12.75 0 21.375-8.625T600 785V655q0-12.75-8.625-21.375T570 625H420v-70h180v-60h-90v-40h-60v40h-60q-12.75 0-21.375 8.625T360 525v130q0 12.75 8.625 21.375T390 685h150v70H360v60h90v40ZM220 976q-24 0-42-18t-18-42V236q0-24 18-42t42-18h361l219 219v521q0 24-18 42t-42 18H220Zm311-581V236H220v680h520V395H531ZM220 236v159-159 680-680Z"></path></svg>
-                    Deposits
-                </div>
-                <input type="number" name="Deposits" placeholder="Deposits..">
-            </div>
-            <div class="new-car-inputs">
-                <div class="new-car-inputs-inner">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M450 855h60v-40h60q12.75 0 21.375-8.625T600 785V655q0-12.75-8.625-21.375T570 625H420v-70h180v-60h-90v-40h-60v40h-60q-12.75 0-21.375 8.625T360 525v130q0 12.75 8.625 21.375T390 685h150v70H360v60h90v40ZM220 976q-24 0-42-18t-18-42V236q0-24 18-42t42-18h361l219 219v521q0 24-18 42t-42 18H220Zm311-581V236H220v680h520V395H531ZM220 236v159-159 680-680Z"></path></svg>
-                    Balance
-                </div>
-                <input type="number" name="Balance" placeholder="Balance..">
-            </div>
-            <div class="new-car-inputs">
-                <div class="new-car-inputs-inner">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M450 855h60v-40h60q12.75 0 21.375-8.625T600 785V655q0-12.75-8.625-21.375T570 625H420v-70h180v-60h-90v-40h-60v40h-60q-12.75 0-21.375 8.625T360 525v130q0 12.75 8.625 21.375T390 685h150v70H360v60h90v40ZM220 976q-24 0-42-18t-18-42V236q0-24 18-42t42-18h361l219 219v521q0 24-18 42t-42 18H220Zm311-581V236H220v680h520V395H531ZM220 236v159-159 680-680Z"></path></svg>
-                    Refueling
-                </div>
-                <input type="number" name="Refueling" placeholder="Refueling..">
-            </div>
-            {{--  --}}
+            </div>  
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936q-12 0-21-9t-9-21.5q0-12.5 9-21t21-8.5h40V606h-50q-12 0-21-9t-9-21.5q0-12.5 9-21t21-8.5h50V276h-40q-12 0-21-9t-9-21.5q0-12.5 9-21t21-8.5h640q12.75 0 21.375 8.625T830 246q0 12-8.625 21T800 276h-40v270h50q12.75 0 21.375 8.625T840 576q0 12-8.625 21T810 606h-50v270h40q12.75 0 21.375 8.625T830 906q0 12-8.625 21T800 936H160Zm100-60h440V606q-12 0-21-9t-9-21.5q0-12.5 9-21t21-8.5V276H260v270q12.75 0 21.375 8.625T290 576q0 12-8.625 21T260 606v270Zm220.118-153Q526 723 558 691.357q32-31.644 32-76.586Q590 579 569.5 554T480 449q-69 79-89.5 104.5T370 614.771q0 44.942 32.118 76.586 32.117 31.643 78 31.643ZM260 876V276v600Z"></path></svg>
-                    Fuel Monthly Buck
+                    Monthly Budget
                 </div>
-                <input type="number" name="MonthlyBudget" placeholder="Fuel Monthly Buck..">
+                <input type="number" name="MonthlyBudget" placeholder="Monthly Budget..">
             </div> 
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">

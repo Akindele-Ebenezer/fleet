@@ -53,6 +53,14 @@
             </li>
             <li>
                 <span>
+                    <img src="{{ asset('Images/balance-brought-forward.png') }}" alt="">
+                    Brought Forward
+                </span>
+                <span class="BalanceBroughtForward_X"> 
+                </span>
+            </li>
+            <li>
+                <span>
                     <img src="{{ asset('Images/to-deposit.png') }}" alt="">
                     Used By
                 </span>

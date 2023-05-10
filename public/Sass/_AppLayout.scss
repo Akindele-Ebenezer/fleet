@@ -16,13 +16,13 @@
             padding-block: 0.5em;
 
             button {
-                background: $Color-1;
+                background: $Color-2;
                 border-radius: 0.2rem;
                 margin-right: 0.5rem;
                 margin-top: unset;
 
                 &:nth-child(2) {
-                    background: $Color-1;
+                    background: $Color-4;
                 }
 
                 &:nth-child(4) {
@@ -146,6 +146,83 @@
         .action {
             display: flex;
             justify-content: center;
+
+            .FilterWrapper {
+                width: 20em;
+                position: relative;
+
+                button {
+                    align-items: center;
+                    background: #000;
+                    border: 1px solid #222;
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 0.7em;
+                    width: 100%;
+                }
+
+                .inner-filter {
+                    background: #000;
+                    display: none;
+                    height: 25em;
+                    padding: 1em;
+                    position: absolute;
+                    overflow-y: scroll;
+                    z-index: 10;
+
+                    button {
+                        font-size: 12px;
+                        height: 2em;
+                        margin: unset;
+                        margin-bottom: 1em;
+                        padding: unset;
+                        padding-inline: 0.5em;
+                        width: unset;
+                    }
+
+                    form { 
+                        background: #111;
+                        border-radius: .5em;
+                        margin-bottom: 1em;
+                        padding: 0.5em;
+
+                        button {
+                            background-color: $Color-2;
+                            border: unset;
+                        }
+                    }
+
+                    h3 {
+                        font-family: system-ui;
+                    }
+
+                    h3, p, li {
+                        color: #ddd;
+                        text-align: center;
+                    }
+
+                    p { 
+                        font-size: 12px; 
+                    }
+
+                    ul {
+                        padding-block: .5em;
+                        li {
+                            align-items: center;
+                            color: #ccc;
+                            display: flex;
+                            font-size: 12px;
+                            height: 3em;
+                            justify-content: space-between;
+
+                            input {
+                                height: 2em;
+                                width: 55%;
+                            }
+                        }
+                    }
+                }
+            }
 
             .inner {
                 background: rgba(0,0,0,.5);
@@ -373,7 +450,28 @@
                     &:hover {
                         color: #333 !important;
                     }
+                } 
+                
+                &.show-record-x-2 {
+                    align-items: center;
+                    display: flex;
+                    justify-content: space-between;
+
+                    span { 
+                        display: block;
+                        height: .2em;
+                        width: .7em;
+
+                        &.ACTIVE {
+                            background-color: $Color-3;
+                        }
+                        &.INACTIVE {
+                            background-color: $Color-2;
+                        }
+                    }
                 }
+                
+                
             }
 
             td, 

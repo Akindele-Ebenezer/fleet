@@ -12,7 +12,11 @@
                 <th onclick="sortTable(5)">Comments</th> 
             </tr> 
             @foreach ($Cars as $Car)
-            @php include('../resources/views/Includes/CompanyName.php') @endphp
+            @php 
+                include('../resources/views/Includes/CompanyName.php');
+                $TotalDeposits = \App\Models\Deposits::where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
+                $TotalRefueling = \App\Models\Refueling::where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
+            @endphp
             <tr> 
                 <td class="id">
                     {{ $Car->CompanyCode }}
@@ -52,7 +56,7 @@
                                 </div>
                                 <div class="inner-x">
                                     <span>Deposits</span>
-                                    <span>₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</span>
+                                    <span>₦ {{ empty($TotalDeposits) ? '' : number_format($TotalDeposits) }}</span>
                                 </div>
                                 <div class="inner-x">
                                     <span>PIN Code</span>
@@ -67,8 +71,8 @@
                         <div class="stats-heading">
                             <h2></h2>
                             <button class="action-x show-record-button">action</button>
-                            <span class="Deposits_X_DATA Hide">₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</span>
-                            <span class="Refueling_X_DATA Hide">₦ {{ empty($Car->TotalRefueling) ? '' : number_format($Car->TotalRefueling) }}</span>
+                            <span class="Deposits_X_DATA Hide">₦ {{ empty($TotalDeposits) ? '' : number_format($TotalDeposits) }}</span>
+                            <span class="Refueling_X_DATA Hide">₦ {{ empty($TotalRefueling) ? '' : number_format($TotalRefueling) }}</span>
                             <span class="Balance_X_DATA Hide">₦ {{ empty($Car->Balance) ? '' : number_format($Car->Balance) }}</span>
                             <span class="UsedBy_X_DATA Hide">{{ $Car->CarOwner }}</span>
                             <span class="RegistrationNo_X_DATA Hide">{{ $Car->VehicleNumber }}</span>
@@ -94,12 +98,13 @@
                             <span class="StopDate_X_DATA Hide">{{ $Car->StopDate }}</span>
                             <span class="Driver_X_DATA Hide">{{ $Car->Driver }}</span>
                             <span class="Status_X_DATA Hide">{{ $Car->Status  === 'ACTIVE' ? 'This CAR is active since ' . $Car->PurchaseDate . '. Licence Expires on ' . $Car->LicenceExpiryDate . '.'  : 'This CAR is inactive. Licence Expires on ' . $Car->LicenceExpiryDate . '..' }}</span>
+                            <span class="BalanceBroughtForward_X_DATA Hide">{{ $Car->MonthlyBudget - $Car->Balance }}</span>
                         </div> 
                     </div>
                 </td>
-                <td class="refueling">₦ {{ empty($Car->TotalRefueling) ? '' : number_format($Car->TotalRefueling) }}</td>
+                <td class="refueling">₦ {{ empty($TotalRefueling) ? '' : number_format($TotalRefueling) }}</td>
                 <td class="balance">₦ {{ empty($Car->Balance) ? '' : number_format($Car->Balance) }}</td>
-                <td class="to-deposit">₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</td>
+                <td class="to-deposit">₦ {{ empty($TotalDeposits) ? '' : number_format($TotalDeposits) }}</td>
                 <td class="comments"> {{ substr($Car->Comments, 0, 25) }}{{ strlen($Car->Comments) > 25 ? '...' : '' }}</td>
             </tr>  
             @endforeach 

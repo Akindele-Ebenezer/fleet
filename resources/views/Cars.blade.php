@@ -11,7 +11,12 @@
                 <th onclick="sortTable(4)">Balance</th>
             </tr>  
             @foreach ($Cars as $Car)
-                @php include('../resources/views/Includes/CompanyName.php') @endphp
+                @php 
+                    include('../resources/views/Includes/CompanyName.php'); 
+                    $TotalDeposits = \App\Models\Deposits::where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
+                    $TotalRefueling = \App\Models\Refueling::where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
+                    // $BalanceBroughtForward = ;
+                @endphp  
                 <tr> 
                     <td class="id">{{ $loop->iteration  + (($Cars->currentPage() -1) * $Cars->perPage()) }}</td>
                     <td>
@@ -37,7 +42,7 @@
                                     </div>
                                     <div class="inner-x">
                                         <span>Total Deposits</span>
-                                        <span>₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</span>
+                                        <span>₦ {{ empty($TotalDeposits) ? '0.00' : number_format($TotalDeposits) }}</span>
                                     </div>
                                 </div>
                                 <div class="inner">
@@ -62,8 +67,10 @@
                             <div class="stats-heading">
                                 <h2>STATS</h2>
                                 <button class="action-x show-record-button">action</button>
-                                <span class="Deposits_X_DATA Hide">₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</span>
-                                <span class="Refueling_X_DATA Hide">₦ {{ empty($Car->TotalRefueling) ? '' : number_format($Car->TotalRefueling) }}</span>
+                                {{-- <span class="Deposits_X_DATA Hide">₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</span> --}}
+                                <span class="Deposits_X_DATA Hide">₦ {{ empty($TotalDeposits) ? '0.00' : number_format($TotalDeposits) }}</span>
+                                {{-- <span class="Refueling_X_DATA Hide">₦ {{ empty($Car->TotalRefueling) ? '' : number_format($Car->TotalRefueling) }}</span> --}}
+                                <span class="Deposits_X_DATA Hide">₦ {{ empty($TotalRefueling) ? '0.00' : number_format($TotalRefueling) }}</span>
                                 <span class="Balance_X_DATA Hide">₦ {{ empty($Car->Balance) ? '' : number_format($Car->Balance) }}</span>
                                 <span class="UsedBy_X_DATA Hide">{{ $Car->CarOwner }}</span>
                                 <span class="RegistrationNo_X_DATA Hide">{{ $Car->VehicleNumber }}</span>
@@ -89,6 +96,7 @@
                                 <span class="StopDate_X_DATA Hide">{{ $Car->StopDate }}</span>
                                 <span class="Driver_X_DATA Hide">{{ $Car->Driver }}</span>
                                 <span class="Status_X_DATA Hide">{{ $Car->Status  === 'ACTIVE' ? 'This CAR is active since ' . $Car->PurchaseDate . '. Licence Expires on ' . $Car->LicenceExpiryDate . '.'  : 'This CAR is inactive. Licence Expires on ' . $Car->LicenceExpiryDate . '..' }}</span>
+                                <span class="BalanceBroughtForward_X_DATA Hide">{{ $Car->MonthlyBudget - $Car->Balance }}</span>
                             </div>
                             <div class="stats">
                                 <div class="inner">
@@ -97,7 +105,7 @@
                                 </div> 
                                 <div class="inner">
                                     <h3>Refueling</h3>
-                                    <span>₦ {{ empty($Car->TotalRefueling) ? '' : number_format( $Car->TotalRefueling) }}</span>
+                                    <span>₦ {{ empty($TotalRefueling) ? '0.00' : number_format( $TotalRefueling) }}</span>
                                 </div> 
                                 <div class="inner">
                                     <h3>Price</h3>

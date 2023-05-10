@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('Date')->nullable();
             $table->string('Time')->nullable();
             $table->string('KMETER')->nullable();
+            $table->string('KMLITER')->nullable();
             $table->string('TERNO')->nullable();
             $table->string('ReceiptNumber')->nullable(); 
             $table->string('Quantity')->nullable();

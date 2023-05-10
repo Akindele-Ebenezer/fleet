@@ -432,13 +432,13 @@ svg {
   padding-block: 0.5em;
 }
 .report-data-heading .inner button {
-  background: #333;
+  background: #DF2E38;
   border-radius: 0.2rem;
   margin-right: 0.5rem;
   margin-top: unset;
 }
 .report-data-heading .inner button:nth-child(2) {
-  background: #333;
+  background: #3034b5;
 }
 .report-data-heading .inner button:nth-child(4) {
   background: #DF2E38;
@@ -537,6 +537,72 @@ svg {
 .report-inner .action {
   display: flex;
   justify-content: center;
+}
+.report-inner .action .FilterWrapper {
+  width: 20em;
+  position: relative;
+}
+.report-inner .action .FilterWrapper button {
+  align-items: center;
+  background: #000;
+  border: 1px solid #222;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.7em;
+  width: 100%;
+}
+.report-inner .action .FilterWrapper .inner-filter {
+  background: #000;
+  display: none;
+  height: 25em;
+  padding: 1em;
+  position: absolute;
+  overflow-y: scroll;
+  z-index: 10;
+}
+.report-inner .action .FilterWrapper .inner-filter button {
+  font-size: 12px;
+  height: 2em;
+  margin: unset;
+  margin-bottom: 1em;
+  padding: unset;
+  padding-inline: 0.5em;
+  width: unset;
+}
+.report-inner .action .FilterWrapper .inner-filter form {
+  background: #111;
+  border-radius: 0.5em;
+  margin-bottom: 1em;
+  padding: 0.5em;
+}
+.report-inner .action .FilterWrapper .inner-filter form button {
+  background-color: #DF2E38;
+  border: unset;
+}
+.report-inner .action .FilterWrapper .inner-filter h3 {
+  font-family: system-ui;
+}
+.report-inner .action .FilterWrapper .inner-filter h3, .report-inner .action .FilterWrapper .inner-filter p, .report-inner .action .FilterWrapper .inner-filter li {
+  color: #ddd;
+  text-align: center;
+}
+.report-inner .action .FilterWrapper .inner-filter p {
+  font-size: 12px;
+}
+.report-inner .action .FilterWrapper .inner-filter ul {
+  padding-block: 0.5em;
+}
+.report-inner .action .FilterWrapper .inner-filter ul li {
+  align-items: center;
+  color: #ccc;
+  display: flex;
+  font-size: 12px;
+  height: 3em;
+  justify-content: space-between;
+}
+.report-inner .action .FilterWrapper .inner-filter ul li input {
+  height: 2em;
+  width: 55%;
 }
 .report-inner .action .inner {
   background: rgba(0, 0, 0, 0.5);
@@ -704,6 +770,22 @@ svg {
 }
 .report-inner .table td.show-record-x-edit:hover, .report-inner .table td.show-record-x:hover {
   color: #333 !important;
+}
+.report-inner .table td.show-record-x-2 {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.report-inner .table td.show-record-x-2 span {
+  display: block;
+  height: 0.2em;
+  width: 0.7em;
+}
+.report-inner .table td.show-record-x-2 span.ACTIVE {
+  background-color: #41a341;
+}
+.report-inner .table td.show-record-x-2 span.INACTIVE {
+  background-color: #DF2E38;
 }
 .report-inner .table td,
 .report-inner .table th {

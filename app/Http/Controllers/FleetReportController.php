@@ -10,6 +10,16 @@ use App\Models\Repair;
 
 class FleetReportController extends Controller
 { 
+    public function get_sum_of_deposits($QueryColumn, $Value) {
+        $Data = \App\Models\Deposits::where($QueryColumn, $Value)->sum('Amount');
+        return $Data;
+    }
+
+    public function get_sum_of_refueling($QueryColumn, $Value) {
+        $Data = \App\Models\Refueling::where($QueryColumn, $Value)->sum('Amount');
+        return $Data;
+    }
+
     public function get_car_report_data($QueryColumn, $Value, $GetColumn) {
         $Data = Car::where($QueryColumn, $Value)->first(); 
         if(empty($Data->$GetColumn)) {
@@ -99,7 +109,7 @@ class FleetReportController extends Controller
         
         $fpdf->Ln(8);
         $fpdf->Cell(35, 6, 'Refueling', 0, 0, ''); 
-        $fpdf->Cell(50, 6, 'N ' . number_format(self::get_car_report_data('VehicleNumber', $CarReportId, 'TotalRefueling')), 1);
+        $fpdf->Cell(50, 6, 'N ' . number_format(self::get_sum_of_refueling('VehicleNumber', $CarReportId)), 1);
         $fpdf->Cell(20, 6, '');  
         
         $fpdf->Cell(35, 6, 'Repairs', 0, 0, ''); 
@@ -108,7 +118,13 @@ class FleetReportController extends Controller
         
         $fpdf->Ln(8);
         $fpdf->Cell(35, 6, 'Deposits', 0, 0, ''); 
-        $fpdf->Cell(50, 6, 'N ' . number_format(self::get_car_report_data('VehicleNumber', $CarReportId, 'TotalDeposits')), 1);
+        $fpdf->Cell(50, 6, 'N ' . number_format(self::get_sum_of_deposits('VehicleNumber', $CarReportId)), 1);
+        $fpdf->Cell(20, 6, '');  
+          
+        $fpdf->Ln(10);
+
+        $fpdf->Cell(35, 6, 'Brought Forward', 0, 0, ''); 
+        $fpdf->Cell(50, 6, 'N ' . number_format(self::get_car_report_data('VehicleNumber', $CarReportId, 'MonthlyBudget') - self::get_car_report_data('VehicleNumber', $CarReportId, 'Balance')), 1);
         $fpdf->Cell(20, 6, '');  
           
         $fpdf->Ln(10);
@@ -353,7 +369,7 @@ class FleetReportController extends Controller
         $fpdf->SetFillColor(207, 184, 24);
         $fpdf->SetTextColor(255, 255, 255);
         $fpdf->SetFont('Arial', 'B', 10);
-        $fpdf->Cell(50, 10, 'INFORMATION RESOURCES', 0, 0, 'C', true);
+        $fpdf->Cell(50, 10, 'REPAIR', 0, 0, 'C', true);
         $fpdf->Cell(70, 25, '');
         $fpdf->Image('../public/Images/depasa-logo.png', 163, 30, 40, 20);
 
@@ -458,7 +474,7 @@ class FleetReportController extends Controller
         $fpdf->SetFillColor(207, 184, 24);
         $fpdf->SetTextColor(255, 255, 255);
         $fpdf->SetFont('Arial', 'B', 10);
-        $fpdf->Cell(50, 10, 'INFORMATION RESOURCES', 0, 0, 'C', true);
+        $fpdf->Cell(50, 10, 'DEPOSIT', 0, 0, 'C', true);
         $fpdf->Cell(70, 25, '');
         $fpdf->Image('../public/Images/depasa-logo.png', 163, 30, 40, 20);
 
@@ -549,7 +565,7 @@ class FleetReportController extends Controller
         $fpdf->SetFillColor(207, 184, 24);
         $fpdf->SetTextColor(255, 255, 255);
         $fpdf->SetFont('Arial', 'B', 10);
-        $fpdf->Cell(50, 10, 'INFORMATION RESOURCES', 0, 0, 'C', true);
+        $fpdf->Cell(50, 10, 'REFUEL', 0, 0, 'C', true);
         $fpdf->Cell(70, 25, '');
         $fpdf->Image('../public/Images/depasa-logo.png', 163, 30, 40, 20);
 
@@ -559,7 +575,7 @@ class FleetReportController extends Controller
         $fpdf->MultiCell(190, 4, 'This report provides information on the refueling activities carried out during the reporting period, including the number of vehicles that required repairs, the types of repairs performed, and the associated costs. This document clearly shows brief summary of the fleet\'s performance during the reporting period, including key metrics such as total distance traveled, fuel consumption, maintenance costs, and any significant events or changes that have occurred. ');
 
         $fpdf->Ln(8);
-        $fpdf->Cell(50, 5, 'This car is ' . self::get_car_report_data('VehicleNumber', $RefuelingReportId, 'Status')  . '. Licence Expires on ' . self::get_car_report_data('VehicleNumber', $RefuelingReportId, 'LicenceExpiringDate') . '..');
+        $fpdf->Cell(50, 5, 'This car is ' . self::get_sum_of_refueling('VehicleNumber', $RefuelingReportId, 'Status')  . '. Licence Expires on ' . self::get_car_report_data('VehicleNumber', $RefuelingReportId, 'LicenceExpiringDate') . '..');
         $fpdf->Cell(113, 25, '');
         $fpdf->Cell(50, 5, 'Date: ' . date('Y/m/d'));
         $fpdf->SetFont('Arial', '', 9);
