@@ -339,7 +339,7 @@
                                 display: flex;
                                 justify-content: space-between;
                                 padding: 0.3em;
-                                width: 14em;
+                                width: 16em;
 
                                 span {
                                     &:first-of-type { 
@@ -512,7 +512,7 @@
             margin-left: 2rem;
             overflow-y: scroll;
             padding-bottom: 4rem;
-            
+             
             nav {
                 &[aria-label] {
                     align-items: center;
@@ -619,7 +619,11 @@
         overflow-y: scroll;
         padding-inline: .5rem;
         width: 19rem;
-
+ 
+        &::-webkit-scrollbar {
+            background-color: #222; 
+        }
+    
         center {
             img {
                 border-radius: 0.25em;

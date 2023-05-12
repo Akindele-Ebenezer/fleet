@@ -41,7 +41,7 @@ class RefuelingController extends Controller
                 return back();
             }
 
-            $Refueling = Refueling::where('VehicleNumber', $_GET['VehicleNo']) 
+            $Refueling = Refueling::where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%') 
                                         ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
@@ -56,7 +56,7 @@ class RefuelingController extends Controller
                 return back();
             }
 
-            $Refueling = Refueling::where('VehicleNumber', $_GET['VehicleNo'])
+            $Refueling = Refueling::where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) //ANY DATE
                                         // ->orWhereBetween('Date', ['2021-01-01', '2021-12-31']) //YEARLY
                                         ->orderBy('Date', 'DESC')

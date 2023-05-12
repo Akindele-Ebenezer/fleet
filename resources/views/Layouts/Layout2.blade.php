@@ -24,7 +24,7 @@
         {{ Route::is('EditMaintenance') ? 'Edit / MAINTENANCE' : '' }}
         {{ Route::is('EditRepairs') ? 'Edit / REPAIRS' : '' }}
         {{ Route::is('EditRefueling') ? 'Edit / REFUELING' : '' }}
-        {{ Route::is('EditDeposits') ? 'Edit / DEPOSITS' : '' }}
+        {{ Route::is('EditDeposits') ? 'Make Deposits' : '' }}
 
         {{ Route::is('Users') ? 'USERS' : '' }}
     </title>
@@ -169,7 +169,7 @@
                         <a href='{{ route('EditDeposits') }}'>
                             <li class="{{ Route::is('EditDeposits') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M451 936v-84q-57-10-93.5-43.5T305 724l56-23q17 48 49 71.5t77 23.5q48 0 79-24t31-66q0-44-27.5-68T466 589q-72-23-107.5-61T323 433q0-55 35.5-92t92.5-42v-83h60v83q45 5 77.5 29.5T638 391l-56 24q-14-32-37.5-46.5T483 354q-46 0-73 21t-27 57q0 38 30 61.5T524 542q68 21 100.5 60.5T657 702q0 63-37 101.5T511 853v83h-60Z"/></svg>            
-                                Monthly Deposits ({{ number_format($NumberOfCarDeposits_MyRecords) }})
+                                Make Deposits ({{ number_format($NumberOfCarDeposits_MyRecords) }})
                             </li>
                         </a>
                         <a href='{{ route('EditRefueling') }}'>
@@ -264,7 +264,7 @@
                         {{ Route::is('EditMaintenance') ? 'Edit / MAINTENANCE' : '' }}
                         {{ Route::is('EditRepairs') ? 'Edit / REPAIRS' : '' }}
                         {{ Route::is('EditRefueling') ? 'Edit / REFUELING' : '' }}
-                        {{ Route::is('EditDeposits') ? 'Edit / DEPOSITS' : '' }}
+                        {{ Route::is('EditDeposits') ? 'Make Deposits' : '' }}
 
                         {{ Route::is('Users') ? 'USERS' : '' }}
                          

@@ -1,4 +1,5 @@
 <?php
+    \DB::statement("SET SQL_MODE=''");
 
     $Cars_Absolute = \App\Models\Car::all();
     $Cars_Maker_GROUPED = \App\Models\Car::select('Maker')->distinct()->get();
@@ -8,7 +9,7 @@
     $Cars_Status_GROUPED = \App\Models\Car::select('Status')->distinct()->get();
     $Users_Role_GROUPED = \App\Models\User::select('Role')->distinct()->get();
 
-    $NumberOfCarOwners = \App\Models\Car::select('CarOwner')->distinct()->count(); 
+    $NumberOfCarOwners = \App\Models\Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, VehicleNumber")->groupBy('CarOwner')->get()->count(); 
     $NumberOfFleetUsers = \App\Models\User::select('id')->count();
     $NumberOfCars = \App\Models\Car::select('VehicleNumber')->distinct()->count();
     $NumberOfCars_ACTIVE = \App\Models\Car::select('Status')->where('Status', 'ACTIVE')->count();

@@ -9,6 +9,12 @@
   text-decoration: none;
   word-wrap: break-word;
 }
+*::-webkit-scrollbar {
+  background-color: #888;
+}
+* ::-webkit-scrollbar-thumb {
+  background: #333;
+}
 
 .active, .report-inner ul a li:hover {
   background: #fff;
@@ -163,7 +169,7 @@ button {
   justify-content: center;
   position: absolute;
   width: 100vw;
-  z-index: 2;
+  z-index: 2000;
 }
 .loader .inner {
   height: 15em;
@@ -686,7 +692,7 @@ svg {
   display: flex;
   justify-content: space-between;
   padding: 0.3em;
-  width: 14em;
+  width: 16em;
 }
 .report-inner .table.list .car-info .info-inner .inner-x span:first-of-type {
   border-radius: 0.2em;
@@ -891,6 +897,9 @@ svg {
   overflow-y: scroll;
   padding-inline: 0.5rem;
   width: 19rem;
+}
+.report .left-nav::-webkit-scrollbar {
+  background-color: #222;
 }
 .report .left-nav center img {
   border-radius: 0.25em;

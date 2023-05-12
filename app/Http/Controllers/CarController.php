@@ -10,9 +10,9 @@ class CarController extends Controller
 {
     public function config() {  
         $Cars = Car::orderBy('PurchaseDate', 'DESC')->paginate(7);
-        $Cars__MyRecords = Car::where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7);
-        $CarOwners = Car::select(['id','CarOwner', 'VehicleNumber'])->paginate(7);  
-         
+        $Cars__MyRecords = Car::selectRaw("*, TRIM(VehicleNumber) AS VehicleNumber")->where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7); 
+        \DB::statement("SET SQL_MODE=''");
+        $CarOwners = Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, TRIM(VehicleNumber) AS VehicleNumber")->groupBy('CarOwner')->paginate(7); 
         return [
             'Cars' => $Cars,
             'Cars__MyRecords' => $Cars__MyRecords, 
@@ -69,7 +69,7 @@ class CarController extends Controller
         $Config = self::config();
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
-            $FilterValue = $_GET['FilterValue']; 
+            $FilterValue = trim(str_replace(' ', '', $_GET['FilterValue'])); 
             $CarOwners = Car::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Model', 'LIKE', '%' . $FilterValue . '%')

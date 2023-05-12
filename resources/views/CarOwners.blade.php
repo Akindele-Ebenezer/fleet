@@ -8,34 +8,54 @@
                 <th onclick="sortTable(1)">Name</th>
                 <th onclick="sortTable(2)">Car Details</th>
                 <th onclick="sortTable(3)">Registration Number</th> 
-            </tr>
+            </tr> 
             @foreach ($CarOwners as $CarOwner)
-            @php
-                $CarOwners_TOTAL = \App\Models\Car::select('id')
-                                                    ->where('CarOwner', $CarOwner->CarOwner) 
-                                                    ->count();
-                $CarOwners_ACTIVE = \App\Models\Car::select('id')
-                                                    ->where('CarOwner', $CarOwner->CarOwner)
+            @php 
+                $CarOwners_TOTAL = \App\Models\Car::where('CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%') 
+                                                    ->count(); 
+                $CarOwners_ACTIVE = \App\Models\Car::where('CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
                                                     ->where('Status', 'ACTIVE')
                                                     ->count();
-                $CarOwners_INACTIVE = \App\Models\Car::select('id')
-                                                    ->where('CarOwner', $CarOwner->CarOwner)
+                $CarOwners_INACTIVE = \App\Models\Car::where('CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
                                                     ->where('Status', 'INACTIVE')
                                                     ->count(); 
-                $CarOwners_MAINTENANCE = \App\Models\Maintenance::select('id')
-                                                                    ->where('VehicleNumber', $CarOwner->VehicleNumber) 
-                                                                    ->count();
-                $CarOwners_REPAIRS = \App\Models\Repair::select('id')
-                                                                    ->where('VehicleNumber', $CarOwner->VehicleNumber) 
-                                                                    ->count();
-                $CarOwners_REFUELING = \App\Models\Refueling::select('id')
-                                                                    ->where('VehicleNumber', $CarOwner->VehicleNumber) 
-                                                                    ->count();
-                $CarOwners_DEPOSITS = \App\Models\Deposits::select('id')
-                                                                    ->where('VehicleNumber', $CarOwner->VehicleNumber) 
-                                                                    ->count();
+                                                    
+                $CarOwners_MAINTENANCE = \App\Models\Maintenance::select(['maintenances.VehicleNumber', 'cars.VehicleNumber'])
+                                            ->join('cars', 'maintenances.VehicleNumber', '=', 'cars.VehicleNumber')
+                                            ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
+                                            ->count();
+                $CarOwners_REPAIRS = \App\Models\Repair::select(['repairs.VehicleNumber', 'cars.VehicleNumber'])
+                                        ->join('cars', 'repairs.VehicleNumber', '=', 'cars.VehicleNumber')
+                                        ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
+                                        ->count();
+                $CarOwners_REFUELING = \App\Models\Refueling::select(['refuelings.VehicleNumber', 'cars.VehicleNumber'])
+                                        ->join('cars', 'refuelings.VehicleNumber', '=', 'cars.VehicleNumber')
+                                        ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
+                                        ->count();
+                $CarOwners_DEPOSITS = \App\Models\Deposits::select(['deposits.VehicleNumber', 'cars.VehicleNumber'])
+                                        ->join('cars', 'deposits.VehicleNumber', '=', 'cars.VehicleNumber')
+                                        ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
+                                        ->count();
                 $Aggregate = $CarOwners_MAINTENANCE + $CarOwners_REPAIRS + $CarOwners_REFUELING + $CarOwners_DEPOSITS;                                                                    
- 
+  
+                $SumOfMaintenance = \App\Models\Maintenance::select(['maintenances.VehicleNumber', 'cars.VehicleNumber'])
+                                        ->join('cars', 'maintenances.VehicleNumber', '=', 'cars.VehicleNumber')
+                                        ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
+                                        ->sum('maintenances.Cost');             
+                $SumOfRepair = \App\Models\Repair::select(['repairs.VehicleNumber', 'cars.VehicleNumber'])
+                                        ->join('cars', 'repairs.VehicleNumber', '=', 'cars.VehicleNumber')
+                                        ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
+                                        ->sum('repairs.Cost');             
+                $SumOfDeposits = \App\Models\Deposits::select(['deposits.VehicleNumber', 'cars.VehicleNumber'])
+                                        ->join('cars', 'deposits.VehicleNumber', '=', 'cars.VehicleNumber')
+                                        ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
+                                        ->sum('deposits.Amount');             
+                $SumOfRefueling = \App\Models\Refueling::select(['refuelings.VehicleNumber', 'cars.VehicleNumber'])
+                                        ->join('cars', 'refuelings.VehicleNumber', '=', 'cars.VehicleNumber')
+                                        ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
+                                        ->sum('refuelings.Amount');     
+                $AggregateSum = $SumOfMaintenance + $SumOfRepair + $SumOfDeposits + $SumOfRefueling;     
+                
             @endphp
             <tr> 
                 <td>{{ $CarOwner->id }}</td>
@@ -48,26 +68,26 @@
                             <div class="inner">
                                 <div class="inner-x">
                                     <span>Maintenance</span>
-                                    <span>{{ $CarOwners_MAINTENANCE }}</span> 
+                                    <span>₦ {{ number_format($SumOfMaintenance) }} ({{ $CarOwners_MAINTENANCE }})</span> 
                                 </div>
                                 <div class="inner-x">
                                     <span>Repairs</span>
-                                    <span>{{ $CarOwners_REPAIRS }}</span>
+                                    <span>₦ {{ number_format($SumOfRepair) }} ({{ $CarOwners_REPAIRS }})</span>
                                 </div>
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
                                     <span>Deposits</span>
-                                    <span>{{ $CarOwners_DEPOSITS }}</span>
+                                    <span>₦ {{ number_format($SumOfDeposits) }} ({{ $CarOwners_DEPOSITS }})</span>
                                 </div>
                                 <div class="inner-x">
                                     <span>Refueling</span>
-                                    <span>{{ $CarOwners_REFUELING }}</span>
+                                    <span>₦ {{ number_format($SumOfRefueling) }} ({{ $CarOwners_REFUELING }})</span>
                                 </div>
                                 <hr>
                                 <div class="inner-x">
                                     <span>Aggregate</span>
-                                    <span>{{ $Aggregate }}</span>
+                                    <span>₦ {{ number_format($AggregateSum) }} ({{ $Aggregate }})</span>
                                 </div>
                                 <hr>
                             </div>
@@ -80,7 +100,8 @@
                     <span class="total-x">TOTAL</span> &nbsp;  {{ $CarOwners_TOTAL }} &nbsp;&nbsp;
                 </td>
                 <td> 
-                    {{$CarOwner->VehicleNumber}} </td> 
+                    {{$CarOwner->VehicleNumber}} 
+                </td> 
             </tr> 
             @endforeach 
             <div class="table-head filter"> 

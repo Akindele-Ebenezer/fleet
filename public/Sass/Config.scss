@@ -1,3 +1,9 @@
+
+$Color-1: #333;
+$Color-2: #DF2E38; 
+$Color-3: #41a341; 
+$Color-4: #3034b5; 
+ 
 * {
     box-sizing: border-box; 
     color: #333;
@@ -10,13 +16,16 @@
     padding: 0;
     text-decoration: none;
     word-wrap: break-word;
+ 
+    &::-webkit-scrollbar {
+        background-color: #888; 
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: $Color-1;  
+    }
 } 
 
-$Color-1: #333;
-$Color-2: #DF2E38; 
-$Color-3: #41a341; 
-$Color-4: #3034b5; 
- 
 .active {
     background: #fff;
     border-radius: 0.5rem;
@@ -186,7 +195,7 @@ button {
     justify-content: center;
     position: absolute;
     width: 100vw;
-    z-index: 2;
+    z-index: 2000;
 
     .inner {
         height: 15em;
