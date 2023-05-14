@@ -471,7 +471,15 @@
                     }
                 }
                 
-                
+                .car-owner-cars {
+                    color: #ddd;
+                    height: 5.5em;
+                    overflow-y: scroll;
+
+                    &::-webkit-scrollbar {
+                        width: .5em; 
+                    }
+                }
             }
 
             td, 

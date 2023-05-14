@@ -11,14 +11,20 @@
             </tr> 
             @foreach ($CarOwners as $CarOwner)
             @php 
-                $CarOwners_TOTAL = \App\Models\Car::where('CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%') 
+                $CarOwners_TOTAL = \App\Models\Car::select('id')
+                                                    ->where('CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%') 
                                                     ->count(); 
-                $CarOwners_ACTIVE = \App\Models\Car::where('CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
+                $CarOwners_ACTIVE = \App\Models\Car::select('id')
+                                                    ->where('CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
                                                     ->where('Status', 'ACTIVE')
                                                     ->count();
-                $CarOwners_INACTIVE = \App\Models\Car::where('CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
+                $CarOwners_INACTIVE = \App\Models\Car::select('id')
+                                                    ->where('CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
                                                     ->where('Status', 'INACTIVE')
                                                     ->count(); 
+                $CarOwners_Cars = \App\Models\Car::select('VehicleNumber')
+                                                    ->where('CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
+                                                    ->get(); 
                                                     
                 $CarOwners_MAINTENANCE = \App\Models\Maintenance::select(['maintenances.VehicleNumber', 'cars.VehicleNumber'])
                                             ->join('cars', 'maintenances.VehicleNumber', '=', 'cars.VehicleNumber')
@@ -99,8 +105,12 @@
                     <span class="inactive-x">INACTIVE</span> &nbsp;  {{ $CarOwners_INACTIVE }} &nbsp;&nbsp;
                     <span class="total-x">TOTAL</span> &nbsp;  {{ $CarOwners_TOTAL }} &nbsp;&nbsp;
                 </td>
-                <td> 
-                    {{$CarOwner->VehicleNumber}} 
+                <td>  
+                    <div class="car-owner-cars">
+                        @foreach ($CarOwners_Cars as $VehicleNumber)
+                            {{ empty($VehicleNumber->VehicleNumber) ? $loop->iteration .  ' :: '  . $CarOwner->CarOwner : $loop->iteration .  ' :: '  . $VehicleNumber->VehicleNumber  }} <br>
+                        @endforeach
+                    </div>
                 </td> 
             </tr> 
             @endforeach 

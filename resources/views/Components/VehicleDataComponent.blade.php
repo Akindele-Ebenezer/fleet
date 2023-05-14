@@ -7,7 +7,7 @@
                 Car Features
             </h1>
             <button class="Print">
-                PRINT
+                + Open Document
             </button>
         </div>
         <div class="active-status Status_X">

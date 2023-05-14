@@ -42,7 +42,7 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         });
  
         DeleteDepositsButton.addEventListener('click', () => {
-            window.location = '/Delete/Deposits/' + DepositsId_X.value;  
+            window.location = '/Delete/Deposits/' + DepositsId_X.value + '/' + CardNumber.value + '/' + Amount_X.value;  
         });
     });
     

@@ -183,8 +183,11 @@ class DepositsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($DepositsId, Deposits $deposits)
-    {
+    public function destroy($DepositsId, $CardNumber, $Amount, Deposits $deposits)
+    { 
+        $Balance = \App\Models\Car::where('CardNumber', $CardNumber)->first();
+        $Balance->Balance = $Amount - $Balance->Balance;
+        $Balance->save(); 
         $DeleteDeposits = Deposits::where('id', $DepositsId)->delete();
 
         return back();

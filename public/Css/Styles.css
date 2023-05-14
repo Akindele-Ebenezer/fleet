@@ -216,7 +216,6 @@ button {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin-top: 2em;
   padding-block: 0.5em;
 }
 .modal-vehicle-data .inner .heading h1 {
@@ -792,6 +791,14 @@ svg {
 }
 .report-inner .table td.show-record-x-2 span.INACTIVE {
   background-color: #DF2E38;
+}
+.report-inner .table td .car-owner-cars {
+  color: #ddd;
+  height: 5.5em;
+  overflow-y: scroll;
+}
+.report-inner .table td .car-owner-cars::-webkit-scrollbar {
+  width: 0.5em;
 }
 .report-inner .table td,
 .report-inner .table th {
