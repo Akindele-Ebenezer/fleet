@@ -26,13 +26,16 @@ class DepositsController extends Controller
                 return back();
             }
 
+            $SumOfCarDeposits = \App\Models\Deposits::select('Amount')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Amount'); 
             $Deposits = Deposits::whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) 
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
                                         
             $Deposits->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Deposits', $Config)->with('Deposits', $Deposits);
+            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits);
         }
 
         if (isset($_GET['Filter_Deposits_Yearly'])) {
@@ -40,6 +43,10 @@ class DepositsController extends Controller
                 return back();
             }
 
+            $SumOfCarDeposits = \App\Models\Deposits::select('Amount')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->sum('Amount'); 
             $Deposits = Deposits::where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                         ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
                                         ->orderBy('Date', 'DESC')
@@ -47,7 +54,7 @@ class DepositsController extends Controller
                                         
             $Deposits->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Deposits', $Config)->with('Deposits', $Deposits);
+            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits);
         }
 
         if (isset($_GET['Filter_Deposits_Range'])) {
@@ -55,6 +62,10 @@ class DepositsController extends Controller
                 return back();
             }
 
+            $SumOfCarDeposits = \App\Models\Deposits::select('Amount')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Amount'); 
             $Deposits = Deposits::where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) //ANY DATE
                                         // ->orWhereBetween('Date', ['2021-01-01', '2021-12-31']) //YEARLY
@@ -63,7 +74,7 @@ class DepositsController extends Controller
                                         
             $Deposits->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Deposits', $Config)->with('Deposits', $Deposits);
+            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits);
         }
         ///////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
@@ -185,7 +196,7 @@ class DepositsController extends Controller
      */
     public function destroy($DepositsId, $CardNumber, $Amount, Deposits $deposits)
     { 
-        $Balance = \App\Models\Car::where('CardNumber', $CardNumber)->first();
+        $Balance = \App\Models\Car::where('CardNumber', $CardNumber)->first(); 
         $Balance->Balance = $Amount - $Balance->Balance;
         $Balance->save(); 
         $DeleteDeposits = Deposits::where('id', $DepositsId)->delete();

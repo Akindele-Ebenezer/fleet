@@ -10,6 +10,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController; 
 use App\Http\Controllers\FleetReportController; 
 use App\Http\Controllers\AnalyticsController; 
+use App\Http\Controllers\CarsExportController; 
+use App\Http\Controllers\RepairsExportController; 
+use App\Http\Controllers\MaintenanceExportController; 
+use App\Http\Controllers\DepositsExportController; 
+use App\Http\Controllers\RefuelingExportController; 
  
 Route::view('/', 'Login');
 
@@ -62,3 +67,9 @@ Route::get('/Cars/Repairs/Report/{RepairReportId}', [FleetReportController::clas
 Route::get('/Cars/Maintenance/Report/{MaintenanceReportId}', [FleetReportController::class, 'maintenance_report'])->name('MaintenanceReport');
 Route::get('/Cars/Deposits/Report/{DepositReportId}', [FleetReportController::class, 'deposit_report'])->name('DepositsReport');
 Route::get('/Cars/Refueling/Report/{RefuelingReportId}', [FleetReportController::class, 'refueling_report'])->name('RefuelingReport');
+
+Route::get('Cars/Export/', [CarsExportController::class, 'Export'])->name('Cars_ExportToExcel');
+Route::get('Repairs/Export/', [RepairsExportController::class, 'Export'])->name('Repairs_ExportToExcel');
+Route::get('Maintenance/Export/', [MaintenanceExportController::class, 'Export'])->name('Maintenance_ExportToExcel');
+Route::get('Deposits/Export/', [DepositsExportController::class, 'Export'])->name('Deposits_ExportToExcel');
+Route::get('Refueling/Export/', [RefuelingExportController::class, 'Export'])->name('Refueling_ExportToExcel');

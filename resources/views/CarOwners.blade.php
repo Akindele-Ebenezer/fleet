@@ -22,7 +22,7 @@
                                                     ->where('CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
                                                     ->where('Status', 'INACTIVE')
                                                     ->count(); 
-                $CarOwners_Cars = \App\Models\Car::select('VehicleNumber')
+                $CarOwners_Cars = \App\Models\Car::select(['VehicleNumber', 'Maker'])
                                                     ->where('CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
                                                     ->get(); 
                                                     
@@ -107,8 +107,8 @@
                 </td>
                 <td>  
                     <div class="car-owner-cars">
-                        @foreach ($CarOwners_Cars as $VehicleNumber)
-                            {{ empty($VehicleNumber->VehicleNumber) ? $loop->iteration .  ' :: '  . $CarOwner->CarOwner : $loop->iteration .  ' :: '  . $VehicleNumber->VehicleNumber  }} <br>
+                        @foreach ($CarOwners_Cars as $Car)
+                            {{ empty($Car->VehicleNumber) ? $loop->iteration .  ' :: '  . $CarOwner->CarOwner : $loop->iteration .  ' :: '  . $Car->VehicleNumber .  ' - ['  . $Car->Maker .  ']'  }} <br>
                         @endforeach
                     </div>
                 </td> 

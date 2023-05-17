@@ -175,7 +175,7 @@
                         <a href='{{ route('EditRefueling') }}'>
                             <li class="{{ Route::is('EditRefueling') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"/></svg>                  
-                                Refueling ({{ number_format($NumberOfCarRefueling_MyRecords) }})
+                                Fuel Management ({{ number_format($NumberOfCarRefueling_MyRecords) }})
                             </li>
                         </a>
                     </div>
@@ -263,7 +263,7 @@
                         {{ Route::is('MyRecords') ? 'REGISTERATION' : '' }}
                         {{ Route::is('EditMaintenance') ? 'Edit / MAINTENANCE' : '' }}
                         {{ Route::is('EditRepairs') ? 'Edit / REPAIRS' : '' }}
-                        {{ Route::is('EditRefueling') ? 'Edit / REFUELING' : '' }}
+                        {{ Route::is('EditRefueling') ? 'FUEL MANAGEMENT' : '' }}
                         {{ Route::is('EditDeposits') ? 'Make Deposits' : '' }}
 
                         {{ Route::is('Users') ? 'USERS' : '' }}
@@ -564,7 +564,7 @@
                 </div>
                 @endunless
                 <div class="inner">
-                    <button class="action-x {{ Route::is('MyRecords') ? 'add-car' : '' }} {{ Route::is('EditRepairs') ? 'add-repair' : '' }} {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') ? 'cars-route' : '' }}"> {{ Route::is('MyRecords') ? '+ Add Vehicle' : '' }} {{ Route::is('EditRepairs') ? '+ Add Repairs' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') ? 'Explore Cars' : '' }}</button><button>Export to EXCEL</button>
+                    <button class="action-x {{ Route::is('MyRecords') ? 'add-car' : '' }} {{ Route::is('EditRepairs') ? 'add-repair' : '' }} {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') ? 'cars-route' : '' }}"> {{ Route::is('MyRecords') ? '+ Add Vehicle' : '' }} {{ Route::is('EditRepairs') ? '+ Add Repairs' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') ? 'Explore Cars' : '' }}</button><button class="ExportToExcel" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">Export to EXCEL</button>
                 </div>
             </div> 
             @endunless
@@ -597,22 +597,67 @@
             }
         @endfor
         </script>
-        @endunless
+        @endunless 
+        @if (Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling'))
+        <script>
+            let VehicleFilterButton = document.querySelector('.Filter-X');
+            let VehicleFilterDropdown = document.querySelector('.FilterWrapper .inner-filter');
+            let VehicleFilterWrapper = document.querySelector('.FilterWrapper');
+
+            VehicleFilterWrapper.addEventListener('click', e => e.stopPropagation())
+            VehicleFilterButton.addEventListener('click', (e) => { 
+                VehicleFilterDropdown.classList.toggle('Show'); 
+            }); 
+            document.addEventListener('click', () => VehicleFilterDropdown.classList.remove('Show'));
+        </script>
+        @endif
+        @if (Route::is('Cars') || Route::is('VehicleReport'))
+        <script>
+            let ExportButton = document.querySelector('.ExportToExcel');
+            ExportButton.addEventListener('click', () => {
+                window.location = '/Cars/Export'; 
+            });
+        </script>
+        @endif
         <script src="{{ asset('Js/Scripts.js') }}"></script>
         @if (Route::is('MyRecords'))
             <script src="{{ asset('Js/Edit/MyRecords.js') }}"></script>
         @endif
         @if (Route::is('EditRepairs'))
             <script src="{{ asset('Js/Edit/Repair.js') }}"></script>
+            <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Repairs/Export'; 
+                });
+            </script>
         @endif
         @if (Route::is('EditMaintenance'))
             <script src="{{ asset('Js/Edit/Maintenance.js') }}"></script>
+            <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Maintenance/Export'; 
+                });
+            </script>
         @endif
         @if (Route::is('EditDeposits'))
             <script src="{{ asset('Js/Edit/MonthlyDeposits.js') }}"></script>
+            <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Deposits/Export'; 
+                });
+            </script>
         @endif
         @if (Route::is('EditRefueling'))
             <script src="{{ asset('Js/Edit/Refueling.js') }}"></script>
+            <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Refueling/Export'; 
+                });
+            </script>
         @endif
         @if (Route::is('Users'))
             <script src="{{ asset('Js/Edit/Users.js') }}"></script>
@@ -621,15 +666,39 @@
         
         @if (Route::is('Repairs'))
             <script src="{{ asset('Js/ReadOnly/Repair.js') }}"></script>
+            <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Repairs/Export'; 
+                });
+            </script>
         @endif
         @if (Route::is('Maintenance'))
             <script src="{{ asset('Js/ReadOnly/Maintenance.js') }}"></script>
+            <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Maintenance/Export'; 
+                });
+            </script>
         @endif
         @if (Route::is('Deposits'))
             <script src="{{ asset('Js/ReadOnly/Deposits.js') }}"></script>
+            <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Deposits/Export'; 
+                });
+            </script>
         @endif
         @if (Route::is('Refueling'))
             <script src="{{ asset('Js/ReadOnly/Refueling.js') }}"></script>
+            <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Refueling/Export'; 
+                });
+            </script>
         @endif
         <script src="{{ asset('Js/Loader.js') }}"></script> 
         <script src="{{ asset('Js/Tooltips.js') }}"></script> 

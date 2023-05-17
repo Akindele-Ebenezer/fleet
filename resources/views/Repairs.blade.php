@@ -58,5 +58,29 @@
         @unless (count($Repairs) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
+        @if(!isset($_GET['Filter_All_Repairs']) AND !isset($_GET['Filter_Repairs_Yearly']) AND !isset($_GET['Filter_Repairs_Range']))
+        @php
+            $SumOfCarRepairs = \App\Models\Repair::select('Cost')->sum('Cost');
+            $Date_from = \App\Models\Repair::select('Date')->whereNotNull('Date')->orderBy('Date', 'ASC')->first();
+        @endphp
+        <div class="total-spent">
+            <p>Total amount spent on Repairs from "{{ $Date_from->Date }}" till date = ₦ {{ number_format($SumOfCarRepairs) }}</p>
+        </div>
+        @endif
+        @isset($_GET['Filter_All_Repairs'])
+        <div class="total-spent">
+            <p>Total amount spent on Repairs from "{{ $_GET['Date_From'] }}" to "{{ $_GET['Date_To'] }}" = ₦ {{ number_format($SumOfCarRepairs) }}</p>
+        </div>
+        @endisset
+        @isset($_GET['Filter_Repairs_Yearly'])
+        <div class="total-spent">
+            <p>Total amount spent on Repairs for VEHICLE "{{ $_GET['VehicleNo'] }}" in "{{ $_GET['Year'] }}" = ₦ {{ number_format($SumOfCarRepairs) }}</p>
+        </div>
+        @endisset
+        @isset($_GET['Filter_Repairs_Range'])
+        <div class="total-spent">
+            <p>Total amount spent on Repairs for VEHICLE "{{ $_GET['VehicleNo'] }}", from "{{ $_GET['Date_From'] }}" to "{{ $_GET['Date_To'] }}" = ₦ {{ number_format($SumOfCarRepairs) }}</p>
+        </div>
+        @endisset
     </div>
 @endsection

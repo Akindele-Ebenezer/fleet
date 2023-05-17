@@ -27,13 +27,16 @@ class RefuelingController extends Controller
                 return back();
             }
 
+            $SumOfCarRefueling = \App\Models\Refueling::select('Amount')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Amount'); 
             $Refueling = Refueling::whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) 
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
                                         
             $Refueling->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Refueling', $Config)->with('Refuelings', $Refueling);
+            return view('Refueling', $Config)->with('Refuelings', $Refueling)->with('SumOfCarRefueling', $SumOfCarRefueling);
         }
 
         if (isset($_GET['Filter_Refueling_Yearly'])) {
@@ -41,6 +44,10 @@ class RefuelingController extends Controller
                 return back();
             }
 
+            $SumOfCarRefueling = \App\Models\Refueling::select('Amount')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->sum('Amount'); 
             $Refueling = Refueling::where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%') 
                                         ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
                                         ->orderBy('Date', 'DESC')
@@ -48,7 +55,7 @@ class RefuelingController extends Controller
                                         
             $Refueling->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Refueling', $Config)->with('Refuelings', $Refueling);
+            return view('Refueling', $Config)->with('Refuelings', $Refueling)->with('SumOfCarRefueling', $SumOfCarRefueling);
         }
 
         if (isset($_GET['Filter_Refueling_Range'])) {
@@ -56,6 +63,10 @@ class RefuelingController extends Controller
                 return back();
             }
 
+            $SumOfCarRefueling = \App\Models\Refueling::select('Amount')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Amount'); 
             $Refueling = Refueling::where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) //ANY DATE
                                         // ->orWhereBetween('Date', ['2021-01-01', '2021-12-31']) //YEARLY
@@ -64,7 +75,7 @@ class RefuelingController extends Controller
                                         
             $Refueling->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Refueling', $Config)->with('Refuelings', $Refueling);
+            return view('Refueling', $Config)->with('Refuelings', $Refueling)->with('SumOfCarRefueling', $SumOfCarRefueling);
         }
         ///////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {

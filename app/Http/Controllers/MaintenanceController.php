@@ -27,13 +27,16 @@ class MaintenanceController extends Controller
                 return back();
             }
 
+            $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Cost'); 
             $Maintenance = Maintenance::whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) 
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
                                         
             $Maintenance->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Maintenance', $Config)->with('Maintenance', $Maintenance);
+            return view('Maintenance', $Config)->with('Maintenance', $Maintenance)->with('SumOfCarMaintenance', $SumOfCarMaintenance);
         }
 
         if (isset($_GET['Filter_Maintenance_Yearly'])) {
@@ -41,6 +44,10 @@ class MaintenanceController extends Controller
                 return back();
             }
 
+            $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->sum('Cost');
             $Maintenance = Maintenance::where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%') 
                                         ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
                                         ->orderBy('Date', 'DESC')
@@ -48,7 +55,7 @@ class MaintenanceController extends Controller
                                         
             $Maintenance->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Maintenance', $Config)->with('Maintenance', $Maintenance);
+            return view('Maintenance', $Config)->with('Maintenance', $Maintenance)->with('SumOfCarMaintenance', $SumOfCarMaintenance);
         }
 
         if (isset($_GET['Filter_Maintenance_Range'])) {
@@ -56,6 +63,10 @@ class MaintenanceController extends Controller
                 return back();
             }
 
+            $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Cost'); 
             $Maintenance = Maintenance::where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) //ANY DATE
                                         // ->orWhereBetween('Date', ['2021-01-01', '2021-12-31']) //YEARLY
@@ -64,7 +75,7 @@ class MaintenanceController extends Controller
                                         
             $Maintenance->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Maintenance', $Config)->with('Maintenance', $Maintenance);
+            return view('Maintenance', $Config)->with('Maintenance', $Maintenance)->with('SumOfCarMaintenance', $SumOfCarMaintenance);
         }
   //////////////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {

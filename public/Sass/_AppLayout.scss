@@ -561,6 +561,15 @@
                     }
                 }
             }
+
+            .total-spent {
+                display: flex;
+                justify-content: center;
+
+                p {
+                    color: #ddd;
+                }
+            }
         }
 
         .table-head.filter { 

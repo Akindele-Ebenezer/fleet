@@ -858,6 +858,13 @@ svg {
   margin-inline: 0.2em;
   padding-inline: 0.45em;
 }
+.report-inner .table-wrapper .total-spent {
+  display: flex;
+  justify-content: center;
+}
+.report-inner .table-wrapper .total-spent p {
+  color: #ddd;
+}
 .report-inner .table-head.filter {
   display: flex;
   flex-wrap: wrap;

@@ -165,13 +165,4 @@ CarsRouteButton.forEach(Button => {
         window.location = '/Cars';
     });
 });
-
-let VehicleFilterButton = document.querySelector('.Filter-X');
-let VehicleFilterDropdown = document.querySelector('.FilterWrapper .inner-filter');
-let VehicleFilterWrapper = document.querySelector('.FilterWrapper');
-
-VehicleFilterWrapper.addEventListener('click', e => e.stopPropagation())
-VehicleFilterButton.addEventListener('click', (e) => { 
-    VehicleFilterDropdown.classList.toggle('Show'); 
-}); 
-document.addEventListener('click', () => VehicleFilterDropdown.classList.remove('Show'));
+ 

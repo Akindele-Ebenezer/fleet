@@ -65,6 +65,30 @@
         {{ $Refuelings->onEachSide(5)->links() }}
         @unless (count($Refuelings) > 0)
         @include('Includes.EmptyProjectTemplate') 
-        @endunless
+        @endunless 
+        @if(!isset($_GET['Filter_All_Refueling']) AND !isset($_GET['Filter_Refueling_Yearly']) AND !isset($_GET['Filter_Refueling_Range']))
+        @php
+            $SumOfCarRefueling = \App\Models\Refueling::select('Amount')->sum('Amount');
+            $Date_from = \App\Models\Refueling::select('Date')->whereNotNull('Date')->orderBy('Date', 'ASC')->first();
+        @endphp
+        <div class="total-spent">
+            <p>Total amount spent on Refueling from "{{ $Date_from->Date }}" till date = ₦ {{ number_format($SumOfCarRefueling) }}</p>
+        </div>
+        @endif
+        @isset($_GET['Filter_All_Refueling'])
+        <div class="total-spent">
+            <p>Total amount spent on Refueling from "{{ $_GET['Date_From'] }}" to "{{ $_GET['Date_To'] }}" = ₦ {{ number_format($SumOfCarRefueling) }}</p>
+        </div>
+        @endisset
+        @isset($_GET['Filter_Refueling_Yearly'])
+        <div class="total-spent">
+            <p>Total amount spent on Refueling for VEHICLE "{{ $_GET['VehicleNo'] }}" in "{{ $_GET['Year'] }}" = ₦ {{ number_format($SumOfCarRefueling) }}</p>
+        </div>
+        @endisset
+        @isset($_GET['Filter_Refueling_Range'])
+        <div class="total-spent">
+            <p>Total amount spent on Refueling for VEHICLE "{{ $_GET['VehicleNo'] }}", from "{{ $_GET['Date_From'] }}" to "{{ $_GET['Date_To'] }}" = ₦ {{ number_format($SumOfCarRefueling) }}</p>
+        </div>
+        @endisset
     </div>
 @endsection

@@ -55,5 +55,29 @@
             <div class="empty-records" style="background: url('{{ asset('Images/empty-records.png') }}')"></div> 
         </center>
         @endunless
+        @if(!isset($_GET['Filter_All_Deposits']) AND !isset($_GET['Filter_Deposits_Yearly']) AND !isset($_GET['Filter_Deposits_Range']))
+        @php
+            $SumOfCarDeposits = \App\Models\Deposits::select('Amount')->sum('Amount');
+            $Date_from = \App\Models\Deposits::select('Date')->whereNotNull('Date')->orderBy('Date', 'ASC')->first();
+        @endphp
+        <div class="total-spent">
+            <p>Total amount spent on Deposits from "{{ $Date_from->Date }}" till date = ₦ {{ number_format($SumOfCarDeposits) }}</p>
+        </div>
+        @endif
+        @isset($_GET['Filter_All_Deposits'])
+        <div class="total-spent">
+            <p>Total amount spent on Deposits from "{{ $_GET['Date_From'] }}" to "{{ $_GET['Date_To'] }}" = ₦ {{ number_format($SumOfCarDeposits) }}</p>
+        </div>
+        @endisset
+        @isset($_GET['Filter_Deposits_Yearly'])
+        <div class="total-spent">
+            <p>Total amount spent on Deposits for VEHICLE "{{ $_GET['VehicleNo'] }}" in "{{ $_GET['Year'] }}" = ₦ {{ number_format($SumOfCarDeposits) }}</p>
+        </div>
+        @endisset
+        @isset($_GET['Filter_Deposits_Range'])
+        <div class="total-spent">
+            <p>Total amount spent on Deposits for VEHICLE "{{ $_GET['VehicleNo'] }}", from "{{ $_GET['Date_From'] }}" to "{{ $_GET['Date_To'] }}" = ₦ {{ number_format($SumOfCarDeposits) }}</p>
+        </div>
+        @endisset
     </div>
 @endsection
