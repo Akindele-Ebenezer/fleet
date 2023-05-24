@@ -10,7 +10,7 @@
                 <br>
                 creating your first saved project.
                 <br><br>
-                <button class="action-x <?= Route::is('MyRecords') ? 'add-car' : '' ?> <?= Route::is('EditRepairs') ? 'add-repair' : '' ?> <?= Route::is('EditMaintenance') ? 'add-maintenance' : '' ?> <?= Route::is('EditDeposits') ? 'add-monthly-deposits' : '' ?> <?= Route::is('EditRefueling') ? 'add-refueling' : '' ?>">Create new</button>
+                <button class="action-x <?= Route::is('MyRecords') ? 'add-car' : '' ?> <?= Route::is('EditRepairs') ? 'add-repair' : '' ?> <?= Route::is('EditMaintenance') ? 'add-maintenance' : '' ?> <?= Route::is('EditDeposits') ? 'add-monthly-deposits' : '' ?> <?= Route::is('EditDeposits_MasterCard') ? 'add-master-card-deposits' : '' ?> <?= Route::is('EditRefueling') ? 'add-refueling' : '' ?>">Create new</button>
             </p>  
             <?php endif; ?>  
             <?php if (isset($_GET['Filter']) || isset($_GET['FilterValue']) || isset($_GET['Filter_All_Maintenance']) || isset($_GET['Filter_All_Repairs']) || isset($_GET['Filter_All_Deposits']) || isset($_GET['Filter_All_Refueling']) || isset($_GET['Filter_Maintenance_Yearly']) || isset($_GET['Filter_Repairs_Yearly']) || isset($_GET['Filter_Deposits_Yearly']) || isset($_GET['Filter_Refueling_Yearly']) || isset($_GET['Filter_Maintenance_Range']) || isset($_GET['Filter_Repairs_Range']) || isset($_GET['Filter_Deposits_Range']) || isset($_GET['Filter_Refueling_Range'])) : ?>   

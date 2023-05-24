@@ -26,7 +26,7 @@
         {{ Route::is('EditRepairs') ? 'Edit / REPAIRS' : '' }}
         {{ Route::is('EditRefueling') ? 'Edit / REFUELING' : '' }}
         {{ Route::is('EditDeposits') ? 'Make Deposits' : '' }}
-        {{ Route::is('EditMasterCardDeposits') ? 'Make Deposits' : '' }}
+        {{ Route::is('EditDeposits_MasterCard') ? 'Make Deposits' : '' }}
 
         {{ Route::is('Users') ? 'USERS' : '' }}
 
@@ -93,8 +93,17 @@
         @include('Components.EditMonthlyDepositsComponent')
     @endif
 
+    @if (Route::is('EditDeposits_MasterCard'))
+        @include('Components.AddDeposits_MasterCardComponent')
+        @include('Components.EditDeposits_MasterCardComponent')
+    @endif
+
     @if (Route::is('Deposits'))
         @include('Components.ReadOnly.DepositsComponent')
+    @endif
+
+    @if (Route::is('Deposits_MasterCard'))
+        @include('Components.ReadOnly.Deposits_MasterCardComponent')
     @endif
     
     @if (Route::is('EditRefueling'))
@@ -199,7 +208,7 @@
                             Card Management
                             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg>
                         </li>
-                        <div class="sub-nav {{ Route::is('EditDeposits') || Route::is('EditMasterCardDeposits') || Route::is('Deposits') || Route::is('CreditCard') || Route::is('Deposits_MasterCard') || Route::is('MasterCard') ? 'Show' : '' }}">
+                        <div class="sub-nav {{ Route::is('EditDeposits') || Route::is('EditDeposits_MasterCard') || Route::is('Deposits') || Route::is('CreditCard') || Route::is('Deposits_MasterCard') || Route::is('MasterCard') ? 'Show' : '' }}">
                             <a class="card-management action-x">
                                 <li>
                                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
@@ -234,9 +243,9 @@
                                     <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg>
                                 </li> 
                             </a>
-                            <div class="sub-nav {{ Route::is('EditMasterCardDeposits') || Route::is('Deposits_MasterCard') || Route::is('MasterCard') ? 'Show' : '' }}">
-                                <a class="card-management action-x"> 
-                                    <li class="">
+                            <div class="sub-nav {{ Route::is('EditDeposits_MasterCard') || Route::is('Deposits_MasterCard') || Route::is('MasterCard') ? 'Show' : '' }}">
+                                <a href="{{ route('EditDeposits_MasterCard')}}"> 
+                                    <li class="{{ Route::is('EditDeposits_MasterCard') ? 'active' : '' }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
                                         Make Deposit 
                                     </li>
@@ -322,6 +331,7 @@
                         {{ Route::is('EditRepairs') ? 'Edit / REPAIRS' : '' }}
                         {{ Route::is('EditRefueling') ? 'FUEL MANAGEMENT' : '' }}
                         {{ Route::is('EditDeposits') ? 'Make Deposits' : '' }}
+                        {{ Route::is('EditDeposits_MasterCard') ? 'Make Deposits' : '' }}
                         {{ Route::is('EditMasterCardDeposits') ? 'Make Deposits' : '' }}
 
                         {{ Route::is('Users') ? 'USERS' : '' }}
@@ -625,7 +635,7 @@
                 </div>
                 @endunless
                 <div class="inner">
-                    <button class="action-x {{ Route::is('MyRecords') ? 'add-car' : '' }} {{ Route::is('EditRepairs') ? 'add-repair' : '' }} {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('CreditCard') ? 'cars-route' : '' }}"> {{ Route::is('MyRecords') ? '+ Add Vehicle' : '' }} {{ Route::is('EditRepairs') ? '+ Add Repairs' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('CreditCard') || Route::is('MasterCard') ? 'Explore Cars' : '' }}</button><button class="ExportToExcel" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">Export to EXCEL</button>
+                    <button class="action-x {{ Route::is('MyRecords') ? 'add-car' : '' }} {{ Route::is('EditRepairs') ? 'add-repair' : '' }} {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? 'add-master-card-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('CreditCard') ? 'cars-route' : '' }}"> {{ Route::is('MyRecords') ? '+ Add Vehicle' : '' }} {{ Route::is('EditRepairs') ? '+ Add Repairs' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('CreditCard') || Route::is('MasterCard') ? 'Explore Cars' : '' }}</button><button class="ExportToExcel" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">Export to EXCEL</button>
                 </div>
             </div> 
             @endunless
@@ -727,6 +737,30 @@
                 }); 
             </script>
         @endif
+        @if (Route::is('EditDeposits_MasterCard'))
+            <script src="{{ asset('Js/Edit/Deposits_MasterCard.js') }}"></script>
+            {{-- <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Deposits/Export'; 
+                });
+                let VehicleNumbers = document.getElementById('VehicleNumbers'); 
+                let VehicleNumberInput = document.querySelector('input[list]'); 
+                let CardNumberInput = document.querySelector('input[name=CardNumber]');   
+            
+                VehicleNumberInput.addEventListener('change', () => { 
+                    let VehicleNumberInput = document.querySelector('input[list]').value;
+                    let VehicleNumbers = document.getElementById('VehicleNumbers').childNodes;
+
+                    for (var i = 0; i < VehicleNumbers.length; i++) {
+                        if (VehicleNumbers[i].value === VehicleNumberInput) { 
+                            CardNumberInput.value = VehicleNumbers[i].firstChild.textContent.trim();
+                        break;
+                        }
+                    } 
+                });  --}}
+            {{-- </script> --}}
+        @endif
         @if (Route::is('EditRefueling'))
             <script src="{{ asset('Js/Edit/Refueling.js') }}"></script>
             <script>
@@ -781,6 +815,15 @@
                 let ExportButton = document.querySelector('.ExportToExcel');
                 ExportButton.addEventListener('click', () => {
                     window.location = '/Deposits/Export'; 
+                });
+            </script>
+        @endif
+        @if (Route::is('Deposits_MasterCard'))
+            <script src="{{ asset('Js/ReadOnly/Deposits_MasterCard.js') }}"></script>
+            <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Deposits/Master/Cards/Export'; 
                 });
             </script>
         @endif

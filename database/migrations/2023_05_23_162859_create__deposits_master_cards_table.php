@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('master_cards', function (Blueprint $table) {
+        Schema::create('deposits_master_cards', function (Blueprint $table) {
             $table->id();
-            $table->string('Date')->nullable();
             $table->string('CardNumber')->nullable();
+            $table->string('Date')->nullable();
             $table->string('Amount')->nullable();
+            $table->string('UserId')->nullable();
+            $table->string('DateIn')->nullable();
+            $table->string('TimeIn')->nullable();
             $table->string('Year')->nullable();
-            $table->string('Week')->nullable();
             $table->string('Month')->nullable();
+            $table->string('Week')->nullable();
             $table->string('Status')->nullable();
             $table->timestamps();
         });

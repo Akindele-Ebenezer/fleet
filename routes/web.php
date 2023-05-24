@@ -79,4 +79,8 @@ Route::get('/Management/Credit/Cards', [CardController::class, 'credit_card_inde
 
 Route::get('/Management/Master/Cards', [CardController::class, 'master_card_index'])->name('MasterCard');
 Route::get('/Management/Deposits/Master/Cards', [CardController::class, 'master_card_deposits'])->name('Deposits_MasterCard');
-Route::get('/Management/Edit/Master/Cards', [CardController::class, 'master_card_edit'])->name('EditMasterCardDeposits');
+
+Route::get('/Management/Edit/Master/Cards', [CardController::class, 'my_records_deposits_master_card'])->name('EditDeposits_MasterCard');
+Route::get('/Add/Master/Cards/{MasterCard}', [CardController::class, 'store_master_card'])->name('store_Deposits_MasterCard'); 
+Route::get('/Update/Master/Cards/{MasterCard}', [CardController::class, 'update_master_card'])->name('UpdateDeposits_MasterCard');
+Route::get('/Delete/Master/Cards/{MasterCard}/{CardNumber}/{Amount}', [CardController::class, 'destroy_master_card'])->name('DeleteDeposits_MasterCard');

@@ -15,14 +15,7 @@
             @foreach ($Deposits_MasterCards as $Deposits_MasterCard) 
             <tr>  
                 <td>{{ $loop->iteration  + (($Deposits_MasterCards->currentPage() -1) * $Deposits_MasterCards->perPage()) + (($Deposits_MasterCards->currentPage() -1) * $Deposits_MasterCards->perPage()) }}</td>
-                <td class="show-record-x show-record-x-2"><span class="{{ $Deposits_MasterCard->Status ?? 'INACTIVE' }}"></span>{{ $Deposits_MasterCard->CardNumber }}</td> 
-                <span class="CardNumber_X_DATA_Edit Hide">{{ $Deposits_MasterCard->CardNumber }}</span> 
-                <span class="Date_X_DATA_Edit Hide">{{ $Deposits_MasterCard->Date }}</span> 
-                <span class="Amount_X_DATA_Edit Hide">{{ $Deposits_MasterCard->Amount }}</span>
-                <span class="Year_X_DATA_Edit Hide">{{ $Deposits_MasterCard->Year }}</span>
-                <span class="Week_X_DATA_Edit Hide">{{ $Deposits_MasterCard->Week }}</span> 
-                <span class="Month_X_DATA_Edit Hide">{{ $Deposits_MasterCard->Month }}</span> 
-                <td>{{ $Deposits_MasterCard->CardNumber }}</td>
+                <td class="show-record-x show-record-x-2"><span class="{{ $Deposits_MasterCard->Status ?? 'INACTIVE' }}"></span>{{ $Deposits_MasterCard->CardNumber }}</td>  
                 <td>{{ $Deposits_MasterCard->Date }}</td>
                 <td>₦ {{ empty($Deposits_MasterCard->Amount) ? '' : number_format($Deposits_MasterCard->Amount) }}</td> 
                 <td>{{ $Deposits_MasterCard->Year }}</td>
