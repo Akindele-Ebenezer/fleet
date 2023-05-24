@@ -72,7 +72,7 @@ AddMaintenanceButton.forEach(Button => {
         ModalAddMaintenance.style.display = 'block';
          
         AddMaintenanceButton_X.addEventListener('click', () => {   
-            if (AddMaintenanceForm.children[1].lastElementChild.value === '') {
+            if (AddMaintenanceForm.children[1].children[1].value === '') {
                 Error.textContent = 'Please fill out vehicle number for new Maintenance';
             } else {
                 AddMaintenanceForm.setAttribute('action', '/Add/Maintenance/' + VehicleNumber_MAINTENANCE.value); 

@@ -2,7 +2,7 @@
 
 @section('Content')
     <div class="table-wrapper"> 
-        <table class="table list" id="Table">
+        <table class="table table-2 list" id="Table">
             <tr class="table-head">
                 <th onclick="sortTable(0)">#</th>
                 <th onclick="sortTable(1)">Email</th>
@@ -27,7 +27,13 @@
                 <td>{{ $loop->iteration  + (($Users->currentPage() -1) * $Users->perPage()) }}</td>  
                 <td class="{{ request()->session()->get('Role') === 'ADMIN' ? 'show-record-x-edit' : '' }}">{{ $User->email }}</td> 
                 <td>{{ $User->name }}</td>
-                <td>{{ $User->role }}</td>
+                <td>
+                    <center>
+                        <span class="{{ $User->role === 'ADMIN' ? 'admin' : '' }}{{ $User->role === 'USER' ? 'user' : '' }}">
+                            {{ $User->role }}
+                        </span>
+                    </center>
+                </td>
                 @if (request()->session()->get('Role') === 'ADMIN')
                 <td class="Hide">{{ $User->password }}</td>
                 <td class="Hide">{{ $User->id }}</td>

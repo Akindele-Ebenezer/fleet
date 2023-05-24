@@ -1,10 +1,17 @@
 let Arrow = document.querySelector('.arrow');
 let MyRecords = document.querySelector('.my-records');
+let CardManagement = document.querySelectorAll('.card-management');
 let SubNavs = document.querySelectorAll('.sub-nav li');
 
 MyRecords.addEventListener('click', (e) => {
     e.preventDefault();
     MyRecords.nextElementSibling.classList.toggle('Show');
+});
+CardManagement.forEach(NavWrapper => {
+    NavWrapper.addEventListener('click', (e) => {
+        e.preventDefault();
+        NavWrapper.nextElementSibling.classList.toggle('Show');
+    });
 });
 
 let ModalVehicleData = document.querySelector('.modal-vehicle-data');
@@ -151,9 +158,9 @@ DepositsRouteButton.forEach(Button => {
 
 DepositsRouteEditButton.forEach(Button => {
     Button.addEventListener('click', () => {
-        window.location = '/Edit/Deposits';
+        window.location = '/Management/Edit/Credit/Cards';
         
-        if (window.location.href === '/Edit/Deposits') {
+        if (window.location.href === '/Management/Edit/Credit/Cards') {
             let ModalAddMonthlyDeposits = document.querySelector('.add-monthly-deposits-form');
             ModalAddMonthlyDeposits.style.display = 'block';
         }

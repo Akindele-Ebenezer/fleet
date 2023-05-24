@@ -34,8 +34,8 @@
 .total-x {
   border-radius: 0.35em;
   color: #fff;
-  font-size: smaller;
   padding: 0.15em 0.35em;
+  text-transform: lowercase;
 }
 
 .active-x {
@@ -655,7 +655,8 @@ svg {
 .report-inner .nav-footer .inner span {
   color: #fff;
 }
-.report-inner .sub-nav-wrapper .my-records {
+.report-inner .sub-nav-wrapper .my-records,
+.report-inner .sub-nav-wrapper .card-management {
   cursor: pointer;
 }
 .report-inner .table {
@@ -713,9 +714,9 @@ svg {
   border-radius: 0.35em;
   color: #fff !important;
   display: inline-block;
-  font-size: smaller;
   margin-block: 1em;
   padding: 0.15em 0.35em;
+  text-transform: lowercase;
 }
 .report-inner .table.list td .car-info h1 {
   font-size: 2em;
@@ -729,7 +730,7 @@ svg {
   padding-block: 0.4em;
 }
 .report-inner .table.list td .car-info hr {
-  border: 1px solid;
+  border: 1px solid #000;
 }
 .report-inner .table.list td .car-info .inactive {
   background: #DF2E38;
@@ -762,6 +763,10 @@ svg {
 }
 .report-inner .table.list td .car-info .stats .inner span {
   font-size: smaller;
+}
+.report-inner .table.list td .car-info .type {
+  color: #ddd;
+  margin-right: 1em;
 }
 .report-inner .table.list td .car-info .used-by {
   color: #fff;
@@ -800,6 +805,9 @@ svg {
 .report-inner .table td .car-owner-cars::-webkit-scrollbar {
   width: 0.5em;
 }
+.report-inner .table td center {
+  color: #ddd;
+}
 .report-inner .table td,
 .report-inner .table th {
   background: #111;
@@ -822,6 +830,31 @@ svg {
 }
 .report-inner .table tr.table-head.filter {
   top: 2em;
+}
+.report-inner .table-2 td button {
+  background: #3034b5;
+}
+.report-inner .table-2 td center span {
+  border-radius: 0.35em;
+  color: #fff !important;
+  display: inline-block;
+  margin-block: 1em;
+  padding: 0.15em 0.35em;
+  text-transform: lowercase;
+  width: 5em;
+}
+.report-inner .table-2 td center span.admin {
+  background: #DF2E38;
+}
+.report-inner .table-2 td center span.user {
+  background: #333;
+}
+.report-inner .table-2 td, .report-inner .table-2 th {
+  border: none;
+}
+.report-inner .table-2 tr {
+  border: 4px solid #000;
+  border-left: 3px solid;
 }
 .report-inner .table-wrapper {
   height: 60%;

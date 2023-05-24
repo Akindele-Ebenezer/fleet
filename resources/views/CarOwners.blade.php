@@ -2,7 +2,7 @@
 
 @section('Content')
     <div class="table-wrapper"> 
-        <table class="table list" id="Table">
+        <table class="table table-2 list" id="Table">
             <tr class="table-head">
                 <th onclick="sortTable(0)">#</th>
                 <th onclick="sortTable(1)">Name</th>
@@ -101,9 +101,11 @@
                     </div> 
                  </td>
                 <td> 
-                    <span class="active-x">ACTIVE</span> &nbsp;  {{ $CarOwners_ACTIVE }} &nbsp;&nbsp;
-                    <span class="inactive-x">INACTIVE</span> &nbsp;  {{ $CarOwners_INACTIVE }} &nbsp;&nbsp;
-                    <span class="total-x">TOTAL</span> &nbsp;  {{ $CarOwners_TOTAL }} &nbsp;&nbsp;
+                    <center>
+                        <span class="active-x">ACTIVE</span> &nbsp;  {{ $CarOwners_ACTIVE }} &nbsp;&nbsp;
+                        <span class="inactive-x">INACTIVE</span> &nbsp;  {{ $CarOwners_INACTIVE }} &nbsp;&nbsp;
+                        <span class="total-x">TOTAL</span> &nbsp;  {{ $CarOwners_TOTAL }} &nbsp;&nbsp;
+                    </center>
                 </td>
                 <td>  
                     <div class="car-owner-cars">

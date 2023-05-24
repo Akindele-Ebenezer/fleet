@@ -78,7 +78,7 @@ AddRefuelingButton.forEach(Button => {
         ModalAddRefueling.style.display = 'block';
          
         AddRefuelingButton_X.addEventListener('click', () => {  
-            if (AddRefuelingForm.children[1].lastElementChild.value === '') {
+            if (AddRefuelingForm.children[1].children[1].value === '') {
                 Error.textContent = 'Please fill out vehicle number for new Refueling';
             } else {
                 AddRefuelingForm.setAttribute('action', '/Add/Refueling/' + VehicleNumber_REFUELING.value);

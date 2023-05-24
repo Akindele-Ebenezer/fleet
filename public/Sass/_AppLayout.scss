@@ -282,7 +282,8 @@
         }
         
         .sub-nav-wrapper {
-            .my-records {
+            .my-records,
+            .card-management {
                 cursor: pointer;
             }
         }
@@ -371,10 +372,10 @@
                             background: $Color-3;
                             border-radius: 0.35em;
                             color: #fff !important;
-                            display: inline-block;
-                            font-size: smaller;
+                            display: inline-block; 
                             margin-block: 1em;
-                            padding: 0.15em 0.35em;
+                            padding: 0.15em 0.35em;    
+                            text-transform: lowercase;
                         }
 
                         h1 { 
@@ -391,7 +392,7 @@
                         }
 
                         hr {
-                            border: 1px solid;
+                            border: 1px solid #000;
                         }
 
                         .inactive {
@@ -430,6 +431,11 @@
                                     font-size: smaller;
                                 }
                             }
+                        }
+
+                        .type {
+                            color: #ddd;
+                            margin-right: 1em;
                         }
 
                         .used-by {
@@ -480,6 +486,10 @@
                         width: .5em; 
                     }
                 }
+
+                center {
+                    color: #ddd;
+                }
             }
 
             td, 
@@ -512,6 +522,43 @@
                         top: 2em;
                     }
                 } 
+            }
+        }
+
+        .table-2 {
+            td {
+                button {
+                    background: $Color-4;    
+                }
+
+                center {
+                    span {
+                        border-radius: 0.35em;
+                        color: #fff !important;
+                        display: inline-block;
+                        margin-block: 1em;
+                        padding: 0.15em 0.35em;
+                        text-transform: lowercase;
+                        width: 5em;
+
+                        &.admin {
+                            background: $Color-2;
+                        }
+
+                        &.user {
+                            background: $Color-1;
+                        }
+                    }
+                }
+            }
+
+            td, th {
+                border: none;
+            }
+
+            tr {
+                border: 4px solid #000;
+                border-left: 3px solid;
             }
         }
 

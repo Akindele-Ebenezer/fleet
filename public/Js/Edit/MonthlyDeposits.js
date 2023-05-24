@@ -65,7 +65,7 @@ AddMonthlyDepositsButton.forEach(Button => {
         ModalAddMonthlyDeposits.style.display = 'block';
          
         AddDepositsButton_X.addEventListener('click', () => {  
-            if (AddDepositsForm.children[1].lastElementChild.value === '') {
+            if (AddDepositsForm.children[1].children[1].value === '') {
                 Error.textContent = 'Please fill out vehicle number for new Deposits';
             } else {
                 AddDepositsForm.setAttribute('action', '/Add/Deposits/' + VehicleNumber_DEPOSITS.value);
@@ -73,7 +73,7 @@ AddMonthlyDepositsButton.forEach(Button => {
             }   
         });
     }); 
-
+  
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
             ModalAddMonthlyDeposits.style.display = 'none';

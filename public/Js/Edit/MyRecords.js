@@ -109,7 +109,7 @@ ActionButtons.forEach(ActionButton => {
         }); 
         Comment_X_Edit.value = Comments_X_DATA; 
         CarId_X.value = ActionButton.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
-        console.log(BalanceBroughtForward_X_Edit)
+         
         BalanceBroughtForward_X_Edit.value = BalanceBroughtForward_X_DATA;
         EditCarButton.addEventListener('click', () => {
             EditCarForm.setAttribute('action', '/Update/Car/' + CarId_X.value);

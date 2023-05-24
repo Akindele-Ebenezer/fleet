@@ -72,7 +72,7 @@ AddRepairButton.forEach(Button => {
         ModalAddRepair.style.display = 'block';
          
         AddRepairButton_X.addEventListener('click', () => {   
-            if (AddRepairForm.children[1].lastElementChild.value === '') {
+            if (AddRepairForm.children[1].children[1].value === '') {
                 Error.textContent = 'Please fill out vehicle number for new Repair';
             } else {
                 AddRepairForm.setAttribute('action', '/Add/Repair/' + VehicleNumber_REPAIR.value);

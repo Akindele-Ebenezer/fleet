@@ -46,8 +46,9 @@ $Color-4: #3034b5;
 .total-x  {
     border-radius: 0.35em;
     color: #fff; 
-    font-size: smaller; 
+    // font-size: smaller; 
     padding: 0.15em 0.35em;
+    text-transform: lowercase;
 }
 
 .active-x  {

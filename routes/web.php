@@ -15,6 +15,7 @@ use App\Http\Controllers\RepairsExportController;
 use App\Http\Controllers\MaintenanceExportController; 
 use App\Http\Controllers\DepositsExportController; 
 use App\Http\Controllers\RefuelingExportController; 
+use App\Http\Controllers\CardController; 
  
 Route::view('/', 'Login');
 
@@ -38,7 +39,7 @@ Route::get('/Add/Maintenance/{Maintenance}', [MaintenanceController::class, 'sto
 Route::get('/Update/Maintenance/{Maintenance}', [MaintenanceController::class, 'update'])->name('UpdateMaintenance');
 Route::get('/Delete/Maintenance/{Maintenance}', [MaintenanceController::class, 'destroy'])->name('DeleteMaintenance');
 
-Route::get('/Edit/Deposits', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
+Route::get('/Management/Edit/Credit/Cards', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
 Route::get('/Add/Deposits/{Deposits}', [DepositsController::class, 'store'])->name('store_Deposits'); 
 Route::get('/Update/Deposits/{Deposits}', [DepositsController::class, 'update'])->name('UpdateDeposits');
 Route::get('/Delete/Deposits/{Deposits}/{CardNumber}/{Amount}', [DepositsController::class, 'destroy'])->name('DeleteDeposits');
@@ -73,3 +74,9 @@ Route::get('Repairs/Export/', [RepairsExportController::class, 'Export'])->name(
 Route::get('Maintenance/Export/', [MaintenanceExportController::class, 'Export'])->name('Maintenance_ExportToExcel');
 Route::get('Deposits/Export/', [DepositsExportController::class, 'Export'])->name('Deposits_ExportToExcel');
 Route::get('Refueling/Export/', [RefuelingExportController::class, 'Export'])->name('Refueling_ExportToExcel');
+
+Route::get('/Management/Credit/Cards', [CardController::class, 'credit_card_index'])->name('CreditCard');
+
+Route::get('/Management/Master/Cards', [CardController::class, 'master_card_index'])->name('MasterCard');
+Route::get('/Management/Deposits/Master/Cards', [CardController::class, 'master_card_deposits'])->name('Deposits_MasterCard');
+Route::get('/Management/Edit/Master/Cards', [CardController::class, 'master_card_edit'])->name('EditMasterCardDeposits');
