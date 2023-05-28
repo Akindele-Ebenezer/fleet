@@ -83,7 +83,8 @@ class MaintenanceController extends Controller
             $Maintenance = Maintenance::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('MaintenanceAction', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('IncidentType', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('IncidentAction', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('ReleaseDate', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('ReleaseTime', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
@@ -108,7 +109,8 @@ class MaintenanceController extends Controller
                                                     ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                                                     ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
                                                     ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
-                                                    ->orWhere('MaintenanceAction', 'LIKE', '%' . $FilterValue . '%')
+                                                    ->orWhere('IncidentType', 'LIKE', '%' . $FilterValue . '%')
+                                                    ->orWhere('IncidentAction', 'LIKE', '%' . $FilterValue . '%')
                                                     ->orWhere('ReleaseDate', 'LIKE', '%' . $FilterValue . '%')
                                                     ->orWhere('ReleaseTime', 'LIKE', '%' . $FilterValue . '%')
                                                     ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
@@ -136,14 +138,20 @@ class MaintenanceController extends Controller
      */
     public function store($Maintenance, Request $request)
     {
+        $IncidentFile = $request->file('IncidentAttachment'); 
+        $DestinationPath = 'Images/Maintenance';
+        $IncidentFile->move($DestinationPath, $IncidentFile->getClientOriginalName());
+ 
         Maintenance::insert([ 
             'VehicleNumber' => $Maintenance, 
-            'MaintenanceAction' => $request->MaintenanceAction, 
+            'IncidentType' => $request->IncidentType, 
+            'IncidentAction' => $request->IncidentAction, 
             'Date' => $request->Date, 
             'Time' => $request->Time, 
             'ReleaseDate' => $request->ReleaseDate, 
             'ReleaseTime' => $request->ReleaseTime, 
             'Cost' => $request->Cost, 
+            'IncidentAttachment' => $IncidentFile->getClientOriginalName(),
             'InvoiceNumber' => $request->InvoiceNumber, 
             'Week' => $request->Week, 
             'DateIn' => date('F j, Y'), 
@@ -175,17 +183,23 @@ class MaintenanceController extends Controller
      */
     public function update(Request $request, Maintenance $maintenance)
     {
+        $IncidentFile_UPDATED = $request->file('IncidentAttachment'); 
+        $DestinationPath = 'Images/Maintenance';
+        $IncidentFile_UPDATED->move($DestinationPath, $IncidentFile_UPDATED->getClientOriginalName());
+
         Maintenance::where('id', $request->MaintenanceId)
             ->update([
                 'VehicleNumber' => $request->VehicleNumber,
                 'Date' => $request->Date,
                 'Time' => $request->Time,
-                'MaintenanceAction' => $request->MaintenanceAction,
+                'IncidentType' => $request->IncidentType,
+                'IncidentAction' => $request->IncidentAction,
                 'ReleaseDate' => $request->ReleaseDate,
                 'ReleaseTime' => $request->ReleaseTime,
                 'Cost' => $request->Cost,
                 'InvoiceNumber' => $request->InvoiceNumber,
                 'Week' => $request->Week, 
+                'IncidentAttachment' => $IncidentFile_UPDATED->getClientOriginalName(),
             ]);
 
         return back(); 

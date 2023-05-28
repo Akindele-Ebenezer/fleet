@@ -16,6 +16,19 @@
         right: 0;
         width: 60rem;
     
+        .attachment {
+            margin-block: 2em;
+
+            img {
+                width: 20em;
+            }
+
+            p {
+                color: #ddd; 
+                margin-bottom: 1em;
+            }
+        }
+
         button {
             &:first-of-type {
                 background-color: $Color-4;

@@ -35,8 +35,8 @@ Route::get('/Update/Repair/{Repair}', [RepairController::class, 'update'])->name
 Route::get('/Delete/Repair/{Repair}', [RepairController::class, 'destroy'])->name('DeleteRepair');
 
 Route::get('/Edit/Maintenance', [MaintenanceController::class, 'my_records_maintenance'])->name('EditMaintenance'); 
-Route::get('/Add/Maintenance/{Maintenance}', [MaintenanceController::class, 'store'])->name('store_Maintenance'); 
-Route::get('/Update/Maintenance/{Maintenance}', [MaintenanceController::class, 'update'])->name('UpdateMaintenance');
+Route::post('/Add/Maintenance/{Maintenance}', [MaintenanceController::class, 'store'])->name('store_Maintenance'); 
+Route::post('/Update/Maintenance/{Maintenance}', [MaintenanceController::class, 'update'])->name('UpdateMaintenance');
 Route::get('/Delete/Maintenance/{Maintenance}', [MaintenanceController::class, 'destroy'])->name('DeleteMaintenance');
 
 Route::get('/Management/Edit/Credit/Cards', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
@@ -78,9 +78,12 @@ Route::get('Refueling/Export/', [RefuelingExportController::class, 'Export'])->n
 Route::get('/Management/Credit/Cards', [CardController::class, 'credit_card_index'])->name('CreditCard');
 
 Route::get('/Management/Master/Cards', [CardController::class, 'master_card_index'])->name('MasterCard');
+Route::get('/Add/Master/Cards/{MasterCard}', [CardController::class, 'store_master_card'])->name('store_MasterCard'); 
+Route::get('/Management/Update/Master/Cards/{MasterCard}', [CardController::class, 'update_master_card'])->name('update_MasterCard'); 
+Route::get('/Management/Delete/Master/Cards/{MasterCard}', [CardController::class, 'destroy_master_card'])->name('destroy_MasterCard'); 
+ 
 Route::get('/Management/Deposits/Master/Cards', [CardController::class, 'master_card_deposits'])->name('Deposits_MasterCard');
-
 Route::get('/Management/Edit/Master/Cards', [CardController::class, 'my_records_deposits_master_card'])->name('EditDeposits_MasterCard');
-Route::get('/Add/Master/Cards/{MasterCard}', [CardController::class, 'store_master_card'])->name('store_Deposits_MasterCard'); 
-Route::get('/Update/Master/Cards/{MasterCard}', [CardController::class, 'update_master_card'])->name('UpdateDeposits_MasterCard');
-Route::get('/Delete/Master/Cards/{MasterCard}/{CardNumber}/{Amount}', [CardController::class, 'destroy_master_card'])->name('DeleteDeposits_MasterCard');
+Route::get('/Add/Deposits/Master/Cards/{MasterCard}', [CardController::class, 'store_deposits_master_card'])->name('store_Deposits_MasterCard'); 
+Route::get('/Update/Deposits/Master/Cards/{MasterCard}', [CardController::class, 'update_deposits_master_card'])->name('UpdateDeposits_MasterCard');
+Route::get('/Delete/Deposits/Master/Cards/{MasterCard}/{CardNumber}/{Amount}', [CardController::class, 'destroy_deposits_master_card'])->name('DeleteDeposits_MasterCard');

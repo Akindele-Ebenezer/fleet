@@ -15,7 +15,10 @@
             @foreach ($Deposits_MasterCards as $Deposits_MasterCard) 
             <tr>  
                 <td>{{ $loop->iteration  + (($Deposits_MasterCards->currentPage() -1) * $Deposits_MasterCards->perPage()) + (($Deposits_MasterCards->currentPage() -1) * $Deposits_MasterCards->perPage()) }}</td>
-                <td class="show-record-x show-record-x-2"><span class="{{ $Deposits_MasterCard->Status ?? 'INACTIVE' }}"></span>{{ $Deposits_MasterCard->CardNumber }}</td>  
+                @php
+                    $Status = \App\Models\MasterCard::select('Status')->where('CardNumber', $Deposits_MasterCard->CardNumber)->first();
+                @endphp
+                <td class="show-record-x show-record-x-2"><span class="{{ $Status->Status ?? 'INACTIVE' }}"></span>{{ $Deposits_MasterCard->CardNumber }}</td>  
                 <td>{{ $Deposits_MasterCard->Date }}</td>
                 <td>₦ {{ empty($Deposits_MasterCard->Amount) ? '' : number_format($Deposits_MasterCard->Amount) }}</td> 
                 <td>{{ $Deposits_MasterCard->Year }}</td>

@@ -9,8 +9,8 @@ use AmrShawky\LaravelCurrency\Facade\Currency;
 class CarController extends Controller
 {
     public function config() {  
-        $Cars = Car::orderBy('PurchaseDate', 'DESC')->paginate(7);
-        $Cars__MyRecords = Car::selectRaw("*, TRIM(VehicleNumber) AS VehicleNumber")->where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7); 
+        $Cars = Car::whereNotNull('VehicleNumber')->orderBy('PurchaseDate', 'DESC')->paginate(7);
+        $Cars__MyRecords = Car::whereNotNull('VehicleNumber')->selectRaw("*, TRIM(VehicleNumber) AS VehicleNumber")->where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7); 
         \DB::statement("SET SQL_MODE=''");
         $CarOwners = Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, TRIM(VehicleNumber) AS VehicleNumber")->groupBy('CarOwner')->paginate(7); 
         return [
@@ -262,42 +262,42 @@ class CarController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Car $car)
-    {    
-            Car::where('id', $request->CarId)
-                ->update([
-                    'VehicleNumber' => $request->VehicleNumber,
-                    'Maker' => $request->Maker,
-                    'Model' => $request->Model,
-                    'SubModel' => $request->SubModel,
-                    'GearType' => $request->GearType,
-                    'EngineType' => $request->EngineType,
-                    'EngineNumber' => $request->EngineNumber,
-                    'ChassisNumber' => $request->ChassisNumber,
-                    'ModelYear' => $request->ModelYear,
-                    'EngineVolume' => $request->EngineVolume,
-                    'Comments' => $request->Comments,
-                    'PurchaseDate' => $request->PurchaseDate,
-                    'Price' => $request->Price, 
-                    'DateIn' => $request->DateIn,
-                    'TimeIn' => $request->TimeIn,
-                    'Supplier' => $request->Supplier,
-                    'CarOwner' => $request->CarOwner,
-                    'Driver' => $request->Driver,
-                    'CardNumber' => $request->CardNumber,
-                    'MonthlyBudget' => $request->MonthlyBudget,
-                    'CompanyCode' => $request->CompanyCode,
-                    'TotalDeposits' => $request->Deposits,
-                    'TotalRefueling' => $request->Refueling,
-                    'Balance' => $request->Balance,
-                    'PinCode' => $request->PinCode, 
-                    'Status' => $request->Status,
-                    'StopDate' => $request->StopDate,
-                    'LicenceExpiryDate' => $request->LicenceExpiryDate,
-                    'InsuranceExpiryDate' => $request->InsuranceExpiryDate,
-                    'FuelTankCapacity' => $request->FuelTankCapacity, 
-                ]);
+    {      
+        Car::where('id', $request->CarId)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber,
+                'Maker' => $request->Maker,
+                'Model' => $request->Model,
+                'SubModel' => $request->SubModel,
+                'GearType' => $request->GearType,
+                'EngineType' => $request->EngineType,
+                'EngineNumber' => $request->EngineNumber,
+                'ChassisNumber' => $request->ChassisNumber,
+                'ModelYear' => $request->ModelYear,
+                'EngineVolume' => $request->EngineVolume,
+                'Comments' => $request->Comments,
+                'PurchaseDate' => $request->PurchaseDate,
+                'Price' => $request->Price, 
+                'DateIn' => $request->DateIn,
+                'TimeIn' => $request->TimeIn,
+                'Supplier' => $request->Supplier,
+                'CarOwner' => $request->CarOwner,
+                'Driver' => $request->Driver,
+                'CardNumber' => $request->CardNumber,
+                'MonthlyBudget' => $request->MonthlyBudget,
+                'CompanyCode' => $request->CompanyCode,
+                'TotalDeposits' => $request->Deposits,
+                'TotalRefueling' => $request->Refueling,
+                'Balance' => $request->Balance,
+                'PinCode' => $request->PinCode, 
+                'Status' => $request->Status,
+                'StopDate' => $request->StopDate,
+                'LicenceExpiryDate' => $request->LicenceExpiryDate,
+                'InsuranceExpiryDate' => $request->InsuranceExpiryDate,
+                'FuelTankCapacity' => $request->FuelTankCapacity, 
+            ]);
 
-            return back(); 
+        return back(); 
     }
 
     /**

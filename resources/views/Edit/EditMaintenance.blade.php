@@ -8,12 +8,13 @@
                 <th onclick="sortTable(1)">Vehicle no</th>
                 <th onclick="sortTable(2)">Date</th>
                 <th onclick="sortTable(3)">Time</th>
-                <th onclick="sortTable(4)">Maintenance Action</th>
-                <th onclick="sortTable(5)">Release Date</th>
-                <th onclick="sortTable(6)">Release Time</th>
-                <th onclick="sortTable(7)">Cost</th>
-                <th onclick="sortTable(8)">Invoice No</th>
-                <th onclick="sortTable(9)">Supplier No</th>
+                <th onclick="sortTable(4)">Incident Type</th>
+                <th onclick="sortTable(5)">Incident Action</th>
+                <th onclick="sortTable(6)">Release Date</th>
+                <th onclick="sortTable(7)">Release Time</th>
+                <th onclick="sortTable(8)">Cost</th>
+                <th onclick="sortTable(9)">Invoice No</th>
+                <th onclick="sortTable(10)">Weeks</th>
             </tr> 
             @foreach ($Maintenance__MyRecords as $Maintenance)
             <tr> 
@@ -22,7 +23,7 @@
                 <span class="VehicleNumber_X_DATA_Edit Hide">{{ $Maintenance->VehicleNumber }}</span>
                 <span class="Date_X_DATA_Edit Hide">{{ $Maintenance->Date }}</span>
                 <span class="Time_X_DATA_Edit Hide">{{ $Maintenance->Time }}</span>
-                <span class="MaintenanceAction_X_DATA_Edit Hide">{{ $Maintenance->MaintenanceAction }}</span>
+                <span class="IncidentAction_X_DATA_Edit Hide">{{ $Maintenance->IncidentAction }}</span>
                 <span class="ReleaseDate_X_DATA_Edit Hide">{{ $Maintenance->ReleaseDate }}</span>
                 <span class="ReleaseTime_X_DATA_Edit Hide">{{ $Maintenance->ReleaseTime }}</span>
                 <span class="Cost_X_DATA_Edit Hide">₦ {{ empty($Maintenance->Cost) ? '' : number_format($Maintenance->Cost) }}</span>
@@ -30,13 +31,21 @@
                 <span class="Week_X_DATA_Edit Hide">{{ $Maintenance->Week }}</span>
                 <td>{{ $Maintenance->Date }}</td>
                 <td>{{ $Maintenance->Time }}</td>
-                <td>{{ $Maintenance->MaintenanceAction }}</td>
+                <td>
+                    <center>
+                        <span class="{{ $Maintenance->IncidentType === 'MAINTENANCE' ? 'MAINTENANCE' : '' }}{{ $Maintenance->IncidentType === 'ACCIDENT' ? 'ACCIDENT' : '' }}{{ $Maintenance->IncidentType === 'REPAIR' ? 'REPAIR' : '' }}">
+                            {{ $Maintenance->IncidentType }}
+                        </span>
+                    </center>
+                </td>
+                <td>{{ $Maintenance->IncidentAction }}</td>
                 <td>{{ $Maintenance->ReleaseDate }}</td>
                 <td>{{ $Maintenance->ReleaseTime }}</td>
                 <td>₦ {{ empty($Maintenance->Cost) ? '' : number_format($Maintenance->Cost) }}</td>
                 <td>{{ $Maintenance->InvoiceNumber }}</td>
                 <td>{{ $Maintenance->Week }}</td>
                 <td class="Hide">{{ $Maintenance->id }}</td>
+                <td class="Hide">{{ $Maintenance->IncidentAttachment }}</td>
             </tr> 
             @endforeach  
             <div class="table-head filter"> 
@@ -44,12 +53,12 @@
                 <span><input type="text" id="SearchInput1" placeholder="Filter By Vehicle no" onkeyup="FilterVehicleNo()"></span> 
                 <span><input type="text" id="SearchInput2" placeholder="Filter By Date" onkeyup="FilterDate()"></span> 
                 <span><input type="text" id="SearchInput3" placeholder="Filter By Time" onkeyup="FilterTime()"></span> 
-                <span><input type="text" id="SearchInput4" placeholder="Filter By Maintenance Action" onkeyup="FilterMaintenanceAction()"></span> 
+                <span><input type="text" id="SearchInput4" placeholder="Filter By Incident Action" onkeyup="FilterIncidentAction()"></span> 
                 <span><input type="text" id="SearchInput5" placeholder="Filter By Release Date" onkeyup="FilterReleaseDate()"></span> 
                 <span><input type="text" id="SearchInput6" placeholder="Filter By Release Time" onkeyup="FilterReleaseTime()"></span> 
                 <span><input type="text" id="SearchInput7" placeholder="Filter By Cost" onkeyup="FilterCost()"></span> 
                 <span><input type="text" id="SearchInput8" placeholder="Filter By Invoice No" onkeyup="FilterInvoiceNo()"></span> 
-                <span><input type="text" id="SearchInput9" placeholder="Filter By Supplier No" onkeyup="FilterSupplierNo()"></span>  
+                <span><input type="text" id="SearchInput9" placeholder="Filter By Weeks" onkeyup="FilterSupplierNo()"></span>  
             </div>
         </table>
         {{ $Maintenance__MyRecords->onEachSide(5)->links() }}

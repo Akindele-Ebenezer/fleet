@@ -34,12 +34,12 @@ ShowRecord_X_Edit.forEach(CardNumber => {
         DepositsId_X.value = CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
  
         EditDepositsButton.addEventListener('click', () => {
-            EditDepositsForm.setAttribute('action', '/Update/Master/Cards/' + DepositsId_X.value);
+            EditDepositsForm.setAttribute('action', '/Update/Deposits/Master/Cards/' + DepositsId_X.value);
             EditDepositsForm.submit();
         });
  
         DeleteDepositsButton.addEventListener('click', () => {
-            window.location = '/Delete/Master/Cards/' + DepositsId_X.value + '/' + CardNumber_X.value + '/' + Amount_X.value;  
+            window.location = '/Delete/Deposits/Master/Cards/' + DepositsId_X.value + '/' + CardNumber_X.value + '/' + Amount_X.value;  
         });
     });
     
@@ -65,7 +65,7 @@ AddMonthlyDepositsButton.forEach(Button => {
             if (AddDepositsForm.children[1].children[1].value === '') {
                 Error.textContent = 'Please fill out card number for new Deposits';
             } else {
-                AddDepositsForm.setAttribute('action', '/Add/Master/Cards/' + CardNumber_DEPOSITS.value);
+                AddDepositsForm.setAttribute('action', '/Add/Deposits/Master/Cards/' + CardNumber_DEPOSITS.value);
                 AddDepositsForm.submit();
             }   
         });

@@ -21,7 +21,7 @@
                 <td class="id">
                     {{ $Car->CompanyCode }}
                     <br>
-                    <button class="action-x">{{ $Companies->CompanyName }}</button>
+                    <button class="action-x">{{ $Companies->CompanyName ?? 0 }}</button>
                 </td>
                 <td>
                     <div class="car-info">

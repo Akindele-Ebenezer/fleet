@@ -1,7 +1,7 @@
 @extends('Layouts.Layout2')
 
 @php 
-    $NumberOfCars = \App\Models\Car::select('VehicleNumber')->distinct()->count();
+    $NumberOfCars = \App\Models\Car::select('VehicleNumber')->whereNotNull('VehicleNumber')->distinct()->count();
 
     $NumberOfCarRepairs = \App\Models\Repair::select('VehicleNumber')->count();
     $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')->count();
@@ -19,12 +19,12 @@
     $FleetSurvey_Deposits_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarDeposits / $FleetSurvey_TOTAL * 100;
     $FleetSurvey_Refueling_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRefueling / $FleetSurvey_TOTAL * 100;
     
-    $NumberOfCars_ACTIVE = \App\Models\Car::select('Status')->where('Status', 'ACTIVE')->count();
-    $NumberOfCars_INACTIVE = \App\Models\Car::select('Status')->where('Status', 'INACTIVE')->count();
+    $NumberOfCars_ACTIVE = \App\Models\Car::select('Status')->whereNotNull('VehicleNumber')->where('Status', 'ACTIVE')->count();
+    $NumberOfCars_INACTIVE = \App\Models\Car::select('Status')->whereNotNull('VehicleNumber')->where('Status', 'INACTIVE')->count();
     $NumberNumberOfCars_ACTIVE_PERCENTAGE = $NumberOfCars == 0 ? 0 : $NumberOfCars_ACTIVE / $NumberOfCars * 100;
     $NumberNumberOfCars_INACTIVE_PERCENTAGE = $NumberOfCars == 0 ? 0 : $NumberOfCars_INACTIVE / $NumberOfCars * 100;
 
-    $NumberOfDrivers = \App\Models\Car::select('Drivers')->distinct()->count();
+    $NumberOfDrivers = \App\Models\Car::select('Drivers')->whereNotNull('VehicleNumber')->distinct()->count();
    
     function get_fleet_survey_currency_in_dollars($Value) {
         // ONE NAIRA TO DOLLAR CURRENTLY
@@ -820,7 +820,7 @@
                             <div class="x-inner">
                                 {{ $User->name }} commented on Maintenance
                                 <br>
-                                {{ $Comment->MaintenanceAction }}
+                                {{ $Comment->IncidentAction }}
                             </div>
                         </div>
                         <div class="x-inner">{{ $Comment->Date }}</div>

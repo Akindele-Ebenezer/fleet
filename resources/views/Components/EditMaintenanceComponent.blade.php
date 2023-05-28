@@ -9,7 +9,7 @@
                 Refueling
             </button>
         </div> 
-        <form class="EditMaintenanceForm">
+        <form class="EditMaintenanceForm">@csrf
             <div class="cancel-modal">✖</div>
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">
@@ -35,9 +35,20 @@
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M880 316v520q0 24-18 42t-42 18H140q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42ZM140 425h680V316H140v109Zm0 129v282h680V554H140Zm0 282V316v520Z"></path></svg>
-                    Maintenance Action	
+                    Incident Type	
                 </div>
-                <input class="MaintenanceAction_X" name="MaintenanceAction" type="text" placeholder="Maintenance Action	..">
+                <select class="IncidentType_X" name="IncidentType"> 
+                    <option value="MAINTENANCE">MAINTENANCE 
+                    <option value="ACCIDENT">ACCIDENT
+                        <option value="REPAIR">REPAIR
+                </select> 
+            </div>
+            <div class="new-car-inputs">
+                <div class="new-car-inputs-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M880 316v520q0 24-18 42t-42 18H140q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42ZM140 425h680V316H140v109Zm0 129v282h680V554H140Zm0 282V316v520Z"></path></svg>
+                    Incident Action	
+                </div>
+                <input class="IncidentAction_X" name="IncidentAction" type="text" placeholder="Incident Action	..">
             </div>
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">
@@ -70,12 +81,25 @@
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M386 677h87q24.75 0 42.375-18T533 617V415q0-24-17.625-42T473 355h-71q-24 0-42 18t-18 42v71q0 24 18 42t42 18h71v71h-87v60Zm87-191h-71v-71h71v71ZM260 856q-24 0-42-18t-18-42V236q0-24 18-42t42-18h560q24 0 42 18t18 42v560q0 24-18 42t-42 18H260Zm0-60h560V236H260v560ZM140 976q-24 0-42-18t-18-42V296h60v620h620v60H140Zm120-740v560-560Zm406 395h60v-87h83v-60h-83v-83h-60v83h-83v60h83v87Z"></path></svg>
-                    Sup No
+                    Weeks
                 </div>
                 <input class="Week_X" name="Week" type="text" placeholder="Weeks..">
             </div>  
+            <div class="new-car-inputs">
+                <div class="new-car-inputs-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M386 677h87q24.75 0 42.375-18T533 617V415q0-24-17.625-42T473 355h-71q-24 0-42 18t-18 42v71q0 24 18 42t42 18h71v71h-87v60Zm87-191h-71v-71h71v71ZM260 856q-24 0-42-18t-18-42V236q0-24 18-42t42-18h560q24 0 42 18t18 42v560q0 24-18 42t-42 18H260Zm0-60h560V236H260v560ZM140 976q-24 0-42-18t-18-42V296h60v620h620v60H140Zm120-740v560-560Zm406 395h60v-87h83v-60h-83v-83h-60v83h-83v60h83v87Z"></path></svg>
+                    Attach Image
+                </div>
+                <input type="file" name="IncidentAttachment">
+            </div> 
             <input type="hidden" name="MaintenanceId" class="MaintenanceId_X">
         </form>
+        <div class="attachment">
+            <a class="IncidentAttachment_Link" target="blank">
+                <p class="IncidentAttachment_FILE"></p>
+                <img class="IncidentAttachment_X">
+            </a>
+        </div>
         <button class="EditMaintenance">+ Edit Maintenance</button>
         <button class="DeleteMaintenance">- Delete Maintenance</button>
     </div>

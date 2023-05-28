@@ -12,7 +12,7 @@
                 <th onclick="sortTable(5)">Week</th>
                 <th onclick="sortTable(6)">Month</th> 
             </tr>
-            @foreach ($Deposits_MasterCards as $Deposits_MasterCard)
+            @foreach ($DepositsMasterCard__MyRecords as $Deposits_MasterCard)
             <tr> 
                 <td>{{ $loop->iteration  + (($Deposits_MasterCards->currentPage() -1) * $Deposits_MasterCards->perPage()) }}</td>
                 <td class="show-record-x-edit">{{ $Deposits_MasterCard->CardNumber }}</td> 
@@ -39,8 +39,8 @@
                 <span><input type="text" id="SearchInput3" placeholder="Filter By Brought Forward" onkeyup="FilterRegistrationNumber()"></span>  
             </div>
         </table>
-        {{ $Deposits_MasterCards->onEachSide(5)->links() }}
-        @unless (count($Deposits_MasterCards) > 0)
+        {{ $DepositsMasterCard__MyRecords->onEachSide(5)->links() }}
+        @unless (count($DepositsMasterCard__MyRecords) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>

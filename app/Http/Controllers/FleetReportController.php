@@ -428,10 +428,10 @@ class FleetReportController extends Controller
         $fpdf->Ln(10);
         $fpdf->SetFillColor(230, 230, 230);
         $fpdf->SetTextColor(0, 0, 0);
-        $fpdf->Cell(190, 5, 'Maintenance Action:', 0, 0, '', true);
+        $fpdf->Cell(190, 5, 'Incident Action:', 0, 0, '', true);
         $fpdf->SetTextColor(0, 0, 0);
         $fpdf->Ln(8); 
-        $fpdf->MultiCell(190, 4, $Request->MaintenanceAction); 
+        $fpdf->MultiCell(190, 4, $Request->IncidentAction); 
         
         $fpdf->Ln(112); 
         $fpdf->Cell(50, 6, request()->session()->get('Name'));

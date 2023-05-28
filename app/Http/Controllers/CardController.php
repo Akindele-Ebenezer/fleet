@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Models\MasterCard;
 use App\Models\DepositsMasterCard;
 
 class CardController extends Controller
@@ -23,7 +24,7 @@ class CardController extends Controller
      */
     public function credit_card_index()
     {
-        $Cars = Car::orderBy('PurchaseDate', 'DESC')->paginate(7);
+        $Cars = Car::orderBy('DateIn', 'DESC')->paginate(7);
         return view('CreditCard', [
             'Cars' => $Cars,
         ]);
@@ -31,7 +32,7 @@ class CardController extends Controller
 
     public function master_card_index()
     {
-        $MasterCards = DepositsMasterCard::orderBy('Date', 'DESC')->paginate(7);
+        $MasterCards = MasterCard::orderBy('Date', 'DESC')->paginate(7);
         return view('MasterCard', [
             'MasterCards' => $MasterCards,
         ]);
@@ -79,16 +80,25 @@ class CardController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store_master_card(Request $request)
     {
-        //
+        MasterCard::insert([  
+            'CardNumber' => $request->CardNumber, 
+            'Date' => $request->Date, 
+            'MonthlyBudget' => $request->MonthlyBudget, 
+            'Balance' => $request->Balance, 
+            'Status' => $request->Status,  
+            'UserId' => request()->session()->get('Id'),  
+        ]);
+
+        return back();  
     }
 
-    public function store_master_card($Deposits, Request $request)
+    public function store_deposits_master_card($Deposits, Request $request)
     {
-        // $Balance = \App\Models\Car::where('CardNumber', $request->CardNumber)->first();
-        // $Balance->Balance = $request->Amount + $Balance->Balance;
-        // $Balance->save();
+        $Balance = \App\Models\MasterCard::where('CardNumber', $request->CardNumber_DEPOSITS)->first(); 
+        $Balance->Balance = $request->Amount + $Balance->Balance;
+        $Balance->save();
         
         DepositsMasterCard::insert([  
             'CardNumber' => $request->CardNumber_DEPOSITS, 
@@ -123,12 +133,21 @@ class CardController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update_master_card(Request $request, string $id)
+    { 
+        MasterCard::where('id', $request->MasterCardId)
+        ->update([
+            'CardNumber' => $request->CardNumber, 
+            'Date' => $request->Date, 
+            'MonthlyBudget' => $request->MonthlyBudget, 
+            'Balance' => $request->Balance, 
+            'Status' => $request->Status,    
+        ]);
+
+        return back();  
     }
 
-    public function update_master_card($MasterCards, Request $request)
+    public function update_deposits_master_card($MasterCards, Request $request)
     {  
         DepositsMasterCard::where('id', $MasterCards)
             ->update([
@@ -146,17 +165,22 @@ class CardController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy_master_card($MasterCardId)
     {
-        //
+        // $Balance = \App\Models\DepositsMasterCard::where('CardNumber', $CardNumber)->first(); 
+        // $Balance->Balance = $Amount - $Balance->Balance;
+        // $Balance->save();  
+        $DeleteMasterCard = MasterCard::where('id', $MasterCardId)->delete();
+
+        return back();
     }
 
-    public function destroy_master_card($MasterCardId, $CardNumber, $Amount, DepositsMasterCard $MasterCards)
+    public function destroy_deposits_master_card($MasterCardId, $CardNumber, $Amount, DepositsMasterCard $MasterCards)
     { 
         // $Balance = \App\Models\DepositsMasterCard::where('CardNumber', $CardNumber)->first(); 
         // $Balance->Balance = $Amount - $Balance->Balance;
         // $Balance->save(); 
-        $DeleteMasterCard = DepositsMasterCard::where('id', $MasterCardId)->delete();
+        $DeleteDepositsMasterCard = DepositsMasterCard::where('id', $MasterCardId)->delete();
 
         return back();
     }

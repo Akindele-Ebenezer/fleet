@@ -23,7 +23,7 @@
                             <div class="inner">
                                 <h1>{{ $Car->CardNumber }}</h1> 
                                 <span class="type">Credit Card</span>
-                                <span class="{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}</span>
+                                <span class="{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br> {{ $Car->DateIn }}
                             </div>  
                             <div class="inner">
                                 <span class="used-by">{{ $Car->VehicleNumber }}</span>
@@ -52,6 +52,13 @@
                 </td> 
                 <td>  
                     <button class="action-x manage">MANAGE</button>
+                    <span class="Hide">{{ $Car->CardNumber }}</span>
+                    <span class="Hide">{{ $Car->DateIn }}</span>
+                    <span class="Hide">{{ $Car->MonthlyBudget }}</span>
+                    <span class="Hide">{{ $Car->Balance }}</span>
+                    <span class="Hide">{{ $Car->Status }}</span>
+                    <span class="Hide">{{ $Car->id }}</span>
+                    <span class="Hide">{{ $Car->VehicleNumber }}</span>
                 </td> 
             </tr> 
             @endforeach 

@@ -101,9 +101,19 @@
     @if (Route::is('Deposits'))
         @include('Components.ReadOnly.DepositsComponent')
     @endif
+    
+    @if (Route::is('CreditCard'))
+        @include('Components.AddCreditCardComponent')
+        @include('Components.EditCreditCardComponent')
+    @endif
 
     @if (Route::is('Deposits_MasterCard'))
         @include('Components.ReadOnly.Deposits_MasterCardComponent')
+    @endif
+    
+    @if (Route::is('MasterCard'))
+        @include('Components.AddMasterCardComponent')
+        @include('Components.EditMasterCardComponent')
     @endif
     
     @if (Route::is('EditRefueling'))
@@ -475,7 +485,8 @@
                                 "VehicleNo",
                                 "Date",
                                 "Time",
-                                "MaintenanceAction",
+                                "IncidentType",
+                                "IncidentAction",
                                 "ReleaseDate",
                                 "ReleaseTime",
                                 "Cost",
@@ -536,7 +547,8 @@
                                 "VehicleNo",
                                 "Date",
                                 "Time",
-                                "MaintenanceAction",
+                                "IncidentType",
+                                "IncidentAction",
                                 "ReleaseDate",
                                 "ReleaseTime",
                                 "Cost",
@@ -635,7 +647,7 @@
                 </div>
                 @endunless
                 <div class="inner">
-                    <button class="action-x {{ Route::is('MyRecords') ? 'add-car' : '' }} {{ Route::is('EditRepairs') ? 'add-repair' : '' }} {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? 'add-master-card-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('CreditCard') ? 'cars-route' : '' }}"> {{ Route::is('MyRecords') ? '+ Add Vehicle' : '' }} {{ Route::is('EditRepairs') ? '+ Add Repairs' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('CreditCard') || Route::is('MasterCard') ? 'Explore Cars' : '' }}</button><button class="ExportToExcel" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">Export to EXCEL</button>
+                    <button class="action-x {{ Route::is('MyRecords') ? 'add-car' : '' }} {{ Route::is('EditRepairs') ? 'add-repair' : '' }} {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? 'add-master-card-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Deposits_MasterCard') ? 'cars-route' : '' }}{{ Route::is('CreditCard') ? 'add-credit-card' : '' }}{{ Route::is('MasterCard') ? 'add-master-card' : '' }}"> {{ Route::is('MyRecords') ? '+ Add Vehicle' : '' }} {{ Route::is('EditRepairs') ? '+ Add Repairs' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Deposits_MasterCard') ? 'Explore Cars' : '' }}{{ Route::is('CreditCard') ? '+ New Credit Card' : '' }}{{ Route::is('MasterCard') ? '+ New Master Card' : '' }}</button><button class="ExportToExcel" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">Export to EXCEL</button>
                 </div>
             </div> 
             @endunless
@@ -818,14 +830,32 @@
                 });
             </script>
         @endif
-        @if (Route::is('Deposits_MasterCard'))
-            <script src="{{ asset('Js/ReadOnly/Deposits_MasterCard.js') }}"></script>
-            <script>
+        @if (Route::is('CreditCard'))
+            <script src="{{ asset('Js/Edit/CreditCard.js') }}"></script>
+            {{-- <script>
                 let ExportButton = document.querySelector('.ExportToExcel');
                 ExportButton.addEventListener('click', () => {
                     window.location = '/Deposits/Master/Cards/Export'; 
                 });
-            </script>
+            </script> --}}
+        @endif
+        @if (Route::is('Deposits_MasterCard'))
+            <script src="{{ asset('Js/ReadOnly/Deposits_MasterCard.js') }}"></script>
+            {{-- <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Deposits/Master/Cards/Export'; 
+                });
+            </script> --}}
+        @endif
+        @if (Route::is('MasterCard'))
+            <script src="{{ asset('Js/Edit/MasterCard.js') }}"></script>
+            {{-- <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Deposits/Master/Cards/Export'; 
+                });
+            </script> --}}
         @endif
         @if (Route::is('Refueling'))
             <script src="{{ asset('Js/ReadOnly/Refueling.js') }}"></script>

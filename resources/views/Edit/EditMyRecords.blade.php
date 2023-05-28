@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="inner">
                                     <h3>Organisation</h3>
-                                    <span>{{ $Car->CompanyCode }} - {{ $Companies->CompanyName }}</span>
+                                    <span>{{ $Car->CompanyCode }} - {{ $Companies->CompanyName ?? 0 }}</span>
                                 </div>
                                 <div class="inner">
                                     <h3>Engine Type</h3>

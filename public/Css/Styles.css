@@ -301,6 +301,16 @@ svg {
   right: 0;
   width: 60rem;
 }
+.form .inner .attachment {
+  margin-block: 2em;
+}
+.form .inner .attachment img {
+  width: 20em;
+}
+.form .inner .attachment p {
+  color: #ddd;
+  margin-bottom: 1em;
+}
 .form .inner button:first-of-type {
   background-color: #3034b5;
 }
@@ -807,6 +817,23 @@ svg {
 }
 .report-inner .table td center {
   color: #ddd;
+}
+.report-inner .table td center span {
+  border-radius: 0.35em;
+  display: inline-block;
+  color: #fff !important;
+  padding: 0.15em 0.35em;
+  width: 7em;
+  text-transform: lowercase;
+}
+.report-inner .table td center span.ACCIDENT {
+  background: #DF2E38;
+}
+.report-inner .table td center span.MAINTENANCE {
+  background: #333;
+}
+.report-inner .table td center span.REPAIR {
+  background: #3034b5;
 }
 .report-inner .table td,
 .report-inner .table th {

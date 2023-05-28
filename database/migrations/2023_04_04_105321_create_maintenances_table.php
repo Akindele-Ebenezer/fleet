@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('VehicleNumber')->nullable();
             $table->string('RFLNO');
-            $table->string('MaintenanceAction')->nullable();
+            $table->string('IncidentType');
+            $table->string('IncidentAction')->nullable();
             $table->string('Details')->nullable();
             $table->string('Date')->nullable();
             $table->string('Time')->nullable();
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('Cost')->nullable();
             $table->string('InvoiceNumber')->nullable();
             $table->string('Week')->nullable();
+            $table->string('IncidentAttachment')->nullable();
             $table->string('UserId')->nullable();
             $table->string('DateIn')->nullable();
             $table->string('TimeIn')->nullable();

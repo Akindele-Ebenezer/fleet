@@ -22,12 +22,12 @@
                         <div class="info-inner">
                             <div class="inner">
                                 <h1>{{ $MasterCard->CardNumber }}</h1> 
-                                <span class="type">Credit Card</span>
-                                <span class="{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}</span>
+                                <span class="type">Master Card</span>
+                                <span class="{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br> {{ $MasterCard->Date }}
                             </div>  
                             <div class="inner">
-                                <span class="used-by">{{ $MasterCard->VehicleNumber }}</span>
-                            </div>  
+                                <span class="used-by">ALL CARS</span> 
+                            </div>   
                         </div>  
                     </div> 
                  </td> 
@@ -35,7 +35,7 @@
                     ₦ {{ number_format($MasterCard->MonthlyBudget) }}
                 </td> 
                 @php
-                    $Deposits = \App\Models\Deposits::where('CardNumber', $MasterCard->CardNumber)->sum('Amount');
+                    $Deposits = \App\Models\DepositsMasterCard::where('CardNumber', $MasterCard->CardNumber)->sum('Amount');
                     $Refueling = \App\Models\Refueling::where('CardNumber', $MasterCard->CardNumber)->sum('Amount');
                 @endphp
                 <td>  
@@ -52,6 +52,12 @@
                 </td> 
                 <td>  
                     <button class="action-x manage">MANAGE</button>
+                    <span class="Hide">{{ $MasterCard->CardNumber }}</span>
+                    <span class="Hide">{{ $MasterCard->Date }}</span>
+                    <span class="Hide">{{ $MasterCard->MonthlyBudget }}</span>
+                    <span class="Hide">{{ $MasterCard->Balance }}</span>
+                    <span class="Hide">{{ $MasterCard->Status }}</span>
+                    <span class="Hide">{{ $MasterCard->id }}</span>
                 </td> 
             </tr> 
             @endforeach 

@@ -489,6 +489,25 @@
 
                 center {
                     color: #ddd;
+
+                    span {
+                        border-radius: 0.35em;
+                        display: inline-block;
+                        color: #fff !important;
+                        padding: 0.15em 0.35em;
+                        width: 7em;
+                        text-transform: lowercase;
+
+                        &.ACCIDENT {
+                            background: $Color-2;
+                        }
+                        &.MAINTENANCE {
+                            background: $Color-1;
+                        }
+                        &.REPAIR {
+                            background: $Color-4;
+                        }
+                    }
                 }
             }
 
