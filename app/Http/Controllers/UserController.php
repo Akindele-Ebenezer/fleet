@@ -89,6 +89,53 @@ class UserController extends Controller
         return back(); 
     }
 
+    public function enable_user($User, Request $request) { 
+        \DB::table('user_privileges')->insert([ 
+            'UserId' => $request->UserId, 
+            'Date' => date('Y-m-d'),  
+            'TimeIn' => date("g:i sa"),  
+        ]);
+
+        return back(); 
+    }
+    public function store_privileges($User, Request $request) { 
+        \DB::table('user_privileges')->where('UserId', $request->UserId)
+        ->update([
+            'UserId' => $request->UserId,
+            'CarRegistration' => $request->CarRegistration_PRIVILEGES, 
+            'AddMaintenance' => $request->AddMaintenance_PRIVILEGES, 
+            'FuelManagement' => $request->FuelManagement_PRIVILEGES,  
+            'MakeDeposits' => $request->MakeDeposits_PRIVILEGES,  
+            'CardManagement' => $request->CardManagement_PRIVILEGES,  
+            'Date' => date('Y-m-d'),  
+            'TimeIn' => date("g:i sa"),  
+        ]);
+
+        return back(); 
+    }
+    
+    public function update_privileges($User, Request $request) {
+        \DB::table('user_privileges')->where('UserId', $request->UserId)
+        ->update([
+            'UserId' => $request->UserId,
+            'CarRegistration' => $request->CarRegistration_PRIVILEGES, 
+            'AddMaintenance' => $request->AddMaintenance_PRIVILEGES, 
+            'FuelManagement' => $request->FuelManagement_PRIVILEGES,  
+            'MakeDeposits' => $request->MakeDeposits_PRIVILEGES,  
+            'CardManagement' => $request->CardManagement_PRIVILEGES,  
+            'Date' => date('Y-m-d'), 
+            'TimeIn' => date("g:i sa"),  
+        ]);
+
+        return back(); 
+    }
+
+    public function disable_user($UserId, Request $request)
+    {
+        \DB::table('user_privileges')->where('UserId', $request->UserId)->delete();
+
+        return back();
+    }
     /**
      * Remove the specified resource from storage.
      */

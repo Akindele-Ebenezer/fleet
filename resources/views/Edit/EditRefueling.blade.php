@@ -5,7 +5,7 @@
         <table class="table" id="Table">
             <tr class="table-head">
                 <th onclick="sortTable(0)">RFL NO</th>
-                <th onclick="sortTable(1)">Vehicle no</th>
+                <th onclick="sortTable(1)">Vehicle Number</th>
                 <th onclick="sortTable(2)">Date</th>
                 <th onclick="sortTable(3)">Time</th>
                 <th onclick="sortTable(4)">K.METER</th>

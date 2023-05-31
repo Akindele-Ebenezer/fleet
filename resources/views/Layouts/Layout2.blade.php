@@ -16,14 +16,12 @@
         {{ Route::is('VehicleReport') ? 'REPORT' : '' }}
 
         {{ Route::is('Maintenance') ? 'MAINTENANCE' : '' }}
-        {{ Route::is('Repairs') ? 'REPAIRS' : '' }}
         {{ Route::is('Refueling') ? 'REFUELING' : '' }}
         {{ Route::is('Deposits') ? 'DEPOSITS' : '' }}
         {{ Route::is('Deposits_MasterCard') ? 'DEPOSITS' : '' }}
 
-        {{ Route::is('MyRecords') ? 'REGISTERATION' : '' }}
+        {{ Route::is('Cars_Registration') ? 'REGISTERATION' : '' }}
         {{ Route::is('EditMaintenance') ? 'Edit / MAINTENANCE' : '' }}
-        {{ Route::is('EditRepairs') ? 'Edit / REPAIRS' : '' }}
         {{ Route::is('EditRefueling') ? 'Edit / REFUELING' : '' }}
         {{ Route::is('EditDeposits') ? 'Make Deposits' : '' }}
         {{ Route::is('EditDeposits_MasterCard') ? 'Make Deposits' : '' }}
@@ -63,22 +61,13 @@
     @endphp 
     @include('Components.LoaderComponent')
 
-    @if (Route::is('MyRecords') || Route::is('Cars') || Route::is('VehicleReport'))
+    @if (Route::is('Cars_Registration') || Route::is('Cars') || Route::is('VehicleReport'))
         @include('Components.EditCarComponent')
         @include('Components.AddCarComponent')
         @include('Components.VehicleDataComponent')
         @include('Components.EditVehicleDataComponent')
     @endif
-
-    @if (Route::is('EditRepairs'))
-        @include('Components.AddRepairComponent')
-        @include('Components.EditRepairComponent')
-    @endif
-
-    @if (Route::is('Repairs'))
-        @include('Components.ReadOnly.RepairComponent')
-    @endif
-    
+ 
     @if (Route::is('EditMaintenance'))
         @include('Components.AddMaintenanceComponent')
         @include('Components.EditMaintenanceComponent')
@@ -171,19 +160,13 @@
                             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"/></svg>
                         </li> 
                     </a>
-                    <div class="sub-nav {{ Route::is('MyRecords') || Route::is('EditRepairs') || Route::is('EditMaintenance') || Route::is('EditRefueling') ? 'Show' : '' }}">
-                        <a href='{{ route('MyRecords') }}'>
-                            <li class="{{ Route::is('MyRecords') ? 'active' : '' }}">
+                    <div class="sub-nav {{ Route::is('Cars_Registration') || Route::is('EditMaintenance') || Route::is('EditRefueling') ? 'Show' : '' }}">
+                        <a href='{{ route('Cars_Registration') }}'>
+                            <li class="{{ Route::is('Cars_Registration') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
                                 Car Registration ({{ number_format($NumberOfCars_MyRecords) }})
                             </li>
-                        </a>
-                        <a href='{{ route('EditRepairs') }}'>
-                            <li class="{{ Route::is('EditRepairs') ? 'active' : '' }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M705 928 447 668q-23 8-46 13t-47 5q-97.083 0-165.042-67.667Q121 550.667 121 454q0-31 8.158-60.388Q137.316 364.223 152 338l145 145 92-86-149-149q25.915-15.158 54.957-23.579Q324 216 354 216q99.167 0 168.583 69.417Q592 354.833 592 454q0 24-5 47t-13 46l259 258q11 10.957 11 26.478Q844 847 833 858l-76 70q-10.696 11-25.848 11T705 928Zm28-57 40-40-273-273q16-21 24-49.5t8-54.5q0-75-55.5-127T350 274l101 103q9 9 9 22t-9 22L319 545q-9 9-22 9t-22-9l-97-96q3 77 54.668 127T354 626q25 0 53-8t49-24l277 277ZM476 572Z"/></svg>                 
-                                Repairs ({{ number_format($NumberOfCarRepairs_MyRecords) }})
-                            </li>
-                        </a>
+                        </a> 
                         <a href='{{ route('EditMaintenance') }}'>
                             <li class="{{ Route::is('EditMaintenance') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"/></svg>           
@@ -274,13 +257,7 @@
                                 </a>
                             </div>
                         </div>
-                    </a>
-                    <a href='{{ route('Repairs') }}'>
-                        <li class="{{ Route::is('Repairs') ? 'active' : '' }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M705 928 447 668q-23 8-46 13t-47 5q-97.083 0-165.042-67.667Q121 550.667 121 454q0-31 8.158-60.388Q137.316 364.223 152 338l145 145 92-86-149-149q25.915-15.158 54.957-23.579Q324 216 354 216q99.167 0 168.583 69.417Q592 354.833 592 454q0 24-5 47t-13 46l259 258q11 10.957 11 26.478Q844 847 833 858l-76 70q-10.696 11-25.848 11T705 928Zm28-57 40-40-273-273q16-21 24-49.5t8-54.5q0-75-55.5-127T350 274l101 103q9 9 9 22t-9 22L319 545q-9 9-22 9t-22-9l-97-96q3 77 54.668 127T354 626q25 0 53-8t49-24l277 277ZM476 572Z"/></svg>                 
-                            Repairs ({{ number_format($NumberOfCarRepairs) }})
-                        </li>
-                    </a>
+                    </a> 
                     <a href='{{ route('Maintenance') }}'>
                         <li class="{{ Route::is('Maintenance') ? 'active' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"/></svg>           
@@ -331,14 +308,12 @@
                         {{ Route::is('VehicleReport') ? 'REPORT' : '' }}
 
                         {{ Route::is('Maintenance') ? 'MAINTENANCE' : '' }}
-                        {{ Route::is('Repairs') ? 'REPAIRS' : '' }}
                         {{ Route::is('Refueling') ? 'FUEL HISTORY' : '' }}
                         {{ Route::is('Deposits') ? 'DEPOSITS' : '' }}
                         {{ Route::is('Deposits_MasterCard') ? 'DEPOSITS' : '' }}
 
-                        {{ Route::is('MyRecords') ? 'REGISTERATION' : '' }}
+                        {{ Route::is('Cars_Registration') ? 'REGISTERATION' : '' }}
                         {{ Route::is('EditMaintenance') ? 'Edit / MAINTENANCE' : '' }}
-                        {{ Route::is('EditRepairs') ? 'Edit / REPAIRS' : '' }}
                         {{ Route::is('EditRefueling') ? 'FUEL MANAGEMENT' : '' }}
                         {{ Route::is('EditDeposits') ? 'Make Deposits' : '' }}
                         {{ Route::is('EditDeposits_MasterCard') ? 'Make Deposits' : '' }}
@@ -398,7 +373,7 @@
                             <tr>
                                 @php
                                                                     
-                                    $SumOfCarRepairs = \App\Models\Repair::select('Cost')->sum('Cost');
+                                    $SumOfCarRepairs = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'REPAIR')->sum('Cost');
                                     $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')->sum('Cost');
                                     $SumOfCarDeposits = \App\Models\Deposits::select('Amount')->sum('Amount');
                                     $SumOfCarRefueling = \App\Models\Refueling::select('Amount')->sum('Amount');
@@ -434,7 +409,7 @@
                             ];
                         }
                         
-                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/MyRecords') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Cars/Registration') {
                             $SearchInputs = [
                                 "ID",
                                 "Cars", 
@@ -463,22 +438,7 @@
                                 "RegistrationNumber", 
                             ];
                         }
-             
-                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Repairs') {
-                            $SearchInputs = [
-                                "SN",
-                                "CarVehicleNo",
-                                "Date",
-                                "Time",
-                                "RepairAction",
-                                "ReleaseDate",
-                                "ReleaseTime",
-                                "Cost",
-                                "InvoiceNo",
-                                "Weeks", 
-                            ];
-                        }
-                
+                 
                         if(strtok($_SERVER['REQUEST_URI'], '?') === '/Maintenance') {
                             $SearchInputs = [
                                 "SN",
@@ -524,24 +484,9 @@
                                 "KM", 
                                 "KMLITER", 
                             ];
-                        }
-             
-                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/EditRepairs') {
-                            $SearchInputs = [
-                                "SN",
-                                "CarVehicleNo",
-                                "Date",
-                                "Time",
-                                "RepairAction",
-                                "ReleaseDate",
-                                "ReleaseTime",
-                                "Cost",
-                                "InvoiceNo",
-                                "Weeks", 
-                            ];
-                        }
+                        } 
                 
-                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/EditMaintenance') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Edit/Maintenance') {
                             $SearchInputs = [
                                 "SN",
                                 "VehicleNo",
@@ -557,21 +502,18 @@
                             ];
                         }
                 
-                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/EditDeposits') {
-                            $SearchInputs = [
-                                "LNO",
-                                "VehicleNo",
-                                "Date",
-                                "CardNo",
-                                "Amount",
-                                "Year",
-                                "Week",
-                                "Month", 
-                                "Comments", 
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Management/Credit/Cards') {
+                            $SearchInputs = [ 
+                                "CarInformation",
+                                "MonthlyBudget",
+                                "CarDeposits",
+                                "Refueling",
+                                "Balance",
+                                "BroughtForward", 
                             ];
                         } 
 
-                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/EditRefueling') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Edit/Refueling') {
                             $SearchInputs = [
                                 "SN",
                                 "VehicleNo",
@@ -611,9 +553,9 @@
                 </div> 
             </div>
             <div class="action">
-                @unless (!(Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling'))) 
+                @unless (!(Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling'))) 
                 <div class="FilterWrapper">
-                    <button class="action-x Filter-X">Vehicle {{ Route::is('Repairs') ? 'Repairs' : '' }}{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  :: (Specify)<svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg></button>
+                    <button class="action-x Filter-X">Vehicle {{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  :: (Specify)<svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg></button>
                     <div class="inner-filter">
                         <form action="">
                             <h3>Global Time Period</h3>
@@ -622,32 +564,32 @@
                                 <li>From: <input type="date" name="Date_From"></li>
                                 <li>To: <input type="date" name="Date_To"></li>
                             </ul>
-                            <button class="action-x" name="Filter_All_{{ Route::is('Repairs') ? 'Repairs' : '' }}{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}">Apply</button>
+                            <button class="action-x" name="Filter_All_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}">Apply</button>
                         </form>
                         <form action="">
                             <h3>Vehicle Time Period</h3>
-                            <p>{{ Route::is('Repairs') ? 'Repairs' : '' }}{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  Yearly</p>
+                            <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  Yearly</p>
                             <ul>
                                 <li>Vehicle No.: <input type="text" name="VehicleNo"></li>
                                 <li>Specify Year: <input type="number" name="Year"></li>
                             </ul>
-                            <button class="action-x" name="Filter_{{ Route::is('Repairs') ? 'Repairs' : '' }}{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Yearly">Apply</button>
+                            <button class="action-x" name="Filter_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Yearly">Apply</button>
                         </form>
                         <form action="">
                             <h3>Time Period</h3>
-                            <p>{{ Route::is('Repairs') ? 'Repairs' : '' }}{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  (Range)</p>
+                            <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  (Range)</p>
                             <ul>
                                 <li>Vehicle No.: <input type="text" name="VehicleNo"></li> 
                                 <li>Start Date: <input type="date" name="Date_From"></li>
                                 <li>End Date: <input type="date" name="Date_To"></li>
                             </ul>
-                            <button class="action-x" name="Filter_{{ Route::is('Repairs') ? 'Repairs' : '' }}{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Range">Apply</button>
+                            <button class="action-x" name="Filter_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Range">Apply</button>
                         </form>
                     </div>
                 </div>
                 @endunless
                 <div class="inner">
-                    <button class="action-x {{ Route::is('MyRecords') ? 'add-car' : '' }} {{ Route::is('EditRepairs') ? 'add-repair' : '' }} {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? 'add-master-card-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Deposits_MasterCard') ? 'cars-route' : '' }}{{ Route::is('CreditCard') ? 'add-credit-card' : '' }}{{ Route::is('MasterCard') ? 'add-master-card' : '' }}"> {{ Route::is('MyRecords') ? '+ Add Vehicle' : '' }} {{ Route::is('EditRepairs') ? '+ Add Repairs' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Deposits_MasterCard') ? 'Explore Cars' : '' }}{{ Route::is('CreditCard') ? '+ New Credit Card' : '' }}{{ Route::is('MasterCard') ? '+ New Master Card' : '' }}</button><button class="ExportToExcel" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">Export to EXCEL</button>
+                    <button class="action-x {{ Route::is('Cars_Registration') ? 'add-car' : '' }}  {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? 'add-master-card-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Deposits_MasterCard') ? 'cars-route' : '' }}{{ Route::is('CreditCard') ? 'add-credit-card' : '' }}{{ Route::is('MasterCard') ? 'add-master-card' : '' }}"> {{ Route::is('Cars_Registration') ? '+ Add Vehicle' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Deposits_MasterCard') ? 'Explore Cars' : '' }}{{ Route::is('CreditCard') ? '+ New Credit Card' : '' }}{{ Route::is('MasterCard') ? '+ New Master Card' : '' }}</button><button class="ExportToExcel" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">Export to EXCEL</button>
                 </div>
             </div> 
             @endunless
@@ -681,7 +623,7 @@
         @endfor
         </script>
         @endunless 
-        @if (Route::is('Repairs') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling'))
+        @if (Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling'))
         <script>
             let VehicleFilterButton = document.querySelector('.Filter-X');
             let VehicleFilterDropdown = document.querySelector('.FilterWrapper .inner-filter');
@@ -703,19 +645,9 @@
         </script>
         @endif
         <script src="{{ asset('Js/Scripts.js') }}"></script>
-        @if (Route::is('MyRecords'))
-            <script src="{{ asset('Js/Edit/MyRecords.js') }}"></script>
-        @endif
-        @if (Route::is('EditRepairs'))
-            <script src="{{ asset('Js/Edit/Repair.js') }}"></script>
-            <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Repairs/Export'; 
-                });
-                
-            </script>
-        @endif
+        @if (Route::is('Cars_Registration'))
+            <script src="{{ asset('Js/Edit/CarsRegistration.js') }}"></script>
+        @endif 
         @if (Route::is('EditMaintenance'))
             <script src="{{ asset('Js/Edit/Maintenance.js') }}"></script>
             <script>
@@ -802,16 +734,7 @@
             <script src="{{ asset('Js/Edit/Users.js') }}"></script>
         @endif
         {{--  --}}
-        
-        @if (Route::is('Repairs'))
-            <script src="{{ asset('Js/ReadOnly/Repair.js') }}"></script>
-            <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Repairs/Export'; 
-                });
-            </script>
-        @endif
+         
         @if (Route::is('Maintenance'))
             <script src="{{ asset('Js/ReadOnly/Maintenance.js') }}"></script>
             <script>

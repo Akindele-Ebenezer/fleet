@@ -81,7 +81,7 @@
                         Maker
                     </span> 
                     <select name="Maker" class="Maker_X">
-                        @foreach ($Cars_Maker_GROUPED as $Car)
+                        @foreach ($Cars_Maker as $Car)
                             <option value="{{ $Car->Maker }}">{{ $Car->Maker }}</option>
                         @endforeach 
                     </select>
@@ -106,7 +106,7 @@
                         Engine Type
                     </span>
                     <select name="EngineType" class="EngineType_X">
-                        @foreach ($Cars_EngineType_GROUPED as $Car)
+                        @foreach ($Cars_EngineType as $Car)
                             <option value="{{ $Car->EngineType }}">{{ $Car->EngineType }}</option>
                         @endforeach 
                     </select>
@@ -117,7 +117,7 @@
                         Gear Type
                     </span>
                     <select name="GearType" class="GearType_X">
-                        @foreach ($Cars_GearType_GROUPED as $Car)
+                        @foreach ($Cars_GearType as $Car)
                             <option value="{{ $Car->GearType }}">{{ $Car->GearType }}</option>
                         @endforeach 
                     </select>
@@ -163,7 +163,7 @@
                         Organisation
                     </span>
                     <select class="CompanyCode_X" name="CompanyCode">
-                        @foreach ($Cars_Org_GROUPED as $Car)
+                        @foreach ($Cars_Organisation as $Car)
                             <option value="{{ $Car->CompanyCode }}">{{ $Car->CompanyCode }} ::: {{ $Car->CompanyName }}</option>
                         @endforeach 
                     </select> 
@@ -237,9 +237,8 @@
                         Status
                     </span>
                     <select name="Status" class="Status_X">
-                        @foreach ($Cars_Status_GROUPED as $Car)
-                            <option value="{{ $Car->Status }}">{{ $Car->Status }}</option>
-                        @endforeach 
+                        <option value="ACTIVE">ACTIVE</option>
+                        <option value="INACTIVE">INACTIVE</option>
                     </select>
                 </li> 
                 <li>

@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use App\Models\Car;
-use App\Models\Maintenance;
-use App\Models\Repair;
+use App\Models\Maintenance; 
 
 class FleetReportController extends Controller
 { 
@@ -31,11 +30,6 @@ class FleetReportController extends Controller
 
     public function get_maintenance_report_data_count($Column, $Value) {
         $Data = Maintenance::select('id')->where($Column, $Value)->count(); 
-        return $Data;
-    }
-
-    public function get_repairs_report_data_count($Column, $Value) {
-        $Data = Repair::select('id')->where($Column, $Value)->count(); 
         return $Data;
     } 
 
@@ -93,11 +87,7 @@ class FleetReportController extends Controller
         $fpdf->Cell(35, 6, 'Used By', 0, 0, ''); 
         $fpdf->Cell(50, 6, self::get_car_report_data('VehicleNumber', $CarReportId, 'CarOwner'), 1);
         $fpdf->Cell(20, 6, '');
-        
-        $fpdf->Cell(35, 6, 'Repairs', 0, 0, ''); 
-        $fpdf->Cell(50, 6, '{Repairs}', 1);
-        $fpdf->Cell(20, 6, '');
-        
+         
         $fpdf->Ln(8);
         $fpdf->Cell(35, 6, 'Balance', 0, 0, ''); 
         $fpdf->Cell(50, 6, 'N ' . number_format(self::get_car_report_data('VehicleNumber', $CarReportId, 'Balance')), 1);
@@ -110,11 +100,7 @@ class FleetReportController extends Controller
         $fpdf->Ln(8);
         $fpdf->Cell(35, 6, 'Refueling', 0, 0, ''); 
         $fpdf->Cell(50, 6, 'N ' . number_format(self::get_sum_of_refueling('VehicleNumber', $CarReportId)), 1);
-        $fpdf->Cell(20, 6, '');  
-        
-        $fpdf->Cell(35, 6, 'Repairs', 0, 0, ''); 
-        $fpdf->Cell(50, 6, self::get_repairs_report_data_count('VehicleNumber', $CarReportId, 'Status'), 1);
-        $fpdf->Cell(20, 6, '');  
+        $fpdf->Cell(20, 6, '');    
         
         $fpdf->Ln(8);
         $fpdf->Cell(35, 6, 'Deposits', 0, 0, ''); 
@@ -236,112 +222,7 @@ class FleetReportController extends Controller
         $fpdf->Output();
         exit;
     }
- 
-    public function repair_report($RepairReportId, Fpdf $fpdf, Request $Request) {   
-        $fpdf->SetTitle('Repair Report - ' . $RepairReportId . ' | Fleet Management System');
-
-        $fpdf->AddPage();
-
-        $fpdf->SetFont('Arial', '', 10);
-        $fpdf->Cell(50, 25, 'Reg No: ' . $RepairReportId . '');
-        $fpdf->Cell(33, 25, '');
-        $fpdf->SetFont('Arial', 'B', 15);
-        $fpdf->SetTextColor(70,130,180);
-        $fpdf->Cell(50, 25, 'FLEET MANAGEMENT SYSTEM');
-        $fpdf->Ln(5); 
-        if (self::get_car_report_data('VehicleNumber', $RepairReportId, 'Status') == 'ACTIVE') {
-            $fpdf->SetTextColor(102,205,170);
-        } else { 
-            $fpdf->SetTextColor(250, 128, 114);
-        }
-        $fpdf->SetFont('Arial', 'I', 10);
-        $fpdf->Cell(170, 25, self::get_car_report_data('VehicleNumber', $RepairReportId, 'Status'));
-        $fpdf->SetTextColor(70,130,180);
-        $fpdf->Cell(50, 25, '(VFMS)');
-        $fpdf->SetFont('Arial', '', 10);
-        
-        $fpdf->Ln(17);
-        $fpdf->SetFillColor(207, 184, 24);
-        $fpdf->SetTextColor(255, 255, 255);
-        $fpdf->SetFont('Arial', 'B', 10);
-        $fpdf->Cell(50, 10, 'INFORMATION RESOURCES', 0, 0, 'C', true);
-        $fpdf->Cell(70, 25, '');
-        $fpdf->Image('../public/Images/depasa-logo.png', 163, 30, 40, 20);
-
-        $fpdf->SetTextColor(0, 0, 0);
-        $fpdf->SetFont('Arial', '', 9);
-        $fpdf->Ln(20);
-        $fpdf->MultiCell(190, 4, 'This report provides information on the repair activities carried out during the reporting period, including the number of vehicles that required repairs, the types of repairs performed, and the associated costs. This document clearly shows brief summary of the fleet\'s performance during the reporting period, including key metrics such as total distance traveled, fuel consumption, maintenance costs, and any significant events or changes that have occurred. ');
-
-        $fpdf->Ln(8);
-        $fpdf->Cell(50, 5, 'This car is ' . self::get_car_report_data('VehicleNumber', $RepairReportId, 'Status')  . '. Licence Expires on ' . self::get_car_report_data('VehicleNumber', $RepairReportId, 'LicenceExpiringDate') . '..');
-        $fpdf->Cell(113, 25, '');
-        $fpdf->Cell(50, 5, 'Date: ' . date('Y/m/d'));
-        $fpdf->SetFont('Arial', '', 9);
-
-        $fpdf->Ln(10);
-        $fpdf->SetFillColor(230, 230, 230);
-        $fpdf->SetTextColor(0, 0, 0);
-        $fpdf->Cell(190, 5, 'The following are the repair info:', 0, 0, '', true);
-        $fpdf->SetTextColor(0, 0, 0);
-        $fpdf->Ln(8); 
-        $fpdf->Cell(35, 6, 'Date', 0, 0, ''); 
-        $fpdf->SetDrawColor(220, 220, 220);
-        $fpdf->Cell(50, 6, ': ' . $Request->Date);
-        $fpdf->Cell(20, 6, '');
-        $fpdf->Cell(35, 6, 'Time', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . $Request->Time);
-        $fpdf->Cell(20, 6, '');
-        
-        $fpdf->Cell(35, 6, 'Repairs', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . '{Repairs}');
-        $fpdf->Cell(20, 6, '');
-        
-        $fpdf->Ln(8);
-        $fpdf->Cell(35, 6, 'Week', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . $Request->Week);
-        $fpdf->Cell(20, 6, '');
-        
-        $fpdf->Cell(35, 6, 'Release Date', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . $Request->ReleaseDate);
-        $fpdf->Cell(20, 6, '');
-        
-        $fpdf->Ln(8);
-        $fpdf->Cell(35, 6, 'Release Time', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . $Request->ReleaseTime);
-        $fpdf->Cell(20, 6, '');  
-        
-        $fpdf->Cell(35, 6, 'Cost', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . 'N ' . number_format(str_replace(',', '', str_replace('₦', '', $Request->Cost))));
-        $fpdf->Cell(20, 6, '');  
-        
-        $fpdf->Ln(8);
-        $fpdf->Cell(35, 6, 'Invoice No.', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . $Request->InvoiceNo);
-        $fpdf->Cell(20, 6, '');  
-          
-        $fpdf->Ln(10);
-        $fpdf->SetFillColor(230, 230, 230);
-        $fpdf->SetTextColor(0, 0, 0);
-        $fpdf->Cell(190, 5, 'Repair Action:', 0, 0, '', true);
-        $fpdf->SetTextColor(0, 0, 0);
-        $fpdf->Ln(8); 
-        $fpdf->MultiCell(190, 4, $Request->RepairAction); 
-        
-        $fpdf->Ln(112); 
-        $fpdf->Cell(50, 6, request()->session()->get('Name'));
-        $fpdf->Cell(20, 6, '');  
-        $fpdf->Ln(7); 
-        $fpdf->Cell(50, 6, date('Y-m-d'));
-        $fpdf->Cell(20, 6, '');  
-
-        $fpdf->Image('../public/Images/depasa-signature.png', 11, 270, 30, 20);
-
-         
-        $fpdf->Output();
-        exit; 
-    }
- 
+  
     public function maintenance_report($MaintenanceReportId, Fpdf $fpdf, Request $Request) {   
         $fpdf->SetTitle('Maintenance Report - ' . $MaintenanceReportId . ' | Fleet Management System');
 
@@ -396,11 +277,7 @@ class FleetReportController extends Controller
         $fpdf->Cell(20, 6, '');
         $fpdf->Cell(35, 6, 'Time', 0, 0, ''); 
         $fpdf->Cell(50, 6, ': ' . $Request->Time);
-        $fpdf->Cell(20, 6, '');
-        
-        $fpdf->Cell(35, 6, 'Repairs', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . '{Repairs}');
-        $fpdf->Cell(20, 6, '');
+        $fpdf->Cell(20, 6, ''); 
         
         $fpdf->Ln(8);
         $fpdf->Cell(35, 6, 'Week', 0, 0, ''); 
@@ -501,11 +378,7 @@ class FleetReportController extends Controller
         $fpdf->Cell(20, 6, '');
         $fpdf->Cell(35, 6, 'Card Number', 0, 0, ''); 
         $fpdf->Cell(50, 6, ': ' . $Request->CardNumber);
-        $fpdf->Cell(20, 6, '');
-        
-        $fpdf->Cell(35, 6, 'Repairs', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . '{Repairs}');
-        $fpdf->Cell(20, 6, '');
+        $fpdf->Cell(20, 6, ''); 
         
         $fpdf->Ln(8);
         $fpdf->Cell(35, 6, 'Amount', 0, 0, ''); 
@@ -592,11 +465,7 @@ class FleetReportController extends Controller
         $fpdf->Cell(20, 6, '');
         $fpdf->Cell(35, 6, 'Card Number', 0, 0, ''); 
         $fpdf->Cell(50, 6, ': ' . $Request->CardNumber);
-        $fpdf->Cell(20, 6, '');
-        
-        $fpdf->Cell(35, 6, 'Repairs', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . '{Repairs}');
-        $fpdf->Cell(20, 6, '');
+        $fpdf->Cell(20, 6, ''); 
         
         $fpdf->Ln(8);
         $fpdf->Cell(35, 6, 'Amount', 0, 0, ''); 

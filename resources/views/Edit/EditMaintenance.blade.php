@@ -5,7 +5,7 @@
         <table class="table" id="Table">
             <tr class="table-head"> 
                 <th onclick="sortTable(0)">S/N</th>
-                <th onclick="sortTable(1)">Vehicle no</th>
+                <th onclick="sortTable(1)">Vehicle Number</th>
                 <th onclick="sortTable(2)">Date</th>
                 <th onclick="sortTable(3)">Time</th>
                 <th onclick="sortTable(4)">Incident Type</th>
@@ -53,12 +53,13 @@
                 <span><input type="text" id="SearchInput1" placeholder="Filter By Vehicle no" onkeyup="FilterVehicleNo()"></span> 
                 <span><input type="text" id="SearchInput2" placeholder="Filter By Date" onkeyup="FilterDate()"></span> 
                 <span><input type="text" id="SearchInput3" placeholder="Filter By Time" onkeyup="FilterTime()"></span> 
-                <span><input type="text" id="SearchInput4" placeholder="Filter By Incident Action" onkeyup="FilterIncidentAction()"></span> 
-                <span><input type="text" id="SearchInput5" placeholder="Filter By Release Date" onkeyup="FilterReleaseDate()"></span> 
-                <span><input type="text" id="SearchInput6" placeholder="Filter By Release Time" onkeyup="FilterReleaseTime()"></span> 
-                <span><input type="text" id="SearchInput7" placeholder="Filter By Cost" onkeyup="FilterCost()"></span> 
-                <span><input type="text" id="SearchInput8" placeholder="Filter By Invoice No" onkeyup="FilterInvoiceNo()"></span> 
-                <span><input type="text" id="SearchInput9" placeholder="Filter By Weeks" onkeyup="FilterSupplierNo()"></span>  
+                <span><input type="text" id="SearchInput4" placeholder="Filter By Incident Type" onkeyup="FilterIncidentType()"></span> 
+                <span><input type="text" id="SearchInput5" placeholder="Filter By Incident Action" onkeyup="FilterIncidentAction()"></span> 
+                <span><input type="text" id="SearchInput6" placeholder="Filter By Release Date" onkeyup="FilterReleaseDate()"></span> 
+                <span><input type="text" id="SearchInput7" placeholder="Filter By Release Time" onkeyup="FilterReleaseTime()"></span> 
+                <span><input type="text" id="SearchInput8" placeholder="Filter By Cost" onkeyup="FilterCost()"></span> 
+                <span><input type="text" id="SearchInput9" placeholder="Filter By Invoice No" onkeyup="FilterInvoiceNo()"></span> 
+                <span><input type="text" id="SearchInput10" placeholder="Filter By Weeks" onkeyup="FilterSupplierNo()"></span>  
             </div>
         </table>
         {{ $Maintenance__MyRecords->onEachSide(5)->links() }}

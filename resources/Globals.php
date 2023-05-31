@@ -3,12 +3,10 @@
     \DB::statement("SET SQL_MODE=''"); 
 
     $Cars_Absolute = \App\Models\Car::whereNotNull('VehicleNumber')->get();
-    $Cars_Maker_GROUPED = \App\Models\Car::select('Maker')->distinct()->get();
-    $Cars_EngineType_GROUPED = \App\Models\Car::select('EngineType')->distinct()->get();
-    $Cars_GearType_GROUPED = \App\Models\Car::select('GearType')->distinct()->get();
-    $Cars_Org_GROUPED = \App\Models\organisation::select(['CompanyCode', 'CompanyName'])->distinct()->get();
-    $Cars_Status_GROUPED = \App\Models\Car::select('Status')->distinct()->get();
-    $Users_Role_GROUPED = \App\Models\User::select('Role')->distinct()->get();
+    $Cars_Maker = DB::table('makers')->select('Maker')->get();
+    $Cars_EngineType = DB::table('engine_types')->select('EngineType')->get();
+    $Cars_GearType = DB::table('gear_types')->select('GearType')->get();
+    $Cars_Organisation = \App\Models\organisation::select(['CompanyCode', 'CompanyName'])->distinct()->get();
 
     $NumberOfCarOwners = \App\Models\Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, VehicleNumber")->groupBy('CarOwner')->get()->count(); 
     $NumberOfFleetUsers = \App\Models\User::select('id')->count();
@@ -16,7 +14,6 @@
     $NumberOfCars_ACTIVE = \App\Models\Car::select('Status')->whereNotNull('VehicleNumber')->where('Status', 'ACTIVE')->count();
     $NumberOfCars_INACTIVE = \App\Models\Car::select('Status')->whereNotNull('VehicleNumber')->where('Status', 'INACTIVE')->count();
     $NumberOfDrivers = \App\Models\Car::select('Drivers')->whereNotNull('VehicleNumber')->distinct()->count();
-    $NumberOfCarRepairs = \App\Models\Repair::select('VehicleNumber')->count();
     $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')->count();
     $NumberOfCarDeposits = \App\Models\Deposits::select('VehicleNumber')->count();
     $NumberOfCarRefueling = \App\Models\Refueling::select('VehicleNumber')->count();
@@ -25,11 +22,7 @@
                                                         ->whereNotNull('VehicleNumber')
                                                         ->where('UserId', request()->session()
                                                         ->get('Id'))
-                                                        ->count();
-    $NumberOfCarRepairs_MyRecords = \App\Models\Repair::select(['VehicleNumber', 'UserId'])
-                                                        ->where('UserId', request()->session()
-                                                        ->get('Id'))
-                                                        ->count();
+                                                        ->count(); 
     $NumberOfCarMaintenance_MyRecords = \App\Models\Maintenance::select(['VehicleNumber', 'UserId'])
                                                         ->where('UserId', request()->session()
                                                         ->get('Id'))
@@ -55,17 +48,13 @@
         $MyRecords_Refueling = \App\Models\Refueling::select(['VehicleNumber', 'UserId'])
                                                             ->where('UserId', request()->session()
                                                             ->get('Id'))
-                                                            ->count();
-        $MyRecords_Repairs = \App\Models\Repair::select(['VehicleNumber', 'UserId'])
-                                                            ->where('UserId', request()->session()
-                                                            ->get('Id'))
-                                                            ->count();
+                                                            ->count(); 
         $MyRecords_Deposits = \App\Models\Deposits::select(['VehicleNumber', 'UserId'])
                                                             ->where('UserId', request()->session()
                                                             ->get('Id'))
                                                             ->count();
 
-        $MyRecords_TOTAL = $MyRecords_Cars + $MyRecords_Maintenance + $MyRecords_Refueling + $MyRecords_Repairs + $MyRecords_Deposits;
+        $MyRecords_TOTAL = $MyRecords_Cars + $MyRecords_Maintenance + $MyRecords_Refueling  + $MyRecords_Deposits;
         
         return $MyRecords_TOTAL;
 

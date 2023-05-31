@@ -100,7 +100,7 @@
                             </div>
                             <div class="stats">
                                 <div class="inner">
-                                    <h3>Vehicle No</h3>
+                                    <h3>Vehicle Number</h3>
                                     <span>{{ $Car->VehicleNumber }}</span>
                                 </div> 
                                 <div class="inner">

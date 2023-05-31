@@ -16,7 +16,7 @@
             @php
                 $Id_CURRENT_USER = $User->id;
                 $NumberOfMaintenance_CURRENT_USER = \App\Models\Maintenance::where('UserId', $Id_CURRENT_USER)->count();
-                $NumberOfRepairs_CURRENT_USER = \App\Models\Repair::where('UserId', $Id_CURRENT_USER)->count();
+                $NumberOfRepairs_CURRENT_USER = \App\Models\Maintenance::where('UserId', $Id_CURRENT_USER)->where('IncidentType', 'REPAIR')->count();
                 $NumberOfRefueling_CURRENT_USER = \App\Models\Refueling::where('UserId', $Id_CURRENT_USER)->count();
                 $NumberOfDeposits_CURRENT_USER = \App\Models\Deposits::where('UserId', $Id_CURRENT_USER)->count();
                 $NumberOfCarsRegistered_CURRENT_USER = \App\Models\Car::where('UserId', $Id_CURRENT_USER)->count();
@@ -25,7 +25,12 @@
             @endphp
             <tr> 
                 <td>{{ $loop->iteration  + (($Users->currentPage() -1) * $Users->perPage()) }}</td>  
-                <td class="{{ request()->session()->get('Role') === 'ADMIN' ? 'show-record-x-edit' : '' }}">{{ $User->email }}</td> 
+                <td class="{{ request()->session()->get('Role') === 'ADMIN' ? 'show-record-x-edit' : '' }}">
+                    <div class="manage-user">
+                        {{ $User->email }} 
+                        <button class="action-x">MANAGE</button>
+                    </div>
+                </td> 
                 <td>{{ $User->name }}</td>
                 <td>
                     <center>
@@ -37,6 +42,48 @@
                 @if (request()->session()->get('Role') === 'ADMIN')
                 <td class="Hide">{{ $User->password }}</td>
                 <td class="Hide">{{ $User->id }}</td>
+                @php
+                    $CarRegistration_PRIVILEGE = \DB::table('user_privileges')
+                                                        ->select('CarRegistration')
+                                                        ->where('UserId', $User->id) 
+                                                        ->orderBy('Date', 'DESC') 
+                                                        ->orderBy('TimeIn', 'DESC') 
+                                                        ->first(); 
+                    $AddMaintenance_PRIVILEGE = \DB::table('user_privileges')
+                                                        ->select('AddMaintenance')
+                                                        ->where('UserId', $User->id) 
+                                                        ->orderBy('Date', 'DESC') 
+                                                        ->orderBy('TimeIn', 'DESC') 
+                                                        ->first(); 
+                    $FuelManagement_PRIVILEGE = \DB::table('user_privileges')
+                                                        ->select('FuelManagement')
+                                                        ->where('UserId', $User->id) 
+                                                        ->orderBy('Date', 'DESC') 
+                                                        ->orderBy('TimeIn', 'DESC') 
+                                                        ->first(); 
+                    $MakeDeposits_PRIVILEGE = \DB::table('user_privileges')
+                                                        ->select('MakeDeposits')
+                                                        ->where('UserId', $User->id) 
+                                                        ->orderBy('Date', 'DESC') 
+                                                        ->orderBy('TimeIn', 'DESC') 
+                                                        ->first(); 
+                    $CardManagement_PRIVILEGE = \DB::table('user_privileges')
+                                                        ->select('CardManagement')
+                                                        ->where('UserId', $User->id) 
+                                                        ->orderBy('Date', 'DESC') 
+                                                        ->orderBy('TimeIn', 'DESC') 
+                                                        ->first(); 
+                    $UserEnabled = \DB::table('user_privileges')
+                                        ->select('id')
+                                        ->where('UserId', $User->id) 
+                                        ->first();
+                @endphp
+                <td class="Hide">{{ $CarRegistration_PRIVILEGE->CarRegistration ?? false }}</td>
+                <td class="Hide">{{ $AddMaintenance_PRIVILEGE->AddMaintenance ?? false }}</td>
+                <td class="Hide">{{ $FuelManagement_PRIVILEGE->FuelManagement ?? false }}</td>
+                <td class="Hide">{{ $MakeDeposits_PRIVILEGE->MakeDeposits ?? false }}</td>
+                <td class="Hide">{{ $CardManagement_PRIVILEGE->CardManagement ?? false }}</td>
+                <td class="Hide">{{ (!empty($UserEnabled->id) ? 'Enabled' : 'Disabled') }}</td>
                 @endif
                 <td>
                     <div class="car-info">

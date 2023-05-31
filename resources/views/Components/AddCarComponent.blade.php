@@ -25,7 +25,7 @@
                     Maker
                 </div>
                 <select name="Maker">
-                    @foreach ($Cars_Maker_GROUPED as $Car)
+                    @foreach ($Cars_Maker as $Car)
                         <option value="{{ $Car->Maker }}">{{ $Car->Maker }}</option>
                     @endforeach 
                 </select>
@@ -50,7 +50,7 @@
                     Engine Type
                 </div>
                 <select name="EngineType">
-                    @foreach ($Cars_EngineType_GROUPED as $Car)
+                    @foreach ($Cars_EngineType as $Car)
                         <option value="{{ $Car->EngineType }}">{{ $Car->EngineType }}</option>
                     @endforeach 
                 </select>
@@ -61,7 +61,7 @@
                     Gear Type 
                 </div>
                 <select name="GearType">
-                    @foreach ($Cars_GearType_GROUPED as $Car)
+                    @foreach ($Cars_GearType as $Car)
                         <option value="{{ $Car->GearType }}">{{ $Car->GearType }}</option>
                     @endforeach 
                 </select>
@@ -93,7 +93,7 @@
                     ORG
                 </div>
                 <select name="CompanyCode">
-                    @foreach ($Cars_Org_GROUPED as $Car)
+                    @foreach ($Cars_Organisation as $Car)
                         <option value="{{ $Car->CompanyCode }}">{{ $Car->CompanyCode }} ::: {{ $Car->CompanyName }}</option>
                     @endforeach 
                 </select>
@@ -194,10 +194,9 @@
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M249.899 976Q196 976 158 937.929 120 899.857 120 846V505q-24-23-52-49.5T40 392q0-22.909 16.545-39.455Q73.091 336 96 336q17 0 30 9t24 21q11-12 24.5-21t29.5-9q22.909 0 39.455 16.545Q260 369.091 260 392q0 37-28 63.5T180 505v341q0 29.167 20.382 49.583Q220.765 916 249.882 916 279 916 299.5 895.583 320 875.167 320 846V371q0-80.925 57.053-137.963Q434.106 176 515.053 176T653 233.037Q710 290.075 710 371v7q72 11 121 66.997Q880 500.995 880 576v200q0 83-58.5 141.5T680 976q-83 0-141.5-58.5T480 776V576q0-75 49-131t121-67v-7q0-57-39-96t-96-39q-57 0-96 39t-39 96v475q0 53.857-38.101 91.929-38.101 38.071-92 38.071Zm429.866-60Q738 916 779 875.167q41-40.834 41-99.167V576q0-58.333-40.765-99.167-40.764-40.833-99-40.833Q622 436 581 476.833 540 517.667 540 576v200q0 58.333 40.765 99.167 40.764 40.833 99 40.833ZM680 696q-33 0-56.5 23.5T600 776q0 33 23.5 56.5T680 856q33 0 56.5-23.5T760 776q0-33-23.5-56.5T680 696Zm0 80Z"></path></svg>
                     Status
                 </div>
-                <select name="Status">
-                    @foreach ($Cars_Status_GROUPED as $Car)
-                        <option value="{{ $Car->Status }}">{{ $Car->Status }}</option>
-                    @endforeach 
+                <select name="Status"> 
+                    <option value="ACTIVE">ACTIVE</option>
+                    <option value="INACTIVE">INACTIVE</option>
                 </select>
             </div> 
             <div class="new-car-inputs">

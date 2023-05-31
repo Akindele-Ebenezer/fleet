@@ -449,6 +449,17 @@
             td {
                 color: #eee !important;
 
+                &.show-record-x-edit .manage-user {
+                    align-items: center;
+                    color: #ddd;
+                    display: flex;
+                    justify-content: space-between;
+
+                    button {
+                        margin: unset;
+                    }
+                }
+
                 &.show-record-x-edit,
                 &.show-record-x {
                     cursor: pointer;
@@ -474,6 +485,10 @@
                         &.INACTIVE {
                             background-color: $Color-2;
                         }
+                    }
+
+                    img {
+                        width: 3em;
                     }
                 }
                 

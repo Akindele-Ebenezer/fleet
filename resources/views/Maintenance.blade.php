@@ -5,7 +5,7 @@
         <table class="table" id="Table">
             <tr class="table-head"> 
                 <th onclick="sortTable(0)">S/N</th>
-                <th onclick="sortTable(1)">Vehicle no</th>
+                <th onclick="sortTable(1)">Vehicle Number</th>
                 <th onclick="sortTable(2)">Date</th>
                 <th onclick="sortTable(3)">Time</th>
                 <th onclick="sortTable(4)">Incident Type</th>
@@ -22,7 +22,7 @@
                     $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Maintenancee->VehicleNumber)->first();  
                 @endphp
                 <td>{{ $loop->iteration  + (($Maintenance->currentPage() -1) * $Maintenance->perPage()) }}</td>
-                <td class="show-record-x show-record-x-2"><span class="{{ $CarStatus->Status ?? 'INACTIVE' }}"></span>{{ $Maintenancee->VehicleNumber }}</td>
+                <td class="show-record-x show-record-x-2"><span class="{{ $CarStatus->Status ?? 'INACTIVE' }}"></span>{{ $Maintenancee->VehicleNumber }} <img src="{{ asset('Images/service.png') }}" alt=""></td>
                 <span class="VehicleNumber_X_DATA Hide">{{ $Maintenancee->VehicleNumber }}</span>
                 <span class="Date_X_DATA Hide">{{ $Maintenancee->Date }}</span>
                 <span class="Time_X_DATA Hide">{{ $Maintenancee->Time }}</span>

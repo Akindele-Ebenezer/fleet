@@ -3,12 +3,12 @@
 @php 
     $NumberOfCars = \App\Models\Car::select('VehicleNumber')->whereNotNull('VehicleNumber')->distinct()->count();
 
-    $NumberOfCarRepairs = \App\Models\Repair::select('VehicleNumber')->count();
-    $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')->count();
+    $NumberOfCarRepairs = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'REPAIR')->count();
+    $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'MAINTENANCE')->count();
     $NumberOfCarDeposits = \App\Models\Deposits::select('VehicleNumber')->count();
     $NumberOfCarRefueling = \App\Models\Refueling::select('VehicleNumber')->count();
 
-    $SumOfCarRepairs = \App\Models\Repair::select('Cost')->sum('Cost');
+    $SumOfCarRepairs = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'REPAIR')->sum('Cost');
     $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')->sum('Cost');
     $SumOfCarDeposits = \App\Models\Deposits::select('Amount')->sum('Amount');
     $SumOfCarRefueling = \App\Models\Refueling::select('Amount')->sum('Amount');
@@ -43,8 +43,9 @@
     }
     $NumberOfCars_MAINTENANCE = count($NumberOfCars_MAINTENANCE_);
 
-    $NumberOfCars_REPAIRS = \App\Models\Repair::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
+    $NumberOfCars_REPAIRS = \App\Models\Maintenance::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
                                                         ->groupBy('VehicleNumber')
+                                                        ->where('IncidentType', 'REPAIR')
                                                         ->get();
     $NumberOfCars_REPAIRS_ = [];
     foreach ($NumberOfCars_REPAIRS as $Car) {
@@ -80,8 +81,9 @@
     $MaintenanceCosts_CURRENT_YEAR = \App\Models\Maintenance::select('Cost')
                                                             ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
                                                             ->sum('Cost');
-    $RepairCosts_CURRENT_YEAR = \App\Models\Repair::select('Cost')
+    $RepairCosts_CURRENT_YEAR = \App\Models\Maintenance::select('Cost')
                                                             ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
+                                                            ->where('IncidentType', 'REPAIR')
                                                             ->sum('Cost');
     $RefuelingCosts_CURRENT_YEAR = \App\Models\Refueling::select('Cost')
                                                             ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
@@ -95,8 +97,9 @@
     $MaintenanceCosts_PREVIOUS_YEAR = \App\Models\Maintenance::select('Cost')
                                                             ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
                                                             ->sum('Cost');
-    $RepairCosts_PREVIOUS_YEAR = \App\Models\Repair::select('Cost')
+    $RepairCosts_PREVIOUS_YEAR = \App\Models\Maintenance::select('Cost')
                                                             ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
+                                                            ->where('IncidentType', 'REPAIR')
                                                             ->sum('Cost');
     $RefuelingCosts_PREVIOUS_YEAR = \App\Models\Refueling::select('Amount')
                                                             ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
@@ -130,7 +133,7 @@
         array_push($FirstDaysOfEachMonths, ${$MonthNames[$i] . '_First'});
         array_push($LastDaysOfEachMonths, ${$MonthNames[$i] . '_Last'});
  
-        ${'NumberOfCarRepairs_' . $MonthNames[$i]} = \App\Models\Repair::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->count();
+        ${'NumberOfCarRepairs_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'REPAIR')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->count();
         ${'NumberOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count();
         ${'NumberOfCarDeposits_' . $MonthNames[$i]} = \App\Models\Deposits::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count();
         ${'NumberOfCarRefueling_' . $MonthNames[$i]} = \App\Models\Refueling::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count(); 
@@ -835,7 +838,7 @@
                             <div class="x-inner">
                                 {{ $User->name }} commented on Repair
                                 <br>
-                                {{ $Comment->RepairAction }}
+                                {{ $Comment->IncidentAction }}
                             </div>
                         </div>
                         <div class="x-inner">{{ $Comment->Date }}</div>

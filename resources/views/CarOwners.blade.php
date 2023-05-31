@@ -30,9 +30,10 @@
                                             ->join('cars', 'maintenances.VehicleNumber', '=', 'cars.VehicleNumber')
                                             ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
                                             ->count();
-                $CarOwners_REPAIRS = \App\Models\Repair::select(['repairs.VehicleNumber', 'cars.VehicleNumber'])
-                                        ->join('cars', 'repairs.VehicleNumber', '=', 'cars.VehicleNumber')
+                $CarOwners_REPAIRS = \App\Models\Maintenance::select(['maintenances.VehicleNumber', 'cars.VehicleNumber'])
+                                        ->join('cars', 'maintenances.VehicleNumber', '=', 'cars.VehicleNumber')
                                         ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
+                                        ->where('IncidentType', 'REPAIR')
                                         ->count();
                 $CarOwners_REFUELING = \App\Models\Refueling::select(['refuelings.VehicleNumber', 'cars.VehicleNumber'])
                                         ->join('cars', 'refuelings.VehicleNumber', '=', 'cars.VehicleNumber')
@@ -48,10 +49,10 @@
                                         ->join('cars', 'maintenances.VehicleNumber', '=', 'cars.VehicleNumber')
                                         ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
                                         ->sum('maintenances.Cost');             
-                $SumOfRepair = \App\Models\Repair::select(['repairs.VehicleNumber', 'cars.VehicleNumber'])
-                                        ->join('cars', 'repairs.VehicleNumber', '=', 'cars.VehicleNumber')
+                $SumOfRepair = \App\Models\Maintenance::select(['maintenances.VehicleNumber', 'cars.VehicleNumber'])
+                                        ->join('cars', 'maintenances.VehicleNumber', '=', 'cars.VehicleNumber')
                                         ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')
-                                        ->sum('repairs.Cost');             
+                                        ->sum('maintenances.Cost');             
                 $SumOfDeposits = \App\Models\Deposits::select(['deposits.VehicleNumber', 'cars.VehicleNumber'])
                                         ->join('cars', 'deposits.VehicleNumber', '=', 'cars.VehicleNumber')
                                         ->where('cars.CarOwner', 'LIKE', '%' . $CarOwner->CarOwner . '%')

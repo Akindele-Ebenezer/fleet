@@ -5,7 +5,7 @@
         <table class="table" id="Table">
             <tr class="table-head">
                 <th onclick="sortTable(0)">S/N</th>
-                <th onclick="sortTable(1)">Vehicle no</th>
+                <th onclick="sortTable(1)">Vehicle Number</th>
                 <th onclick="sortTable(2)">Date</th>
                 <th onclick="sortTable(3)">Time</th>
                 <th onclick="sortTable(4)">K.METER</th>
@@ -23,7 +23,7 @@
                     $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Refueling->VehicleNumber)->first();  
                 @endphp
                 <td>{{ $loop->iteration  + (($Refuelings->currentPage() -1) * $Refuelings->perPage()) }}</td>
-                <td class="show-record-x show-record-x-2"><span class="{{ $CarStatus->Status ?? 'INACTIVE' }}"></span>{{ $Refueling->VehicleNumber }}</td>
+                <td class="show-record-x show-record-x-2"><span class="{{ $CarStatus->Status ?? 'INACTIVE' }}"></span>{{ $Refueling->VehicleNumber }} <img src="{{ asset('Images/focus.png') }}" alt=""></td>
                 <span class="VehicleNumber_X_DATA_Edit Hide">{{ $Refueling->VehicleNumber }}</span>
                 <span class="Date_X_DATA_Edit Hide">{{ $Refueling->Date }}</span>
                 <span class="Time_X_DATA_Edit Hide">{{ $Refueling->Time }}</span>

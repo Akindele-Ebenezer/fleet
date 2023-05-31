@@ -63,12 +63,12 @@
             </tr> 
             @endforeach 
             <div class="table-head filter"> 
-                <span><input type="text" id="SearchInput0" placeholder="Filter By Car infomation    " onkeyup="FilterID()"></span> 
-                <span><input type="text" id="SearchInput1" placeholder="Filter By Monthly Budget " onkeyup="FilterNames()"></span> 
-                <span><input type="text" id="SearchInput2" placeholder="Filter By Deposits" onkeyup="FilterCarDetails()"></span> 
-                <span><input type="text" id="SearchInput3" placeholder="Filter By Refueling" onkeyup="FilterRegistrationNumber()"></span>  
-                <span><input type="text" id="SearchInput3" placeholder="Filter By Balance" onkeyup="FilterRegistrationNumber()"></span>  
-                <span><input type="text" id="SearchInput3" placeholder="Filter By Brought Forward" onkeyup="FilterRegistrationNumber()"></span>  
+                <span><input type="text" id="SearchInput0" placeholder="Filter By Car Information    " onkeyup="FilterCarInformation()"></span> 
+                <span><input type="text" id="SearchInput1" placeholder="Filter By Monthly Budget " onkeyup="FilterMonthlyBudget()"></span> 
+                <span><input type="text" id="SearchInput2" placeholder="Filter By Deposits" onkeyup="FilterCarDeposits()"></span> 
+                <span><input type="text" id="SearchInput3" placeholder="Filter By Refueling" onkeyup="FilterRefueling()"></span>  
+                <span><input type="text" id="SearchInput4" placeholder="Filter By Balance" onkeyup="FilterBalance()"></span>  
+                <span><input type="text" id="SearchInput5" placeholder="Filter By Brought Forward" onkeyup="FilterBroughtForward()"></span>  
             </div>
         </table>
         {{ $Cars->onEachSide(5)->links() }}
