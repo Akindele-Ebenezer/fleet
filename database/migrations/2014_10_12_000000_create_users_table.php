@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('email')->unique();
-            $table->timestamp('status')->nullable();
-            $table->timestamp('records')->nullable();
+            $table->string('status')->nullable();
+            $table->string('records')->nullable();
             $table->string('password');
             $table->string('role')->nullable();
             $table->timestamps();

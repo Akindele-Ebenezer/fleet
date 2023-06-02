@@ -840,15 +840,32 @@ svg {
 .report-inner .table td {
   color: #eee !important;
 }
+.report-inner .table td div {
+  color: #ddd;
+}
 .report-inner .table td.show-record-x-edit .manage-user {
   align-items: center;
-  color: #ddd;
   display: flex;
-  justify-content: space-between;
 }
 .report-inner .table td.show-record-x-edit .manage-user button {
   margin: unset;
   margin-inline: 2em;
+}
+.report-inner .table td.show-record-x-edit .manage-user span {
+  color: #ddd;
+  margin-right: 1em;
+  width: 11em;
+}
+.report-inner .table td.show-record-x-edit .manage-user strong {
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+}
+.report-inner .table td.show-record-x-edit .manage-user strong.offline {
+  background: red;
+}
+.report-inner .table td.show-record-x-edit .manage-user strong.online {
+  background: #42b142;
 }
 .report-inner .table td.show-record-x-edit, .report-inner .table td.show-record-x {
   cursor: pointer;
@@ -903,6 +920,26 @@ svg {
 .report-inner .table td center span.REPAIR {
   background: #3034b5;
 }
+.report-inner .table td .user-email {
+  align-items: center;
+  display: flex;
+}
+.report-inner .table td .user-email span {
+  color: #ddd;
+  margin-right: 1em;
+  width: 11em;
+}
+.report-inner .table td .user-email strong {
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+}
+.report-inner .table td .user-email strong.offline {
+  background: red;
+}
+.report-inner .table td .user-email strong.online {
+  background: #42b142;
+}
 .report-inner .table td,
 .report-inner .table th {
   background: #111;
@@ -943,6 +980,10 @@ svg {
 }
 .report-inner .table-2 td center span.user {
   background: #333;
+}
+.report-inner .table-2 td img {
+  margin-right: 1em;
+  width: 2em;
 }
 .report-inner .table-2 td, .report-inner .table-2 th {
   border: none;

@@ -8,8 +8,7 @@
                 <th onclick="sortTable(1)">Email</th>
                 <th onclick="sortTable(2)">Username</th>
                 <th onclick="sortTable(3)">Role</th>
-                <th onclick="sortTable(4)">Records</th>
-                <th onclick="sortTable(5)">Status</th>
+                <th onclick="sortTable(4)">Records</th> 
                 <th onclick="sortTable(6)">Cars Registered</th>
             </tr>
             @foreach ($Users as $User)
@@ -22,28 +21,9 @@
                 $NumberOfCarsRegistered_CURRENT_USER = \App\Models\Car::where('UserId', $Id_CURRENT_USER)->count();
  
                 $NumberOfAllRecords_CURRENT_USER = $NumberOfMaintenance_CURRENT_USER + $NumberOfRepairs_CURRENT_USER + $NumberOfRefueling_CURRENT_USER + $NumberOfDeposits_CURRENT_USER;
-            @endphp
-            <tr> 
-                <td>{{ $loop->iteration  + (($Users->currentPage() -1) * $Users->perPage()) }}</td>  
-                <td class="{{ request()->session()->get('Role') === 'ADMIN' ? 'show-record-x-edit' : '' }}">
-                    <div class="manage-user">
-                        {{ $User->email }} 
-                        <button class="action-x">MANAGE</button>
-                    </div>
-                </td> 
-                <td>{{ $User->name }}</td>
-                <td>
-                    <center>
-                        <span class="{{ $User->role === 'ADMIN' ? 'admin' : '' }}{{ $User->role === 'USER' ? 'user' : '' }}">
-                            {{ $User->role }}
-                        </span>
-                    </center>
-                </td>
-                @if (request()->session()->get('Role') === 'ADMIN')
-                <td class="Hide">{{ $User->password }}</td>
-                <td class="Hide">{{ $User->id }}</td>
-                @php
-                    $CarRegistration_PRIVILEGE = \DB::table('user_privileges')
+
+                
+                $CarRegistration_PRIVILEGE = \DB::table('user_privileges')
                                                         ->select('CarRegistration')
                                                         ->where('UserId', $User->id) 
                                                         ->orderBy('Date', 'DESC') 
@@ -77,7 +57,30 @@
                                         ->select('id')
                                         ->where('UserId', $User->id) 
                                         ->first();
-                @endphp
+            @endphp
+            <tr> 
+                <td>
+                    {{ $loop->iteration  + (($Users->currentPage() -1) * $Users->perPage()) }} 
+                </td>  
+                <td class="{{ request()->session()->get('Role') === 'ADMIN' ? 'show-record-x-edit' : '' }}">
+                    <div class="{{ (request()->session()->get('Role') === 'ADMIN') ? 'manage-user' : 'user-email' }}">
+                        <img src="{{ asset('Images/' . (!empty($UserEnabled->id) ? 'enabled-user.png' : 'disabled-user.png')) }}"> <span>{{ $User->email }} </span> <strong class="{{ $User->status === 'ONLINE' ? 'online' : 'offline' }}"></strong>
+                        @if (request()->session()->get('Role') === 'ADMIN')
+                        <button class="action-x">MANAGE</button>
+                        @endif   
+                    </div>
+                </td> 
+                <td>{{ $User->name }}</td>
+                <td>
+                    <center>
+                        <span class="{{ $User->role === 'ADMIN' ? 'admin' : '' }}{{ $User->role === 'USER' ? 'user' : '' }}">
+                            {{ $User->role }}
+                        </span>
+                    </center>
+                </td>
+                @if (request()->session()->get('Role') === 'ADMIN')
+                <td class="Hide">{{ $User->password }}</td>
+                <td class="Hide">{{ $User->id }}</td> 
                 <td class="Hide">{{ $CarRegistration_PRIVILEGE->CarRegistration ?? false }}</td>
                 <td class="Hide">{{ $AddMaintenance_PRIVILEGE->AddMaintenance ?? false }}</td>
                 <td class="Hide">{{ $FuelManagement_PRIVILEGE->FuelManagement ?? false }}</td>
@@ -113,8 +116,8 @@
                             </div> 
                         </div>  
                     </div>
-                    {{ $User->records }}</td>
-                <td>{{ $User->status }}</td>
+                    {{ $User->records }}
+                </td> 
                 <td>{{ $NumberOfCarsRegistered_CURRENT_USER }}</td>
             </tr> 
             @endforeach 

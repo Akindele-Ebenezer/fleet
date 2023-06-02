@@ -35,33 +35,49 @@ ShowRecord_X_Edit.forEach(Email => {
     Email.addEventListener('click', () => {
         UserModal_Edit.style.display = 'block';
  
-        Email_USER_X.value = Email.firstElementChild.firstChild.textContent;
+        Email_USER_X.value = Email.firstElementChild.children[1].textContent;
         Name_X.value = Email.nextElementSibling.textContent;
         Role_X.value = Email.nextElementSibling.nextElementSibling.firstElementChild.firstElementChild.textContent.trim(); 
         Password_X.value = Email.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         UserId_X_X.forEach(UserId_X => {
             UserId_X.value = Email.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
 
-            EnableUserButton.addEventListener('click', () => {
-                Privileges_X.setAttribute('action', '/Privileges/Enable/' + UserId_X.value);
-                Privileges_X.submit();
+            EnableUserButton.addEventListener('click', e => {
+                if (Email.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent == 'Disabled') { 
+                    Privileges_X.setAttribute('action', '/Privileges/Enable/' + UserId_X.value);
+                    Privileges_X.submit();
+                }
             });
             DisableUserButton.addEventListener('click', () => {
-                Privileges_X.setAttribute('action', '/Privileges/Disable/' + UserId_X.value);
-                Privileges_X.submit();
+                if (Email.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent == 'Enabled') { 
+                    Privileges_X.setAttribute('action', '/Privileges/Disable/' + UserId_X.value);
+                    Privileges_X.submit();
+                } 
             });
             AllPrivilegesButton.addEventListener('click', () => {
-                AllPrivilegesCheckbox.forEach(Checkbox => {
-                    Checkbox.setAttribute('checked', true);
-                });
-                Privileges_X.setAttribute('action', '/Privileges/Add/' + UserId_X.value);
-                setTimeout(() => {
-                    Privileges_X.submit();
-                }, 1000);
+                if (Email.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent == 'Disabled') { 
+                    AllPrivilegesButton.addEventListener('click', e => {
+                        e.preventDefault();
+                    }); 
+                } else {
+                    AllPrivilegesCheckbox.forEach(Checkbox => {
+                        Checkbox.setAttribute('checked', true);
+                    });
+                    Privileges_X.setAttribute('action', '/Privileges/Add/' + UserId_X.value);
+                    setTimeout(() => {
+                        Privileges_X.submit();
+                    }, 1000);  
+                }
             });
             UpdatePrivilegesButton.addEventListener('click', () => {
-                Privileges_X.setAttribute('action', '/Privileges/Update/' + UserId_X.value);
-                Privileges_X.submit();
+                if (Email.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent == 'Disabled') { 
+                    UpdatePrivilegesButton.addEventListener('click', e => {
+                        e.preventDefault();
+                    }); 
+                } else {
+                    Privileges_X.setAttribute('action', '/Privileges/Update/' + UserId_X.value);
+                    Privileges_X.submit();
+                }
             });
 
             EditUserButton.addEventListener('click', () => {
@@ -103,12 +119,16 @@ ShowRecord_X_Edit.forEach(Email => {
             DisableUserButton.textContent = '- Disabled';
             EnableUserButton.style.background = '#3034b5';
             DisableUserButton.style.background = '#333';
-            EnableUserButton.classList.remove('EnableUser');
+            DisableUserButton.addEventListener('click', e => {
+                e.preventDefault();
+            });
         } else if (Email.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent == 'Enabled') {
             EnableUserButton.textContent = '+ Enabled';
             EnableUserButton.style.background = '#333';
-            DisableUserButton.style.background = '#DF2E38';
-            DisableUserButton.classList.remove('DisableUser');
+            DisableUserButton.style.background = '#DF2E38'; 
+            EnableUserButton.addEventListener('click', e => {
+                e.preventDefault();
+            });
         } else {
             DisableUserButton.style.background = '#333';
         }   

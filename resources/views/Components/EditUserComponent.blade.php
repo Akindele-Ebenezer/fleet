@@ -82,6 +82,6 @@
             </div>
         </form>
         <button class="AllPrivileges action-x" name="AllPrivileges">* Grant All Privileges</button>
-        <button class="UpdatePrivileges" name="UpdatePrivileges">+ Update Privileges</button>
+        <button class="UpdatePrivileges action-x" name="UpdatePrivileges">+ Update Privileges</button>
     </div>
 </div>

@@ -164,5 +164,4 @@ CarsRouteButton.forEach(Button => {
     Button.addEventListener('click', () => {
         window.location = '/Cars';
     });
-});
- 
+}); 

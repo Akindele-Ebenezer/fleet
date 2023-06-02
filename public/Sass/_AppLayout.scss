@@ -449,15 +449,36 @@
             td {
                 color: #eee !important;
 
+                div {
+                    color: #ddd;
+                }
+
                 &.show-record-x-edit .manage-user {
                     align-items: center;
-                    color: #ddd;
-                    display: flex;
-                    justify-content: space-between;
+                    display: flex; 
 
                     button {
                         margin: unset;
                         margin-inline: 2em;
+                    }
+
+                    span {
+                        color: #ddd;
+                        margin-right: 1em;
+                        width: 11em;
+                    }
+                    
+                    strong { 
+                        border-radius: 50%;
+                        height: 10px;
+                        width: 10px;
+
+                        &.offline {
+                            background: red;
+                        }
+                        &.online {
+                            background: #42b142;
+                        }
                     }
                 }
 
@@ -525,6 +546,31 @@
                         }
                     }
                 }
+                    
+                .user-email {
+                    align-items: center;
+                    display: flex; 
+
+                    
+                    span {
+                        color: #ddd;
+                        margin-right: 1em;
+                        width: 11em;
+                    }
+
+                    strong { 
+                        border-radius: 50%;
+                        height: 10px;
+                        width: 10px;
+
+                        &.offline {
+                            background: red;
+                        }
+                        &.online {
+                            background: #42b142;
+                        }
+                    }
+                }
             }
 
             td, 
@@ -584,7 +630,14 @@
                             background: $Color-1;
                         }
                     }
-                }
+                } 
+            }
+
+            td { 
+                img {
+                    margin-right: 1em;
+                    width: 2em;
+                }  
             }
 
             td, th {
