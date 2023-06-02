@@ -848,6 +848,7 @@ svg {
 }
 .report-inner .table td.show-record-x-edit .manage-user button {
   margin: unset;
+  margin-inline: 2em;
 }
 .report-inner .table td.show-record-x-edit, .report-inner .table td.show-record-x {
   cursor: pointer;
