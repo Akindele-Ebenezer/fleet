@@ -14,11 +14,11 @@
             @foreach ($Users as $User)
             @php
                 $Id_CURRENT_USER = $User->id;
-                $NumberOfMaintenance_CURRENT_USER = \App\Models\Maintenance::where('UserId', $Id_CURRENT_USER)->count();
-                $NumberOfRepairs_CURRENT_USER = \App\Models\Maintenance::where('UserId', $Id_CURRENT_USER)->where('IncidentType', 'REPAIR')->count();
-                $NumberOfRefueling_CURRENT_USER = \App\Models\Refueling::where('UserId', $Id_CURRENT_USER)->count();
-                $NumberOfDeposits_CURRENT_USER = \App\Models\Deposits::where('UserId', $Id_CURRENT_USER)->count();
-                $NumberOfCarsRegistered_CURRENT_USER = \App\Models\Car::where('UserId', $Id_CURRENT_USER)->count();
+                $NumberOfMaintenance_CURRENT_USER = \App\Models\Maintenance::select('id')->where('UserId', $Id_CURRENT_USER)->count();
+                $NumberOfRepairs_CURRENT_USER = \App\Models\Maintenance::select('id')->where('UserId', $Id_CURRENT_USER)->select('id')->where('IncidentType', 'REPAIR')->count();
+                $NumberOfRefueling_CURRENT_USER = \App\Models\Refueling::select('id')->where('UserId', $Id_CURRENT_USER)->count();
+                $NumberOfDeposits_CURRENT_USER = \App\Models\Deposits::select('id')->where('UserId', $Id_CURRENT_USER)->count();
+                $NumberOfCarsRegistered_CURRENT_USER = \App\Models\Car::select('id')->whereNotNull('VehicleNumber')->where('UserId', $Id_CURRENT_USER)->count();
  
                 $NumberOfAllRecords_CURRENT_USER = $NumberOfMaintenance_CURRENT_USER + $NumberOfRepairs_CURRENT_USER + $NumberOfRefueling_CURRENT_USER + $NumberOfDeposits_CURRENT_USER;
 

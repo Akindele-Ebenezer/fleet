@@ -11,6 +11,11 @@
                 <th onclick="sortTable(4)">To Deposit</th>
                 <th onclick="sortTable(5)">Comments</th> 
             </tr> 
+            @unless (count($Cars) > 0)
+            <tr>
+                <td>No cars available.</td>
+            </tr>    
+            @endunless
             @foreach ($Cars as $Car)
             @php 
                 include('../resources/views/Includes/CompanyName.php');
@@ -119,9 +124,6 @@
                 <span><input type="text" id="SearchInput5" placeholder="Filter By Comments.." onkeyup="FilterComments()"></span> 
             </div>
         </table>
-        {{ $Cars->onEachSide(5)->links() }}
-        @unless (count($Cars) > 0)
-        @include('Includes.EmptyProjectTemplate') 
-        @endunless
+        {{ $Cars->onEachSide(5)->links() }} 
     </div> 
 @endsection

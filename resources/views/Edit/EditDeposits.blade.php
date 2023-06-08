@@ -14,6 +14,11 @@
                 <th onclick="sortTable(6)">Week</th>
                 <th onclick="sortTable(7)">Month</th>
             </tr>
+            @unless (count(\App\Models\Deposits::where('UserId', session()->get('Id'))->get()) > 0)
+            <tr>
+                <td>You don't have Deposits for vehicle cards.</td>
+            </tr>    
+            @endunless
             @foreach ($Deposits__MyRecords as $Deposit)
             <tr>  
                 <td class="show-record-x-edit"><img src="{{ asset('Images/edit.png') }}" alt="">{{ $Deposit->VehicleNumber }}</td>
@@ -49,7 +54,7 @@
             <h1 class="table-title">MASTER CARDS</h1>
             <tr class="table-head">
                 {{-- <th onclick="sortTable(0)">LNO</th> --}}
-                <th onclick="sortTable(1)">Vehicle Number</th>
+                <th onclick="sortTable(1)">Card Type</th>
                 <th onclick="sortTable(2)">Date</th>
                 <th onclick="sortTable(3)">Card No</th>
                 <th onclick="sortTable(4)">Amount</th>
@@ -57,6 +62,11 @@
                 <th onclick="sortTable(6)">Week</th>
                 <th onclick="sortTable(7)">Month</th>
             </tr> 
+            @unless (count(\App\Models\DepositsMasterCard::where('UserId', session()->get('Id'))->get()) > 0)
+            <tr>
+                <td>You don't have Deposits for master cards.</td>
+            </tr>    
+            @endunless
             @foreach ($DepositsMasterCard__MyRecords as $Deposits_MasterCard)
             <tr>  
                 <td class="show-master-card-record-x-edit"><img src="{{ asset('Images/edit.png') }}" alt="">MASTER</td> 

@@ -9,6 +9,11 @@
                 <th onclick="sortTable(2)">Car Details</th>
                 <th onclick="sortTable(3)">Registration Number</th> 
             </tr> 
+            @unless (count($CarOwners) > 0)
+            <tr>
+                <td>No car owners.</td>
+            </tr>    
+            @endunless
             @foreach ($CarOwners as $CarOwner)
             @php 
                 $CarOwners_TOTAL = \App\Models\Car::select('id')
@@ -124,9 +129,6 @@
                 <span><input type="text" id="SearchInput3" placeholder="Filter By Registration Number" onkeyup="FilterRegistrationNumber()"></span>  
             </div>
         </table>
-        {{ $CarOwners->onEachSide(5)->links() }}
-        {{-- @unless (count($CarOwners) > 0)
-        @include('Includes.EmptyProjectTemplate') 
-        @endunless --}}
+        {{ $CarOwners->onEachSide(5)->links() }} 
     </div>
 @endsection

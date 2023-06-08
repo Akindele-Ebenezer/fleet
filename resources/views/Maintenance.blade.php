@@ -16,6 +16,11 @@
                 <th onclick="sortTable(9)">Invoice No</th>
                 <th onclick="sortTable(10)">Weeks</th>
             </tr> 
+            @unless (count($Maintenance) > 0)
+            <tr>
+                <td>No car maintenace.</td>
+            </tr>    
+            @endunless
             @foreach ($Maintenance as $Maintenancee) 
             <tr> 
                 @php
@@ -63,10 +68,7 @@
                 <span><input type="text" id="SearchInput9" placeholder="Filter By Weeks" onkeyup="FilterSupplierNo()"></span>  
             </div>
         </table>
-        {{ $Maintenance->onEachSide(5)->links() }}
-        @unless (count($Maintenance) > 0)
-        @include('Includes.EmptyProjectTemplate') 
-        @endunless
+        {{ $Maintenance->onEachSide(5)->links() }} 
         @if(!isset($_GET['Filter_All_Maintenance']) AND !isset($_GET['Filter_Maintenance_Yearly']) AND !isset($_GET['Filter_Maintenance_Range']))
         @php
             $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')->sum('Cost');

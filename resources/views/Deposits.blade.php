@@ -15,6 +15,11 @@
                 <th onclick="sortTable(7)">Month</th>
                 <th onclick="sortTable(8)">Comments</th>
             </tr>
+            @unless (count(\App\Models\Deposits::all()) > 0)
+            <tr>
+                <td>No Deposits for vehicle cards.</td>
+            </tr>    
+            @endunless
             @foreach ($Deposits as $Deposit) 
             <tr> 
                 @php
@@ -86,7 +91,12 @@
                 <th onclick="sortTable(6)">Week</th>
                 <th onclick="sortTable(7)">Month</th>
                 <th onclick="sortTable(8)">Comments</th>
-            </tr> 
+            </tr>  
+            @unless (count(\App\Models\DepositsMasterCard::all()) > 0)
+            <tr>
+                <td>No Deposits for master cards.</td>
+            </tr>   
+            @endunless
             @unless (isset($_GET['Filter']) || isset($_GET['FilterValue']))
                 @foreach ($Deposits_MasterCards as $Deposits_MasterCard) 
                 <tr>   

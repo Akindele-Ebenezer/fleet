@@ -10,6 +10,11 @@
                 <th onclick="sortTable(3)">Refueling</th>
                 <th onclick="sortTable(4)">Balance</th>
             </tr>  
+            @unless (count($Cars) > 0)
+            <tr>
+                <td>No cars available.</td>
+            </tr>    
+            @endunless
             @foreach ($Cars as $Car)
                 @php 
                     include('../resources/views/Includes/CompanyName.php'); 
@@ -97,7 +102,7 @@
                                 <span class="Driver_X_DATA Hide">{{ $Car->Driver }}</span>
                                 <span class="Status_X_DATA Hide">{{ $Car->Status  === 'ACTIVE' ? 'This CAR is active since ' . $Car->PurchaseDate . '. Licence Expires on ' . $Car->LicenceExpiryDate . '.'  : 'This CAR is inactive. Licence Expires on ' . $Car->LicenceExpiryDate . '..' }}</span>
                                 <span class="BalanceBroughtForward_X_DATA Hide">{{ $Car->MonthlyBudget - $Car->Balance }}</span>
-                                <span class="Mileage_X_DATA Hide">{{ $Mileage ?? 'PENDING' }}</span>
+                                <span class="Mileage_X_DATA Hide">{{ $Mileage->Mileage ?? 'PENDING' }}</span>
                             </div>
                             <div class="stats">
                                 <div class="inner">
@@ -172,9 +177,6 @@
                 <span><input type="text" id="SearchInput4" placeholder="Filter By Balance" onkeyup="FilterBalance()"></span>   
             </div>
             {{ $Cars->onEachSide(1)->links() }}
-        </table>
-        @unless (count($Cars) > 0)
-        @include('Includes.EmptyProjectTemplate') 
-        @endunless
+        </table> 
     </div>
 @endsection

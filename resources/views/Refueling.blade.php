@@ -17,6 +17,11 @@
                 <th onclick="sortTable(10)">KM</th>
                 <th onclick="sortTable(11)">[KM/LITER]</th>
             </tr> 
+            @unless (count($Refuelings) > 0)
+            <tr>
+                <td>No fuel history.</td>
+            </tr>    
+            @endunless
             @foreach ($Refuelings as $Key => $Refueling) 
             <tr>
                 @php
@@ -75,10 +80,7 @@
                 <span><input type="text" id="SearchInput11" placeholder="Filter By [KM/LITER]" onkeyup="FilterKMLITER()"></span>  
             </div>
         </table>
-        {{ $Refuelings->onEachSide(5)->links() }}
-        @unless (count($Refuelings) > 0)
-        @include('Includes.EmptyProjectTemplate') 
-        @endunless 
+        {{ $Refuelings->onEachSide(5)->links() }} 
         @if(!isset($_GET['Filter_All_Refueling']) AND !isset($_GET['Filter_Refueling_Yearly']) AND !isset($_GET['Filter_Refueling_Range']))
         @php
             $SumOfCarRefueling = \App\Models\Refueling::select('Amount')->sum('Amount');
