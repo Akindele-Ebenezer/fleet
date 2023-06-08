@@ -82,7 +82,7 @@ class RefuelingExport implements
             '', 
             'Date', 
             'Time',
-            '', 
+            'Mileage', 
             'KM/LITER', 
             '', 
             'Receipt Number', 
@@ -101,8 +101,7 @@ class RefuelingExport implements
     public function columnWidths(): array
     {
         return [
-            'C' => 0,            
-            'F' => 0,            
+            'C' => 0,             
             'H' => 0,            
             'R' => 0,            
             'S' => 0,            

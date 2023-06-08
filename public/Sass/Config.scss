@@ -71,7 +71,7 @@ $Color-4: #3034b5;
     z-index: 100;
 
     .inner {
-        background-color: $Color-3;
+        background-color: $Color-2;
         border-radius: .5em;
         color: #fff;
         padding: 1em;
@@ -196,7 +196,7 @@ button {
     justify-content: center;
     position: absolute;
     width: 100vw;
-    z-index: 2000;
+    z-index: 10;
 
     .inner {
         height: 15em;
@@ -275,6 +275,22 @@ button {
         img {
             margin-right: 1em;
             width: 3rem;
+        }
+
+        .links {
+            align-items: center;
+            background: #fff;
+            display: flex;
+            justify-content: space-evenly; 
+            padding-block: .5em;
+            position: sticky;
+            top: -1em;
+
+            .link {
+                border-bottom: 4px solid lighten($color: $Color-4, $amount: 20) ;
+                cursor: pointer;
+                padding-bottom: 0.15em;
+            }
         }
 
         svg {

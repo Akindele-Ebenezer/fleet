@@ -183,11 +183,12 @@ class MaintenanceController extends Controller
      */
     public function update(Request $request, Maintenance $maintenance)
     {
-        $IncidentFile_UPDATED = $request->file('IncidentAttachment'); 
-        $DestinationPath = 'Images/Maintenance';
-        $IncidentFile_UPDATED->move($DestinationPath, $IncidentFile_UPDATED->getClientOriginalName());
-
-        Maintenance::where('id', $request->MaintenanceId)
+        if ($request->hasFile('IncidentAttachment')) {
+            $IncidentFile_UPDATED = $request->file('IncidentAttachment'); 
+            $DestinationPath = 'Images/Maintenance';
+            $IncidentFile_UPDATED->move($DestinationPath, $IncidentFile_UPDATED->getClientOriginalName());
+            
+            Maintenance::where('id', $request->MaintenanceId)
             ->update([
                 'VehicleNumber' => $request->VehicleNumber,
                 'Date' => $request->Date,
@@ -201,6 +202,21 @@ class MaintenanceController extends Controller
                 'Week' => $request->Week, 
                 'IncidentAttachment' => $IncidentFile_UPDATED->getClientOriginalName(),
             ]);
+        } else {
+            Maintenance::where('id', $request->MaintenanceId)
+                ->update([
+                    'VehicleNumber' => $request->VehicleNumber,
+                    'Date' => $request->Date,
+                    'Time' => $request->Time,
+                    'IncidentType' => $request->IncidentType,
+                    'IncidentAction' => $request->IncidentAction,
+                    'ReleaseDate' => $request->ReleaseDate,
+                    'ReleaseTime' => $request->ReleaseTime,
+                    'Cost' => $request->Cost,
+                    'InvoiceNumber' => $request->InvoiceNumber,
+                    'Week' => $request->Week,  
+                ]); 
+        }
 
         return back(); 
     }

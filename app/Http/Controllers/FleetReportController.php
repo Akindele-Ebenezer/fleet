@@ -472,8 +472,8 @@ class FleetReportController extends Controller
         $fpdf->Cell(50, 6, ': ' . 'N ' . number_format(str_replace(',', '', str_replace('₦', '', $Request->Amount))));
         $fpdf->Cell(20, 6, '');
         
-        $fpdf->Cell(35, 6, 'KMETER', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . $Request->KMETER);
+        $fpdf->Cell(35, 6, 'Mileage', 0, 0, ''); 
+        $fpdf->Cell(50, 6, ': ' . $Request->Mileage);
         $fpdf->Cell(20, 6, '');
         
         $fpdf->Ln(8);

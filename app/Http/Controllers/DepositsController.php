@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Deposits;
 use Illuminate\Http\Request;
+use App\Models\MasterCard;
+use App\Models\DepositsMasterCard;
 
 class DepositsController extends Controller
 {
     public function config() {
-        $Deposits = Deposits::orderBy('Date', 'DESC')->paginate(14); 
-        $Deposits__MyRecords = Deposits::where('UserId', self::USER_ID())->orderBy('Date', 'DESC')->paginate(14);
+        $Deposits = Deposits::orderBy('Date', 'DESC')->paginate(6); 
+        $Deposits__MyRecords = Deposits::where('UserId', self::USER_ID())->orderBy('Date', 'DESC')->paginate(6);
+        $Deposits_MasterCards = DepositsMasterCard::orderBy('Date', 'DESC')->paginate(6); 
+        $DepositsMasterCard__MyRecords = DepositsMasterCard::where('UserId', self::USER_ID())->orderBy('Date', 'DESC')->paginate(6);
  
         return [
             'Deposits' => $Deposits,
             'Deposits__MyRecords' => $Deposits__MyRecords,
+            'Deposits_MasterCards' => $Deposits_MasterCards,
+            'DepositsMasterCard__MyRecords' => $DepositsMasterCard__MyRecords,
         ];
     }
  

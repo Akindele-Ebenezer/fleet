@@ -22,8 +22,7 @@ ShowRecord_X.forEach(CardNumber => {
 
         CardNumber_X.value = CardNumber.textContent;
         Date_X.value = CardNumber.nextElementSibling.textContent;
-        Amount_X.value = CardNumber.nextElementSibling.nextElementSibling.textContent;
-        console.log(CardNumber.nextElementSibling.textContent)
+        Amount_X.value = CardNumber.nextElementSibling.nextElementSibling.textContent; 
         Year_X.value = CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Week_X.value = CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Month_X.value = CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 

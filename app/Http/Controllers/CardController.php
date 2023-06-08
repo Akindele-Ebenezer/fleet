@@ -25,8 +25,10 @@ class CardController extends Controller
     public function credit_card_index()
     {
         $Cars = Car::orderBy('DateIn', 'DESC')->paginate(7);
-        return view('CreditCard', [
+        $MasterCards = MasterCard::orderBy('Date', 'DESC')->paginate(7);
+        return view('FleetCard', [
             'Cars' => $Cars,
+            'MasterCards' => $MasterCards,
         ]);
     }
 

@@ -85,7 +85,7 @@ class RefuelingController extends Controller
                         ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('KMETER', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Mileage', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('TERNO', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Quantity', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%') 
@@ -112,7 +112,7 @@ class RefuelingController extends Controller
                                                 ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
                                                 ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
                                                 ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
-                                                ->orWhere('KMETER', 'LIKE', '%' . $FilterValue . '%')
+                                                ->orWhere('Mileage', 'LIKE', '%' . $FilterValue . '%')
                                                 ->orWhere('TERNO', 'LIKE', '%' . $FilterValue . '%')
                                                 ->orWhere('Quantity', 'LIKE', '%' . $FilterValue . '%')
                                                 ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%') 
@@ -155,7 +155,7 @@ class RefuelingController extends Controller
             'Date' => $request->Date, 
             'Time' => $request->Time, 
             'KMLITER' => $request->KMLITER, 
-            'KMETER' => $request->KMETER, 
+            'Mileage' => $request->Mileage, 
             'TERNO' => $request->TerminalNumber, 
             'Quantity' => $request->Quantity, 
             'Amount' => $request->Amount, 
@@ -198,7 +198,7 @@ class RefuelingController extends Controller
                 'Time' => $request->Time, 
                 'Amount' => $request->Amount, 
                 'KMLITER' => $request->KMLITER, 
-                'KMETER' => $request->KMETER, 
+                'Mileage' => $request->Mileage, 
                 'TERNO' => $request->TerminalNumber, 
                 'Quantity' => $request->Quantity, 
                 'Amount' => $request->Amount, 

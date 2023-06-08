@@ -8,7 +8,7 @@
                 <th onclick="sortTable(1)">Vehicle Number</th>
                 <th onclick="sortTable(2)">Date</th>
                 <th onclick="sortTable(3)">Time</th>
-                <th onclick="sortTable(4)">K.METER</th>
+                <th onclick="sortTable(4)">Mileage</th>
                 <th onclick="sortTable(5)">Terminal No</th>
                 <th onclick="sortTable(6)">Card No</th>
                 <th onclick="sortTable(7)">Quantity</th>
@@ -20,21 +20,21 @@
             @foreach ($Refueling__MyRecords as $Refueling)
             <tr> 
                 <td>{{ $loop->iteration  + (($Refueling__MyRecords->currentPage() -1) * $Refueling__MyRecords->perPage()) }}</td>
-                <td class="show-record-x-edit">{{ $Refueling->VehicleNumber }}</td>
+                <td class="show-record-x-edit"><img src="{{ asset('Images/oil.png') }}" alt="">{{ $Refueling->VehicleNumber }}</td>
                 <span class="VehicleNumber_X_DATA_Edit Hide">{{ $Refueling->VehicleNumber }}</span>
                 <span class="Date_X_DATA_Edit Hide">{{ $Refueling->Date }}</span>
                 <span class="Time_X_DATA_Edit Hide">{{ $Refueling->Time }}</span>
-                <span class="KMETER_X_DATA_Edit Hide">{{ $Refueling->KMETER }}</span>
+                <span class="Mileage_X_DATA_Edit Hide">{{ $Refueling->Mileage }}</span>
                 <span class="TerminalNo_X_DATA_Edit Hide">{{ $Refueling->TerminalNo }}</span>
                 <span class="CardNumber_X_DATA_Edit Hide">{{ $Refueling->CardNumber }}</span>
                 <span class="Quantity_X_DATA_Edit Hide">₦ {{ empty($Refueling->Quantity) ? '' : number_format($Refueling->Quantity) }}</span>
                 <span class="Amount_X_DATA_Edit Hide">{{ $Refueling->Amount }}</span>
                 <span class="ReceiptNo_X_DATA_Edit Hide">{{ $Refueling->ReceiptNo }}</span>
-                <span class="KM_X_DATA_Edit Hide">{{ $Refueling->KM }}</span>
+                <span class="Hide"></span>
                 <span class="KMLITER_X_DATA_Edit Hide">{{ $Refueling->KMLITER }}</span>
                 <td>{{ $Refueling->Date }}</td>
                 <td>{{ $Refueling->Time }}</td>
-                <td>{{ $Refueling->KMETER }}</td>
+                <td>{{ $Refueling->Mileage }}</td>
                 <td>{{ $Refueling->TERNO }}</td>
                 <td>{{ $Refueling->CardNumber }}</td>
                 <td>{{ $Refueling->Quantity }}</td>
@@ -50,7 +50,7 @@
                 <span><input type="text" id="SearchInput1" placeholder="Filter By Vehicle no" onkeyup="FilterVehicleNo()"></span> 
                 <span><input type="text" id="SearchInput2" placeholder="Filter By Date" onkeyup="FilterDate()"></span> 
                 <span><input type="text" id="SearchInput3" placeholder="Filter By Time" onkeyup="FilterTime()"></span> 
-                <span><input type="text" id="SearchInput4" placeholder="Filter By K.METER" onkeyup="FilterKMETER()"></span> 
+                <span><input type="text" id="SearchInput4" placeholder="Filter By Mileage" onkeyup="FilterMileage()"></span> 
                 <span><input type="text" id="SearchInput5" placeholder="Filter By Terminal No" onkeyup="FilterTerminalNo()"></span> 
                 <span><input type="text" id="SearchInput6" placeholder="Filter By Card No" onkeyup="FilterCardNo()"></span> 
                 <span><input type="text" id="SearchInput7" placeholder="Filter By Quantity" onkeyup="FilterQuantity()"></span> 

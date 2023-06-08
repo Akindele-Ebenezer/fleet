@@ -36,7 +36,7 @@ Route::post('/Add/Maintenance/{Maintenance}', [MaintenanceController::class, 'st
 Route::post('/Update/Maintenance/{Maintenance}', [MaintenanceController::class, 'update'])->name('UpdateMaintenance');
 Route::get('/Delete/Maintenance/{Maintenance}', [MaintenanceController::class, 'destroy'])->name('DeleteMaintenance');
 
-Route::get('/Management/Edit/Credit/Cards', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
+Route::get('/Management/Edit/Fleet/Cards', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
 Route::get('/Add/Deposits/{Deposits}', [DepositsController::class, 'store'])->name('store_Deposits'); 
 Route::get('/Update/Deposits/{Deposits}', [DepositsController::class, 'update'])->name('UpdateDeposits');
 Route::get('/Delete/Deposits/{Deposits}/{CardNumber}/{Amount}', [DepositsController::class, 'destroy'])->name('DeleteDeposits');
@@ -69,7 +69,7 @@ Route::get('Maintenance/Export/', [MaintenanceExportController::class, 'Export']
 Route::get('Deposits/Export/', [DepositsExportController::class, 'Export'])->name('Deposits_ExportToExcel');
 Route::get('Refueling/Export/', [RefuelingExportController::class, 'Export'])->name('Refueling_ExportToExcel');
 
-Route::get('/Management/Credit/Cards', [CardController::class, 'credit_card_index'])->name('CreditCard');
+Route::get('/Management/Fleet/Cards', [CardController::class, 'credit_card_index'])->name('FleetCard');
 
 Route::get('/Management/Master/Cards', [CardController::class, 'master_card_index'])->name('MasterCard');
 Route::get('/Add/Master/Cards/{MasterCard}', [CardController::class, 'store_master_card'])->name('store_MasterCard'); 

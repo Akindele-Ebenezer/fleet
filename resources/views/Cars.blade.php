@@ -15,7 +15,7 @@
                     include('../resources/views/Includes/CompanyName.php'); 
                     $TotalDeposits = \App\Models\Deposits::where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
                     $TotalRefueling = \App\Models\Refueling::where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
-                    // $BalanceBroughtForward = ;
+                    $Mileage = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $Car->VehicleNumber)->orderBy('id', 'DESC')->first();
                 @endphp  
                 <tr> 
                     <td class="id">{{ $loop->iteration  + (($Cars->currentPage() -1) * $Cars->perPage()) }}</td>
@@ -97,6 +97,7 @@
                                 <span class="Driver_X_DATA Hide">{{ $Car->Driver }}</span>
                                 <span class="Status_X_DATA Hide">{{ $Car->Status  === 'ACTIVE' ? 'This CAR is active since ' . $Car->PurchaseDate . '. Licence Expires on ' . $Car->LicenceExpiryDate . '.'  : 'This CAR is inactive. Licence Expires on ' . $Car->LicenceExpiryDate . '..' }}</span>
                                 <span class="BalanceBroughtForward_X_DATA Hide">{{ $Car->MonthlyBudget - $Car->Balance }}</span>
+                                <span class="Mileage_X_DATA Hide">{{ $Mileage ?? 'PENDING' }}</span>
                             </div>
                             <div class="stats">
                                 <div class="inner">

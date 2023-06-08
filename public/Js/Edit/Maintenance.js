@@ -1,6 +1,5 @@
 let MaintenanceModal_Edit = document.querySelector('.edit-maintenance-form');
-let ShowRecord_X_Edit = document.querySelectorAll('.show-record-x-edit');
-console.log(MaintenanceModal_Edit)
+let ShowRecord_X_Edit = document.querySelectorAll('.show-record-x-edit'); 
 let VehicleNumber_X_DATA_Edit = document.querySelector('.VehicleNumber_X_DATA_Edit');
 let Date_X_DATA_Edit = document.querySelector('.Date_X_DATA_Edit');
 let Time_X_DATA_Edit = document.querySelector('.Time_X_DATA_Edit');
@@ -78,6 +77,7 @@ let AddMaintenanceButton_X = document.querySelector('.AddMaintenance');
 let VehicleNumber_MAINTENANCE = document.querySelector('input[name="VehicleNumber_MAINTENANCE"]');
 
 AddMaintenanceButton.forEach(Button => {
+    Button.classList.remove('permission-denied');
     Button.addEventListener('click', () => {
         ModalAddMaintenance.style.display = 'block';
          
@@ -97,5 +97,17 @@ AddMaintenanceButton.forEach(Button => {
         CancelModalIcon.addEventListener('click', () => {
             ModalAddMaintenance.style.display = 'none';
         });
+    });
+});
+
+let AlertComponent = document.querySelector('.alert');
+let PermissionDeniedButton = document.querySelectorAll('.permission-denied');
+
+PermissionDeniedButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        AlertComponent.style.display = 'flex';
+        setTimeout(() => {
+            AlertComponent.style.display = 'none';
+        }, 5000);
     });
 });

@@ -233,6 +233,7 @@ class CarController extends Controller
             'CardNumber' => $request->CardNumber,
             'MonthlyBudget' => $request->MonthlyBudget,
             'CompanyCode' => $request->CompanyCode, 
+            'Balance' => $request->Balance, 
             'PinCode' => $request->PinCode, 
             'Status' => $request->Status,
             'StopDate' => $request->StopDate,

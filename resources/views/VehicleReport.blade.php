@@ -16,6 +16,7 @@
                 include('../resources/views/Includes/CompanyName.php');
                 $TotalDeposits = \App\Models\Deposits::where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
                 $TotalRefueling = \App\Models\Refueling::where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
+                $Mileage = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $Car->VehicleNumber)->orderBy('id', 'DESC')->first();
             @endphp
             <tr> 
                 <td class="id">
@@ -71,9 +72,9 @@
                         <div class="stats-heading">
                             <h2></h2>
                             <button class="action-x show-record-button">action</button>
-                            <span class="Deposits_X_DATA Hide">₦ {{ empty($TotalDeposits) ? '' : number_format($TotalDeposits) }}</span>
-                            <span class="Refueling_X_DATA Hide">₦ {{ empty($TotalRefueling) ? '' : number_format($TotalRefueling) }}</span>
-                            <span class="Balance_X_DATA Hide">₦ {{ empty($Car->Balance) ? '' : number_format($Car->Balance) }}</span>
+                            <span class="Deposits_X_DATA Hide">₦ {{ empty($TotalDeposits) ? '0.00' : number_format($TotalDeposits) }}</span>
+                            <span class="Refueling_X_DATA Hide">₦ {{ empty($TotalRefueling) ? '0.00' : number_format($TotalRefueling) }}</span>
+                            <span class="Balance_X_DATA Hide">₦ {{ empty($Car->Balance) ? '0.00' : number_format($Car->Balance) }}</span>
                             <span class="UsedBy_X_DATA Hide">{{ $Car->CarOwner }}</span>
                             <span class="RegistrationNo_X_DATA Hide">{{ $Car->VehicleNumber }}</span>
                             <span class="Maker_X_DATA Hide">{{ $Car->Maker }}</span>
@@ -99,6 +100,7 @@
                             <span class="Driver_X_DATA Hide">{{ $Car->Driver }}</span>
                             <span class="Status_X_DATA Hide">{{ $Car->Status  === 'ACTIVE' ? 'This CAR is active since ' . $Car->PurchaseDate . '. Licence Expires on ' . $Car->LicenceExpiryDate . '.'  : 'This CAR is inactive. Licence Expires on ' . $Car->LicenceExpiryDate . '..' }}</span>
                             <span class="BalanceBroughtForward_X_DATA Hide">{{ $Car->MonthlyBudget - $Car->Balance }}</span>
+                            <span class="Mileage_X_DATA Hide">{{ $Mileage->Mileage ?? 'PENDING' }}</span>
                         </div> 
                     </div>
                 </td>

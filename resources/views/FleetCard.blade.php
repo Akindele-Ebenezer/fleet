@@ -13,6 +13,52 @@
                 <th onclick="sortTable(6)">Brought Forward</th> 
                 <th onclick="sortTable(7)"></th> 
             </tr> 
+            @foreach ($MasterCards as $MasterCard)  
+            @if (empty($MasterCard->CardNumber)) @continue; @endif
+            <tr> 
+                {{-- <td>{{ $MasterCard->id }}</td> --}}
+                <td>
+                    <div class="car-info">
+                        <div class="info-inner">
+                            <div class="inner">
+                                <h1>{{ $MasterCard->CardNumber }}</h1> 
+                                <span class="type">Master Card</span>
+                                <span class="{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br>
+                                <span class="used-by">MASTER</span>  {{ $MasterCard->Date }}
+                            </div>   
+                        </div>  
+                    </div> 
+                 </td> 
+                <td>  
+                    ₦ {{ number_format($MasterCard->MonthlyBudget) }}
+                </td> 
+                @php
+                    $Deposits = \App\Models\DepositsMasterCard::where('CardNumber', $MasterCard->CardNumber)->sum('Amount');
+                    $Refueling = \App\Models\Refueling::where('CardNumber', $MasterCard->CardNumber)->sum('Amount');
+                @endphp
+                <td>  
+                    ₦ {{ number_format($Deposits) }}
+                </td> 
+                <td>  
+                    ₦ {{ number_format($Refueling) }}
+                </td> 
+                <td>  
+                    ₦ {{ number_format($MasterCard->Balance) }}
+                </td> 
+                <td>  
+                    ₦ {{ number_format($MasterCard->MonthlyBudget - $MasterCard->Balance) }}
+                </td> 
+                <td>  
+                    <button class="action-x manage-master-card">MANAGE</button>
+                    <span class="Hide">{{ $MasterCard->CardNumber }}</span>
+                    <span class="Hide">{{ $MasterCard->Date }}</span>
+                    <span class="Hide">{{ $MasterCard->MonthlyBudget }}</span>
+                    <span class="Hide">{{ $MasterCard->Balance }}</span>
+                    <span class="Hide">{{ $MasterCard->Status }}</span>
+                    <span class="Hide">{{ $MasterCard->id }}</span>
+                </td> 
+            </tr> 
+            @endforeach 
             @foreach ($Cars as $Car)  
             @if (empty($Car->CardNumber)) @continue; @endif
             <tr> 
@@ -22,12 +68,11 @@
                         <div class="info-inner">
                             <div class="inner">
                                 <h1>{{ $Car->CardNumber }}</h1> 
-                                <span class="type">Credit Card</span>
-                                <span class="{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br> {{ $Car->DateIn }}
-                            </div>  
-                            <div class="inner">
+                                <span class="type">{{ $Car->Maker . ' :: ' }}{{ $Car->Model ?? 'Fleet Card' }}</span>
+                                <span class="{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br>
                                 <span class="used-by">{{ $Car->VehicleNumber }}</span>
-                            </div>  
+                                 {{ $Car->DateIn }}
+                            </div>   
                         </div>  
                     </div> 
                  </td> 

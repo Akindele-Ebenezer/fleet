@@ -26,7 +26,7 @@
                                 <span class="{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br> {{ $MasterCard->Date }}
                             </div>  
                             <div class="inner">
-                                <span class="used-by">ALL CARS</span> 
+                                <span class="used-by">MASTER</span> 
                             </div>   
                         </div>  
                     </div> 

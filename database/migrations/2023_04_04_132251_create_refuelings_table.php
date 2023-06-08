@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('RFLNO');
             $table->string('Date')->nullable();
             $table->string('Time')->nullable();
-            $table->string('KMETER')->nullable();
+            $table->string('Mileage')->nullable();
             $table->string('KMLITER')->nullable();
             $table->string('TERNO')->nullable();
             $table->string('ReceiptNumber')->nullable(); 

@@ -69,7 +69,7 @@ ActionButtons.forEach(ActionButton => {
         let Comments_X_DATA = ActionButton.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
         let BalanceBroughtForward_X_DATA = ActionButton.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
  
-        Deposits_X_Edit.value = BigInt(Deposits_X_DATA.replace(/₦/g, '').replace(/,/g, ''));
+        Deposits_X_Edit.value = BigInt(Deposits_X_DATA.replace(/₦/g, '').replace(/,/g, '')); 
         Refueling_X_Edit.value = BigInt(Refueling_X_DATA.replace(/₦/g, '').replace(/,/g, ''));
         Balance_X_Edit.value = BigInt(Balance_X_DATA.replace(/₦/g, '').replace(/,/g, ''));
         UsedBy_X_Edit.value = UsedBy_X_DATA;
@@ -158,6 +158,7 @@ let VehicleNumber_CAR = document.querySelector('input[name="VehicleNumber_CAR"]'
 let Error = document.querySelector('.error');
 
 AddCarButton.forEach(Button => {
+    Button.classList.remove('permission-denied');
     Button.addEventListener('click', () => {
         ModalAddCar.style.display = 'block';
            
@@ -175,5 +176,17 @@ AddCarButton.forEach(Button => {
         CancelModalIcon.addEventListener('click', () => {
             ModalAddCar.style.display = 'none';
         });
+    });
+});
+
+let AlertComponent = document.querySelector('.alert');
+let PermissionDeniedButton = document.querySelectorAll('.permission-denied');
+
+PermissionDeniedButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        AlertComponent.style.display = 'flex';
+        setTimeout(() => {
+            AlertComponent.style.display = 'none';
+        }, 5000);
     });
 });

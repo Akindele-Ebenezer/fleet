@@ -59,7 +59,7 @@
   z-index: 100;
 }
 .alert .inner {
-  background-color: #41a341;
+  background-color: #DF2E38;
   border-radius: 0.5em;
   color: #fff;
   padding: 1em;
@@ -169,7 +169,7 @@ button {
   justify-content: center;
   position: absolute;
   width: 100vw;
-  z-index: 2000;
+  z-index: 10;
 }
 .loader .inner {
   height: 15em;
@@ -239,6 +239,20 @@ button {
 .modal-vehicle-data .inner img {
   margin-right: 1em;
   width: 3rem;
+}
+.modal-vehicle-data .inner .links {
+  align-items: center;
+  background: #fff;
+  display: flex;
+  justify-content: space-evenly;
+  padding-block: 0.5em;
+  position: sticky;
+  top: -1em;
+}
+.modal-vehicle-data .inner .links .link {
+  border-bottom: 4px solid #7275d9;
+  cursor: pointer;
+  padding-bottom: 0.15em;
 }
 .modal-vehicle-data .inner svg {
   fill: #111;
@@ -867,10 +881,18 @@ svg {
 .report-inner .table td.show-record-x-edit .manage-user strong.online {
   background: #42b142;
 }
-.report-inner .table td.show-record-x-edit, .report-inner .table td.show-record-x {
+.report-inner .table td.show-record-x-edit, .report-inner .table td.show-master-card-record-x-edit {
+  display: flex;
+}
+.report-inner .table td.show-record-x-edit img, .report-inner .table td.show-master-card-record-x-edit img {
+  border-radius: 0.15em;
+  margin-right: 1em;
+  width: 1.5em;
+}
+.report-inner .table td.show-record-x-edit, .report-inner .table td.show-record-x, .report-inner .table td.show-master-card-record-x-edit {
   cursor: pointer;
 }
-.report-inner .table td.show-record-x-edit:hover, .report-inner .table td.show-record-x:hover {
+.report-inner .table td.show-record-x-edit:hover, .report-inner .table td.show-record-x:hover, .report-inner .table td.show-master-card-record-x-edit:hover {
   color: #333 !important;
 }
 .report-inner .table td.show-record-x-2 {
@@ -890,7 +912,7 @@ svg {
   background-color: #DF2E38;
 }
 .report-inner .table td.show-record-x-2 img {
-  width: 3em;
+  width: 2em;
 }
 .report-inner .table td .car-owner-cars {
   color: #ddd;
@@ -1026,6 +1048,14 @@ svg {
   border-radius: 0.1em;
   margin-inline: 0.2em;
   padding-inline: 0.45em;
+}
+.report-inner .table-wrapper .table-title {
+  background: #ddd;
+  border-radius: 0.45em;
+  color: #333;
+  display: inline-block;
+  margin-block: 0.5em;
+  padding: 0.5em;
 }
 .report-inner .table-wrapper .total-spent {
   display: flex;

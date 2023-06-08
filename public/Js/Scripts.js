@@ -46,6 +46,7 @@ let StopDate_X = document.querySelector('.StopDate_X');
 let Driver_X = document.querySelector('.Driver_X');
 let Status_X = document.querySelector('.Status_X');
 let BalanceBroughtForward_X = document.querySelector('.BalanceBroughtForward_X');
+let Mileage_X = document.querySelector('.Mileage_X');
 
 ActionButtons.forEach(ActionButton => {
     ActionButton.addEventListener('click', () => {
@@ -79,8 +80,9 @@ ActionButtons.forEach(ActionButton => {
         let Driver_X_DATA = ActionButton.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         let Status_X_DATA = ActionButton.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         let BalanceBroughtForward_X_DATA = ActionButton.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        let Mileage_X_DATA = ActionButton.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
        
-        Deposits_X.textContent = Deposits_X_DATA;
+        Deposits_X.textContent = Deposits_X_DATA; 
         Refueling_X.textContent = Refueling_X_DATA;
         Balance_X.textContent = Balance_X_DATA;
         UsedBy_X.textContent = UsedBy_X_DATA;
@@ -108,13 +110,27 @@ ActionButtons.forEach(ActionButton => {
         Driver_X.textContent = Driver_X_DATA; 
         Status_X.innerHTML = Status_X_DATA;  
         BalanceBroughtForward_X.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'NGN' }).format(BalanceBroughtForward_X_DATA); 
+        Mileage_X.innerHTML = Mileage_X_DATA;  
 
         let PrintButton = document.querySelectorAll('.Print');
+        let MaintenanceButton = document.querySelector('.modal-vehicle-data .inner .links .maintenance');
+        let DepositsButton = document.querySelector('.modal-vehicle-data .inner .links .deposits');
+        let FuelHistoryButton = document.querySelector('.modal-vehicle-data .inner .links .fuel-history');
         
         PrintButton.forEach(Button => {
             Button.addEventListener('click', () => { 
                 window.open('/Cars/Report/' + RegistrationNo_X.textContent, '_blank');
             });
+        });
+ 
+        MaintenanceButton.addEventListener('click', () => {  
+            window.location = '/Maintenance?FilterValue=' + RegistrationNo_X.textContent;
+        });
+        DepositsButton.addEventListener('click', () => { 
+            window.location = '/Deposits?FilterValue=' + RegistrationNo_X.textContent;
+        });
+        FuelHistoryButton.addEventListener('click', () => { 
+            window.location = '/Refueling?FilterValue=' + RegistrationNo_X.textContent;
         });
     }); 
 
@@ -151,9 +167,9 @@ DepositsRouteButton.forEach(Button => {
 
 DepositsRouteEditButton.forEach(Button => {
     Button.addEventListener('click', () => {
-        window.location = '/Management/Edit/Credit/Cards';
+        window.location = '/Management/Edit/Fleet/Cards';
         
-        if (window.location.href === '/Management/Edit/Credit/Cards') {
+        if (window.location.href === '/Management/Edit/Fleet/Cards') {
             let ModalAddMonthlyDeposits = document.querySelector('.add-monthly-deposits-form');
             ModalAddMonthlyDeposits.style.display = 'block';
         }

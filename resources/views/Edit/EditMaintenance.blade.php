@@ -19,7 +19,7 @@
             @foreach ($Maintenance__MyRecords as $Maintenance)
             <tr> 
                 <td>{{ $loop->iteration  + (($Maintenance__MyRecords->currentPage() -1) * $Maintenance__MyRecords->perPage()) }}</td>
-                <td class="show-record-x-edit">{{ $Maintenance->VehicleNumber }}</td>
+                <td class="show-record-x-edit"><img src="{{ asset('Images/adjust.png') }}" alt="">{{ $Maintenance->VehicleNumber }}</td>
                 <span class="VehicleNumber_X_DATA_Edit Hide">{{ $Maintenance->VehicleNumber }}</span>
                 <span class="Date_X_DATA_Edit Hide">{{ $Maintenance->Date }}</span>
                 <span class="Time_X_DATA_Edit Hide">{{ $Maintenance->Time }}</span>

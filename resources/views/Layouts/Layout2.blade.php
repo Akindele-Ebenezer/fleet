@@ -28,7 +28,7 @@
 
         {{ Route::is('Users') ? 'USERS' : '' }}
 
-        {{ Route::is('CreditCard') ? 'CREDIT CARDS' : '' }}
+        {{ Route::is('FleetCard') ? 'FLEET CARDS' : '' }}
         {{ Route::is('MasterCard') ? 'MASTER CARDS' : '' }}
     </title>
 
@@ -80,6 +80,7 @@
     @if (Route::is('EditDeposits'))
         @include('Components.AddMonthlyDepositsComponent')
         @include('Components.EditMonthlyDepositsComponent')
+        @include('Components.EditDeposits_MasterCardComponent')
     @endif
 
     @if (Route::is('EditDeposits_MasterCard'))
@@ -91,9 +92,11 @@
         @include('Components.ReadOnly.DepositsComponent')
     @endif
     
-    @if (Route::is('CreditCard'))
-        @include('Components.AddCreditCardComponent')
-        @include('Components.EditCreditCardComponent')
+    @if (Route::is('FleetCard'))
+        @include('Components.AddFleetCardComponent')
+        @include('Components.EditFleetCardComponent')
+        @include('Components.AddMasterCardComponent')
+        @include('Components.EditMasterCardComponent')
     @endif
 
     @if (Route::is('Deposits_MasterCard'))
@@ -164,19 +167,19 @@
                         <a href='{{ route('Cars_Registration') }}'>
                             <li class="{{ Route::is('Cars_Registration') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
-                                Car Registration ({{ number_format($NumberOfCars_MyRecords) }})
+                                Car Registration 
                             </li>
                         </a> 
                         <a href='{{ route('EditMaintenance') }}'>
                             <li class="{{ Route::is('EditMaintenance') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"/></svg>           
-                                Maintenance  ({{ number_format($NumberOfCarMaintenance_MyRecords) }})
+                                Maintenance 
                             </li>
                         </a> 
                         <a href='{{ route('EditRefueling') }}'>
                             <li class="{{ Route::is('EditRefueling') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"/></svg>                  
-                                Fuel Management ({{ number_format($NumberOfCarRefueling_MyRecords) }})
+                                Fuel Management 
                             </li>
                         </a>
                     </div>
@@ -201,60 +204,33 @@
                             Card Management
                             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg>
                         </li>
-                        <div class="sub-nav {{ Route::is('EditDeposits') || Route::is('EditDeposits_MasterCard') || Route::is('Deposits') || Route::is('CreditCard') || Route::is('Deposits_MasterCard') || Route::is('MasterCard') ? 'Show' : '' }}">
+                        <div class="sub-nav {{ Route::is('EditDeposits') || Route::is('EditDeposits_MasterCard') || Route::is('Deposits') || Route::is('FleetCard') || Route::is('Deposits_MasterCard') || Route::is('MasterCard') ? 'Show' : '' }}">
                             <a class="card-management action-x">
                                 <li>
                                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
-                                    Credit Card
+                                    Manage
                                     <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg>
                                 </li>
                             </a>   
-                            <div class="sub-nav {{ Route::is('EditDeposits') || Route::is('Deposits') || Route::is('CreditCard') ? 'Show' : '' }}"><a class="card-management action-x"> 
+                            <div class="sub-nav {{ Route::is('EditDeposits') || Route::is('Deposits') || Route::is('FleetCard') ? 'Show' : '' }}"><a class="card-management action-x"> 
                                 <a href="{{ route('EditDeposits') }}">
                                     <li class="{{ Route::is('EditDeposits') ? 'active' : '' }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
-                                        Make Deposit  ({{ number_format($NumberOfCarDeposits_MyRecords) }})
+                                        Make Deposit 
                                     </li>
                                 </a>   
                                 <a href="{{ route('Deposits') }}">
                                     <li class="{{ Route::is('Deposits') ? 'active' : '' }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
-                                        Deposits ({{ number_format($NumberOfCarDeposits) }}) 
-                                    </li> 
-                                </a>
-                                <a href="{{ route('CreditCard') }}">
-                                    <li class="{{ Route::is('CreditCard') ? 'active' : '' }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
-                                        Credit Cards 
-                                    </li> 
-                                </a>
-                            </div>
-                            <a class="card-management action-x">
-                                <li class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
-                                    Master Card
-                                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg>
-                                </li> 
-                            </a>
-                            <div class="sub-nav {{ Route::is('EditDeposits_MasterCard') || Route::is('Deposits_MasterCard') || Route::is('MasterCard') ? 'Show' : '' }}">
-                                <a href="{{ route('EditDeposits_MasterCard')}}"> 
-                                    <li class="{{ Route::is('EditDeposits_MasterCard') ? 'active' : '' }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
-                                        Make Deposit 
-                                    </li>
-                                </a>   
-                                <a href="{{ route('Deposits_MasterCard') }}">
-                                    <li class="{{ Route::is('Deposits_MasterCard') ? 'active' : '' }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
                                         Deposits 
                                     </li> 
                                 </a>
-                                <a href="{{ route('MasterCard') }}">
-                                    <li class="{{ Route::is('MasterCard') ? 'active' : '' }}">
+                                <a href="{{ route('FleetCard') }}">
+                                    <li class="{{ Route::is('FleetCard') ? 'active' : '' }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
-                                        Master Cards 
+                                        Fleet Cards 
                                     </li> 
-                                </a>
+                                </a> 
                             </div>
                         </div>
                     </a> 
@@ -321,7 +297,7 @@
 
                         {{ Route::is('Users') ? 'USERS' : '' }}
 
-                        {{ Route::is('CreditCard') ? 'CREDIT CARDS' : '' }}
+                        {{ Route::is('FleetCard') ? 'FLEET CARDS' : '' }}
                         {{ Route::is('MasterCard') ? 'MASTER CARDS' : '' }}
                          
                     <br>
@@ -475,7 +451,7 @@
                                 "VehicleNo",
                                 "Date",
                                 "Time",
-                                "KMETER",
+                                "Mileage",
                                 "TerminalNo",
                                 "CardNo",
                                 "Quantity", 
@@ -502,7 +478,7 @@
                             ];
                         }
                 
-                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Management/Credit/Cards') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Management/Fleet/Cards') {
                             $SearchInputs = [ 
                                 "CarInformation",
                                 "MonthlyBudget",
@@ -519,7 +495,7 @@
                                 "VehicleNo",
                                 "Date",
                                 "Time",
-                                "KMETER",
+                                "Mileage",
                                 "TerminalNo",
                                 "CardNo",
                                 "Quantity", 
@@ -588,8 +564,29 @@
                     </div>
                 </div>
                 @endunless
+                @php
+                    $CarRegistration_USER = \DB::table('user_privileges')
+                                                ->select('CarRegistration')
+                                                ->where('UserId', session()->get('Id'))
+                                                ->first(); 
+
+                    $AddMaintenance_USER = \DB::table('user_privileges')
+                                                ->select('AddMaintenance')
+                                                ->where('UserId', session()->get('Id'))
+                                                ->first(); 
+
+                    $FuelManagement_USER = \DB::table('user_privileges')
+                                                ->select('FuelManagement')
+                                                ->where('UserId', session()->get('Id'))
+                                                ->first(); 
+
+                    $MakeDeposits_USER = \DB::table('user_privileges')
+                                                ->select('MakeDeposits')
+                                                ->where('UserId', session()->get('Id'))
+                                                ->first(); 
+                @endphp
                 <div class="inner">
-                    <button class="action-x {{ Route::is('Cars_Registration') ? 'add-car' : '' }}  {{ Route::is('EditMaintenance') ? 'add-maintenance' : '' }} {{ Route::is('EditDeposits') ? 'add-monthly-deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? 'add-master-card-deposits' : '' }} {{ Route::is('EditRefueling') ? 'add-refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Deposits_MasterCard') ? 'cars-route' : '' }}{{ Route::is('CreditCard') ? 'add-credit-card' : '' }}{{ Route::is('MasterCard') ? 'add-master-card' : '' }}"> {{ Route::is('Cars_Registration') ? '+ Add Vehicle' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Deposits_MasterCard') ? 'Explore Cars' : '' }}{{ Route::is('CreditCard') ? '+ New Credit Card' : '' }}{{ Route::is('MasterCard') ? '+ New Master Card' : '' }}</button><button class="ExportToExcel" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">Export to EXCEL</button>
+                    <button class="action-x {{ (Route::is('Cars_Registration') AND $CarRegistration_USER->CarRegistration ?? 'off' === 'on') ? 'add-car' : 'permission-denied' }}  {{ (Route::is('EditMaintenance') AND $AddMaintenance_USER->AddMaintenance ?? 'off' === 'on') ? 'add-maintenance' : 'permission-denied' }} {{ (Route::is('EditDeposits') AND $MakeDeposits_USER->MakeDeposits ?? 'off' === 'on') ? 'add-monthly-deposits' : 'permission-denied' }} {{ Route::is('EditDeposits_MasterCard') ? 'add-master-card-deposits' : '' }} {{ (Route::is('EditRefueling') AND $FuelManagement_USER->FuelManagement ?? 'off' === 'on') ? 'add-refueling' : 'permission-denied' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Deposits_MasterCard') ? 'cars-route' : '' }}{{ Route::is('FleetCard') ? 'add-fleet-card' : '' }}{{ Route::is('MasterCard') ? 'add-master-card' : '' }}"> {{ Route::is('Cars_Registration') ? '+ Add Vehicle' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }}{{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Deposits_MasterCard') ? 'Explore Cars' : '' }}{{ Route::is('FleetCard') ? '+ New Fleet Card' : '' }}{{ Route::is('MasterCard') ? '+ New Master Card' : '' }}</button><button class="ExportToExcel" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">Export to EXCEL</button>
                 </div>
             </div> 
             @endunless
@@ -753,8 +750,8 @@
                 });
             </script>
         @endif
-        @if (Route::is('CreditCard'))
-            <script src="{{ asset('Js/Edit/CreditCard.js') }}"></script>
+        @if (Route::is('FleetCard'))
+            <script src="{{ asset('Js/Edit/FleetCard.js') }}"></script>
             {{-- <script>
                 let ExportButton = document.querySelector('.ExportToExcel');
                 ExportButton.addEventListener('click', () => {
