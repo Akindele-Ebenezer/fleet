@@ -107,6 +107,19 @@ button {
   top: 0.5em;
   z-index: 30;
 }
+.cancel-modal-x {
+  background: #fff;
+  border-radius: 0.1em;
+  color: #DF2E38;
+  cursor: pointer;
+  font-size: 2em;
+  font-weight: bold;
+  padding-inline: 0.25em;
+  position: unset;
+  position: sticky;
+  text-align: right;
+  top: -0.5em;
+}
 
 .edit-modal-vehicle-data .inner ul li input,
 .edit-modal-vehicle-data .inner ul li select {
@@ -132,6 +145,7 @@ button {
 .empty-records-wrapper .inner .empty-records {
   background-position: center !important;
   background-repeat: no-repeat !important;
+  border-radius: 0.5em;
   height: 24em;
   width: 50em;
 }
@@ -247,7 +261,7 @@ button {
   justify-content: space-evenly;
   padding-block: 0.5em;
   position: sticky;
-  top: -1em;
+  top: 2em;
 }
 .modal-vehicle-data .inner .links .link {
   border-bottom: 4px solid #7275d9;
@@ -360,6 +374,18 @@ svg {
 }
 .form.privileges .inner-x-wrapper .inner-x-x input[type=checkbox]:checked {
   background: #3034b5;
+}
+.form.privileges .inner .user-disabled {
+  background: #DF2E38;
+}
+.form.privileges .inner .user-enabled {
+  background: #41a341;
+}
+.form.privileges .inner .privilege-message {
+  border-radius: 0.2em;
+  color: #ddd;
+  display: inline-block;
+  padding: 0.5em;
 }
 .form .inner {
   background: #111;
@@ -762,7 +788,15 @@ svg {
 }
 .report-inner .table.list .car-info .info-inner .inner:first-of-type {
   color: #eee;
+  margin-right: 1em;
   width: 20em;
+}
+.report-inner .table.list .car-info .info-inner .inner:first-of-type .card-number {
+  text-decoration: underline;
+}
+.report-inner .table.list .car-info .info-inner .inner:first-of-type .card-number:hover {
+  color: #333;
+  cursor: pointer;
 }
 .report-inner .table.list .car-info .info-inner .inner:not(.report-inner .table.list .car-info .info-inner .inner:first-of-type) {
   translate: -3em;
@@ -1108,6 +1142,7 @@ svg {
 .report .left-nav {
   background: #0d0d0d;
   overflow-y: scroll;
+  padding-bottom: 4em;
   padding-inline: 0.5rem;
   width: 19rem;
 }

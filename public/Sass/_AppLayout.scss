@@ -329,7 +329,17 @@
                         .inner {
                             &:first-of-type {
                                 color: #eee;
+                                margin-right: 1em;
                                 width: 20em;
+
+                                .card-number {
+                                    text-decoration: underline;
+                                    
+                                    &:hover {
+                                        color: #333;
+                                        cursor: pointer;
+                                    }
+                                }
                             }
 
                             &:not(&:first-of-type) { 
@@ -790,6 +800,7 @@
     .left-nav {
         background: darken($color: $Color-1, $amount: 15);
         overflow-y: scroll;
+        padding-bottom: 4em;
         padding-inline: .5rem;
         width: 19rem;
  

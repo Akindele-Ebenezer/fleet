@@ -6,6 +6,7 @@ let AddFleetCardButton_X = document.querySelector('.AddFleetCard');
 let Error = document.querySelector('.error');
 
 AddFleetCardButton.forEach(Button => {
+    Button.classList.remove('permission-denied');
     Button.addEventListener('click', () => {
         ModalAddFleetCard.style.display = 'block';
          
@@ -88,6 +89,7 @@ let EditFleetCard = document.querySelector('.EditFleetCard');
 let DeleteFleetCard = document.querySelector('.DeleteFleetCard');
  
 ManageButton.forEach(Button => {
+    Button.classList.remove('permission-denied');
     Button.addEventListener('click', () => {
         EditFleetCardForm.style.display = 'block';
 
@@ -138,10 +140,8 @@ let AddMasterCardButton = document.querySelectorAll('.add-master-card');
 let AddMasterCardForm = document.querySelector('.AddMasterCardForm');
 let AddMasterCardButton_X = document.querySelector('.AddMasterCard');
 let Error_MasterCard = document.querySelector('.error-master-card');
- 
 
 AddMasterCardButton_X.addEventListener('click', () => {  
-    console.log(24)
     if (AddMasterCardForm.children[1].children[1].value === '') {
         Error.textContent = 'Please fill out CARD number for new Master Card';
     } else {
@@ -152,6 +152,7 @@ AddMasterCardButton_X.addEventListener('click', () => {
 });
 
 ManageMasterCardButton.forEach(Button => {
+    Button.classList.remove('permission-denied');
     Button.addEventListener('click', () => {
         EditMasterCardForm.style.display = 'block';
  
@@ -177,6 +178,25 @@ ManageMasterCardButton.forEach(Button => {
         CancelModalIcon.addEventListener('click', () => {
             EditMasterCardForm.style.display = 'none';
         });
+    });
+});
+
+let CardNumber_ = document.querySelectorAll('.card-number');
+CardNumber_.forEach(CardNumber => {
+    CardNumber.addEventListener('click', () => {
+        window.location = '/Deposits?FilterValue=' + CardNumber.textContent.trim();
+    });
+});
+ 
+let AlertComponent = document.querySelector('.alert');
+let PermissionDeniedButton = document.querySelectorAll('.permission-denied');
+
+PermissionDeniedButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        AlertComponent.style.display = 'flex';
+        setTimeout(() => {
+            AlertComponent.style.display = 'none';
+        }, 5000);
     });
 });
 

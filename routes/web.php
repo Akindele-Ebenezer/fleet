@@ -70,8 +70,7 @@ Route::get('Deposits/Export/', [DepositsExportController::class, 'Export'])->nam
 Route::get('Refueling/Export/', [RefuelingExportController::class, 'Export'])->name('Refueling_ExportToExcel');
 
 Route::get('/Management/Fleet/Cards', [CardController::class, 'credit_card_index'])->name('FleetCard');
-
-Route::get('/Management/Master/Cards', [CardController::class, 'master_card_index'])->name('MasterCard');
+ 
 Route::get('/Add/Master/Cards/{MasterCard}', [CardController::class, 'store_master_card'])->name('store_MasterCard'); 
 Route::get('/Management/Update/Master/Cards/{MasterCard}', [CardController::class, 'update_master_card'])->name('update_MasterCard'); 
 Route::get('/Management/Delete/Master/Cards/{MasterCard}', [CardController::class, 'destroy_master_card'])->name('destroy_MasterCard'); 

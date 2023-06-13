@@ -59,6 +59,8 @@
         @php
             $SumOfCarDeposits = \App\Models\Deposits::select('Amount')->sum('Amount');
             $Date_from = \App\Models\Deposits::select('Date')->whereNotNull('Date')->orderBy('Date', 'ASC')->first();
+            $SumOfCarDeposits_MasterCard = \App\Models\DepositsMasterCard::select('Amount')->sum('Amount');
+            $Date_from_MasterCard = \App\Models\DepositsMasterCard::select('Date')->whereNotNull('Date')->orderBy('Date', 'ASC')->first();
         @endphp
         <div class="total-spent">
             <p>Total (Vehicle Card) Deposits from "{{ $Date_from->Date }}" till date = ₦ {{ number_format($SumOfCarDeposits) }}</p>
@@ -127,6 +129,20 @@
             </div>
         </table>
         {{ $Deposits_MasterCards->onEachSide(5)->links() }}
+        @if(!isset($_GET['Filter_All_Deposits']) AND !isset($_GET['Filter_Deposits_Yearly']) AND !isset($_GET['Filter_Deposits_Range']))
+        @php 
+            $SumOfCarDeposits_MasterCard = \App\Models\DepositsMasterCard::select('Amount')->sum('Amount');
+            $Date_from_MasterCard = \App\Models\DepositsMasterCard::select('Date')->whereNotNull('Date')->orderBy('Date', 'ASC')->first();
+        @endphp
+        <div class="total-spent">
+            <p>Total (Master Card) Deposits from "{{ $Date_from_MasterCard->Date }}" till date = ₦ {{ number_format($SumOfCarDeposits_MasterCard) }}</p>
+        </div>
+        @endif
+        @isset($_GET['Filter_All_Deposits'])
+        <div class="total-spent">
+            <p>Total (Master Card) Deposits from "{{ $_GET['Date_From'] }}" to "{{ $_GET['Date_To'] }}" = ₦ {{ number_format($SumOfCarDeposits_MasterCard) }}</p>
+        </div>
+        @endisset
         @unless (count($Deposits) > 0 || count($Deposits_MasterCards) > 0)
         <center>
             <div class="empty-records" style="background: url('{{ asset('Images/empty-records.png') }}')"></div> 

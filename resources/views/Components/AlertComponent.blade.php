@@ -4,5 +4,6 @@
         {{ Route::is('EditMaintenance') ? 'PERMISSION DENIED: Contact an Admin to grant you privilege to work on vehicle maintenance.' : '' }}
         {{ Route::is('EditRefueling') ? 'PERMISSION DENIED: Contact an Admin to grant you privilege to manage fuel.' : '' }}
         {{ Route::is('EditDeposits') ? 'PERMISSION DENIED: Contact an Admin to grant you privilege to make deposits.' : '' }}
+        {{ Route::is('FleetCard') ? 'PERMISSION DENIED: Contact an Admin to grant you privilege to manage fleet cards.' : '' }}
     </div>
 </div>

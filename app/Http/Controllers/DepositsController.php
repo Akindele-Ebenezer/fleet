@@ -38,10 +38,17 @@ class DepositsController extends Controller
             $Deposits = Deposits::whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) 
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
+
+            $SumOfCarDeposits_MasterCard = \App\Models\DepositsMasterCard::select('Amount')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Amount'); 
+            $Deposits_MasterCards = DepositsMasterCard::whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) 
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
                                         
             $Deposits->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits);
+            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits)->with('Deposits_MasterCards', $Deposits_MasterCards)->with('SumOfCarDeposits_MasterCard', $SumOfCarDeposits_MasterCard);
         }
 
         if (isset($_GET['Filter_Deposits_Yearly'])) {
@@ -119,9 +126,21 @@ class DepositsController extends Controller
                                             ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
                                             ->paginate(7);
 
+            $DepositsMasterCard__MyRecords = DepositsMasterCard::where('UserId', self::USER_ID())
+                                            ->where('CardNumber', 'LIKE', '%' . $FilterValue . '%') 
+                                            ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                                            ->orWhere('DateIn', 'LIKE', '%' . $FilterValue . '%')
+                                            ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
+                                            ->orWhere('Year', 'LIKE', '%' . $FilterValue . '%')
+                                            ->orWhere('Month', 'LIKE', '%' . $FilterValue . '%')
+                                            ->orWhere('TimeIn', 'LIKE', '%' . $FilterValue . '%')
+                                            ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                                            ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%') 
+                                            ->paginate(7);
+                                            
             $Deposits__MyRecords->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Edit.EditDeposits', $Config)->with('Deposits__MyRecords', $Deposits__MyRecords);
+            return view('Edit.EditDeposits', $Config)->with('Deposits__MyRecords', $Deposits__MyRecords)->with('DepositsMasterCard__MyRecords', $DepositsMasterCard__MyRecords);
         } 
         return view('Edit.EditDeposits', $Config);
     }

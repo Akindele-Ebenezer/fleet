@@ -13,6 +13,12 @@
                 <th onclick="sortTable(6)">Brought Forward</th> 
                 <th onclick="sortTable(7)"></th> 
             </tr> 
+            @php 
+                $CardManagement_USER = \DB::table('user_privileges')
+                                                ->select('CardManagement')
+                                                ->where('UserId', session()->get('Id'))
+                                                ->first();   
+            @endphp
             @foreach ($MasterCards as $MasterCard)  
             @if (empty($MasterCard->CardNumber)) @continue; @endif
             <tr> 
@@ -21,7 +27,7 @@
                     <div class="car-info">
                         <div class="info-inner">
                             <div class="inner">
-                                <h1>{{ $MasterCard->CardNumber }}</h1> 
+                                <h1 class="card-number">{{ $MasterCard->CardNumber }}</h1> 
                                 <span class="type">Master Card</span>
                                 <span class="{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br>
                                 <span class="used-by">MASTER</span>  {{ $MasterCard->Date }}
@@ -49,7 +55,7 @@
                     ₦ {{ number_format($MasterCard->MonthlyBudget - $MasterCard->Balance) }}
                 </td> 
                 <td>  
-                    <button class="action-x manage-master-card">MANAGE</button>
+                    <button class="action-x {{ $CardManagement_USER->CardManagement ?? 'off' === 'on' ? 'manage-master-card' : 'permission-denied' }}">MANAGE</button>
                     <span class="Hide">{{ $MasterCard->CardNumber }}</span>
                     <span class="Hide">{{ $MasterCard->Date }}</span>
                     <span class="Hide">{{ $MasterCard->MonthlyBudget }}</span>
@@ -67,7 +73,7 @@
                     <div class="car-info">
                         <div class="info-inner">
                             <div class="inner">
-                                <h1>{{ $Car->CardNumber }}</h1> 
+                                <h1 class="card-number">{{ $Car->CardNumber }}</h1> 
                                 <span class="type">{{ $Car->Maker . ' :: ' }}{{ $Car->Model ?? 'Fleet Card' }}</span>
                                 <span class="{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br>
                                 <span class="used-by">{{ $Car->VehicleNumber }}</span>
@@ -96,7 +102,7 @@
                     ₦ {{ number_format($Car->MonthlyBudget - $Car->Balance) }}
                 </td> 
                 <td>  
-                    <button class="action-x manage">MANAGE</button>
+                    <button class="action-x {{ ($CardManagement_USER->CardManagement ?? 'off' === 'on') ? 'manage' : 'permission-denied' }}">MANAGE</button>
                     <span class="Hide">{{ $Car->CardNumber }}</span>
                     <span class="Hide">{{ $Car->DateIn }}</span>
                     <span class="Hide">{{ $Car->MonthlyBudget }}</span>
@@ -117,8 +123,8 @@
             </div>
         </table>
         {{ $Cars->onEachSide(5)->links() }}
-        {{-- @unless (count($Cars_Absolutes) > 0)
+        @unless (count($Cars) > 0 AND count($MasterCards) > 0)
         @include('Includes.EmptyProjectTemplate') 
-        @endunless --}}
+        @endunless
     </div>
 @endsection

@@ -68,6 +68,20 @@
                     }
                 }
             }
+
+            .user-disabled {
+                background: $Color-2; 
+            }
+            .user-enabled {
+                background: $Color-3; 
+            }
+
+            .privilege-message {
+                border-radius: 0.2em;
+                color: #ddd;
+                display: inline-block;
+                padding: .5em;
+            }
         }
     }
 

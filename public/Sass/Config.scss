@@ -119,6 +119,20 @@ button {
     right: 1em;
     top: 0.5em;
     z-index: 30;
+
+    &-x {
+        background: #fff;
+        border-radius: 0.1em;
+        color: $Color-2;
+        cursor: pointer;
+        font-size: 2em;
+        font-weight: bold;
+        padding-inline: 0.25em;
+        position: unset;
+        position: sticky;
+        text-align: right;
+        top: -0.5em;
+    }
 }
 
 .edit-modal-vehicle-data {
@@ -153,6 +167,7 @@ button {
         .empty-records {
             background-position: center !important;
             background-repeat: no-repeat !important;
+            border-radius: 0.5em;
             height: 24em;
             width: 50em;  
 
@@ -284,7 +299,7 @@ button {
             justify-content: space-evenly; 
             padding-block: .5em;
             position: sticky;
-            top: -1em;
+            top: 2em;
 
             .link {
                 border-bottom: 4px solid lighten($color: $Color-4, $amount: 20) ;

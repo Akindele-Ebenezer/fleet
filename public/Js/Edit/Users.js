@@ -30,6 +30,7 @@ let AddMaintenance_PRIVILEGE = document.querySelector('.AddMaintenance_PRIVILEGE
 let FuelManagement_PRIVILEGE = document.querySelector('.FuelManagement_PRIVILEGES');
 let MakeDeposits_PRIVILEGE = document.querySelector('.MakeDeposits_PRIVILEGES');
 let CardManagement_PRIVILEGES = document.querySelector('.CardManagement_PRIVILEGES');
+let PrivilegeMessage = document.querySelector('.privilege-message')
 
 ShowRecord_X_Edit.forEach(Email => {
     Email.addEventListener('click', () => {
@@ -119,6 +120,9 @@ ShowRecord_X_Edit.forEach(Email => {
             DisableUserButton.textContent = '- Disabled';
             EnableUserButton.style.background = '#3034b5';
             DisableUserButton.style.background = '#333';
+            PrivilegeMessage.classList.remove('user-enabled');
+            PrivilegeMessage.classList.add('user-disabled');
+            PrivilegeMessage.textContent = 'User is disabled. Permmissions cannot be assigned.';
             DisableUserButton.addEventListener('click', e => {
                 e.preventDefault();
             });
@@ -126,6 +130,9 @@ ShowRecord_X_Edit.forEach(Email => {
             EnableUserButton.textContent = '+ Enabled';
             EnableUserButton.style.background = '#333';
             DisableUserButton.style.background = '#DF2E38'; 
+            PrivilegeMessage.classList.remove('user-disabled');
+            PrivilegeMessage.classList.add('user-enabled');
+            PrivilegeMessage.textContent = 'User is enabled. Permmissions can be assigned.';
             EnableUserButton.addEventListener('click', e => {
                 e.preventDefault();
             });
@@ -143,7 +150,7 @@ ShowRecord_X_Edit.forEach(Email => {
     });
 });
 
-AddUserButton.forEach(Button => {
+AddUserButton.forEach(Button => { 
     Button.addEventListener('click', () => {
         ModalAddUser.style.display = 'block';
          

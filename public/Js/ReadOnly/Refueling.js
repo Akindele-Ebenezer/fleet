@@ -14,8 +14,7 @@ let KMLITER_X_DATA = document.querySelector('.KMLITER_X_DATA');
 
 let VehicleNumber_X = document.querySelector('.VehicleNumber_X');
 let Date_X = document.querySelector('.Date_X');
-let Time_X = document.querySelector('.Time_X');
-let Mileage_X = document.querySelector('.Mileage_X');
+let Time_X = document.querySelector('.Time_X'); 
 let TerminalNo_X = document.querySelector('.TerminalNo_X');
 let CardNumber_X = document.querySelector('.CardNumber_X');
 let Quantity_X = document.querySelector('.Quantity_X');
