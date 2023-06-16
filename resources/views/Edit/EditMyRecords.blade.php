@@ -59,6 +59,8 @@
                                         <span>{{ $Car->PurchaseDate }}</span>
                                     </div>
                                 </div>
+                                <button class="action-x open-document">document</button>
+                                <span class="Hide">{{$Car->VehicleNumber }}</span>
                             </div>
                             <div class="stats-heading">
                                 <h2>STATS</h2>

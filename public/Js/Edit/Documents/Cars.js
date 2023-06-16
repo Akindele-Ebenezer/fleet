@@ -1,9 +1,28 @@
 let ShowDocument_X = document.querySelectorAll('.report-inner .table td.td-x .x-inner');
+let DeleteCarDocumentButtons = document.querySelectorAll('.delete-document-btn');
+let DeleteCarDocumentForm = document.querySelector('.DeleteCarDocumentForm');
 
 ShowDocument_X.forEach(Element => {
     Element.addEventListener('click', () => { 
         Element.parentElement.parentElement.nextElementSibling.classList.toggle('TableRow'); 
         Element.parentElement.parentElement.nextElementSibling.nextElementSibling.classList.toggle('TableRow');
+    });
+    
+    DeleteCarDocumentButtons.forEach(Button => { 
+        Button.addEventListener('click', () => {
+            if (Button.nextElementSibling.nextElementSibling.textContent == '') {
+                let AlertComponent = document.querySelector('.alert');
+                AlertComponent.style.display = 'flex';
+                AlertComponent.firstElementChild.textContent = 'Your attempt to delete an empty file is invalid.';
+                setTimeout(() => {
+                    AlertComponent.style.display = 'none';
+                }, 5000);
+            } else {
+                DeleteCarDocumentForm.setAttribute('action', '/Delete/Documents/Car/' + Button.nextElementSibling.textContent + '/' + Button.nextElementSibling.nextElementSibling.textContent);
+                DeleteCarDocumentForm.setAttribute('method', 'POST');
+                DeleteCarDocumentForm.submit(); 
+            }
+        }); 
     });
 });
 //  
@@ -11,7 +30,6 @@ let ModalCardDocument_Edit = document.querySelector('.edit-car-document-form');
 let EditCarDocumentButton = document.querySelector('.EditCarDocument'); 
 let EditCarDocumentForm = document.querySelector('.EditCarDocumentForm');
 let ManageDocumentButtons = document.querySelectorAll('.manage-document'); 
-let CancelModalIcons = document.querySelectorAll('.cancel-modal'); 
 
 let CarDocument_VehicleNumber = document.querySelector('.VehicleNumber_X'); 
 
@@ -23,15 +41,13 @@ ManageDocumentButtons.forEach(ManageDocumentButton => {
 
         EditCarDocumentButton.addEventListener('click', () => {
             EditCarDocumentForm.setAttribute('action', '/Update/Documents/Car/' + CarDocument_VehicleNumber.value);
+            EditCarDocumentForm.setAttribute('enctype', 'multipart/form-data'); 
+            EditCarDocumentForm.setAttribute('method', 'POST'); 
             EditCarDocumentForm.submit();
-        });
- 
-        let DeleteCarDocumentButton = document.querySelector('.DeleteCarDocument');
-        
-        DeleteCarDocumentButton.addEventListener('click', () => {
-            window.location = '/Delete/Documents/Car/' + CarDocument_VehicleNumber.value;
         }); 
     }); 
+
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal'); 
 
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {

@@ -10,14 +10,19 @@
                 <th onclick="sortTable(3)">Purchase Date</th> 
                 <th onclick="sortTable(3)"></th> 
             </tr>  
+            @unless (count($Cars) > 0)
+            <tr>
+                <td>No documents available.</td>
+            </tr>    
+            @endunless
             @foreach ($Cars as $Document)
             @php
-                $CarDocuments_REGISTRATION_CERTIFICATE = \DB::table('car_documents')->select(['RegistrationCertificate', 'RegistrationCertificateSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
-                $CarDocuments_DRIVING_LICENCE = \DB::table('car_documents')->select(['DrivingLicence', 'DrivingLicenceSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
-                $CarDocuments_PUC_CERTIFICATE = \DB::table('car_documents')->select(['PUCCertificate', 'PUCCertificateSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
-                $CarDocuments_PROOF_OF_OWNERSHIP = \DB::table('car_documents')->select(['ProofOfOwnership', 'ProofOfOwnershipSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
-                $CarDocuments_CERTIFICATE_OF_ROAD_WORTHINESS = \DB::table('car_documents')->select(['CertificateOfRoadWorthiness', 'CertificateOfRoadWorthinessSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
-                $CarDocuments_INSURANCE_CERTIFICATE = \DB::table('car_documents')->select(['InsuranceCertificate', 'InsuranceCertificateSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
+                $CarDocuments_REGISTRATION_CERTIFICATE = \DB::table('car_documents')->select(['VehicleNumber', 'RegistrationCertificate', 'RegistrationCertificateSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
+                $CarDocuments_DRIVING_LICENCE = \DB::table('car_documents')->select(['VehicleNumber', 'DrivingLicence', 'DrivingLicenceSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
+                $CarDocuments_PUC_CERTIFICATE = \DB::table('car_documents')->select(['VehicleNumber', 'PUCCertificate', 'PUCCertificateSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
+                $CarDocuments_PROOF_OF_OWNERSHIP = \DB::table('car_documents')->select(['VehicleNumber', 'ProofOfOwnership', 'ProofOfOwnershipSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
+                $CarDocuments_CERTIFICATE_OF_ROAD_WORTHINESS = \DB::table('car_documents')->select(['VehicleNumber', 'CertificateOfRoadWorthiness', 'CertificateOfRoadWorthinessSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
+                $CarDocuments_INSURANCE_CERTIFICATE = \DB::table('car_documents')->select(['VehicleNumber', 'InsuranceCertificate', 'InsuranceCertificateSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
             @endphp   
             <tr class="tr-x">
                 <td class="td-x">
@@ -61,46 +66,82 @@
                             <span>No files..</span>
                         </div> 
                     @endif 
-                    @foreach ($CarDocuments_REGISTRATION_CERTIFICATE as $Document_)
+                    @foreach ($CarDocuments_REGISTRATION_CERTIFICATE as $Document_) 
                         <div class="document">
+                            @if (empty($Document_->RegistrationCertificate))
+                                <p>No File..</p>
+                            @endif
                             <a href="/Documents/Cars/{{ $Document->VehicleNumber }}/{{ $Document_->RegistrationCertificate }}" target="blank">
                                 {{ $Document_->RegistrationCertificate }}
                             </a>
+                            <button class="action-x delete-document-btn">Delete</button>
+                            <span class="Hide">{{ $Document_->VehicleNumber }}</span>
+                            <span class="Hide">{{ $Document_->RegistrationCertificate }}</span>
                         </div>
                     @endforeach
                     @foreach ($CarDocuments_DRIVING_LICENCE as $Document_)
                         <div class="document">
+                            @if (empty($Document_->DrivingLicence))
+                                <p>No File..</p>
+                            @endif
                             <a href="/Documents/Cars/{{ $Document->VehicleNumber }}/{{ $Document_->DrivingLicence }}" target="blank">
                                 {{ $Document_->DrivingLicence }}
                             </a>
+                            <button class="action-x delete-document-btn">Delete</button>
+                            <span class="Hide">{{ $Document_->VehicleNumber }}</span>
+                            <span class="Hide">{{ $Document_->DrivingLicence }}</span>
                         </div>
                     @endforeach
                     @foreach ($CarDocuments_PUC_CERTIFICATE as $Document_)
                         <div class="document">
+                            @if (empty($Document_->PUCCertificate))
+                                <p>No File..</p>
+                            @endif
                             <a href="/Documents/Cars/{{ $Document->VehicleNumber }}/{{ $Document_->PUCCertificate }}" target="blank">
                                 {{ $Document_->PUCCertificate }}
                             </a>
+                            <button class="action-x delete-document-btn">Delete</button>
+                            <span class="Hide">{{ $Document_->VehicleNumber }}</span>
+                            <span class="Hide">{{ $Document_->PUCCertificate }}</span>
                         </div>
                     @endforeach
                     @foreach ($CarDocuments_PROOF_OF_OWNERSHIP as $Document_)
                         <div class="document">
+                            @if (empty($Document_->ProofOfOwnership))
+                                <p>No File..</p>
+                            @endif
                             <a href="/Documents/Cars/{{ $Document->VehicleNumber }}/{{ $Document_->ProofOfOwnership }}" target="blank">
                                 {{ $Document_->ProofOfOwnership }}
                             </a>
+                            <button class="action-x delete-document-btn">Delete</button>
+                            <span class="Hide">{{ $Document_->VehicleNumber }}</span>
+                            <span class="Hide">{{ $Document_->ProofOfOwnership }}</span>
                         </div>
                     @endforeach
                     @foreach ($CarDocuments_CERTIFICATE_OF_ROAD_WORTHINESS as $Document_)
                         <div class="document">
+                            @if (empty($Document_->CertificateOfRoadWorthiness))
+                                <p>No File..</p>
+                            @endif
                             <a href="/Documents/Cars/{{ $Document->VehicleNumber }}/{{ $Document_->CertificateOfRoadWorthiness }}" target="blank">
                                 {{ $Document_->CertificateOfRoadWorthiness }}
                             </a>
+                            <button class="action-x delete-document-btn">Delete</button>
+                            <span class="Hide">{{ $Document_->VehicleNumber }}</span>
+                            <span class="Hide">{{ $Document_->CertificateOfRoadWorthiness }}</span>
                         </div>
                     @endforeach
                     @foreach ($CarDocuments_INSURANCE_CERTIFICATE as $Document_)
                         <div class="document">
+                            @if (empty($Document_->InsuranceCertificate))
+                                <p>No File..</p>
+                            @endif
                             <a href="/Documents/Cars/{{ $Document->VehicleNumber }}/{{ $Document_->InsuranceCertificate }}" target="blank">
                                 {{ $Document_->InsuranceCertificate }}
                             </a>
+                            <button class="action-x delete-document-btn">Delete</button>
+                            <span class="Hide">{{ $Document_->VehicleNumber }}</span>
+                            <span class="Hide">{{ $Document_->InsuranceCertificate }}</span>
                         </div>
                     @endforeach
                 </td>
@@ -175,5 +216,8 @@
             @endforeach
         </table>
         {{ $Cars->onEachSide(5)->links() }}
+        @unless (count($Cars) > 0)
+        @include('Includes.EmptyProjectTemplate') 
+        @endunless
     </div>
 @endsection

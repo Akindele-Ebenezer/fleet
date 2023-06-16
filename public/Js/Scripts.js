@@ -17,6 +17,7 @@ CardManagement.forEach(NavWrapper => {
 let ModalVehicleData = document.querySelector('.modal-vehicle-data');
 let CancelModalIcons = document.querySelectorAll('.cancel-modal');
 let ActionButtons = document.querySelectorAll('.show-record-button');
+let OpenDocumentButtons = document.querySelectorAll('.open-document');
 
 let Deposits_X = document.querySelector('.Deposits_X');
 let Refueling_X = document.querySelector('.Refueling_X');
@@ -141,11 +142,24 @@ ActionButtons.forEach(ActionButton => {
     });
 });
 
+OpenDocumentButtons.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Cars/Documents?FilterValue=' + Button.nextElementSibling.textContent;
+    });
+});
+
 let MaintenanceRouteButton = document.querySelectorAll('.maintenance-route');
 let RefuelingRouteButton = document.querySelectorAll('.refueling-route'); 
 let DepositsRouteButton = document.querySelectorAll('.deposits-route');
 let DepositsRouteEditButton = document.querySelectorAll('.deposits-route-edit');
 let CarsRouteButton = document.querySelectorAll('.cars-route');
+let CarsRegistrationRouteButton = document.querySelectorAll('.cars-registration-route');
+
+CarsRegistrationRouteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Cars/Registration';
+    });
+});
 
 MaintenanceRouteButton.forEach(Button => {
     Button.addEventListener('click', () => {

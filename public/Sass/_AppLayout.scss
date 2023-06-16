@@ -367,6 +367,9 @@
                                 }
                             }
                         }
+                    .open-document {
+                        background: $Color-2;
+                    }
                     }
                 }
 
@@ -466,16 +469,24 @@
                 div {
                     color: #ddd;
 
-                    a {
+                    a, p {
                         color: #ddd;
                         text-decoration: underline;
                     } 
                 } 
 
                 .document {
+                    align-items: center;
                     border-bottom: 1px solid #333;
+                    display: flex;
+                    justify-content: space-between;
                     height: 4em;
                     padding-block: .5em;
+
+                    button {
+                        background-color: $Color-2;
+                        margin: unset;
+                    }
 
                     &:hover {
                         background: #333;

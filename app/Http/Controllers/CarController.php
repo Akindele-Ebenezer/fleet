@@ -68,22 +68,59 @@ class CarController extends Controller
 
     public function car_documents() {
         $Config = self::config();
+
+        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
+            $FilterValue = trim(str_replace(' ', '', $_GET['FilterValue'])); 
+            $Cars = Car::whereNotNull('VehicleNumber')
+                        ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Model', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('SubModel', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('GearType', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('EngineType', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('EngineNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('ChassisNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('ModelYear', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('EngineVolume', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Comments', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('PurchaseDate', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Price', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Supplier', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('CarOwner', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Driver', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('MonthlyBudget', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('CompanyCode', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('TotalDeposits', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('TotalRefueling', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Balance', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('PinCode', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('StopDate', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('LicenceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('InsuranceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('FuelTankCapacity', 'LIKE', '%' . $FilterValue . '%')
+                        ->paginate(7);
+ 
+                        $Cars->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Documents.Cars.Documents', $Config)->with('Cars', $Cars);
+        } 
         return view('Documents.Cars.Documents', $Config);
     }
 
-    public function car_documents_update($VehicleNumber) {
-        
+    public function car_documents_update($VehicleNumber, Request $request) {
         if (
             $request->hasFile('RegistrationCertificate')  
         ) {
-            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            $DestinationPath = public_path().'/Documents/Cars/' . $VehicleNumber;
             File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
     
             $RegistrationCertificateFile = $request->file('RegistrationCertificate');  
      
             \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
             ->update([
-                'VehicleNumber' => $request->VehicleNumber_CAR,
+                'VehicleNumber' => $VehicleNumber,
                 'RegistrationCertificate' => $RegistrationCertificateFile->getClientOriginalName(),
                 'RegistrationCertificateSize' => $RegistrationCertificateFile->getSize() / 1024, 
             ]);
@@ -94,14 +131,14 @@ class CarController extends Controller
         if ( 
             $request->hasFile('DrivingLicence') 
         ) {
-            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            $DestinationPath = public_path().'/Documents/Cars/' . $VehicleNumber;
             File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
      
             $DrivingLicenceFile = $request->file('DrivingLicence');   
      
             \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
             ->update([
-                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'VehicleNumber' => $VehicleNumber, 
                 'DrivingLicence' => $DrivingLicenceFile->getClientOriginalName(),
                 'DrivingLicenceSize' => $DrivingLicenceFile->getSize() / 1024, 
             ]);
@@ -112,14 +149,15 @@ class CarController extends Controller
         if ( 
             $request->hasFile('PUCCertificate')  
         ) {
-            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            $DestinationPath = public_path().'/Documents/Cars/' . $VehicleNumber;
             File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
      
             $PUCCertificateFile = $request->file('PUCCertificate');  
      
             \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
             ->update([
-                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'VehicleNumber' => $VehicleNumber, 
+                'PUCCertificate' => $PUCCertificateFile->getClientOriginalName(),
                 'PUCCertificateSize' => $PUCCertificateFile->getSize() / 1024, 
             ]);
      
@@ -129,14 +167,14 @@ class CarController extends Controller
         if ( 
             $request->hasFile('ProofOfOwnership') 
         ) {
-            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            $DestinationPath = public_path().'/Documents/Cars/' . $VehicleNumber;
             File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
      
             $ProofOfOwnershipFile = $request->file('ProofOfOwnership');  
      
             \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
             ->update([
-                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'VehicleNumber' => $VehicleNumber, 
                 'ProofOfOwnership' => $ProofOfOwnershipFile->getClientOriginalName(), 
                 'ProofOfOwnershipSize' => $ProofOfOwnershipFile->getSize() / 1024, 
             ]);
@@ -147,14 +185,14 @@ class CarController extends Controller
         if ( 
             $request->hasFile('CertificateOfRoadWorthiness') 
         ) {
-            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            $DestinationPath = public_path().'/Documents/Cars/' . $VehicleNumber;
             File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
      
             $CertificateOfRoadWorthinessFile = $request->file('CertificateOfRoadWorthiness');  
      
             \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
             ->update([
-                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'VehicleNumber' => $VehicleNumber, 
                 'CertificateOfRoadWorthiness' => $CertificateOfRoadWorthinessFile->getClientOriginalName(), 
                 'CertificateOfRoadWorthinessSize' => $CertificateOfRoadWorthinessFile->getSize() / 1024, 
             ]);
@@ -165,20 +203,74 @@ class CarController extends Controller
         if ( 
             $request->hasFile('InsuranceCertificate') 
         ) {
-            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            $DestinationPath = public_path().'/Documents/Cars/' . $VehicleNumber;
             File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
      
             $InsuranceCertificateFile = $request->file('InsuranceCertificate');  
      
             \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
             ->update([
-                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'VehicleNumber' => $VehicleNumber, 
                 'InsuranceCertificate' => $InsuranceCertificateFile->getClientOriginalName(), 
                 'InsuranceCertificateSize' => $InsuranceCertificateFile->getSize() / 1024,
             ]); 
 
             $InsuranceCertificateFile->move($DestinationPath, $InsuranceCertificateFile->getClientOriginalName());
         }
+
+        return back(); 
+    }
+
+    public function car_documents_delete($Car, $Document) {   
+        \DB::table('car_documents')
+            ->where('VehicleNumber', $Car)
+            ->where('RegistrationCertificate', $Document) 
+                ->update([ 
+                    'RegistrationCertificate' => '', 
+                    'RegistrationCertificateSize' => '0', 
+                ]); 
+
+        \DB::table('car_documents')
+        ->where('VehicleNumber', $Car)
+        ->where('DrivingLicence', $Document) 
+            ->update([ 
+                'DrivingLicence' => '', 
+                'DrivingLicenceSize' => '0', 
+            ]); 
+
+        \DB::table('car_documents')
+        ->where('VehicleNumber', $Car)
+        ->where('PUCCertificate', $Document) 
+            ->update([ 
+                'PUCCertificate' => '', 
+                'PUCCertificateSize' => '0', 
+            ]); 
+
+        \DB::table('car_documents')
+        ->where('VehicleNumber', $Car)
+        ->where('ProofOfOwnership', $Document) 
+            ->update([ 
+                'ProofOfOwnership' => '', 
+                'ProofOfOwnershipSize' => '0', 
+            ]); 
+
+        \DB::table('car_documents')
+        ->where('VehicleNumber', $Car)
+        ->where('CertificateOfRoadWorthiness', $Document) 
+            ->update([ 
+                'CertificateOfRoadWorthiness' => '', 
+                'CertificateOfRoadWorthinessSize' => '0', 
+            ]); 
+
+        \DB::table('car_documents')
+        ->where('VehicleNumber', $Car)
+        ->where('InsuranceCertificate', $Document) 
+            ->update([ 
+                'InsuranceCertificate' => '', 
+                'InsuranceCertificateSize' => '0', 
+            ]); 
+
+        return back();
     }
 
     public function car_owners()

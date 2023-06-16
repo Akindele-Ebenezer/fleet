@@ -828,6 +828,9 @@ svg {
 .report-inner .table.list .car-info .info-inner .inner-x span:last-of-type {
   color: #ccc;
 }
+.report-inner .table.list .car-info .info-inner .open-document {
+  background: #DF2E38;
+}
 .report-inner .table.list .refueling,
 .report-inner .table.list .balance {
   text-align: center;
@@ -905,14 +908,21 @@ svg {
 .report-inner .table td div {
   color: #ddd;
 }
-.report-inner .table td div a {
+.report-inner .table td div a, .report-inner .table td div p {
   color: #ddd;
   text-decoration: underline;
 }
 .report-inner .table td .document {
+  align-items: center;
   border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
   height: 4em;
   padding-block: 0.5em;
+}
+.report-inner .table td .document button {
+  background-color: #DF2E38;
+  margin: unset;
 }
 .report-inner .table td .document:hover {
   background: #333;

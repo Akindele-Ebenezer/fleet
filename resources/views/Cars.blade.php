@@ -68,11 +68,12 @@
                                         <span>{{ $Car->PurchaseDate }}</span>
                                     </div>
                                 </div>
+                                <button class="action-x open-document">document</button>
+                                <span class="Hide">{{$Car->VehicleNumber }}</span>
                             </div>
                             <div class="stats-heading">
                                 <h2>STATS</h2>
                                 <button class="action-x show-record-button">action</button>
-                                {{-- <span class="Deposits_X_DATA Hide">₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</span> --}}
                                 <span class="Deposits_X_DATA Hide">₦ {{ empty($TotalDeposits) ? '0.00' : number_format($TotalDeposits) }}</span>
                                 {{-- <span class="Refueling_X_DATA Hide">₦ {{ empty($Car->TotalRefueling) ? '' : number_format($Car->TotalRefueling) }}</span> --}}
                                 <span class="Deposits_X_DATA Hide">₦ {{ empty($TotalRefueling) ? '0.00' : number_format($TotalRefueling) }}</span>
@@ -178,5 +179,8 @@
             </div>
             {{ $Cars->onEachSide(1)->links() }}
         </table> 
+        @unless (count($Cars) > 0)
+        @include('Includes.EmptyProjectTemplate') 
+        @endunless
     </div>
 @endsection

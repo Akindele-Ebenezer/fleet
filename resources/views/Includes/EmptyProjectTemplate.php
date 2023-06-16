@@ -24,7 +24,27 @@
         <div class="empty-records" style="background: url('/Images/<?= $_SERVER['REQUEST_URI'] === '/Users' ? 'users.jpg' : '' ?><?= $_SERVER['REQUEST_URI'] != '/Users' ? 'empty-records.png' : '' ?>')"></div> 
         <div class="empty-records-2">
             <p>
-            <?php if (!(isset($_GET['Filter']) || isset($_GET['FilterValue']) || isset($_GET['Filter_All_Maintenance']) || isset($_GET['Filter_All_Deposits']) || isset($_GET['Filter_All_Refueling']) || isset($_GET['Filter_Maintenance_Yearly']) || isset($_GET['Filter_Deposits_Yearly']) || isset($_GET['Filter_Refueling_Yearly']) || isset($_GET['Filter_Maintenance_Range']) || isset($_GET['Filter_Deposits_Range']) || isset($_GET['Filter_Refueling_Range']) || $_SERVER['REQUEST_URI'] === '/Users')) : ?>   
+            <?php if ($_SERVER['REQUEST_URI'] === '/Cars') : ?>   
+            <strong>NO CARS IN FLEET DB</strong>
+            <br>
+                Looks like no cars have been registered.. 
+                <br>
+                There is no car available.
+                <br><br>
+                <button class="cars-registration-route">Register</button>
+            </p>  
+            <?php endif; ?>  
+            <?php if ($_SERVER['REQUEST_URI'] === '/Cars/Documents') : ?>   
+            <strong>THERE ARE NO DOCUMENTS IN FLEET DB</strong>
+            <br>
+                Looks like no cars have been registered.. 
+                <br>
+                There is no document available.
+                <br><br>
+                <button class="cars-registration-route">Register</button>
+            </p>  
+            <?php endif; ?>  
+            <?php if (!(isset($_GET['Filter']) || isset($_GET['FilterValue']) || isset($_GET['Filter_All_Maintenance']) || isset($_GET['Filter_All_Deposits']) || isset($_GET['Filter_All_Refueling']) || isset($_GET['Filter_Maintenance_Yearly']) || isset($_GET['Filter_Deposits_Yearly']) || isset($_GET['Filter_Refueling_Yearly']) || isset($_GET['Filter_Maintenance_Range']) || isset($_GET['Filter_Deposits_Range']) || isset($_GET['Filter_Refueling_Range']) || $_SERVER['REQUEST_URI'] === '/Cars' || $_SERVER['REQUEST_URI'] === '/Users' || $_SERVER['REQUEST_URI'] === '/Cars/Documents')) : ?>   
             <strong>YOU DON'T HAVE SAVED JOBS YET</strong>
             <br>
                 Make it easier to track daily reports by 

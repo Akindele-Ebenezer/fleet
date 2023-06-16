@@ -28,8 +28,8 @@ Route::get('/Cars/Owners', [CarController::class, 'car_owners'])->name('CarOwner
 Route::get('/Cars/Report', [CarController::class, 'vehicle_report'])->name('VehicleReport'); 
 
 Route::get('/Cars/Documents', [CarController::class, 'car_documents'])->name('Documents');
-Route::get('/Update/Documents/Car/{Car}', [CarController::class, 'car_documents_update'])->name('UpdateCarDocuments');
-Route::get('/Delete/Documents/Car/{Car}', [CarController::class, 'car_documents_delete'])->name('DeleteCarDocuments');
+Route::post('/Update/Documents/Car/{Car}', [CarController::class, 'car_documents_update'])->name('UpdateCarDocuments');
+Route::post('/Delete/Documents/Car/{Car}/{Document}', [CarController::class, 'car_documents_delete'])->name('DeleteCarDocuments');
 
 Route::post('/Add/Car/{Car}', [CarController::class, 'store'])->name('store_MyRecords'); 
 Route::get('/Update/Car/{Car}', [CarController::class, 'update'])->name('UpdateCar');

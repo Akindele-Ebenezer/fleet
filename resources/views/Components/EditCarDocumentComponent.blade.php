@@ -79,8 +79,10 @@
                     <p>Upload file</p>
                 </label>
             </div>   
+            @csrf
         </form>
-        <button class="EditCarDocument">+ Edit Document</button>
-        <button class="DeleteCarDocument">- Delete Document</button>
+        <button class="EditCarDocument">+ Edit Document</button> 
+        
+        <form class="DeleteCarDocumentForm Hide"><@csrf</form>
     </div>
 </div>
