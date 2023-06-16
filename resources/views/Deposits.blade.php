@@ -63,7 +63,7 @@
             $Date_from_MasterCard = \App\Models\DepositsMasterCard::select('Date')->whereNotNull('Date')->orderBy('Date', 'ASC')->first();
         @endphp
         <div class="total-spent">
-            <p>Total (Vehicle Card) Deposits from "{{ $Date_from->Date }}" till date = ₦ {{ number_format($SumOfCarDeposits) }}</p>
+            <p>Total (Vehicle Card) Deposits from "{{ $Date_from->Date ?? 'NULL' }}" till date = ₦ {{ number_format($SumOfCarDeposits) }}</p>
         </div>
         @endif
         @isset($_GET['Filter_All_Deposits'])
