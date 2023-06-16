@@ -83,7 +83,7 @@
             $Date_from = \App\Models\Refueling::select('Date')->whereNotNull('Date')->orderBy('Date', 'ASC')->first();
         @endphp
         <div class="total-spent">
-            <p>Total amount spent on Refueling from "{{ $Date_from->Date }}" till date = ₦ {{ number_format($SumOfCarRefueling) }}</p>
+            <p>Total amount spent on Refueling from "{{ $Date_from->Date ?? 'NULL' }}" till date = ₦ {{ number_format($SumOfCarRefueling) }}</p>
         </div>
         @endif
         @isset($_GET['Filter_All_Refueling'])

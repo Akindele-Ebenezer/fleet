@@ -75,7 +75,7 @@
             $Date_from = \App\Models\Maintenance::select('Date')->whereNotNull('Date')->orderBy('Date', 'ASC')->first();
         @endphp
         <div class="total-spent">
-            <p>Total amount spent on Maintenance from "{{ $Date_from->Date }}" till date = ₦ {{ number_format($SumOfCarMaintenance) }}</p>
+            <p>Total amount spent on Maintenance from "{{ $Date_from->Date ?? 'NULL' }}" till date = ₦ {{ number_format($SumOfCarMaintenance) }}</p>
         </div>
         @endif
         @isset($_GET['Filter_All_Maintenance'])
