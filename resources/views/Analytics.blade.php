@@ -72,7 +72,7 @@
     $NumberOfCars_DEPOSITS = count($NumberOfCars_DEPOSITS_); 
 
     function get_average_cost($Sum, $Count) {
-        $Result = $Sum / $Count;
+        $Result = $Count === 0 ? 0 : $Sum / $Count;
         $Result = get_fleet_survey_currency_in_dollars($Result);
         return $Result; 
     }
