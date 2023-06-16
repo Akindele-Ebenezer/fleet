@@ -129,6 +129,7 @@ class CardController extends Controller
             'MonthlyBudget' => $request->MonthlyBudget, 
             'Balance' => $request->Balance, 
             'Status' => $request->Status,  
+            'Vendor' => $request->Vendor,  
             'UserId' => request()->session()->get('Id'),  
         ]);
 
@@ -183,6 +184,7 @@ class CardController extends Controller
             'MonthlyBudget' => $request->MonthlyBudget, 
             'Balance' => $request->Balance, 
             'Status' => $request->Status,    
+            'Vendor' => $request->Vendor,  
         ]);
 
         return back();  

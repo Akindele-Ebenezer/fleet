@@ -148,6 +148,11 @@
                     display: flex;
                 }
 
+                input[type=file]::file-selector-button { 
+                    display: none;
+                }
+
+
                 input, select {
                     background: #222;
                     border: none;
@@ -158,6 +163,11 @@
                     outline: none;
                     padding: 0.5em;
                     width: 90%;
+                }
+
+                .file-x p {
+                    color: #ddd;
+                    text-align: right;
                 }
 
                 select {

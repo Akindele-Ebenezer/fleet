@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('MonthlyBudget')->nullable();
             $table->string('Balance')->nullable();
             $table->string('Status')->nullable();
+            $table->string('Vendor')->nullable();
             $table->string('UserId')->nullable();
             $table->timestamps();
         });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request; 
 use AmrShawky\LaravelCurrency\Facade\Currency;
+use File;
 
 class CarController extends Controller
 {
@@ -13,10 +14,11 @@ class CarController extends Controller
         $Cars__MyRecords = Car::whereNotNull('VehicleNumber')->selectRaw("*, TRIM(VehicleNumber) AS VehicleNumber")->where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7); 
         \DB::statement("SET SQL_MODE=''");
         $CarOwners = Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, TRIM(VehicleNumber) AS VehicleNumber")->groupBy('CarOwner')->paginate(7); 
+
         return [
             'Cars' => $Cars,
             'Cars__MyRecords' => $Cars__MyRecords, 
-            'CarOwners' => $CarOwners,
+            'CarOwners' => $CarOwners, 
         ];
     }
 
@@ -62,6 +64,121 @@ class CarController extends Controller
         } 
 
         return view('Cars', $Config);
+    }
+
+    public function car_documents() {
+        $Config = self::config();
+        return view('Documents.Cars.Documents', $Config);
+    }
+
+    public function car_documents_update($VehicleNumber) {
+        
+        if (
+            $request->hasFile('RegistrationCertificate')  
+        ) {
+            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
+    
+            $RegistrationCertificateFile = $request->file('RegistrationCertificate');  
+     
+            \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber_CAR,
+                'RegistrationCertificate' => $RegistrationCertificateFile->getClientOriginalName(),
+                'RegistrationCertificateSize' => $RegistrationCertificateFile->getSize() / 1024, 
+            ]);
+    
+            $RegistrationCertificateFile->move($DestinationPath, $RegistrationCertificateFile->getClientOriginalName()); 
+        }
+        
+        if ( 
+            $request->hasFile('DrivingLicence') 
+        ) {
+            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
+     
+            $DrivingLicenceFile = $request->file('DrivingLicence');   
+     
+            \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'DrivingLicence' => $DrivingLicenceFile->getClientOriginalName(),
+                'DrivingLicenceSize' => $DrivingLicenceFile->getSize() / 1024, 
+            ]);
+     
+            $DrivingLicenceFile->move($DestinationPath, $DrivingLicenceFile->getClientOriginalName());  
+        }
+        
+        if ( 
+            $request->hasFile('PUCCertificate')  
+        ) {
+            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
+     
+            $PUCCertificateFile = $request->file('PUCCertificate');  
+     
+            \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'PUCCertificateSize' => $PUCCertificateFile->getSize() / 1024, 
+            ]);
+     
+            $PUCCertificateFile->move($DestinationPath, $PUCCertificateFile->getClientOriginalName()); 
+        }
+        
+        if ( 
+            $request->hasFile('ProofOfOwnership') 
+        ) {
+            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
+     
+            $ProofOfOwnershipFile = $request->file('ProofOfOwnership');  
+     
+            \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'ProofOfOwnership' => $ProofOfOwnershipFile->getClientOriginalName(), 
+                'ProofOfOwnershipSize' => $ProofOfOwnershipFile->getSize() / 1024, 
+            ]);
+     
+            $ProofOfOwnershipFile->move($DestinationPath, $ProofOfOwnershipFile->getClientOriginalName()); 
+        }
+        
+        if ( 
+            $request->hasFile('CertificateOfRoadWorthiness') 
+        ) {
+            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
+     
+            $CertificateOfRoadWorthinessFile = $request->file('CertificateOfRoadWorthiness');  
+     
+            \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'CertificateOfRoadWorthiness' => $CertificateOfRoadWorthinessFile->getClientOriginalName(), 
+                'CertificateOfRoadWorthinessSize' => $CertificateOfRoadWorthinessFile->getSize() / 1024, 
+            ]);
+     
+            $CertificateOfRoadWorthinessFile->move($DestinationPath, $CertificateOfRoadWorthinessFile->getClientOriginalName());  
+        }
+        
+        if ( 
+            $request->hasFile('InsuranceCertificate') 
+        ) {
+            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
+     
+            $InsuranceCertificateFile = $request->file('InsuranceCertificate');  
+     
+            \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'InsuranceCertificate' => $InsuranceCertificateFile->getClientOriginalName(), 
+                'InsuranceCertificateSize' => $InsuranceCertificateFile->getSize() / 1024,
+            ]); 
+
+            $InsuranceCertificateFile->move($DestinationPath, $InsuranceCertificateFile->getClientOriginalName());
+        }
     }
 
     public function car_owners()
@@ -209,7 +326,108 @@ class CarController extends Controller
      * Store a newly created resource in storage.
      */
     public function store($Car, Request $request)
-    {  
+    {   
+        if (
+            $request->hasFile('RegistrationCertificate')  
+        ) {
+            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
+    
+            $RegistrationCertificateFile = $request->file('RegistrationCertificate');  
+     
+            \DB::table('car_documents')->insert([
+                'VehicleNumber' => $request->VehicleNumber_CAR,
+                'RegistrationCertificate' => $RegistrationCertificateFile->getClientOriginalName(),
+                'RegistrationCertificateSize' => $RegistrationCertificateFile->getSize() / 1024, 
+            ]);
+    
+            $RegistrationCertificateFile->move($DestinationPath, $RegistrationCertificateFile->getClientOriginalName()); 
+        }
+        
+        if ( 
+            $request->hasFile('DrivingLicence') 
+        ) {
+            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
+     
+            $DrivingLicenceFile = $request->file('DrivingLicence');   
+     
+            \DB::table('car_documents')->insert([
+                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'DrivingLicence' => $DrivingLicenceFile->getClientOriginalName(),
+                'DrivingLicenceSize' => $DrivingLicenceFile->getSize() / 1024, 
+            ]);
+     
+            $DrivingLicenceFile->move($DestinationPath, $DrivingLicenceFile->getClientOriginalName());  
+        }
+        
+        if ( 
+            $request->hasFile('PUCCertificate')  
+        ) {
+            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
+     
+            $PUCCertificateFile = $request->file('PUCCertificate');  
+     
+            \DB::table('car_documents')->insert([
+                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'PUCCertificateSize' => $PUCCertificateFile->getSize() / 1024, 
+            ]);
+     
+            $PUCCertificateFile->move($DestinationPath, $PUCCertificateFile->getClientOriginalName()); 
+        }
+        
+        if ( 
+            $request->hasFile('ProofOfOwnership') 
+        ) {
+            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
+     
+            $ProofOfOwnershipFile = $request->file('ProofOfOwnership');  
+     
+            \DB::table('car_documents')->insert([
+                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'ProofOfOwnership' => $ProofOfOwnershipFile->getClientOriginalName(), 
+                'ProofOfOwnershipSize' => $ProofOfOwnershipFile->getSize() / 1024, 
+            ]);
+     
+            $ProofOfOwnershipFile->move($DestinationPath, $ProofOfOwnershipFile->getClientOriginalName()); 
+        }
+        
+        if ( 
+            $request->hasFile('CertificateOfRoadWorthiness') 
+        ) {
+            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
+     
+            $CertificateOfRoadWorthinessFile = $request->file('CertificateOfRoadWorthiness');  
+     
+            \DB::table('car_documents')->insert([
+                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'CertificateOfRoadWorthiness' => $CertificateOfRoadWorthinessFile->getClientOriginalName(), 
+                'CertificateOfRoadWorthinessSize' => $CertificateOfRoadWorthinessFile->getSize() / 1024, 
+            ]);
+     
+            $CertificateOfRoadWorthinessFile->move($DestinationPath, $CertificateOfRoadWorthinessFile->getClientOriginalName());  
+        }
+        
+        if ( 
+            $request->hasFile('InsuranceCertificate') 
+        ) {
+            $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
+            File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
+     
+            $InsuranceCertificateFile = $request->file('InsuranceCertificate');  
+     
+            \DB::table('car_documents')->insert([
+                'VehicleNumber' => $request->VehicleNumber_CAR, 
+                'InsuranceCertificate' => $InsuranceCertificateFile->getClientOriginalName(), 
+                'InsuranceCertificateSize' => $InsuranceCertificateFile->getSize() / 1024,
+            ]); 
+
+            $InsuranceCertificateFile->move($DestinationPath, $InsuranceCertificateFile->getClientOriginalName());
+        }
+        
         Car::insert([
             'VehicleNumber' => $request->VehicleNumber_CAR,
             'Maker' => $request->Maker,
@@ -236,6 +454,7 @@ class CarController extends Controller
             'Balance' => $request->Balance, 
             'PinCode' => $request->PinCode, 
             'Status' => $request->Status,
+            'CardVendor' => $request->Vendor,
             'StopDate' => $request->StopDate,
             'LicenceExpiryDate' => $request->LicenceExpiryDate,
             'InsuranceExpiryDate' => $request->InsuranceExpiryDate,
@@ -292,6 +511,7 @@ class CarController extends Controller
                 'Balance' => $request->Balance,
                 'PinCode' => $request->PinCode, 
                 'Status' => $request->Status,
+                'CardVendor' => $request->Vendor,
                 'StopDate' => $request->StopDate,
                 'LicenceExpiryDate' => $request->LicenceExpiryDate,
                 'InsuranceExpiryDate' => $request->InsuranceExpiryDate,

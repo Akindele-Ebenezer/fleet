@@ -85,6 +85,7 @@ let EditFleetCardForm_X = document.querySelector('.EditFleetCardForm');
 let MonthlyBudget_X = document.querySelector('.MonthlyBudget_X');
 let FleetCardId_X = document.querySelector('.FleetCardId_X');
 let VehicleNumber_X = document.querySelector('.VehicleNumber_X');
+let CardVendor_X = document.querySelector('.CardVendor_X');
 let EditFleetCard = document.querySelector('.EditFleetCard');
 let DeleteFleetCard = document.querySelector('.DeleteFleetCard');
  
@@ -100,6 +101,7 @@ ManageButton.forEach(Button => {
         Status_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         FleetCardId_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         VehicleNumber_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        CardVendor_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
     }); 
 
     EditFleetCard.addEventListener('click', () => {
@@ -131,6 +133,7 @@ let EditMasterCardForm = document.querySelector('.edit-master-card-form');
 let EditMasterCardForm_X = document.querySelector('.EditMasterCardForm');
  
 let MasterCardId_X = document.querySelector('.MasterCardId_X');
+let CardVendor_MasterCard_X = document.querySelector('.CardVendor_MasterCard_X');
 let EditMasterCard = document.querySelector('.EditMasterCard');
 let DeleteMasterCard = document.querySelector('.DeleteMasterCard');
 
@@ -162,6 +165,7 @@ ManageMasterCardButton.forEach(Button => {
         Balance_MasterCard_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Status_MasterCard_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         MasterCardId_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        CardVendor_MasterCard_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
     }); 
 
     EditMasterCard.addEventListener('click', () => {

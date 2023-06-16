@@ -5,13 +5,13 @@
         <table class="table table-2 list" id="Table">
             <tr class="table-head">
                 {{-- <th onclick="sortTable(0)">#ID</th> --}}
-                <th onclick="sortTable(1)">Card Infomation</th> 
-                <th onclick="sortTable(2)">Monthly Budget</th> 
-                <th onclick="sortTable(3)">Deposits</th> 
-                <th onclick="sortTable(4)">Refueling</th> 
-                <th onclick="sortTable(5)">Balance</th> 
-                <th onclick="sortTable(6)">Brought Forward</th> 
-                <th onclick="sortTable(7)"></th> 
+                <th onclick="sortTable(0)">Card Infomation</th> 
+                <th onclick="sortTable(1)">Monthly Budget</th> 
+                <th onclick="sortTable(2)">Deposits</th> 
+                <th onclick="sortTable(3)">Refueling</th> 
+                <th onclick="sortTable(4)">Balance</th> 
+                <th onclick="sortTable(5)">Brought Forward</th> 
+                <th onclick="sortTable(6)"></th> 
             </tr> 
             @php 
                 $CardManagement_USER = \DB::table('user_privileges')
@@ -30,7 +30,7 @@
                                 <h1 class="card-number">{{ $MasterCard->CardNumber }}</h1> 
                                 <span class="type">Master Card</span>
                                 <span class="{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br>
-                                <span class="used-by">MASTER</span>  {{ $MasterCard->Date }}
+                                <span class="used-by">MASTER</span>  {{ $MasterCard->Date }} :: {{ $MasterCard->Vendor }}
                             </div>   
                         </div>  
                     </div> 
@@ -62,6 +62,7 @@
                     <span class="Hide">{{ $MasterCard->Balance }}</span>
                     <span class="Hide">{{ $MasterCard->Status }}</span>
                     <span class="Hide">{{ $MasterCard->id }}</span>
+                    <span class="Hide">{{ $MasterCard->Vendor }}</span>
                 </td> 
             </tr> 
             @endforeach 
@@ -77,7 +78,7 @@
                                 <span class="type">{{ $Car->Maker . ' :: ' }}{{ $Car->Model ?? 'Fleet Card' }}</span>
                                 <span class="{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br>
                                 <span class="used-by">{{ $Car->VehicleNumber }}</span>
-                                 {{ $Car->DateIn }}
+                                 {{ $Car->DateIn }} :: {{ $Car->CardVendor }}
                             </div>   
                         </div>  
                     </div> 
@@ -110,6 +111,7 @@
                     <span class="Hide">{{ $Car->Status }}</span>
                     <span class="Hide">{{ $Car->id }}</span>
                     <span class="Hide">{{ $Car->VehicleNumber }}</span>
+                    <span class="Hide">{{ $Car->CardVendor }}</span>
                 </td> 
             </tr> 
             @endforeach 

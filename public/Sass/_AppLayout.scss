@@ -459,8 +459,31 @@
             td {
                 color: #eee !important;
 
+                button {
+                    background: $Color-4;
+                }
+
                 div {
                     color: #ddd;
+
+                    a {
+                        color: #ddd;
+                        text-decoration: underline;
+                    } 
+                } 
+
+                .document {
+                    border-bottom: 1px solid #333;
+                    height: 4em;
+                    padding-block: .5em;
+
+                    &:hover {
+                        background: #333;
+                    }
+
+                    span {
+                        color: #ddd;
+                    }
                 }
 
                 &.show-record-x-edit .manage-user {
@@ -536,6 +559,23 @@
                     }
                 }
                 
+                small {
+                    color: #eee;
+                    display: inline-block;
+                    padding-block: .5em;
+                }
+
+                &.td-x:hover {
+                    background-color: #333;
+                }
+
+                &.td-x .x-inner {
+                    align-items: center;
+                    border: unset;
+                    display: flex;
+                    padding: 2em;
+                }
+
                 .car-owner-cars {
                     color: #ddd;
                     height: 5.5em;
@@ -592,6 +632,10 @@
                             background: #42b142;
                         }
                     }
+                } 
+
+                &.td-x {
+                    background: #000;
                 }
             }
 
@@ -604,8 +648,10 @@
             }
 
             th {  
+                background: #222;
                 font-family: system-ui;
                 font-weight: unset;
+                text-align: left;
             }
 
             tr {
@@ -615,6 +661,9 @@
                 //     background: #eee;
                 // }
                 
+                    &.tr-x { 
+                    }
+
                 &.table-head {
                     border: 2px solid #000;
                     position: sticky;

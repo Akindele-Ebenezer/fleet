@@ -167,9 +167,9 @@ DepositsRouteButton.forEach(Button => {
 
 DepositsRouteEditButton.forEach(Button => {
     Button.addEventListener('click', () => {
-        window.location = '/Management/Edit/Fleet/Cards';
+        window.location = '/Management/Fleet/Deposits/Entries';
         
-        if (window.location.href === '/Management/Edit/Fleet/Cards') {
+        if (window.location.href === '/Management/Fleet/Deposits/Entries') {
             let ModalAddMonthlyDeposits = document.querySelector('.add-monthly-deposits-form');
             ModalAddMonthlyDeposits.style.display = 'block';
         }

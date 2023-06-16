@@ -7,6 +7,7 @@
     $Cars_EngineType = DB::table('engine_types')->select('EngineType')->get();
     $Cars_GearType = DB::table('gear_types')->select('GearType')->get();
     $Cars_Organisation = \App\Models\organisation::select(['CompanyCode', 'CompanyName'])->distinct()->get();
+    $CardVendors = DB::table('card_vendors')->select('CardVendors')->get();
 
     $NumberOfCarOwners = \App\Models\Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, VehicleNumber")->groupBy('CarOwner')->get()->count(); 
     $NumberOfFleetUsers = \App\Models\User::select('id')->count();

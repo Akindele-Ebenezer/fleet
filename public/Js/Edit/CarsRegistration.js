@@ -167,6 +167,8 @@ AddCarButton.forEach(Button => {
                 Error.textContent = 'Please fill out vehicle number for new Car';
             } else {
                 AddCarForm.setAttribute('action', '/Add/Car/' + VehicleNumber_CAR.value);
+                AddCarForm.setAttribute('enctype', 'multipart/form-data'); 
+                AddCarForm.setAttribute('method', 'POST'); 
                 AddCarForm.submit();
             }
         });

@@ -43,6 +43,7 @@ return new class extends Migration
             $table->string('PinCode')->nullable();
             $table->string('TotalMaster')->nullable();
             $table->string('Status')->nullable();
+            $table->string('CardVendor')->nullable();
             $table->string('StopDate')->nullable();
             $table->string('LicenceExpiryDate')->nullable();
             $table->string('InsuranceExpiryDate')->nullable();

@@ -291,6 +291,10 @@ button {
   display: block !important;
 }
 
+.TableRow {
+  display: table-row !important;
+}
+
 svg {
   fill: #eee;
   height: 2rem;
@@ -440,6 +444,9 @@ svg {
   color: #fff;
   display: flex;
 }
+.form .inner form .new-car-inputs input[type=file]::file-selector-button {
+  display: none;
+}
 .form .inner form .new-car-inputs input, .form .inner form .new-car-inputs select {
   background: #222;
   border: none;
@@ -450,6 +457,10 @@ svg {
   outline: none;
   padding: 0.5em;
   width: 90%;
+}
+.form .inner form .new-car-inputs .file-x p {
+  color: #ddd;
+  text-align: right;
 }
 .form .inner form .new-car-inputs select option {
   color: #eee;
@@ -888,7 +899,25 @@ svg {
 .report-inner .table td {
   color: #eee !important;
 }
+.report-inner .table td button {
+  background: #3034b5;
+}
 .report-inner .table td div {
+  color: #ddd;
+}
+.report-inner .table td div a {
+  color: #ddd;
+  text-decoration: underline;
+}
+.report-inner .table td .document {
+  border-bottom: 1px solid #333;
+  height: 4em;
+  padding-block: 0.5em;
+}
+.report-inner .table td .document:hover {
+  background: #333;
+}
+.report-inner .table td .document span {
   color: #ddd;
 }
 .report-inner .table td.show-record-x-edit .manage-user {
@@ -948,6 +977,20 @@ svg {
 .report-inner .table td.show-record-x-2 img {
   width: 2em;
 }
+.report-inner .table td small {
+  color: #eee;
+  display: inline-block;
+  padding-block: 0.5em;
+}
+.report-inner .table td.td-x:hover {
+  background-color: #333;
+}
+.report-inner .table td.td-x .x-inner {
+  align-items: center;
+  border: unset;
+  display: flex;
+  padding: 2em;
+}
 .report-inner .table td .car-owner-cars {
   color: #ddd;
   height: 5.5em;
@@ -996,6 +1039,9 @@ svg {
 .report-inner .table td .user-email strong.online {
   background: #42b142;
 }
+.report-inner .table td.td-x {
+  background: #000;
+}
 .report-inner .table td,
 .report-inner .table th {
   background: #111;
@@ -1004,8 +1050,10 @@ svg {
   padding: 0.5rem;
 }
 .report-inner .table th {
+  background: #222;
   font-family: system-ui;
   font-weight: unset;
+  text-align: left;
 }
 .report-inner .table tr {
   border-bottom: 3px solid #000;

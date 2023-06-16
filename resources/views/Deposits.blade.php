@@ -6,14 +6,14 @@
             <h1 class="table-title">VEHICLE CARDS</h1>
             <tr class="table-head">
                 {{-- <th onclick="sortTable(0)">LNO</th> --}}
-                <th onclick="sortTable(1)">Vehicle Number</th>
-                <th onclick="sortTable(2)">Date</th>
-                <th onclick="sortTable(3)">Card No</th>
-                <th onclick="sortTable(4)">Amount</th>
-                <th onclick="sortTable(5)">Year</th>
-                <th onclick="sortTable(6)">Week</th>
-                <th onclick="sortTable(7)">Month</th>
-                <th onclick="sortTable(8)">Comments</th>
+                <th onclick="sortTable(0)">Vehicle Number</th>
+                <th onclick="sortTable(1)">Date</th>
+                <th onclick="sortTable(2)">Card No</th>
+                <th onclick="sortTable(3)">Amount</th>
+                <th onclick="sortTable(4)">Year</th>
+                <th onclick="sortTable(5)">Week</th>
+                <th onclick="sortTable(6)">Month</th>
+                <th onclick="sortTable(7)">Comments</th>
             </tr>
             @unless (count(\App\Models\Deposits::all()) > 0)
             <tr>
@@ -44,14 +44,14 @@
             @endforeach 
             <div class="table-head filter"> 
                 {{-- <span><input type="text" id="SearchInput0" placeholder="Filter By LNO" onkeyup="FilterLNO()"></span>  --}}
-                <span><input type="text" id="SearchInput1" placeholder="Filter By Vehicle no" onkeyup="FilterVehicleNo()"></span> 
-                <span><input type="text" id="SearchInput2" placeholder="Filter By Date" onkeyup="FilterDate()"></span> 
-                <span><input type="text" id="SearchInput3" placeholder="Filter By Card No" onkeyup="FilterCardNo()"></span> 
-                <span><input type="text" id="SearchInput4" placeholder="Filter By Amount" onkeyup="FilterAmount()"></span> 
-                <span><input type="text" id="SearchInput5" placeholder="Filter By Year" onkeyup="FilterYear()"></span> 
-                <span><input type="text" id="SearchInput6" placeholder="Filter By Week " onkeyup="FilterWeek()"></span> 
-                <span><input type="text" id="SearchInput7" placeholder="Filter By Month" onkeyup="FilterMonth()"></span> 
-                <span><input type="text" id="SearchInput8" placeholder="Filter By Comments" onkeyup="FilterComments()"></span> 
+                <span><input type="text" id="SearchInput0" placeholder="Filter By Vehicle no" onkeyup="FilterVehicleNo()"></span> 
+                <span><input type="text" id="SearchInput1" placeholder="Filter By Date" onkeyup="FilterDate()"></span> 
+                <span><input type="text" id="SearchInput2" placeholder="Filter By Card No" onkeyup="FilterCardNo()"></span> 
+                <span><input type="text" id="SearchInput3" placeholder="Filter By Amount" onkeyup="FilterAmount()"></span> 
+                <span><input type="text" id="SearchInput4" placeholder="Filter By Year" onkeyup="FilterYear()"></span> 
+                <span><input type="text" id="SearchInput5" placeholder="Filter By Week " onkeyup="FilterWeek()"></span> 
+                <span><input type="text" id="SearchInput6" placeholder="Filter By Month" onkeyup="FilterMonth()"></span> 
+                <span><input type="text" id="SearchInput7" placeholder="Filter By Comments" onkeyup="FilterComments()"></span> 
             </div>
         </table> 
         {{ $Deposits->onEachSide(5)->links() }}
@@ -81,18 +81,18 @@
             <p>Total amount spent on (Vehicle Card) Deposits for VEHICLE "{{ $_GET['VehicleNo'] }}", from "{{ $_GET['Date_From'] }}" to "{{ $_GET['Date_To'] }}" = ₦ {{ number_format($SumOfCarDeposits) }}</p>
         </div>
         @endisset
-        <table class="table" id="Table">
+        <table class="table" id="Table2">
             <h1 class="table-title">MASTER CARDS</h1>
             <tr class="table-head">
                 {{-- <th onclick="sortTable(0)">LNO</th> --}}
-                <th onclick="sortTable(1)">Card Type</th>
-                <th onclick="sortTable(2)">Date</th>
-                <th onclick="sortTable(3)">Card No</th>
-                <th onclick="sortTable(4)">Amount</th>
-                <th onclick="sortTable(5)">Year</th>
-                <th onclick="sortTable(6)">Week</th>
-                <th onclick="sortTable(7)">Month</th>
-                <th onclick="sortTable(8)">Comments</th>
+                <th onclick="sortTable2(0)">Card Type</th>
+                <th onclick="sortTable2(1)">Date</th>
+                <th onclick="sortTable2(2)">Card No</th>
+                <th onclick="sortTable2(3)">Amount</th>
+                <th onclick="sortTable2(4)">Year</th>
+                <th onclick="sortTable2(5)">Week</th>
+                <th onclick="sortTable2(6)">Month</th>
+                <th onclick="sortTable2(7)">Comments</th>
             </tr>  
             @unless (count(\App\Models\DepositsMasterCard::all()) > 0)
             <tr>
@@ -118,14 +118,14 @@
             @endunless
             <div class="table-head filter"> 
                 {{-- <span><input type="text" id="SearchInput0" placeholder="Filter By LNO" onkeyup="FilterLNO()"></span>  --}}
-                <span><input type="text" id="SearchInput1" placeholder="Filter By Card Type" onkeyup="FilterCardType()"></span> 
-                <span><input type="text" id="SearchInput2" placeholder="Filter By Date" onkeyup="FilterDate()"></span> 
-                <span><input type="text" id="SearchInput3" placeholder="Filter By Card No" onkeyup="FilterCardNo()"></span> 
-                <span><input type="text" id="SearchInput4" placeholder="Filter By Amount" onkeyup="FilterAmount()"></span> 
-                <span><input type="text" id="SearchInput5" placeholder="Filter By Year" onkeyup="FilterYear()"></span> 
-                <span><input type="text" id="SearchInput6" placeholder="Filter By Week " onkeyup="FilterWeek()"></span> 
-                <span><input type="text" id="SearchInput7" placeholder="Filter By Month" onkeyup="FilterMonth()"></span> 
-                <span><input type="text" id="SearchInput8" placeholder="Filter By Comments" onkeyup="FilterComments()"></span> 
+                <span><input type="text" id="SearchInputX0" placeholder="Filter By Card Type" onkeyup="Filter2CardType()"></span> 
+                <span><input type="text" id="SearchInputX1" placeholder="Filter By Date" onkeyup="Filter2Date()"></span> 
+                <span><input type="text" id="SearchInputX2" placeholder="Filter By Card No" onkeyup="Filter2CardNo()"></span> 
+                <span><input type="text" id="SearchInputX3" placeholder="Filter By Amount" onkeyup="Filter2Amount()"></span> 
+                <span><input type="text" id="SearchInputX4" placeholder="Filter By Year" onkeyup="Filter2Year()"></span> 
+                <span><input type="text" id="SearchInputX5" placeholder="Filter By Week " onkeyup="Filter2Week()"></span> 
+                <span><input type="text" id="SearchInputX6" placeholder="Filter By Month" onkeyup="Filter2Month()"></span> 
+                <span><input type="text" id="SearchInputX7" placeholder="Filter By Comments" onkeyup="Filter2Comments()"></span> 
             </div>
         </table>
         {{ $Deposits_MasterCards->onEachSide(5)->links() }}

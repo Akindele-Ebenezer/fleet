@@ -27,7 +27,11 @@ Route::get('/Cars/Registration', [CarController::class, 'my_records_activity'])-
 Route::get('/Cars/Owners', [CarController::class, 'car_owners'])->name('CarOwners');
 Route::get('/Cars/Report', [CarController::class, 'vehicle_report'])->name('VehicleReport'); 
 
-Route::get('/Add/Car/{Car}', [CarController::class, 'store'])->name('store_MyRecords'); 
+Route::get('/Cars/Documents', [CarController::class, 'car_documents'])->name('Documents');
+Route::get('/Update/Documents/Car/{Car}', [CarController::class, 'car_documents_update'])->name('UpdateCarDocuments');
+Route::get('/Delete/Documents/Car/{Car}', [CarController::class, 'car_documents_delete'])->name('DeleteCarDocuments');
+
+Route::post('/Add/Car/{Car}', [CarController::class, 'store'])->name('store_MyRecords'); 
 Route::get('/Update/Car/{Car}', [CarController::class, 'update'])->name('UpdateCar');
 Route::get('/Delete/Car/{Car}', [CarController::class, 'destroy'])->name('DeleteCar');
   
@@ -36,7 +40,7 @@ Route::post('/Add/Maintenance/{Maintenance}', [MaintenanceController::class, 'st
 Route::post('/Update/Maintenance/{Maintenance}', [MaintenanceController::class, 'update'])->name('UpdateMaintenance');
 Route::get('/Delete/Maintenance/{Maintenance}', [MaintenanceController::class, 'destroy'])->name('DeleteMaintenance');
 
-Route::get('/Management/Edit/Fleet/Cards', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
+Route::get('/Management/Fleet/Deposits/Entries', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
 Route::get('/Add/Deposits/{Deposits}', [DepositsController::class, 'store'])->name('store_Deposits'); 
 Route::get('/Update/Deposits/{Deposits}', [DepositsController::class, 'update'])->name('UpdateDeposits');
 Route::get('/Delete/Deposits/{Deposits}/{CardNumber}/{Amount}', [DepositsController::class, 'destroy'])->name('DeleteDeposits');

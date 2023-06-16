@@ -14,8 +14,7 @@
                 <th onclick="sortTable(7)">Quantity</th>
                 <th onclick="sortTable(8)">Amount</th>
                 <th onclick="sortTable(9)">Receipt No</th>
-                <th onclick="sortTable(10)">KM</th>
-                <th onclick="sortTable(11)">[KM/LITER]</th>
+                <th onclick="sortTable(10)">KM</th> 
             </tr>
             @foreach ($Refueling__MyRecords as $Refueling)
             <tr> 
@@ -40,8 +39,7 @@
                 <td>{{ $Refueling->Quantity }}</td>
                 <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
                 <td>{{ $Refueling->ReceiptNumber }}</td>
-                <td>{{ $Refueling->KM }}</td>
-                <td>{{ $Refueling->KMLITER }}</td>
+                <td>{{ $Refueling->KM }}</td> 
                 <td class="Hide">{{ $Refueling->id }}</td>
             </tr> 
             @endforeach  
@@ -56,8 +54,7 @@
                 <span><input type="text" id="SearchInput7" placeholder="Filter By Quantity" onkeyup="FilterQuantity()"></span> 
                 <span><input type="text" id="SearchInput8" placeholder="Filter By Amount " onkeyup="FilterAmount()"></span> 
                 <span><input type="text" id="SearchInput9" placeholder="Filter By Receipt No" onkeyup="FilterReceiptNo()"></span>  
-                <span><input type="text" id="SearchInput10" placeholder="Filter By KM " onkeyup="FilterKM()"></span>  
-                <span><input type="text" id="SearchInput11" placeholder="Filter By [KM/LITER]" onkeyup="FilterKMLITER()"></span>  
+                <span><input type="text" id="SearchInput10" placeholder="Filter By KM " onkeyup="FilterKM()"></span>   
             </div>
         </table>
         {{ $Refueling__MyRecords->onEachSide(5)->links() }}

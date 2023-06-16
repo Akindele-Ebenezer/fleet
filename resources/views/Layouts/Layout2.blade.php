@@ -12,6 +12,7 @@
         {{ Route::is('Analytics') ? 'ANALYTICS' : '' }}
 
         {{ Route::is('Cars') ? 'FLEET DB' : '' }}
+        {{ Route::is('Documents') ? 'DOCUMENTS' : '' }}
         {{ Route::is('CarOwners') ? 'CAR OWNERS' : '' }}
         {{ Route::is('VehicleReport') ? 'REPORT' : '' }}
 
@@ -67,6 +68,12 @@
         @include('Components.VehicleDataComponent')
         @include('Components.EditVehicleDataComponent')
     @endif
+ 
+    @if (Route::is('Documents'))
+        {{-- @include('Components.AddCarDocumentComponent') --}}
+        @include('Components.EditCarDocumentComponent')
+    @endif
+
  
     @if (Route::is('EditMaintenance'))
         @include('Components.AddMaintenanceComponent')
@@ -152,6 +159,12 @@
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"/></svg>                  
                         Cars
                         <span>{{ $NumberOfCars }}</span>
+                    </li>
+                </a>
+                <a href='{{ route('Documents') }}'>
+                    <li class="{{ Route::is('Documents') ? 'active' : '' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"/></svg>                   
+                        Documents
                     </li>
                 </a>
                 <div class="sub-nav-wrapper">
@@ -280,6 +293,7 @@
                         {{ Route::is('Analytics') ? 'FLEET DASHBOARD' : '' }}
 
                         {{ Route::is('Cars') ? 'FLEET DB' : '' }}
+                        {{ Route::is('Documents') ? 'DOCUMENTS' : '' }}
                         {{ Route::is('CarOwners') ? 'CAR OWNERS' : '' }}
                         {{ Route::is('VehicleReport') ? 'REPORT' : '' }}
 
@@ -394,7 +408,7 @@
                             ];
                         }
 
-                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/VehicleReport') {
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Cars/Report') {
                             $SearchInputs = [
                                 "ORG",
                                 "CarNumber", 
@@ -430,9 +444,8 @@
                             ];
                         }
                 
-                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Deposits') {
-                            $SearchInputs = [
-                                "LNO",
+                        if(strtok($_SERVER['REQUEST_URI'], '?') === '/Management/Fleet/Deposits/Entries' || strtok($_SERVER['REQUEST_URI'], '?') === '/Deposits') {
+                            $SearchInputs = [ 
                                 "VehicleNo",
                                 "Date",
                                 "CardNo",
@@ -442,8 +455,19 @@
                                 "Month", 
                                 "Comments", 
                             ];
-                        } 
 
+                            $SearchInputs2 = [ 
+                                "CardType",
+                                "Date",
+                                "CardNo",
+                                "Amount",
+                                "Year",
+                                "Week",
+                                "Month", 
+                                "Comments", 
+                            ];
+                        }  
+                        
                         if(strtok($_SERVER['REQUEST_URI'], '?') === '/Refueling') {
                             $SearchInputs = [
                                 "SN",
@@ -456,8 +480,7 @@
                                 "Quantity", 
                                 "Amount", 
                                 "ReceiptNo", 
-                                "KM", 
-                                "KMLITER", 
+                                "KM",  
                             ];
                         } 
                 
@@ -500,8 +523,7 @@
                                 "Quantity", 
                                 "Amount", 
                                 "ReceiptNo", 
-                                "KM", 
-                                "KMLITER", 
+                                "KM",  
                             ];
                         }
 
@@ -590,7 +612,7 @@
                                                 ->first(); 
                 @endphp
                 <div class="inner">
-                    <button class="action-x {{ (Route::is('Cars_Registration') AND $CarRegistration_USER->CarRegistration ?? 'off' === 'on') ? 'add-car' : 'permission-denied' }}  {{ (Route::is('EditMaintenance') AND $AddMaintenance_USER->AddMaintenance ?? 'off' === 'on') ? 'add-maintenance' : 'permission-denied' }} {{ (Route::is('EditDeposits') AND $MakeDeposits_USER->MakeDeposits ?? 'off' === 'on') ? 'add-monthly-deposits' : 'permission-denied' }} {{ Route::is('EditDeposits_MasterCard') ? 'add-master-card-deposits' : '' }} {{ (Route::is('EditRefueling') AND $FuelManagement_USER->FuelManagement ?? 'off' === 'on') ? 'add-refueling' : 'permission-denied' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Deposits_MasterCard') ? 'cars-route' : '' }} {{ (Route::is('FleetCard') AND $CardManagement_USER->CardManagement ?? 'off' === 'on') ? 'add-fleet-card' : 'permission-denied' }}"> {{ Route::is('Cars_Registration') ? '+ Add Vehicle' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }} {{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }} {{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Deposits_MasterCard') ? 'Explore Cars' : '' }} {{ Route::is('FleetCard') ? '+ New Fleet Card' : '' }}</button><button class="ExportToExcel" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">Export to EXCEL</button>
+                    <button class="action-x {{ (Route::is('Cars_Registration') AND $CarRegistration_USER->CarRegistration ?? 'off' === 'on') ? 'add-car' : 'permission-denied' }}  {{ (Route::is('EditMaintenance') AND $AddMaintenance_USER->AddMaintenance ?? 'off' === 'on') ? 'add-maintenance' : 'permission-denied' }} {{ (Route::is('EditDeposits') AND $MakeDeposits_USER->MakeDeposits ?? 'off' === 'on') ? 'add-monthly-deposits' : 'permission-denied' }} {{ Route::is('EditDeposits_MasterCard') ? 'add-master-card-deposits' : '' }} {{ (Route::is('EditRefueling') AND $FuelManagement_USER->FuelManagement ?? 'off' === 'on') ? 'add-refueling' : 'permission-denied' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Documents') ? 'cars-route' : '' }} {{ (Route::is('FleetCard') AND $CardManagement_USER->CardManagement ?? 'off' === 'on') ? 'add-fleet-card' : 'permission-denied' }}"> {{ Route::is('Cars_Registration') ? '+ Add Vehicle' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }} {{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }} {{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Documents') ? 'Explore Cars' : '' }} {{ Route::is('FleetCard') ? '+ New Fleet Card' : '' }}</button><button class="ExportToExcel" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">Export to EXCEL</button>
                 </div>
             </div> 
             @endunless
@@ -599,9 +621,7 @@
     </div> 
     <script src="{{ asset('Js/SortTables.js') }}"></script>
     @unless (Route::is('Analytics'))
-    <script>
-        // let NumberOfTableHeads = document.querySelectorAll('th').length;
-
+    <script> 
         @for($i = 0; $i < count($SearchInputs); $i++)
             function Filter{{ $SearchInputs[$i] }}() {
                 var input, filter, table, tr, td, i, txtValue;
@@ -621,9 +641,62 @@
                     }       
                 }
             }
-        @endfor
+        @endfor 
+ 
+        @if(Route::is('EditDeposits') || Route::is('Deposits'))  
+            @for($i = 0; $i < count($SearchInputs); $i++)
+                function Filter{{ $SearchInputs[$i] }}() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("SearchInput{{ $i }}");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("Table");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[{{ $i }}];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }       
+                    }
+                }
+            @endfor 
+
+            @for($i = 0; $i < count($SearchInputs2); $i++)
+                function Filter2{{ $SearchInputs2[$i] }}() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("SearchInputX{{ $i }}");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("Table2");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[{{ $i }}];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }       
+                    }
+                }
+            @endfor
+        @endif
         </script>
         @endunless 
+        @if (Route::is('Documents'))
+            <script src="{{ asset('Js/Edit/Documents/Cars.js') }}"></script>
+            <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Deposits/Export'; 
+                });
+            </script>
+        @endif
         @if (Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling'))
         <script>
             let VehicleFilterButton = document.querySelector('.Filter-X');
@@ -681,31 +754,7 @@
                     } 
                 }); 
             </script>
-        @endif
-        @if (Route::is('EditDeposits_MasterCard'))
-            <script src="{{ asset('Js/Edit/Deposits_MasterCard.js') }}"></script>
-            {{-- <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Deposits/Export'; 
-                });
-                let VehicleNumbers = document.getElementById('VehicleNumbers'); 
-                let VehicleNumberInput = document.querySelector('input[list]'); 
-                let CardNumberInput = document.querySelector('input[name=CardNumber]');   
-            
-                VehicleNumberInput.addEventListener('change', () => { 
-                    let VehicleNumberInput = document.querySelector('input[list]').value;
-                    let VehicleNumbers = document.getElementById('VehicleNumbers').childNodes;
-
-                    for (var i = 0; i < VehicleNumbers.length; i++) {
-                        if (VehicleNumbers[i].value === VehicleNumberInput) { 
-                            CardNumberInput.value = VehicleNumbers[i].firstChild.textContent.trim();
-                        break;
-                        }
-                    } 
-                });  --}}
-            {{-- </script> --}}
-        @endif
+        @endif 
         @if (Route::is('EditRefueling'))
             <script src="{{ asset('Js/Edit/Refueling.js') }}"></script>
             <script>
@@ -762,25 +811,7 @@
                     window.location = '/Deposits/Master/Cards/Export'; 
                 });
             </script> --}}
-        @endif
-        @if (Route::is('Deposits_MasterCard'))
-            <script src="{{ asset('Js/ReadOnly/Deposits_MasterCard.js') }}"></script>
-            {{-- <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Deposits/Master/Cards/Export'; 
-                });
-            </script> --}}
-        @endif
-        @if (Route::is('MasterCard'))
-            <script src="{{ asset('Js/Edit/MasterCard.js') }}"></script>
-            {{-- <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Deposits/Master/Cards/Export'; 
-                });
-            </script> --}}
-        @endif
+        @endif 
         @if (Route::is('Refueling'))
             <script src="{{ asset('Js/ReadOnly/Refueling.js') }}"></script>
             <script>
