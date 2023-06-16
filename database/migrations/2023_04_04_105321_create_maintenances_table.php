@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
             $table->string('VehicleNumber')->nullable();
-            $table->string('RFLNO');
-            $table->string('IncidentType');
+            $table->string('RFLNO')->nullable();
+            $table->string('IncidentType')->nullable();
             $table->string('IncidentAction')->nullable();
             $table->string('Details')->nullable();
             $table->string('Date')->nullable();

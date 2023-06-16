@@ -138,26 +138,44 @@ class MaintenanceController extends Controller
      */
     public function store($Maintenance, Request $request)
     {
-        $IncidentFile = $request->file('IncidentAttachment'); 
-        $DestinationPath = 'Images/Maintenance';
-        $IncidentFile->move($DestinationPath, $IncidentFile->getClientOriginalName());
- 
-        Maintenance::insert([ 
-            'VehicleNumber' => $Maintenance, 
-            'IncidentType' => $request->IncidentType, 
-            'IncidentAction' => $request->IncidentAction, 
-            'Date' => $request->Date, 
-            'Time' => $request->Time, 
-            'ReleaseDate' => $request->ReleaseDate, 
-            'ReleaseTime' => $request->ReleaseTime, 
-            'Cost' => $request->Cost, 
-            'IncidentAttachment' => $IncidentFile->getClientOriginalName(),
-            'InvoiceNumber' => $request->InvoiceNumber, 
-            'Week' => $request->Week, 
-            'DateIn' => date('F j, Y'), 
-            'TimeIn' => date("g:i a"), 
-            'UserId' => request()->session()->get('Id'), 
-        ]);
+        if ($request->hasFile('IncidentAttachment')) {
+            $IncidentFile = $request->file('IncidentAttachment'); 
+            $DestinationPath = 'Images/Maintenance';
+            $IncidentFile->move($DestinationPath, $IncidentFile->getClientOriginalName());
+     
+            Maintenance::insert([ 
+                'VehicleNumber' => $Maintenance, 
+                'IncidentType' => $request->IncidentType, 
+                'IncidentAction' => $request->IncidentAction, 
+                'Date' => $request->Date, 
+                'Time' => $request->Time, 
+                'ReleaseDate' => $request->ReleaseDate, 
+                'ReleaseTime' => $request->ReleaseTime, 
+                'Cost' => $request->Cost, 
+                'IncidentAttachment' => $IncidentFile->getClientOriginalName(),
+                'InvoiceNumber' => $request->InvoiceNumber, 
+                'Week' => $request->Week, 
+                'DateIn' => date('F j, Y'), 
+                'TimeIn' => date("g:i a"), 
+                'UserId' => request()->session()->get('Id'), 
+            ]);
+        } else {
+            Maintenance::insert([ 
+                'VehicleNumber' => $Maintenance, 
+                'IncidentType' => $request->IncidentType, 
+                'IncidentAction' => $request->IncidentAction, 
+                'Date' => $request->Date, 
+                'Time' => $request->Time, 
+                'ReleaseDate' => $request->ReleaseDate, 
+                'ReleaseTime' => $request->ReleaseTime, 
+                'Cost' => $request->Cost,  
+                'InvoiceNumber' => $request->InvoiceNumber, 
+                'Week' => $request->Week, 
+                'DateIn' => date('F j, Y'), 
+                'TimeIn' => date("g:i a"), 
+                'UserId' => request()->session()->get('Id'), 
+            ]);
+        }
 
         return back();  
     }
