@@ -170,6 +170,16 @@ button {
   display: block;
 }
 
+footer {
+  background: #fff;
+  bottom: 0;
+  border-radius: 0.15em;
+  margin-bottom: 0.2em;
+  padding-inline: 1em;
+  position: fixed;
+  right: 2em;
+}
+
 .Hide {
   display: none !important;
 }

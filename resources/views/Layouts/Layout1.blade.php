@@ -32,6 +32,9 @@
 <body> 
     @include('Components.LoaderComponent')
     @yield('Content') 
+    <footer>
+        Software Engineer: Akindele Ebenezer, 2023 Project (DEPASA MARINE, INT'L)
+    </footer>
     <script src="{{ asset('Js/Loader.js') }}"></script>
 </body>
 </html>

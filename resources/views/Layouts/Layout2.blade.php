@@ -619,6 +619,9 @@
             @yield('Content') 
         </div>
     </div> 
+    <footer>
+        Software Engineer: Akindele Ebenezer, 2023 Project @ (DEPASA MARINE, INTERNATIONAL)
+    </footer>
     <script src="{{ asset('Js/SortTables.js') }}"></script>
     @unless (Route::is('Analytics'))
     <script> 
