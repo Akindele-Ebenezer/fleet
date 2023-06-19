@@ -32,6 +32,7 @@ class AuthController extends Controller
                 User::where('id', $User->id)
                 ->update([ 
                     'status' => 'ONLINE',
+                    'last_login' => date('Y-m-d') . ' (' . date('h:i a') . ')',
                 ]);
             }
             
@@ -46,6 +47,7 @@ class AuthController extends Controller
         User::where('id', request()->session()->get('Id'))
         ->update([ 
             'status' => 'OFFLINE',
+            'last_logout' => date('Y-m-d') . ' (' . date('h:i a') . ')',
         ]);
 
         request()->session()->flush();

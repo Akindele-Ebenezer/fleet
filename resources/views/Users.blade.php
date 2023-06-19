@@ -10,6 +10,8 @@
                 <th onclick="sortTable(3)">Role</th>
                 <th onclick="sortTable(4)">Records</th> 
                 <th onclick="sortTable(6)">Cars Registered</th>
+                <th onclick="sortTable(7)">Last Login</th>
+                <th onclick="sortTable(8)">Last Logout</th>
             </tr>
             @foreach ($Users as $User)
             @php
@@ -119,6 +121,8 @@
                     {{ $User->records }}
                 </td> 
                 <td>{{ $NumberOfCarsRegistered_CURRENT_USER }}</td>
+                <td>{{ $User->last_login }}</td>
+                <td>{{ $User->last_logout }}</td>
             </tr> 
             @endforeach 
             <div class="table-head filter"> 
