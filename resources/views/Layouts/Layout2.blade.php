@@ -1,6 +1,6 @@
 @if (Session::missing('Id')) 
     <script>window.location = "/";</script>
-@else 
+@else  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -273,6 +273,16 @@
                         Logout 
                     </li>
                 </a>
+                <a href='{{ route('Logout') }}'>
+                    <li> 
+                        @php
+                            $LastLogin = \App\Models\User::select('last_login')->where('id', request()->session()->get('Id'))->first();
+                        @endphp 
+                        <br>
+                        Last Login <br>
+                        {{ $LastLogin->last_login }}
+                    </li>
+                </a>
             </ul>
             <div class="nav-footer">
                 <div class="inner">
@@ -282,7 +292,7 @@
                     <span>{{ request()->session()->get('Name')  }}</span>
                     <br>
                     <span>{{ request()->session()->get('Role')  }}</span>
-                </div>
+                </div> 
             </div>
         </div>
         <div class="report-data report-inner">

@@ -27,7 +27,9 @@ class AuthController extends Controller
                 request()->session()->put('Id', $User->id);
                 request()->session()->put('Email', $User->email);
                 request()->session()->put('Name', $User->name);
-                request()->session()->put('Role', $User->role);
+                request()->session()->put('Role', $User->role); 
+                
+                date_default_timezone_set('Africa/Lagos');
 
                 User::where('id', $User->id)
                 ->update([ 
@@ -44,6 +46,8 @@ class AuthController extends Controller
     }
 
     public function Logout() {
+        date_default_timezone_set('Africa/Lagos');
+
         User::where('id', request()->session()->get('Id'))
         ->update([ 
             'status' => 'OFFLINE',
