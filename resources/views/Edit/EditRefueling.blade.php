@@ -38,8 +38,7 @@
                 <td>{{ $Refueling->CardNumber }}</td>
                 <td>{{ $Refueling->Quantity }}</td>
                 <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
-                <td>{{ $Refueling->ReceiptNumber }}</td>
-                <td>{{ $Refueling->KM }}</td> 
+                <td>{{ $Refueling->ReceiptNumber }}</td> 
                 <td class="Hide">{{ $Refueling->id }}</td>
             </tr> 
             @endforeach  

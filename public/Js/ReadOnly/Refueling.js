@@ -34,8 +34,7 @@ ShowRecord_X.forEach(VehicleNumber => {
         CardNumber_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Quantity_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Amount_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
-        ReceiptNo_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
-        KMLITER_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        ReceiptNo_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
     });
     
     CancelModalIcons.forEach(CancelModalIcon => {
@@ -47,6 +46,6 @@ ShowRecord_X.forEach(VehicleNumber => {
     let PrintRefuelingButton = document.querySelector('.PrintRefueling');
 
     PrintRefuelingButton.addEventListener('click', () => {
-        window.open('/Cars/Refueling/Report/' + VehicleNumber_X.value + '?Date=' + Date_X.value + '&Time=' + Time_X.value + '&Mileage=' + Mileage_X.value + '&TerminalNo=' + TerminalNo_X.value + '&CardNumber=' + CardNumber_X.value + '&Quantity=' + Quantity_X.value + '&ReceiptNo=' + ReceiptNo_X.value + '&Amount=' + Amount_X.value + '&KMLITER=' + KMLITER_X.value, '_blank');
+        window.open('/Cars/Refueling/Report/' + VehicleNumber_X.value + '?Date=' + Date_X.value + '&Time=' + Time_X.value + '&Mileage=' + Mileage_X.value + '&TerminalNo=' + TerminalNo_X.value + '&CardNumber=' + CardNumber_X.value + '&Quantity=' + Quantity_X.value + '&ReceiptNo=' + ReceiptNo_X.value + '&Amount=' + Amount_X.value, '_blank');
     });
 });
