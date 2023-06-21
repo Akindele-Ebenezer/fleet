@@ -53,7 +53,7 @@
     } 
     $NumberOfCars_REPAIRS = count($NumberOfCars_REPAIRS_); 
 
-    $NumberOfCars_REEFUELING = \App\Models\Refueling::selectRaw("TRIM(REPLACE(VehicleNumber, ' ', '')) ")
+    $NumberOfCars_REEFUELING = \App\Models\Refueling::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
                                                         ->groupBy('VehicleNumber') 
                                                         ->get();
  

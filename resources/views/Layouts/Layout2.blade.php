@@ -273,7 +273,7 @@
                         Logout 
                     </li>
                 </a>
-                <a href='{{ route('Logout') }}'>
+                <a href='' class="action-x">
                     <li> 
                         @php
                             $LastLogin = \App\Models\User::select('last_login')->where('id', request()->session()->get('Id'))->first();

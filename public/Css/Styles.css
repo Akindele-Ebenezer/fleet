@@ -1011,6 +1011,10 @@ svg {
   display: flex;
   padding: 2em;
 }
+.report-inner .table td.td-x .x-inner img {
+  margin-right: 1em;
+  width: 3em;
+}
 .report-inner .table td .car-owner-cars {
   color: #ddd;
   height: 5.5em;
