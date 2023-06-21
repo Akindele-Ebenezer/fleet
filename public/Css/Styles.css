@@ -1011,7 +1011,18 @@ svg {
   display: flex;
   padding: 2em;
 }
+.report-inner .table td.td-x .x-inner-2 {
+  justify-content: space-between;
+}
+.report-inner .table td.td-x .x-inner h1 {
+  font-size: 2em;
+}
+.report-inner .table td.td-x .x-inner h1:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 .report-inner .table td.td-x .x-inner img {
+  cursor: pointer;
   margin-right: 1em;
   width: 3em;
 }
@@ -1065,6 +1076,7 @@ svg {
 }
 .report-inner .table td.td-x {
   background: #000;
+  width: 40em;
 }
 .report-inner .table td,
 .report-inner .table th {

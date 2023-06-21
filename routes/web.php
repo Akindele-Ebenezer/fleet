@@ -25,6 +25,7 @@ Route::get('/Analytics', [AnalyticsController::class, 'index'])->name('Analytics
 Route::get('/Cars', [CarController::class, 'index'])->name('Cars');
 Route::get('/Cars/Registration', [CarController::class, 'my_records_activity'])->name('Cars_Registration'); 
 Route::get('/Cars/Owners', [CarController::class, 'car_owners'])->name('CarOwners');
+Route::get('/Cars/Drivers', [CarController::class, 'drivers'])->name('Drivers');
 Route::get('/Cars/Report', [CarController::class, 'vehicle_report'])->name('VehicleReport'); 
 
 Route::get('/Cars/Documents', [CarController::class, 'car_documents'])->name('Documents');

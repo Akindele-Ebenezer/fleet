@@ -584,9 +584,23 @@
                     align-items: center;
                     border: unset;
                     display: flex;
-                    padding: 2em;
+                    padding: 2em; 
+
+                    &-2 {
+                        justify-content: space-between;
+                    }
+
+                    h1 {
+                        font-size: 2em;
+
+                        &:hover {
+                            cursor: pointer;
+                            text-decoration: underline;
+                        }
+                    }
 
                     img {
+                        cursor: pointer;
                         margin-right: 1em;
                         width: 3em;
                     }
@@ -652,6 +666,7 @@
 
                 &.td-x {
                     background: #000;
+                    width: 40em;
                 }
             }
 

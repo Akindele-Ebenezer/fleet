@@ -317,6 +317,54 @@ class CarController extends Controller
         return view('CarOwners', $Config);
     }
 
+    public function drivers() {
+        $Config = self::config();
+
+        $Drivers = Car::select(['VehicleNumber', 'CarOwner', 'Model', 'Status', 'Driver'])
+                        ->whereNotNull('Driver')
+                        ->paginate(6);
+
+        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
+            $FilterValue = trim(str_replace(' ', '', $_GET['FilterValue'])); 
+            $Drivers = Car::whereNotNull('Driver')
+                        ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Model', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('SubModel', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('GearType', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('EngineType', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('EngineNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('ChassisNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('ModelYear', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('EngineVolume', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Comments', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('PurchaseDate', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Price', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Supplier', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('CarOwner', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Driver', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('MonthlyBudget', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('CompanyCode', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('TotalDeposits', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('TotalRefueling', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Balance', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('PinCode', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('StopDate', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('LicenceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('InsuranceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('FuelTankCapacity', 'LIKE', '%' . $FilterValue . '%')
+                        ->paginate(7);
+ 
+                        $Drivers->withPath($_SERVER['REQUEST_URI']);
+
+            return view('Drivers', $Config)->with('Drivers', $Drivers);
+        } 
+
+        return view('Drivers', $Config)->with('Drivers', $Drivers);
+    }
+
     public function my_records_activity()
     {
         $Config = self::config();
