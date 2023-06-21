@@ -30,6 +30,7 @@ let AddMaintenance_PRIVILEGE = document.querySelector('.AddMaintenance_PRIVILEGE
 let FuelManagement_PRIVILEGE = document.querySelector('.FuelManagement_PRIVILEGES');
 let MakeDeposits_PRIVILEGE = document.querySelector('.MakeDeposits_PRIVILEGES');
 let CardManagement_PRIVILEGES = document.querySelector('.CardManagement_PRIVILEGES');
+let DocumentManagement_PRIVILEGES = document.querySelector('.DocumentManagement_PRIVILEGES');
 let PrivilegeMessage = document.querySelector('.privilege-message')
 
 ShowRecord_X_Edit.forEach(Email => {
@@ -138,6 +139,11 @@ ShowRecord_X_Edit.forEach(Email => {
             });
         } else {
             DisableUserButton.style.background = '#333';
+        }   
+        if (Email.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent == 'on') {
+            DocumentManagement_PRIVILEGES.setAttribute('checked', Email.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent);
+        } else {
+            DocumentManagement_PRIVILEGES.removeAttribute('checked');
         }   
      });
     

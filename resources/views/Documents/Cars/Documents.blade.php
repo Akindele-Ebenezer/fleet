@@ -10,6 +10,12 @@
                 <th onclick="sortTable(3)">Purchase Date</th> 
                 <th onclick="sortTable(3)"></th> 
             </tr>  
+            @php 
+                $DocumentManagement_USER = \DB::table('user_privileges')
+                                                ->select('DocumentManagement')
+                                                ->where('UserId', session()->get('Id'))
+                                                ->first();   
+            @endphp
             @unless (count($Cars) > 0)
             <tr>
                 <td>No documents available.</td>
@@ -41,7 +47,7 @@
                     {{ $Document->PurchaseDate }} 
                 </td>
                 <td>  
-                    <button class="action-x manage-document">MANAGE</button>
+                    <button class="action-x {{ $DocumentManagement_USER->DocumentManagement ?? 'off' === 'on' ? 'manage-document' : 'permission-denied' }}">MANAGE</button>
                     <span class="Hide">{{ $Document->VehicleNumber }}</span>
                     <span class="Hide">{{ $Document->id }}</span>
                 </td>

@@ -107,6 +107,7 @@ class UserController extends Controller
             'FuelManagement' => $request->FuelManagement_PRIVILEGES,  
             'MakeDeposits' => $request->MakeDeposits_PRIVILEGES,  
             'CardManagement' => $request->CardManagement_PRIVILEGES,  
+            'DocumentManagement' => $request->DocumentManagement_PRIVILEGES,  
             'Date' => date('Y-m-d'),  
             'TimeIn' => date("g:i sa"),  
         ]);
@@ -123,6 +124,7 @@ class UserController extends Controller
             'FuelManagement' => $request->FuelManagement_PRIVILEGES,  
             'MakeDeposits' => $request->MakeDeposits_PRIVILEGES,  
             'CardManagement' => $request->CardManagement_PRIVILEGES,  
+            'DocumentManagement' => $request->DocumentManagement_PRIVILEGES,  
             'Date' => date('Y-m-d'), 
             'TimeIn' => date("g:i sa"),  
         ]);

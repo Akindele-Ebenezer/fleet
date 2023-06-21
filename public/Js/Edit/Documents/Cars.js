@@ -35,7 +35,7 @@ let CarDocument_VehicleNumber = document.querySelector('.VehicleNumber_X');
 
 ManageDocumentButtons.forEach(ManageDocumentButton => {
     ManageDocumentButton.addEventListener('click', () => {
-        ModalCardDocument_Edit.style.display = 'flex'; 
+        ModalCardDocument_Edit.style.display = 'flex';  
 
         CarDocument_VehicleNumber.value = ManageDocumentButton.nextElementSibling.textContent; 
 
@@ -56,14 +56,15 @@ ManageDocumentButtons.forEach(ManageDocumentButton => {
     });
 });
   
-// let AlertComponent = document.querySelector('.alert');
-// let PermissionDeniedButton = document.querySelectorAll('.permission-denied');
+let AlertComponent = document.querySelector('.alert');
+let PermissionDeniedButton = document.querySelectorAll('.permission-denied');
 
-// PermissionDeniedButton.forEach(Button => {
-//     Button.addEventListener('click', () => {
-//         AlertComponent.style.display = 'flex';
-//         setTimeout(() => {
-//             AlertComponent.style.display = 'none';
-//         }, 5000);
-//     });
-// });
+PermissionDeniedButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        AlertComponent.style.display = 'flex';
+        AlertComponent.firstElementChild.textContent = 'PERMISSION DENIED: Contact an Admin to grant you privilege to manage fleet documents.';
+        setTimeout(() => {
+            AlertComponent.style.display = 'none';
+        }, 5000);
+    });
+});

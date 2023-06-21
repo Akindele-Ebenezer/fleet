@@ -55,6 +55,12 @@
                                                         ->orderBy('Date', 'DESC') 
                                                         ->orderBy('TimeIn', 'DESC') 
                                                         ->first(); 
+                    $DocumentManagement_PRIVILEGE = \DB::table('user_privileges')
+                                                        ->select('DocumentManagement')
+                                                        ->where('UserId', $User->id) 
+                                                        ->orderBy('Date', 'DESC') 
+                                                        ->orderBy('TimeIn', 'DESC') 
+                                                        ->first(); 
                     $UserEnabled = \DB::table('user_privileges')
                                         ->select('id')
                                         ->where('UserId', $User->id) 
@@ -89,6 +95,7 @@
                 <td class="Hide">{{ $MakeDeposits_PRIVILEGE->MakeDeposits ?? false }}</td>
                 <td class="Hide">{{ $CardManagement_PRIVILEGE->CardManagement ?? false }}</td>
                 <td class="Hide">{{ (!empty($UserEnabled->id) ? 'Enabled' : 'Disabled') }}</td>
+                <td class="Hide">{{ $DocumentManagement_PRIVILEGE->DocumentManagement ?? false }}</td>
                 @endif
                 <td>
                     <div class="car-info">

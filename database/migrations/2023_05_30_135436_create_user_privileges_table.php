@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('FuelManagement')->nullable();
             $table->string('MakeDeposits')->nullable();
             $table->string('CardManagement')->nullable();
+            $table->string('DocumentManagement')->nullable();
             $table->string('Date')->nullable();
             $table->string('TimeIn')->nullable();
             $table->timestamps();

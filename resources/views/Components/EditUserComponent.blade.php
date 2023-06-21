@@ -80,6 +80,10 @@
                         <div class="inner-x-x"><svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M880 316v520q0 24-18 42t-42 18H140q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42ZM140 425h680V316H140v109Zm0 129v282h680V554H140Zm0 282V316v520Z"></path></svg>+ Card Management</div>
                         <div class="inner-x-x"><input type="checkbox" name="CardManagement_PRIVILEGES" class="CardManagement_PRIVILEGES"></div>
                     </div> 
+                    <div class="inner-x">
+                        <div class="inner-x-x"><svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M880 316v520q0 24-18 42t-42 18H140q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42ZM140 425h680V316H140v109Zm0 129v282h680V554H140Zm0 282V316v520Z"></path></svg>+ Manage Documents</div>
+                        <div class="inner-x-x"><input type="checkbox" name="DocumentManagement_PRIVILEGES" class="DocumentManagement_PRIVILEGES"></div>
+                    </div> 
                 </div>
                 <input type="hidden" name="UserId" class="UserId_X">
             </div>
