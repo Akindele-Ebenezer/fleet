@@ -203,4 +203,3 @@ PermissionDeniedButton.forEach(Button => {
         }, 5000);
     });
 });
-

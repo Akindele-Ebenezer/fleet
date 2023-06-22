@@ -132,6 +132,41 @@
 
     @include('Components.AlertComponent')   
 
+    @if (Route::is('Analytics'))
+    <button class="automatic-filter action-x">Cars :: (Automatic Filter) <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg></button>
+    <div class="cars-filter-wrapper Hide">
+        <div class="cars-filter">
+            <form action="">
+                <h3>Global Time Period</h3>
+                <p>All Vehicles</p>
+                <ul>
+                    <li>From: <input type="date" name="Date_From"></li>
+                    <li>To: <input type="date" name="Date_To"></li>
+                </ul>
+                <button class="action-x" name="Filter_All_Analytics">Apply</button>
+            </form>
+            <form action="">
+                <h3>Vehicle Time Period</h3>
+                <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  Yearly</p>
+                <ul>
+                    <li>Vehicle No.: <input type="text" name="VehicleNo"></li>
+                    <li>Specify Year: <input type="number" name="Year"></li>
+                </ul>
+                <button class="action-x" name="Filter_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Yearly">Apply</button>
+            </form>
+            <form action="">
+                <h3>Time Period</h3>
+                <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  (Range)</p>
+                <ul>
+                    <li>Vehicle No.: <input type="text" name="VehicleNo"></li> 
+                    <li>Start Date: <input type="date" name="Date_From"></li>
+                    <li>End Date: <input type="date" name="Date_To"></li>
+                </ul>
+                <button class="action-x" name="Filter_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Range">Apply</button>
+            </form> 
+        </div> 
+    </div>
+@endif 
     <div class="report" style="background-image: url('Images/bg-3.gif');">
         <div class="left-nav report-inner">
             <div class="report-inner-heading">
@@ -331,7 +366,7 @@
 
                         {{ Route::is('FleetCard') ? 'FLEET CARDS' : '' }}
                         {{ Route::is('MasterCard') ? 'MASTER CARDS' : '' }}
-                         
+                          
                     <br>
                     <span>Vehicle Management System</span>
                     </h1> 
@@ -710,6 +745,15 @@
         @endif
         </script>
         @endunless 
+        @if (Route::is('Analytics'))
+            <script src="{{ asset('Js/Analytics.js') }}"></script>
+            <script>
+                let ExportButton = document.querySelector('.ExportToExcel');
+                ExportButton.addEventListener('click', () => {
+                    window.location = '/Deposits/Export'; 
+                });
+            </script>
+        @endif
         @if (Route::is('Documents'))
             <script src="{{ asset('Js/Edit/Documents/Cars.js') }}"></script>
             <script>

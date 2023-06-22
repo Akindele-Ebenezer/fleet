@@ -191,7 +191,7 @@ footer {
   display: none;
   height: 100vh;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   z-index: 10;
 }
@@ -544,6 +544,94 @@ svg {
 }
 .login-wrapper .wrapper-inner .login-inner p {
   text-align: right;
+}
+
+.automatic-filter {
+  background: #DF2E38 !important;
+  color: #fff;
+  position: fixed;
+  right: 2em;
+  text-align: left;
+  top: 2em;
+  width: 14em;
+  z-index: 130;
+}
+.automatic-filter svg {
+  translate: 0 -0.7em;
+}
+
+.cars-filter {
+  background: #000;
+  height: 25em;
+  padding: 1em;
+  position: absolute;
+  overflow-y: scroll;
+  right: 2em;
+  top: 6em;
+  z-index: 10;
+}
+.cars-filter button {
+  font-size: 12px;
+  height: 2em;
+  margin: unset;
+  margin-bottom: 1em;
+  padding: unset;
+  padding-inline: 0.5em;
+  width: unset;
+}
+.cars-filter form {
+  background: #111;
+  border-radius: 0.5em;
+  margin-bottom: 1em;
+  padding: 0.5em;
+}
+.cars-filter form button {
+  background-color: #DF2E38;
+  border: unset;
+}
+.cars-filter h3 {
+  font-family: system-ui;
+}
+.cars-filter h3, .cars-filter p, .cars-filter li {
+  color: #ddd;
+  text-align: center;
+}
+.cars-filter input {
+  background: #1a1a1a;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  margin-block: 1em;
+  outline: none;
+  padding: 0.5rem;
+}
+.cars-filter p {
+  font-size: 12px;
+}
+.cars-filter ul {
+  padding-block: 0.5em;
+}
+.cars-filter ul li {
+  align-items: center;
+  color: #ccc;
+  display: flex;
+  font-size: 12px;
+  height: 3em;
+  justify-content: space-between;
+}
+.cars-filter ul li input {
+  height: 2em;
+  width: 55%;
+}
+.cars-filter ul li input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+.cars-filter-wrapper {
+  background: rgba(0, 0, 0, 0.7);
+  height: 100vh;
+  position: fixed;
+  width: 100vw;
+  z-index: 120;
 }
 
 .report {
@@ -1220,6 +1308,9 @@ svg {
   outline: none;
   padding: 0.5rem;
   width: 100%;
+}
+.report-inner ul input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
 .report-inner ul input[placeholder] {
   -webkit-text-fill-color: #eee !important;

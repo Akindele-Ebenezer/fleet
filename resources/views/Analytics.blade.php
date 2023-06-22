@@ -38,7 +38,7 @@
     } 
 @endphp
 @section('Content')
-    <style>
+    <style> 
         .report-inner {
             height: unset; 
             overflow: unset; 

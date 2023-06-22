@@ -1,3 +1,103 @@
+.automatic-filter {
+    background: $Color-2 !important;
+    color: #fff;
+    position: fixed;
+    right: 2em;
+    text-align: left;
+    top: 2em;
+    width: 14em;
+    z-index: 130;
+
+    svg {
+        translate: 0 -0.7em;
+    }
+}
+ 
+.cars-filter { 
+    background: #000; 
+    height: 25em;
+    padding: 1em;
+    position: absolute;
+    overflow-y: scroll;
+    right: 2em;
+    top: 6em;
+    z-index: 10;
+
+    button {
+        font-size: 12px;
+        height: 2em;
+        margin: unset;
+        margin-bottom: 1em;
+        padding: unset;
+        padding-inline: 0.5em;
+        width: unset;
+    }
+
+    form { 
+        background: #111;
+        border-radius: .5em;
+        margin-bottom: 1em;
+        padding: 0.5em;
+
+        button {
+            background-color: $Color-2;
+            border: unset;
+        }
+    }
+
+    h3 {
+        font-family: system-ui;
+    }
+
+    h3, p, li {
+        color: #ddd;
+        text-align: center;
+    }
+
+    input {
+        background: #1a1a1a;
+        border: none;
+        border-radius: 0.5rem;
+        color: #fff;
+        margin-block: 1em;
+        outline: none;
+        padding: 0.5rem;
+    }
+
+    p { 
+        font-size: 12px; 
+    }
+
+    ul {
+        padding-block: .5em;
+        li {
+            align-items: center;
+            color: #ccc;
+            display: flex;
+            font-size: 12px;
+            height: 3em;
+            justify-content: space-between;
+
+            input {
+                height: 2em;
+                width: 55%;
+                
+                &::-webkit-calendar-picker-indicator {
+                    filter: invert(1)
+                }
+            }
+        }
+    }
+
+    &-wrapper {
+        background: rgba(0, 0, 0, .7);
+        height: 100vh;
+        position: fixed;
+        width: 100vw;
+        z-index: 120;
+    }
+}
+
 .report {
     background: #000;
     display: flex;   
@@ -6,7 +106,7 @@
         width: -webkit-fill-available;
     }
 
-    &-data-heading { 
+    &-data-heading {  
         margin-left: 2rem; 
 
         .inner {
@@ -870,6 +970,10 @@
                 padding: 0.5rem;
                 width: 100%;
 
+                &::-webkit-calendar-picker-indicator {
+                    filter: invert(1)
+                }
+                
                 &[placeholder] {
                     -webkit-text-fill-color: #eee !important;
                 }
