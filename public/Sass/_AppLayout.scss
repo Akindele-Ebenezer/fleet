@@ -336,7 +336,7 @@
                                     text-decoration: underline;
                                     
                                     &:hover {
-                                        color: #333;
+                                        color: #999;
                                         cursor: pointer;
                                     }
                                 }
@@ -428,7 +428,7 @@
                                 text-align: center;  
 
                                 h3 { 
-                                    background: #000; 
+                                    background: #222; 
                                     font-weight: unset;
                                     padding-block: 0.1em;
                                     font-family: system-ui;
@@ -459,7 +459,11 @@
                 }
             }
 
-            td {
+            td { 
+                &:hover {
+                    background-color: #333;
+                }
+
                 color: #eee !important;
 
                 button {
@@ -540,11 +544,7 @@
                 &.show-record-x-edit,
                 &.show-record-x,
                 &.show-master-card-record-x-edit  {
-                    cursor: pointer;
-
-                    &:hover {
-                        color: #333 !important;
-                    }
+                    cursor: pointer; 
                 } 
                 
                 &.show-record-x-2 {

@@ -816,7 +816,7 @@ svg {
   text-decoration: underline;
 }
 .report-inner .table.list .car-info .info-inner .inner:first-of-type .card-number:hover {
-  color: #333;
+  color: #999;
   cursor: pointer;
 }
 .report-inner .table.list .car-info .info-inner .inner:not(.report-inner .table.list .car-info .info-inner .inner:first-of-type) {
@@ -888,7 +888,7 @@ svg {
   text-align: center;
 }
 .report-inner .table.list td .car-info .stats .inner h3 {
-  background: #000;
+  background: #222;
   font-weight: unset;
   padding-block: 0.1em;
   font-family: system-ui;
@@ -911,6 +911,9 @@ svg {
 }
 .report-inner .table td {
   color: #eee !important;
+}
+.report-inner .table td:hover {
+  background-color: #333;
 }
 .report-inner .table td button {
   background: #3034b5;
@@ -974,9 +977,6 @@ svg {
 }
 .report-inner .table td.show-record-x-edit, .report-inner .table td.show-record-x, .report-inner .table td.show-master-card-record-x-edit {
   cursor: pointer;
-}
-.report-inner .table td.show-record-x-edit:hover, .report-inner .table td.show-record-x:hover, .report-inner .table td.show-master-card-record-x-edit:hover {
-  color: #333 !important;
 }
 .report-inner .table td.show-record-x-2 {
   align-items: center;

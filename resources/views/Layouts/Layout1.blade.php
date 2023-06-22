@@ -33,7 +33,7 @@
     @include('Components.LoaderComponent')
     @yield('Content') 
     <footer>
-        Software Engineer: Akindele Ebenezer, 2023 Project (DEPASA MARINE, INT'L)
+        Developed by Akindele Ebenezer, Version 1.0
     </footer>
     <script src="{{ asset('Js/Loader.js') }}"></script>
 </body>

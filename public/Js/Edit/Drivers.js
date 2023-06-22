@@ -21,4 +21,4 @@ OpenDriverDocumentIcons.forEach(Icon => {
     Icon.addEventListener('click', () => {
         window.location = '/Cars/Documents?FilterValue=' + Icon.previousElementSibling.textContent;
     }); 
-});
+}); 
