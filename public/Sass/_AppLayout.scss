@@ -460,7 +460,7 @@
             }
 
             td { 
-                &:hover {
+                &:not(&.td-2):hover {
                     background-color: #333;
                 }
 

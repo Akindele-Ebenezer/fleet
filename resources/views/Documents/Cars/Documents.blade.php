@@ -59,7 +59,7 @@
                 <th onclick="sortTable(3)">Purchase Date</th> 
             </tr>  
             <tr class="Hide">
-                <td>
+                <td class="td-2"> 
                     @if (
                         (count($CarDocuments_REGISTRATION_CERTIFICATE) < 1) AND
                         (count($CarDocuments_DRIVING_LICENCE) < 1) AND
@@ -151,7 +151,7 @@
                         </div>
                     @endforeach
                 </td>
-                <td>
+                <td class="td-2">
                     @foreach ($CarDocuments_REGISTRATION_CERTIFICATE as $Document_)
                         <div class="document">
                             <span>{{ round($Document_->RegistrationCertificateSize) }} KB</span>
@@ -183,7 +183,7 @@
                         </div>
                     @endforeach
                 </td>
-                <td>
+                <td class="td-2">
                     @foreach ($CarDocuments_REGISTRATION_CERTIFICATE as $Document_)
                         <div class="document">
                                 Registration Certificate
@@ -215,7 +215,7 @@
                         </div>
                     @endforeach
                 </td>
-                <td>  
+                <td class="td-2">  
                     {{ $Document->PurchaseDate }} <br>
                 </td>
             </tr>

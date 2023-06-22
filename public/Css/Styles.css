@@ -912,7 +912,7 @@ svg {
 .report-inner .table td {
   color: #eee !important;
 }
-.report-inner .table td:hover {
+.report-inner .table td:not(.report-inner .table td.td-2):hover {
   background-color: #333;
 }
 .report-inner .table td button {
