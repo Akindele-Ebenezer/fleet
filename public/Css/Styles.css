@@ -1008,6 +1008,7 @@ svg {
 .report-inner .table td.td-x .x-inner {
   align-items: center;
   border: unset;
+  cursor: pointer;
   display: flex;
   padding: 2em;
 }

@@ -1,31 +1,11 @@
-@extends('Layouts.Layout2')
-
+@extends('Layouts.Layout2') 
 @php 
-    $NumberOfCars = \App\Models\Car::select('VehicleNumber')->whereNotNull('VehicleNumber')->distinct()->count();
+    function get_average_cost($Sum, $Count) {
+        $Result = $Count === 0 ? 0 : $Sum / $Count;
+        $Result = get_fleet_survey_currency_in_dollars($Result);
+        return $Result; 
+    }
 
-    $NumberOfCarRepairs = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'REPAIR')->count();
-    $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'MAINTENANCE')->count();
-    $NumberOfCarDeposits = \App\Models\Deposits::select('VehicleNumber')->count();
-    $NumberOfCarRefueling = \App\Models\Refueling::select('VehicleNumber')->count();
-
-    $SumOfCarRepairs = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'REPAIR')->sum('Cost');
-    $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')->sum('Cost');
-    $SumOfCarDeposits = \App\Models\Deposits::select('Amount')->sum('Amount');
-    $SumOfCarRefueling = \App\Models\Refueling::select('Amount')->sum('Amount');
- 
-    $FleetSurvey_TOTAL = $NumberOfCarRepairs + $NumberOfCarMaintenance + $NumberOfCarDeposits + $NumberOfCarRefueling;
-    $FleetSurvey_Repairs_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRepairs / $FleetSurvey_TOTAL * 100;
-    $FleetSurvey_Maintenance_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarMaintenance / $FleetSurvey_TOTAL * 100;
-    $FleetSurvey_Deposits_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarDeposits / $FleetSurvey_TOTAL * 100;
-    $FleetSurvey_Refueling_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRefueling / $FleetSurvey_TOTAL * 100;
-    
-    $NumberOfCars_ACTIVE = \App\Models\Car::select('Status')->whereNotNull('VehicleNumber')->where('Status', 'ACTIVE')->count();
-    $NumberOfCars_INACTIVE = \App\Models\Car::select('Status')->whereNotNull('VehicleNumber')->where('Status', 'INACTIVE')->count();
-    $NumberNumberOfCars_ACTIVE_PERCENTAGE = $NumberOfCars == 0 ? 0 : $NumberOfCars_ACTIVE / $NumberOfCars * 100;
-    $NumberNumberOfCars_INACTIVE_PERCENTAGE = $NumberOfCars == 0 ? 0 : $NumberOfCars_INACTIVE / $NumberOfCars * 100;
-
-    $NumberOfDrivers = \App\Models\Car::select('Drivers')->whereNotNull('VehicleNumber')->distinct()->count();
-   
     function get_fleet_survey_currency_in_dollars($Value) {
         // ONE NAIRA TO DOLLAR CURRENTLY
         $USD = 0.0022;
@@ -34,96 +14,6 @@
         return number_format(round($Result, 0));
     } 
     
-    $NumberOfCars_MAINTENANCE = \App\Models\Maintenance::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
-                                                        ->groupBy('VehicleNumber')
-                                                        ->get();
-    $NumberOfCars_MAINTENANCE_ = [];
-    foreach ($NumberOfCars_MAINTENANCE as $Car) {
-        array_push($NumberOfCars_MAINTENANCE_, $Car);
-    }
-    $NumberOfCars_MAINTENANCE = count($NumberOfCars_MAINTENANCE_);
-
-    $NumberOfCars_REPAIRS = \App\Models\Maintenance::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
-                                                        ->groupBy('VehicleNumber')
-                                                        ->where('IncidentType', 'REPAIR')
-                                                        ->get();
-    $NumberOfCars_REPAIRS_ = [];
-    foreach ($NumberOfCars_REPAIRS as $Car) {
-        array_push($NumberOfCars_REPAIRS_, $Car);
-    } 
-    $NumberOfCars_REPAIRS = count($NumberOfCars_REPAIRS_); 
-
-    $NumberOfCars_REEFUELING = \App\Models\Refueling::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
-                                                        ->groupBy('VehicleNumber') 
-                                                        ->get();
- 
-    $NumberOfCars_REEFUELING_ = [];
-    foreach ($NumberOfCars_REEFUELING as $Car) {
-        array_push($NumberOfCars_REEFUELING_, $Car);
-    } 
-    $NumberOfCars_REEFUELING = count($NumberOfCars_REEFUELING_); 
-     
-    $NumberOfCars_DEPOSITS = \App\Models\Deposits::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
-                                                        ->groupBy('VehicleNumber')
-                                                        ->get();
-    $NumberOfCars_DEPOSITS_ = [];
-    foreach ($NumberOfCars_DEPOSITS as $Car) {
-        array_push($NumberOfCars_DEPOSITS_, $Car);
-    } 
-    $NumberOfCars_DEPOSITS = count($NumberOfCars_DEPOSITS_); 
-
-    function get_average_cost($Sum, $Count) {
-        $Result = $Count === 0 ? 0 : $Sum / $Count;
-        $Result = get_fleet_survey_currency_in_dollars($Result);
-        return $Result; 
-    }
-
-    $FirstDayOfCurrentYear = date('Y') . '-01-01';
-    $MaintenanceCosts_CURRENT_YEAR = \App\Models\Maintenance::select('Cost')
-                                                            ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
-                                                            ->sum('Cost');
-    $RepairCosts_CURRENT_YEAR = \App\Models\Maintenance::select('Cost')
-                                                            ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
-                                                            ->where('IncidentType', 'REPAIR')
-                                                            ->sum('Cost');
-    $RefuelingCosts_CURRENT_YEAR = \App\Models\Refueling::select('Cost')
-                                                            ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
-                                                            ->sum('Amount');
-    $DepositsCosts_CURRENT_YEAR = \App\Models\Deposits::select('Amount')
-                                                            ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
-                                                            ->sum('Amount');
-
-    $FirstDayOfPreviousYear = date('Y') - 1 . '-01-01';
-    $LastDayOfPreviousYear = date('Y') - 1 . '-12-31';
-    $MaintenanceCosts_PREVIOUS_YEAR = \App\Models\Maintenance::select('Cost')
-                                                            ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
-                                                            ->sum('Cost');
-    $RepairCosts_PREVIOUS_YEAR = \App\Models\Maintenance::select('Cost')
-                                                            ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
-                                                            ->where('IncidentType', 'REPAIR')
-                                                            ->sum('Cost');
-    $RefuelingCosts_PREVIOUS_YEAR = \App\Models\Refueling::select('Amount')
-                                                            ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
-                                                            ->sum('Amount');
-    $DepositsCosts_PREVIOUS_YEAR = \App\Models\Deposits::select('Amount')
-                                                            ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
-                                                            ->sum('Amount');
-    
-    $MonthNames = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ];                                                            
- 
     $FirstDaysOfEachMonths = [];
     $LastDaysOfEachMonths = [];
 
@@ -133,7 +23,7 @@
         ${$MonthNames[$i] . '_Last'} = date('Y-m-t', ${"Timestamp_" . $MonthNames[$i]}); 
         array_push($FirstDaysOfEachMonths, ${$MonthNames[$i] . '_First'});
         array_push($LastDaysOfEachMonths, ${$MonthNames[$i] . '_Last'});
- 
+    
         ${'NumberOfCarRepairs_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'REPAIR')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->count();
         ${'NumberOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count();
         ${'NumberOfCarDeposits_' . $MonthNames[$i]} = \App\Models\Deposits::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count();
@@ -145,14 +35,8 @@
         ${'FleetSurvey_Maintenance_PERCENTAGE_' . $MonthNames[$i]} = ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} == 0 ? 0 : ${'NumberOfCarMaintenance_' . $MonthNames[$i]} / ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} * 100;
         ${'FleetSurvey_Deposits_PERCENTAGE_' . $MonthNames[$i]} = ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} == 0 ? 0 : ${'NumberOfCarDeposits_' . $MonthNames[$i]} / ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} * 100;
         ${'FleetSurvey_Refueling_PERCENTAGE_' . $MonthNames[$i]} = ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} == 0 ? 0 : ${'NumberOfCarRefueling_' . $MonthNames[$i]} / ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} * 100;
-    
-        // if ($i < 8) {
-        //     var_dump($MonthNames[$i] . ' - ' . ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} . ' / ' . $FleetSurvey_TOTAL . ' = ' . ${'FleetSurvey_TOTAL_' . $MonthNames[$i]}/$FleetSurvey_TOTAL * 100); 
-        //     die();
-        // }
     } 
-@endphp 
-
+@endphp
 @section('Content')
     <style>
         .report-inner {
