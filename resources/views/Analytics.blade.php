@@ -60,6 +60,63 @@
     </style>
  
     <div class="analytics">  
+        @if(
+            isset($_GET['Filter__Yearly_Analytics']) ||
+            isset($_GET['Filter__Range_Analytics'])
+        )
+            <div class="inner-1">
+                <div class="x">
+                    <div class="inner">
+                        <img src="{{ asset('Images/car-x.png') }}">
+                    </div>
+                    <div class="inner">
+                        <span>{{ 'APP SSF 89' }}</span>
+                        <br>
+                        <span>Vehicle Number</span>
+                    </div>
+                </div>
+                <div class="x">
+                    <div class="inner">
+                        <img src="{{ asset('Images/used-by.png') }}">
+                    </div>
+                    <div class="inner">
+                        <span>{{ $UsedBy ?? 'Pool' }}</span>
+                        <br>
+                        <span>Used by</span>
+                    </div>
+                </div>
+                <div class="x">
+                    <div class="inner">
+                        <img src="{{ asset('Images/km.png') }}">
+                    </div>
+                    <div class="inner">
+                        <span>{{ number_format($Mileage) }}</span>
+                        <br>
+                        <span>Mileage</span>
+                    </div>
+                </div>
+                <div class="x">
+                    <div class="inner">
+                        <img src="{{ asset('Images/balance.png') }}">
+                    </div>
+                    <div class="inner">
+                        <span>₦ {{ number_format($Balance) }}</span>
+                        <br>
+                        <span>Balance</span>
+                    </div>
+                </div>
+                <div class="x">
+                    <div class="inner">
+                        <img src="{{ asset('Images/balance-brought-forward.png') }}">
+                    </div>
+                    <div class="inner">
+                        <span>₦ {{ number_format('348742') }}</span>
+                        <br>
+                        <span>Brought Forward</span>
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="inner-1">
             <div class="x">
                 <div class="inner">

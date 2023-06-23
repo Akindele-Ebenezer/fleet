@@ -216,6 +216,87 @@ class AnalyticsController extends Controller
                                             ->with('FleetSurvey_Refueling_PERCENTAGE' , $FleetSurvey_Refueling_PERCENTAGE);
         }
 
+        if (isset($_GET['Filter__Yearly_Analytics'])) {
+            if(empty($_GET['VehicleNo']) || empty($_GET['Year'])) {
+                return back();
+            }
+
+
+            $NumberOfCarRepairs = \App\Models\Maintenance::select('VehicleNumber')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->where('IncidentType', 'REPAIR')->count();
+            $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->where('IncidentType', 'MAINTENANCE')->count();
+            $NumberOfCarDeposits = \App\Models\Deposits::select('VehicleNumber')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->count();
+            $NumberOfCarRefueling = \App\Models\Refueling::select('VehicleNumber')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->count();
+            
+            $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->where('IncidentType', 'MAINTENANCE')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->sum('Cost');  
+            $SumOfCarRepairs = \App\Models\Maintenance::select('Cost')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->where('IncidentType', 'REPAIR')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->sum('Cost');   
+            
+            $SumOfCarDeposits = \App\Models\Deposits::select('Amount')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->sum('Amount');  
+            $SumOfCarRefueling = \App\Models\Refueling::select('Amount')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->sum('Amount'); 
+
+            $FleetSurvey_TOTAL = $NumberOfCarRepairs + $NumberOfCarMaintenance + $NumberOfCarDeposits + $NumberOfCarRefueling;
+            $FleetSurvey_Repairs_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRepairs / $FleetSurvey_TOTAL * 100;
+            $FleetSurvey_Maintenance_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarMaintenance / $FleetSurvey_TOTAL * 100;
+            $FleetSurvey_Deposits_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarDeposits / $FleetSurvey_TOTAL * 100;
+            $FleetSurvey_Refueling_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRefueling / $FleetSurvey_TOTAL * 100;
+            
+            $VehicleNumber = $_GET['VehicleNo'];
+            $UsedBy = \App\Models\Car::select('CarOwner')->where('VehicleNumber', $VehicleNumber)->get();
+            $Mileage = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $VehicleNumber)->orderBy('id', 'DESC')->first();
+            $Balance = \App\Models\Car::select('Balance')->where('VehicleNumber', $VehicleNumber)->get();
+ 
+            foreach ($UsedBy as $UsedBy_) {
+                $UsedBy = $UsedBy_->UsedBy;
+            } 
+
+            foreach ($Balance as $Balance_) {
+                $Balance = $Balance_->Balance;
+            } 
+
+            return view('Analytics', $Config)->with('NumberOfCarRepairs' , $NumberOfCarRepairs)  
+                                            ->with('NumberOfCarMaintenance' , $NumberOfCarMaintenance)
+                                            ->with('NumberOfCarDeposits' , $NumberOfCarDeposits)  
+                                            ->with('NumberOfCarRefueling' , $NumberOfCarRefueling)
+                                            ->with('SumOfCarMaintenance', $SumOfCarMaintenance)
+                                            ->with('SumOfCarRepairs', $SumOfCarRepairs)
+                                            ->with('SumOfCarDeposits', $SumOfCarDeposits)
+                                            ->with('SumOfCarRefueling', $SumOfCarRefueling)
+                                            ->with('FleetSurvey_TOTAL' , $FleetSurvey_TOTAL)  
+                                            ->with('FleetSurvey_Repairs_PERCENTAGE' , $FleetSurvey_Repairs_PERCENTAGE)  
+                                            ->with('FleetSurvey_Maintenance_PERCENTAGE' , $FleetSurvey_Maintenance_PERCENTAGE)  
+                                            ->with('FleetSurvey_Deposits_PERCENTAGE' , $FleetSurvey_Deposits_PERCENTAGE)  
+                                            ->with('FleetSurvey_Refueling_PERCENTAGE' , $FleetSurvey_Refueling_PERCENTAGE) 
+                                            ->with('VehicleNumber' , $VehicleNumber) 
+                                            ->with('UsedBy' , $UsedBy ?? 'Pool') 
+                                            ->with('Mileage' , $Mileage->Mileage ?? 0) 
+                                            ->with('Balance' , $Balance ?? 0);  
+        }
+
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $Config = self::config();
     

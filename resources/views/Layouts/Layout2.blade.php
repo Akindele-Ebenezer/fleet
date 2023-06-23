@@ -163,7 +163,7 @@
                     </li>
                     <li>Specify Year: <input type="number" name="Year"></li>
                 </ul>
-                <button class="action-x" name="Filter_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Yearly">Apply</button>
+                <button class="action-x" name="Filter__Yearly_Analytics">Apply</button>
             </form>
             <form action="">
                 <h3>Time Period</h3>
@@ -183,7 +183,7 @@
                     <li>Start Date: <input type="date" name="Date_From"></li>
                     <li>End Date: <input type="date" name="Date_To"></li>
                 </ul>
-                <button class="action-x" name="Filter_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Range">Apply</button>
+                <button class="action-x" name="Filter__Range_Analytics">Apply</button>
             </form> 
         </div> 
     </div>

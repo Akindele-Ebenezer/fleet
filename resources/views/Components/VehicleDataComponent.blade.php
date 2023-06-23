@@ -73,7 +73,7 @@
             </li>
             <li>
                 <span>
-                    <img src="{{ asset('Images/to-deposit.png') }}" alt="">
+                    <img src="{{ asset('Images/used-by.png') }}" alt="">
                     Used By
                 </span>
                 <span class="UsedBy_X"></span>
