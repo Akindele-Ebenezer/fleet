@@ -70,7 +70,7 @@
                         <img src="{{ asset('Images/car-x.png') }}">
                     </div>
                     <div class="inner">
-                        <span>{{ 'APP SSF 89' }}</span>
+                        <span>{{ $VehicleNumber }}</span>
                         <br>
                         <span>Vehicle Number</span>
                     </div>
