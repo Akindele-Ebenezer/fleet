@@ -364,6 +364,151 @@ class AnalyticsController extends Controller
             $Mileage = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $VehicleNumber)->orderBy('id', 'DESC')->first();
             $Balance = \App\Models\Car::select('Balance')->where('VehicleNumber', $VehicleNumber)->get();
             $MonthlyBudget = \App\Models\Car::select('MonthlyBudget')->where('VehicleNumber', $VehicleNumber)->get();
+
+            foreach ($UsedBy as $UsedBy_) {
+                $UsedBy = $UsedBy_->CarOwner;
+            } 
+         
+            foreach ($Balance as $Balance_) {
+                $Balance = $Balance_->Balance;
+            } 
+            
+            foreach ($MonthlyBudget as $MonthlyBudget_) {
+                $MonthlyBudget = $MonthlyBudget_->MonthlyBudget;
+            } 
+
+            $BalanceBroughtForward = $MonthlyBudget - $Balance;
+
+            return view('Analytics', $Config)->with('NumberOfCarRepairs' , $NumberOfCarRepairs)  
+                                            ->with('NumberOfCarMaintenance' , $NumberOfCarMaintenance)
+                                            ->with('NumberOfCarDeposits' , $NumberOfCarDeposits)  
+                                            ->with('NumberOfCarRefueling' , $NumberOfCarRefueling)
+                                            ->with('SumOfCarMaintenance', $SumOfCarMaintenance)
+                                            ->with('SumOfCarRepairs', $SumOfCarRepairs)
+                                            ->with('SumOfCarDeposits', $SumOfCarDeposits)
+                                            ->with('SumOfCarRefueling', $SumOfCarRefueling)
+                                            ->with('FleetSurvey_TOTAL' , $FleetSurvey_TOTAL)  
+                                            ->with('FleetSurvey_Repairs_PERCENTAGE' , $FleetSurvey_Repairs_PERCENTAGE)  
+                                            ->with('FleetSurvey_Maintenance_PERCENTAGE' , $FleetSurvey_Maintenance_PERCENTAGE)  
+                                            ->with('FleetSurvey_Deposits_PERCENTAGE' , $FleetSurvey_Deposits_PERCENTAGE)  
+                                            ->with('FleetSurvey_Refueling_PERCENTAGE' , $FleetSurvey_Refueling_PERCENTAGE)
+                                            ->with('MaintenanceCosts_CURRENT_YEAR', $MaintenanceCosts_CURRENT_YEAR)
+                                            ->with('RepairCosts_CURRENT_YEAR', $RepairCosts_CURRENT_YEAR)
+                                            ->with('RefuelingCosts_CURRENT_YEAR', $RefuelingCosts_CURRENT_YEAR)
+                                            ->with('DepositsCosts_CURRENT_YEAR', $DepositsCosts_CURRENT_YEAR)
+                                            ->with('MaintenanceCosts_PREVIOUS_YEAR', $MaintenanceCosts_PREVIOUS_YEAR)
+                                            ->with('RepairCosts_PREVIOUS_YEAR', $RepairCosts_PREVIOUS_YEAR)
+                                            ->with('RefuelingCosts_PREVIOUS_YEAR', $RefuelingCosts_PREVIOUS_YEAR)
+                                            ->with('DepositsCosts_PREVIOUS_YEAR', $DepositsCosts_PREVIOUS_YEAR)
+                                            ->with('VehicleNumber' , $VehicleNumber) 
+                                            ->with('UsedBy' , $UsedBy ?? 'Pool') 
+                                            ->with('Mileage' , $Mileage->Mileage ?? 0) 
+                                            ->with('Balance' , $Balance ?? 0)
+                                            ->with('BalanceBroughtForward' , $BalanceBroughtForward ?? 0);  
+        }
+
+        if (isset($_GET['Filter__Range_Analytics'])) {
+            if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
+                return back();
+            }
+
+
+            $NumberOfCarRepairs = \App\Models\Maintenance::select('VehicleNumber')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->where('IncidentType', 'REPAIR')->count();
+            $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->where('IncidentType', 'MAINTENANCE')->count();
+            $NumberOfCarDeposits = \App\Models\Deposits::select('VehicleNumber')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->count();
+            $NumberOfCarRefueling = \App\Models\Refueling::select('VehicleNumber')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->count();
+            
+            $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->where('IncidentType', 'MAINTENANCE')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Cost');  
+            $SumOfCarRepairs = \App\Models\Maintenance::select('Cost')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->where('IncidentType', 'REPAIR')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Cost');   
+            
+            $SumOfCarDeposits = \App\Models\Deposits::select('Amount')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Amount');  
+            $SumOfCarRefueling = \App\Models\Refueling::select('Amount')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Amount'); 
+
+            $FleetSurvey_TOTAL = $NumberOfCarRepairs + $NumberOfCarMaintenance + $NumberOfCarDeposits + $NumberOfCarRefueling;
+            $FleetSurvey_Repairs_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRepairs / $FleetSurvey_TOTAL * 100;
+            $FleetSurvey_Maintenance_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarMaintenance / $FleetSurvey_TOTAL * 100;
+            $FleetSurvey_Deposits_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarDeposits / $FleetSurvey_TOTAL * 100;
+            $FleetSurvey_Refueling_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRefueling / $FleetSurvey_TOTAL * 100;
+            
+            $FirstDayOfCurrentYear = date('Y') . '-01-01';
+            $MaintenanceCosts_CURRENT_YEAR = \App\Models\Maintenance::select('Cost')
+                                                                    ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                                    ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                                    ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
+                                                                    ->sum('Cost');
+            $RepairCosts_CURRENT_YEAR = \App\Models\Maintenance::select('Cost')
+                                                                    ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                                    ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                                    ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
+                                                                    ->where('IncidentType', 'REPAIR')
+                                                                    ->sum('Cost');
+            $RefuelingCosts_CURRENT_YEAR = \App\Models\Refueling::select('Cost')
+                                                                    ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                                    ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                                    ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
+                                                                    ->sum('Amount');
+            $DepositsCosts_CURRENT_YEAR = \App\Models\Deposits::select('Amount')
+                                                                    ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                                    ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                                    ->whereBetween('Date', [$FirstDayOfCurrentYear, date('Y-m-d')])
+                                                                    ->sum('Amount');
+        
+            $FirstDayOfPreviousYear = date('Y') - 1 . '-01-01';
+            $LastDayOfPreviousYear = date('Y') - 1 . '-12-31';
+            $MaintenanceCosts_PREVIOUS_YEAR = \App\Models\Maintenance::select('Cost')
+                                                                    ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                                    ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                                    ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
+                                                                    ->sum('Cost');
+            $RepairCosts_PREVIOUS_YEAR = \App\Models\Maintenance::select('Cost')
+                                                                    ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                                    ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                                    ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
+                                                                    ->where('IncidentType', 'REPAIR')
+                                                                    ->sum('Cost');
+            $RefuelingCosts_PREVIOUS_YEAR = \App\Models\Refueling::select('Amount')
+                                                                    ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                                    ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                                    ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
+                                                                    ->sum('Amount');
+            $DepositsCosts_PREVIOUS_YEAR = \App\Models\Deposits::select('Amount')
+                                                                    ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                                    ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                                    ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
+                                                                    ->sum('Amount');
+
+            $VehicleNumber = $_GET['VehicleNo'];
+            $UsedBy = \App\Models\Car::select('CarOwner')->where('VehicleNumber', $VehicleNumber)->get();
+            $Mileage = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $VehicleNumber)->orderBy('id', 'DESC')->first();
+            $Balance = \App\Models\Car::select('Balance')->where('VehicleNumber', $VehicleNumber)->get();
+            $MonthlyBudget = \App\Models\Car::select('MonthlyBudget')->where('VehicleNumber', $VehicleNumber)->get();
+            
             foreach ($UsedBy as $UsedBy_) {
                 $UsedBy = $UsedBy_->CarOwner;
             } 

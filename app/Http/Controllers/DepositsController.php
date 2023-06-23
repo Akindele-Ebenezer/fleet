@@ -80,8 +80,7 @@ class DepositsController extends Controller
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                         ->sum('Amount'); 
             $Deposits = Deposits::where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
-                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) //ANY DATE
-                                        // ->orWhereBetween('Date', ['2021-01-01', '2021-12-31']) //YEARLY
+                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])   
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
                                         

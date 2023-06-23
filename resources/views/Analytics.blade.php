@@ -59,12 +59,21 @@
 
     </style>
  
-    <div class="analytics">  
+    <div class="analytics">
+        <h1 class="analytics-summary-heading">  
+            @if(isset($_GET['Filter_All_Analytics']))
+                Vehicle summary from "{{ $_GET['Date_From'] }}" to "{{ $_GET['Date_To'] }}" 
+            @elseif(isset($_GET['Filter__Yearly_Analytics']))
+                Vehicle summary for VEHICLE "{{ $VehicleNumber }}" in the YEAR "{{ $_GET['Year'] }}" 
+            @elseif(isset($_GET['Filter__Range_Analytics']))
+                Vehicle summary for VEHICLE "{{ $VehicleNumber }}", from {{ $_GET['Date_From'] }} to {{ $_GET['Date_To'] }}  
+            @endif
+        </h1>
         @if(
             isset($_GET['Filter__Yearly_Analytics']) ||
             isset($_GET['Filter__Range_Analytics'])
         )
-            <div class="inner-1">
+            <div class="inner-1 inner-1-x">
                 <div class="x">
                     <div class="inner">
                         <img src="{{ asset('Images/car-x.png') }}">
@@ -117,7 +126,7 @@
                 </div>
             </div>
         @endif
-        <div class="inner-1">
+        <div class="inner-1 {{ isset($_GET['Filter_All_Analytics']) ?  'inner-1-x' : '' }}">
             <div class="x">
                 <div class="inner">
                     <img src="{{ asset('Images/refueling.png') }}">
