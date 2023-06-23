@@ -364,11 +364,10 @@ class AnalyticsController extends Controller
             $Mileage = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $VehicleNumber)->orderBy('id', 'DESC')->first();
             $Balance = \App\Models\Car::select('Balance')->where('VehicleNumber', $VehicleNumber)->get();
             $MonthlyBudget = \App\Models\Car::select('MonthlyBudget')->where('VehicleNumber', $VehicleNumber)->get();
-            
             foreach ($UsedBy as $UsedBy_) {
-                $UsedBy = $UsedBy_->UsedBy;
+                $UsedBy = $UsedBy_->CarOwner;
             } 
-            
+         
             foreach ($Balance as $Balance_) {
                 $Balance = $Balance_->Balance;
             } 
