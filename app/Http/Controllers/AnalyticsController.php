@@ -203,7 +203,7 @@ class AnalyticsController extends Controller
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                         ->sum('Amount'); 
             $SumOfCarAccidents = \App\Models\Maintenance::select('Cost')
-                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->where('IncidentType', 'ACCIDENT')
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                         ->sum('Cost'); 
 
