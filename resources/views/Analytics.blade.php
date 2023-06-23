@@ -110,7 +110,7 @@
                         <img src="{{ asset('Images/balance-brought-forward.png') }}">
                     </div>
                     <div class="inner">
-                        <span>₦ {{ number_format('348742') }}</span>
+                        <span>₦ {{ number_format($BalanceBroughtForward) }}</span>
                         <br>
                         <span>Brought Forward</span>
                     </div>
@@ -123,7 +123,7 @@
                     <img src="{{ asset('Images/refueling.png') }}">
                 </div>
                 <div class="inner">
-                    <span>${{ get_fleet_survey_currency_in_dollars($SumOfCarRefueling) }}</span>
+                    <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($SumOfCarRefueling) : '$ ' . get_fleet_survey_currency_in_dollars($SumOfCarRefueling) }}</span>
                     <br>
                     <span>Fuel Cost</span>
                 </div>
@@ -133,7 +133,7 @@
                     <img src="{{ asset('Images/service.png') }}">
                 </div>
                 <div class="inner">
-                    <span>${{ get_fleet_survey_currency_in_dollars($SumOfCarMaintenance) }}</span>
+                    <span> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($SumOfCarMaintenance) : '$ ' . get_fleet_survey_currency_in_dollars($SumOfCarMaintenance) }}</span>
                     <br>
                     <span>Total Service</span>
                 </div>
@@ -143,7 +143,7 @@
                     <img src="{{ asset('Images/deposit.png') }}">
                 </div>
                 <div class="inner">
-                    <span>${{ get_fleet_survey_currency_in_dollars($SumOfCarDeposits) }}</span>
+                    <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($SumOfCarDeposits) : '$ ' . get_fleet_survey_currency_in_dollars($SumOfCarDeposits) }}</span>
                     <br>
                     <span>Deposits</span>
                 </div>
@@ -153,7 +153,7 @@
                     <img src="{{ asset('Images/repair.png') }}">
                 </div>
                 <div class="inner">
-                    <span>${{ get_fleet_survey_currency_in_dollars($SumOfCarRepairs) }}</span>
+                    <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($SumOfCarRepairs) : '$ ' . get_fleet_survey_currency_in_dollars($SumOfCarRepairs) }}</span>
                     <br>
                     <span>Repair Cost</span>
                 </div>
@@ -439,14 +439,14 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"></path></svg>
                                         Current Year
                                     </div>
-                                    <div class="-xx">$ {{ get_fleet_survey_currency_in_dollars($MaintenanceCosts_CURRENT_YEAR) }}</div>
+                                    <div class="-xx">{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($MaintenanceCosts_CURRENT_YEAR) : '$ ' . get_fleet_survey_currency_in_dollars($MaintenanceCosts_CURRENT_YEAR) }}</div>
                                 </li>
                                 <li>
                                     <div class="-xx">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"></path></svg>
                                         Previous Year
                                     </div>
-                                    <div class="-xx">$ {{ get_fleet_survey_currency_in_dollars($MaintenanceCosts_PREVIOUS_YEAR) }}</div>
+                                    <div class="-xx"> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($MaintenanceCosts_PREVIOUS_YEAR) : '$ ' . get_fleet_survey_currency_in_dollars($MaintenanceCosts_PREVIOUS_YEAR) }}</div>
                                 </li>
                             </ul>
                         </div>
@@ -477,14 +477,14 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"></path></svg>
                                         Current Year
                                     </div>
-                                    <div class="-xx">$ {{ get_fleet_survey_currency_in_dollars($RepairCosts_CURRENT_YEAR) }}</div>
+                                    <div class="-xx"> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($RepairCosts_CURRENT_YEAR) : '$ ' . get_fleet_survey_currency_in_dollars($RepairCosts_CURRENT_YEAR) }}</div>
                                 </li> 
                                 <li>
                                     <div class="-xx">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"></path></svg>
                                         Previous Year
                                     </div>
-                                    <div class="-xx">$ {{ get_fleet_survey_currency_in_dollars($RepairCosts_PREVIOUS_YEAR) }}</div>
+                                    <div class="-xx"> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($RepairCosts_PREVIOUS_YEAR) : '$ ' . get_fleet_survey_currency_in_dollars($RepairCosts_PREVIOUS_YEAR) }}</div>
                                 </li> 
                             </ul>
                         </div>
@@ -517,7 +517,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"></path></svg> Current Year
                                 </div>
                                 <div class="x1-inner">
-                                    <span>$ {{ get_fleet_survey_currency_in_dollars($RefuelingCosts_CURRENT_YEAR) }}</span> <strong>></strong>
+                                    <span> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($RefuelingCosts_CURRENT_YEAR) : '$ ' . get_fleet_survey_currency_in_dollars($RefuelingCosts_CURRENT_YEAR) }}</span> <strong>></strong>
                                 </div>
                             </li>
                             <li>
@@ -525,7 +525,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"></path></svg> Previous Year
                                 </div>
                                 <div class="x1-inner">
-                                    <span>$ {{ get_fleet_survey_currency_in_dollars($RefuelingCosts_PREVIOUS_YEAR) }}</span> <strong>></strong>
+                                    <span> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($RefuelingCosts_PREVIOUS_YEAR) : '$ ' . get_fleet_survey_currency_in_dollars($RefuelingCosts_PREVIOUS_YEAR) }}</span> <strong>></strong>
                                 </div>
                             </li> 
                         </ul>
@@ -540,7 +540,7 @@
                             <div class="last-inner">
                                 <strong>Deposits</strong>
                                 <br>
-                                $ {{ get_fleet_survey_currency_in_dollars($DepositsCosts_CURRENT_YEAR) }}
+                                {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($DepositsCosts_CURRENT_YEAR) : '$ ' . get_fleet_survey_currency_in_dollars($DepositsCosts_CURRENT_YEAR) }}
                             </div>
                             <div class="last-inner">
                                This Year
@@ -567,11 +567,11 @@
                             <div class="last-inner">
                                 <strong>Other Costs (Deposits)</strong>
                                 <br>
-                                $ {{ get_fleet_survey_currency_in_dollars($DepositsCosts_PREVIOUS_YEAR) }}
+                                {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($DepositsCosts_PREVIOUS_YEAR) : '$ ' . get_fleet_survey_currency_in_dollars($DepositsCosts_PREVIOUS_YEAR) }}
                                 <br><br>
                                 <strong>Current Year</strong>
                                 <br>
-                                $ {{ get_fleet_survey_currency_in_dollars($DepositsCosts_CURRENT_YEAR) }}
+                                {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($DepositsCosts_CURRENT_YEAR) : '$ ' . get_fleet_survey_currency_in_dollars($DepositsCosts_CURRENT_YEAR) }}
                             </div>
                             <div class="last-inner">
                                 Last Year
