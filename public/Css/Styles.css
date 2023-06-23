@@ -550,9 +550,9 @@ svg {
   background: #DF2E38 !important;
   color: #fff;
   position: fixed;
-  right: 2em;
+  right: 4em;
   text-align: left;
-  top: 2em;
+  top: 1em;
   width: 14em;
   z-index: 130;
 }
@@ -632,6 +632,18 @@ svg {
   position: fixed;
   width: 100vw;
   z-index: 120;
+}
+
+.clear-filter {
+  border: 1px solid #555;
+  border-radius: 0.2em;
+  cursor: pointer;
+  padding: 0.3em;
+  position: fixed;
+  right: 1em;
+  top: 2em;
+  width: 2.45em;
+  z-index: 130;
 }
 
 .report {

@@ -134,6 +134,7 @@
 
     @if (Route::is('Analytics'))
     <button class="automatic-filter action-x">Cars :: (Automatic Filter) <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg></button>
+    <img src="{{ asset('Images/clear-filter.png') }}" class="clear-filter">
     <div class="cars-filter-wrapper Hide">
         <div class="cars-filter">
             <form action="">
@@ -149,7 +150,17 @@
                 <h3>Vehicle Time Period</h3>
                 <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  Yearly</p>
                 <ul>
-                    <li>Vehicle No.: <input type="text" name="VehicleNo"></li>
+                    <li>
+                        Vehicle No.: 
+                        <input type="text" name="VehicleNo" list="Vehicles" autocomplete="off">
+                        <datalist id="Vehicles">
+                            @foreach ($Cars_Absolute as $Car)
+                                <option value="{{ $Car->VehicleNumber }}">
+                                {{ $Car->VehicleNumber }} <br>
+                                <span>{{ $Car->Make }} :: {{ $Car->Model }}</span>
+                            @endforeach
+                        </datalist>
+                    </li>
                     <li>Specify Year: <input type="number" name="Year"></li>
                 </ul>
                 <button class="action-x" name="Filter_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Yearly">Apply</button>
@@ -158,7 +169,17 @@
                 <h3>Time Period</h3>
                 <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  (Range)</p>
                 <ul>
-                    <li>Vehicle No.: <input type="text" name="VehicleNo"></li> 
+                    <li>
+                        Vehicle No.:
+                        <input type="text" name="VehicleNo" list="Vehicles" autocomplete="off">
+                        <datalist id="Vehicles">
+                            @foreach ($Cars_Absolute as $Car)
+                                <option value="{{ $Car->VehicleNumber }}">
+                                {{ $Car->VehicleNumber }} <br>
+                                <span>{{ $Car->Make }} :: {{ $Car->Model }}</span>
+                            @endforeach
+                        </datalist>
+                    </li> 
                     <li>Start Date: <input type="date" name="Date_From"></li>
                     <li>End Date: <input type="date" name="Date_To"></li>
                 </ul>
@@ -621,7 +642,17 @@
                             <h3>Vehicle Time Period</h3>
                             <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  Yearly</p>
                             <ul>
-                                <li>Vehicle No.: <input type="text" name="VehicleNo"></li>
+                                <li>
+                                    Vehicle No.: 
+                                    <input type="text" name="VehicleNo" list="Vehicles" autocomplete="off">
+                                    <datalist id="Vehicles">
+                                        @foreach ($Cars_Absolute as $Car)
+                                            <option value="{{ $Car->VehicleNumber }}">
+                                            {{ $Car->VehicleNumber }} <br>
+                                            <span>{{ $Car->Make }} :: {{ $Car->Model }}</span>
+                                        @endforeach
+                                    </datalist>
+                                </li>
                                 <li>Specify Year: <input type="number" name="Year"></li>
                             </ul>
                             <button class="action-x" name="Filter_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Yearly">Apply</button>
@@ -630,7 +661,17 @@
                             <h3>Time Period</h3>
                             <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  (Range)</p>
                             <ul>
-                                <li>Vehicle No.: <input type="text" name="VehicleNo"></li> 
+                                <li>
+                                    Vehicle No.:
+                                    <input type="text" name="VehicleNo" list="Vehicles" autocomplete="off">
+                                    <datalist id="Vehicles">
+                                        @foreach ($Cars_Absolute as $Car)
+                                            <option value="{{ $Car->VehicleNumber }}">
+                                            {{ $Car->VehicleNumber }} <br>
+                                            <span>{{ $Car->Make }} :: {{ $Car->Model }}</span>
+                                        @endforeach
+                                    </datalist>
+                                </li> 
                                 <li>Start Date: <input type="date" name="Date_From"></li>
                                 <li>End Date: <input type="date" name="Date_To"></li>
                             </ul>

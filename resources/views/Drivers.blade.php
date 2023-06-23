@@ -6,8 +6,7 @@
             <tr class="table-head"> 
                 <th onclick="sortTable(0)">Name</th>
                 <th onclick="sortTable(1)">Assigned Vehicle</th>
-                <th onclick="sortTable(2)">Car Owner</th> 
-                <th onclick="sortTable(3)"></th> 
+                <th onclick="sortTable(2)">Car Owner</th>  
             </tr>   
             @unless (count($Drivers) > 0)
             <tr>
@@ -29,12 +28,7 @@
                 </td>
                 <td>
                     {{ $Driver->CarOwner }} 
-                </td> 
-                <td>  
-                    <button class="action-x {{ 'manage-document' }}">MANAGE</button>
-                    <span class="Hide">{{ $Driver->VehicleNumber }}</span>
-                    <span class="Hide">{{ $Driver->id }}</span>
-                </td>
+                </td>  
             </tr>   
             @endforeach
         </table>
