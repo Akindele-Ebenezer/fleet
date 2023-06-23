@@ -14,11 +14,13 @@ class AnalyticsController extends Controller
         $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'MAINTENANCE')->count();
         $NumberOfCarDeposits = \App\Models\Deposits::select('VehicleNumber')->count();
         $NumberOfCarRefueling = \App\Models\Refueling::select('VehicleNumber')->count();
+        $NumberOfCarAccidents = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'ACCIDENT')->count();
     
         $SumOfCarRepairs = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'REPAIR')->sum('Cost');
         $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')->sum('Cost');
         $SumOfCarDeposits = \App\Models\Deposits::select('Amount')->sum('Amount');
         $SumOfCarRefueling = \App\Models\Refueling::select('Amount')->sum('Amount');
+        $SumOfCarAccidents = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'ACCIDENT')->sum('Cost');
      
         $FleetSurvey_TOTAL = $NumberOfCarRepairs + $NumberOfCarMaintenance + $NumberOfCarDeposits + $NumberOfCarRefueling;
         $FleetSurvey_Repairs_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRepairs / $FleetSurvey_TOTAL * 100;
@@ -129,6 +131,8 @@ class AnalyticsController extends Controller
             'NumberOfCarMaintenance' => $NumberOfCarMaintenance, 
             'NumberOfCarDeposits' => $NumberOfCarDeposits,
             'NumberOfCarRefueling' => $NumberOfCarRefueling, 
+            'NumberOfCarAccidents' => $NumberOfCarAccidents, 
+            'SumOfCarAccidents' => $SumOfCarAccidents,
             'SumOfCarRepairs' => $SumOfCarRepairs,
             'SumOfCarMaintenance' => $SumOfCarMaintenance, 
             'SumOfCarDeposits' => $SumOfCarDeposits,
@@ -179,6 +183,10 @@ class AnalyticsController extends Controller
             $NumberOfCarRefueling = \App\Models\Refueling::select('VehicleNumber')
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                         ->count();
+            $NumberOfCarAccidents = \App\Models\Maintenance::select('VehicleNumber')
+                                                        ->where('IncidentType', 'ACCIDENT')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->count();
             
             $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
                                                         ->where('IncidentType', 'MAINTENANCE')
@@ -194,6 +202,10 @@ class AnalyticsController extends Controller
             $SumOfCarRefueling = \App\Models\Refueling::select('Amount')
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                         ->sum('Amount'); 
+            $SumOfCarAccidents = \App\Models\Maintenance::select('Cost')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Cost'); 
 
             $FleetSurvey_TOTAL = $NumberOfCarRepairs + $NumberOfCarMaintenance + $NumberOfCarDeposits + $NumberOfCarRefueling;
             $FleetSurvey_Repairs_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRepairs / $FleetSurvey_TOTAL * 100;
@@ -239,11 +251,14 @@ class AnalyticsController extends Controller
                                                                     ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                                     ->whereBetween('Date', [$FirstDayOfPreviousYear, $LastDayOfPreviousYear])
                                                                     ->sum('Amount');
+                                                               
 
             return view('Analytics', $Config)->with('NumberOfCarRepairs' , $NumberOfCarRepairs)  
                                             ->with('NumberOfCarMaintenance' , $NumberOfCarMaintenance)
                                             ->with('NumberOfCarDeposits' , $NumberOfCarDeposits)  
                                             ->with('NumberOfCarRefueling' , $NumberOfCarRefueling)
+                                            ->with('NumberOfCarAccidents' , $NumberOfCarAccidents)
+                                            ->with('SumOfCarAccidents' , $SumOfCarAccidents)
                                             ->with('SumOfCarMaintenance', $SumOfCarMaintenance)
                                             ->with('SumOfCarRepairs', $SumOfCarRepairs)
                                             ->with('SumOfCarDeposits', $SumOfCarDeposits)
@@ -286,6 +301,12 @@ class AnalyticsController extends Controller
                                                         ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
                                                         ->count();
             
+            $NumberOfCarAccidents = \App\Models\Maintenance::select('VehicleNumber')
+                                                        ->where('IncidentType', 'ACCIDENT')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->count();
+
             $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
                                                         ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                                         ->where('IncidentType', 'MAINTENANCE')
@@ -305,6 +326,12 @@ class AnalyticsController extends Controller
                                                         ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                                         ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
                                                         ->sum('Amount'); 
+
+            $SumOfCarAccidents = \App\Models\Maintenance::select('Cost')
+                                                        ->where('IncidentType', 'ACCIDENT')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                                                        ->sum('Cost'); 
 
             $FleetSurvey_TOTAL = $NumberOfCarRepairs + $NumberOfCarMaintenance + $NumberOfCarDeposits + $NumberOfCarRefueling;
             $FleetSurvey_Repairs_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRepairs / $FleetSurvey_TOTAL * 100;
@@ -383,6 +410,8 @@ class AnalyticsController extends Controller
                                             ->with('NumberOfCarMaintenance' , $NumberOfCarMaintenance)
                                             ->with('NumberOfCarDeposits' , $NumberOfCarDeposits)  
                                             ->with('NumberOfCarRefueling' , $NumberOfCarRefueling)
+                                            ->with('NumberOfCarAccidents' , $NumberOfCarAccidents)
+                                            ->with('SumOfCarAccidents' , $SumOfCarAccidents)
                                             ->with('SumOfCarMaintenance', $SumOfCarMaintenance)
                                             ->with('SumOfCarRepairs', $SumOfCarRepairs)
                                             ->with('SumOfCarDeposits', $SumOfCarDeposits)
@@ -430,6 +459,12 @@ class AnalyticsController extends Controller
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                         ->count();
             
+            $NumberOfCarAccidents = \App\Models\Maintenance::select('VehicleNumber')
+                                                        ->where('IncidentType', 'ACCIDENT')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->count();
+
             $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
                                                         ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                                         ->where('IncidentType', 'MAINTENANCE')
@@ -450,6 +485,11 @@ class AnalyticsController extends Controller
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                         ->sum('Amount'); 
 
+            $SumOfCarAccidents = \App\Models\Maintenance::select('Cost')
+                                                        ->where('IncidentType', 'ACCIDENT')
+                                                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Cost'); 
             $FleetSurvey_TOTAL = $NumberOfCarRepairs + $NumberOfCarMaintenance + $NumberOfCarDeposits + $NumberOfCarRefueling;
             $FleetSurvey_Repairs_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarRepairs / $FleetSurvey_TOTAL * 100;
             $FleetSurvey_Maintenance_PERCENTAGE = $FleetSurvey_TOTAL == 0 ? 0 : $NumberOfCarMaintenance / $FleetSurvey_TOTAL * 100;
@@ -527,6 +567,8 @@ class AnalyticsController extends Controller
                                             ->with('NumberOfCarMaintenance' , $NumberOfCarMaintenance)
                                             ->with('NumberOfCarDeposits' , $NumberOfCarDeposits)  
                                             ->with('NumberOfCarRefueling' , $NumberOfCarRefueling)
+                                            ->with('NumberOfCarAccidents' , $NumberOfCarAccidents)
+                                            ->with('SumOfCarAccidents' , $SumOfCarAccidents)
                                             ->with('SumOfCarMaintenance', $SumOfCarMaintenance)
                                             ->with('SumOfCarRepairs', $SumOfCarRepairs)
                                             ->with('SumOfCarDeposits', $SumOfCarDeposits)

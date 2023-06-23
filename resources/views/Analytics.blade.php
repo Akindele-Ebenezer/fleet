@@ -167,6 +167,16 @@
                     <span>Repair Cost</span>
                 </div>
             </div>
+            <div class="x">
+                <div class="inner">
+                    <img src="{{ asset('Images/car-accident.png') }}">
+                </div>
+                <div class="inner">
+                    <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($SumOfCarAccidents) : '$ ' . get_fleet_survey_currency_in_dollars($SumOfCarAccidents) }}</span>
+                    <br>
+                    <span>Accidents</span>
+                </div>
+            </div>
         </div>
         <div class="inner-2">
            <div class="x">
@@ -606,6 +616,14 @@
                                 </div>
                                 <div class="x1-inner">
                                     <span>{{ number_format($NumberOfCarRepairs) }}</span> <strong>></strong>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="x1-inner">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"></path></svg> Accidents
+                                </div>
+                                <div class="x1-inner">
+                                    <span>{{ number_format($NumberOfCarAccidents) }}</span> <strong>></strong>
                                 </div>
                             </li>
                             <li>
