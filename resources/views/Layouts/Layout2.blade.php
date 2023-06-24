@@ -393,19 +393,19 @@
                     </h1> 
                     @unless (Route::is('Analytics'))
                     <div class="inner-x">
-                        <p>
+                        <p class="cars-route">
                             <img src="{{ asset('Images/car.png') }}" alt="">
                             Cars ({{ number_format($NumberOfCars) }})
                         </p>
-                        <p>
+                        <p class="active-cars-route">
                             <img src="{{ asset('Images/active.png') }}" alt="">
                             Active ({{ number_format($NumberOfCars_ACTIVE) }})
                         </p>
-                        <p>
+                        <p class="inactive-cars-route">
                             <img src="{{ asset('Images/inactive.png') }}" alt="">
                             Inactive ({{ number_format($NumberOfCars_INACTIVE) }})
                         </p>
-                        <p>
+                        <p class="drivers-route">
                             <img src="{{ asset('Images/driver.png') }}" alt="">
                             Drivers ({{ number_format($NumberOfDrivers) }})
                         </p>

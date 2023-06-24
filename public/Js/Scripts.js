@@ -152,6 +152,9 @@ let MaintenanceRouteButton = document.querySelectorAll('.maintenance-route');
 let RefuelingRouteButton = document.querySelectorAll('.refueling-route'); 
 let DepositsRouteButton = document.querySelectorAll('.deposits-route');
 let DepositsRouteEditButton = document.querySelectorAll('.deposits-route-edit');
+let ActiveCarsRouteButton = document.querySelectorAll('.active-cars-route');
+let InactiveCarsRouteButton = document.querySelectorAll('.inactive-cars-route');
+let DriversRouteButton = document.querySelectorAll('.drivers-route');
 let CarsRouteButton = document.querySelectorAll('.cars-route');
 let CarsRegistrationRouteButton = document.querySelectorAll('.cars-registration-route');
 
@@ -193,5 +196,23 @@ DepositsRouteEditButton.forEach(Button => {
 CarsRouteButton.forEach(Button => {
     Button.addEventListener('click', () => {
         window.location = '/Cars';
+    });
+}); 
+
+ActiveCarsRouteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Cars?FilterValue=active';
+    });
+}); 
+
+InactiveCarsRouteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Cars?FilterValue=inactive';
+    });
+}); 
+
+DriversRouteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Cars/Drivers';
     });
 }); 

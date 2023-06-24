@@ -207,9 +207,14 @@
                 p {
                     align-items: center;   
                     color: #fff;
+                    cursor: pointer;
                     display: flex;
                     margin-right: 1rem; 
                     padding: 0.5em;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
 
                     img { 
                         padding: 0.25em;

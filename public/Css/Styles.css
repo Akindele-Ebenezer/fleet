@@ -731,9 +731,13 @@ svg {
 .report-data-heading .inner-x p {
   align-items: center;
   color: #fff;
+  cursor: pointer;
   display: flex;
   margin-right: 1rem;
   padding: 0.5em;
+}
+.report-data-heading .inner-x p:hover {
+  text-decoration: underline;
 }
 .report-data-heading .inner-x p img {
   padding: 0.25em;
@@ -1850,6 +1854,10 @@ svg {
   font-family: system-ui;
   font-size: 1em;
   text-align: center;
+}
+.chart-inner h3:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 .chart .block {
   display: block;

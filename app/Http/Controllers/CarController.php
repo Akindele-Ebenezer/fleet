@@ -28,7 +28,13 @@ class CarController extends Controller
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
-            $Cars = Car::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+
+            if ($FilterValue === 'active') {
+                $Cars = Car::where('Status', 'ACTIVE')->paginate(7);
+
+                $Cars->withPath($_SERVER['REQUEST_URI']);
+            } else {
+                $Cars = Car::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Model', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('SubModel', 'LIKE', '%' . $FilterValue . '%')
@@ -59,6 +65,7 @@ class CarController extends Controller
                         ->paginate(7);
  
                         $Cars->withPath($_SERVER['REQUEST_URI']);
+                }
 
             return view('Cars', $Config)->with('Cars', $Cars);
         } 

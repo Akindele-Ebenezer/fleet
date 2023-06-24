@@ -184,7 +184,7 @@
                     <h2>Vehicles Condition</h2>
                     <div class="chart">  
                         <div class="chart-inner">   
-                            <h3>Active</h3>                   
+                            <h3 class="active-cars-route">Active</h3>                   
                             <div class="block">
                                 <span id="val"></span>
                                 <canvas id="canvas" width="260" height="260">
@@ -200,7 +200,7 @@
                             </div>
                         </div>
                         <div class="chart-inner">    
-                            <h3>Inactive</h3>                     
+                            <h3 class="inactive-cars-route">Inactive</h3>                     
                             <div class="block">
                                 <span id="val2"></span>
                                 <canvas id="canvas2" width="260" height="260">
@@ -342,7 +342,7 @@
                     <h2>Total Vehicles</h2> 
                     <div class="chart">  
                         <div class="chart-inner">   
-                            <h3>Aggregate</h3>                   
+                            <h3 class="cars-route">Aggregate</h3>                   
                             <div class="block">
                                 <span id="val3"></span>
                                 <canvas id="canvas3" width="260" height="260">
