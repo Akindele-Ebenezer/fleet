@@ -50,6 +50,11 @@
                 span {
                     color: #fff;
 
+                    &:hover {
+                        cursor: pointer;
+                        text-decoration: underline;
+                    }
+
                     &:first-of-type {
                         font-family: system-ui;
                         font-size: 3em; 
@@ -596,6 +601,11 @@
             color: #ddd !important;
             margin-block: 2em;
             padding-left: 1em;
+
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
 
             &.active {
                 border-left: 3px solid $Color-3;

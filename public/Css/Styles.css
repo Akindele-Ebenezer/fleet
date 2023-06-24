@@ -1398,6 +1398,10 @@ svg {
 .analytics .inner-1 .x .inner span {
   color: #fff;
 }
+.analytics .inner-1 .x .inner span:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 .analytics .inner-1 .x .inner span:first-of-type {
   font-family: system-ui;
   font-size: 3em;
@@ -1831,6 +1835,10 @@ svg {
   color: #ddd !important;
   margin-block: 2em;
   padding-left: 1em;
+}
+.chart-xx .xx-inner:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 .chart-xx .xx-inner.active, .chart-xx .report-inner ul a li.xx-inner:hover, .report-inner ul a .chart-xx li.xx-inner:hover {
   border-left: 3px solid #41a341;

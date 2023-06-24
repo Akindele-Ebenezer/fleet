@@ -149,6 +149,8 @@ OpenDocumentButtons.forEach(Button => {
 });
 
 let MaintenanceRouteButton = document.querySelectorAll('.maintenance-route');
+let RepairRouteButton = document.querySelectorAll('.repair-route');
+let AccidentRouteButton = document.querySelectorAll('.accident-route');
 let RefuelingRouteButton = document.querySelectorAll('.refueling-route'); 
 let DepositsRouteButton = document.querySelectorAll('.deposits-route');
 let DepositsRouteEditButton = document.querySelectorAll('.deposits-route-edit');
@@ -167,6 +169,18 @@ CarsRegistrationRouteButton.forEach(Button => {
 MaintenanceRouteButton.forEach(Button => {
     Button.addEventListener('click', () => {
         window.location = '/Maintenance';
+    });
+});
+
+RepairRouteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Maintenance?FilterValue=repair';
+    });
+});
+
+AccidentRouteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Maintenance?FilterValue=accident';
     });
 });
 

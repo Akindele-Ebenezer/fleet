@@ -134,7 +134,7 @@
                 <div class="inner">
                     <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($SumOfCarRefueling) : '$ ' . get_fleet_survey_currency_in_dollars($SumOfCarRefueling) }}</span>
                     <br>
-                    <span>Fuel Cost</span>
+                    <span class="refueling-route">Fuel Cost</span>
                 </div>
             </div>
             <div class="x">
@@ -144,7 +144,7 @@
                 <div class="inner">
                     <span> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($SumOfCarMaintenance) : '$ ' . get_fleet_survey_currency_in_dollars($SumOfCarMaintenance) }}</span>
                     <br>
-                    <span>Total Service</span>
+                    <span class="maintenance-route">Total Service</span>
                 </div>
             </div>
             <div class="x">
@@ -154,7 +154,7 @@
                 <div class="inner">
                     <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($SumOfCarDeposits) : '$ ' . get_fleet_survey_currency_in_dollars($SumOfCarDeposits) }}</span>
                     <br>
-                    <span>Deposits</span>
+                    <span class="deposits-route">Deposits</span>
                 </div>
             </div>
             <div class="x">
@@ -164,7 +164,7 @@
                 <div class="inner">
                     <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($SumOfCarRepairs) : '$ ' . get_fleet_survey_currency_in_dollars($SumOfCarRepairs) }}</span>
                     <br>
-                    <span>Repair Cost</span>
+                    <span class="repair-route">Repair Cost</span>
                 </div>
             </div>
             <div class="x">
@@ -174,7 +174,7 @@
                 <div class="inner">
                     <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . number_format($SumOfCarAccidents) : '$ ' . get_fleet_survey_currency_in_dollars($SumOfCarAccidents) }}</span>
                     <br>
-                    <span>Accidents</span>
+                    <span class="accident-route">Accidents</span>
                 </div>
             </div>
         </div>
@@ -358,15 +358,15 @@
                             </div>
                         </div> 
                         <div class="chart-xx">
-                            <div class="xx-inner active">
+                            <div class="xx-inner active active-cars-route">
                                 ACTIVE <br>
                                 {{ $NumberOfCars_ACTIVE }} <em>+ {{ round($NumberNumberOfCars_ACTIVE_PERCENTAGE, 0) }}%</em>
                             </div>
-                            <div class="xx-inner inactive">
+                            <div class="xx-inner inactive inactive-cars-route">
                                 INACTIVE <br>
                                 {{ $NumberOfCars_INACTIVE }} <em>+ {{ round($NumberNumberOfCars_INACTIVE_PERCENTAGE, 0) }}%</em>
                             </div>
-                            <div class="xx-inner aggregate">
+                            <div class="xx-inner aggregate cars-route">
                                 AGGREGATE <br>
                                 {{ $NumberOfCars }} <em>+ 100%</em>
                             </div>
