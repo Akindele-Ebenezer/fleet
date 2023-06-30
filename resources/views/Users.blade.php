@@ -1,5 +1,10 @@
 @extends('Layouts.Layout2')
-
+{{-- @php
+    
+    $HandleNumbers = fn($Value) => 
+                        ($Value > 999 AND $Value < 1000000) ? number_format($Value / 1000, 1) . 'K' : 
+                        ($Value > 999999 ? number_format($Value / 1000, 1) . 'M' : ''); 
+@endphp --}}
 @section('Content')
     <div class="table-wrapper"> 
         <table class="table table-2 list" id="Table">
@@ -101,26 +106,26 @@
                     <div class="car-info">
                         <div class="info-inner">
                             <div class="inner">
-                                <h1>: {{ handle_numbers($NumberOfAllRecords_CURRENT_USER) }}</h1> 
+                                <h1>: {{ $HandleNumbers($NumberOfAllRecords_CURRENT_USER) }}</h1> 
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
                                     <span>Maintenance</span>
-                                    <span>{{ handle_numbers($NumberOfMaintenance_CURRENT_USER) }}</span> 
+                                    <span>{{ $HandleNumbers($NumberOfMaintenance_CURRENT_USER) }}</span> 
                                 </div>
                                 <div class="inner-x">
                                     <span>Repairs</span>
-                                    <span>{{ handle_numbers($NumberOfRepairs_CURRENT_USER) }}</span>
+                                    <span>{{ $HandleNumbers($NumberOfRepairs_CURRENT_USER) }}</span>
                                 </div>
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
                                     <span>Deposits</span>
-                                    <span>{{ handle_numbers($NumberOfDeposits_CURRENT_USER) }}</span>
+                                    <span>{{ $HandleNumbers($NumberOfDeposits_CURRENT_USER) }}</span>
                                 </div>
                                 <div class="inner-x">
                                     <span>Refueling</span>
-                                    <span>{{ handle_numbers($NumberOfRefueling_CURRENT_USER) }}</span>
+                                    <span>{{ $HandleNumbers($NumberOfRefueling_CURRENT_USER) }}</span>
                                 </div>
                             </div> 
                         </div>  

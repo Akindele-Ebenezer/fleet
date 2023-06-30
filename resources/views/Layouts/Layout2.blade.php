@@ -59,18 +59,7 @@
 </head>
 <body> 
     @php
-        include('../resources/Globals.php'); 
-
-        // function handle_numbers($Value) { 
-        //     if ($Value > 999 AND $Value < 1000000) {
-        //         $Value = $Value > 999 ? number_format($Value / 1000, 1) . 'K' : $Value;
-        //     } elseif ($Value > 999999) {
-        //         $Value = $Value > 999999 ? number_format($Value / 1000, 1) . 'M' : $Value;
-        //     }
-
-        //     return $Value;
-        // }
-
+        include('../resources/Globals.php');  
     @endphp 
     @include('Components.LoaderComponent')
 
@@ -226,7 +215,7 @@
                     <li class="{{ Route::is('Cars') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"/></svg>                  
                         Cars
-                        <span>{{ handle_numbers($NumberOfCars) }}</span>
+                        <span>{{ $HandleNumbers($NumberOfCars) }}</span>
                     </li>
                 </a>
                 <a href='{{ route('Documents') }}'>
@@ -240,7 +229,7 @@
                         <li class="">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M222 976q-43.75 0-74.375-30.625T117 871V746h127V176l59.8 60 59.8-60 59.8 60 59.8-60 59.8 60 60-60 60 60 60-60 60 60 60-60v695q0 43.75-30.625 74.375T738 976H222Zm516-60q20 0 32.5-12.5T783 871V276H304v470h389v125q0 20 12.5 32.5T738 916ZM357 434v-60h240v60H357Zm0 134v-60h240v60H357Zm333-134q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9Zm0 129q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9ZM221 916h412V806H177v65q0 20 12.65 32.5T221 916Zm-44 0V806v110Z"/></svg>                  
                             Fleet Entries 
-                            <span>{{ handle_numbers(MyRecords_TOTAL()) }}</span>
+                            <span>{{ $HandleNumbers(MyRecords_TOTAL()) }}</span>
                             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"/></svg>
                         </li> 
                     </a>
@@ -275,14 +264,14 @@
                     <li class="{{ Route::is('CarOwners') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 575q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM160 896v-94q0-38 19-65t49-41q67-30 128.5-45T480 636q62 0 123 15.5t127.921 44.694q31.301 14.126 50.19 40.966Q800 764 800 802v94H160Zm60-60h520v-34q0-16-9.5-30.5T707 750q-64-31-117-42.5T480 696q-57 0-111 11.5T252 750q-14 7-23 21.5t-9 30.5v34Zm260-321q39 0 64.5-25.5T570 425q0-39-25.5-64.5T480 335q-39 0-64.5 25.5T390 425q0 39 25.5 64.5T480 515Zm0-90Zm0 411Z"/></svg>                   
                         Car Owners
-                        <span>{{ handle_numbers($NumberOfCarOwners) }}</span>
+                        <span>{{ $HandleNumbers($NumberOfCarOwners) }}</span>
                     </li>
                 </a> 
                 <a href='{{ route('Drivers') }}'>
                     <li class="{{ Route::is('Drivers') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M96 128V70.2c0-13.3 8.3-25.3 20.8-30l96-36c7.2-2.7 15.2-2.7 22.5 0l96 36c12.5 4.7 20.8 16.6 20.8 30V128h-.3c.2 2.6 .3 5.3 .3 8v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V136c0-2.7 .1-5.4 .3-8H96zm48 48c0 44.2 35.8 80 80 80s80-35.8 80-80V160H144v16zM111.9 327.7c10.5-3.4 21.8 .4 29.4 8.5l71 75.5c6.3 6.7 17 6.7 23.3 0l71-75.5c7.6-8.1 18.9-11.9 29.4-8.5C401 348.6 448 409.4 448 481.3c0 17-13.8 30.7-30.7 30.7H30.7C13.8 512 0 498.2 0 481.3c0-71.9 47-132.7 111.9-153.6zM208 48V64H192c-4.4 0-8 3.6-8 8V88c0 4.4 3.6 8 8 8h16v16c0 4.4 3.6 8 8 8h16c4.4 0 8-3.6 8-8V96h16c4.4 0 8-3.6 8-8V72c0-4.4-3.6-8-8-8H240V48c0-4.4-3.6-8-8-8H216c-4.4 0-8 3.6-8 8z"/></svg>                  
                         Drivers
-                        <span>{{ handle_numbers($NumberOfDrivers) }}</span>
+                        <span>{{ $HandleNumbers($NumberOfDrivers) }}</span>
                     </li>
                 </a>
                 <div class="sub-nav-wrapper">
@@ -325,13 +314,13 @@
                     <a href='{{ route('Maintenance') }}'>
                         <li class="{{ Route::is('Maintenance') ? 'active' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"/></svg>           
-                            Maintenance  :: {{ handle_numbers($NumberOfCarMaintenance) }}
+                            Maintenance  :: {{ $HandleNumbers($NumberOfCarMaintenance) }}
                         </li>
                     </a> 
                     <a href='{{ route('Refueling') }}'>
                         <li class="{{ Route::is('Refueling') ? 'active' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"/></svg>                  
-                            Refueling :: {{ handle_numbers($NumberOfCarRefueling) }}
+                            Refueling :: {{ $HandleNumbers($NumberOfCarRefueling) }}
                         </li>
                     </a>
                 </div>
@@ -339,7 +328,7 @@
                     <li class="{{ Route::is('Users') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 575q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM160 896v-94q0-38 19-65t49-41q67-30 128.5-45T480 636q62 0 123 15.5t127.921 44.694q31.301 14.126 50.19 40.966Q800 764 800 802v94H160Zm60-60h520v-34q0-16-9.5-30.5T707 750q-64-31-117-42.5T480 696q-57 0-111 11.5T252 750q-14 7-23 21.5t-9 30.5v34Zm260-321q39 0 64.5-25.5T570 425q0-39-25.5-64.5T480 335q-39 0-64.5 25.5T390 425q0 39 25.5 64.5T480 515Zm0-90Zm0 411Z"/></svg>                   
                         Users
-                        <span>{{ handle_numbers($NumberOfFleetUsers) }}</span>
+                        <span>{{ $HandleNumbers($NumberOfFleetUsers) }}</span>
                     </li>
                 </a>
                 <a href='{{ route('Logout') }}'>
@@ -454,10 +443,10 @@
                                     $SumOfCarRefueling = \App\Models\Refueling::select('Amount')->sum('Amount');
                                 
                                 @endphp
-                                <td>₦ {{ handle_numbers($SumOfCarRepairs) }}</td>
-                                <td>₦ {{ handle_numbers($SumOfCarRefueling) }}</td>
-                                <td>₦ {{ handle_numbers($SumOfCarDeposits) }}</td>
-                                <td>₦ {{ handle_numbers($SumOfCarMaintenance) }}</td>
+                                <td>₦ {{ $HandleNumbers($SumOfCarRepairs) }}</td>
+                                <td>₦ {{ $HandleNumbers($SumOfCarRefueling) }}</td>
+                                <td>₦ {{ $HandleNumbers($SumOfCarDeposits) }}</td>
+                                <td>₦ {{ $HandleNumbers($SumOfCarMaintenance) }}</td>
                             </tr>
                         </table>
                         <button class="deposits-route-edit">Deposit</button>

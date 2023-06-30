@@ -155,6 +155,37 @@
                                 </div>
                             </div> 
                         </div>
+                        <span class="Deposits_X_DATA Hide">₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</span>
+                        <span class="Refueling_X_DATA Hide">₦ {{ empty($Car->TotalRefueling) ? '' : number_format($Car->TotalRefueling) }}</span>
+                        <span class="Balance_X_DATA Hide">₦ {{ empty($Car->Balance) ? '' : number_format($Car->Balance) }}</span>
+                        <span class="UsedBy_X_DATA Hide">{{ $Car->CarOwner }}</span>
+                        <span class="RegistrationNo_X_DATA Hide">{{ $Car->VehicleNumber }}</span>
+                        <span class="Maker_X_DATA Hide">{{ $Car->Maker }}</span>
+                        <span class="Model_X_DATA Hide">{{ $Car->Model }}</span>
+                        <span class="SubModel_X_DATA Hide">{{ $Car->SubModel }}</span>
+                        <span class="EngineType_X_DATA Hide">{{ $Car->EngineType }}</span>
+                        <span class="GearType_X_DATA Hide">{{ $Car->GearType }}</span>
+                        <span class="EngineNo_X_DATA Hide">{{ $Car->EngineNumber }}</span>
+                        <span class="ChasisNo_X_DATA Hide">{{ $Car->ChassisNumber }}</span>
+                        <span class="PurchaseDate_X_DATA Hide">{{ $Car->PurchaseDate }}</span>
+                        <span class="Supplier_X_DATA Hide">{{ $Car->Supplier }}</span>
+                        <span class="Price_X_DATA Hide">₦ {{ empty($Car->Price) ? '' : number_format($Car->Price) }}</span>
+                        <span class="CompanyCode_X_DATA Hide">{{ $Car->CompanyCode }}</span>
+                        <span class="LicenceExpiryDate_X_DATA Hide">{{ $Car->LicenceExpiryDate }}</span>
+                        <span class="InsuranceExpiryDate_X_DATA Hide">{{ $Car->InsuranceExpiryDate }}</span>
+                        <span class="CardNo_X_DATA Hide">{{ $Car->CardNumber }}</span>
+                        <span class="PinCode_X_DATA Hide">{{ $Car->PinCode }}</span>
+                        <span class="FuelMonthly_X_DATA Hide">₦ {{ empty($Car->MonthlyBudget) ? '' : number_format($Car->MonthlyBudget) }}</span>
+                        <span class="FuelTankCapacity_X_DATA Hide">{{ $Car->FuelTankCapacity }}</span>
+                        <span class="EngineVolume_X_DATA Hide">{{ $Car->EngineVolume }}</span>
+                        <span class="ModelYear_X_DATA Hide">{{ $Car->ModelYear }}</span>
+                        <span class="StopDate_X_DATA Hide">{{ $Car->StopDate }}</span>
+                        <span class="Driver_X_DATA Hide">{{ $Car->Driver }}</span>
+                        <span class="Status_X_DATA Hide">{{ $Car->Status  === 'ACTIVE' ? 'This CAR is active since ' . $Car->PurchaseDate . '. Licence Expires on ' . $Car->LicenceExpiryDate . '.'  : 'This CAR is inactive. Licence Expires on ' . $Car->LicenceExpiryDate . '..' }}</span>
+                        <span class="Status_X_DATA_X Hide">{{ $Car->Status }}</span>
+                        <span class="Comments_X_DATA_X Hide">{{ $Car->Comments }}</span>
+                        <span class="CarId_X_DATA_X Hide">{{ $Car->id }}</span> 
+                        <span class="BalanceBroughtForward_X_DATA Hide">{{ $Car->MonthlyBudget - $Car->Balance }}</span>
                     </td>
                     <td class="engine-volume">{{ $Car->EngineVolume }}</td>
                     <td class="refueling">₦ {{ empty($Car->TotalRefueling) ? '' : number_format($Car->TotalRefueling) }}</td>

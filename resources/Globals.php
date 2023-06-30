@@ -61,13 +61,8 @@
 
     }  
 
-    function handle_numbers($Value) { 
-        if ($Value > 999 AND $Value < 1000000) {
-            $Value = $Value > 999 ? number_format($Value / 1000, 1) . 'K' : $Value;
-        } elseif ($Value > 999999) {
-            $Value = $Value > 999999 ? number_format($Value / 1000, 1) . 'M' : $Value;
-        }
-        
-        return $Value;
-    }
+    $HandleNumbers = fn($Value) => 
+                    ($Value > 999 AND $Value < 1000000) ? number_format($Value / 1000, 1) . 'K' : 
+                    ($Value > 999999 ? number_format($Value / 1000, 1) . 'M' : ''); 
+
 ?>

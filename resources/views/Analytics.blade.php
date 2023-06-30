@@ -1,8 +1,17 @@
 @extends('Layouts.Layout2') 
 @php 
+    $HandleNumbers = fn($Value) => 
+                        ($Value > 999 AND $Value < 1000000) ? number_format($Value / 1000, 1) . 'K' : 
+                        ($Value > 999999 ? number_format($Value / 1000, 1) . 'M' : ''); 
+
+                        
     function get_average_cost($Sum, $Count) {
+        $HandleNumbers = fn($Value) => 
+                            ($Value > 999 AND $Value < 1000000) ? number_format($Value / 1000, 1) . 'K' : 
+                            ($Value > 999999 ? number_format($Value / 1000, 1) . 'M' : ''); 
+
         $Result = $Count === 0 ? 0 : $Sum / $Count;
-        $Result = handle_numbers($Result);
+        $Result = $HandleNumbers($Result);
         return $Result; 
     }
 
@@ -13,17 +22,7 @@
     //     $Result = $USD * $Value; 
     //     return number_format(round($Result, 0));
     // } 
-
-    function handle_numbers($Value) { 
-        if ($Value > 999 AND $Value < 1000000) {
-            $Value = $Value > 999 ? number_format($Value / 1000, 1) . 'K' : $Value;
-        } elseif ($Value > 999999) {
-            $Value = $Value > 999999 ? number_format($Value / 1000, 1) . 'M' : $Value;
-        }
-        
-        return $Value;
-    }
-
+ 
     $FirstDaysOfEachMonths = [];
     $LastDaysOfEachMonths = [];
 
@@ -142,7 +141,7 @@
                     <img src="{{ asset('Images/refueling.png') }}">
                 </div>
                 <div class="inner">
-                    <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($SumOfCarRefueling) : '₦ ' . handle_numbers($SumOfCarRefueling) }}</span>
+                    <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($SumOfCarRefueling) : '₦ ' . $HandleNumbers($SumOfCarRefueling) }}</span>
                     <br>
                     <span class="refueling-route">Fuel Cost</span>
                 </div>
@@ -152,7 +151,7 @@
                     <img src="{{ asset('Images/service.png') }}">
                 </div>
                 <div class="inner">
-                    <span> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($SumOfCarMaintenance) : '₦ ' . handle_numbers($SumOfCarMaintenance) }}</span>
+                    <span> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($SumOfCarMaintenance) : '₦ ' . $HandleNumbers($SumOfCarMaintenance) }}</span>
                     <br>
                     <span class="maintenance-route">Total Service</span>
                 </div>
@@ -162,7 +161,7 @@
                     <img src="{{ asset('Images/deposit.png') }}">
                 </div>
                 <div class="inner">
-                    <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($SumOfCarDeposits) : '₦ ' . handle_numbers($SumOfCarDeposits) }}</span>
+                    <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($SumOfCarDeposits) : '₦ ' . $HandleNumbers($SumOfCarDeposits) }}</span>
                     <br>
                     <span class="deposits-route">Deposits</span>
                 </div>
@@ -172,7 +171,7 @@
                     <img src="{{ asset('Images/repair.png') }}">
                 </div>
                 <div class="inner">
-                    <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($SumOfCarRepairs) : '₦ ' . handle_numbers($SumOfCarRepairs) }}</span>
+                    <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($SumOfCarRepairs) : '₦ ' . $HandleNumbers($SumOfCarRepairs) }}</span>
                     <br>
                     <span class="repair-route">Repair Cost</span>
                 </div>
@@ -182,7 +181,7 @@
                     <img src="{{ asset('Images/car-accident.png') }}">
                 </div>
                 <div class="inner">
-                    <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($SumOfCarAccidents) : '₦ ' . handle_numbers($SumOfCarAccidents) }}</span>
+                    <span>{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($SumOfCarAccidents) : '₦ ' . $HandleNumbers($SumOfCarAccidents) }}</span>
                     <br>
                     <span class="accident-route">Accidents</span>
                 </div>
@@ -468,14 +467,14 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"></path></svg>
                                         Current Year
                                     </div>
-                                    <div class="-xx">{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($MaintenanceCosts_CURRENT_YEAR) : '₦ ' . handle_numbers($MaintenanceCosts_CURRENT_YEAR) }}</div>
+                                    <div class="-xx">{{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($MaintenanceCosts_CURRENT_YEAR) : '₦ ' . $HandleNumbers($MaintenanceCosts_CURRENT_YEAR) }}</div>
                                 </li>
                                 <li>
                                     <div class="-xx">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"></path></svg>
                                         Previous Year
                                     </div>
-                                    <div class="-xx"> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($MaintenanceCosts_PREVIOUS_YEAR) : '₦ ' . handle_numbers($MaintenanceCosts_PREVIOUS_YEAR) }}</div>
+                                    <div class="-xx"> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($MaintenanceCosts_PREVIOUS_YEAR) : '₦ ' . $HandleNumbers($MaintenanceCosts_PREVIOUS_YEAR) }}</div>
                                 </li>
                             </ul>
                         </div>
@@ -506,14 +505,14 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"></path></svg>
                                         Current Year
                                     </div>
-                                    <div class="-xx"> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($RepairCosts_CURRENT_YEAR) : '₦ ' . handle_numbers($RepairCosts_CURRENT_YEAR) }}</div>
+                                    <div class="-xx"> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($RepairCosts_CURRENT_YEAR) : '₦ ' . $HandleNumbers($RepairCosts_CURRENT_YEAR) }}</div>
                                 </li> 
                                 <li>
                                     <div class="-xx">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M768 936 517 685l57-57 251 251-57 57Zm-581 0-57-57 290-290-107-107-23 23-44-44v85l-24 24-122-122 24-24h86l-48-48 131-131q17-17 37-23t44-6q24 0 44 8.5t37 25.5L348 357l48 48-24 24 104 104 122-122q-8-13-12.5-30t-4.5-36q0-53 38.5-91.5T711 215q15 0 25.5 3t17.5 8l-85 85 75 75 85-85q5 8 8.5 19.5T841 347q0 53-38.5 91.5T711 477q-18 0-31-2.5t-24-7.5L187 936Z"></path></svg>
                                         Previous Year
                                     </div>
-                                    <div class="-xx"> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($RepairCosts_PREVIOUS_YEAR) : '₦ ' . handle_numbers($RepairCosts_PREVIOUS_YEAR) }}</div>
+                                    <div class="-xx"> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($RepairCosts_PREVIOUS_YEAR) : '₦ ' . $HandleNumbers($RepairCosts_PREVIOUS_YEAR) }}</div>
                                 </li> 
                             </ul>
                         </div>
@@ -546,7 +545,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"></path></svg> Current Year
                                 </div>
                                 <div class="x1-inner">
-                                    <span> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($RefuelingCosts_CURRENT_YEAR) : '₦ ' . handle_numbers($RefuelingCosts_CURRENT_YEAR) }}</span> <strong>></strong>
+                                    <span> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($RefuelingCosts_CURRENT_YEAR) : '₦ ' . $HandleNumbers($RefuelingCosts_CURRENT_YEAR) }}</span> <strong>></strong>
                                 </div>
                             </li>
                             <li>
@@ -554,7 +553,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M160 936V276q0-24 18-42t42-18h269q24 0 42 18t18 42v288h65q20.625 0 35.312 14.688Q664 593.375 664 614v219q0 21.675 15.5 36.338Q695 884 717 884t37.5-14.662Q770 854.675 770 833V538q-11 6-23 9t-24 3q-39.48 0-66.74-27.26Q629 495.48 629 456q0-31.614 18-56.807T695 366l-95-95 36-35 153 153q14 14 22.5 30.5T820 456v377q0 43.26-29.817 73.13-29.817 29.87-73 29.87T644 906.13q-30-29.87-30-73.13V614h-65v322H160Zm60-432h269V276H220v228Zm503-4q18 0 31-13t13-31q0-18-13-31t-31-13q-18 0-31 13t-13 31q0 18 13 31t31 13ZM220 876h269V564H220v312Zm269 0H220h269Z"></path></svg> Previous Year
                                 </div>
                                 <div class="x1-inner">
-                                    <span> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($RefuelingCosts_PREVIOUS_YEAR) : '₦ ' . handle_numbers($RefuelingCosts_PREVIOUS_YEAR) }}</span> <strong>></strong>
+                                    <span> {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($RefuelingCosts_PREVIOUS_YEAR) : '₦ ' . $HandleNumbers($RefuelingCosts_PREVIOUS_YEAR) }}</span> <strong>></strong>
                                 </div>
                             </li> 
                         </ul>
@@ -569,7 +568,7 @@
                             <div class="last-inner">
                                 <strong class="deposits-route">Deposits</strong>
                                 <br>
-                                {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($DepositsCosts_CURRENT_YEAR) : '₦ ' . handle_numbers($DepositsCosts_CURRENT_YEAR) }}
+                                {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($DepositsCosts_CURRENT_YEAR) : '₦ ' . $HandleNumbers($DepositsCosts_CURRENT_YEAR) }}
                             </div>
                             <div class="last-inner">
                                This Year
@@ -596,11 +595,11 @@
                             <div class="last-inner">
                                 <strong>Other Costs (Deposits)</strong>
                                 <br>
-                                {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($DepositsCosts_PREVIOUS_YEAR) : '₦ ' . handle_numbers($DepositsCosts_PREVIOUS_YEAR) }}
+                                {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($DepositsCosts_PREVIOUS_YEAR) : '₦ ' . $HandleNumbers($DepositsCosts_PREVIOUS_YEAR) }}
                                 <br><br>
                                 <strong>Current Year</strong>
                                 <br>
-                                {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . handle_numbers($DepositsCosts_CURRENT_YEAR) : '₦ ' . handle_numbers($DepositsCosts_CURRENT_YEAR) }}
+                                {{ isset($_GET['Filter_All_Analytics']) || isset($_GET['Filter__Yearly_Analytics']) || isset($_GET['Filter__Range_Analytics']) ? '₦ ' . $HandleNumbers($DepositsCosts_CURRENT_YEAR) : '₦ ' . $HandleNumbers($DepositsCosts_CURRENT_YEAR) }}
                             </div>
                             <div class="last-inner">
                                 Last Year
