@@ -1,10 +1,10 @@
 @extends('Layouts.Layout2')
-{{-- @php
+@php
     
     $HandleNumbers = fn($Value) => 
                         ($Value > 999 AND $Value < 1000000) ? number_format($Value / 1000, 1) . 'K' : 
                         ($Value > 999999 ? number_format($Value / 1000, 1) . 'M' : ''); 
-@endphp --}}
+@endphp
 @section('Content')
     <div class="table-wrapper"> 
         <table class="table table-2 list" id="Table">
