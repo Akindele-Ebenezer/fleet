@@ -18,6 +18,7 @@ let ModalVehicleData = document.querySelector('.modal-vehicle-data');
 let CancelModalIcons = document.querySelectorAll('.cancel-modal');
 let ActionButtons = document.querySelectorAll('.show-record-button');
 let OpenDocumentButtons = document.querySelectorAll('.open-document');
+let OpenAnalyticsButtons = document.querySelectorAll('.open-analytics');
 
 let Deposits_X = document.querySelector('.Deposits_X');
 let Refueling_X = document.querySelector('.Refueling_X');
@@ -145,8 +146,17 @@ Cars.forEach(Car => {
 }); 
 
 OpenDocumentButtons.forEach(Button => {
-    Button.addEventListener('click', () => {
+    Button.addEventListener('click', (e) => {
+        e.stopPropagation();
         window.location = '/Cars/Documents?FilterValue=' + Button.nextElementSibling.textContent;
+    });
+});
+
+OpenAnalyticsButtons.forEach(Button => {
+    Button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        let CurrentDate = new Date().toJSON().slice(0, 10);
+        window.location = '/Analytics?VehicleNo=' + Button.nextElementSibling.textContent + '&Date_From=2000-01-01&Date_To=' + CurrentDate + '&Filter__Range_Analytics=';
     });
 });
 

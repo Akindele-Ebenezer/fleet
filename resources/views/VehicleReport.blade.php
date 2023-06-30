@@ -76,6 +76,8 @@
                             <div class="icons">
                                 <img src="{{ asset('Images/folder.png')}}" class="open-document icon">  
                                 <span class="Hide">{{$Car->VehicleNumber }}</span>
+                                <img src="{{ asset('Images/graph.png')}}" class="open-analytics icon">  
+                                <span class="Hide">{{$Car->VehicleNumber }}</span>
                             </div>
                         </div> 
                     </div>
