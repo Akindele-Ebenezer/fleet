@@ -85,12 +85,12 @@ button {
   padding: 0.5rem;
 }
 
-.big-figure, .report-inner .table.list .engine-volume, .report-inner .table.list .id {
+.big-figure, .report-inner .table.list .engine-volume {
   background: #000;
   border: none;
   display: block;
   font-family: system-ui;
-  font-size: 4em;
+  font-size: 1.5em;
   font-weight: bold;
   text-align: center;
 }
@@ -861,6 +861,10 @@ svg {
   color: #eee;
   font-family: system-ui;
 }
+.report-inner h1.vehicle-number {
+  font-weight: unset;
+  font-size: unset !important;
+}
 .report-inner-heading {
   align-items: center;
   display: flex;
@@ -893,6 +897,9 @@ svg {
   border-collapse: collapse;
   width: 100%;
 }
+.report-inner .table.list .car-info h1 {
+  font-size: 2em;
+}
 .report-inner .table.list .car-info .stats-heading {
   align-items: center;
   display: flex;
@@ -923,6 +930,11 @@ svg {
   color: #999;
   cursor: pointer;
 }
+.report-inner .table.list .car-info .info-inner .inner.car-inner-x {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
 .report-inner .table.list .car-info .info-inner .inner:not(.report-inner .table.list .car-info .info-inner .inner:first-of-type) {
   translate: -3em;
 }
@@ -942,12 +954,26 @@ svg {
 .report-inner .table.list .car-info .info-inner .inner-x span:last-of-type {
   color: #ccc;
 }
-.report-inner .table.list .car-info .info-inner .open-document {
-  background: #DF2E38;
+.report-inner .table.list .car-info .info-inner img.icon {
+  margin-inline: 0.5em;
+  width: 2em;
 }
-.report-inner .table.list .refueling,
-.report-inner .table.list .balance {
-  text-align: center;
+.report-inner .table.list .car-info .info-inner span {
+  margin: unset !important;
+  display: block;
+}
+.report-inner .table.list .car-info .info-inner span.car-status {
+  height: 0.2em;
+  width: 0.7em;
+}
+.report-inner .table.list .car-info .info-inner span.status {
+  margin-block: 1em !important;
+}
+.report-inner .table.list .car-info .info-inner span.ACTIVE {
+  background-color: #41a341;
+}
+.report-inner .table.list .car-info .info-inner span.INACTIVE {
+  background-color: #DF2E38;
 }
 .report-inner .table.list td .car-info .active, .report-inner .table.list td .car-info ul a li:hover, .report-inner ul a .table.list td .car-info li:hover,
 .report-inner .table.list td .car-info .inactive {
@@ -957,10 +983,9 @@ svg {
   display: inline-block;
   margin-block: 1em;
   padding: 0.15em 0.35em;
+  text-align: center;
   text-transform: lowercase;
-}
-.report-inner .table.list td .car-info h1 {
-  font-size: 2em;
+  width: 5em;
 }
 .report-inner .table.list td .car-info h2 {
   border-bottom: 5px solid;
@@ -1046,6 +1071,9 @@ svg {
 }
 .report-inner .table td .document span {
   color: #ddd;
+}
+.report-inner .table td.show-record-x-edit.admin {
+  display: table-cell;
 }
 .report-inner .table td.show-record-x-edit .manage-user {
   align-items: center;
@@ -1182,6 +1210,9 @@ svg {
 .report-inner .table td.td-x {
   background: #000;
   width: 40em;
+}
+.report-inner .table td.car {
+  cursor: pointer;
 }
 .report-inner .table td,
 .report-inner .table th {
@@ -1404,7 +1435,7 @@ svg {
 }
 .analytics .inner-1 .x .inner span:first-of-type {
   font-family: system-ui;
-  font-size: 3em;
+  font-size: 2em;
 }
 .analytics .inner-1 .x .inner span:last-of-type {
   color: #ddd;
@@ -1421,6 +1452,10 @@ svg {
   font-family: system-ui;
   font-size: 1.55em;
   padding-bottom: 0.5em;
+}
+.analytics .inner-2 h2:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 .analytics .inner-2 .x {
   background: #111;
@@ -1516,6 +1551,10 @@ svg {
   font-family: system-ui;
   font-size: 1.55em;
   padding-bottom: 1em;
+}
+.analytics .inner-3 .x .x-inner h2:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 .analytics .inner-3 .x .x-inner h2 small {
   color: #fff;
@@ -1625,7 +1664,7 @@ svg {
   color: #ddd;
   display: block;
   margin-right: 1em;
-  width: 4em;
+  width: 6em;
   text-align: center;
 }
 .analytics .inner-3 .x .inner-x .x1 ul li .x1-inner strong {
@@ -1645,6 +1684,10 @@ svg {
 .analytics .inner-3 .x .inner-x .x1 .x1-last .last-inner strong {
   color: #ddd;
   font-family: system-ui;
+}
+.analytics .inner-3 .x .inner-x .x1 .x1-last .last-inner strong:first-child:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 .analytics .inner-3 .x .inner-x .x1 .-x {
   color: #fff;

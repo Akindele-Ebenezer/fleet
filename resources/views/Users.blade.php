@@ -70,7 +70,7 @@
                 <td>
                     {{ $loop->iteration  + (($Users->currentPage() -1) * $Users->perPage()) }} 
                 </td>  
-                <td class="{{ request()->session()->get('Role') === 'ADMIN' ? 'show-record-x-edit' : '' }}">
+                <td class="{{ request()->session()->get('Role') === 'ADMIN' ? 'show-record-x-edit admin' : '' }}">
                     <div class="{{ (request()->session()->get('Role') === 'ADMIN') ? 'manage-user' : 'user-email' }}">
                         <img src="{{ asset('Images/' . (!empty($UserEnabled->id) ? 'enabled-user.png' : 'disabled-user.png')) }}"> <span>{{ $User->email }} </span> <strong class="{{ $User->status === 'ONLINE' ? 'online' : 'offline' }}"></strong>
                         @if (request()->session()->get('Role') === 'ADMIN')
@@ -101,26 +101,26 @@
                     <div class="car-info">
                         <div class="info-inner">
                             <div class="inner">
-                                <h1>: {{ $NumberOfAllRecords_CURRENT_USER }}</h1> 
+                                <h1>: {{ handle_numbers($NumberOfAllRecords_CURRENT_USER) }}</h1> 
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
                                     <span>Maintenance</span>
-                                    <span>{{ $NumberOfMaintenance_CURRENT_USER }}</span> 
+                                    <span>{{ handle_numbers($NumberOfMaintenance_CURRENT_USER) }}</span> 
                                 </div>
                                 <div class="inner-x">
                                     <span>Repairs</span>
-                                    <span>{{ $NumberOfRepairs_CURRENT_USER }}</span>
+                                    <span>{{ handle_numbers($NumberOfRepairs_CURRENT_USER) }}</span>
                                 </div>
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
                                     <span>Deposits</span>
-                                    <span>{{ $NumberOfDeposits_CURRENT_USER }}</span>
+                                    <span>{{ handle_numbers($NumberOfDeposits_CURRENT_USER) }}</span>
                                 </div>
                                 <div class="inner-x">
                                     <span>Refueling</span>
-                                    <span>{{ $NumberOfRefueling_CURRENT_USER }}</span>
+                                    <span>{{ handle_numbers($NumberOfRefueling_CURRENT_USER) }}</span>
                                 </div>
                             </div> 
                         </div>  

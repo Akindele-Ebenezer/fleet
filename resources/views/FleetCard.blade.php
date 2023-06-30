@@ -29,7 +29,7 @@
                             <div class="inner">
                                 <h1 class="card-number">{{ $MasterCard->CardNumber }}</h1> 
                                 <span class="type">Master Card</span>
-                                <span class="{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br>
+                                <span class="{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }} status">{{ $MasterCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $MasterCard->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br>
                                 <span class="used-by">MASTER</span>  {{ $MasterCard->Date }} :: {{ $MasterCard->Vendor }}
                             </div>   
                         </div>  
@@ -76,7 +76,7 @@
                             <div class="inner">
                                 <h1 class="card-number">{{ $Car->CardNumber }}</h1> 
                                 <span class="type">{{ $Car->Maker . ' :: ' }}{{ $Car->Model ?? 'Fleet Card' }}</span>
-                                <span class="{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}">{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br>
+                                <span class="{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }} status">{{ $Car->Status === 'ACTIVE' ? 'active' : '' }}{{ $Car->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br>
                                 <span class="used-by">{{ $Car->VehicleNumber }}</span>
                                  {{ $Car->DateIn }} :: {{ $Car->CardVendor }}
                             </div>   

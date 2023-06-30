@@ -10,7 +10,7 @@ use File;
 class CarController extends Controller
 {
     public function config() {  
-        $Cars = Car::whereNotNull('VehicleNumber')->orderBy('PurchaseDate', 'DESC')->paginate(7);
+        $Cars = Car::whereNotNull('VehicleNumber')->orderBy('PurchaseDate', 'DESC')->paginate(14);
         $Cars__MyRecords = Car::whereNotNull('VehicleNumber')->selectRaw("*, TRIM(VehicleNumber) AS VehicleNumber")->where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7); 
         \DB::statement("SET SQL_MODE=''");
         $CarOwners = Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, TRIM(VehicleNumber) AS VehicleNumber")->groupBy('CarOwner')->paginate(7); 
@@ -30,7 +30,7 @@ class CarController extends Controller
             $FilterValue = $_GET['FilterValue']; 
 
             if ($FilterValue === 'active') {
-                $Cars = Car::where('Status', 'ACTIVE')->paginate(7);
+                $Cars = Car::where('Status', 'ACTIVE')->paginate(14);
 
                 $Cars->withPath($_SERVER['REQUEST_URI']);
             } else {
@@ -62,7 +62,7 @@ class CarController extends Controller
                         ->orWhere('LicenceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('InsuranceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('FuelTankCapacity', 'LIKE', '%' . $FilterValue . '%')
-                        ->paginate(7);
+                        ->paginate(14);
  
                         $Cars->withPath($_SERVER['REQUEST_URI']);
                 }
@@ -107,7 +107,7 @@ class CarController extends Controller
                         ->orWhere('LicenceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('InsuranceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('FuelTankCapacity', 'LIKE', '%' . $FilterValue . '%')
-                        ->paginate(7);
+                        ->paginate(14);
  
                         $Cars->withPath($_SERVER['REQUEST_URI']);
 

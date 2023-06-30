@@ -366,6 +366,11 @@
         h1 {
              color: #eee;
              font-family: system-ui;
+
+             &.vehicle-number {
+                font-weight: unset;
+                font-size: unset !important;
+             }
         }
 
         &-heading {
@@ -409,16 +414,10 @@
             border-collapse: collapse; 
             width: 100%;
 
-            &.list {
-                .id {
-                    @extend .big-figure;
-
-                    .inner {
-
-                    }
-                }
-
+            &.list {  
                 .car-info {
+                    h1 { font-size: 2em; }
+
                     .stats-heading {
                         align-items: center;
                         display: flex;
@@ -459,6 +458,12 @@
                                 }
                             }
 
+                            &.car-inner-x {
+                                align-items: center;
+                                display: flex;
+                                justify-content: space-between;
+                            }
+
                             &:not(&:first-of-type) { 
                                 translate: -3em;
                             }
@@ -484,16 +489,29 @@
                                 }
                             }
                         }
-                    .open-document {
-                        background: $Color-2;
-                    }
-                    }
-                }
 
-                .refueling,
-                .balance {
-                    text-align: center;
-                }
+                        img.icon {
+                            margin-inline: 0.5em;
+                                width: 2em;
+                        }
+
+                        span {
+                            margin: unset !important; 
+                            display: block;
+                            
+                            &.car-status { 
+                                height: 0.2em;
+                                width: 0.7em; 
+                            }
+                            &.status { 
+                                margin-block: 1em !important;  
+                            }
+
+                            &.ACTIVE { background-color: $Color-3; }
+                            &.INACTIVE { background-color: $Color-2; }
+                        }
+                    }
+                } 
 
                 td {
                     .car-info {
@@ -505,12 +523,10 @@
                             display: inline-block; 
                             margin-block: 1em;
                             padding: 0.15em 0.35em;    
-                            text-transform: lowercase;
-                        }
-
-                        h1 { 
-                            font-size: 2em;
-                        }
+                            text-align: center;
+                            text-transform: lowercase;    
+                            width: 5em;
+                        } 
 
                         h2 {
                             border-bottom: 5px solid;
@@ -616,6 +632,10 @@
                     span {
                         color: #ddd;
                     }
+                }
+
+                &.show-record-x-edit.admin {
+                    display: table-cell;
                 }
 
                 &.show-record-x-edit .manage-user {
@@ -787,6 +807,8 @@
                     width: 40em;
                 }
             }
+
+            td.car { cursor: pointer; }
 
             td, 
             th {

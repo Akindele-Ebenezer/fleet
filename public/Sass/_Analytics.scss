@@ -57,7 +57,7 @@
 
                     &:first-of-type {
                         font-family: system-ui;
-                        font-size: 3em; 
+                        font-size: 2em; 
                     }
                     &:last-of-type {
                         color: #ddd;
@@ -79,6 +79,11 @@
             font-family: system-ui;
             font-size: 1.55em;
             padding-bottom: .5em;
+
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
         }
 
         .x {
@@ -200,6 +205,11 @@
                     font-family: system-ui;
                     font-size: 1.55em;
                     padding-bottom: 1em;
+
+                    &:hover {
+                        cursor: pointer;
+                        text-decoration: underline;
+                    }
 
                     small {
                         color: #fff;
@@ -329,7 +339,7 @@
                                     color: #ddd;
                                     display: block;
                                     margin-right: 1em;
-                                    width: 4em;
+                                    width: 6em;
                                     text-align: center;
                                 }
 
@@ -354,6 +364,13 @@
                             strong {
                                 color: #ddd;
                                 font-family: system-ui;
+
+                                &:first-child {
+                                    &:hover {
+                                        cursor: pointer;
+                                        text-decoration: underline;
+                                    }
+                                }
                             }
                         }
                     }
