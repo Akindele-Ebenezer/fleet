@@ -40,7 +40,7 @@
                             <div class="inner">
                                 <div class="inner-x">
                                     <span>Card Number</span>
-                                    <span>{{ $Car->CardNumber }}</span>
+                                    <span class="card-numbers-x underline">{{ $Car->CardNumber }}</span>
                                 </div>
                                 <div class="inner-x">
                                     <span>Monthly Budget</span>
@@ -52,13 +52,13 @@
                                 </div>
                                 <div class="inner-x">
                                     <span>Driver</span>
-                                    <span>{{ $Car->Driver }}</span>
+                                    <span class="drivers-x underline">{{ $Car->Driver }}</span>
                                 </div>
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
                                     <span>Model</span>
-                                    <span>{{ $Car->Model }}</span>
+                                    <span class="models-x underline">{{ $Car->Model }}</span>
                                 </div>
                                 <div class="inner-x">
                                     <span>Deposits</span>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="inner-x">
                                     <span>Maker</span>
-                                    <span>{{ $Car->Maker }}</span>
+                                    <span class="make-x underline">{{ $Car->Maker }}</span>
                                 </div>
                             </div>
                             <div class="icons">

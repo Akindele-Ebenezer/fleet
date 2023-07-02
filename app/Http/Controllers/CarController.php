@@ -13,7 +13,7 @@ class CarController extends Controller
         $Cars = Car::whereNotNull('VehicleNumber')->orderBy('PurchaseDate', 'DESC')->paginate(14);
         $Cars__MyRecords = Car::whereNotNull('VehicleNumber')->selectRaw("*, TRIM(VehicleNumber) AS VehicleNumber")->where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7); 
         \DB::statement("SET SQL_MODE=''");
-        $CarOwners = Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, TRIM(VehicleNumber) AS VehicleNumber")->groupBy('CarOwner')->paginate(7); 
+        $CarOwners = Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, TRIM(VehicleNumber) AS VehicleNumber, CardNumber")->groupBy('CarOwner')->paginate(7); 
 
         return [
             'Cars' => $Cars,
@@ -455,7 +455,7 @@ class CarController extends Controller
  
                         $Cars->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Cars', $Config)->with('Cars', $Cars);
+            return view('VehicleReport', $Config)->with('Cars', $Cars);
         } 
 
         return view('VehicleReport', $Config);

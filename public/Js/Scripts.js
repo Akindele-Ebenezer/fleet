@@ -242,3 +242,89 @@ DriversRouteButton.forEach(Button => {
         window.location = '/Cars/Drivers';
     });
 }); 
+
+let CarOwnersX = document.querySelectorAll('.car-owners-x');
+
+CarOwnersX.forEach(CarOwner => {
+    CarOwner.addEventListener('click', () => { 
+        window.location = '/Cars/Owners?FilterValue=' + CarOwner.textContent;
+    });
+}); 
+
+let DriversX = document.querySelectorAll('.drivers-x');
+
+DriversX.forEach(Driver => {
+    Driver.addEventListener('click', (e) => { 
+        e.stopPropagation();
+        window.location = '/Cars/Drivers?FilterValue=' + Driver.textContent;
+    });
+}); 
+
+let MakeX = document.querySelectorAll('.make-x');
+
+MakeX.forEach(Make => {
+    Make.addEventListener('click', (e) => { 
+        e.stopPropagation();
+        window.location = '/Cars/Report?FilterValue=' + Make.textContent;
+    });
+}); 
+
+let ModelsX = document.querySelectorAll('.models-x');
+
+ModelsX.forEach(Model => {
+    Model.addEventListener('click', (e) => { 
+        e.stopPropagation();
+        window.location = '/Cars/Report?FilterValue=' + Model.textContent;
+    });
+}); 
+
+let CardNumbersX = document.querySelectorAll('.card-numbers-x');
+
+CardNumbersX.forEach(CardNumbers => {
+    CardNumbers.addEventListener('click', (e) => { 
+        e.stopPropagation();
+        window.location = '/Deposits?FilterValue=' + CardNumbers.textContent;
+    });
+}); 
+
+let DepositsX = document.querySelectorAll('.deposits-x');
+
+DepositsX.forEach(Deposit => {
+    Deposit.addEventListener('click', (e) => { 
+        e.stopPropagation();
+        window.location = '/Deposits?FilterValue=' + Deposit.nextElementSibling.textContent;
+    });
+}); 
+
+let RefuelingsX = document.querySelectorAll('.refuelings-x');
+
+RefuelingsX.forEach(Refueling => {
+    Refueling.addEventListener('click', (e) => { 
+        e.stopPropagation();
+        window.location = '/Refueling?FilterValue=' + Refueling.nextElementSibling.textContent;
+    });
+}); 
+
+let GearTypeX = document.querySelectorAll('.gear-type-x');
+
+GearTypeX.forEach(GearType => {
+    GearType.addEventListener('click', () => { 
+        window.location = '/Cars/Report?FilterValue=' + GearType.textContent;
+    });
+}); 
+
+let MaintenanceX = document.querySelectorAll('.maintenance-x');
+
+MaintenanceX.forEach(Maintenance => {
+    Maintenance.addEventListener('click', () => { 
+        window.location = '/Maintenance?FilterValue=' + Maintenance.textContent.trim();
+    });
+}); 
+
+let MaintenanceX2 = document.querySelectorAll('.maintenance-x-2');
+
+MaintenanceX2.forEach(Maintenance => {
+    Maintenance.addEventListener('click', () => { 
+        window.location = '/Maintenance?FilterValue=' + Maintenance.nextElementSibling.textContent.trim();
+    });
+}); 

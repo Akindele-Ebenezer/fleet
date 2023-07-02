@@ -352,6 +352,11 @@ footer {
     display: table-row !important;
 }
 
+.underline:hover {
+    cursor: pointer;
+    text-decoration: underline !important;
+}
+
 svg {
     fill: #eee;
     height: 2rem;

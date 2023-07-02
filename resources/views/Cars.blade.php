@@ -79,11 +79,11 @@
                         <span class="Mileage_X_DATA Hide">{{ $Mileage->Mileage ?? 'PENDING' }}</span> 
                     </td>
                     <td class="engine-volume">{{ $Car->EngineVolume }}</td>  
-                    <td>{{ $Car->CarOwner }}</td>
-                    <td>{{ $Car->Driver }}</td>
-                    <td>{{ $Car->Maker }}</td>
-                    <td>{{ $Car->Model }}</td>
-                    <td>{{ $Car->CardNumber }}</td>
+                    <td class="car-owners-x underline">{{ $Car->CarOwner }}</td>
+                    <td class="drivers-x underline">{{ $Car->Driver }}</td>
+                    <td class="make-x underline">{{ $Car->Maker }}</td>
+                    <td class="models-x underline">{{ $Car->Model }}</td>
+                    <td class="card-numbers-x underline">{{ $Car->CardNumber }}</td>
                     <td>₦ {{ number_format($Car->MonthlyBudget) }}</td>
                     <td>₦ {{ number_format($Car->Deposits) }}</td>
                     <td>₦ {{ number_format($Car->Refueling) }}</td>

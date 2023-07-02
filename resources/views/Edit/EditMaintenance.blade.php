@@ -33,7 +33,7 @@
                 <td>{{ $Maintenance->Time }}</td>
                 <td>
                     <center>
-                        <span class="{{ $Maintenance->IncidentType === 'MAINTENANCE' ? 'MAINTENANCE' : '' }}{{ $Maintenance->IncidentType === 'ACCIDENT' ? 'ACCIDENT' : '' }}{{ $Maintenance->IncidentType === 'REPAIR' ? 'REPAIR' : '' }}">
+                        <span class="{{ $Maintenance->IncidentType === 'MAINTENANCE' ? 'MAINTENANCE' : '' }} {{ $Maintenance->IncidentType === 'ACCIDENT' ? 'ACCIDENT' : '' }} {{ $Maintenance->IncidentType === 'REPAIR' ? 'REPAIR' : '' }} maintenance-x underline">
                             {{ $Maintenance->IncidentType }}
                         </span>
                     </center>

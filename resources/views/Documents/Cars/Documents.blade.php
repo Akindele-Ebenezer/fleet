@@ -37,10 +37,10 @@
                     </div> 
                 </td>
                 <td>
-                    <small>{{ $Document->GearType }}</small> <br>
+                    <small class="gear-type-x underline">{{ $Document->GearType }}</small> <br>
                     <span class="{{ $Document->Status  === 'ACTIVE' ? 'active-x' : 'inactive-x' }}">{{ $Document->Status }}</span>  
                 </td>
-                <td>
+                <td class="drivers-x underline">
                     {{ $Document->Driver }} 
                 </td>
                 <td>

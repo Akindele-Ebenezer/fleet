@@ -75,25 +75,29 @@
                     <div class="car-info">
                         <div class="info-inner">
                             <div class="inner">
-                                <h1>{{ $CarOwner->CarOwner }}</h1> 
+                                <h1 class="car-owners-x underline">{{ $CarOwner->CarOwner }}</h1> 
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
-                                    <span>Maintenance</span>
+                                    <span class="maintenance-x-2 underline">Maintenance</span>
+                                    <span class="Hide">{{ $CarOwner->VehicleNumber }}</span>
                                     <span>₦ {{ number_format($SumOfMaintenance) }} ({{ $CarOwners_MAINTENANCE }})</span> 
                                 </div>
                                 <div class="inner-x">
                                     <span>Repairs</span>
+                                    {{-- <span class="Hide">repair</span> --}}
                                     <span>₦ {{ number_format($SumOfRepair) }} ({{ $CarOwners_REPAIRS }})</span>
                                 </div>
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
-                                    <span>Deposits</span>
+                                    <span class="deposits-x underline">Deposits</span>
+                                    <span class="Hide">{{ $CarOwner->CardNumber ?? 'null' }}</span>
                                     <span>₦ {{ number_format($SumOfDeposits) }} ({{ $CarOwners_DEPOSITS }})</span>
                                 </div>
                                 <div class="inner-x">
-                                    <span>Refueling</span>
+                                    <span class="refuelings-x underline">Refueling</span>
+                                    <span class="Hide">{{ $CarOwner->VehicleNumber }}</span>
                                     <span>₦ {{ number_format($SumOfRefueling) }} ({{ $CarOwners_REFUELING }})</span>
                                 </div>
                                 <hr>
@@ -116,7 +120,7 @@
                 <td>  
                     <div class="car-owner-cars">
                         @foreach ($CarOwners_Cars as $Car)
-                            {{ empty($Car->VehicleNumber) ? $loop->iteration .  ' :: '  . $CarOwner->CarOwner : $loop->iteration .  ' :: '  . $Car->VehicleNumber .  ' - ['  . $Car->Maker .  ']'  }} <br>
+                            {!! empty($Car->VehicleNumber) ? $loop->iteration .  ' :: '  . $CarOwner->CarOwner : $loop->iteration .  ' :: <span class="make-x underline car-owners-vehicle">'  . $Car->VehicleNumber .  '</span> - ['  . $Car->Maker .  ']'  !!} <br>
                         @endforeach
                     </div>
                 </td> 
