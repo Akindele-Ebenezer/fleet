@@ -34,7 +34,7 @@
                 <span class="Week_X_DATA_Edit Hide">{{ $Deposit->Week }}</span> 
                 <span class="Month_X_DATA_Edit Hide">{{ $Deposit->Month }}</span> 
                 <td>{{ $Deposit->Date }}</td>
-                <td>{{ $Deposit->CardNumber }}</td>
+                <td class="card-numbers-x underline">{{ $Deposit->CardNumber }}</td>
                 <td>₦ {{ empty($Deposit->Amount) ? '' : number_format($Deposit->Amount) }}</td> 
                 <td>{{ $Deposit->Year }}</td>
                 <td>{{ $Deposit->Week }}</td>
@@ -107,7 +107,7 @@
                     @endphp
                     <td class="show-record-x show-record-x-2"><img src="{{ asset('Images/deposit_.png') }}" alt=""> MASTER<span class="{{ $Status->Status ?? 'INACTIVE' }}"></span></td>  
                     <td>{{ $Deposits_MasterCard->Date }}</td>
-                    <td>{{ $Deposits_MasterCard->CardNumber }}</td>
+                    <td class="card-numbers-x underline">{{ $Deposits_MasterCard->CardNumber }}</td>
                     <td>₦ {{ empty($Deposits_MasterCard->Amount) ? '' : number_format($Deposits_MasterCard->Amount) }}</td> 
                     <td>{{ $Deposits_MasterCard->Year }}</td>
                     <td>{{ $Deposits_MasterCard->Week }}</td>

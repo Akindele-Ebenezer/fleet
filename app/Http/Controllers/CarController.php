@@ -27,7 +27,7 @@ class CarController extends Controller
         $Config = self::config();
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
-            $FilterValue = $_GET['FilterValue']; 
+            $FilterValue = trim($_GET['FilterValue']); 
 
             if ($FilterValue === 'active') {
                 $Cars = Car::where('Status', 'ACTIVE')->paginate(14);
@@ -77,7 +77,7 @@ class CarController extends Controller
         $Config = self::config();
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
-            $FilterValue = trim(str_replace(' ', '', $_GET['FilterValue'])); 
+            $FilterValue = trim($_GET['FilterValue']); 
             $Cars = Car::whereNotNull('VehicleNumber')
                         ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
@@ -285,7 +285,7 @@ class CarController extends Controller
         $Config = self::config();
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
-            $FilterValue = trim(str_replace(' ', '', $_GET['FilterValue'])); 
+            $FilterValue = trim($_GET['FilterValue']); 
             $CarOwners = Car::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Model', 'LIKE', '%' . $FilterValue . '%')
@@ -332,7 +332,7 @@ class CarController extends Controller
                         ->paginate(6);
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
-            $FilterValue = trim(str_replace(' ', '', $_GET['FilterValue'])); 
+            $FilterValue = trim($_GET['FilterValue']); 
             $Drivers = Car::whereNotNull('Driver')
                         ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
@@ -377,7 +377,7 @@ class CarController extends Controller
         $Config = self::config();
  
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
-            $FilterValue = $_GET['FilterValue']; 
+            $FilterValue = trim($_GET['FilterValue']); 
             $Cars__MyRecords = Car::where('UserId', self::USER_ID())
                         ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
@@ -422,7 +422,7 @@ class CarController extends Controller
         $Config = self::config();
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
-            $FilterValue = $_GET['FilterValue']; 
+            $FilterValue = trim($_GET['FilterValue']); 
             $Cars = Car::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Model', 'LIKE', '%' . $FilterValue . '%')

@@ -46,7 +46,7 @@
                 <td>{{ $Refueling->Time }}</td>
                 <td>{{ $Refueling->Mileage }}</td>
                 <td>{{ $Refueling->TERNO }}</td>
-                <td>{{ $Refueling->CardNumber }}</td>
+                <td class="card-numbers-x underline">{{ $Refueling->CardNumber }}</td>
                 <td>{{ $Refueling->Quantity }}</td>
                 <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
                 <td>{{ $Refueling->ReceiptNumber }}</td>

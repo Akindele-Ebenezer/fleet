@@ -23,10 +23,10 @@
                     </div> 
                 </td>
                 <td>
-                    <small>{{ $Driver->Model ?? 'POOL' }} :: {{ $Driver->VehicleNumber }}</small> <br>
+                    <small><span class="make-x underline car-owners-vehicle">{{ $Driver->Model ?? 'POOL' }}</span> :: <span class="make-x underline car-owners-vehicle">{{ $Driver->VehicleNumber }}</span></small> <br>
                     <span class="{{ $Driver->Status  === 'ACTIVE' ? 'active-x' : 'inactive-x' }}">{{ $Driver->Status }}</span>  
                 </td>
-                <td>
+                <td class="car-owners-x underline car-owners-vehicle">
                     {{ $Driver->CarOwner }} 
                 </td>  
             </tr>   

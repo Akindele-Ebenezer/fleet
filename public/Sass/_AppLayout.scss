@@ -405,7 +405,8 @@
         
         .sub-nav-wrapper {
             .my-records,
-            .card-management {
+            .card-management,
+            .inspections {
                 cursor: pointer;
             }
         }
@@ -711,6 +712,10 @@
                     color: #eee;
                     display: inline-block;
                     padding-block: .5em;
+
+                    span {
+                        color: #eee;
+                    }
                 }
 
                 &.td-x:hover {

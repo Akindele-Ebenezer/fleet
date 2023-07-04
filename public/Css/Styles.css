@@ -895,7 +895,8 @@ svg {
   color: #fff;
 }
 .report-inner .sub-nav-wrapper .my-records,
-.report-inner .sub-nav-wrapper .card-management {
+.report-inner .sub-nav-wrapper .card-management,
+.report-inner .sub-nav-wrapper .inspections {
   cursor: pointer;
 }
 .report-inner .table {
@@ -1138,6 +1139,9 @@ svg {
   color: #eee;
   display: inline-block;
   padding-block: 0.5em;
+}
+.report-inner .table td small span {
+  color: #eee;
 }
 .report-inner .table td.td-x:hover {
   background-color: #333;

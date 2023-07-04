@@ -1,6 +1,7 @@
 let Arrow = document.querySelector('.arrow');
 let MyRecords = document.querySelector('.my-records');
 let CardManagement = document.querySelectorAll('.card-management');
+let Inspections = document.querySelectorAll('.inspections');
 let SubNavs = document.querySelectorAll('.sub-nav li');
 
 MyRecords.addEventListener('click', (e) => {
@@ -8,6 +9,12 @@ MyRecords.addEventListener('click', (e) => {
     MyRecords.nextElementSibling.classList.toggle('Show');
 });
 CardManagement.forEach(NavWrapper => {
+    NavWrapper.addEventListener('click', (e) => {
+        e.preventDefault();
+        NavWrapper.nextElementSibling.classList.toggle('Show');
+    });
+});
+Inspections.forEach(NavWrapper => {
     NavWrapper.addEventListener('click', (e) => {
         e.preventDefault();
         NavWrapper.nextElementSibling.classList.toggle('Show');
