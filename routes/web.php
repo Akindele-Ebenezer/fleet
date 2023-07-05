@@ -42,7 +42,8 @@ Route::post('/Update/Maintenance/{Maintenance}', [MaintenanceController::class, 
 Route::get('/Delete/Maintenance/{Maintenance}', [MaintenanceController::class, 'destroy'])->name('DeleteMaintenance');
 
 Route::get('/Cars/Inspections/Daily/Checklist', [CarController::class, 'cars_daily_checklist'])->name('DailyCheckList'); 
-Route::get('/Cars/Inspections/Report', [CarController::class, 'cars_inspection_report'])->name('Inpsection_Report'); 
+Route::get('/Cars/Inspections/Report', [CarController::class, 'cars_inspection_report'])->name('Inspection_Report'); 
+Route::get('Add/Cars/Inspections/Report', [CarController::class, 'cars_inspection_store'])->name('Add_Inspection_Report'); 
 
 Route::get('/Management/Fleet/Deposits/Entries', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
 Route::get('/Add/Deposits/{Deposits}', [DepositsController::class, 'store'])->name('store_Deposits'); 

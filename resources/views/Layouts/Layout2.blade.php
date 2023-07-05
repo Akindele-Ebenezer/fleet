@@ -195,7 +195,7 @@
                         <span>{{ $HandleNumbers($NumberOfCars) }}</span>
                     </li>
                 </a>
-                {{-- <div class="sub-nav-wrapper">
+                <div class="sub-nav-wrapper">
                     <a class="inspections action-x">
                         <li class="">
                             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M222 976q-43.75 0-74.375-30.625T117 871V746h127V176l59.8 60 59.8-60 59.8 60 59.8-60 59.8 60 60-60 60 60 60-60 60 60 60-60v695q0 43.75-30.625 74.375T738 976H222Zm516-60q20 0 32.5-12.5T783 871V276H304v470h389v125q0 20 12.5 32.5T738 916ZM357 434v-60h240v60H357Zm0 134v-60h240v60H357Zm333-134q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9Zm0 129q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9ZM221 916h412V806H177v65q0 20 12.65 32.5T221 916Zm-44 0V806v110Z"/></svg>                  
@@ -204,21 +204,21 @@
                             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"/></svg>
                         </li> 
                     </a>
-                    <div class="sub-nav {{ Route::is('DailyCheckList') || Route::is('Inpsection_Report') ? 'Show' : '' }}">
+                    <div class="sub-nav {{ Route::is('DailyCheckList') || Route::is('Inspection_Report') ? 'Show' : '' }}">
                         <a href='{{ route('DailyCheckList') }}'>
                             <li class="{{ Route::is('DailyCheckList') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
                                 Daily Checklist 
                             </li>
                         </a>  
-                        <a href='{{ route('Inpsection_Report') }}'>
-                            <li class="{{ Route::is('Inpsection_Report') ? 'active' : '' }}">
+                        <a href='{{ route('Inspection_Report') }}'>
+                            <li class="{{ Route::is('Inspection_Report') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
                                 Report 
                             </li>
                         </a>  
                     </div>
-                </div> --}}
+                </div>
                 <a href='{{ route('Documents') }}'>
                     <li class="{{ Route::is('Documents') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"/></svg>                   

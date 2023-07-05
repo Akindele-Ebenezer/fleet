@@ -77,6 +77,27 @@ class CarController extends Controller
         return view('DailyCheckList');
     }
 
+    public function cars_inspection_report() {
+        $Config = self::config();
+
+        return view('InspectionReport', $Config);
+    }
+
+    public function cars_inspection_store(Request $request) {  
+        \DB::table('inspection_report')->insert([
+            'VehicleNumber' => $request->VehicleNumber, 
+            'InspectionNumber' => $request->InspectionNumber, 
+            'Mileage' => $request->Mileage,
+            'DateInspected' => $request->DateInspected,
+            'VehicleMake' => $request->VehicleMake,
+            'VehicleModel' => $request->VehicleModel,
+            'Driver' => $request->Driver,
+            'InspectedBy' => $request->InspectedBy,
+        ]); 
+
+        return redirect()->route('Inspection_Report');
+    }
+
     public function car_documents() {
         $Config = self::config();
 

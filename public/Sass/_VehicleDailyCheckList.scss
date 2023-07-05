@@ -1,33 +1,139 @@
 .daily-checklist {
     display: flex;
+    height: 62vh;
     justify-content: center;  
+    overflow-y: scroll;
 
     &-inner {
-        width: 80em;
+        width: 70em;
+
+        h1 {
+            border-bottom: 5px solid $Color-4;
+            font-size: 1.35em;
+            margin-block: 1em;
+            padding-block: 0.5em;
+
+            &.h1-x {
+                border: unset;
+                margin: unset;
+                margin-top: 1em;
+            }
+        }
+
+        input,
+        textarea {
+            background: #1a1a1a;
+            border: none;
+            color: #fff;
+            outline: none;
+            padding-inline: 0.5rem;
+            resize: none;
+            width: 100%;
+        }
+
+        .div input {
+            height: 3em;
+            width: 40%;
+        }
+
+        h2 {
+            background: #333;
+            color: #ddd; 
+            display: inline-block;
+            font-family: system-ui; 
+            margin-block: 1em;
+            padding: 0.5em;
+        }
+
+        .inspection-x {
+            .item-checklist {
+                align-items: center;
+                display: flex; 
+
+                &.heading {
+                    background-color: #000;
+                    position: sticky;
+                    top: 0;
+                }
+
+                &-inner {
+                    border: 1px solid #333;
+                    border-right: unset;
+                    border-bottom: unset;
+                    color: #ddd; 
+                    padding: 1em;
+                    width: 5%;
+
+                    &:first-of-type {
+                        width: 60%;
+                    }
+ 
+                    &.heading {
+                        border: none;
+                        padding-inline: unset;
+                        text-align: center;
+
+                        &:first-of-type {
+                            border: none !important;
+                        }
+
+                        &:nth-child(2) {
+                            background: $Color-2;
+                        }
+
+                        &:nth-child(3) {
+                            background: $Color-3;
+                        }
+
+                        &:nth-child(4) {
+                            background: #111;
+                        }
+
+                        &:nth-child(5) {
+                            background: $Color-4;
+                        }
+                    }
+
+                    &:last-of-type {
+                        border-right: 1px solid #333;
+                        width: 25%;
+                    }
+                }
+
+                &.last {
+                    border-bottom: 1px solid #333;
+                }
+            }
+        }
+        
+        textarea {
+            height: 10em;
+        }
+    }
+
+    button {
+        background: $Color-4;
     }
 
     .inner-wrapper-1 {
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-between;
     }
 
     .checklist {
         margin-bottom: 1em;
-        width: 30em;
+        margin-inline: 0.75em;
+        width: 47%;
  
-        input {
-            background: #222;
-            border: none;
-            border-radius: 0.5em;
-            color: #fff;
-            margin-block: 1em;
-            outline: none;
-            padding: 0.5em;
-            width: 90%;
+        input { 
+            height: 3em; 
         }
 
         label {
             color: #eee;
+            display: inline-block;
+            margin-bottom: 1em;
         }
     }
 }
