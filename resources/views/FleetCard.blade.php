@@ -1,5 +1,8 @@
 @extends('Layouts.Layout2')
 
+@section('Title', 'FLEET CARDS') 
+@section('Heading', 'FLEET CARDS') 
+
 @section('Content')
     <div class="table-wrapper"> 
         <table class="table table-2 list" id="Table">

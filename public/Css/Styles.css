@@ -1943,4 +1943,33 @@ svg {
   width: 100%;
 }
 
+.daily-checklist {
+  display: flex;
+  justify-content: center;
+}
+.daily-checklist-inner {
+  width: 80em;
+}
+.daily-checklist .inner-wrapper-1 {
+  display: flex;
+  flex-wrap: wrap;
+}
+.daily-checklist .checklist {
+  margin-bottom: 1em;
+  width: 30em;
+}
+.daily-checklist .checklist input {
+  background: #222;
+  border: none;
+  border-radius: 0.5em;
+  color: #fff;
+  margin-block: 1em;
+  outline: none;
+  padding: 0.5em;
+  width: 90%;
+}
+.daily-checklist .checklist label {
+  color: #eee;
+}
+
 /*# sourceMappingURL=Styles.css.map */

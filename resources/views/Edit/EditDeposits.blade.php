@@ -1,5 +1,8 @@
 @extends('Layouts.Layout2')
 
+@section('Title', 'Make Deposits') 
+@section('Heading', 'Make Deposits') 
+
 @section('Content')
     <div class="table-wrapper"> 
         <table class="table" id="Table">

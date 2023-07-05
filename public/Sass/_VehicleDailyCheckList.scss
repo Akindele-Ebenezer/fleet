@@ -1,0 +1,33 @@
+.daily-checklist {
+    display: flex;
+    justify-content: center;  
+
+    &-inner {
+        width: 80em;
+    }
+
+    .inner-wrapper-1 {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .checklist {
+        margin-bottom: 1em;
+        width: 30em;
+ 
+        input {
+            background: #222;
+            border: none;
+            border-radius: 0.5em;
+            color: #fff;
+            margin-block: 1em;
+            outline: none;
+            padding: 0.5em;
+            width: 90%;
+        }
+
+        label {
+            color: #eee;
+        }
+    }
+}

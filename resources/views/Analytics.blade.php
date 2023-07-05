@@ -46,6 +46,10 @@
         ${'FleetSurvey_Refueling_PERCENTAGE_' . $MonthNames[$i]} = ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} == 0 ? 0 : ${'NumberOfCarRefueling_' . $MonthNames[$i]} / ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} * 100;
     } 
 @endphp
+
+@section('Title', 'ANALYTICS') 
+@section('Heading', 'FLEET DASHBOARD') 
+
 @section('Content')
     <style> 
         .report-inner {

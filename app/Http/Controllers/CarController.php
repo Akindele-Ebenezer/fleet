@@ -73,6 +73,10 @@ class CarController extends Controller
         return view('Cars', $Config);
     }
 
+    public function cars_daily_checklist() {
+        return view('DailyCheckList');
+    }
+
     public function car_documents() {
         $Config = self::config();
 
