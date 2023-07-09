@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string("PresenceOfFirstAidKit")->nullable();
             $table->string("FunctionalityOfAllSafetyFeatures")->nullable();
             $table->string("EmergencyLightsCondition")->nullable(); 
+            $table->string("PresenceOfSpareTire_ActionRequired")->nullable();
+            $table->string("PresenceOfFirstAidKit_ActionRequired")->nullable();
+            $table->string("FunctionalityOfAllSafetyFeatures_ActionRequired")->nullable();
+            $table->string("EmergencyLightsCondition_ActionRequired")->nullable(); 
             $table->timestamps();
         });
     }

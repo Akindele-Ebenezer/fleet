@@ -40,6 +40,8 @@
     @endphp 
     @include('Components.LoaderComponent')
 
+    @yield('Components')
+
     @if (Route::is('Cars_Registration') || Route::is('Cars') || Route::is('VehicleReport'))
         @include('Components.EditCarComponent')
         @include('Components.AddCarComponent')
@@ -912,6 +914,7 @@
         @endif
         <script src="{{ asset('Js/Loader.js') }}"></script> 
         <script src="{{ asset('Js/Tooltips.js') }}"></script> 
+        @yield('JS')
 </body>
 </html>
 @endif

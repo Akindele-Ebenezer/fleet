@@ -16,11 +16,14 @@ return new class extends Migration
             $table->string("VehicleNumber")->nullable();
             $table->string("InspectionNumber")->nullable();
             $table->string("Mileage")->nullable();
-            $table->string("DateInspected")->nullable();
-            $table->string("VehicleMake")->nullable();
-            $table->string("VehicleModel")->nullable();
-            $table->string("Driver")->nullable();
+            $table->string("DateInspected")->nullable(); 
             $table->string("InspectedBy")->nullable(); 
+            $table->string("AdditionalNotes")->nullable(); 
+            $table->string("Attachment")->nullable(); 
+            $table->string("Status")->nullable(); 
+            $table->string("Mechanic")->nullable(); 
+            $table->string("SubmitTime")->nullable(); 
+            $table->string("Week")->nullable(); 
             $table->timestamps();
         });
     }

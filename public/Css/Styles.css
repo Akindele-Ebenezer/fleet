@@ -1949,11 +1949,25 @@ svg {
   justify-content: center;
   overflow-y: scroll;
 }
+.daily-checklist.edit {
+  display: none;
+  height: 100vh;
+  justify-content: right;
+  padding: 1em;
+}
+.daily-checklist.edit button:last-of-type {
+  background: #DF2E38;
+}
+.daily-checklist.edit .daily-checklist-inner {
+  background: #000;
+}
 .daily-checklist-inner {
   width: 70em;
 }
 .daily-checklist-inner h1 {
   border-bottom: 5px solid #3034b5;
+  color: #eee;
+  font-family: system-ui;
   font-size: 1.35em;
   margin-block: 1em;
   padding-block: 0.5em;

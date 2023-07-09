@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string("BrakeFluidLevelCondition")->nullable();
             $table->string("WindshieldWasherFluidCondition")->nullable();
             $table->string("PowerSteeringFluidLevelCondition")->nullable(); 
+            $table->string("EngineOilCondition_ActionRequired")->nullable();
+            $table->string("CoolantLevelCondition_ActionRequired")->nullable();
+            $table->string("BrakeFluidLevelCondition_ActionRequired")->nullable();
+            $table->string("WindshieldWasherFluidCondition_ActionRequired")->nullable();
+            $table->string("PowerSteeringFluidLevelCondition_ActionRequired")->nullable(); 
             $table->timestamps();
         });
     }

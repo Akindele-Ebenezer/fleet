@@ -4,11 +4,28 @@
     justify-content: center;  
     overflow-y: scroll;
 
+    &.edit {
+        display: none;
+        height: 100vh;
+        justify-content: right;
+        padding: 1em;
+
+        button:last-of-type {
+            background: $Color-2;
+        }
+
+        .daily-checklist-inner {
+            background: #000;
+        }
+    } 
+
     &-inner {
         width: 70em;
 
         h1 {
             border-bottom: 5px solid $Color-4;
+            color: #eee;
+            font-family: system-ui;
             font-size: 1.35em;
             margin-block: 1em;
             padding-block: 0.5em;

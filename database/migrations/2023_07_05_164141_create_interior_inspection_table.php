@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string("HornCondition")->nullable();
             $table->string("AllControlsCondition")->nullable();
             $table->string("MirrorVisibility")->nullable(); 
+            $table->string("SeatBeltsCondition_ActionRequired")->nullable(); 
+            $table->string("SeatsCondition_ActionRequired")->nullable(); 
+            $table->string("HornCondition_ActionRequired")->nullable(); 
+            $table->string("AllControlsCondition_ActionRequired")->nullable(); 
+            $table->string("MirrorVisibility_ActionRequired")->nullable(); 
             $table->timestamps();
         });
     }

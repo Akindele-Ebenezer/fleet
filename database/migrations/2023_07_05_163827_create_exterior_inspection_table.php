@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string("WindshieldCondition")->nullable();
             $table->string("LightsCondition")->nullable();
             $table->string("MirrorCondition")->nullable(); 
+            $table->string("BodyDamages_ActionRequired")->nullable(); 
+            $table->string("TireCondition_ActionRequired")->nullable(); 
+            $table->string("WindshieldCondition_ActionRequired")->nullable(); 
+            $table->string("LightsCondition_ActionRequired")->nullable(); 
+            $table->string("MirrorCondition_ActionRequired")->nullable(); 
             $table->timestamps();
         });
     }

@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string("BrakeEngagingCondition")->nullable();
             $table->string("WiperBladesCondition")->nullable();
             $table->string("BatteryCondition")->nullable(); 
+            $table->string("EngineCondition_ActionRequired")->nullable();
+            $table->string("BrakeCondition_ActionRequired")->nullable();
+            $table->string("BrakeEngagingCondition_ActionRequired")->nullable();
+            $table->string("WiperBladesCondition_ActionRequired")->nullable();
+            $table->string("BatteryCondition_ActionRequired")->nullable(); 
             $table->timestamps();
         });
     }

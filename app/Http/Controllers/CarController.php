@@ -88,11 +88,184 @@ class CarController extends Controller
             'VehicleNumber' => $request->VehicleNumber, 
             'InspectionNumber' => $request->InspectionNumber, 
             'Mileage' => $request->Mileage,
-            'DateInspected' => $request->DateInspected,
-            'VehicleMake' => $request->VehicleMake,
-            'VehicleModel' => $request->VehicleModel,
-            'Driver' => $request->Driver,
+            'DateInspected' => $request->DateInspected, 
             'InspectedBy' => $request->InspectedBy,
+            'AdditionalNotes' => $request->AdditionalNotes,
+            'Attachment' => $request->Attachment,
+            'Status' => $request->Status,
+            'Mechanic' => $request->Mechanic,
+            'SubmitTime' => $request->SubmitTime,
+            'Week' => $request->Week,
+        ]); 
+
+        \DB::table('exterior_inspection')->insert([
+            'VehicleNumber' => $request->VehicleNumber, 
+            'InspectionNumber' => $request->InspectionNumber, 
+            'BodyDamages' => $request->BodyDamages,
+            'TireCondition' => $request->TireCondition,
+            'WindshieldCondition' => $request->WindshieldCondition,
+            'LightsCondition' => $request->LightsCondition,
+            'MirrorCondition' => $request->MirrorCondition, 
+            'BodyDamages_ActionRequired' => $request->BodyDamages_ActionRequired, 
+            'TireCondition_ActionRequired' => $request->TireCondition_ActionRequired, 
+            'WindshieldCondition_ActionRequired' => $request->WindshieldCondition_ActionRequired, 
+            'LightsCondition_ActionRequired' => $request->LightsCondition_ActionRequired, 
+            'MirrorCondition_ActionRequired' => $request->MirrorCondition_ActionRequired, 
+        ]); 
+
+        \DB::table('interior_inspection')->insert([
+            'VehicleNumber' => $request->VehicleNumber, 
+            'InspectionNumber' => $request->InspectionNumber, 
+            'SeatBeltsCondition' => $request->SeatBeltsCondition,
+            'SeatsCondition' => $request->SeatsCondition,
+            'HornCondition' => $request->HornCondition,
+            'AllControlsCondition' => $request->AllControlsCondition,
+            'MirrorVisibility' => $request->MirrorVisibility, 
+            'SeatBeltsCondition_ActionRequired' => $request->SeatBeltsCondition_ActionRequired, 
+            'SeatsCondition_ActionRequired' => $request->SeatsCondition_ActionRequired, 
+            'HornCondition_ActionRequired' => $request->HornCondition_ActionRequired, 
+            'AllControlsCondition_ActionRequired' => $request->AllControlsCondition_ActionRequired, 
+            'MirrorVisibility_ActionRequired' => $request->MirrorVisibility_ActionRequired, 
+        ]); 
+
+        \DB::table('fluid_levels')->insert([
+            'VehicleNumber' => $request->VehicleNumber, 
+            'InspectionNumber' => $request->InspectionNumber, 
+            'EngineOilCondition' => $request->EngineOilCondition,
+            'CoolantLevelCondition' => $request->CoolantLevelCondition,
+            'BrakeFluidLevelCondition' => $request->BrakeFluidLevelCondition,
+            'WindshieldWasherFluidCondition' => $request->WindshieldWasherFluidCondition,
+            'PowerSteeringFluidLevelCondition' => $request->PowerSteeringFluidLevelCondition, 
+            'EngineOilCondition_ActionRequired' => $request->EngineOilCondition_ActionRequired, 
+            'CoolantLevelCondition_ActionRequired' => $request->CoolantLevelCondition_ActionRequired, 
+            'BrakeFluidLevelCondition_ActionRequired' => $request->BrakeFluidLevelCondition_ActionRequired, 
+            'WindshieldWasherFluidCondition_ActionRequired' => $request->WindshieldWasherFluidCondition_ActionRequired, 
+            'PowerSteeringFluidLevelCondition_ActionRequired' => $request->PowerSteeringFluidLevelCondition_ActionRequired, 
+        ]); 
+
+        \DB::table('mechanical_inspection')->insert([
+            'VehicleNumber' => $request->VehicleNumber, 
+            'InspectionNumber' => $request->InspectionNumber, 
+            'EngineCondition' => $request->EngineCondition,
+            'BrakeCondition' => $request->BrakeCondition,
+            'BrakeEngagingCondition' => $request->BrakeEngagingCondition,
+            'WiperBladesCondition' => $request->WiperBladesCondition,
+            'BatteryCondition' => $request->BatteryCondition, 
+            'EngineCondition_ActionRequired' => $request->EngineCondition_ActionRequired, 
+            'BrakeCondition_ActionRequired' => $request->BrakeCondition_ActionRequired, 
+            'BrakeEngagingCondition_ActionRequired' => $request->BrakeEngagingCondition_ActionRequired, 
+            'WiperBladesCondition_ActionRequired' => $request->WiperBladesCondition_ActionRequired, 
+            'BatteryCondition_ActionRequired' => $request->BatteryCondition_ActionRequired, 
+        ]); 
+
+        \DB::table('safety_equipment')->insert([
+            'VehicleNumber' => $request->VehicleNumber, 
+            'InspectionNumber' => $request->InspectionNumber, 
+            'PresenceOfSpareTire' => $request->PresenceOfSpareTire,
+            'PresenceOfFirstAidKit' => $request->PresenceOfFirstAidKit,
+            'FunctionalityOfAllSafetyFeatures' => $request->FunctionalityOfAllSafetyFeatures,
+            'EmergencyLightsCondition' => $request->EmergencyLightsCondition,
+            'PresenceOfSpareTire_ActionRequired' => $request->PresenceOfSpareTire_ActionRequired, 
+            'PresenceOfFirstAidKit_ActionRequired' => $request->PresenceOfFirstAidKit_ActionRequired, 
+            'FunctionalityOfAllSafetyFeatures_ActionRequired' => $request->FunctionalityOfAllSafetyFeatures_ActionRequired, 
+            'EmergencyLightsCondition_ActionRequired' => $request->EmergencyLightsCondition_ActionRequired, 
+        ]); 
+
+        return redirect()->route('Inspection_Report');
+    }
+
+    public function cars_inspection_update(Request $request) {  
+        \DB::table('inspection_report')->where('InspectionNumber', $InspectionNumber)
+            ->update([
+            'VehicleNumber' => $request->VehicleNumber, 
+            'InspectionNumber' => $request->InspectionNumber, 
+            'Mileage' => $request->Mileage,
+            'DateInspected' => $request->DateInspected, 
+            'InspectedBy' => $request->InspectedBy,
+            'AdditionalNotes' => $request->AdditionalNotes,
+            'Attachment' => $request->Attachment,
+            'Status' => $request->Status,
+            'Mechanic' => $request->Mechanic,
+            'SubmitTime' => $request->SubmitTime,
+            'Week' => $request->Week,
+        ]); 
+
+        \DB::table('exterior_inspection')->where('InspectionNumber', $InspectionNumber)
+            ->update([
+            'VehicleNumber' => $request->VehicleNumber, 
+            'InspectionNumber' => $request->InspectionNumber, 
+            'BodyDamages' => $request->BodyDamages,
+            'TireCondition' => $request->TireCondition,
+            'WindshieldCondition' => $request->WindshieldCondition,
+            'LightsCondition' => $request->LightsCondition,
+            'MirrorCondition' => $request->MirrorCondition, 
+            'BodyDamages_ActionRequired' => $request->BodyDamages_ActionRequired, 
+            'TireCondition_ActionRequired' => $request->TireCondition_ActionRequired, 
+            'WindshieldCondition_ActionRequired' => $request->WindshieldCondition_ActionRequired, 
+            'LightsCondition_ActionRequired' => $request->LightsCondition_ActionRequired, 
+            'MirrorCondition_ActionRequired' => $request->MirrorCondition_ActionRequired, 
+        ]); 
+
+        \DB::table('interior_inspection')->where('InspectionNumber', $InspectionNumber)
+            ->update([
+            'VehicleNumber' => $request->VehicleNumber, 
+            'InspectionNumber' => $request->InspectionNumber, 
+            'SeatBeltsCondition' => $request->SeatBeltsCondition,
+            'SeatsCondition' => $request->SeatsCondition,
+            'HornCondition' => $request->HornCondition,
+            'AllControlsCondition' => $request->AllControlsCondition,
+            'MirrorVisibility' => $request->MirrorVisibility, 
+            'SeatBeltsCondition_ActionRequired' => $request->SeatBeltsCondition_ActionRequired, 
+            'SeatsCondition_ActionRequired' => $request->SeatsCondition_ActionRequired, 
+            'HornCondition_ActionRequired' => $request->HornCondition_ActionRequired, 
+            'AllControlsCondition_ActionRequired' => $request->AllControlsCondition_ActionRequired, 
+            'MirrorVisibility_ActionRequired' => $request->MirrorVisibility_ActionRequired, 
+        ]); 
+
+        \DB::table('fluid_levels')->where('InspectionNumber', $InspectionNumber)
+            ->update([
+            'VehicleNumber' => $request->VehicleNumber, 
+            'InspectionNumber' => $request->InspectionNumber, 
+            'EngineOilCondition' => $request->EngineOilCondition,
+            'CoolantLevelCondition' => $request->CoolantLevelCondition,
+            'BrakeFluidLevelCondition' => $request->BrakeFluidLevelCondition,
+            'WindshieldWasherFluidCondition' => $request->WindshieldWasherFluidCondition,
+            'PowerSteeringFluidLevelCondition' => $request->PowerSteeringFluidLevelCondition, 
+            'EngineOilCondition_ActionRequired' => $request->EngineOilCondition_ActionRequired, 
+            'CoolantLevelCondition_ActionRequired' => $request->CoolantLevelCondition_ActionRequired, 
+            'BrakeFluidLevelCondition_ActionRequired' => $request->BrakeFluidLevelCondition_ActionRequired, 
+            'WindshieldWasherFluidCondition_ActionRequired' => $request->WindshieldWasherFluidCondition_ActionRequired, 
+            'PowerSteeringFluidLevelCondition_ActionRequired' => $request->PowerSteeringFluidLevelCondition_ActionRequired, 
+        ]); 
+
+        \DB::table('mechanical_inspection')->where('InspectionNumber', $InspectionNumber)
+            ->update([
+            'VehicleNumber' => $request->VehicleNumber, 
+            'InspectionNumber' => $request->InspectionNumber, 
+            'EngineCondition' => $request->EngineCondition,
+            'BrakeCondition' => $request->BrakeCondition,
+            'BrakeEngagingCondition' => $request->BrakeEngagingCondition,
+            'WiperBladesCondition' => $request->WiperBladesCondition,
+            'BatteryCondition' => $request->BatteryCondition, 
+            'EngineCondition_ActionRequired' => $request->EngineCondition_ActionRequired, 
+            'BrakeCondition_ActionRequired' => $request->BrakeCondition_ActionRequired, 
+            'BrakeEngagingCondition_ActionRequired' => $request->BrakeEngagingCondition_ActionRequired, 
+            'WiperBladesCondition_ActionRequired' => $request->WiperBladesCondition_ActionRequired, 
+            'BatteryCondition_ActionRequired' => $request->BatteryCondition_ActionRequired, 
+        ]); 
+
+        \DB::table('safety_equipment')->where('InspectionNumber', $InspectionNumber)
+            ->update([
+            'VehicleNumber' => $request->VehicleNumber, 
+            'InspectionNumber' => $request->InspectionNumber, 
+            'PresenceOfSpareTire' => $request->PresenceOfSpareTire,
+            'PresenceOfFirstAidKit' => $request->PresenceOfFirstAidKit,
+            'FunctionalityOfAllSafetyFeatures' => $request->FunctionalityOfAllSafetyFeatures,
+            'EmergencyLightsCondition' => $request->EmergencyLightsCondition,
+            'PresenceOfSpareTire_ActionRequired' => $request->PresenceOfSpareTire_ActionRequired, 
+            'PresenceOfFirstAidKit_ActionRequired' => $request->PresenceOfFirstAidKit_ActionRequired, 
+            'FunctionalityOfAllSafetyFeatures_ActionRequired' => $request->FunctionalityOfAllSafetyFeatures_ActionRequired, 
+            'EmergencyLightsCondition_ActionRequired' => $request->EmergencyLightsCondition_ActionRequired, 
         ]); 
 
         return redirect()->route('Inspection_Report');
