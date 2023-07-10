@@ -278,8 +278,7 @@ footer {
 
             h1 {
                 align-items: center;
-                border: 1px solid lighten($color: $Color-4, $amount: 40);
-                border-radius: 0.35em;
+                border-bottom: 5px solid lighten($color: $Color-4, $amount: 40);
                 color: lighten($color: $Color-4, $amount: 10);
                 display: flex;
                 font-family: "Bitter", serif !important;

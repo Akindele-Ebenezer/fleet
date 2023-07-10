@@ -175,7 +175,7 @@ class CarController extends Controller
     }
 
     public function cars_inspection_update(Request $request) {  
-        \DB::table('inspection_report')->where('InspectionNumber', $InspectionNumber)
+        \DB::table('inspection_report')->where('InspectionNumber', $request->InspectionNumber)
             ->update([
             'VehicleNumber' => $request->VehicleNumber, 
             'InspectionNumber' => $request->InspectionNumber, 
@@ -190,7 +190,7 @@ class CarController extends Controller
             'Week' => $request->Week,
         ]); 
 
-        \DB::table('exterior_inspection')->where('InspectionNumber', $InspectionNumber)
+        \DB::table('exterior_inspection')->where('InspectionNumber', $request->InspectionNumber)
             ->update([
             'VehicleNumber' => $request->VehicleNumber, 
             'InspectionNumber' => $request->InspectionNumber, 
@@ -206,7 +206,7 @@ class CarController extends Controller
             'MirrorCondition_ActionRequired' => $request->MirrorCondition_ActionRequired, 
         ]); 
 
-        \DB::table('interior_inspection')->where('InspectionNumber', $InspectionNumber)
+        \DB::table('interior_inspection')->where('InspectionNumber', $request->InspectionNumber)
             ->update([
             'VehicleNumber' => $request->VehicleNumber, 
             'InspectionNumber' => $request->InspectionNumber, 
@@ -222,7 +222,7 @@ class CarController extends Controller
             'MirrorVisibility_ActionRequired' => $request->MirrorVisibility_ActionRequired, 
         ]); 
 
-        \DB::table('fluid_levels')->where('InspectionNumber', $InspectionNumber)
+        \DB::table('fluid_levels')->where('InspectionNumber', $request->InspectionNumber)
             ->update([
             'VehicleNumber' => $request->VehicleNumber, 
             'InspectionNumber' => $request->InspectionNumber, 
@@ -238,7 +238,7 @@ class CarController extends Controller
             'PowerSteeringFluidLevelCondition_ActionRequired' => $request->PowerSteeringFluidLevelCondition_ActionRequired, 
         ]); 
 
-        \DB::table('mechanical_inspection')->where('InspectionNumber', $InspectionNumber)
+        \DB::table('mechanical_inspection')->where('InspectionNumber', $request->InspectionNumber)
             ->update([
             'VehicleNumber' => $request->VehicleNumber, 
             'InspectionNumber' => $request->InspectionNumber, 
@@ -254,7 +254,7 @@ class CarController extends Controller
             'BatteryCondition_ActionRequired' => $request->BatteryCondition_ActionRequired, 
         ]); 
 
-        \DB::table('safety_equipment')->where('InspectionNumber', $InspectionNumber)
+        \DB::table('safety_equipment')->where('InspectionNumber', $request->InspectionNumber)
             ->update([
             'VehicleNumber' => $request->VehicleNumber, 
             'InspectionNumber' => $request->InspectionNumber, 
@@ -267,6 +267,16 @@ class CarController extends Controller
             'FunctionalityOfAllSafetyFeatures_ActionRequired' => $request->FunctionalityOfAllSafetyFeatures_ActionRequired, 
             'EmergencyLightsCondition_ActionRequired' => $request->EmergencyLightsCondition_ActionRequired, 
         ]); 
+
+        return redirect()->route('Inspection_Report');
+    }
+
+    public function cars_inspection_delete($InspectionNumber) { 
+        $Tables = ['inspection_report', 'exterior_inspection', 'interior_inspection', 'fluid_levels', 'mechanical_inspection', 'safety_equipment',];
+
+        foreach ($Tables as $Table) {
+            \DB::table($Table)->where('InspectionNumber', $InspectionNumber)->delete();
+        } 
 
         return redirect()->route('Inspection_Report');
     }

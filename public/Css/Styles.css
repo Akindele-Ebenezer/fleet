@@ -244,8 +244,7 @@ footer {
 }
 .modal-vehicle-data .inner .heading h1 {
   align-items: center;
-  border: 1px solid #c2c3ef;
-  border-radius: 0.35em;
+  border-bottom: 5px solid #c2c3ef;
   color: #494dcf;
   display: flex;
   font-family: "Bitter", serif !important;

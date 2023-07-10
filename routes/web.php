@@ -43,8 +43,9 @@ Route::get('/Delete/Maintenance/{Maintenance}', [MaintenanceController::class, '
 
 Route::get('/Cars/Inspections/Daily/Checklist', [CarController::class, 'cars_daily_checklist'])->name('DailyCheckList'); 
 Route::get('/Cars/Inspections/Report', [CarController::class, 'cars_inspection_report'])->name('Inspection_Report'); 
-Route::post('Add/Cars/Inspections/Report', [CarController::class, 'cars_inspection_store'])->name('Add_Inspection_Report'); 
-Route::post('Update/Cars/Inspections/Report', [CarController::class, 'cars_inspection_update'])->name('Update_Inspection_Report'); 
+Route::post('/Add/Cars/Inspections/Report', [CarController::class, 'cars_inspection_store'])->name('Add_Inspection_Report'); 
+Route::post('/Update/Cars/Inspections/Report/{Report}', [CarController::class, 'cars_inspection_update'])->name('Update_Inspection_Report'); 
+Route::post('/Delete/Cars/Inspections/Report/{Report}', [CarController::class, 'cars_inspection_delete'])->name('Delete_Inspection_Report'); 
 
 Route::get('/Management/Fleet/Deposits/Entries', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
 Route::get('/Add/Deposits/{Deposits}', [DepositsController::class, 'store'])->name('store_Deposits'); 

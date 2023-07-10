@@ -111,7 +111,11 @@
                 <td class="Hide">{{ $SafetyEquipment->PresenceOfFirstAidKit_ActionRequired }}</td> 
                 <td class="Hide">{{ $SafetyEquipment->FunctionalityOfAllSafetyFeatures_ActionRequired }}</td> 
                 <td class="Hide">{{ $SafetyEquipment->EmergencyLightsCondition_ActionRequired }}</td> 
-
+                {{-- OTHERS --}}
+                <td class="Hide">{{ $Report->AdditionalNotes }}</td> 
+                <td class="Hide">{{ $Report->Attachment }}</td> 
+                <td class="Hide">{{ $Report->Status }}</td> 
+                <td class="Hide">{{ $Report->Mechanic }}</td> 
 
                 <td>{{ $Report->VehicleNumber }}</td>
                 <td>{{ $Report->DateInspected }}</td>

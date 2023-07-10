@@ -1,5 +1,5 @@
 <div class="daily-checklist edit form">
-    <form class="EditVehicleDailyChecklist"> 
+    <form class="EditVehicleDailyChecklist"> @csrf
         <div class="cancel-modal">✖</div>
         <div class="daily-checklist-inner">
             <h1>Edit Daily Vehicle Inspection Report</h1>
