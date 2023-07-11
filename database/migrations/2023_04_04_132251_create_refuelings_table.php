@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('refuelings', function (Blueprint $table) {
             $table->id();
             $table->string('VehicleNumber')->nullable();
-            $table->string('RFLNO');
+            $table->string('RFLNO')->nullable();
             $table->string('Date')->nullable();
             $table->string('Time')->nullable();
             $table->string('Mileage')->nullable();
