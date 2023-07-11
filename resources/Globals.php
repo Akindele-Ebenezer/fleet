@@ -3,6 +3,7 @@
     \DB::statement("SET SQL_MODE=''"); 
 
     $Cars_Absolute = \App\Models\Car::whereNotNull('VehicleNumber')->get();
+    $CardNumbers = \App\Models\Car::select('CardNumber')->whereNotNull('VehicleNumber')->get();
     $Cars_Maker = DB::table('makers')->select('Maker')->get();
     $Cars_EngineType = DB::table('engine_types')->select('EngineType')->get();
     $Cars_GearType = DB::table('gear_types')->select('GearType')->get();
