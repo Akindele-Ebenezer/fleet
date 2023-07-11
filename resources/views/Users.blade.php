@@ -2,8 +2,8 @@
 @php
     
     $HandleNumbers = fn($Value) => 
-                        ($Value > 999 AND $Value < 1000000) ? number_format($Value / 1000, 1) . 'K' : 
-                        ($Value > 999999 ? number_format($Value / 1000, 1) . 'M' : $Value); 
+                        ($Value > 999 AND $Value < 1000000) ? number_format($Value / 1000) . 'K' : 
+                        ($Value > 999999 ? number_format($Value / 1000000) . 'M' : $Value); 
 @endphp
 @section('Title', 'USERS') 
 @section('Heading', 'USERS') 
