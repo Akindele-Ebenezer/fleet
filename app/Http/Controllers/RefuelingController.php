@@ -141,7 +141,7 @@ class RefuelingController extends Controller
     public function store($Refueling, Request $request)
     {
         $Balance = \App\Models\Car::where('CardNumber', $request->CardNumber)->first();
-        if($Balance === NULL) {
+        if(empty($Balance)) {
             $Balance = \App\Models\MasterCard::where('CardNumber', $request->CardNumber)->first();
         }
         // dd($Balance);
