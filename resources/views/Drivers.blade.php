@@ -35,9 +35,6 @@
             </tr>   
             @endforeach
         </table>
-        {{ $Drivers->onEachSide(5)->links() }}
-        @unless (count($Drivers) > 0)
-        @include('Includes.EmptyProjectTemplate') 
-        @endunless
+        {{ $Drivers->onEachSide(5)->links() }} 
     </div>
 @endsection
