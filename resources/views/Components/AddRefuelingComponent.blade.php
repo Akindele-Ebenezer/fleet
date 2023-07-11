@@ -60,7 +60,7 @@
                 <input list="CardNumbers" type="text" placeholder="Card Number	.." name="CardNumber"  autocomplete="off">
                 <datalist id="CardNumbers">
                     @foreach ($CardNumbers as $CardNumber)
-                        <option class="VehicleNumbers_Option" value="{{ $CardNumber->CardNumber }}"> 
+                        <option class="VehicleNumbers_Option" value="{{ $CardNumber->CardNumber }}"> {{ $CardNumber->CardNumber }} </option>
                     @endforeach
                 </datalist>
             </div>
