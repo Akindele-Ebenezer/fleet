@@ -20,7 +20,7 @@
                 <input list="VehicleNumbers" type="text" placeholder="PLATE Number	.." name="VehicleNumber_REFUELING" autocomplete="off">
                 <datalist id="VehicleNumbers">
                     @foreach ($Cars_Absolute as $Car)
-                        <option class="VehicleNumbers_Option" value="{{ $Car->VehicleNumber }}">{{ $Car->VehicleNumber }} {{ $Car->CardNumber }}</option>  
+                        <option class="VehicleNumbers_Option" value="{{ $Car->VehicleNumber }}"> {{ $Car->CardNumber }}</option>  
                     @endforeach
                 </datalist>
             </div>
