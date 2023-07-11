@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('deposits', function (Blueprint $table) {
             $table->id();
             $table->string('VehicleNumber')->nullable();
-            $table->string('LNO');
+            $table->string('LNO')->nullable();
             $table->string('CardNumber')->nullable(); 
             $table->string('Date')->nullable();
             $table->string('Amount')->nullable();
