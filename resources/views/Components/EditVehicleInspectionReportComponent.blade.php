@@ -4,11 +4,11 @@
         <div class="daily-checklist-inner">
             <h1>Edit Daily Vehicle Inspection Report</h1>
             <div class="inner-wrapper-1">  
-                <div class="checklist">
+                <div class="checklist readonly">
                     <label>Vehicle Plate #:</label> <br>
                     <input type="text" name="VehicleNumber" class="VehicleNumber">
                 </div>
-                <div class="checklist">
+                <div class="checklist readonly">
                     <label>Fleet (Inspection Number) #:</label> <br>
                     <input type="text" name="InspectionNumber" class="InspectionNumber">
                 </div>

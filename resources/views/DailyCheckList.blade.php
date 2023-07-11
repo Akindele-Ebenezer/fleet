@@ -6,33 +6,47 @@
 @section('Button_1', 'Explore Cars') 
 
 @section('Content')
-@php date_default_timezone_set('Africa/Lagos') @endphp
+@php 
+    date_default_timezone_set('Africa/Lagos');
+    $Cars_Absolute = \App\Models\Car::whereNotNull('VehicleNumber')->get();
+    $Drivers = \App\Models\Car::select('Driver')->get();
+@endphp
     <div class="daily-checklist">
         <form action="{{ route('Add_Inspection_Report') }}" method="POST" enctype="multipart/form-data">@csrf 
             <div class="daily-checklist-inner">
                 <h1>Daily Vehicle Inspection Form</h1>
-                <div class="inner-wrapper-1">  
+                <div class="inner-wrapper-1"> 
+                    <div class="checklist readonly">
+                        <label>Fleet (Inspection Number) #:</label> <br>
+                        <input type="number" name="InspectionNumber" value="{{ date('Ymd') . date('his') }}">
+                    </div> 
                     <div class="checklist">
                         <label>Vehicle Plate #:</label> <br>
-                        <input type="text" name="VehicleNumber">
-                    </div>
-                    <div class="checklist">
-                        <label>Fleet (Inspection Number) #:</label> <br>
-                        <input type="text" name="InspectionNumber">
+                        <input list="VehicleNumbers" type="text" name="VehicleNumber" autocomplete="off">
+                        <datalist id="VehicleNumbers">
+                            @foreach ($Cars_Absolute as $Car)
+                                <option value="{{ $Car->VehicleNumber }}"> {{ $Car->CardNumber }}</option>  
+                            @endforeach
+                        </datalist>
                     </div>
                     <div class="checklist">
                         <label>Mileage:</label> <br>
-                        <input type="text" name="Mileage">
+                        <input type="number" name="Mileage" autocomplete="off">
                     </div>
                     <div class="checklist">
                         <label>Date Inspected:</label> <br>
-                        <input type="date" name="DateInspected">
+                        <input type="date" name="DateInspected" value="{{ date('Y-m-d') }}">
                     </div>
                 </div>
                 <div class="inner-wrapper-1"> 
                     <div class="checklist">
                         <label>Inspected By:</label> <br>
-                        <input type="text" name="InspectedBy">
+                        <input list="Drivers" type="text" name="InspectedBy" autocomplete="off">
+                        <datalist id="Drivers">
+                            @foreach ($Drivers as $Driver)
+                                <option value="{{ $Driver->Driver }}"> {{ $Driver->CardNumber }}</option>  
+                            @endforeach
+                        </datalist>
                     </div> 
                 </div>
                 <h1>Item Checklist</h1>
