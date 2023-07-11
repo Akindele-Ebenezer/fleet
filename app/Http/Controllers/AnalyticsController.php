@@ -33,7 +33,7 @@ class AnalyticsController extends Controller
         $NumberNumberOfCars_ACTIVE_PERCENTAGE = $NumberOfCars == 0 ? 0 : $NumberOfCars_ACTIVE / $NumberOfCars * 100;
         $NumberNumberOfCars_INACTIVE_PERCENTAGE = $NumberOfCars == 0 ? 0 : $NumberOfCars_INACTIVE / $NumberOfCars * 100;
     
-        $NumberOfDrivers = \App\Models\Car::select('Drivers')->whereNotNull('VehicleNumber')->distinct()->count();
+        $NumberOfDrivers = \App\Models\Car::select('Drivers')->whereNotNull('VehicleNumber')->whereNotNull('Drivers')->distinct()->count();
         
         $NumberOfCars_MAINTENANCE = \App\Models\Maintenance::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
                                                             ->groupBy('VehicleNumber')
