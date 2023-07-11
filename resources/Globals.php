@@ -16,7 +16,7 @@
     $NumberOfCars = \App\Models\Car::select('VehicleNumber')->whereNotNull('VehicleNumber')->distinct()->count();
     $NumberOfCars_ACTIVE = \App\Models\Car::select('Status')->whereNotNull('VehicleNumber')->where('Status', 'ACTIVE')->count();
     $NumberOfCars_INACTIVE = \App\Models\Car::select('Status')->whereNotNull('VehicleNumber')->where('Status', 'INACTIVE')->count();
-    $NumberOfDrivers = \App\Models\Car::select('Drivers')->whereNotNull('VehicleNumber')->distinct()->count();
+    $NumberOfDrivers = \App\Models\Car::select('Driver')->whereNotNull('VehicleNumber')->distinct()->count();
     $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')->count();
     $NumberOfCarDeposits = \App\Models\Deposits::select('VehicleNumber')->count();
     $NumberOfCarRefueling = \App\Models\Refueling::select('VehicleNumber')->count();
