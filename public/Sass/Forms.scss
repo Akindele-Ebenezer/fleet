@@ -30,7 +30,7 @@ form {
     width: 100vw;
     z-index: 20;
 
-    input { margin-left: 2em; }
+    input, select { margin-left: 2em; }
 
     &.privileges { 
         height: unset;

@@ -358,7 +358,7 @@ form select option {
   width: 100vw;
   z-index: 20;
 }
-.form input {
+.form input, .form select {
   margin-left: 2em;
 }
 .form.privileges {
@@ -767,6 +767,7 @@ form select option {
   margin-right: 0.5em;
   outline: none;
   padding: 0.2em;
+  width: 15em;
 }
 .report-data-heading .inner-x {
   align-items: center;
