@@ -141,6 +141,7 @@ button {
             li {
                 input,
                 select {
+                    background: unset;
                     border: 1px solid lighten($color: $Color-4, $amount: 40);
                     color: $Color-4;
                     outline: none;
