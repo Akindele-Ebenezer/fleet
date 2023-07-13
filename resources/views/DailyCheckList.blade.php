@@ -22,12 +22,17 @@
                     </div> 
                     <div class="checklist">
                         <label>Vehicle Plate #:</label> <br>
-                        <input list="VehicleNumbers" type="text" name="VehicleNumber" autocomplete="off">
-                        <datalist id="VehicleNumbers">
+                        <input type="text" name="VehicleNumber" autocomplete="off" class="datalist-input">
+                        <div class="datalist Hide">
+                            <h1>VEHICLE LIST</h1>
                             @foreach ($Cars_Absolute as $Car)
-                                <option value="{{ $Car->VehicleNumber }}"> {{ $Car->CardNumber }}</option>  
+                                <div class="data-values">
+                                    <span>{{ $Car->VehicleNumber }}</span>
+                                    <span class="Hide">{{ $Car->CardNumber }}</span>
+                                    <span>{{ $Car->Maker }} <br> {{ $Car->CardNumber }}</span>
+                                </div>
                             @endforeach
-                        </datalist>
+                        </div> 
                     </div>
                     <div class="checklist">
                         <label>Mileage:</label> <br>

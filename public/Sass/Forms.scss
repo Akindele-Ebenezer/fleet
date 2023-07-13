@@ -7,6 +7,47 @@
     width: 100vw;
     z-index: 20;
 
+    .datalist {
+        background: #111;
+        max-height: 25em;
+        margin-top: 1em;
+        position: absolute;
+        padding: 1em;
+        overflow-y: scroll;
+        width: 100%;
+        z-index: 100;
+
+        .data-values { 
+            display: flex;
+            justify-content: space-between;
+            padding: .2em;
+
+            &:hover {
+                background: #333;
+                cursor: pointer;
+            }
+
+            span {
+                color: #ddd;
+
+                &:last-of-type {
+                    color: #bbb; 
+                    text-align: right;
+                }
+            }
+        }
+
+        h1 {
+            background: #333; 
+            color: #ddd;
+            font-family: system-ui;
+            padding-block: 1em;
+            padding-inline: 1em;
+            position: sticky;
+            top: -1em;
+        }
+    }
+
     &.privileges { 
         height: unset;
         position: unset;  
@@ -140,6 +181,7 @@
                 border: 1px solid;
                 margin-block: 0.5em;
                 padding: 0.5em;
+                position: relative;
                 width: 49%;
 
                 &-inner {

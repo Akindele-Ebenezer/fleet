@@ -17,12 +17,16 @@
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M200 852v54q0 12.75-8.625 21.375T170 936h-20q-12.75 0-21.375-8.625T120 906V582l85-256q5-14 16.5-22t26.5-8h464q15 0 26.5 8t16.5 22l85 256v324q0 12.75-8.625 21.375T810 936h-21q-13 0-21-8.625T760 906v-54H200Zm3-330h554l-55-166H258l-55 166Zm-23 60v210-210Zm105.765 160Q309 742 324.5 726.25T340 688q0-23.333-15.75-39.667Q308.5 632 286 632q-23.333 0-39.667 16.265Q230 664.529 230 687.765 230 711 246.265 726.5q16.264 15.5 39.5 15.5ZM675 742q23.333 0 39.667-15.75Q731 710.5 731 688q0-23.333-16.265-39.667Q698.471 632 675.235 632 652 632 636.5 648.265q-15.5 16.264-15.5 39.5Q621 711 636.75 726.5T675 742Zm-495 50h600V582H180v210Z"></path></svg>
                     Vehicle Number	
                 </div>
-                <input  type="text" list="VehicleNumbers" name="VehicleNumber_MAINTENANCE" placeholder="PLATE Number	.." autocomplete="off">
-                <datalist id="VehicleNumbers">
+                <input  type="text" name="VehicleNumber_MAINTENANCE" placeholder="PLATE Number	.." autocomplete="off" class="datalist-input">
+                <div class="datalist Hide">
+                    <h1>VEHICLE LIST</h1>
                     @foreach ($Cars_Absolute as $Car)
-                        <option class="VehicleNumbers_Option" value="{{ $Car->VehicleNumber }}"> {{ $Car->CardNumber }}</option>  
+                        <div class="data-values">
+                            <span>{{ $Car->VehicleNumber }}</span>
+                            <span>{{ $Car->Maker }} <br> {{ $Car->CardNumber }}</span>
+                        </div>
                     @endforeach
-                </datalist>
+                </div> 
             </div>
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">

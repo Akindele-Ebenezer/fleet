@@ -338,6 +338,41 @@ svg {
   width: 100vw;
   z-index: 20;
 }
+.form .datalist {
+  background: #111;
+  max-height: 25em;
+  margin-top: 1em;
+  position: absolute;
+  padding: 1em;
+  overflow-y: scroll;
+  width: 100%;
+  z-index: 100;
+}
+.form .datalist .data-values {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2em;
+}
+.form .datalist .data-values:hover {
+  background: #333;
+  cursor: pointer;
+}
+.form .datalist .data-values span {
+  color: #ddd;
+}
+.form .datalist .data-values span:last-of-type {
+  color: #bbb;
+  text-align: right;
+}
+.form .datalist h1 {
+  background: #333;
+  color: #ddd;
+  font-family: system-ui;
+  padding-block: 1em;
+  padding-inline: 1em;
+  position: sticky;
+  top: -1em;
+}
 .form.privileges {
   height: unset;
   position: unset;
@@ -451,6 +486,7 @@ svg {
   border: 1px solid;
   margin-block: 0.5em;
   padding: 0.5em;
+  position: relative;
   width: 49%;
 }
 .form .inner form .new-car-inputs-inner {
@@ -1947,6 +1983,41 @@ svg {
   height: 62vh;
   justify-content: center;
   overflow-y: scroll;
+}
+.daily-checklist .datalist {
+  background: #111;
+  max-height: 25em;
+  margin-top: 1em;
+  position: absolute;
+  padding: 1em;
+  overflow-y: scroll;
+  width: 100%;
+  z-index: 100;
+}
+.daily-checklist .datalist .data-values {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2em;
+}
+.daily-checklist .datalist .data-values:hover {
+  background: #333;
+  cursor: pointer;
+}
+.daily-checklist .datalist .data-values span {
+  color: #ddd;
+}
+.daily-checklist .datalist .data-values span:last-of-type {
+  color: #bbb;
+  text-align: right;
+}
+.daily-checklist .datalist h1 {
+  background: #333;
+  color: #ddd;
+  font-family: system-ui;
+  padding-block: 1em;
+  padding-inline: 1em;
+  position: sticky;
+  top: -1em;
 }
 .daily-checklist.edit {
   display: none;

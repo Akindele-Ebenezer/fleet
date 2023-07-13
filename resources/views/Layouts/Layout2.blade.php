@@ -915,6 +915,7 @@
         <script src="{{ asset('Js/Loader.js') }}"></script> 
         <script src="{{ asset('Js/Tooltips.js') }}"></script> 
         @yield('JS')
+        <script src="{{ asset('Js/Datalist.js') }}"></script> 
 </body>
 </html>
 @endif
