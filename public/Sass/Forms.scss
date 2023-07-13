@@ -1,3 +1,26 @@
+form { 
+    &.form { margin-left: 2.5em; } 
+    
+    position: relative;
+
+    input, select {
+        background: #222;
+        border: none;
+        border-radius: 0.5em;
+        color: #fff;
+        margin-top: 0.5em;
+        outline: none;
+        padding: 0.5em;
+        width: 90%;
+    }
+ 
+    select {
+        option {
+            color: #eee;
+        }
+    }
+}
+
 .form { 
     display: none;
     background: rgba(0,0,0,.8);
@@ -7,46 +30,7 @@
     width: 100vw;
     z-index: 20;
 
-    .datalist {
-        background: #111;
-        max-height: 25em;
-        margin-top: 1em;
-        position: absolute;
-        padding: 1em;
-        overflow-y: scroll;
-        width: 100%;
-        z-index: 100;
-
-        .data-values { 
-            display: flex;
-            justify-content: space-between;
-            padding: .2em;
-
-            &:hover {
-                background: #333;
-                cursor: pointer;
-            }
-
-            span {
-                color: #ddd;
-
-                &:last-of-type {
-                    color: #bbb; 
-                    text-align: right;
-                }
-            }
-        }
-
-        h1 {
-            background: #333; 
-            color: #ddd;
-            font-family: system-ui;
-            padding-block: 1em;
-            padding-inline: 1em;
-            position: sticky;
-            top: -1em;
-        }
-    }
+    input { margin-left: 2em; }
 
     &.privileges { 
         height: unset;
@@ -193,30 +177,11 @@
                 input[type=file]::file-selector-button { 
                     display: none;
                 }
-
-
-                input, select {
-                    background: #222;
-                    border: none;
-                    border-radius: 0.5em;
-                    color: #fff;
-                    margin-left: 2.5em;
-                    margin-top: 0.5em;
-                    outline: none;
-                    padding: 0.5em;
-                    width: 90%;
-                }
-
+ 
                 .file-x p {
                     color: #ddd;
                     text-align: right;
-                }
-
-                select {
-                    option {
-                        color: #eee;
-                    }
-                }
+                } 
             }  
         }
         

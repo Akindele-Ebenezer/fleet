@@ -329,6 +329,26 @@ svg {
     font-size: unset;
   }
 }
+form {
+  position: relative;
+}
+form.form {
+  margin-left: 2.5em;
+}
+form input, form select {
+  background: #222;
+  border: none;
+  border-radius: 0.5em;
+  color: #fff;
+  margin-top: 0.5em;
+  outline: none;
+  padding: 0.5em;
+  width: 90%;
+}
+form select option {
+  color: #eee;
+}
+
 .form {
   display: none;
   background: rgba(0, 0, 0, 0.8);
@@ -338,40 +358,8 @@ svg {
   width: 100vw;
   z-index: 20;
 }
-.form .datalist {
-  background: #111;
-  max-height: 25em;
-  margin-top: 1em;
-  position: absolute;
-  padding: 1em;
-  overflow-y: scroll;
-  width: 100%;
-  z-index: 100;
-}
-.form .datalist .data-values {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.2em;
-}
-.form .datalist .data-values:hover {
-  background: #333;
-  cursor: pointer;
-}
-.form .datalist .data-values span {
-  color: #ddd;
-}
-.form .datalist .data-values span:last-of-type {
-  color: #bbb;
-  text-align: right;
-}
-.form .datalist h1 {
-  background: #333;
-  color: #ddd;
-  font-family: system-ui;
-  padding-block: 1em;
-  padding-inline: 1em;
-  position: sticky;
-  top: -1em;
+.form input {
+  margin-left: 2em;
 }
 .form.privileges {
   height: unset;
@@ -497,23 +485,9 @@ svg {
 .form .inner form .new-car-inputs input[type=file]::file-selector-button {
   display: none;
 }
-.form .inner form .new-car-inputs input, .form .inner form .new-car-inputs select {
-  background: #222;
-  border: none;
-  border-radius: 0.5em;
-  color: #fff;
-  margin-left: 2.5em;
-  margin-top: 0.5em;
-  outline: none;
-  padding: 0.5em;
-  width: 90%;
-}
 .form .inner form .new-car-inputs .file-x p {
   color: #ddd;
   text-align: right;
-}
-.form .inner form .new-car-inputs select option {
-  color: #eee;
 }
 .form .inner .heading {
   align-items: center;
@@ -533,6 +507,47 @@ svg {
 .readonly input {
   background-color: unset !important;
   pointer-events: none;
+}
+
+.datalist {
+  background: #111;
+  max-height: 25em;
+  position: absolute;
+  padding: 1em;
+  overflow-y: scroll;
+  width: 100%;
+  z-index: 100;
+}
+.datalist .data-values {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2em;
+}
+.datalist .data-values:hover {
+  background: #333;
+  cursor: pointer;
+}
+.datalist .data-values span {
+  color: #ddd;
+}
+.datalist .data-values span:last-of-type {
+  color: #bbb;
+  text-align: right;
+}
+.datalist h1 {
+  background: #333;
+  color: #ddd;
+  font-family: system-ui !important;
+  font-size: unset !important;
+  font-weight: unset !important;
+  padding-block: 1em;
+  padding-inline: 1em;
+  position: sticky;
+  top: -1em;
+}
+.datalist p {
+  color: #ddd;
+  padding-left: 1em;
 }
 
 .login-wrapper {
@@ -2052,8 +2067,11 @@ svg {
   background: #1a1a1a;
   border: none;
   color: #fff;
-  outline: none;
+  margin-top: unset;
+  padding: unset;
   padding-inline: 0.5rem;
+  padding-top: unset;
+  outline: none;
   resize: none;
   width: 100%;
 }
@@ -2130,6 +2148,7 @@ svg {
 .daily-checklist .checklist {
   margin-bottom: 1em;
   margin-inline: 0.75em;
+  position: relative;
   width: 47%;
 }
 .daily-checklist .checklist input {

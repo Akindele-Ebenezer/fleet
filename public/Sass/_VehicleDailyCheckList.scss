@@ -83,8 +83,11 @@
             background: #1a1a1a;
             border: none;
             color: #fff;
-            outline: none;
+            margin-top: unset;
+            padding: unset;
             padding-inline: 0.5rem;
+            padding-top: unset;
+            outline: none;
             resize: none;
             width: 100%;
         }
@@ -182,6 +185,7 @@
     .checklist {
         margin-bottom: 1em;
         margin-inline: 0.75em;
+        position: relative;
         width: 47%;
  
         input { 

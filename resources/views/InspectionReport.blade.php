@@ -119,7 +119,7 @@
 
                 <td>{{ $Report->VehicleNumber }}</td>
                 <td>{{ $Report->DateInspected }}</td>
-                <td>{{ "\$Driver" }}</td>
+                <td>{{ $Report->InspectedBy }}</td>
                 <td>{{ $Report->InspectionNumber }}</td>
                 <td>{{ $Report->Week }}</td>
             </tr>

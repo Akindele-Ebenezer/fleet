@@ -181,7 +181,18 @@
             <ul>
                 <li>
                     <form action="">
-                        <input type="text" placeholder="Search.." name="FilterValue">
+                        <input type="text" placeholder="Search.." name="FilterValue" autocomplete="off" class="datalist-input">
+                        <div class="datalist Hide">
+                            <h1>SEARCH LIST</h1>
+                            <p>Press ENTER to search</p>
+                            @foreach ($Cars_Absolute as $Car)
+                                <div class="data-values">
+                                    <span>{{ $Car->VehicleNumber }}</span>
+                                    <span class="Hide">{{ $Car->CardNumber }}</span>
+                                    <span>{{ $Car->Maker }} <br> {{ $Car->CardNumber }}</span>
+                                </div>
+                            @endforeach
+                        </div> 
                     </form>
                 </li>
                 <a href='{{ route('Analytics') }}'>
@@ -587,8 +598,18 @@
                     @endphp
                     <div class="search">
                         <h2>Master Card No: 83783742</h2>
-                            <form action="">
-                                <input type="text" placeholder="Search..." id="SearchInput" name="FilterValue">
+                            <form action="" class="search">
+                                <input type="text" placeholder="Search..." id="SearchInput" name="FilterValue" autocomplete="off" class="datalist-input">
+                                <div class="datalist Hide">
+                                    <h1>SEARCH LIST</h1>
+                                    @foreach ($Cars_Absolute as $Car)
+                                        <div class="data-values">
+                                            <span>{{ $Car->VehicleNumber }}</span>
+                                            <span class="Hide">{{ $Car->CardNumber }}</span>
+                                            <span>{{ $Car->Maker }} <br> {{ $Car->CardNumber }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
                                 <button name="Filter">Filter</button>
                                 <button name="ClearFilter">Clear</button>
                         </form>

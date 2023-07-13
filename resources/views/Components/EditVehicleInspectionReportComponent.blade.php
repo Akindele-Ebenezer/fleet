@@ -1,3 +1,6 @@
+@php  
+    $Drivers = \App\Models\Car::select('Driver')->get();
+@endphp
 <div class="daily-checklist edit form">
     <form class="EditVehicleDailyChecklist"> @csrf
         <div class="cancel-modal">✖</div>
@@ -24,7 +27,15 @@
             <div class="inner-wrapper-1"> 
                 <div class="checklist">
                     <label>Inspected By:</label> <br>
-                    <input type="text" name="InspectedBy" class="InspectedBy">
+                    <input type="text" name="InspectedBy" class="InspectedBy datalist-input">
+                    <div class="datalist Hide">
+                        <h1>DRIVERS LIST</h1>
+                        @foreach ($Drivers as $Driver)
+                            <div class="data-values">
+                                <span>{{ $Driver->Driver }}</span> 
+                            </div>
+                        @endforeach
+                    </div> 
                 </div> 
             </div>
             <h1>Item Checklist</h1>
@@ -471,8 +482,12 @@
             </div>
             <h1 class="h1-x">Status</h1>
             <div class="div">
-                <h2>Indicate if the vehicle is Safe or Unsafe to drive</h2> <br>
-                <input type="text" name="Status" class="Status" placeholder="Vehicle Safety...">
+                <h2>Indicate if the vehicle is Safe or Unsafe to drive</h2> 
+                <select name="Status" class="Status"> 
+                    <option value="GOOD">GOOD</option>
+                    <option value="FAIR">FAIR</option>
+                    <option value="BAD">BAD</option> 
+                </select>
             </div>
             <h1 class="h1-x">Assigned Mechanic/Agent</h1>
             <div class="div">

@@ -46,12 +46,15 @@
                 <div class="inner-wrapper-1"> 
                     <div class="checklist">
                         <label>Inspected By:</label> <br>
-                        <input list="Drivers" type="text" name="InspectedBy" autocomplete="off">
-                        <datalist id="Drivers">
+                        <input list="Drivers" type="text" name="InspectedBy" autocomplete="off" class="datalist-input">
+                        <div class="datalist Hide">
+                            <h1>DRIVERS LIST</h1>
                             @foreach ($Drivers as $Driver)
-                                <option value="{{ $Driver->Driver }}"> {{ $Driver->CardNumber }}</option>  
+                                <div class="data-values">
+                                    <span>{{ $Driver->Driver }}</span> 
+                                </div>
                             @endforeach
-                        </datalist>
+                        </div> 
                     </div> 
                 </div>
                 <h1>Item Checklist</h1>
@@ -498,8 +501,12 @@
                 </div>
                 <h1 class="h1-x">Status</h1>
                 <div class="div">
-                    <h2>Indicate if the vehicle is Safe or Unsafe to drive</h2> <br>
-                    <input type="text" name="Status" placeholder="Vehicle Safety...">
+                    <h2>Indicate if the vehicle is Safe or Unsafe to drive</h2> <br> 
+                    <select name="Status"> 
+                        <option value="GOOD">GOOD</option>
+                        <option value="FAIR">FAIR</option>
+                        <option value="BAD">BAD</option> 
+                </select>
                 </div>
                 <h1 class="h1-x">Assigned Mechanic/Agent</h1>
                 <div class="div">
