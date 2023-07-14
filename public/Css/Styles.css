@@ -531,6 +531,14 @@ form select option {
 .datalist .data-values span {
   color: #ddd;
 }
+.datalist .data-values span:nth-of-type(1) {
+  color: #eee;
+  margin-left: 1.5em;
+}
+.datalist .data-values span:nth-of-type(3) {
+  position: absolute;
+  translate: 0em 0.7em;
+}
 .datalist .data-values span:last-of-type {
   color: #bbb;
   text-align: right;
@@ -545,6 +553,7 @@ form select option {
   padding-inline: 1em;
   position: sticky;
   top: -1em;
+  z-index: 20;
 }
 .datalist p {
   color: #ddd;
@@ -894,7 +903,7 @@ form select option {
 }
 .report-inner .action .FilterWrapper .inner-filter ul li input {
   height: 2em;
-  width: 55%;
+  width: 60%;
 }
 .report-inner .action .inner {
   background: rgba(0, 0, 0, 0.5);
@@ -2065,11 +2074,13 @@ form select option {
   margin-top: 1em;
 }
 .daily-checklist-inner input,
+.daily-checklist-inner select,
 .daily-checklist-inner textarea {
   background: #1a1a1a;
   border: none;
   color: #fff;
   margin-top: unset;
+  margin-left: unset;
   padding: unset;
   padding-inline: 0.5rem;
   padding-top: unset;

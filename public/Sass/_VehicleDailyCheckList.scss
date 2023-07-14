@@ -79,11 +79,13 @@
         }
 
         input,
+        select,
         textarea {
             background: #1a1a1a;
             border: none;
             color: #fff;
             margin-top: unset;
+            margin-left: unset;
             padding: unset;
             padding-inline: 0.5rem;
             padding-top: unset;

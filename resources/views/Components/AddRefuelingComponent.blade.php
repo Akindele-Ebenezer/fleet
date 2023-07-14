@@ -18,21 +18,7 @@
                     Vehicle Number	
                 </div>
                 <input type="text" placeholder="PLATE Number	.." name="VehicleNumber_REFUELING" autocomplete="off" class="datalist-input">
-                <div class="datalist Hide">
-                    <h1>VEHICLE LIST</h1>
-                    @foreach ($Cars_Absolute as $Car)
-                        <div class="data-values">
-                            <span>{{ $Car->VehicleNumber }}</span>
-                            <span class="Hide">{{ $Car->CardNumber }}</span>
-                            <span>{{ $Car->Maker }} <br> {{ $Car->CardNumber }}</span>
-                        </div>
-                    @endforeach
-                </div> 
-                {{-- <datalist id="VehicleNumbers">
-                    @foreach ($Cars_Absolute as $Car)
-                        <option class="VehicleNumbers_Option" value="{{ $Car->VehicleNumber }}"> {{ $Car->CardNumber }}</option>  
-                    @endforeach
-                </datalist> --}}
+                @include('Components.Datalist.VehicleListComponent')
             </div>
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">

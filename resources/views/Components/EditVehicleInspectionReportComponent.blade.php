@@ -28,14 +28,7 @@
                 <div class="checklist">
                     <label>Inspected By:</label> <br>
                     <input type="text" name="InspectedBy" class="InspectedBy datalist-input">
-                    <div class="datalist Hide">
-                        <h1>DRIVERS LIST</h1>
-                        @foreach ($Drivers as $Driver)
-                            <div class="data-values">
-                                <span>{{ $Driver->Driver }}</span> 
-                            </div>
-                        @endforeach
-                    </div> 
+                    @include('Components.Datalist.DriverListComponent')
                 </div> 
             </div>
             <h1>Item Checklist</h1>

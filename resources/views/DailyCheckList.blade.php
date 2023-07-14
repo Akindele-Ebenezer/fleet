@@ -23,16 +23,7 @@
                     <div class="checklist">
                         <label>Vehicle Plate #:</label> <br>
                         <input type="text" name="VehicleNumber" autocomplete="off" class="datalist-input">
-                        <div class="datalist Hide">
-                            <h1>VEHICLE LIST</h1>
-                            @foreach ($Cars_Absolute as $Car)
-                                <div class="data-values">
-                                    <span>{{ $Car->VehicleNumber }}</span>
-                                    <span class="Hide">{{ $Car->CardNumber }}</span>
-                                    <span>{{ $Car->Maker }} <br> {{ $Car->CardNumber }}</span>
-                                </div>
-                            @endforeach
-                        </div> 
+                        @include('Components.Datalist.VehicleListComponent')
                     </div>
                     <div class="checklist">
                         <label>Mileage:</label> <br>
@@ -47,14 +38,7 @@
                     <div class="checklist">
                         <label>Inspected By:</label> <br>
                         <input list="Drivers" type="text" name="InspectedBy" autocomplete="off" class="datalist-input">
-                        <div class="datalist Hide">
-                            <h1>DRIVERS LIST</h1>
-                            @foreach ($Drivers as $Driver)
-                                <div class="data-values">
-                                    <span>{{ $Driver->Driver }}</span> 
-                                </div>
-                            @endforeach
-                        </div> 
+                        @include('Components.Datalist.DriverListComponent')
                     </div> 
                 </div>
                 <h1>Item Checklist</h1>
