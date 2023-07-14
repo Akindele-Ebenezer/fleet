@@ -2073,6 +2073,9 @@ form select option {
   margin: unset;
   margin-top: 1em;
 }
+.daily-checklist-inner img {
+  width: 50em;
+}
 .daily-checklist-inner input,
 .daily-checklist-inner select,
 .daily-checklist-inner textarea {
@@ -2146,6 +2149,9 @@ form select option {
 }
 .daily-checklist-inner .inspection-x .item-checklist.last {
   border-bottom: 1px solid #333;
+}
+.daily-checklist-inner p {
+  color: #ddd;
 }
 .daily-checklist-inner textarea {
   height: 10em;

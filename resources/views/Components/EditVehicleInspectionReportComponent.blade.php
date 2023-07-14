@@ -470,7 +470,11 @@
             </div>
             <h1>Attachments</h1>
             <div class="attachment">
-                <h2>Indicate if damage or any other fault is noted</h2>
+                <a class="Attachment" target="blank">
+                    <p></p>
+                    <img class="Attachment_">
+                </a>
+                <h2>Edit attachment and indicate if damage or any other fault is noted</h2>
                 <input type="file" name="Attachment" class="Attachment">
             </div>
             <h1 class="h1-x">Status</h1>
@@ -492,5 +496,6 @@
         <input type="hidden" value="{{ date('h:i a') }}" name="SubmitTime" class="SubmitTime">
         <button class="EditInspectionButton">Edit Inspection</button> 
         <button class="DeleteInspectionButton">- Delete Inspection</button>
+        <br><br>
     </form>
 </div>

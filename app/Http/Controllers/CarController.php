@@ -84,20 +84,37 @@ class CarController extends Controller
     }
 
     public function cars_inspection_store(Request $request) {  
-        \DB::table('inspection_report')->insert([
-            'VehicleNumber' => $request->VehicleNumber, 
-            'InspectionNumber' => $request->InspectionNumber, 
-            'Mileage' => $request->Mileage,
-            'DateInspected' => $request->DateInspected, 
-            'InspectedBy' => $request->InspectedBy,
-            'AdditionalNotes' => $request->AdditionalNotes,
-            'Attachment' => $request->Attachment,
-            'Status' => $request->Status,
-            'Mechanic' => $request->Mechanic,
-            'SubmitTime' => $request->SubmitTime,
-            'Week' => $request->Week,
-        ]); 
-
+        if(empty($request->file('Attachment'))) {   
+            \DB::table('inspection_report')->insert([
+                'VehicleNumber' => $request->VehicleNumber, 
+                'InspectionNumber' => $request->InspectionNumber, 
+                'Mileage' => $request->Mileage,
+                'DateInspected' => $request->DateInspected, 
+                'InspectedBy' => $request->InspectedBy,
+                'AdditionalNotes' => $request->AdditionalNotes, 
+                'Status' => $request->Status,
+                'Mechanic' => $request->Mechanic,
+                'SubmitTime' => $request->SubmitTime,
+                'Week' => $request->Week,
+            ]); 
+        } else {
+            $Attachment = $request->file('Attachment'); 
+            $Attachment->move('Inspections/' . $request->VehicleNumber, $Attachment->getClientOriginalName()); 
+            \DB::table('inspection_report')->insert([
+                'VehicleNumber' => $request->VehicleNumber, 
+                'InspectionNumber' => $request->InspectionNumber, 
+                'Mileage' => $request->Mileage,
+                'DateInspected' => $request->DateInspected, 
+                'InspectedBy' => $request->InspectedBy,
+                'AdditionalNotes' => $request->AdditionalNotes,
+                'Attachment' => $Attachment->getClientOriginalName(),
+                'Status' => $request->Status,
+                'Mechanic' => $request->Mechanic,
+                'SubmitTime' => $request->SubmitTime,
+                'Week' => $request->Week,
+            ]); 
+        }
+ 
         \DB::table('exterior_inspection')->insert([
             'VehicleNumber' => $request->VehicleNumber, 
             'InspectionNumber' => $request->InspectionNumber, 
@@ -175,6 +192,39 @@ class CarController extends Controller
     }
 
     public function cars_inspection_update(Request $request) {  
+        if(empty($request->file('Attachment'))) {   
+            \DB::table('inspection_report')->where('InspectionNumber', $request->InspectionNumber)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber, 
+                'InspectionNumber' => $request->InspectionNumber, 
+                'Mileage' => $request->Mileage,
+                'DateInspected' => $request->DateInspected, 
+                'InspectedBy' => $request->InspectedBy,
+                'AdditionalNotes' => $request->AdditionalNotes, 
+                'Status' => $request->Status,
+                'Mechanic' => $request->Mechanic,
+                'SubmitTime' => $request->SubmitTime,
+                'Week' => $request->Week,
+            ]); 
+        } else {
+            $Attachment = $request->file('Attachment'); 
+            $Attachment->move('Inspections/' . $request->VehicleNumber, $Attachment->getClientOriginalName()); 
+            \DB::table('inspection_report')->where('InspectionNumber', $request->InspectionNumber)
+            ->update([
+                'VehicleNumber' => $request->VehicleNumber, 
+                'InspectionNumber' => $request->InspectionNumber, 
+                'Mileage' => $request->Mileage,
+                'DateInspected' => $request->DateInspected, 
+                'InspectedBy' => $request->InspectedBy,
+                'AdditionalNotes' => $request->AdditionalNotes,
+                'Attachment' => $Attachment->getClientOriginalName(),
+                'Status' => $request->Status,
+                'Mechanic' => $request->Mechanic,
+                'SubmitTime' => $request->SubmitTime,
+                'Week' => $request->Week,
+            ]); 
+        }
+ 
         \DB::table('inspection_report')->where('InspectionNumber', $request->InspectionNumber)
             ->update([
             'VehicleNumber' => $request->VehicleNumber, 
