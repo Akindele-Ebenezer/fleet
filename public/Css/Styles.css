@@ -1295,6 +1295,9 @@ form select option {
 .report-inner .table td.car {
   cursor: pointer;
 }
+.report-inner .table td.pdf img {
+  width: 3em;
+}
 .report-inner .table td,
 .report-inner .table th {
   background: #111;

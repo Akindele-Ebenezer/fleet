@@ -13,7 +13,7 @@
     <div class="table-wrapper"> 
         <table class="table" id="Table">
             <tr class="table-head"> 
-                <th onclick="sortTable(0)">S/N</th>
+                <th onclick="sortTable(0)">#</th>
                 <th onclick="sortTable(1)" class="text-align-center">Inspection Number</th>
                 <th onclick="sortTable(2)">Vehicle Plate #</th>
                 <th onclick="sortTable(3)">Date Inspected</th>
@@ -31,7 +31,10 @@
                 $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Report->VehicleNumber)->first();  
             @endphp 
             <tr>
-                <td>{{ $Report->id }}</td>
+                <td class="pdf">
+                    <img src="{{ asset('Images/pdf.png') }}" class="pdf-x">
+                    <span class="Hide">{{ $Report->InspectionNumber }}</span>
+                </td>
                 <td class="inspection-number underline show-record-x-2">
                     <span class="{{ $CarStatus->Status ?? 'INACTIVE' === 'ACTIVE' ? 'active-x' : 'inactive-x' }}"></span>
                     {{ $Report->InspectionNumber }} 

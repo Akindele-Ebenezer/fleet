@@ -14,6 +14,7 @@ use App\Http\Controllers\MaintenanceExportController;
 use App\Http\Controllers\DepositsExportController; 
 use App\Http\Controllers\RefuelingExportController; 
 use App\Http\Controllers\CardController; 
+use App\Http\Controllers\InspectionReportPdfController; 
  
 Route::view('/', 'Login');
 
@@ -43,6 +44,7 @@ Route::get('/Delete/Maintenance/{Maintenance}', [MaintenanceController::class, '
 
 Route::get('/Cars/Inspections/Daily/Checklist', [CarController::class, 'cars_daily_checklist'])->name('DailyCheckList'); 
 Route::get('/Cars/Inspections/Report', [CarController::class, 'cars_inspection_report'])->name('Inspection_Report'); 
+Route::get('/Cars/Inspections/Report/Document/{InspectionNumber}', [InspectionReportPdfController::class, 'index'])->name('Inspection_Pdf');
 Route::post('/Add/Cars/Inspections/Report', [CarController::class, 'cars_inspection_store'])->name('Add_Inspection_Report'); 
 Route::post('/Update/Cars/Inspections/Report/{Report}', [CarController::class, 'cars_inspection_update'])->name('Update_Inspection_Report'); 
 Route::post('/Delete/Cars/Inspections/Report/{Report}', [CarController::class, 'cars_inspection_delete'])->name('Delete_Inspection_Report'); 
@@ -91,4 +93,3 @@ Route::get('/Management/Edit/Master/Cards', [CardController::class, 'my_records_
 Route::get('/Add/Deposits/Master/Cards/{MasterCard}', [CardController::class, 'store_deposits_master_card'])->name('store_Deposits_MasterCard'); 
 Route::get('/Update/Deposits/Master/Cards/{MasterCard}', [CardController::class, 'update_deposits_master_card'])->name('UpdateDeposits_MasterCard');
 Route::get('/Delete/Deposits/Master/Cards/{MasterCard}/{CardNumber}/{Amount}', [CardController::class, 'destroy_deposits_master_card'])->name('DeleteDeposits_MasterCard');
- 
