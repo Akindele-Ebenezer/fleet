@@ -29,7 +29,14 @@
                 @php
                     $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Refueling->VehicleNumber)->first(); 
                     ////////
-                    $CurrentCar = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $Refueling->VehicleNumber)->orderBy('Date', 'DESC')->get(); 
+                    $CurrentCar = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $Refueling->VehicleNumber)->orderBy('Date', 'DESC')->get();  
+                    $PreviousCarMileageArr = [];
+                    for ($i = 1; $i < count($CurrentCar); $i++) { 
+                        $PreviousCarMileage = $CurrentCar[$i]['Mileage'];
+                        array_push($PreviousCarMileageArr, $PreviousCarMileage);
+                    }
+                    // print_r($PreviousCarMileageArr);
+                    // die();
                     ///////
                 @endphp
                 <td>{{ $loop->iteration  + (($Refuelings->currentPage() -1) * $Refuelings->perPage()) }}</td>
@@ -54,11 +61,13 @@
                 <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
                 <td>{{ $Refueling->ReceiptNumber }}</td>
                 {{-- ///// --}}
-                @for ($i = 0; $i < count($CurrentCar); $i++)  
-                    <td>{{ $Refueling->Mileage . ' - ' . $CurrentCar[$i]['Mileage'] . ' - ' . $loop->index }} 
+                @for ($i = 0; $i < count($PreviousCarMileageArr); $i++)  
+                    <td>{{ $Refueling->Mileage . ' - ' . $PreviousCarMileageArr[$i] . ' c- '  }} 
                     </td>
+                    {{-- <td>{{ $Refueling->Mileage . ' - ' . $PreviousCarMileageArr[$i] . ' c- ' . ($loop->iteration  + (($Refuelings->currentPage() - 1) * $Refuelings->perPage())) }} 
+                    </td> --}}
                         @php
-                            if (count($CurrentCar) > count($CurrentCar) - 1) {
+                            if (count($PreviousCarMileageArr) > count($PreviousCarMileageArr) - 1) {
                                 break;
                             } 
                         @endphp 

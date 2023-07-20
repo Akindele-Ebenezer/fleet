@@ -2,7 +2,9 @@
 
 @section('Title', 'INSPECTION REPORT') 
 @section('Heading', 'INSPECTION REPORT') 
-@section('Button_1', 'Explore Cars') 
+@section('Button_1', '+ Add Inspection') 
+@section('Button_1_Link', 'daily-checklist-route') 
+
 @section('Components')
     @include('Components.EditVehicleInspectionReportComponent')
 @endsection
@@ -12,22 +14,29 @@
         <table class="table" id="Table">
             <tr class="table-head"> 
                 <th onclick="sortTable(0)">S/N</th>
-                <th onclick="sortTable(1)">Inspection Number</th>
+                <th onclick="sortTable(1)" class="text-align-center">Inspection Number</th>
                 <th onclick="sortTable(2)">Vehicle Plate #</th>
                 <th onclick="sortTable(3)">Date Inspected</th>
                 <th onclick="sortTable(4)">Driver</th>
-                <th onclick="sortTable(5)">Status</th> 
+                <th onclick="sortTable(5)" class="text-align-center">Status</th> 
                 <th onclick="sortTable(6)">Weeks</th>
             </tr> 
-            @unless (count(\DB::table('inspection_report')->get()) > 0)
+            @unless (count($InspectionReport) > 0)
             <tr>
                 <td>No vehicle inspections (report).</td>
             </tr>    
             @endunless 
-            @foreach (\DB::table('inspection_report')->get() as $Report)
+            @foreach ($InspectionReport as $Report)
+            @php
+                $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Report->VehicleNumber)->first();  
+            @endphp 
             <tr>
                 <td>{{ $Report->id }}</td>
-                <td class="inspection-number underline">{{ $Report->InspectionNumber }}</td>
+                <td class="inspection-number underline show-record-x-2">
+                    <span class="{{ $CarStatus->Status ?? 'INACTIVE' === 'ACTIVE' ? 'active-x' : 'inactive-x' }}"></span>
+                    {{ $Report->InspectionNumber }} 
+                    <img src="{{ asset('Images/service.png') }}" alt="">
+                </td>
                 <td class="Hide">{{ $Report->VehicleNumber }}</td>
                 <td class="Hide">{{ $Report->InspectionNumber }}</td>
                 <td class="Hide">{{ $Report->Mileage }}</td> 
@@ -116,11 +125,22 @@
                 <td class="Hide">{{ $Report->Attachment }}</td> 
                 <td class="Hide">{{ $Report->Status }}</td> 
                 <td class="Hide">{{ $Report->Mechanic }}</td> 
-
-                <td>{{ $Report->VehicleNumber }}</td>
+                <td class=" ">
+                    {{ $Report->VehicleNumber }}
+                </td>
                 <td>{{ $Report->DateInspected }}</td>
                 <td>{{ $Report->InspectedBy }}</td>
-                <td>{{ $Report->InspectionNumber }}</td>
+                <td>
+                    <center>
+                        <span class="
+                                    {{ $Report->Status === 'GOOD' ? 'active-x' : '' }}
+                                    {{ $Report->Status === 'BAD' ? 'inactive-x' : '' }}
+                                    {{ $Report->Status === 'FAIR' ? 'fair-x' : '' }}
+                        ">
+                            {{ $Report->Status }}
+                        </span>
+                    </center>
+                </td>
                 <td>{{ $Report->Week }}</td>
             </tr>
             @endforeach 

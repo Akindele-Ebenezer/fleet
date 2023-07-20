@@ -2,7 +2,7 @@
     $Drivers = \App\Models\Car::select('Driver')->get();
 @endphp
 <div class="daily-checklist edit form">
-    <form class="EditVehicleDailyChecklist"> @csrf
+    <form class="EditVehicleDailyChecklist" enctype="multipart/form-data"> @csrf
         <div class="cancel-modal">✖</div>
         <div class="daily-checklist-inner">
             <h1>Edit Daily Vehicle Inspection Report</h1>

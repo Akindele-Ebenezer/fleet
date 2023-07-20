@@ -50,6 +50,14 @@
   background-color: #3034b5;
 }
 
+.fair-x {
+  background-color: #787500;
+}
+
+.text-align-center {
+  text-align: center !important;
+}
+
 .alert {
   align-items: center;
   display: none;

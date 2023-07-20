@@ -14,11 +14,13 @@ class CarController extends Controller
         $Cars__MyRecords = Car::whereNotNull('VehicleNumber')->selectRaw("*, TRIM(VehicleNumber) AS VehicleNumber")->where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7); 
         \DB::statement("SET SQL_MODE=''");
         $CarOwners = Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, TRIM(VehicleNumber) AS VehicleNumber, CardNumber")->whereNotNull('CarOwner')->groupBy('CarOwner')->paginate(7); 
+        $InspectionReport = \DB::table('inspection_report')->paginate(14);
 
         return [
             'Cars' => $Cars,
             'Cars__MyRecords' => $Cars__MyRecords, 
             'CarOwners' => $CarOwners, 
+            'InspectionReport' => $InspectionReport, 
         ];
     }
 
@@ -80,6 +82,26 @@ class CarController extends Controller
     public function cars_inspection_report() {
         $Config = self::config();
 
+        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
+            $FilterValue = trim($_GET['FilterValue']); 
+            $InspectionReport = \DB::table('inspection_report')
+                        ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('InspectionNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Mileage', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('DateInspected', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('InspectedBy', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('AdditionalNotes', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Attachment', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Mechanic', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('SubmitTime', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                        ->paginate(14);
+ 
+                        $InspectionReport->withPath($_SERVER['REQUEST_URI']);
+
+            return view('InspectionReport', $Config)->with('InspectionReport', $InspectionReport);
+        } 
         return view('InspectionReport', $Config);
     }
 
@@ -206,7 +228,7 @@ class CarController extends Controller
                 'SubmitTime' => $request->SubmitTime,
                 'Week' => $request->Week,
             ]); 
-        } else {
+        } else { 
             $Attachment = $request->file('Attachment'); 
             $Attachment->move('Inspections/' . $request->VehicleNumber, $Attachment->getClientOriginalName()); 
             \DB::table('inspection_report')->where('InspectionNumber', $request->InspectionNumber)
@@ -224,22 +246,7 @@ class CarController extends Controller
                 'Week' => $request->Week,
             ]); 
         }
- 
-        \DB::table('inspection_report')->where('InspectionNumber', $request->InspectionNumber)
-            ->update([
-            'VehicleNumber' => $request->VehicleNumber, 
-            'InspectionNumber' => $request->InspectionNumber, 
-            'Mileage' => $request->Mileage,
-            'DateInspected' => $request->DateInspected, 
-            'InspectedBy' => $request->InspectedBy,
-            'AdditionalNotes' => $request->AdditionalNotes,
-            'Attachment' => $request->Attachment,
-            'Status' => $request->Status,
-            'Mechanic' => $request->Mechanic,
-            'SubmitTime' => $request->SubmitTime,
-            'Week' => $request->Week,
-        ]); 
-
+  
         \DB::table('exterior_inspection')->where('InspectionNumber', $request->InspectionNumber)
             ->update([
             'VehicleNumber' => $request->VehicleNumber, 

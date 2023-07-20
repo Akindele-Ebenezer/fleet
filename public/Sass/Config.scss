@@ -3,6 +3,7 @@ $Color-1: #333;
 $Color-2: #DF2E38; 
 $Color-3: #41a341; 
 $Color-4: #3034b5; 
+$Color-5: #787500; 
  
 * {
     box-sizing: border-box; 
@@ -59,6 +60,12 @@ $Color-4: #3034b5;
 }
 .total-x {
     background-color: $Color-4; 
+}
+.fair-x {
+    background-color: $Color-5; 
+}
+.text-align-center {
+    text-align: center !important;
 }
 
 .alert {

@@ -177,6 +177,7 @@ let ActiveCarsRouteButton = document.querySelectorAll('.active-cars-route');
 let InactiveCarsRouteButton = document.querySelectorAll('.inactive-cars-route');
 let DriversRouteButton = document.querySelectorAll('.drivers-route');
 let CarsRouteButton = document.querySelectorAll('.cars-route');
+let DailyChecklistRouteButton = document.querySelectorAll('.daily-checklist-route');
 let CarsRegistrationRouteButton = document.querySelectorAll('.cars-registration-route');
 
 CarsRegistrationRouteButton.forEach(Button => {
@@ -229,6 +230,12 @@ DepositsRouteEditButton.forEach(Button => {
 CarsRouteButton.forEach(Button => {
     Button.addEventListener('click', () => {
         window.location = '/Cars';
+    });
+}); 
+
+DailyChecklistRouteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        window.location = '/Cars/Inspections/Daily/Checklist';
     });
 }); 
 
