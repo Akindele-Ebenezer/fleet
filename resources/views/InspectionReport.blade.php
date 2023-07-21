@@ -4,6 +4,8 @@
 @section('Heading', 'INSPECTION REPORT') 
 @section('Button_1', '+ Add Inspection') 
 @section('Button_1_Link', 'daily-checklist-route') 
+@section('Button_2_Link', 'daily-vehicle-inspection-form') 
+@section('Button_2', '+ Inspection Form') 
 
 @section('Components')
     @include('Components.EditVehicleInspectionReportComponent')

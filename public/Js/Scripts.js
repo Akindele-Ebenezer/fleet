@@ -127,6 +127,7 @@ Cars.forEach(Car => {
         let MaintenanceButton = document.querySelector('.modal-vehicle-data .inner .links .maintenance');
         let DepositsButton = document.querySelector('.modal-vehicle-data .inner .links .deposits');
         let FuelHistoryButton = document.querySelector('.modal-vehicle-data .inner .links .fuel-history');
+        let InspectionsButton = document.querySelector('.modal-vehicle-data .inner .links .inspections');
         
         PrintButton.forEach(Button => {
             Button.addEventListener('click', () => { 
@@ -142,6 +143,9 @@ Cars.forEach(Car => {
         });
         FuelHistoryButton.addEventListener('click', () => { 
             window.location = '/Refueling?FilterValue=' + RegistrationNo_X.textContent;
+        });
+        InspectionsButton.addEventListener('click', () => { 
+            window.location = '/Cars/Inspections/Report?FilterValue=' + RegistrationNo_X.textContent;
         });
     }); 
 

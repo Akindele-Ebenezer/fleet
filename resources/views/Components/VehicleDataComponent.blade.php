@@ -17,6 +17,7 @@
             <div class="link maintenance">Maintenance</div>
             <div class="link deposits">Deposits</div>
             <div class="link fuel-history">Fuel History</div>
+            <div class="link inspections">Inpections</div>
         </div>
         <h1>
             Vehicle Data
