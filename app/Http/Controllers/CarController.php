@@ -14,7 +14,7 @@ class CarController extends Controller
         $Cars__MyRecords = Car::whereNotNull('VehicleNumber')->selectRaw("*, TRIM(VehicleNumber) AS VehicleNumber")->where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7); 
         \DB::statement("SET SQL_MODE=''");
         $CarOwners = Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, TRIM(VehicleNumber) AS VehicleNumber, CardNumber")->whereNotNull('CarOwner')->groupBy('CarOwner')->paginate(7); 
-        $InspectionReport = \DB::table('inspection_report')->paginate(14);
+        $InspectionReport = \DB::table('inspection_report')->orderBy('DateInspected', 'DESC')->paginate(14);
 
         return [
             'Cars' => $Cars,
