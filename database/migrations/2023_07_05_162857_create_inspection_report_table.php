@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("Mileage")->nullable();
             $table->string("DateInspected")->nullable(); 
             $table->string("InspectedBy")->nullable(); 
-            $table->string("AdditionalNotes")->nullable(); 
+            $table->text("AdditionalNotes")->nullable(); 
             $table->string("Attachment")->nullable(); 
             $table->string("Status")->nullable(); 
             $table->string("Mechanic")->nullable(); 

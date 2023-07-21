@@ -33,7 +33,7 @@
     @include('Components.LoaderComponent')
     @yield('Content') 
     <footer>
-        Developed by Akindele Ebenezer, Version 1.0
+        Developed by Akindele Ebenezer, Version 2.{{ date('md.hi') }} 
     </footer>
     <script src="{{ asset('Js/Loader.js') }}"></script>
 </body>

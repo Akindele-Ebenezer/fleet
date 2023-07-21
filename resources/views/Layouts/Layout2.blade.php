@@ -683,8 +683,7 @@
                     <button class="action-x {{ (Route::is('Cars_Registration') AND $CarRegistration_USER->CarRegistration ?? 'off' === 'on') ? 'add-car' : 'permission-denied' }}  {{ (Route::is('EditMaintenance') AND $AddMaintenance_USER->AddMaintenance ?? 'off' === 'on') ? 'add-maintenance' : 'permission-denied' }} {{ (Route::is('EditDeposits') AND $MakeDeposits_USER->MakeDeposits ?? 'off' === 'on') ? 'add-monthly-deposits' : 'permission-denied' }} {{ Route::is('EditDeposits_MasterCard') ? 'add-master-card-deposits' : '' }} {{ (Route::is('EditRefueling') AND $FuelManagement_USER->FuelManagement ?? 'off' === 'on') ? 'add-refueling' : 'permission-denied' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Documents') || Route::is('Drivers') ? 'cars-route' : '' }} {{ (Route::is('FleetCard') AND $CardManagement_USER->CardManagement ?? 'off' === 'on') ? 'add-fleet-card' : 'permission-denied' }} @yield('Button_1_Link')" > {{ Route::is('Cars_Registration') ? '+ Add Vehicle' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }} {{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }} {{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Documents')|| Route::is('Drivers') ? 'Explore Cars' : '' }} {{ Route::is('FleetCard') ? '+ New Fleet Card' : '' }}
                         @yield('Button_1')
                     </button>
-                    <button class="ExportToExcel" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">Export to EXCEL
-                    </button>
+                    <button class="ExportToExcel @yield('Button_2_Link')" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">@yield('Button_2', 'Export to EXCEL')</button>
                 </div>
             </div> 
             @endunless
@@ -692,7 +691,7 @@
         </div>
     </div> 
     <footer>
-        Developed by Akindele Ebenezer, Version 1.0
+        Developed by Akindele Ebenezer, Version 2.{{ date('md.hi') }} 
     </footer>
     <script src="{{ asset('Js/SortTables.js') }}"></script>
     @unless (Route::is('Analytics'))

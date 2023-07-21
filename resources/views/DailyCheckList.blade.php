@@ -4,6 +4,8 @@
 @section('Heading', 'VEHICLE DAILY CHECKLIST') 
 @section('Button_1_Link', 'cars-route') 
 @section('Button_1', 'Explore Cars') 
+@section('Button_2_Link', 'daily-vehicle-inspection-form') 
+@section('Button_2', '+ Inspection Form') 
 
 @section('Content')
 @php 
