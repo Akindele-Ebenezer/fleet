@@ -376,7 +376,7 @@ let Inspection_Pdf_Icons = document.querySelectorAll('.pdf-x');
 
 Inspection_Pdf_Icons.forEach(Pdf_Icon => {
     Pdf_Icon.addEventListener('click', () => {
-        window.open('/Cars/Inspections/Report/Document?=InspectionNumber' + 87654);
+        window.open('/Cars/Inspections/Report/Document?InspectionNumber=' + Pdf_Icon.nextElementSibling.textContent);
     });
 });
 
