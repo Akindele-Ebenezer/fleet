@@ -145,7 +145,7 @@ Cars.forEach(Car => {
             window.location = '/Refueling?FilterValue=' + RegistrationNo_X.textContent;
         });
         InspectionsButton.addEventListener('click', () => { 
-            window.location = '/Cars/Inspections/Report?FilterValue=' + RegistrationNo_X.textContent;
+            window.location = '/Cars/Inspections/General/Report?FilterValue=' + RegistrationNo_X.textContent;
         });
     }); 
 
