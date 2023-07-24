@@ -128,7 +128,7 @@ class CarController extends Controller
                       
                         $General_Inspection_Report->withPath($_SERVER['REQUEST_URI']);
 
-            return view('General_Inspection_Report', $Config)->with('General_Inspection_Report', $General_Inspection_Report);
+            return view('GeneralInspectionReport', $Config)->with('General_Inspection_Report', $General_Inspection_Report);
         } 
         return view('GeneralInspectionReport', $Config);
     }
