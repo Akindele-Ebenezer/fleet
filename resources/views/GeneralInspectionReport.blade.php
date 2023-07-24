@@ -1,7 +1,7 @@
 @extends('Layouts.Layout2')
 
-@section('Title', 'MY ENTRIES') 
-@section('Heading', 'MY ENTRIES') 
+@section('Title', 'INSPECTION REPORT') 
+@section('Heading', 'INSPECTION REPORT') 
 @section('Button_1', '+ Add Inspection') 
 @section('Button_1_Link', 'daily-checklist-route') 
 @section('Button_2_Link', 'daily-vehicle-inspection-form') 
@@ -23,14 +23,12 @@
                 <th onclick="sortTable(5)" class="text-align-center">Status</th> 
                 <th onclick="sortTable(6)">Weeks</th>
             </tr> 
-            @unless (count($MyInspectionReport) > 0)
+            @unless (count($General_Inspection_Report) > 0)
             <tr>
-                <td>You have not created vehicle inspections (report). &nbsp;&nbsp;
-                    <button class="daily-checklist-route">+ Create Inspection</button>
-                </td>
+                <td>No vehicle inspections (report).</td>
             </tr>    
             @endunless 
-            @foreach ($MyInspectionReport as $Report)
+            @foreach ($General_Inspection_Report as $Report)
             @php
                 $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Report->VehicleNumber)->first();  
             @endphp 
@@ -152,7 +150,7 @@
             </tr>
             @endforeach 
         </table>
-        {{ $MyInspectionReport->onEachSide(5)->links() }}  
+        {{ $General_Inspection_Report->onEachSide(5)->links() }}  
 @endsection
 @section('JS')
 <script src="{{ asset('Js/Edit/VehicleInspectionReport.js') }}"></script>

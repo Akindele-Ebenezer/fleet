@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string("Mechanic")->nullable(); 
             $table->string("SubmitTime")->nullable(); 
             $table->string("Week")->nullable(); 
+            $table->string("UserId")->nullable(); 
             $table->timestamps();
         });
     }

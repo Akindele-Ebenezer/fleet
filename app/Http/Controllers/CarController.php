@@ -14,13 +14,15 @@ class CarController extends Controller
         $Cars__MyRecords = Car::whereNotNull('VehicleNumber')->selectRaw("*, TRIM(VehicleNumber) AS VehicleNumber")->where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7); 
         \DB::statement("SET SQL_MODE=''");
         $CarOwners = Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, TRIM(VehicleNumber) AS VehicleNumber, CardNumber")->whereNotNull('CarOwner')->groupBy('CarOwner')->paginate(7); 
-        $InspectionReport = \DB::table('inspection_report')->orderBy('DateInspected', 'DESC')->paginate(14);
+        $MyInspectionReport = \DB::table('inspection_report')->where('UserId', self::USER_ID())->orderBy('DateInspected', 'DESC')->paginate(14);
+        $General_Inspection_Report = \DB::table('inspection_report')->orderBy('DateInspected', 'DESC')->paginate(14);
 
         return [
             'Cars' => $Cars,
             'Cars__MyRecords' => $Cars__MyRecords, 
             'CarOwners' => $CarOwners, 
-            'InspectionReport' => $InspectionReport, 
+            'MyInspectionReport' => $MyInspectionReport, 
+            'General_Inspection_Report' => $General_Inspection_Report, 
         ];
     }
 
@@ -84,7 +86,7 @@ class CarController extends Controller
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = trim($_GET['FilterValue']); 
-            $InspectionReport = \DB::table('inspection_report')
+            $MyInspectionReport = \DB::table('inspection_report')
                         ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('InspectionNumber', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Mileage', 'LIKE', '%' . $FilterValue . '%')
@@ -98,11 +100,37 @@ class CarController extends Controller
                         ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
                         ->paginate(14);
  
-                        $InspectionReport->withPath($_SERVER['REQUEST_URI']);
+                        $MyInspectionReport->withPath($_SERVER['REQUEST_URI']);
 
-            return view('InspectionReport', $Config)->with('InspectionReport', $InspectionReport);
+            return view('InspectionReport', $Config)->with('MyInspectionReport', $MyInspectionReport);
         } 
         return view('InspectionReport', $Config);
+    }
+
+    public function cars_general_inspection_report() {
+        $Config = self::config();
+
+        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
+            $FilterValue = trim($_GET['FilterValue']); 
+            $General_Inspection_Report = \DB::table('inspection_report')
+                        ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('InspectionNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Mileage', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('DateInspected', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('InspectedBy', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('AdditionalNotes', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Attachment', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Mechanic', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('SubmitTime', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                        ->paginate(14);
+                      
+                        $General_Inspection_Report->withPath($_SERVER['REQUEST_URI']);
+
+            return view('General_Inspection_Report', $Config)->with('General_Inspection_Report', $General_Inspection_Report);
+        } 
+        return view('GeneralInspectionReport', $Config);
     }
 
     public function cars_inspection_store(Request $request) {  
@@ -118,6 +146,7 @@ class CarController extends Controller
                 'Mechanic' => $request->Mechanic,
                 'SubmitTime' => $request->SubmitTime,
                 'Week' => $request->Week,
+                'UserId' => self::USER_ID(),
             ]); 
         } else {
             $Attachment = $request->file('Attachment'); 
@@ -134,6 +163,7 @@ class CarController extends Controller
                 'Mechanic' => $request->Mechanic,
                 'SubmitTime' => $request->SubmitTime,
                 'Week' => $request->Week,
+                'UserId' => self::USER_ID(),
             ]); 
         }
  
@@ -227,6 +257,7 @@ class CarController extends Controller
                 'Mechanic' => $request->Mechanic,
                 'SubmitTime' => $request->SubmitTime,
                 'Week' => $request->Week,
+                'UserId' => self::USER_ID(),
             ]); 
         } else { 
             $Attachment = $request->file('Attachment'); 
@@ -244,6 +275,7 @@ class CarController extends Controller
                 'Mechanic' => $request->Mechanic,
                 'SubmitTime' => $request->SubmitTime,
                 'Week' => $request->Week,
+                'UserId' => self::USER_ID(),
             ]); 
         }
   

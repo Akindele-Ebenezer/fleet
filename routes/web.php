@@ -44,6 +44,7 @@ Route::get('/Delete/Maintenance/{Maintenance}', [MaintenanceController::class, '
 
 Route::get('/Cars/Inspections/Daily/Checklist', [CarController::class, 'cars_daily_checklist'])->name('DailyCheckList'); 
 Route::get('/Cars/Inspections/Report', [CarController::class, 'cars_inspection_report'])->name('Inspection_Report'); 
+Route::get('/Cars/Inspections/General/Report', [CarController::class, 'cars_general_inspection_report'])->name('General_Inspection_Report'); 
 Route::get('/Cars/Inspections/Report/Document', [InspectionReportPdfController::class, 'index'])->name('Inspection_Pdf');
 Route::get('/Cars/Inspections/Report/Form', [InspectionReportPdfController::class, 'daily_vehicle_inspection_form'])->name('Inspection_Form');
 Route::post('/Add/Cars/Inspections/Report', [CarController::class, 'cars_inspection_store'])->name('Add_Inspection_Report'); 

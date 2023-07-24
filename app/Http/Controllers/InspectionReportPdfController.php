@@ -16,7 +16,7 @@ class InspectionReportPdfController extends Controller
 
     public function index(Request $request) 
     { 
-        $InspectionReport = \DB::table('inspection_report')->where('InspectionNumber', $request->InspectionNumber)->first();
+        $MyInspectionReport = \DB::table('inspection_report')->where('InspectionNumber', $request->InspectionNumber)->first();
         $ExteriorInspection = \DB::table('exterior_inspection')->where('InspectionNumber', $request->InspectionNumber)->first();
         $InteriorInspection = \DB::table('interior_inspection')->where('InspectionNumber', $request->InspectionNumber)->first();
         $FluidLevels = \DB::table('fluid_levels')->where('InspectionNumber', $request->InspectionNumber)->first();
@@ -24,6 +24,7 @@ class InspectionReportPdfController extends Controller
         $SafetyEquipment = \DB::table('safety_equipment')->where('InspectionNumber', $request->InspectionNumber)->first();
 
         $this->fpdf->SetFont('Arial', 'B', 15);
+        $this->fpdf->SetTitle('Inspection Report - ' . $request->InspectionNumber);
         $this->fpdf->SetTextColor(245, 37, 95);
         $this->fpdf->SetFillColor(227, 232, 243);
         $this->fpdf->AddPage();
@@ -52,7 +53,7 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->SetFont('Arial', '', 9);
         $this->fpdf->Cell(80, 8, $request->InspectionNumber, 0, 0);  
         $this->fpdf->Cell(40, 8,' ', 0, 0);   
-        $this->fpdf->Cell(70, 8, $InspectionReport->VehicleNumber, 0, 0);   
+        $this->fpdf->Cell(70, 8, $MyInspectionReport->VehicleNumber, 0, 0);   
         $this->fpdf->Cell(0, 10,' ', 0, 0);   
         $this->fpdf->Ln();   
         $this->fpdf->SetFont('Arial', 'B', 11);
@@ -60,9 +61,9 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->Cell(140, 5,'Date Inspected:', 0, 0);   
         $this->fpdf->Ln();   
         $this->fpdf->SetFont('Arial', '', 9);
-        $this->fpdf->Cell(80, 8, $InspectionReport->Mileage, 0, 0);  
+        $this->fpdf->Cell(80, 8, $MyInspectionReport->Mileage, 0, 0);  
         $this->fpdf->Cell(40, 8,' ', 0, 0);    
-        $this->fpdf->Cell(70, 8, $InspectionReport->DateInspected, 0, 0);  
+        $this->fpdf->Cell(70, 8, $MyInspectionReport->DateInspected, 0, 0);  
         $this->fpdf->Cell(0, 10,' ', 0, 0);    
         $this->fpdf->Ln();     
         $this->fpdf->SetFont('Arial', 'B', 11);
@@ -70,16 +71,16 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->Cell(140, 5,'Status:', 0, 0); 
         $this->fpdf->Ln();   
         $this->fpdf->SetFont('Arial', '', 9);
-        $this->fpdf->Cell(80, 8, $InspectionReport->InspectedBy, 0, 0); 
+        $this->fpdf->Cell(80, 8, $MyInspectionReport->InspectedBy, 0, 0); 
         $this->fpdf->Cell(40, 8,' ', 0, 0);  
-        $this->fpdf->Cell(70, 8, $InspectionReport->Status, 0, 0);  
+        $this->fpdf->Cell(70, 8, $MyInspectionReport->Status, 0, 0);  
         $this->fpdf->Cell(0, 10,' ', 0, 0);   
         $this->fpdf->Ln();     
         $this->fpdf->SetFont('Arial', 'B', 11);
         $this->fpdf->Cell(120, 5,'Assigned Mechanic/Agent:', 0, 0);  
         $this->fpdf->SetFont('Arial', '', 9);   
         $this->fpdf->Ln();   
-        $this->fpdf->Cell(80, 8, $InspectionReport->Mechanic, 0, 0,); 
+        $this->fpdf->Cell(80, 8, $MyInspectionReport->Mechanic, 0, 0,); 
   
         $this->fpdf->Cell(0, 10,' ', 0, 0);   
         $this->fpdf->Ln();   
@@ -299,7 +300,7 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->Cell(20, 7, 'Remarks:', 0, 0, 'C'); 
         $this->fpdf->SetFont('Arial', '', 11);
         $this->fpdf->Ln();    
-        $this->fpdf->MultiCell(190, 7, $InspectionReport->AdditionalNotes ?? 'No remarks for this inspection.', 'B'); 
+        $this->fpdf->MultiCell(190, 7, $MyInspectionReport->AdditionalNotes ?? 'No remarks for this inspection.', 'B'); 
         $this->fpdf->Output();
 
         exit;
@@ -309,6 +310,7 @@ class InspectionReportPdfController extends Controller
     {  
 
         $this->fpdf->SetFont('Arial', 'B', 15);
+        $this->fpdf->SetTitle('Vehicle Inspection Form');
         $this->fpdf->SetTextColor(245, 37, 95);
         $this->fpdf->SetFillColor(227, 232, 243);
         $this->fpdf->AddPage();
