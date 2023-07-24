@@ -23,21 +23,11 @@
             <tr>
                 <td>No fuel history.</td>
             </tr>    
-            @endunless
-            @foreach ($Refuelings as $Key => $Refueling) 
+            @endunless  
+            @foreach ($Refuelings as $Refueling) 
             <tr>
                 @php
                     $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Refueling->VehicleNumber)->first(); 
-                    ////////
-                    $CurrentCar = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $Refueling->VehicleNumber)->orderBy('Date', 'DESC')->get();  
-                    $PreviousCarMileageArr = [];
-                    for ($i = 1; $i < count($CurrentCar); $i++) { 
-                        $PreviousCarMileage = $CurrentCar[$i]['Mileage'];
-                        array_push($PreviousCarMileageArr, $PreviousCarMileage);
-                    }
-                    // print_r($PreviousCarMileageArr);
-                    // die();
-                    ///////
                 @endphp
                 <td>{{ $loop->iteration  + (($Refuelings->currentPage() -1) * $Refuelings->perPage()) }}</td>
                 <td class="show-record-x show-record-x-2"><span class="{{ $CarStatus->Status ?? 'INACTIVE' }}"></span>{{ $Refueling->VehicleNumber }} <img src="{{ asset('Images/focus.png') }}" alt=""></td>
@@ -60,18 +50,24 @@
                 <td>{{ $Refueling->Quantity }}</td>
                 <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
                 <td>{{ $Refueling->ReceiptNumber }}</td>
-                {{-- ///// --}}
-                @for ($i = 0; $i < count($PreviousCarMileageArr); $i++)  
-                    <td>{{ $Refueling->Mileage . ' - ' . $PreviousCarMileageArr[$i] . ' c- '  }} 
-                    </td>
-                    {{-- <td>{{ $Refueling->Mileage . ' - ' . $PreviousCarMileageArr[$i] . ' c- ' . ($loop->iteration  + (($Refuelings->currentPage() - 1) * $Refuelings->perPage())) }} 
-                    </td> --}}
+                {{-- ///// --}}   
+                @php 
+                    $CurrentCar = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $Refueling->VehicleNumber)->orderBy('Date', 'DESC')->get();  
+                    $PreviousCarMileageArr = []; 
+                    $KM_Arr = []; 
+                @endphp 
+                <td>
+                    @for ($i = 1; $i < count($CurrentCar); $i++)
                         @php
-                            if (count($PreviousCarMileageArr) > count($PreviousCarMileageArr) - 1) {
-                                break;
-                            } 
-                        @endphp 
-                @endfor   
+                            $PreviousCarMileage = $CurrentCar[$i - 1]['Mileage'];
+                            $CurrentCarMileage = $CurrentCar[$i]['Mileage']; 
+                            $KM = $CurrentCarMileage - $PreviousCarMileage;  
+                            array_push($KM_Arr, $KM);
+                            break;
+                        @endphp
+                    @endfor 
+                    {{-- {{ $KM }}  --}} 
+                </td> 
             </tr>
             @endforeach  
             <div class="table-head filter"> 
