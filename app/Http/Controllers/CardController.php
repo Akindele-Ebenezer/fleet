@@ -60,17 +60,24 @@ class CardController extends Controller
                         ->orWhere('InsuranceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('FuelTankCapacity', 'LIKE', '%' . $FilterValue . '%')
                         ->paginate(7);
- 
-            $MasterCards = MasterCard::where('CardNumber', 'LIKE', '%' . $FilterValue . '%') 
+
+            $Deposits_MasterCards = DepositsMasterCard::where('CardNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Balance', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('MonthlyBudget', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%') 
                         ->paginate(7);
+                        
+            $MasterCards = MasterCard::where('CardNumber', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('MonthlyBudget', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Balance', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('Vendor', 'LIKE', '%' . $FilterValue . '%') 
+                        ->paginate(7);
 
-                        $Cars->withPath($_SERVER['REQUEST_URI']);
+                $Cars->withPath($_SERVER['REQUEST_URI']);
 
-            return view('FleetCard', $Config)->with('Cars', $Cars)->with('MasterCards', $MasterCards);
+            return view('FleetCard', $Config)->with('Cars', $Cars)->with('Deposits_MasterCards', $Deposits_MasterCards)->with('MasterCards', $MasterCards);
         } 
 
         return view('FleetCard', [
@@ -79,13 +86,13 @@ class CardController extends Controller
         ]);
     } 
 
-    public function master_card_deposits()
-    {
-        $Deposits_MasterCards = DepositsMasterCard::orderBy('Date', 'DESC')->paginate(7);
-        return view('Deposits_MasterCard', [
-            'Deposits_MasterCards' => $Deposits_MasterCards,
-        ]);
-    }
+    // public function master_card_deposits()
+    // {
+    //     $Deposits_MasterCards = DepositsMasterCard::orderBy('Date', 'DESC')->paginate(7);
+    //     return view('Deposits_MasterCard', [
+    //         'Deposits_MasterCards' => $Deposits_MasterCards,
+    //     ]);
+    // }
 
     /**
      * Show the form for creating a new resource.

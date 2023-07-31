@@ -102,23 +102,21 @@
                 <td>No Deposits for master cards.</td>
             </tr>   
             @endunless
-            @unless (isset($_GET['Filter']) || isset($_GET['FilterValue']))
-                @foreach ($Deposits_MasterCards as $Deposits_MasterCard) 
-                <tr>   
-                    @php
-                        $Status = \App\Models\MasterCard::select('Status')->where('CardNumber', $Deposits_MasterCard->CardNumber)->first();
-                    @endphp
-                    <td class="show-record-x show-record-x-2"><img src="{{ asset('Images/deposit_.png') }}" alt=""> MASTER<span class="{{ $Status->Status ?? 'INACTIVE' }}"></span></td>  
-                    <td>{{ $Deposits_MasterCard->Date }}</td>
-                    <td class="card-numbers-x underline">{{ $Deposits_MasterCard->CardNumber }}</td>
-                    <td>₦ {{ empty($Deposits_MasterCard->Amount) ? '' : number_format($Deposits_MasterCard->Amount) }}</td> 
-                    <td>{{ $Deposits_MasterCard->Year }}</td>
-                    <td>{{ $Deposits_MasterCard->Week }}</td>
-                    <td>{{ $Deposits_MasterCard->Month }}</td> 
-                    <td>{{ $Deposits_MasterCard->Comments }}</td> 
-                </tr> 
-                @endforeach 
-            @endunless
+            @foreach ($Deposits_MasterCards as $Deposits_MasterCard) 
+            <tr>   
+                @php
+                    $Status = \App\Models\MasterCard::select('Status')->where('CardNumber', $Deposits_MasterCard->CardNumber)->first();
+                @endphp
+                <td class="show-record-x show-record-x-2"><img src="{{ asset('Images/deposit_.png') }}" alt=""> MASTER<span class="{{ $Status->Status ?? 'INACTIVE' }}"></span></td>  
+                <td>{{ $Deposits_MasterCard->Date }}</td>
+                <td class="card-numbers-x underline">{{ $Deposits_MasterCard->CardNumber }}</td>
+                <td>₦ {{ empty($Deposits_MasterCard->Amount) ? '' : number_format($Deposits_MasterCard->Amount) }}</td> 
+                <td>{{ $Deposits_MasterCard->Year }}</td>
+                <td>{{ $Deposits_MasterCard->Week }}</td>
+                <td>{{ $Deposits_MasterCard->Month }}</td> 
+                <td>{{ $Deposits_MasterCard->Comments }}</td> 
+            </tr> 
+            @endforeach  
             <div class="table-head filter"> 
                 {{-- <span><input type="text" id="SearchInput0" placeholder="Filter By LNO" onkeyup="FilterLNO()"></span>  --}}
                 <span><input type="text" id="SearchInputX0" placeholder="Filter By Card Type" onkeyup="Filter2CardType()"></span> 
