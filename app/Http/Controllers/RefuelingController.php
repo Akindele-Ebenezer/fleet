@@ -142,7 +142,7 @@ class RefuelingController extends Controller
     {
         $Mileage = \App\Models\Refueling::select('Mileage')->whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->orderBy('Date', 'DESC')->first();  
         $KM = $request->Mileage - $Mileage->Mileage;
-        $FuelConsumption = $KM / $request->Quantity;
+        $FuelConsumption = $request->Quantity === 0 ? 0 : $KM / $request->Quantity;
         $Balance = \App\Models\Car::whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->first() ?? \App\Models\MasterCard::whereNotNull('CardNumber')->orderBy('Date', 'DESC')->first();  
         $Balance->Balance = $Balance->Balance - $request->Amount;
         $Balance->save();
