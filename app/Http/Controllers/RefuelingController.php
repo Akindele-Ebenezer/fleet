@@ -212,7 +212,7 @@ class RefuelingController extends Controller
      */
     public function destroy($RefuelingId, Refueling $refueling)
     {
-        $DeleteRefueling = DB::table('refuelings')::where('id', $RefuelingId)->unlimited()->delete();
+        $DeleteRefueling = \DB::table('refuelings')::where('id', $RefuelingId)->unlimited()->delete();
 
         return back();
     }
