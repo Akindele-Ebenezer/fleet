@@ -44,7 +44,7 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         Amount_X.value = BigInt(VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent.replace(/₦/g, '').replace(/,/g, ''));
         ReceiptNo_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
         RefuelingId_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
- console.log(RefuelingId_X.value)
+ 
         EditRefuelingButton.addEventListener('click', () => {
             EditRefuelingForm.setAttribute('action', '/Update/Refueling/' + RefuelingId_X.value);
             EditRefuelingForm.submit();
