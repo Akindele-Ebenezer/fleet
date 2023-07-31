@@ -66,7 +66,7 @@
                             </div>
                             <div class="stats-heading">
                                 <h2>STATS</h2>
-                                <button class="action-x show-record-button">action</button>
+                                <button class="action-x show-record-button">edit</button>
                                 <span class="Deposits_X_DATA Hide">₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</span>
                                 <span class="Refueling_X_DATA Hide">₦ {{ empty($Car->TotalRefueling) ? '' : number_format($Car->TotalRefueling) }}</span>
                                 <span class="Balance_X_DATA Hide">₦ {{ empty($Car->Balance) ? '' : number_format($Car->Balance) }}</span>
