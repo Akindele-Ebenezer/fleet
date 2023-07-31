@@ -18,6 +18,7 @@
                 <th onclick="sortTable(8)">Amount</th>
                 <th onclick="sortTable(9)">Receipt No</th>
                 <th onclick="sortTable(10)">KM</th> 
+                <th onclick="sortTable(11)">Fuel Consumption</th> 
             </tr>
             @foreach ($Refueling__MyRecords as $Refueling)
             <tr> 
@@ -44,6 +45,7 @@
                 <td>{{ $Refueling->ReceiptNumber }}</td> 
                 <td>{{ $Refueling->KM }}</td> 
                 <td class="Hide">{{ $Refueling->id }}</td>
+                <td>{{ $Refueling->Consumption }}</td>
             </tr> 
             @endforeach  
             <div class="table-head filter"> 
