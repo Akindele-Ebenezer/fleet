@@ -211,8 +211,7 @@ class RefuelingController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($RefuelingId, Refueling $refueling)
-    {
-        dd($RefuelingId);
+    { 
         $DeleteRefueling = Refueling::where('id', $RefuelingId)->delete();
 
         return back();
