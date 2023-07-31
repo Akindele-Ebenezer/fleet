@@ -141,7 +141,7 @@ class RefuelingController extends Controller
     public function store($Refueling, Request $request)
     {
         $Mileage = \App\Models\Refueling::select('Mileage')->whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->orderBy('Date', 'DESC')->first();  
-        $KM = $KM->Mileage - $request->Mileage;
+        $KM = $Mileage->Mileage - $request->Mileage;
         $Balance = \App\Models\Car::whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->first() ?? \App\Models\MasterCard::whereNotNull('CardNumber')->orderBy('Date', 'DESC')->first();  
         $Balance->Balance = $Balance->Balance - $request->Amount;
         $Balance->save();
