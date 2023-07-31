@@ -81,7 +81,7 @@
                 </div>
                 <input class="ReceiptNo_X" type="text" placeholder="Receipt Number.." name="ReceiptNumber">
             </div>   
-            <input type="hidden" name="RepairId" class="RefuelingId_X">
+            <input type="hidden" name="RefuelingId" class="RefuelingId_X">
         </form>
         <button class="EditRefueling">+ Edit Refueling</button>
         <button class="DeleteRefueling">- Delete Refueling</button>
