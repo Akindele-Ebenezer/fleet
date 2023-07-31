@@ -140,6 +140,8 @@ class RefuelingController extends Controller
      */
     public function store($Refueling, Request $request)
     {
+        $Mileage = \App\Models\Refueling::select('Mileage')->whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->orderBy('Date', 'DESC')->first();  
+        $KM = $KM->Mileage - $request->Mileage;
         $Balance = \App\Models\Car::whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->first() ?? \App\Models\MasterCard::whereNotNull('CardNumber')->orderBy('Date', 'DESC')->first();  
         $Balance->Balance = $Balance->Balance - $request->Amount;
         $Balance->save();
@@ -156,7 +158,7 @@ class RefuelingController extends Controller
             'Quantity' => $request->Quantity, 
             'Amount' => $request->Amount, 
             'ReceiptNumber' => $request->ReceiptNumber, 
-            'KM' => $request->KM,  
+            'KM' => $KM,  
             'DateIn' => date('F j, Y'), 
             'TimeIn' => date("g:i a"), 
             'UserId' => request()->session()->get('Id'), 

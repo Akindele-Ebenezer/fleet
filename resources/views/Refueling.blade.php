@@ -49,24 +49,9 @@
                 <td class="card-numbers-x underline">{{ $Refueling->CardNumber }}</td>
                 <td>{{ $Refueling->Quantity }}</td>
                 <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
-                <td>{{ $Refueling->ReceiptNumber }}</td>
-                {{-- ///// --}}   
-                @php 
-                    $CurrentCar = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $Refueling->VehicleNumber)->orderBy('Date', 'DESC')->get();  
-                    $PreviousCarMileageArr = []; 
-                    $KM_Arr = []; 
-                @endphp 
-                <td>
-                    @for ($i = 1; $i < count($CurrentCar); $i++)
-                        @php
-                            $PreviousCarMileage = $CurrentCar[$i - 1]['Mileage'];
-                            $CurrentCarMileage = $CurrentCar[$i]['Mileage']; 
-                            $KM = $CurrentCarMileage - $PreviousCarMileage;  
-                            array_push($KM_Arr, $KM);
-                            break;
-                        @endphp
-                    @endfor 
-                    {{-- {{ $KM }}  --}} 
+                <td>{{ $Refueling->ReceiptNumber }}</td> 
+                <td> 
+                    {{ $Refueling->KM }}  
                 </td> 
             </tr>
             @endforeach  
