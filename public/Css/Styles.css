@@ -93,7 +93,7 @@ button {
   padding: 0.5rem;
 }
 
-.big-figure, .report-inner .table.list .engine-volume {
+.big-figure, .report-inner .table.list .engine-volume, .report-inner .table.list .fuel-consumption, .fuel-consumption {
   background: #000;
   border: none;
   display: block;
@@ -633,6 +633,16 @@ form select option {
   translate: 0 -0.7em;
 }
 
+.text-center {
+  text-align: center !important;
+}
+
+.fuel-consumption {
+  background-color: #000 !important;
+  display: table-cell;
+  font-family: system-ui;
+}
+
 .cars-filter {
   background: #000;
   height: 25em;
@@ -984,7 +994,7 @@ form select option {
   background-color: #3236bd;
   padding: 0 0.5em;
 }
-.report-inner .table.list .engine-volume {
+.report-inner .table.list .engine-volume, .report-inner .table.list .fuel-consumption {
   display: table-cell;
   font-family: system-ui;
 }

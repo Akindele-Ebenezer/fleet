@@ -13,6 +13,14 @@
     }
 }
  
+.text-center { text-align: center !important; }
+
+.fuel-consumption {
+    @extend .big-figure;
+    background-color: #000 !important;
+    display: table-cell;
+    font-family: system-ui;
+}
 .cars-filter { 
     background: #000; 
     height: 25em;
@@ -432,7 +440,7 @@
                     }
                 }
 
-                .engine-volume {
+                .engine-volume, .fuel-consumption {
                     @extend .big-figure;
                     display: table-cell;
                     font-family: system-ui;
