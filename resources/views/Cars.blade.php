@@ -88,8 +88,8 @@
                     <td class="models-x underline">{{ $Car->Model }}</td>
                     <td class="card-numbers-x underline">{{ $Car->CardNumber }}</td>
                     <td>₦ {{ number_format($Car->MonthlyBudget) }}</td>
-                    <td>₦ {{ number_format($Car->Deposits) }}</td>
-                    <td>₦ {{ number_format($Car->Refueling) }}</td>
+                    <td>₦ {{ number_format($TotalDeposits ?? 0) }}</td>
+                    <td>₦ {{ number_format($TotalRefueling ?? 0) }}</td>
                     <td>₦ {{ number_format($Car->Balance) }}</td>
                     <td>₦ {{ number_format($Car->MonthlyBudget - $Car->Balance) }}</td>
                 </tr>
