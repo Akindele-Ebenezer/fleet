@@ -45,7 +45,7 @@
                 <td>{{ $Refueling->ReceiptNumber }}</td> 
                 <td>{{ $Refueling->KM }}</td> 
                 <td class="Hide">{{ $Refueling->id }}</td>
-                <td>{{ $Refueling->Consumption }}</td>
+                <td>{{ round($Refueling->Consumption, 1) }}</td>
             </tr> 
             @endforeach  
             <div class="table-head filter"> 
