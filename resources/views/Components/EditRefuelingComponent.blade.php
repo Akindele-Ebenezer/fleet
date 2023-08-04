@@ -39,7 +39,7 @@
                 </div>
                 <input class="Time_X" type="time" step='any' name="Time">
             </div>
-            <div class="new-car-inputs">
+            <div class="new-car-inputs readonly">
                 <div class="new-car-inputs-inner">
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M880 316v520q0 24-18 42t-42 18H140q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42ZM140 425h680V316H140v109Zm0 129v282h680V554H140Zm0 282V316v520Z"></path></svg>
                     Mileage	
@@ -53,14 +53,14 @@
                 </div>
                 <input class="TerminalNo_X" type="text" placeholder="Terminal Number	.." name="TerminalNumber">
             </div>
-            <div class="new-car-inputs">
+            <div class="new-car-inputs readonly">
                 <div class="new-car-inputs-inner">
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M405 782h361V524H405v258ZM140 896q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H140Zm0-60h680V316H140v520Zm0 0V316v520Z"></path></svg>
                     Card Number	
                 </div>
                 <input class="CardNumber_X" type="text" placeholder="Card Number	.." name="CardNumber">
             </div>
-            <div class="new-car-inputs">
+            <div class="new-car-inputs readonly">
                 <div class="new-car-inputs-inner">
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M450 855h60v-40h60q12.75 0 21.375-8.625T600 785V655q0-12.75-8.625-21.375T570 625H420v-70h180v-60h-90v-40h-60v40h-60q-12.75 0-21.375 8.625T360 525v130q0 12.75 8.625 21.375T390 685h150v70H360v60h90v40ZM220 976q-24 0-42-18t-18-42V236q0-24 18-42t42-18h361l219 219v521q0 24-18 42t-42 18H220Zm311-581V236H220v680h520V395H531ZM220 236v159-159 680-680Z"></path></svg>
                     Quantity	
@@ -85,5 +85,6 @@
         </form>
         <button class="EditRefueling">+ Edit Refueling</button>
         <button class="DeleteRefueling">- Delete Refueling</button>
+        <button class="ReverseRefueling">^ Reverse Transaction</button>
     </div>
 </div>

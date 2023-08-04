@@ -234,6 +234,7 @@
                         Documents
                     </li>
                 </a>
+                <span class="line"></span>
                 <div class="sub-nav-wrapper">
                     <a class="my-records action-x">
                         <li class="">
@@ -284,6 +285,7 @@
                         <span>{{ $HandleNumbers($NumberOfDrivers) }}</span>
                     </li>
                 </a>
+                <span class="line"></span>
                 <div class="sub-nav-wrapper">
                     <a class="card-management action-x">
                         <li>
@@ -379,19 +381,19 @@
                     </h1> 
                     @unless (Route::is('Analytics'))
                     <div class="inner-x">
-                        <p class="cars-route">
+                        <p class="cars-route link">
                             <img src="{{ asset('Images/car.png') }}" alt="">
                             Cars ({{ number_format($NumberOfCars) }})
                         </p>
-                        <p class="active-cars-route">
+                        <p class="active-cars-route link">
                             <img src="{{ asset('Images/active.png') }}" alt="">
                             Active ({{ number_format($NumberOfCars_ACTIVE) }})
                         </p>
-                        <p class="inactive-cars-route">
+                        <p class="inactive-cars-route link">
                             <img src="{{ asset('Images/inactive.png') }}" alt="">
                             Inactive ({{ number_format($NumberOfCars_INACTIVE) }})
                         </p>
-                        <p class="drivers-route">
+                        <p class="drivers-route link">
                             <img src="{{ asset('Images/driver.png') }}" alt="">
                             Drivers ({{ number_format($NumberOfDrivers) }})
                         </p>

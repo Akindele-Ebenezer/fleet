@@ -9,8 +9,8 @@ class RefuelingController extends Controller
 {
     
     public function config() {
-        $Refueling = Refueling::orderBy('Date', 'DESC')->paginate(14); 
-        $Refueling__MyRecords = Refueling::where('UserId', self::USER_ID())->orderBy('Date', 'DESC')->paginate(14);
+        $Refueling = Refueling::orderBy('Date', 'DESC')->orderBy('Time', 'DESC')->paginate(14); 
+        $Refueling__MyRecords = Refueling::where('UserId', self::USER_ID())->orderBy('Date', 'DESC')->orderBy('Time', 'DESC')->paginate(14);
 
         return [
             'Refuelings' => $Refueling,
@@ -141,8 +141,8 @@ class RefuelingController extends Controller
     public function store($Refueling, Request $request)
     {
         $Mileage = \App\Models\Refueling::select('Mileage')->whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->orderBy('Date', 'DESC')->first();  
-        $Mileage_ = \App\Models\Car::select('CardNumber')->where('CardNumber', $request->CardNumber)->first();
-        $KM = $request->Mileage - $Mileage_->CardNumber; 
+        $Mileage_ = \App\Models\Refueling::select('Mileage')->whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->orderBy('Date', 'DESC')->first();
+        $KM = $request->Mileage - $Mileage_->Mileage;  
         $FuelConsumption = $request->Quantity == 0 ? 0 : $KM / $request->Quantity; 
         $Balance = \App\Models\Car::whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->first() ?? \App\Models\MasterCard::whereNotNull('CardNumber')->orderBy('Date', 'DESC')->first();  
         $Balance->Balance = $Balance->Balance - $request->Amount;
@@ -216,6 +216,17 @@ class RefuelingController extends Controller
     public function destroy($RefuelingId, Refueling $refueling)
     {
         $DeleteRefueling = Refueling::where('id', $RefuelingId)->delete();
+
+        return back();
+    }
+
+    public function reverse($CardNumber, $Amount)
+    {
+        $Balance = \App\Models\Car::whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first() ?? \App\Models\MasterCard::whereNotNull('CardNumber')->orderBy('Date', 'DESC')->first();  
+        dd($Balance->Balance . ' - ' . $Amount);
+        $Balance->Balance = $Balance->Balance - $Amount;
+        // $Balance->save();
+        // $ReverseRefueling = Refueling::where('id', $RefuelingId)->delete();
 
         return back();
     }

@@ -842,6 +842,10 @@
                 font-family: system-ui;
                 font-weight: unset;
                 text-align: left;
+
+                &.table-head-x {
+                    width: 30em;
+                }
             }
 
             tr {
@@ -1061,6 +1065,13 @@
         .sub-nav {
             display: none;
             padding: 1em;
+        }
+
+        span.line {
+            border-bottom: 1px solid #888;
+            display: block;
+            margin-block: 1em;
+            width: 100%;
         }
     }
 }

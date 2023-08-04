@@ -12,7 +12,7 @@
                 <th onclick="sortTable(2)">Date</th>
                 <th onclick="sortTable(3)">Time</th>
                 <th onclick="sortTable(4)">Incident Type</th>
-                <th onclick="sortTable(5)">Incident Action</th>
+                <th onclick="sortTable(5)" class="table-head-x">Incident Action</th>
                 <th onclick="sortTable(6)">Release Date</th>
                 <th onclick="sortTable(7)">Release Time</th>
                 <th onclick="sortTable(8)">Cost</th>

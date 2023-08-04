@@ -1321,6 +1321,9 @@ form select option {
   font-weight: unset;
   text-align: left;
 }
+.report-inner .table th.table-head-x {
+  width: 30em;
+}
 .report-inner .table tr {
   border-bottom: 3px solid #000;
 }
@@ -1473,6 +1476,12 @@ form select option {
 .report .left-nav .sub-nav {
   display: none;
   padding: 1em;
+}
+.report .left-nav span.line {
+  border-bottom: 1px solid #888;
+  display: block;
+  margin-block: 1em;
+  width: 100%;
 }
 
 .analytics {

@@ -9,8 +9,8 @@ class MaintenanceController extends Controller
 {
     
     public function config() {
-        $Maintenance = Maintenance::orderBy('Date', 'DESC')->paginate(14); 
-        $Maintenance__MyRecords = Maintenance::where('UserId', self::USER_ID())->orderBy('Date', 'DESC')->paginate(14);
+        $Maintenance = Maintenance::orderBy('Date', 'DESC')->orderBy('Time', 'DESC')->paginate(14); 
+        $Maintenance__MyRecords = Maintenance::where('UserId', self::USER_ID())->orderBy('Date', 'DESC')->orderBy('Time', 'DESC')->paginate(14);
 
         return [
             'Maintenance' => $Maintenance,
