@@ -78,9 +78,15 @@ AddRefuelingButton.forEach(Button => {
     Button.addEventListener('click', () => {
         ModalAddRefueling.style.display = 'block';
          
-        AddRefuelingButton_X.addEventListener('click', () => {  
+        AddRefuelingButton_X.addEventListener('click', () => {   
             if (AddRefuelingForm.children[1].children[1].value === '') {
                 Error.textContent = 'Please fill out vehicle number for new Refueling';
+            } else if (AddRefuelingForm.children[4].children[1].value === '') {
+                Error.textContent = 'Please fill out vehicle mileage for new Refueling';
+            } else if (AddRefuelingForm.children[7].children[1].value === '') {
+                Error.textContent = 'Please fill out fuel quantity for new Refueling';
+            } else if (AddRefuelingForm.children[8].children[1].value === '') {
+                Error.textContent = 'Please fill out fuel cost for new Refueling';
             } else {
                 AddRefuelingForm.setAttribute('action', '/Add/Refueling/' + VehicleNumber_REFUELING.value);
                 AddRefuelingForm.submit();
