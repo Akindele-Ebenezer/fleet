@@ -748,6 +748,7 @@ class CarController extends Controller
                         ->orWhere('LicenceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('InsuranceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('FuelTankCapacity', 'LIKE', '%' . $FilterValue . '%')
+                        ->orderBy('PurchaseDate', 'DESC') 
                         ->paginate(7);
  
                         $Cars->withPath($_SERVER['REQUEST_URI']);

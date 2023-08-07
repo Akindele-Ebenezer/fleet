@@ -52,13 +52,13 @@
                 <div class="new-car-inputs-inner">
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M405 782h361V524H405v258ZM140 896q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H140Zm0-60h680V316H140v520Zm0 0V316v520Z"></path></svg>
                     Card Number	
-                </div>
-                <input list="CardNumbers" type="text" placeholder="Card Number	.." name="CardNumber"  autocomplete="off">
-                <datalist id="CardNumbers">
-                    @foreach ($CardNumbers as $CardNumber)
-                        <option class="VehicleNumbers_Option" value="{{ $CardNumber->CardNumber }}"> {{ $CardNumber->CardNumber }} </option>
+                </div> 
+                <select name="CardNumber" class="CardNumber_Select">
+                    <option value="" class="fleet-card"></option>
+                    @foreach (\App\Models\MasterCard::select('CardNumber')->groupBy('CardNumber')->get() as $MasterCard)
+                        <option value="{{ $MasterCard->CardNumber }}" class="master-card">MASTER CARD :: {{ $MasterCard->CardNumber }}</option>
                     @endforeach
-                </datalist>
+                </select>
             </div>
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">
@@ -81,6 +81,7 @@
                 </div>
                 <input  type="text" placeholder="Receipt Number.." name="ReceiptNumber">
             </div>   
+            <input type="hidden" name="CardType" class="CardType">      
         </form>
         <button class="AddRefueling">+ Refuel</button>
     </div>

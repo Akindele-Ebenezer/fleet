@@ -90,6 +90,8 @@ class MaintenanceController extends Controller
                         ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('InvoiceNumber', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orderBy('Date', 'DESC')
+                        ->orderBy('Time', 'DESC')
                         ->paginate(7);
  
                         $Maintenance->withPath($_SERVER['REQUEST_URI']);
@@ -115,7 +117,9 @@ class MaintenanceController extends Controller
                                                     ->orWhere('ReleaseTime', 'LIKE', '%' . $FilterValue . '%')
                                                     ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
                                                     ->orWhere('InvoiceNumber', 'LIKE', '%' . $FilterValue . '%')
-                                                    ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                                                    ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%')
+                                                    ->orderBy('Date', 'DESC')
+                                                    ->orderBy('Time', 'DESC') 
                                                     ->paginate(7);
                             
             $Maintenance__MyRecords->withPath($_SERVER['REQUEST_URI']);

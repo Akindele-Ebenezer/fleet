@@ -91,6 +91,8 @@ class RefuelingController extends Controller
                         ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('ReceiptNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('KM', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orderBy('Date', 'DESC')
+                        ->orderBy('Time', 'DESC')
                         ->paginate(7);
   
                         $Refuelings->withPath($_SERVER['REQUEST_URI']);
@@ -118,6 +120,8 @@ class RefuelingController extends Controller
                                                 ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%') 
                                                 ->orWhere('ReceiptNumber', 'LIKE', '%' . $FilterValue . '%') 
                                                 ->orWhere('KM', 'LIKE', '%' . $FilterValue . '%') 
+                                                ->orderBy('Date', 'DESC')
+                                                ->orderBy('Time', 'DESC')
                                                 ->paginate(7);
   
             $Refueling__MyRecords->withPath($_SERVER['REQUEST_URI']);
@@ -139,14 +143,20 @@ class RefuelingController extends Controller
      * Store a newly created resource in storage.
      */
     public function store($Refueling, Request $request)
-    {
-        $Mileage = \App\Models\Refueling::select('Mileage')->whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->orderBy('Date', 'DESC')->first();  
-        $Mileage_ = \App\Models\Refueling::select('Mileage')->whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->orderBy('Date', 'DESC')->first();
-        $KM = $request->Mileage - $Mileage_->Mileage;  
+    { 
+        $Mileage = \App\Models\Refueling::select('Mileage')->whereNotNull('VehicleNumber')->where('VehicleNumber', $request->VehicleNumber_REFUELING)->orderBy('Date', 'DESC')->first();  
+        $KM = $request->Mileage - ($Mileage->Mileage ?? 0);  
         $FuelConsumption = $request->Quantity == 0 ? 0 : $KM / $request->Quantity; 
-        $Balance = \App\Models\Car::whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->first() ?? \App\Models\MasterCard::whereNotNull('CardNumber')->orderBy('Date', 'DESC')->first();  
-        $Balance->Balance = $Balance->Balance - $request->Amount;
-        $Balance->save();
+        
+        if ($request->CardType === 'fleet-card') {
+            $Balance = \App\Models\Car::whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->first();  
+            $Balance->Balance = $Balance->Balance - $request->Amount;
+            $Balance->save();
+        } elseif ($request->CardType === 'master-card') {
+            $Balance = \App\Models\MasterCard::whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->first();  
+            $Balance->Balance = $Balance->Balance - $request->Amount;
+            $Balance->save();
+        }
 
         Refueling::insert([ 
             'VehicleNumber' => $request->VehicleNumber_REFUELING, 
@@ -222,8 +232,8 @@ class RefuelingController extends Controller
 
     public function reverse($CardNumber, $Amount)
     {
-        $Balance = \App\Models\Car::whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first() ?? \App\Models\MasterCard::whereNotNull('CardNumber')->orderBy('Date', 'DESC')->first();  
-        dd($Balance->Balance . ' - ' . $Amount);
+        $Balance = \App\Models\Car::select('Balance')->whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first();  
+        dd($Balance->Balance . ' + ' . $Amount);
         $Balance->Balance = $Balance->Balance - $Amount;
         // $Balance->save();
         // $ReverseRefueling = Refueling::where('id', $RefuelingId)->delete();

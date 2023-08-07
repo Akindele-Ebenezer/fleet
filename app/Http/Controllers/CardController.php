@@ -59,6 +59,7 @@ class CardController extends Controller
                         ->orWhere('LicenceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('InsuranceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('FuelTankCapacity', 'LIKE', '%' . $FilterValue . '%')
+                        ->orderBy('PurchaseDate', 'DESC') 
                         ->paginate(7);
 
             $Deposits_MasterCards = DepositsMasterCard::where('CardNumber', 'LIKE', '%' . $FilterValue . '%') 

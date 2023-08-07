@@ -3,6 +3,7 @@ let DatalistValues = document.querySelectorAll('.data-values');
 let Datalists = document.querySelectorAll('.datalist');
 let InputsWrapper = document.querySelectorAll('.new-car-inputs');
 let CardNumberInput_ = document.querySelector('input[name=CardNumber]');
+let CardNumberSelect = document.querySelector('select[name=CardNumber]');
  
 DatalistInputs.forEach(Input => {
     Input.addEventListener('click', () => { 
@@ -36,7 +37,9 @@ DatalistInputs.forEach(Input => {
         DatalistValue.addEventListener('click', () => {
             Input.nextElementSibling.classList.remove('Show');  
             DatalistValue.parentElement.previousElementSibling.value = DatalistValue.firstElementChild.textContent; 
-            CardNumberInput_.value = DatalistValue.firstElementChild.nextElementSibling.textContent;
+            CardNumberInput_.value = DatalistValue.firstElementChild.nextElementSibling.textContent; 
+            CardNumberSelect.firstElementChild.value = DatalistValue.firstElementChild.nextElementSibling.textContent; 
+            CardNumberSelect.firstElementChild.textContent = 'FLEET CARD' + ' :: ' +DatalistValue.firstElementChild.nextElementSibling.textContent;  
         }); 
     });
 });

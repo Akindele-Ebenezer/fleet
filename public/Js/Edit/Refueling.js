@@ -22,6 +22,7 @@ let Amount_X = document.querySelector('.Amount_X');
 let ReceiptNo_X = document.querySelector('.ReceiptNo_X');
 let KMLITER_X = document.querySelector('.KMLITER_X');
 let RefuelingId_X = document.querySelector('.RefuelingId_X');
+let CardType = document.querySelector('.CardType');
 
 let EditRefuelingButton = document.querySelector('.EditRefueling');
 let DeleteRefuelingButton = document.querySelector('.DeleteRefueling');
@@ -29,7 +30,6 @@ let ReverseRefuelingButton = document.querySelector('.ReverseRefueling');
 let EditRefuelingForm = document.querySelector('.EditRefuelingForm');
 
 let Error = document.querySelector('.error');
-
 
 ShowRecord_X_Edit.forEach(VehicleNumber => {
     VehicleNumber.addEventListener('click', () => {
@@ -88,6 +88,8 @@ AddRefuelingButton.forEach(Button => {
             } else if (AddRefuelingForm.children[8].children[1].value === '') {
                 Error.textContent = 'Please fill out fuel cost for new Refueling';
             } else {
+                let CardNumberSelect = document.querySelector('.CardNumber_Select'); 
+                CardType.value = CardNumberSelect.options[CardNumberSelect.selectedIndex].className;
                 AddRefuelingForm.setAttribute('action', '/Add/Refueling/' + VehicleNumber_REFUELING.value);
                 AddRefuelingForm.submit();
             }    

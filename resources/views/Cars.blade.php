@@ -78,7 +78,7 @@
                         <span class="StopDate_X_DATA Hide">{{ $Car->StopDate }}</span>
                         <span class="Driver_X_DATA Hide">{{ $Car->Driver }}</span>
                         <span class="Status_X_DATA Hide">{{ $Car->Status  === 'ACTIVE' ? 'This CAR is active since ' . $Car->PurchaseDate . '. Licence Expires on ' . $Car->LicenceExpiryDate . '.'  : 'This CAR is inactive. Licence Expires on ' . $Car->LicenceExpiryDate . '..' }}</span>
-                        <span class="BalanceBroughtForward_X_DATA Hide">{{ $Car->MonthlyBudget - $Car->Balance }}</span>
+                        <span class="BalanceBroughtForward_X_DATA Hide">{{ ($Car->MonthlyBudget - $Car->Balance) < 0 ? 0 : $Car->MonthlyBudget - $Car->Balance }}</span>
                         <span class="Mileage_X_DATA Hide">{{ $Mileage->Mileage ?? 'PENDING' }}</span> 
                     </td>
                     <td class="engine-volume">{{ $Car->EngineVolume }}</td>  
@@ -91,7 +91,7 @@
                     <td>₦ {{ number_format($TotalDeposits ?? 0) }}</td>
                     <td>₦ {{ number_format($TotalRefueling ?? 0) }}</td>
                     <td>₦ {{ number_format($Car->Balance) }}</td>
-                    <td>₦ {{ number_format($Car->MonthlyBudget - $Car->Balance) }}</td>
+                    <td>₦ {{ number_format(($Car->MonthlyBudget - $Car->Balance) < 0 ? 0 : $Car->MonthlyBudget - $Car->Balance) }}</td>
                 </tr>
             @endforeach
             <div class="table-head filter"> 

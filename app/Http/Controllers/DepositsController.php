@@ -99,6 +99,7 @@ class DepositsController extends Controller
                         ->orWhere('Month', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Comments', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orderBy('Date', 'DESC') 
                         ->paginate(7);
  
                         $Deposits->withPath($_SERVER['REQUEST_URI']);
