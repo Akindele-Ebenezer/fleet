@@ -55,7 +55,7 @@
                     ₦ {{ number_format($MasterCard->Balance) }}
                 </td> 
                 <td>  
-                    ₦ {{ number_format($MasterCard->MonthlyBudget - $MasterCard->Balance) }}
+                    ₦ {{ number_format(($MasterCard->MonthlyBudget - $MasterCard->Balance) < 0 ? 0 : $MasterCard->MonthlyBudget - $MasterCard->Balance) }}
                 </td> 
                 <td>  
                     <button class="action-x {{ $CardManagement_USER->CardManagement ?? 'off' === 'on' ? 'manage-master-card' : 'permission-denied' }}">MANAGE</button>
@@ -103,7 +103,7 @@
                     ₦ {{ number_format($Car->Balance) }}
                 </td> 
                 <td>  
-                    ₦ {{ number_format($Car->MonthlyBudget - $Car->Balance) }}
+                    ₦ {{ number_format(($Car->MonthlyBudget - $Car->Balance) < 0 ? 0 : $Car->MonthlyBudget - $Car->Balance) }}
                 </td> 
                 <td>  
                     <button class="action-x {{ ($CardManagement_USER->CardManagement ?? 'off' === 'on') ? 'manage' : 'permission-denied' }}">MANAGE</button>
