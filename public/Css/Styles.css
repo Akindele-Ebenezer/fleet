@@ -1830,7 +1830,7 @@ form select option {
   padding: 1em;
   width: 50%;
 }
-.analytics .inner-4 .x--inner:last-of-type {
+.analytics .inner-4 .x--inner:first-of-type, .analytics .inner-4 .x--inner:last-of-type {
   overflow-y: scroll;
   width: 49%;
 }

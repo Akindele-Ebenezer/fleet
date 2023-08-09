@@ -425,7 +425,7 @@
             padding: 1em;
             width: 50%;
 
-            &:last-of-type {
+            &:first-of-type, &:last-of-type {
                 overflow-y: scroll;
                 width: 49%;
             }
