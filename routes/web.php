@@ -59,7 +59,6 @@ Route::get('/Delete/Deposits/{Deposits}/{CardNumber}/{Amount}', [DepositsControl
 Route::get('/Edit/Refueling', [RefuelingController::class, 'my_records_refueling'])->name('EditRefueling'); 
 Route::get('/Add/Refueling/{Refueling}', [RefuelingController::class, 'store'])->name('store_Refueling'); 
 Route::get('/Update/Refueling/{Refueling}', [RefuelingController::class, 'update'])->name('UpdateRefueling');
-Route::get('/Delete/Refueling/{Refueling}', [RefuelingController::class, 'destroy'])->name('DeleteRefueling');
 Route::get('/Reverse/Refueling/{CardNumber}/{Amount}/{Refueling}', [RefuelingController::class, 'reverse'])->name('ReverseRefueling');
 
 Route::get('/Maintenance', [MaintenanceController::class, 'index'])->name('Maintenance');

@@ -218,25 +218,15 @@ class RefuelingController extends Controller
             ]);
 
             return back(); 
-    }
+    } 
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($RefuelingId, Refueling $refueling)
+    public function reverse($CardNumber, $Amount, $RefuelingId)
     {
-        $DeleteRefueling = Refueling::where('id', $RefuelingId)->delete();
-
-        return back();
-    }
-
-    public function reverse($CardNumber, $Amount)
-    {
-        $Balance = \App\Models\Car::select('Balance')->whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first();  
-        dd($Balance->Balance . ' + ' . $Amount);
-        $Balance->Balance = $Balance->Balance - $Amount;
-        // $Balance->save();
-        // $ReverseRefueling = Refueling::where('id', $RefuelingId)->delete();
+        $Balance = \App\Models\Car::whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first()
+                    ?? \App\Models\MasterCard::whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first();  
+        $Balance->Balance = $Balance->Balance + $Amount;  
+        $Balance->save();
+        $ReverseRefueling = Refueling::where('id', $RefuelingId)->delete();
 
         return back();
     }

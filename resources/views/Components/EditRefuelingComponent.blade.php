@@ -84,7 +84,6 @@
             <input type="hidden" name="RefuelingId" class="RefuelingId_X">
         </form>
         <button class="EditRefueling">+ Edit Refueling</button>
-        <button class="DeleteRefueling">- Delete Refueling</button>
-        {{-- <button class="ReverseRefueling">^ Reverse Transaction</button> --}}
+        <button class="ReverseRefueling">* Reverse Transaction</button>
     </div>
 </div>

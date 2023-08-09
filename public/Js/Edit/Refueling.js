@@ -25,7 +25,6 @@ let RefuelingId_X = document.querySelector('.RefuelingId_X');
 let CardType = document.querySelector('.CardType');
 
 let EditRefuelingButton = document.querySelector('.EditRefueling');
-let DeleteRefuelingButton = document.querySelector('.DeleteRefueling');
 let ReverseRefuelingButton = document.querySelector('.ReverseRefueling');
 let EditRefuelingForm = document.querySelector('.EditRefuelingForm');
 
@@ -49,11 +48,7 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         EditRefuelingButton.addEventListener('click', () => {
             EditRefuelingForm.setAttribute('action', '/Update/Refueling/' + RefuelingId_X.value);
             EditRefuelingForm.submit();
-        });
- 
-        DeleteRefuelingButton.addEventListener('click', () => {
-            window.location = '/Delete/Refueling/' + RefuelingId_X.value;   
-        });
+        }); 
  
         ReverseRefuelingButton.addEventListener('click', () => {
             window.location = '/Reverse/Refueling/' + CardNumber_X.value + '/' + Amount_X.value + '/' + RefuelingId_X.value;   
