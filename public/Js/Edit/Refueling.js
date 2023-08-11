@@ -22,7 +22,10 @@ let Amount_X = document.querySelector('.Amount_X');
 let ReceiptNo_X = document.querySelector('.ReceiptNo_X');
 let KMLITER_X = document.querySelector('.KMLITER_X');
 let RefuelingId_X = document.querySelector('.RefuelingId_X');
-let CardType = document.querySelector('.CardType');
+let CardType = document.querySelector('.CardType'); 
+let CarMileage_ = document.querySelector('.CarMileage'); 
+let CarDriver_ = document.querySelector('.CarDriver'); 
+let CarBalance_ = document.querySelector('.CarBalance'); 
 
 let EditRefuelingButton = document.querySelector('.EditRefueling');
 let ReverseRefuelingButton = document.querySelector('.ReverseRefueling');
@@ -82,7 +85,11 @@ AddRefuelingButton.forEach(Button => {
                 Error.textContent = 'Please fill out fuel quantity for new Refueling';
             } else if (AddRefuelingForm.children[8].children[1].value === '') {
                 Error.textContent = 'Please fill out fuel cost for new Refueling';
-            } else {
+            } else if (Number(AddRefuelingForm.children[4].children[1].value) < Number(CarMileage_.value)) {
+                Error.textContent = 'Mileage cannot be less than ' + CarMileage_.value  + ' (current mileage). Please confirm mileage for vehicle "' + VehicleNumber_REFUELING.value  + '" from ' + CarDriver_.value + ' or Chief Driver. ';
+            } else if (Number(AddRefuelingForm.children[8].children[1].value) > Number(CarBalance_.value)) {
+                Error.textContent = 'The amount on this card "' + AddRefuelingForm.children[6].children[1].value + '" is not sufficient to buy this quantity "' + AddRefuelingForm.children[7].children[1].value + ' liter(s)". Please credit the account balance or select the master card to process this transaction. ';
+            } else if (Number(AddRefuelingForm.children[4].children[1].value) >= Number(CarMileage_.value)) {
                 let CardNumberSelect = document.querySelector('.CardNumber_Select'); 
                 CardType.value = CardNumberSelect.options[CardNumberSelect.selectedIndex].className;
                 AddRefuelingForm.setAttribute('action', '/Add/Refueling/' + VehicleNumber_REFUELING.value);

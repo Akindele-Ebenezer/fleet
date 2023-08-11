@@ -10,6 +10,11 @@
                 Deposits
             </button>
         </div> 
+        <div class="car-data">
+            <div class="data-x">Previous Mileage <br> <span class="Car-Data-Mileage">0</span></div>
+            <div class="data-x">Balance <br> <span class="Car-Data-Balance">₦ 0</span></div>
+            <div class="data-x">Driver <br> <span class="Car-Data-Driver">Null</span></div>
+        </div>
         <form class="AddRefuelingForm">
             <div class="cancel-modal">✖</div>
             <div class="new-car-inputs">
@@ -39,7 +44,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M880 316v520q0 24-18 42t-42 18H140q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42ZM140 425h680V316H140v109Zm0 129v282h680V554H140Zm0 282V316v520Z"></path></svg>
                     Mileage	
                 </div>
-                <input  type="text" placeholder="KM Traveled	.." name="Mileage">
+                <input  type="number" placeholder="KM Traveled	.." name="Mileage">
             </div>
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">
@@ -82,6 +87,9 @@
                 <input  type="text" placeholder="Receipt Number.." name="ReceiptNumber">
             </div>   
             <input type="hidden" name="CardType" class="CardType">      
+            <input type="hidden" name="CarMileage" class="CarMileage">      
+            <input type="hidden" name="CarDriver" class="CarDriver">      
+            <input type="hidden" name="CarBalance" class="CarBalance">      
         </form>
         <button class="AddRefueling">+ Refuel</button>
     </div>

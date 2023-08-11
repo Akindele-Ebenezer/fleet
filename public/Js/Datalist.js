@@ -4,6 +4,12 @@ let Datalists = document.querySelectorAll('.datalist');
 let InputsWrapper = document.querySelectorAll('.new-car-inputs');
 let CardNumberInput_ = document.querySelector('input[name=CardNumber]');
 let CardNumberSelect = document.querySelector('select[name=CardNumber]');
+let CarMileage = document.querySelector('.CarMileage');
+let CarDriver = document.querySelector('.CarDriver');
+let CarBalance = document.querySelector('.CarBalance');
+let CarDataMileage = document.querySelector('.Car-Data-Mileage');
+let CarDataDriver = document.querySelector('.Car-Data-Driver');
+let CarDataBalance = document.querySelector('.Car-Data-Balance');
  
 DatalistInputs.forEach(Input => {
     Input.addEventListener('click', () => { 
@@ -40,6 +46,12 @@ DatalistInputs.forEach(Input => {
             CardNumberInput_.value = DatalistValue.firstElementChild.nextElementSibling.textContent; 
             CardNumberSelect.firstElementChild.value = DatalistValue.firstElementChild.nextElementSibling.textContent; 
             CardNumberSelect.firstElementChild.textContent = 'FLEET CARD' + ' :: ' +DatalistValue.firstElementChild.nextElementSibling.textContent;  
+            CarMileage.value = DatalistValue.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
+            CarDriver.value = DatalistValue.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
+            CarBalance.value = DatalistValue.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
+            CarDataMileage.textContent = CarMileage.value;
+            CarDataDriver.textContent = CarDriver.value;
+            CarDataBalance.textContent = CarBalance.value;
         }); 
     });
 });

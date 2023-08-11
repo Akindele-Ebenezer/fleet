@@ -147,6 +147,8 @@ form {
             border-radius: 0.2em;
             color: #fff;
             padding: 0.3em;
+            max-width: 36em;
+            text-align: left;
             width: fit-content;
         }
 
@@ -185,6 +187,17 @@ form {
             }  
         }
         
+        .car-data {
+            background: #000;
+            border: 1px solid;
+            display: flex;
+            justify-content: space-evenly;
+
+            .data-x, .data-x span {
+                color: #fff;
+            }
+        }
+
         .heading {
             align-items: center;
             display: flex;

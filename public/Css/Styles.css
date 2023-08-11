@@ -467,6 +467,8 @@ form select option {
   border-radius: 0.2em;
   color: #fff;
   padding: 0.3em;
+  max-width: 36em;
+  text-align: left;
   width: fit-content;
 }
 .form .inner form {
@@ -497,6 +499,15 @@ form select option {
 .form .inner form .new-car-inputs .file-x p {
   color: #ddd;
   text-align: right;
+}
+.form .inner .car-data {
+  background: #000;
+  border: 1px solid;
+  display: flex;
+  justify-content: space-evenly;
+}
+.form .inner .car-data .data-x, .form .inner .car-data .data-x span {
+  color: #fff;
 }
 .form .inner .heading {
   align-items: center;

@@ -1,7 +1,7 @@
 @extends('Layouts.Layout2')
 
-@section('Title', 'Edit / MAINTENANCE') 
-@section('Heading', 'Edit / MAINTENANCE') 
+@section('Title', 'Edit | MAINTENANCE') 
+@section('Heading', 'Edit | MAINTENANCE') 
 
 @section('Content')
     <div class="table-wrapper"> 
