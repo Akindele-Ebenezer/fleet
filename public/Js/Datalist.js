@@ -7,6 +7,7 @@ let CardNumberSelect = document.querySelector('select[name=CardNumber]');
 let CarMileage = document.querySelector('.CarMileage');
 let CarDriver = document.querySelector('.CarDriver');
 let CarBalance = document.querySelector('.CarBalance');
+// let CarCardNumber = document.querySelector('.CarCardNumber');
 let CarDataMileage = document.querySelector('.Car-Data-Mileage');
 let CarDataDriver = document.querySelector('.Car-Data-Driver');
 let CarDataBalance = document.querySelector('.Car-Data-Balance');
@@ -49,6 +50,7 @@ DatalistInputs.forEach(Input => {
             CarMileage.value = DatalistValue.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
             CarDriver.value = DatalistValue.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
             CarBalance.value = DatalistValue.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
+            CarCardNumber_.value = DatalistValue.firstElementChild.nextElementSibling.textContent.trim(); 
             CarDataMileage.textContent = CarMileage.value;
             CarDataDriver.textContent = CarDriver.value;
             CarDataBalance.textContent = CarBalance.value;

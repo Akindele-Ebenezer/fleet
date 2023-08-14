@@ -90,6 +90,7 @@
             <input type="hidden" name="CarMileage" class="CarMileage">      
             <input type="hidden" name="CarDriver" class="CarDriver">      
             <input type="hidden" name="CarBalance" class="CarBalance">      
+            <input type="hidden" name="CarCardNumber_" class="CarCardNumber_">      
         </form>
         <button class="AddRefueling">+ Refuel</button>
     </div>

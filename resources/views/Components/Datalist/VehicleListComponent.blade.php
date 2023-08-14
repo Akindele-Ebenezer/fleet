@@ -10,13 +10,13 @@
         @endphp 
         <div class="data-values">
             <span>{{ $Car->VehicleNumber }}</span>
-            <span class="Hide">{{ $Car->CardNumber }}</span>
+            <span class="Hide CarCardNumber">{{ $Car->CardNumber }}</span>
             <span class="{{ $CarStatus->Status === 'ACTIVE' ? 'active-x' : 'inactive-x' }}"></span>
             <span class="Hide"></span>
             <span>{{ $Car->Maker }} <br> {{ $Car->CardNumber }}</span>
             <span class="Hide">{{ $CarMileage->Mileage ?? 0 }}</span>
             <span class="Hide">{{ $CarDriver->Driver ?? 'the car driver' }}</span>
-            <span class="Hide">{{ $CarBalance->Balance ?? 0 }}</span>
+            <span class="Hide">{{ $CarBalance->Balance ?? 0 }}</span> 
         </div>
     @endforeach
 </div>  
