@@ -17,7 +17,7 @@
             <div class="link maintenance"> <img class="link excel excel-maintenance" src="{{ asset('Images/excel.png') }}"> Maintenance</div>
             <div class="link deposits"> <img class="link excel excel-deposits" src="{{ asset('Images/excel.png') }}"> Deposits</div>
             <div class="link fuel-history"> <img class="link excel excel-fuel-history" src="{{ asset('Images/excel.png') }}"> Fuel History</div>
-            <div class="link inspections">Inpections</div>
+            <div class="link inspections"> <img class="link excel excel-inspections" src="{{ asset('Images/check-list.png') }}">Inpections</div>
         </div>
         <h1>
             Vehicle Data
