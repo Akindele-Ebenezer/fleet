@@ -29,9 +29,9 @@
             @foreach ($Cars as $Car)
                 @php 
                     include('../resources/views/Includes/CompanyName.php'); 
-                    $TotalDeposits = \App\Models\Deposits::where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
-                    $TotalRefueling = \App\Models\Refueling::where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
-                    $Mileage = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $Car->VehicleNumber)->orderBy('id', 'DESC')->first();
+                    $TotalDeposits = \DB::table('deposits')->where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
+                    $TotalRefueling = \DB::table('refuelings')->where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
+                    $Mileage = \DB::table('refuelings')->select('Mileage')->where('VehicleNumber', $Car->VehicleNumber)->orderBy('id', 'DESC')->first();
                 @endphp  
                 <tr> 
                     <td class=" ">{{ $loop->iteration  + (($Cars->currentPage() -1) * $Cars->perPage()) }}</td>

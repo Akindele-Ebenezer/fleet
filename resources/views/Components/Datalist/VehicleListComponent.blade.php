@@ -4,10 +4,7 @@
         @if (empty($Car->VehicleNumber)) @continue @endif 
         @php
             $Car__DATA = \DB::table('cars')->select(['Status', 'Driver', 'Balance'])->where('VehicleNumber', $Car->VehicleNumber)->first();
-            // $CarStatus = \DB::table('cars')->select('Status')->where('VehicleNumber', $Car->VehicleNumber)->first();
             $CarMileage = \DB::table('refuelings')->select('Mileage')->where('VehicleNumber', $Car->VehicleNumber)->orderBy('Date', 'DESC')->first(); 
-            // $CarDriver = \DB::table('cars')->select('Driver')->where('VehicleNumber', $Car->VehicleNumber)->first(); 
-            // $CarBalance = \DB::table('cars')->select('Balance')->where('VehicleNumber', $Car->VehicleNumber)->first(); 
         @endphp 
         <div class="data-values">
             <span>{{ $Car->VehicleNumber }}</span>
