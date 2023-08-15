@@ -2,12 +2,12 @@
     date_default_timezone_set('Africa/Lagos');
     \DB::statement("SET SQL_MODE=''"); 
 
-    $Cars_Absolute = \DB::table('cars')->whereNotNull('VehicleNumber')->get();
-    $CardNumbers = \DB::table('cars')->select('CardNumber')->whereNotNull('VehicleNumber')->get();
+    $Cars_Absolute = \App\Models\Car::whereNotNull('VehicleNumber')->get();
+    $CardNumbers = \App\Models\Car::select('CardNumber')->whereNotNull('VehicleNumber')->get();
     $Cars_Maker = DB::table('makers')->select('Maker')->get();
     $Cars_EngineType = DB::table('engine_types')->select('EngineType')->get();
     $Cars_GearType = DB::table('gear_types')->select('GearType')->get();
-    $Cars_Organisation = \DB::table('organisations')->select(['CompanyCode', 'CompanyName'])->distinct()->get();
+    $Cars_Organisation = \App\Models\organisation::select(['CompanyCode', 'CompanyName'])->distinct()->get();
     $CardVendors = DB::table('card_vendors')->select('CardVendors')->get();
     $NumberOfInspections = \DB::table('inspection_report')->count();
 
@@ -17,9 +17,9 @@
     $NumberOfCars_ACTIVE = \App\Models\Car::select('Status')->whereNotNull('VehicleNumber')->where('Status', 'ACTIVE')->count();
     $NumberOfCars_INACTIVE = \App\Models\Car::select('Status')->whereNotNull('VehicleNumber')->where('Status', 'INACTIVE')->count();
     $NumberOfDrivers = \App\Models\Car::select('Driver')->whereNotNull('Driver')->distinct()->count();
-    $NumberOfCarMaintenance = \DB::table('maintenances')->select('VehicleNumber')->count();
+    $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')->count();
     $NumberOfCarDeposits = \App\Models\Deposits::select('VehicleNumber')->count();
-    $NumberOfCarRefueling = \DB::table('refuelings')->select('VehicleNumber')->count();
+    $NumberOfCarRefueling = \App\Models\Refueling::select('VehicleNumber')->count();
 
     $NumberOfCars_MyRecords = \App\Models\Car::select(['VehicleNumber', 'UserId'])
                                                         ->whereNotNull('VehicleNumber')
