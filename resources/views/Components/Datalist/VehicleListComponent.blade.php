@@ -3,10 +3,10 @@
     @foreach ($Cars_Absolute as $Car)
         @if (empty($Car->VehicleNumber)) @continue @endif 
         @php
-            $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Car->VehicleNumber)->first();
-            $CarMileage = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $Car->VehicleNumber)->orderBy('Date', 'DESC')->first(); 
-            $CarDriver = \App\Models\Car::select('Driver')->where('VehicleNumber', $Car->VehicleNumber)->first(); 
-            $CarBalance = \App\Models\Car::select('Balance')->where('VehicleNumber', $Car->VehicleNumber)->first(); 
+            $CarStatus = \DB::table('cars')->select('Status')->where('VehicleNumber', $Car->VehicleNumber)->first();
+            $CarMileage = \DB::table('refuelings')->select('Mileage')->where('VehicleNumber', $Car->VehicleNumber)->orderBy('Date', 'DESC')->first(); 
+            $CarDriver = \DB::table('cars')->select('Driver')->where('VehicleNumber', $Car->VehicleNumber)->first(); 
+            $CarBalance = \DB::table('cars')->select('Balance')->where('VehicleNumber', $Car->VehicleNumber)->first(); 
         @endphp 
         <div class="data-values">
             <span>{{ $Car->VehicleNumber }}</span>

@@ -17,19 +17,28 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\FromQuery;
 
 class RefuelingExport implements 
-                                FromCollection, ShouldAutoSize, 
+                                ShouldAutoSize, 
                                 WithHeadings, WithColumnFormatting,
-                                WithColumnWidths, WithStyles  
+                                WithColumnWidths, WithStyles, FromQuery  
 {
+    public function __construct($VehicleNumber)
+    {
+        $this->VehicleNumber = $VehicleNumber;
+    }
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function collection()
+    public function query()
     {
-        return Refueling::all();
-    }
+        if($this->VehicleNumber === 'all') {
+            return Refueling::query()->whereNotNull('VehicleNumber');
+        } else {
+            return Refueling::query()->where('VehicleNumber', $this->VehicleNumber);
+        }
+    } 
     
     public function styles(Worksheet $sheet)
     {

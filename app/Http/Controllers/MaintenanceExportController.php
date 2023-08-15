@@ -8,8 +8,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class MaintenanceExportController extends Controller
 {
-    public function Export() 
+    public function ExportCarMaintenance($VehicleNumber) 
     {
-        return Excel::download(new MaintenanceExport, 'Maintenance - DEPASA MARINE.xlsx');
+        return Excel::download(new MaintenanceExport($VehicleNumber), 'Maintenance - DEPASA MARINE.xlsx');
     }
 }

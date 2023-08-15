@@ -124,6 +124,9 @@ Cars.forEach(Car => {
         Mileage_X.innerHTML = Mileage_X_DATA;  
 
         let PrintButton = document.querySelectorAll('.Print');
+        let ExcelMaintenanceButton = document.querySelector('.modal-vehicle-data .inner .links .excel-maintenance');
+        let ExcelDepositsButton = document.querySelector('.modal-vehicle-data .inner .links .excel-deposits');
+        let ExcelFuelHistoryButton = document.querySelector('.modal-vehicle-data .inner .links .excel-fuel-history');
         let MaintenanceButton = document.querySelector('.modal-vehicle-data .inner .links .maintenance');
         let DepositsButton = document.querySelector('.modal-vehicle-data .inner .links .deposits');
         let FuelHistoryButton = document.querySelector('.modal-vehicle-data .inner .links .fuel-history');
@@ -135,6 +138,18 @@ Cars.forEach(Car => {
             });
         });
 
+        ExcelMaintenanceButton.addEventListener('click', (e) => {  
+            e.stopPropagation();
+            window.location = '/Maintenance/Export/' + RegistrationNo_X.textContent;
+        });
+        ExcelDepositsButton.addEventListener('click', (e) => {  
+            e.stopPropagation();
+            window.location = '/Deposits/Export/' + RegistrationNo_X.textContent;
+        }); 
+        ExcelFuelHistoryButton.addEventListener('click', (e) => {  
+            e.stopPropagation();
+            window.location = '/Refueling/Export/' + RegistrationNo_X.textContent;
+        });
         MaintenanceButton.addEventListener('click', () => {  
             window.location = '/Maintenance?FilterValue=' + RegistrationNo_X.textContent;
         });

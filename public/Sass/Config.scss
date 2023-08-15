@@ -229,7 +229,7 @@ footer {
     justify-content: center;
     position: fixed;
     width: 100vw;
-    z-index: 10;
+    z-index: 100;
 
     .inner {
         height: 15em;
@@ -319,9 +319,20 @@ footer {
             top: 2em;
 
             .link {
+                align-items: center;
                 border-bottom: 4px solid lighten($color: $Color-4, $amount: 20) ;
+                display: flex;
                 cursor: pointer;
-                padding-bottom: 0.15em;
+                padding-bottom: 0.45em;
+
+                &.excel { 
+                    border-bottom: unset;
+                    padding-bottom: unset;
+                }
+
+                img {
+                    width: 1.75em;
+                }
             }
         }
 

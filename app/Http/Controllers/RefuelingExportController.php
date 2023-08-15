@@ -8,8 +8,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class RefuelingExportController extends Controller
 {
-    public function Export() 
+    public function ExportCarFuelHistory($VehicleNumber) 
     {
-        return Excel::download(new RefuelingExport, 'Refueling - DEPASA MARINE.xlsx');
+        return Excel::download(new RefuelingExport($VehicleNumber), 'Refueling - DEPASA MARINE.xlsx');
     }
 }

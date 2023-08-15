@@ -7,9 +7,9 @@ use App\Exports\DepositsExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DepositsExportController extends Controller
-{
-    public function Export() 
+{ 
+    public function ExportCarDeposits($VehicleNumber) 
     {
-        return Excel::download(new DepositsExport, 'Deposits - DEPASA MARINE.xlsx');
+        return Excel::download(new DepositsExport($VehicleNumber), 'Deposits - DEPASA MARINE.xlsx');
     }
 }

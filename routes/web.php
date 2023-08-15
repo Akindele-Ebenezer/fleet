@@ -80,14 +80,9 @@ Route::get('/Cars/Deposits/Report/{DepositReportId}', [FleetReportController::cl
 Route::get('/Cars/Refueling/Report/{RefuelingReportId}', [FleetReportController::class, 'refueling_report'])->name('RefuelingReport');
 
 Route::get('Cars/Export/', [CarsExportController::class, 'Export'])->name('Cars_ExportToExcel'); 
-Route::get('Maintenance/Export/', [MaintenanceExportController::class, 'Export'])->name('Maintenance_ExportToExcel');
-Route::get('Deposits/Export/', [DepositsExportController::class, 'Export'])->name('Deposits_ExportToExcel');
-Route::get('Refueling/Export/', [RefuelingExportController::class, 'Export'])->name('Refueling_ExportToExcel');
-
-// Route::get('Cars/Export/', [CarsExportController::class, 'Export'])->name('Cars_ExportToExcel'); 
-// Route::get('Maintenance/Export/', [MaintenanceExportController::class, 'Export'])->name('Maintenance_ExportToExcel');
-Route::get('Deposits/Export/{Car}', [DepositsExportController::class, 'Export'])->name('Deposits_ExportToExcel_Car');
-// Route::get('Refueling/Export/', [RefuelingExportController::class, 'Export'])->name('Refueling_ExportToExcel');
+Route::get('Maintenance/Export/{Car}', [MaintenanceExportController::class, 'ExportCarMaintenance'])->name('Maintenance_ExportToExcel');
+Route::get('Deposits/Export/{Car}', [DepositsExportController::class, 'ExportCarDeposits'])->name('CarDeposits_ExportToExcel'); 
+Route::get('Refueling/Export/{Car}', [RefuelingExportController::class, 'ExportCarFuelHistory'])->name('Refueling_ExportToExcel');
 
 Route::get('/Management/Fleet/Cards', [CardController::class, 'credit_card_index'])->name('FleetCard');
  

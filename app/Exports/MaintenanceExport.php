@@ -17,18 +17,27 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\FromQuery;
 
 class MaintenanceExport implements 
-                                FromCollection, ShouldAutoSize, 
+                                ShouldAutoSize, 
                                 WithHeadings, WithColumnFormatting,
-                                WithColumnWidths, WithStyles  
+                                WithColumnWidths, WithStyles, FromQuery  
 {
+    public function __construct($VehicleNumber)
+    {
+        $this->VehicleNumber = $VehicleNumber;
+    }
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function collection()
-    {
-        return Maintenance::all();
+    public function query()
+    { 
+        if($this->VehicleNumber === 'all') {
+            return Maintenance::query()->whereNotNull('VehicleNumber');
+        } else {
+            return Maintenance::query()->where('VehicleNumber', $this->VehicleNumber);
+        }
     }
     
     public function styles(Worksheet $sheet)

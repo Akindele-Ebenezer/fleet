@@ -818,7 +818,7 @@
             <script>
                 let ExportButton = document.querySelector('.ExportToExcel');
                 ExportButton.addEventListener('click', () => {
-                    window.location = '/Maintenance/Export'; 
+                    window.location = '/Maintenance/Export/all'; 
                 });
             </script>
         @endif
@@ -827,7 +827,7 @@
             <script>
                 let ExportButton = document.querySelector('.ExportToExcel');
                 ExportButton.addEventListener('click', () => {
-                    window.location = '/Deposits/Export'; 
+                    window.location = '/Deposits/Export/all'; 
                 });
                 let VehicleNumbers = document.getElementById('VehicleNumbers'); 
                 let VehicleNumberInput = document.querySelector('input[list]'); 
@@ -851,7 +851,7 @@
             <script>
                 let ExportButton = document.querySelector('.ExportToExcel');
                 ExportButton.addEventListener('click', () => {
-                    window.location = '/Refueling/Export'; 
+                    window.location = '/Refueling/Export/all'; 
                 });
 
                 let VehicleNumbers = document.getElementById('VehicleNumbers'); 
@@ -890,7 +890,7 @@
             <script>
                 let ExportButton = document.querySelector('.ExportToExcel');
                 ExportButton.addEventListener('click', () => {
-                    window.location = '/Maintenance/Export'; 
+                    window.location = '/Maintenance/Export/all'; 
                 });
             </script>
         @endif
@@ -899,7 +899,7 @@
             <script>
                 let ExportButton = document.querySelector('.ExportToExcel');
                 ExportButton.addEventListener('click', () => {
-                    window.location = '/Deposits/Export'; 
+                    window.location = '/Deposits/Export/all'; 
                 });
             </script>
         @endif
@@ -917,7 +917,7 @@
             <script>
                 let ExportButton = document.querySelector('.ExportToExcel');
                 ExportButton.addEventListener('click', () => {
-                    window.location = '/Refueling/Export'; 
+                    window.location = '/Refueling/Export/all'; 
                 });
             </script>
         @endif
