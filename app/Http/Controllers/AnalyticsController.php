@@ -595,7 +595,7 @@ class AnalyticsController extends Controller
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $Config = self::config();
-    
+     
             $FilterValue = $_GET['FilterValue']; 
           
             $NumberOfCarRepairs = \App\Models\Maintenance::select('VehicleNumber')->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%')->where('IncidentType', 'REPAIR')->count();

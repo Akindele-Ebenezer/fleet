@@ -45,21 +45,21 @@ class MaintenanceExport implements
         return [ 
            1    => [
                     'font' => [
-                        'bold' => true, 'color' => ['argb' => 'FFFFFFFF'], 
+                        'bold' => true, 'color' => ['argb' => 'FF000000'], 
                     ], 
                 'alignment' => [
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                 ],
-                'fill' => [
-                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                    'startColor' => [
-                        'argb' => 'FF000000',
-                    ],
-                    'endColor' => [
-                        'argb' => 'FF000000',
-                    ],
-                ],
+                // 'fill' => [
+                //     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                //     'startColor' => [
+                //         'argb' => 'FF000000',
+                //     ],
+                //     'endColor' => [
+                //         'argb' => 'FF000000',
+                //     ],
+                // ],
             ], 
            'B'  => ['font' => ['size' => 16]], 
         ];
