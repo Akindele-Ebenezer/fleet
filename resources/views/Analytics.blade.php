@@ -84,7 +84,8 @@
         </h1>
         @if(
             isset($_GET['Filter__Yearly_Analytics']) ||
-            isset($_GET['Filter__Range_Analytics'])
+            isset($_GET['Filter__Range_Analytics']) ||
+            isset($_GET['FilterValue'])
         )
             <div class="inner-1 inner-1-x">
                 <div class="x">
