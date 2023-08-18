@@ -31,15 +31,15 @@
                         @case(date('Y-m-d'))
                             <td class="Today Hide">Today</td>
                             @break
-                            @case(date('Y-m-d'), strtotime("-1 days"))
-                                <td class="Today Hide">Today</td>
-                                @break
-                            @case(date('Y-m-d'), strtotime("-2 days"))
-                                <td class="Today Hide">Today</td>
-                                @break
-                            @case(date('Y-m-d'), strtotime("-3 days"))
-                                <td class="Today Hide">Today</td>
-                                @break
+                        @case(date('Y-m-d', strtotime("-1 days")))
+                            <td class="Today Hide">Today</td>
+                            @break
+                        @case(date('Y-m-d', strtotime("-2 days")))
+                            <td class="Today Hide">Today</td>
+                            @break
+                        @case(date('Y-m-d', strtotime("-3 days")))
+                            <td class="Today Hide">Today</td>
+                            @break
                         @case(date('Y-m-d', strtotime("-1 week monday")))
                             <td class="ThisWeek Hide">This week</td>
                             @break 
