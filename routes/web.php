@@ -23,13 +23,13 @@ Route::get('/Logout', [AuthController::class, 'Logout'])->name('Logout');
 
 Route::get('/Analytics', [AnalyticsController::class, 'index'])->name('Analytics'); 
 
-Route::get('/Cars', [CarController::class, 'index'])->name('Cars')->middleware('cache.headers:private;max_age=3600');
-Route::get('/Cars/Registration', [CarController::class, 'my_records_activity'])->name('Cars_Registration')->middleware('cache.headers:private;max_age=3600'); 
-Route::get('/Cars/Owners', [CarController::class, 'car_owners'])->name('CarOwners')->middleware('cache.headers:private;max_age=3600');
-Route::get('/Cars/Drivers', [CarController::class, 'drivers'])->name('Drivers')->middleware('cache.headers:private;max_age=3600');
-Route::get('/Cars/Report', [CarController::class, 'vehicle_report'])->name('VehicleReport')->middleware('cache.headers:private;max_age=3600'); 
+Route::get('/Cars', [CarController::class, 'index'])->name('Cars');
+Route::get('/Cars/Registration', [CarController::class, 'my_records_activity'])->name('Cars_Registration'); 
+Route::get('/Cars/Owners', [CarController::class, 'car_owners'])->name('CarOwners');
+Route::get('/Cars/Drivers', [CarController::class, 'drivers'])->name('Drivers');
+Route::get('/Cars/Report', [CarController::class, 'vehicle_report'])->name('VehicleReport'); 
 
-Route::get('/Cars/Documents', [CarController::class, 'car_documents'])->name('Documents')->middleware('cache.headers:private;max_age=3600');
+Route::get('/Cars/Documents', [CarController::class, 'car_documents'])->name('Documents');
 Route::post('/Update/Documents/Car/{Car}', [CarController::class, 'car_documents_update'])->name('UpdateCarDocuments');
 Route::post('/Delete/Documents/Car/{Car}/{Document}', [CarController::class, 'car_documents_delete'])->name('DeleteCarDocuments');
 
@@ -37,21 +37,21 @@ Route::post('/Add/Car/{Car}', [CarController::class, 'store'])->name('store_MyRe
 Route::get('/Update/Car/{Car}', [CarController::class, 'update'])->name('UpdateCar');
 Route::get('/Delete/Car/{Car}', [CarController::class, 'destroy'])->name('DeleteCar');
   
-Route::get('/Edit/Maintenance', [MaintenanceController::class, 'my_records_maintenance'])->name('EditMaintenance')->middleware('cache.headers:private;max_age=3600'); 
+Route::get('/Edit/Maintenance', [MaintenanceController::class, 'my_records_maintenance'])->name('EditMaintenance'); 
 Route::post('/Add/Maintenance/{Maintenance}', [MaintenanceController::class, 'store'])->name('store_Maintenance'); 
 Route::post('/Update/Maintenance/{Maintenance}', [MaintenanceController::class, 'update'])->name('UpdateMaintenance');
 Route::get('/Delete/Maintenance/{Maintenance}', [MaintenanceController::class, 'destroy'])->name('DeleteMaintenance');
 
-Route::get('/Cars/Inspections/Daily/Checklist', [CarController::class, 'cars_daily_checklist'])->name('DailyCheckList')->middleware('cache.headers:private;max_age=3600'); 
-Route::get('/Cars/Inspections/Report', [CarController::class, 'cars_inspection_report'])->name('Inspection_Report')->middleware('cache.headers:private;max_age=3600'); 
-Route::get('/Cars/Inspections/General/Report', [CarController::class, 'cars_general_inspection_report'])->name('General_Inspection_Report')->middleware('cache.headers:private;max_age=3600'); 
+Route::get('/Cars/Inspections/Daily/Checklist', [CarController::class, 'cars_daily_checklist'])->name('DailyCheckList'); 
+Route::get('/Cars/Inspections/Report', [CarController::class, 'cars_inspection_report'])->name('Inspection_Report'); 
+Route::get('/Cars/Inspections/General/Report', [CarController::class, 'cars_general_inspection_report'])->name('General_Inspection_Report'); 
 Route::get('/Cars/Inspections/Report/Document', [InspectionReportPdfController::class, 'index'])->name('Inspection_Pdf');
 Route::get('/Cars/Inspections/Report/Form', [InspectionReportPdfController::class, 'daily_vehicle_inspection_form'])->name('Inspection_Form');
 Route::post('/Add/Cars/Inspections/Report', [CarController::class, 'cars_inspection_store'])->name('Add_Inspection_Report'); 
 Route::post('/Update/Cars/Inspections/Report/{Report}', [CarController::class, 'cars_inspection_update'])->name('Update_Inspection_Report'); 
 Route::post('/Delete/Cars/Inspections/Report/{Report}', [CarController::class, 'cars_inspection_delete'])->name('Delete_Inspection_Report'); 
 
-Route::get('/Management/Fleet/Deposits/Entries', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits')->middleware('cache.headers:private;max_age=3600'); 
+Route::get('/Management/Fleet/Deposits/Entries', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
 Route::get('/Add/Deposits/{Deposits}', [DepositsController::class, 'store'])->name('store_Deposits'); 
 Route::get('/Update/Deposits/{Deposits}', [DepositsController::class, 'update'])->name('UpdateDeposits');
 Route::get('/Delete/Deposits/{Deposits}/{CardNumber}/{Amount}', [DepositsController::class, 'destroy'])->name('DeleteDeposits');
@@ -59,16 +59,16 @@ Route::get('/Add/Deposits/Master/Cards/{MasterCard}', [CardController::class, 's
 Route::get('/Update/Deposits/Master/Cards/{MasterCard}', [CardController::class, 'update_deposits_master_card'])->name('UpdateDeposits_MasterCard');
 Route::get('/Delete/Deposits/Master/Cards/{MasterCard}/{CardNumber}/{Amount}', [CardController::class, 'destroy_deposits_master_card'])->name('DeleteDeposits_MasterCard');
 
-Route::get('/Edit/Refueling', [RefuelingController::class, 'my_records_refueling'])->name('EditRefueling')->middleware('cache.headers:private;max_age=3600'); 
+Route::get('/Edit/Refueling', [RefuelingController::class, 'my_records_refueling'])->name('EditRefueling'); 
 Route::get('/Add/Refueling/{Refueling}', [RefuelingController::class, 'store'])->name('store_Refueling'); 
 Route::get('/Update/Refueling/{Refueling}', [RefuelingController::class, 'update'])->name('UpdateRefueling');
 Route::get('/Reverse/Refueling/{CardNumber}/{Amount}/{Refueling}', [RefuelingController::class, 'reverse'])->name('ReverseRefueling');
 
-Route::get('/Maintenance', [MaintenanceController::class, 'index'])->name('Maintenance')->middleware('cache.headers:private;max_age=3600');
-Route::get('/Deposits', [DepositsController::class, 'index'])->name('Deposits')->middleware('cache.headers:private;max_age=3600');
-Route::get('/Refueling', [RefuelingController::class, 'index'])->name('Refueling')->middleware('cache.headers:private;max_age=3600');
+Route::get('/Maintenance', [MaintenanceController::class, 'index'])->name('Maintenance');
+Route::get('/Deposits', [DepositsController::class, 'index'])->name('Deposits');
+Route::get('/Refueling', [RefuelingController::class, 'index'])->name('Refueling');
   
-Route::get('/Users', [UserController::class, 'index'])->name('Users')->middleware('cache.headers:private;max_age=3600');
+Route::get('/Users', [UserController::class, 'index'])->name('Users');
 Route::get('/Add/User/{User}', [UserController::class, 'store'])->name('store_User'); 
 Route::get('/Update/User/{User}', [UserController::class, 'update'])->name('UpdateUser');
 Route::get('/Delete/User/{User}', [UserController::class, 'destroy'])->name('DeleteUser');
@@ -87,7 +87,7 @@ Route::get('Maintenance/Export/{Car}', [MaintenanceExportController::class, 'Exp
 Route::get('Deposits/Export/{Car}', [DepositsExportController::class, 'ExportCarDeposits'])->name('CarDeposits_ExportToExcel'); 
 Route::get('Refueling/Export/{Car}', [RefuelingExportController::class, 'ExportCarFuelHistory'])->name('Refueling_ExportToExcel');
 
-Route::get('/Management/Fleet/Cards', [CardController::class, 'credit_card_index'])->name('FleetCard')->middleware('cache.headers:private;max_age=3600');
+Route::get('/Management/Fleet/Cards', [CardController::class, 'credit_card_index'])->name('FleetCard');
  
 Route::get('/Add/Master/Cards/{MasterCard}', [CardController::class, 'store_master_card'])->name('store_MasterCard'); 
 Route::get('/Management/Update/Master/Cards/{MasterCard}', [CardController::class, 'update_master_card'])->name('update_MasterCard'); 
