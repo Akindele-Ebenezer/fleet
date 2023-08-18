@@ -26,6 +26,35 @@
             </tr>    
             @endunless  
             @foreach ($Refuelings as $Refueling) 
+                <tr> 
+                    @switch($Refueling->Date)
+                        @case(date('Y-m-d'))
+                            <td class="Today Hide">Today</td>
+                            @break
+                        @case(date('Y-m-d', strtotime("-1 week monday")))
+                            <td class="ThisWeek Hide">This week</td>
+                            @break 
+                        @case(date('Y-m-d', strtotime("-1 week")))
+                            <td class="OneWeekAgo Hide">One week ago</td>
+                            @break
+                        @case(date('Y-m-d', strtotime("-2 week")))
+                            <td class="TwoWeeksAgo Hide">Two weeks ago</td>
+                            @break
+                        @case(date('Y-m-d', strtotime("-3 week")))
+                            <td class="ThreeWeeksAgo Hide">Three weeks ago</td>
+                            @break
+                        @case(date('Y-m-d', strtotime("-1 month")))
+                            <td class="OneMonthAgo Hide">One month ago</td>
+                            @break
+                        @case(date('Y-m-d', strtotime("-2 month")))
+                            <td class="TwoMonthsAgo Hide">Two months ago</td>
+                            @break
+                        @case(date('Y-m-d') < date('Y-m-d', strtotime("-2 month")))
+                            <td class="Older Hide">Older</td>
+                            @break
+                        @default 
+                    @endswitch 
+                </tr>
             <tr>
                 @php
                     $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Refueling->VehicleNumber)->first(); 

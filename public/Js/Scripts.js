@@ -368,3 +368,29 @@ MaintenanceX2.forEach(Maintenance => {
         window.location = '/Maintenance?FilterValue=' + Maintenance.nextElementSibling.textContent.trim();
     });
 }); 
+
+let TodayHistory = document.querySelectorAll('.Today');
+let ThisWeekHistory = document.querySelectorAll('.ThisWeek');
+let OneWeekAgoHistory = document.querySelectorAll('.OneWeekAgo');
+let TwoWeeksAgoHistory = document.querySelectorAll('.TwoWeeksAgo');
+let ThreeWeeksAgoHistory = document.querySelectorAll('.ThreeWeeksAgo');
+let OneMonthAgoHistory = document.querySelectorAll('.OneMonthAgo');
+let TwoMonthsAgoHistory = document.querySelectorAll('.TwoMonthsAgo');
+let Older = document.querySelectorAll('.OneWeekAgo');
+
+let HistoryArr = [
+    TodayHistory,
+    ThisWeekHistory,
+    OneWeekAgoHistory,
+    TwoWeeksAgoHistory,
+    ThreeWeeksAgoHistory,
+    OneMonthAgoHistory,
+    TwoMonthsAgoHistory,
+    Older,
+];
+ 
+HistoryArr.forEach(History => {
+    if (History[0] !== undefined) {
+        History[0].classList.add('Show');
+    }
+});

@@ -423,7 +423,7 @@
         .table { 
             border-collapse: collapse; 
             width: 100%;
-
+ 
             &.list {  
                 .car-info {
                     h1 { font-size: 2em; }
@@ -823,7 +823,7 @@
                 &.td-x {
                     background: #000;
                     width: 40em;
-                }
+                } 
             }
 
             td.car { cursor: pointer; }
