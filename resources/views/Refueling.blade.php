@@ -26,25 +26,31 @@
             </tr>    
             @endunless  
             @foreach ($Refuelings as $Refueling) 
+            @php
+                $Date = $Refueling->Date; 
+                $CurrentWeek = date('W');
+                $GivenWeek = date('W', strtotime($Date));
+
+            @endphp
                 <tr> 
                     @switch($Refueling->Date)
                         @case(date('Y-m-d'))
                             <td class="Today Hide">Today</td>
                             @break
                         @case(date('Y-m-d', strtotime("-1 days")))
-                            <td class="Today Hide">Yesterday</td>
+                            <td class="Yesterday Hide">Yesterday</td>
                             @break
-                        @case(date('Y-m-d', strtotime("-2 days")))
+                        {{-- @case(date('Y-m-d', strtotime("-2 days")))
                             <td class="Today Hide">Two days ago</td>
                             @break
                         @case(date('Y-m-d', strtotime("-3 days")))
                             <td class="Today Hide">Three days ago</td>
-                            @break
-                        @case(date('Y-m-d', strtotime("-1 week monday")))
+                            @break --}}
+                        @case($GivenWeek === $CurrentWeek)
                             <td class="ThisWeek Hide">This week</td>
                             @break 
-                        @case(date('Y-m-d', strtotime("-1 week")))
-                            <td class="OneWeekAgo Hide">One week ago</td>
+                        @case(date('Y-m-d', strtotime("last week")))
+                            <td class="LastWeek Hide">Last week</td>
                             @break
                         @case(date('Y-m-d', strtotime("-2 week")))
                             <td class="TwoWeeksAgo Hide">Two weeks ago</td>

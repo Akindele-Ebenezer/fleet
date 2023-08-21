@@ -370,18 +370,20 @@ MaintenanceX2.forEach(Maintenance => {
 }); 
 
 let TodayHistory = document.querySelectorAll('.Today');
+let YesterdayHistory = document.querySelectorAll('.Yesterday');
 let ThisWeekHistory = document.querySelectorAll('.ThisWeek');
-let OneWeekAgoHistory = document.querySelectorAll('.OneWeekAgo');
+let LastWeekHistory = document.querySelectorAll('.LastWeek');
 let TwoWeeksAgoHistory = document.querySelectorAll('.TwoWeeksAgo');
 let ThreeWeeksAgoHistory = document.querySelectorAll('.ThreeWeeksAgo');
 let OneMonthAgoHistory = document.querySelectorAll('.OneMonthAgo');
 let TwoMonthsAgoHistory = document.querySelectorAll('.TwoMonthsAgo');
-let Older = document.querySelectorAll('.OneWeekAgo');
+let Older = document.querySelectorAll('.LastWeek');
 
 let HistoryArr = [
     TodayHistory,
+    YesterdayHistory,
     ThisWeekHistory,
-    OneWeekAgoHistory,
+    LastWeekHistory,
     TwoWeeksAgoHistory,
     ThreeWeeksAgoHistory,
     OneMonthAgoHistory,
