@@ -25,13 +25,7 @@
                 <td>No fuel history.</td>
             </tr>    
             @endunless  
-            @foreach ($Refuelings as $Refueling) 
-            @php
-                $Date = $Refueling->Date; 
-                $CurrentWeek = date('W');
-                $GivenWeek = date('W', strtotime($Date));
-
-            @endphp
+            @foreach ($Refuelings as $Refueling)  
                 <tr> 
                     @switch($Refueling->Date)
                         @case(date('Y-m-d'))
@@ -40,14 +34,20 @@
                         @case(date('Y-m-d', strtotime("-1 days")))
                             <td class="Yesterday Hide">Yesterday</td>
                             @break
-                        {{-- @case(date('Y-m-d', strtotime("-2 days")))
-                            <td class="Today Hide">Two days ago</td>
+                        @case(date('Y-m-d', strtotime("-2 days")))
+                            <td class="TwoDaysAgo Hide">Two days ago</td>
                             @break
                         @case(date('Y-m-d', strtotime("-3 days")))
-                            <td class="Today Hide">Three days ago</td>
-                            @break --}}
-                        @case($GivenWeek === $CurrentWeek)
-                            <td class="ThisWeek Hide">This week</td>
+                            <td class="ThreeDaysAgo Hide">Three days ago</td>
+                            @break
+                        @case(date('Y-m-d', strtotime("-4 days")))
+                            <td class="FourDaysAgo Hide">Four days ago</td>
+                            @break
+                        @case(date('Y-m-d', strtotime("-5 days")))
+                            <td class="FiveDaysAgo Hide">Five days ago</td>
+                            @break
+                        @case(date('Y-m-d', strtotime("-6 days")))
+                            <td class="SixDaysAgo Hide">Six days ago</td>
                             @break 
                         @case(date('Y-m-d', strtotime("last week")))
                             <td class="LastWeek Hide">Last week</td>
