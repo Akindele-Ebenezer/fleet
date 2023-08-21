@@ -32,13 +32,13 @@
                             <td class="Today Hide">Today</td>
                             @break
                         @case(date('Y-m-d', strtotime("-1 days")))
-                            <td class="Today Hide">Today</td>
+                            <td class="Today Hide">Yesterday</td>
                             @break
                         @case(date('Y-m-d', strtotime("-2 days")))
-                            <td class="Today Hide">Today</td>
+                            <td class="Today Hide">Two days ago</td>
                             @break
                         @case(date('Y-m-d', strtotime("-3 days")))
-                            <td class="Today Hide">Today</td>
+                            <td class="Today Hide">Three days ago</td>
                             @break
                         @case(date('Y-m-d', strtotime("-1 week monday")))
                             <td class="ThisWeek Hide">This week</td>
