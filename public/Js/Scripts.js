@@ -370,28 +370,18 @@ MaintenanceX2.forEach(Maintenance => {
 }); 
 
 let TodayHistory = document.querySelectorAll('.Today');
-let YesterdayHistory = document.querySelectorAll('.Yesterday');
-let TwoDaysAgoHistory = document.querySelectorAll('.TwoDaysAgo');
-let ThreeDaysAgoHistory = document.querySelectorAll('.ThreeDaysAgo');
-let FourDaysAgoHistory = document.querySelectorAll('.FourDaysAgo');
-let FiveDaysAgoHistory = document.querySelectorAll('.FiveDaysAgo');
-let SixDaysAgoHistory = document.querySelectorAll('.SixDaysAgo'); 
-let LastWeekHistory = document.querySelectorAll('.LastWeek');
+let ThisWeekHistory = document.querySelectorAll('.ThisWeek');
+let OneWeekAgoHistory = document.querySelectorAll('.OneWeekAgo');
 let TwoWeeksAgoHistory = document.querySelectorAll('.TwoWeeksAgo');
 let ThreeWeeksAgoHistory = document.querySelectorAll('.ThreeWeeksAgo');
 let OneMonthAgoHistory = document.querySelectorAll('.OneMonthAgo');
 let TwoMonthsAgoHistory = document.querySelectorAll('.TwoMonthsAgo');
-let Older = document.querySelectorAll('.LastWeek');
+let Older = document.querySelectorAll('.OneWeekAgo');
 
 let HistoryArr = [
     TodayHistory,
-    YesterdayHistory,
-    TwoDaysAgoHistory,
-    ThreeDaysAgoHistory,
-    FourDaysAgoHistory,
-    FiveDaysAgoHistory,
-    SixDaysAgoHistory, 
-    LastWeekHistory,
+    ThisWeekHistory,
+    OneWeekAgoHistory,
     TwoWeeksAgoHistory,
     ThreeWeeksAgoHistory,
     OneMonthAgoHistory,

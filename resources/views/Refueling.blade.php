@@ -25,32 +25,17 @@
                 <td>No fuel history.</td>
             </tr>    
             @endunless  
-            @foreach ($Refuelings as $Refueling)  
+            @foreach ($Refuelings as $Refueling) 
                 <tr> 
                     @switch($Refueling->Date)
                         @case(date('Y-m-d'))
                             <td class="Today Hide">Today</td>
-                            @break
-                        @case(date('Y-m-d', strtotime("-1 days")))
-                            <td class="Yesterday Hide">Yesterday</td>
-                            @break
-                        @case(date('Y-m-d', strtotime("-2 days")))
-                            <td class="TwoDaysAgo Hide">Two days ago</td>
-                            @break
-                        @case(date('Y-m-d', strtotime("-3 days")))
-                            <td class="ThreeDaysAgo Hide">Three days ago</td>
-                            @break
-                        @case(date('Y-m-d', strtotime("-4 days")))
-                            <td class="FourDaysAgo Hide">Four days ago</td>
-                            @break
-                        @case(date('Y-m-d', strtotime("-5 days")))
-                            <td class="FiveDaysAgo Hide">Five days ago</td>
-                            @break
-                        @case(date('Y-m-d', strtotime("-6 days")))
-                            <td class="SixDaysAgo Hide">Six days ago</td>
                             @break 
-                        @case(date('Y-m-d', strtotime("last week")))
-                            <td class="LastWeek Hide">Last week</td>
+                        @case(date('Y-m-d', strtotime("-1 week monday")))
+                            <td class="ThisWeek Hide">This week</td>
+                            @break 
+                        @case(date('Y-m-d', strtotime("-1 week")))
+                            <td class="OneWeekAgo Hide">One week ago</td>
                             @break
                         @case(date('Y-m-d', strtotime("-2 week")))
                             <td class="TwoWeeksAgo Hide">Two weeks ago</td>
