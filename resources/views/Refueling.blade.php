@@ -44,7 +44,7 @@
                             <td class="ThreeWeeksAgo Hide">Three weeks ago</td>
                             @break
                         @case(($Refueling->Date >= date('Y-m-d', strtotime("-1 month"))))
-                            <td class="OneMonthAgo Hide">One month ago</td>
+                            <td class="OneMonthAgo Hide">Last month</td>
                             @break
                         @case(($Refueling->Date >= date('Y-m-d', strtotime("-2 month"))))
                             <td class="TwoMonthsAgo Hide">Two months ago</td>
