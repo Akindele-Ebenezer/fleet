@@ -31,25 +31,25 @@
                         @case(date('Y-m-d'))
                             <td class="Today Hide">Today</td>
                             @break 
-                        @case(date('Y-m-d', strtotime("-1 week monday")))
+                        @case($Refueling->Date >= date('Y-m-d', strtotime("this week")))
                             <td class="ThisWeek Hide">This week</td>
                             @break 
-                        @case(date('Y-m-d', strtotime("-1 week")))
-                            <td class="OneWeekAgo Hide">One week ago</td>
+                        @case(($Refueling->Date >= date('Y-m-d', strtotime("last week")))) 
+                            <td class="OneWeekAgo Hide">Last week</td>
                             @break
-                        @case(date('Y-m-d', strtotime("-2 week")))
+                        @case(($Refueling->Date >= date('Y-m-d', strtotime("-2 weeks"))))
                             <td class="TwoWeeksAgo Hide">Two weeks ago</td>
                             @break
-                        @case(date('Y-m-d', strtotime("-3 week")))
+                        @case(($Refueling->Date >= date('Y-m-d', strtotime("-3 weeks"))))
                             <td class="ThreeWeeksAgo Hide">Three weeks ago</td>
                             @break
-                        @case(date('Y-m-d', strtotime("-1 month")))
+                        @case(($Refueling->Date >= date('Y-m-d', strtotime("-1 month"))))
                             <td class="OneMonthAgo Hide">One month ago</td>
                             @break
-                        @case(date('Y-m-d', strtotime("-2 month")))
+                        @case(($Refueling->Date >= date('Y-m-d', strtotime("-2 month"))))
                             <td class="TwoMonthsAgo Hide">Two months ago</td>
                             @break
-                        @case(date('Y-m-d') < date('Y-m-d', strtotime("-2 month")))
+                        @case(($Refueling->Date < date('Y-m-d', strtotime("-2 month"))))
                             <td class="Older Hide">Older</td>
                             @break
                         @default 
