@@ -29,6 +29,35 @@
                 @php
                     $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Maintenancee->VehicleNumber)->first();  
                 @endphp
+                <tr> 
+                @switch($Maintenancee->Date)
+                        @case(date('Y-m-d'))
+                            <td class="Today Hide">Today</td>
+                            @break 
+                        @case($Maintenancee->Date >= date('Y-m-d', strtotime("this week")))
+                            <td class="ThisWeek Hide">This week</td>
+                            @break 
+                        @case(($Maintenancee->Date >= date('Y-m-d', strtotime("last week")))) 
+                            <td class="OneWeekAgo Hide">Last week</td>
+                            @break
+                        @case(($Maintenancee->Date >= date('Y-m-d', strtotime("-2 weeks"))))
+                            <td class="TwoWeeksAgo Hide">Two weeks ago</td>
+                            @break
+                        @case(($Maintenancee->Date >= date('Y-m-d', strtotime("-3 weeks"))))
+                            <td class="ThreeWeeksAgo Hide">Three weeks ago</td>
+                            @break
+                        @case(($Maintenancee->Date >= date('Y-m-d', strtotime("-1 month"))))
+                            <td class="OneMonthAgo Hide">Last month</td>
+                            @break
+                        @case(($Maintenancee->Date >= date('Y-m-d', strtotime("-2 month"))))
+                            <td class="TwoMonthsAgo Hide">Two months ago</td>
+                            @break
+                        @case(($Maintenancee->Date < date('Y-m-d', strtotime("-2 month"))))
+                            <td class="Older Hide">Older</td>
+                            @break
+                        @default 
+                    @endswitch 
+                </tr> 
                 <td>{{ $loop->iteration  + (($Maintenance->currentPage() -1) * $Maintenance->perPage()) }}</td>
                 <td class="show-record-x show-record-x-2"><span class="{{ $CarStatus->Status ?? 'INACTIVE' }}"></span>{{ $Maintenancee->VehicleNumber }} <img src="{{ asset('Images/service.png') }}" alt=""></td>
                 <span class="VehicleNumber_X_DATA Hide">{{ $Maintenancee->VehicleNumber }}</span>
