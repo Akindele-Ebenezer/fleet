@@ -24,6 +24,75 @@
             </tr>    
             @endunless
             @foreach ($Deposits as $Deposit) 
+            <tr class="HistoryTableRow"> 
+                @switch($Deposit->Date)
+                    @case(date('Y-m-d'))
+                        @php
+                            $NumberOfRecords_Today = \App\Models\Deposits::select('id')->where('Date', date('Y-m-d'))->count();
+                            $Cost_Today = \App\Models\Deposits::select('Amount')->where('Date', date('Y-m-d'))->sum('Amount');
+                        @endphp
+                        <td class="Today Hide HistoryTitle">{{ number_format($NumberOfRecords_Today) ?? 0 }} :: Today</td>
+                        <td class="Cost_Today Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_Today) ?? 0 }}</td>
+                        @break 
+                    @case($Deposit->Date >= date('Y-m-d', strtotime("this week")))
+                        @php
+                            $NumberOfRecords_ThisWeek = \App\Models\Deposits::select('id')->where('Date', '>=', date('Y-m-d', strtotime("this week")))->count();
+                            $Cost_ThisWeek = \App\Models\Deposits::select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("this week")))->sum('Amount');
+                        @endphp
+                        <td class="ThisWeek Hide HistoryTitle">{{ number_format($NumberOfRecords_ThisWeek) ?? 0 }} :: This week</td>
+                        <td class="Cost_ThisWeek Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_ThisWeek) ?? 0 }}</td>
+                        @break 
+                    @case(($Deposit->Date >= date('Y-m-d', strtotime("last week")))) 
+                        @php
+                            $NumberOfRecords_LastWeek = \App\Models\Deposits::select('id')->where('Date', '>=', date('Y-m-d', strtotime("last week")))->where('Date', '<', date('Y-m-d', strtotime("this week")))->count();
+                            $Cost_LastWeek = \App\Models\Deposits::select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("last week")))->where('Date', '<', date('Y-m-d', strtotime("this week")))->sum('Amount');
+                        @endphp
+                        <td class="OneWeekAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_LastWeek) ?? 0 }} :: Last week</td>
+                        <td class="Cost_LastWeek Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_LastWeek) ?? 0 }}</td>
+                        @break
+                    @case(($Deposit->Date >= date('Y-m-d', strtotime("-2 weeks"))))
+                        @php
+                            $NumberOfRecords_TwoWeeksAgo = \App\Models\Deposits::select('id')->where('Date', '>=', date('Y-m-d', strtotime("-2 weeks")))->where('Date', '<', date('Y-m-d', strtotime("last week")))->count();
+                            $Cost_TwoWeeksAgo = \App\Models\Deposits::select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("-2 weeks")))->where('Date', '<', date('Y-m-d', strtotime("last week")))->sum('Amount');
+                        @endphp
+                        <td class="TwoWeeksAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_TwoWeeksAgo) ?? 0 }} :: Two weeks ago</td>
+                        <td class="Cost_TwoWeeksAgo Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_TwoWeeksAgo) ?? 0 }}</td>
+                        @break
+                    @case(($Deposit->Date >= date('Y-m-d', strtotime("-3 weeks"))))
+                        @php
+                            $NumberOfRecords_ThreeWeeksAgo = \App\Models\Deposits::select('id')->where('Date', '>=', date('Y-m-d', strtotime("-3 weeks")))->where('Date', '<', date('Y-m-d', strtotime("-2 weeks")))->count();
+                            $Cost_ThreeWeeksAgo = \App\Models\Deposits::select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("-3 weeks")))->where('Date', '<', date('Y-m-d', strtotime("-2 weeks")))->sum('Amount');
+                        @endphp
+                        <td class="ThreeWeeksAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_ThreeWeeksAgo) ?? 0 }} :: Three weeks ago</td>
+                        <td class="Cost_ThreeWeeksAgo Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_ThreeWeeksAgo) ?? 0 }}</td>
+                        @break
+                    @case(($Deposit->Date >= date('Y-m-d', strtotime("-1 month"))))
+                        @php
+                            $NumberOfRecords_OneMonthAgo = \App\Models\Deposits::select('id')->where('Date', '>=', date('Y-m-d', strtotime("-1 month")))->where('Date', '<', date('Y-m-d', strtotime("-3 weeks")))->count();
+                            $Cost_OneMonthAgo = \App\Models\Deposits::select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("-1 month")))->where('Date', '<', date('Y-m-d', strtotime("-3 weeks")))->sum('Amount');
+                        @endphp
+                        <td class="OneMonthAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_OneMonthAgo) ?? 0 }} :: Last month</td>
+                        <td class="Cost_OneMonthAgo Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_OneMonthAgo) ?? 0 }}</td>
+                        @break
+                    @case(($Deposit->Date >= date('Y-m-d', strtotime("-2 month"))))
+                        @php
+                            $NumberOfRecords_TwoMonthsAgo = \App\Models\Deposits::select('id')->where('Date', '>=', date('Y-m-d', strtotime("-2 month")))->where('Date', '<', date('Y-m-d', strtotime("-1 month")))->count();
+                            $Cost_TwoMonthsAgo = \App\Models\Deposits::select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("-2 month")))->where('Date', '<', date('Y-m-d', strtotime("-1 month")))->sum('Amount');
+                        @endphp
+                        <td class="TwoMonthsAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_TwoMonthsAgo) ?? 0 }} :: Two months ago</td>
+                        <td class="Cost_TwoMonthsAgo Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_TwoMonthsAgo) ?? 0 }}</td>
+                        @break
+                    @case(($Deposit->Date < date('Y-m-d', strtotime("-2 month"))))
+                        @php
+                            $NumberOfRecords_Older = \App\Models\Deposits::select('id')->where('Date', '<', date('Y-m-d', strtotime("-2 month")))->count();
+                            $Cost_Older = \App\Models\Deposits::select('Amount')->where('Date', '<', date('Y-m-d', strtotime("-2 month")))->sum('Amount');
+                        @endphp
+                        <td class="Older Hide HistoryTitle">{{ number_format($NumberOfRecords_Older) ?? 0 }} :: Older</td>
+                        <td class="Cost_Older Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_Older) ?? 0 }}</td>
+                        @break
+                    @default 
+                @endswitch 
+            </tr>
             <tr> 
                 @php
                     $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Deposit->VehicleNumber)->first();  
@@ -103,6 +172,75 @@
             </tr>   
             @endunless
             @foreach ($Deposits_MasterCards as $Deposits_MasterCard) 
+            <tr class="HistoryTableRow"> 
+                @switch($Deposits_MasterCard->Date)
+                    @case(date('Y-m-d'))
+                        @php
+                            $NumberOfRecords_Today = \DB::table('deposits_master_cards')->select('id')->where('Date', date('Y-m-d'))->count();
+                            $Cost_Today = \DB::table('deposits_master_cards')->select('Amount')->where('Date', date('Y-m-d'))->sum('Amount');
+                        @endphp
+                        <td class="Today Hide HistoryTitle">{{ number_format($NumberOfRecords_Today) ?? 0 }} :: Today</td>
+                        <td class="Cost_Today Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_Today) ?? 0 }}</td>
+                        @break 
+                    @case($Deposits_MasterCard->Date >= date('Y-m-d', strtotime("this week")))
+                        @php
+                            $NumberOfRecords_ThisWeek = \DB::table('deposits_master_cards')->select('id')->where('Date', '>=', date('Y-m-d', strtotime("this week")))->count();
+                            $Cost_ThisWeek = \DB::table('deposits_master_cards')->select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("this week")))->sum('Amount');
+                        @endphp
+                        <td class="ThisWeek Hide HistoryTitle">{{ number_format($NumberOfRecords_ThisWeek) ?? 0 }} :: This week</td>
+                        <td class="Cost_ThisWeek Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_ThisWeek) ?? 0 }}</td>
+                        @break 
+                    @case(($Deposits_MasterCard->Date >= date('Y-m-d', strtotime("last week")))) 
+                        @php
+                            $NumberOfRecords_LastWeek = \DB::table('deposits_master_cards')->select('id')->where('Date', '>=', date('Y-m-d', strtotime("last week")))->where('Date', '<', date('Y-m-d', strtotime("this week")))->count();
+                            $Cost_LastWeek = \DB::table('deposits_master_cards')->select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("last week")))->where('Date', '<', date('Y-m-d', strtotime("this week")))->sum('Amount');
+                        @endphp
+                        <td class="OneWeekAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_LastWeek) ?? 0 }} :: Last week</td>
+                        <td class="Cost_LastWeek Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_LastWeek) ?? 0 }}</td>
+                        @break
+                    @case(($Deposits_MasterCard->Date >= date('Y-m-d', strtotime("-2 weeks"))))
+                        @php
+                            $NumberOfRecords_TwoWeeksAgo = \DB::table('deposits_master_cards')->select('id')->where('Date', '>=', date('Y-m-d', strtotime("-2 weeks")))->where('Date', '<', date('Y-m-d', strtotime("last week")))->count();
+                            $Cost_TwoWeeksAgo = \DB::table('deposits_master_cards')->select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("-2 weeks")))->where('Date', '<', date('Y-m-d', strtotime("last week")))->sum('Amount');
+                        @endphp
+                        <td class="TwoWeeksAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_TwoWeeksAgo) ?? 0 }} :: Two weeks ago</td>
+                        <td class="Cost_TwoWeeksAgo Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_TwoWeeksAgo) ?? 0 }}</td>
+                        @break
+                    @case(($Deposits_MasterCard->Date >= date('Y-m-d', strtotime("-3 weeks"))))
+                        @php
+                            $NumberOfRecords_ThreeWeeksAgo = \DB::table('deposits_master_cards')->select('id')->where('Date', '>=', date('Y-m-d', strtotime("-3 weeks")))->where('Date', '<', date('Y-m-d', strtotime("-2 weeks")))->count();
+                            $Cost_ThreeWeeksAgo = \DB::table('deposits_master_cards')->select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("-3 weeks")))->where('Date', '<', date('Y-m-d', strtotime("-2 weeks")))->sum('Amount');
+                        @endphp
+                        <td class="ThreeWeeksAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_ThreeWeeksAgo) ?? 0 }} :: Three weeks ago</td>
+                        <td class="Cost_ThreeWeeksAgo Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_ThreeWeeksAgo) ?? 0 }}</td>
+                        @break
+                    @case(($Deposits_MasterCard->Date >= date('Y-m-d', strtotime("-1 month"))))
+                        @php
+                            $NumberOfRecords_OneMonthAgo = \DB::table('deposits_master_cards')->select('id')->where('Date', '>=', date('Y-m-d', strtotime("-1 month")))->where('Date', '<', date('Y-m-d', strtotime("-3 weeks")))->count();
+                            $Cost_OneMonthAgo = \DB::table('deposits_master_cards')->select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("-1 month")))->where('Date', '<', date('Y-m-d', strtotime("-3 weeks")))->sum('Amount');
+                        @endphp
+                        <td class="OneMonthAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_OneMonthAgo) ?? 0 }} :: Last month</td>
+                        <td class="Cost_OneMonthAgo Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_OneMonthAgo) ?? 0 }}</td>
+                        @break
+                    @case(($Deposits_MasterCard->Date >= date('Y-m-d', strtotime("-2 month"))))
+                        @php
+                            $NumberOfRecords_TwoMonthsAgo = \DB::table('deposits_master_cards')->select('id')->where('Date', '>=', date('Y-m-d', strtotime("-2 month")))->where('Date', '<', date('Y-m-d', strtotime("-1 month")))->count();
+                            $Cost_TwoMonthsAgo = \DB::table('deposits_master_cards')->select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("-2 month")))->where('Date', '<', date('Y-m-d', strtotime("-1 month")))->sum('Amount');
+                        @endphp
+                        <td class="TwoMonthsAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_TwoMonthsAgo) ?? 0 }} :: Two months ago</td>
+                        <td class="Cost_TwoMonthsAgo Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_TwoMonthsAgo) ?? 0 }}</td>
+                        @break
+                    @case(($Deposits_MasterCard->Date < date('Y-m-d', strtotime("-2 month"))))
+                        @php
+                            $NumberOfRecords_Older = \DB::table('deposits_master_cards')->select('id')->where('Date', '<', date('Y-m-d', strtotime("-2 month")))->count();
+                            $Cost_Older = \DB::table('deposits_master_cards')->select('Amount')->where('Date', '<', date('Y-m-d', strtotime("-2 month")))->sum('Amount');
+                        @endphp
+                        <td class="Older Hide HistoryTitle">{{ number_format($NumberOfRecords_Older) ?? 0 }} :: Older</td>
+                        <td class="Cost_Older Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_Older) ?? 0 }}</td>
+                        @break
+                    @default 
+                @endswitch 
+            </tr>
             <tr>   
                 @php
                     $Status = \App\Models\MasterCard::select('Status')->where('CardNumber', $Deposits_MasterCard->CardNumber)->first();

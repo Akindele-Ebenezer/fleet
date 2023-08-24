@@ -29,6 +29,59 @@
             </tr>    
             @endunless 
             @foreach ($General_Inspection_Report as $Report)
+            <tr class="HistoryTableRow"> 
+                @switch($Report->DateInspected)
+                    @case(date('Y-m-d'))
+                        @php
+                            $NumberOfRecords_Today = \DB::table('inspection_report')->select('id')->where('DateInspected', date('Y-m-d'))->count();
+                        @endphp
+                        <td class="Today Hide HistoryTitle">{{ number_format($NumberOfRecords_Today) ?? 0 }} :: Today</td>
+                        @break 
+                    @case($Report->DateInspected >= date('Y-m-d', strtotime("this week")))
+                        @php
+                            $NumberOfRecords_ThisWeek = \DB::table('inspection_report')->select('id')->where('DateInspected', '>=', date('Y-m-d', strtotime("this week")))->count();
+                        @endphp
+                        <td class="ThisWeek Hide HistoryTitle">{{ number_format($NumberOfRecords_ThisWeek) ?? 0 }} :: This week</td>
+                        @break 
+                    @case(($Report->DateInspected >= date('Y-m-d', strtotime("last week")))) 
+                        @php
+                            $NumberOfRecords_LastWeek = \DB::table('inspection_report')->select('id')->where('DateInspected', '>=', date('Y-m-d', strtotime("last week")))->where('DateInspected', '<', date('Y-m-d', strtotime("this week")))->count();
+                        @endphp
+                        <td class="OneWeekAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_LastWeek) ?? 0 }} :: Last week</td>
+                        @break
+                    @case(($Report->DateInspected >= date('Y-m-d', strtotime("-2 weeks"))))
+                        @php
+                            $NumberOfRecords_TwoWeeksAgo = \DB::table('inspection_report')->select('id')->where('DateInspected', '>=', date('Y-m-d', strtotime("-2 weeks")))->where('DateInspected', '<', date('Y-m-d', strtotime("last week")))->count();
+                        @endphp
+                        <td class="TwoWeeksAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_TwoWeeksAgo) ?? 0 }} :: Two weeks ago</td>
+                        @break
+                    @case(($Report->DateInspected >= date('Y-m-d', strtotime("-3 weeks"))))
+                        @php
+                            $NumberOfRecords_ThreeWeeksAgo = \DB::table('inspection_report')->select('id')->where('DateInspected', '>=', date('Y-m-d', strtotime("-3 weeks")))->where('DateInspected', '<', date('Y-m-d', strtotime("-2 weeks")))->count();
+                        @endphp
+                        <td class="ThreeWeeksAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_ThreeWeeksAgo) ?? 0 }} :: Three weeks ago</td>
+                        @break
+                    @case(($Report->DateInspected >= date('Y-m-d', strtotime("-1 month"))))
+                        @php
+                            $NumberOfRecords_OneMonthAgo = \DB::table('inspection_report')->select('id')->where('DateInspected', '>=', date('Y-m-d', strtotime("-1 month")))->where('DateInspected', '<', date('Y-m-d', strtotime("-3 weeks")))->count();
+                        @endphp
+                        <td class="OneMonthAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_OneMonthAgo) ?? 0 }} :: Last month</td>
+                        @break
+                    @case(($Report->DateInspected >= date('Y-m-d', strtotime("-2 month"))))
+                        @php
+                            $NumberOfRecords_TwoMonthsAgo = \DB::table('inspection_report')->select('id')->where('DateInspected', '>=', date('Y-m-d', strtotime("-2 month")))->where('DateInspected', '<', date('Y-m-d', strtotime("-1 month")))->count();
+                        @endphp
+                        <td class="TwoMonthsAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_TwoMonthsAgo) ?? 0 }} :: Two months ago</td>
+                        @break
+                    @case(($Report->DateInspected < date('Y-m-d', strtotime("-2 month"))))
+                        @php
+                            $NumberOfRecords_Older = \DB::table('inspection_report')->select('id')->where('DateInspected', '<', date('Y-m-d', strtotime("-2 month")))->count();
+                        @endphp
+                        <td class="Older Hide HistoryTitle">{{ number_format($NumberOfRecords_Older) ?? 0 }} :: Older</td>
+                        @break
+                    @default 
+                @endswitch 
+            </tr>
             @php
                 $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Report->VehicleNumber)->first();  
             @endphp 

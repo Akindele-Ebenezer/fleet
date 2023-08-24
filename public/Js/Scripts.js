@@ -376,7 +376,47 @@ let TwoWeeksAgoHistory = document.querySelectorAll('.TwoWeeksAgo');
 let ThreeWeeksAgoHistory = document.querySelectorAll('.ThreeWeeksAgo');
 let OneMonthAgoHistory = document.querySelectorAll('.OneMonthAgo');
 let TwoMonthsAgoHistory = document.querySelectorAll('.TwoMonthsAgo');
-let Older = document.querySelectorAll('.OneWeekAgo');
+let Older = document.querySelectorAll('.Older');
+
+let DistanceTraveled_Today = document.querySelectorAll('.DistanceTraveled_Today');
+let Cost_Today = document.querySelectorAll('.Cost_Today');
+let Quantity_Today = document.querySelectorAll('.Quantity_Today');
+let FuelConsumption_Today = document.querySelectorAll('.FuelConsumption_Today');
+
+let DistanceTraveled_ThisWeek = document.querySelectorAll('.DistanceTraveled_ThisWeek');
+let Cost_ThisWeek = document.querySelectorAll('.Cost_ThisWeek');
+let Quantity_ThisWeek = document.querySelectorAll('.Quantity_ThisWeek');
+let FuelConsumption_ThisWeek = document.querySelectorAll('.FuelConsumption_ThisWeek');
+
+let DistanceTraveled_LastWeek = document.querySelectorAll('.DistanceTraveled_LastWeek');
+let Cost_LastWeek = document.querySelectorAll('.Cost_LastWeek');
+let Quantity_LastWeek = document.querySelectorAll('.Quantity_LastWeek');
+let FuelConsumption_LastWeek = document.querySelectorAll('.FuelConsumption_LastWeek');
+
+let DistanceTraveled_TwoWeeksAgo = document.querySelectorAll('.DistanceTraveled_TwoWeeksAgo');
+let Cost_TwoWeeksAgo = document.querySelectorAll('.Cost_TwoWeeksAgo');
+let Quantity_TwoWeeksAgo = document.querySelectorAll('.Quantity_TwoWeeksAgo');
+let FuelConsumption_TwoWeeksAgo = document.querySelectorAll('.FuelConsumption_TwoWeeksAgo');
+
+let DistanceTraveled_ThreeWeeksAgo = document.querySelectorAll('.DistanceTraveled_ThreeWeeksAgo');
+let Cost_ThreeWeeksAgo = document.querySelectorAll('.Cost_ThreeWeeksAgo');
+let Quantity_ThreeWeeksAgo = document.querySelectorAll('.Quantity_ThreeWeeksAgo');
+let FuelConsumption_ThreeWeeksAgo = document.querySelectorAll('.FuelConsumption_ThreeWeeksAgo');
+
+let DistanceTraveled_OneMonthAgo = document.querySelectorAll('.DistanceTraveled_OneMonthAgo');
+let Cost_OneMonthAgo = document.querySelectorAll('.Cost_OneMonthAgo');
+let Quantity_OneMonthAgo = document.querySelectorAll('.Quantity_OneMonthAgo');
+let FuelConsumption_OneMonthAgo = document.querySelectorAll('.FuelConsumption_OneMonthAgo');
+
+let DistanceTraveled_TwoMonthsAgo = document.querySelectorAll('.DistanceTraveled_TwoMonthsAgo');
+let Cost_TwoMonthsAgo = document.querySelectorAll('.Cost_TwoMonthsAgo');
+let Quantity_TwoMonthsAgo = document.querySelectorAll('.Quantity_TwoMonthsAgo');
+let FuelConsumption_TwoMonthsAgo = document.querySelectorAll('.FuelConsumption_TwoMonthsAgo');
+
+let DistanceTraveled_Older = document.querySelectorAll('.DistanceTraveled_Older');
+let Cost_Older = document.querySelectorAll('.Cost_Older');
+let Quantity_Older = document.querySelectorAll('.Quantity_Older');
+let FuelConsumption_Older = document.querySelectorAll('.FuelConsumption_Older');
 
 let HistoryArr = [
     TodayHistory,
@@ -387,10 +427,43 @@ let HistoryArr = [
     OneMonthAgoHistory,
     TwoMonthsAgoHistory,
     Older,
+    DistanceTraveled_Today,
+    Cost_Today,
+    Quantity_Today,
+    FuelConsumption_Today, 
+    DistanceTraveled_ThisWeek,
+    Cost_ThisWeek,
+    Quantity_ThisWeek,
+    FuelConsumption_ThisWeek, 
+    DistanceTraveled_LastWeek,
+    Cost_LastWeek,
+    Quantity_LastWeek,
+    FuelConsumption_LastWeek, 
+    DistanceTraveled_TwoWeeksAgo,
+    Cost_TwoWeeksAgo,
+    Quantity_TwoWeeksAgo,
+    FuelConsumption_TwoWeeksAgo, 
+    DistanceTraveled_ThreeWeeksAgo,
+    Cost_ThreeWeeksAgo,
+    Quantity_ThreeWeeksAgo,
+    FuelConsumption_ThreeWeeksAgo, 
+    DistanceTraveled_OneMonthAgo,
+    Cost_OneMonthAgo,
+    Quantity_OneMonthAgo,
+    FuelConsumption_OneMonthAgo, 
+    DistanceTraveled_TwoMonthsAgo,
+    Cost_TwoMonthsAgo,
+    Quantity_TwoMonthsAgo,
+    FuelConsumption_TwoMonthsAgo, 
+    DistanceTraveled_Older,
+    Cost_Older,
+    Quantity_Older,
+    FuelConsumption_Older, 
 ];
  
 HistoryArr.forEach(History => {
     if (History[0] !== undefined) {
-        History[0].classList.add('Show');
+        History[0].classList.remove('Hide'); 
+        History[0].style.display = 'inline-block !important';
     }
 });

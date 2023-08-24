@@ -1002,6 +1002,16 @@ form select option {
   border-collapse: collapse;
   width: 100%;
 }
+.report-inner .table .HistoryTitle {
+  background: #ddd;
+  color: #333 !important;
+  margin-block: 0.5em;
+  padding: 0.5em;
+  width: fit-content;
+}
+.report-inner .table .HistoryTitle:hover {
+  background-color: #ddd !important;
+}
 .report-inner .table.list .car-info h1 {
   font-size: 2em;
 }
@@ -1346,6 +1356,13 @@ form select option {
 }
 .report-inner .table tr {
   border-bottom: 3px solid #000;
+}
+.report-inner .table tr.HistoryTableRow {
+  position: sticky;
+  top: 2em;
+}
+.report-inner .table tr.HistoryTableRow .HistoryTableData {
+  background-color: #000;
 }
 .report-inner .table tr.table-head {
   border: 2px solid #000;
