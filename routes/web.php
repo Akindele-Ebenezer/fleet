@@ -54,10 +54,10 @@ Route::post('/Delete/Cars/Inspections/Report/{Report}', [CarController::class, '
 Route::get('/Management/Fleet/Deposits/Entries', [DepositsController::class, 'my_records_deposits'])->name('EditDeposits'); 
 Route::get('/Add/Deposits/{Deposits}', [DepositsController::class, 'store'])->name('store_Deposits'); 
 Route::get('/Update/Deposits/{Deposits}', [DepositsController::class, 'update'])->name('UpdateDeposits');
-Route::get('/Delete/Deposits/{Deposits}/{CardNumber}/{Amount}', [DepositsController::class, 'destroy'])->name('DeleteDeposits');
+Route::get('/Reverse/Deposits/{Deposits}/{CardNumber}/{Amount}', [DepositsController::class, 'reverse'])->name('ReverseDeposits');
 Route::get('/Add/Deposits/Master/Cards/{MasterCard}', [CardController::class, 'store_deposits_master_card'])->name('store_Deposits_MasterCard'); 
 Route::get('/Update/Deposits/Master/Cards/{MasterCard}', [CardController::class, 'update_deposits_master_card'])->name('UpdateDeposits_MasterCard');
-Route::get('/Delete/Deposits/Master/Cards/{MasterCard}/{CardNumber}/{Amount}', [CardController::class, 'destroy_deposits_master_card'])->name('DeleteDeposits_MasterCard');
+Route::get('/Reverse/Deposits/Master/Cards/{MasterCard}/{CardNumber}/{Amount}', [CardController::class, 'reverse_deposits_master_card'])->name('DeleteDeposits_MasterCard');
 
 Route::get('/Edit/Refueling', [RefuelingController::class, 'my_records_refueling'])->name('EditRefueling'); 
 Route::get('/Add/Refueling/{Refueling}', [RefuelingController::class, 'store'])->name('store_Refueling'); 

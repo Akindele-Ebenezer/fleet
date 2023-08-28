@@ -11,7 +11,7 @@
         </div> 
         <form class="EditMasterCardDepositsForm">
             <div class="cancel-modal">✖</div> 
-            <div class="new-car-inputs">
+            <div class="new-car-inputs readonly">
                 <div class="new-car-inputs-inner">
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M405 782h361V524H405v258ZM140 896q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H140Zm0-60h680V316H140v520Zm0 0V316v520Z"></path></svg>
                     Card Number 
@@ -56,6 +56,6 @@
             <input type="hidden" name="DepositsId" class="DepositsId_MasterCard_X">
         </form>
         <button class="EditMasterCardDeposits">+ Edit Master Card Deposit</button>
-        <button class="DeleteMasterCardDeposits">- Delete Master Card Deposit</button>
+        <button class="ReverseMasterCardDeposits">- Reverse Transaction</button>
     </div>
 </div>

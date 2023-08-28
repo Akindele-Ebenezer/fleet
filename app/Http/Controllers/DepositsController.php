@@ -219,11 +219,11 @@ class DepositsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($DepositsId, $CardNumber, $Amount, Deposits $deposits)
+    public function reverse($DepositsId, $CardNumber, $Amount, Deposits $deposits)
     { 
-        $Balance = \App\Models\Car::where('CardNumber', $CardNumber)->first(); 
-        $Balance->Balance = $Amount - $Balance->Balance;
-        $Balance->save(); 
+        $Reverse = \App\Models\Car::where('CardNumber', $CardNumber)->first(); 
+        $Reverse->Balance = $Reverse->Balance - $Amount;
+        $Reverse->save(); 
         $DeleteDeposits = Deposits::where('id', $DepositsId)->delete();
 
         return back();

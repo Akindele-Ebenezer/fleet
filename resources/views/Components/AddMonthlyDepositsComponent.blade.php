@@ -84,7 +84,7 @@
                 @php
                     $MasterCardNumber = \App\Models\MasterCard::select('CardNumber')->orderBy('Date', 'DESC')->first();
                 @endphp
-                <input  type="number" list="CardNumbers" class="CardNumber_MasterCard_DEPOSITS" name="CardNumber_DEPOSITS" placeholder="CARD Number	.." value="{{ $MasterCardNumber->CardNumber }}">
+                <input  type="number" class="CardNumber_MasterCard_DEPOSITS" name="CardNumber_DEPOSITS" placeholder="CARD Number	.." value="{{ $MasterCardNumber->CardNumber ?? 0 }}">
             </div>
             <div class="new-car-inputs">
                 <div class="new-car-inputs-inner">

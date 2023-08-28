@@ -91,6 +91,8 @@ AddRefuelingButton.forEach(Button => {
             } else if ((Number(AddRefuelingForm.children[8].children[1].value) > Number(CarBalance_.value)) && (AddRefuelingForm.children[6].children[1].value == Number(CarCardNumber_.value))) {
                 Error.textContent = 'The amount on this card "' + AddRefuelingForm.children[6].children[1].value + '" is not sufficient to buy this quantity "' + AddRefuelingForm.children[7].children[1].value + ' liter(s)". Please credit the account balance or select the master card to process this transaction. ';
             } else if (Number(AddRefuelingForm.children[4].children[1].value) >= Number(CarMileage_.value)) {
+                Error.style.backgroundColor = '#21a911';
+                Error.textContent = 'Processing transaction.. Please wait!';
                 let CardNumberSelect = document.querySelector('.CardNumber_Select'); 
                 CardType.value = CardNumberSelect.options[CardNumberSelect.selectedIndex].className;
                 AddRefuelingForm.setAttribute('action', '/Add/Refueling/' + VehicleNumber_REFUELING.value);

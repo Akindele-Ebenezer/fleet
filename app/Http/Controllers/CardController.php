@@ -226,11 +226,11 @@ class CardController extends Controller
         return back();
     }
 
-    public function destroy_deposits_master_card($MasterCardId, $CardNumber, $Amount, DepositsMasterCard $MasterCards)
+    public function reverse_deposits_master_card($MasterCardId, $CardNumber, $Amount, DepositsMasterCard $MasterCards)
     { 
-        // $Balance = \App\Models\DepositsMasterCard::where('CardNumber', $CardNumber)->first(); 
-        // $Balance->Balance = $Amount - $Balance->Balance;
-        // $Balance->save(); 
+        $Reverse = \App\Models\MasterCard::whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first();; 
+        $Reverse->Balance = $Reverse->Balance - $Amount;
+        $Reverse->save();  
         $DeleteDepositsMasterCard = DepositsMasterCard::where('id', $MasterCardId)->delete();
 
         return back();

@@ -18,7 +18,7 @@ let Month_X = document.querySelector('.Month_X');
 let DepositsId_X = document.querySelector('.DepositsId_X');
 
 let EditDepositsButton = document.querySelector('.EditDeposits');
-let DeleteDepositsButton = document.querySelector('.DeleteDeposits');
+let ReverseDepositsButton = document.querySelector('.ReverseDeposits');
 let EditDepositsForm = document.querySelector('.EditDepositsForm');
 
 let Error = document.querySelector('.error');
@@ -41,8 +41,8 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
             EditDepositsForm.submit();
         });
  
-        DeleteDepositsButton.addEventListener('click', () => {
-            window.location = '/Delete/Deposits/' + DepositsId_X.value + '/' + CardNumber.value + '/' + Amount_X.value;  
+        ReverseDepositsButton.addEventListener('click', () => {
+            window.location = '/Reverse/Deposits/' + DepositsId_X.value + '/' + CardNumber.value + '/' + Amount_X.value;  
         });
     });
     
@@ -69,6 +69,8 @@ AddMonthlyDepositsButton.forEach(Button => {
             if (AddDepositsForm.children[1].children[1].value === '') {
                 Error.textContent = 'Please fill out vehicle number for new Deposits';
             } else {
+                Error.style.backgroundColor = '#21a911';
+                Error.textContent = 'Processing transaction.. Please wait!';
                 AddDepositsForm.setAttribute('action', '/Add/Deposits/' + VehicleNumber_DEPOSITS.value);
                 AddDepositsForm.submit();
             }   
@@ -102,7 +104,7 @@ let MasterCardMonthlyDepositsModal_Edit = document.querySelector('.edit-master-c
 let EditMasterCardDepositsForm = document.querySelector('.EditMasterCardDepositsForm');
 let ShowMasterCardRecord_X_Edit = document.querySelectorAll('.show-master-card-record-x-edit');
 let EditMasterCardDepositsButton = document.querySelector('.EditMasterCardDeposits');
-let DeleteMasterCardDepositsButton = document.querySelector('.DeleteMasterCardDeposits');
+let ReverseMasterCardDepositsButton = document.querySelector('.ReverseMasterCardDeposits');
 
 let Date_MasterCard_X = document.querySelector('.Date_MasterCard_X');
 let CardNumber_MasterCard_X = document.querySelector('.CardNumber_MasterCard_X');
@@ -116,6 +118,8 @@ AddMasterCardDepositsButton_X.addEventListener('click', () => {
     if (AddMasterCardDepositsForm.children[1].children[1].value === '') {
         Error.textContent = 'Please fill out card number for Master Card Deposits';
     } else {
+        Error.style.backgroundColor = '#21a911';
+        Error.textContent = 'Processing transaction.. Please wait!';
         AddMasterCardDepositsForm.setAttribute('action', '/Add/Deposits/Master/Cards/' + CardNumber_MasterCard_DEPOSITS.value);
         AddMasterCardDepositsForm.submit();
     }   
@@ -138,8 +142,8 @@ ShowMasterCardRecord_X_Edit.forEach(CardNumber => {
             EditMasterCardDepositsForm.submit();
         });
  
-        DeleteMasterCardDepositsButton.addEventListener('click', () => {
-            window.location = '/Delete/Deposits/Master/Cards/' + DepositsId_MasterCard_X.value + '/' + CardNumber_MasterCard_X.value + '/' + Amount_MasterCard_X.value;  
+        ReverseMasterCardDepositsButton.addEventListener('click', () => {
+            window.location = '/Reverse/Deposits/Master/Cards/' + DepositsId_MasterCard_X.value + '/' + CardNumber_MasterCard_X.value + '/' + Amount_MasterCard_X.value;  
         });
     });
     

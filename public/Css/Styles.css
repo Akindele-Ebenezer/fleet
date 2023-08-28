@@ -558,6 +558,7 @@ form select option {
 }
 .datalist .data-values span {
   color: #ddd;
+  text-align: right;
 }
 .datalist .data-values span:nth-of-type(1) {
   color: #eee;
