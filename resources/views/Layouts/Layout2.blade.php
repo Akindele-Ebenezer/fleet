@@ -34,139 +34,87 @@
 
     <link rel="stylesheet" href="{{ asset('Css/Styles.css') }}">
 </head>
-<body> 
-    @php
-        include('../resources/Globals.php');  
-    @endphp 
+<body>  
+    @php include '../resources/views/Includes/Globals.php'; @endphp
     @include('Components.LoaderComponent')
 
     @yield('Components')
 
-    @if (Route::is('Cars_Registration') || Route::is('Cars') || Route::is('VehicleReport'))
-        @include('Components.EditCarComponent')
-        @include('Components.AddCarComponent')
-        @include('Components.VehicleDataComponent')
-        @include('Components.EditVehicleDataComponent')
-    @endif
- 
-    @if (Route::is('Documents'))
-        {{-- @include('Components.AddCarDocumentComponent') --}}
-        @include('Components.EditCarDocumentComponent')
-    @endif
-
- 
-    @if (Route::is('EditMaintenance'))
-        @include('Components.AddMaintenanceComponent')
-        @include('Components.EditMaintenanceComponent')
-    @endif
-
-    @if (Route::is('Maintenance'))
-        @include('Components.ReadOnly.MaintenanceComponent')
-    @endif
-
-    @if (Route::is('EditDeposits'))
-        @include('Components.AddMonthlyDepositsComponent')
-        @include('Components.EditMonthlyDepositsComponent')
-        @include('Components.EditDeposits_MasterCardComponent')
-    @endif
-
-    @if (Route::is('EditDeposits_MasterCard'))
-        @include('Components.AddDeposits_MasterCardComponent')
-        @include('Components.EditDeposits_MasterCardComponent')
-    @endif
-
-    @if (Route::is('Deposits'))
-        @include('Components.ReadOnly.DepositsComponent')
-    @endif
-    
     @if (Route::is('FleetCard'))
         @include('Components.AddFleetCardComponent')
         @include('Components.EditFleetCardComponent')
         @include('Components.AddMasterCardComponent')
         @include('Components.EditMasterCardComponent')
     @endif
-
+    @if (Route::is('Cars_Registration') || Route::is('Cars') || Route::is('VehicleReport'))
+        @include('Components.EditCarComponent')
+        @include('Components.AddCarComponent')
+        @include('Components.VehicleDataComponent')
+        @include('Components.EditVehicleDataComponent')
+    @endif   
+    
     @if (Route::is('Deposits_MasterCard'))
         @include('Components.ReadOnly.Deposits_MasterCardComponent')
-    @endif
-    
-    @if (Route::is('MasterCard'))
-        @include('Components.AddMasterCardComponent')
-        @include('Components.EditMasterCardComponent')
-    @endif
-    
-    @if (Route::is('EditRefueling'))
-        @include('Components.AddRefuelingComponent')
-        @include('Components.EditRefuelingComponent')   
-    @endif
-    
-    @if (Route::is('Refueling'))
-        @include('Components.ReadOnly.RefuelingComponent')
-    @endif
-    
-    @if (Route::is('Users'))
-        @include('Components.AddUserComponent')
-        @include('Components.EditUserComponent')   
-    @endif
+    @endif  
 
     @include('Components.AlertComponent')   
 
     @if (Route::is('Analytics'))
-    <button class="automatic-filter action-x">Cars :: (Automatic Filter) <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg></button>
-    <img src="{{ asset('Images/clear-filter.png') }}" class="clear-filter">
-    <div class="cars-filter-wrapper Hide">
-        <div class="cars-filter">
-            <form action="">
-                <h3>Global Time Period</h3>
-                <p>All Vehicles</p>
-                <ul>
-                    <li>From: <input type="date" name="Date_From"></li>
-                    <li>To: <input type="date" name="Date_To"></li>
-                </ul>
-                <button class="action-x" name="Filter_All_Analytics">Apply</button>
-            </form>
-            <form action="">
-                <h3>Vehicle Time Period</h3>
-                <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  Yearly</p>
-                <ul>
-                    <li>
-                        Vehicle No.: 
-                        <input type="text" name="VehicleNo" list="Vehicles" autocomplete="off">
-                        <datalist id="Vehicles">
-                            @foreach ($Cars_Absolute as $Car)
-                                <option value="{{ $Car->VehicleNumber }}">
-                                {{ $Car->VehicleNumber }} <br>
-                                <span>{{ $Car->Make }} :: {{ $Car->Model }}</span>
-                            @endforeach
-                        </datalist>
-                    </li>
-                    <li>Specify Year: <input type="number" name="Year"></li>
-                </ul>
-                <button class="action-x" name="Filter__Yearly_Analytics">Apply</button>
-            </form>
-            <form action="">
-                <h3>Time Period</h3>
-                <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  (Range)</p>
-                <ul>
-                    <li>
-                        Vehicle No.:
-                        <input type="text" name="VehicleNo" list="Vehicles" autocomplete="off">
-                        <datalist id="Vehicles">
-                            @foreach ($Cars_Absolute as $Car)
-                                <option value="{{ $Car->VehicleNumber }}">
-                                {{ $Car->VehicleNumber }} <br>
-                                <span>{{ $Car->Make }} :: {{ $Car->Model }}</span>
-                            @endforeach
-                        </datalist>
-                    </li> 
-                    <li>Start Date: <input type="date" name="Date_From"></li>
-                    <li>End Date: <input type="date" name="Date_To"></li>
-                </ul>
-                <button class="action-x" name="Filter__Range_Analytics">Apply</button>
-            </form> 
-        </div> 
-    </div>
-@endif 
+        <button class="automatic-filter action-x">Cars :: (Automatic Filter) <svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg></button>
+        <img src="{{ asset('Images/clear-filter.png') }}" class="clear-filter">
+        <div class="cars-filter-wrapper Hide">
+            <div class="cars-filter">
+                <form action="">
+                    <h3>Global Time Period</h3>
+                    <p>All Vehicles</p>
+                    <ul>
+                        <li>From: <input type="date" name="Date_From"></li>
+                        <li>To: <input type="date" name="Date_To"></li>
+                    </ul>
+                    <button class="action-x" name="Filter_All_Analytics">Apply</button>
+                </form>
+                <form action="">
+                    <h3>Vehicle Time Period</h3>
+                    <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  Yearly</p>
+                    <ul>
+                        <li>
+                            Vehicle No.: 
+                            <input type="text" name="VehicleNo" list="Vehicles" autocomplete="off">
+                            <datalist id="Vehicles">
+                                @foreach ($Cars_Absolute as $Car)
+                                    <option value="{{ $Car->VehicleNumber }}">
+                                    {{ $Car->VehicleNumber }} <br>
+                                    <span>{{ $Car->Make }} :: {{ $Car->Model }}</span>
+                                @endforeach
+                            </datalist>
+                        </li>
+                        <li>Specify Year: <input type="number" name="Year"></li>
+                    </ul>
+                    <button class="action-x" name="Filter__Yearly_Analytics">Apply</button>
+                </form>
+                <form action="">
+                    <h3>Time Period</h3>
+                    <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  (Range)</p>
+                    <ul>
+                        <li>
+                            Vehicle No.:
+                            <input type="text" name="VehicleNo" list="Vehicles" autocomplete="off">
+                            <datalist id="Vehicles">
+                                @foreach ($Cars_Absolute as $Car)
+                                    <option value="{{ $Car->VehicleNumber }}">
+                                    {{ $Car->VehicleNumber }} <br>
+                                    <span>{{ $Car->Make }} :: {{ $Car->Model }}</span>
+                                @endforeach
+                            </datalist>
+                        </li> 
+                        <li>Start Date: <input type="date" name="Date_From"></li>
+                        <li>End Date: <input type="date" name="Date_To"></li>
+                    </ul>
+                    <button class="action-x" name="Filter__Range_Analytics">Apply</button>
+                </form> 
+            </div> 
+        </div>
+    @endif 
     <div class="report" style="background-image: url('Images/bg-3.gif');">
         <div class="left-nav report-inner">
             <div class="report-inner-heading">
@@ -769,25 +717,7 @@
             @endfor
         @endif
         </script>
-        @endunless 
-        @if (Route::is('Analytics'))
-            <script src="{{ asset('Js/Analytics.js') }}"></script>
-            <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Deposits/Export'; 
-                });
-            </script>
-        @endif
-        @if (Route::is('Documents'))
-            <script src="{{ asset('Js/Edit/Documents/Cars.js') }}"></script>
-            <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Deposits/Export'; 
-                });
-            </script>
-        @endif
+        @endunless  
         @if (Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling'))
         <script>
             let VehicleFilterButton = document.querySelector('.Filter-X');
@@ -812,115 +742,8 @@
         <script src="{{ asset('Js/Scripts.js') }}"></script>
         @if (Route::is('Cars_Registration'))
             <script src="{{ asset('Js/Edit/CarsRegistration.js') }}"></script>
-        @endif 
-        @if (Route::is('EditMaintenance'))
-            <script src="{{ asset('Js/Edit/Maintenance.js') }}"></script>
-            <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Maintenance/Export/all'; 
-                });
-            </script>
-        @endif
-        @if (Route::is('EditDeposits'))
-            <script src="{{ asset('Js/Edit/MonthlyDeposits.js') }}"></script>
-            <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Deposits/Export/all'; 
-                });
-                let VehicleNumbers = document.getElementById('VehicleNumbers'); 
-                let VehicleNumberInput = document.querySelector('input[list]'); 
-                let CardNumberInput = document.querySelector('input[name=CardNumber]');   
-            
-                VehicleNumberInput.addEventListener('change', () => { 
-                    let VehicleNumberInput = document.querySelector('input[list]').value;
-                    let VehicleNumbers = document.getElementById('VehicleNumbers').childNodes;
-
-                    for (var i = 0; i < VehicleNumbers.length; i++) {
-                        if (VehicleNumbers[i].value === VehicleNumberInput) { 
-                            CardNumberInput.value = VehicleNumbers[i].firstChild.textContent.trim();
-                        break;
-                        }
-                    } 
-                }); 
-            </script>
-        @endif 
-        @if (Route::is('EditRefueling'))
-            <script src="{{ asset('Js/Edit/Refueling.js') }}"></script>
-            <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Refueling/Export/all'; 
-                });
-
-                let VehicleNumbers = document.getElementById('VehicleNumbers'); 
-                let VehicleNumberInput = document.querySelector('input[list]'); 
-                let CardNumberInput = document.querySelector('input[name=CardNumber]');   
-            
-                VehicleNumberInput.addEventListener('change', () => { 
-                    let VehicleNumberInput = document.querySelector('input[list]').value;
-                    let VehicleNumbers = document.getElementById('VehicleNumbers').childNodes;
-
-                    for (var i = 0; i < VehicleNumbers.length; i++) {
-                        if (VehicleNumbers[i].value === VehicleNumberInput) { 
-                            CardNumberInput.value = VehicleNumbers[i].firstChild.textContent.trim();
-                        break;
-                        }
-                    } 
-                }); 
-            </script>
-        @endif
-        @if (Route::is('Drivers'))
-            <script src="{{ asset('Js/Edit/Drivers.js') }}"></script>
-            <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Drivers/Export'; 
-                });
-            </script>
-        @endif
-        @if (Route::is('Users'))
-            <script src="{{ asset('Js/Edit/Users.js') }}"></script>
-        @endif
-        {{--  --}}
-         
-        @if (Route::is('Maintenance'))
-            <script src="{{ asset('Js/ReadOnly/Maintenance.js') }}"></script>
-            <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Maintenance/Export/all'; 
-                });
-            </script>
-        @endif
-        @if (Route::is('Deposits'))
-            <script src="{{ asset('Js/ReadOnly/Deposits.js') }}"></script>
-            <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Deposits/Export/all'; 
-                });
-            </script>
-        @endif
-        @if (Route::is('FleetCard'))
-            <script src="{{ asset('Js/Edit/FleetCard.js') }}"></script>
-            {{-- <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Deposits/Master/Cards/Export'; 
-                });
-            </script> --}}
-        @endif 
-        @if (Route::is('Refueling'))
-            <script src="{{ asset('Js/ReadOnly/Refueling.js') }}"></script>
-            <script>
-                let ExportButton = document.querySelector('.ExportToExcel');
-                ExportButton.addEventListener('click', () => {
-                    window.location = '/Refueling/Export/all'; 
-                });
-            </script>
-        @endif
+        @endif     
+        {{--  --}}   
         <script src="{{ asset('Js/Loader.js') }}"></script> 
         <script src="{{ asset('Js/Tooltips.js') }}"></script> 
         @yield('JS')

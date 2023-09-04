@@ -1,3 +1,7 @@
+
+{{-- @include('Components.AddDeposits_MasterCardComponent') --}}
+{{-- @include('Components.EditDeposits_MasterCardComponent') --}}
+
 <div class="edit-master-card-deposits-form form">
     <div class="inner">
         <div class="heading">

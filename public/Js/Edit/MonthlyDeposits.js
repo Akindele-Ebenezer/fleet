@@ -45,6 +45,7 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
             window.location = '/Reverse/Deposits/' + DepositsId_X.value + '/' + CardNumber.value + '/' + Amount_X.value;  
         });
     });
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
     
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
@@ -76,6 +77,7 @@ AddMonthlyDepositsButton.forEach(Button => {
             }   
         });
     }); 
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
   
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
@@ -146,6 +148,7 @@ ShowMasterCardRecord_X_Edit.forEach(CardNumber => {
             window.location = '/Reverse/Deposits/Master/Cards/' + DepositsId_MasterCard_X.value + '/' + CardNumber_MasterCard_X.value + '/' + Amount_MasterCard_X.value;  
         });
     });
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
     
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {

@@ -20,6 +20,7 @@ AddFleetCardButton.forEach(Button => {
             }   
         });
     }); 
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
   
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
@@ -70,6 +71,7 @@ ShowRecord_X_Edit.forEach(CardNumber => {
             window.location = '/Delete/Deposits/Fleet/Cards/' + DepositsId_X.value + '/' + CardNumber_X.value + '/' + Amount_X.value;  
         });
     });
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
     
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
@@ -113,6 +115,7 @@ ManageButton.forEach(Button => {
         EditFleetCardForm_X.setAttribute('action', '/Delete/Car/' + FleetCardId_X.value);
         EditFleetCardForm_X.submit(); 
     });
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
   
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
@@ -177,6 +180,7 @@ ManageMasterCardButton.forEach(Button => {
         EditMasterCardForm_X.setAttribute('action', '/Management/Delete/Master/Cards/' + MasterCardId_X.value);
         EditMasterCardForm_X.submit(); 
     });
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
   
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {

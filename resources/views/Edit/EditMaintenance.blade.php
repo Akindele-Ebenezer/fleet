@@ -1,8 +1,13 @@
+@php
+    $Cars_Absolute = \App\Models\Car::whereNotNull('VehicleNumber')->get();
+@endphp
 @extends('Layouts.Layout2')
 
 @section('Title', 'Edit | MAINTENANCE') 
 @section('Heading', 'Edit | MAINTENANCE') 
 
+@include('Components.AddMaintenanceComponent')
+@include('Components.EditMaintenanceComponent')
 @section('Content')
     <div class="table-wrapper"> 
         <table class="table" id="Table">
@@ -70,4 +75,11 @@
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>
+    <script src="{{ asset('Js/Edit/Maintenance.js') }}"></script>
+    <script>
+        let ExportButton = document.querySelector('.ExportToExcel');
+        ExportButton.addEventListener('click', () => {
+            window.location = '/Maintenance/Export/all'; 
+        });
+    </script>
 @endsection

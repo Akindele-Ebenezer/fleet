@@ -1,8 +1,13 @@
+@php
+    $Cars_Absolute = \App\Models\Car::whereNotNull('VehicleNumber')->get();
+@endphp
 @extends('Layouts.Layout2')
 
 @section('Title', 'Edit | REFUELING') 
 @section('Heading', 'Edit | REFUELING') 
 
+@include('Components.AddRefuelingComponent')
+@include('Components.EditRefuelingComponent')  
 @section('Content')
     <div class="table-wrapper"> 
         <table class="table" id="Table">
@@ -67,4 +72,27 @@
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>
+    <script src="{{ asset('Js/Edit/Refueling.js') }}"></script>
+    <script>
+        let ExportButton = document.querySelector('.ExportToExcel');
+        ExportButton.addEventListener('click', () => {
+            window.location = '/Refueling/Export/all'; 
+        });
+    
+        let VehicleNumbers = document.getElementById('VehicleNumbers'); 
+        let VehicleNumberInput = document.querySelector('input[list]'); 
+        let CardNumberInput = document.querySelector('input[name=CardNumber]');   
+    
+        VehicleNumberInput.addEventListener('change', () => { 
+            let VehicleNumberInput = document.querySelector('input[list]').value;
+            let VehicleNumbers = document.getElementById('VehicleNumbers').childNodes;
+    
+            for (var i = 0; i < VehicleNumbers.length; i++) {
+                if (VehicleNumbers[i].value === VehicleNumberInput) { 
+                    CardNumberInput.value = VehicleNumbers[i].firstChild.textContent.trim();
+                break;
+                }
+            } 
+        }); 
+    </script>
 @endsection

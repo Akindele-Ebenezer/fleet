@@ -3,6 +3,7 @@
 @section('Title', 'DOCUMENTS') 
 @section('Heading', 'DOCUMENTS') 
 
+@include('Components.EditCarDocumentComponent')
 @section('Content')
     <div class="table-wrapper"> 
         <table class="table" id="Table">
@@ -229,4 +230,11 @@
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>
+    <script src="{{ asset('Js/Edit/Documents/Cars.js') }}"></script>
+    <script>
+        let ExportButton = document.querySelector('.ExportToExcel');
+        ExportButton.addEventListener('click', () => {
+            window.location = '/Deposits/Export'; 
+        });
+    </script>
 @endsection

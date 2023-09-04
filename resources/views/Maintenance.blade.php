@@ -2,6 +2,7 @@
 
 @section('Title', 'MAINTENANCE') 
 @section('Heading', 'MAINTENANCE') 
+@include('Components.ReadOnly.MaintenanceComponent')
 
 @section('Content')
     <div class="table-wrapper"> 
@@ -195,4 +196,11 @@
         </div>
         @endisset
     </div>
+    <script src="{{ asset('Js/ReadOnly/Maintenance.js') }}"></script>
+    <script>
+        let ExportButton = document.querySelector('.ExportToExcel');
+        ExportButton.addEventListener('click', () => {
+            window.location = '/Maintenance/Export/all'; 
+        });
+    </script>
 @endsection

@@ -146,6 +146,8 @@ ShowRecord_X_Edit.forEach(Email => {
             DocumentManagement_PRIVILEGES.removeAttribute('checked');
         }   
      });
+
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
     
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
@@ -172,6 +174,7 @@ AddUserButton.forEach(Button => {
             }
         });
     }); 
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
 
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {

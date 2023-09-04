@@ -3,6 +3,12 @@
 @section('Title', 'FLEET CARDS') 
 @section('Heading', 'FLEET CARDS') 
 
+{{-- @section('Components')
+    @include('Components.AddFleetCardComponent')
+    @include('Components.EditFleetCardComponent')
+    @include('Components.AddMasterCardComponent')
+    @include('Components.EditMasterCardComponent')
+@endsection --}}
 @section('Content')
     <div class="table-wrapper"> 
         <table class="table table-2 list" id="Table">
@@ -132,4 +138,5 @@
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>
+    <script src="{{ asset('Js/Edit/FleetCard.js') }}"></script>
 @endsection

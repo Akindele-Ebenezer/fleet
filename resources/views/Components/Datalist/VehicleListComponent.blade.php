@@ -1,3 +1,6 @@
+ @php
+    $Cars_Absolute = \App\Models\Car::whereNotNull('VehicleNumber')->get();
+ @endphp
 <div class="datalist Hide">
     <h1>VEHICLE LIST</h1>
     @foreach ($Cars_Absolute as $Car)

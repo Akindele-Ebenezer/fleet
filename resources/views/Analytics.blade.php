@@ -831,4 +831,11 @@
                 </div>
             </div>
     </div>
+    <script src="{{ asset('Js/Analytics.js') }}"></script>
+    <script>
+        let ExportButton = document.querySelector('.ExportToExcel');
+        ExportButton.addEventListener('click', () => {
+            window.location = '/Deposits/Export'; 
+        });
+    </script>
 @endsection

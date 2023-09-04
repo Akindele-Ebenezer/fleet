@@ -37,4 +37,11 @@
         </table>
         {{ $Drivers->onEachSide(5)->links() }} 
     </div>
+    <script src="{{ asset('Js/Edit/Drivers.js') }}"></script>
+    <script>
+        let ExportButton = document.querySelector('.ExportToExcel');
+        ExportButton.addEventListener('click', () => {
+            window.location = '/Drivers/Export'; 
+        });
+    </script>
 @endsection

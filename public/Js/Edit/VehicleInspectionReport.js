@@ -80,6 +80,8 @@ InspectionNumbers.forEach(InspectionNumber_ => {
         InspectedBy.value = InspectionNumber_.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
 
         let RemoveAttribute = (Element) => {
+            let CancelModalIcons = document.querySelectorAll('.cancel-modal');
+
             CancelModalIcons.forEach(CancelModalIcon => {
                 CancelModalIcon.addEventListener('click', () => {
                     EditVehicleDailyChecklistForm.style.display = 'none';
@@ -363,6 +365,7 @@ InspectionNumbers.forEach(InspectionNumber_ => {
         DeleteInspectionButton.addEventListener('click', (e) => {
             EditVehicleDailyChecklist.setAttribute('action', '/Delete/Cars/Inspections/Report/' + InspectionNumber.value);
         });
+        let CancelModalIcons = document.querySelectorAll('.cancel-modal');
 
         CancelModalIcons.forEach(CancelModalIcon => {
             CancelModalIcon.addEventListener('click', () => {

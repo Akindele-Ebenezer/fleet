@@ -122,6 +122,7 @@ ActionButtons.forEach(ActionButton => {
             window.location = '/Delete/Car/' + CarId_X.value;
         }); 
     }); 
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
 
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
@@ -173,6 +174,7 @@ AddCarButton.forEach(Button => {
             }
         });
     }); 
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
 
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {

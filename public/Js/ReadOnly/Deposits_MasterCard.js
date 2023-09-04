@@ -27,6 +27,7 @@ ShowRecord_X.forEach(CardNumber => {
         Week_X.value = CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Month_X.value = CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
     });
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
     
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {

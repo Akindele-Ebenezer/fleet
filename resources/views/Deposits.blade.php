@@ -2,6 +2,7 @@
 
 @section('Title', 'DEPOSITS') 
 @section('Heading', 'DEPOSITS') 
+@include('Components.ReadOnly.DepositsComponent')
 
 @section('Content')
     <div class="table-wrapper"> 
@@ -288,4 +289,11 @@
         </center>
         @endunless
     </div>
+    <script src="{{ asset('Js/ReadOnly/Deposits.js') }}"></script>
+    <script>
+        let ExportButton = document.querySelector('.ExportToExcel');
+        ExportButton.addEventListener('click', () => {
+            window.location = '/Deposits/Export/all'; 
+        });
+    </script>
 @endsection

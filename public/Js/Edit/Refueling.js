@@ -58,6 +58,7 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
             window.location = '/Reverse/Refueling/' + CardNumber_X.value + '/' + Amount_X.value + '/' + RefuelingId_X.value;   
         });
     });
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
     
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
@@ -100,6 +101,7 @@ AddRefuelingButton.forEach(Button => {
             }    
         });
     }); 
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
 
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {

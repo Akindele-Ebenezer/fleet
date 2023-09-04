@@ -8,6 +8,8 @@
 @section('Title', 'USERS') 
 @section('Heading', 'USERS') 
 
+@include('Components.AddUserComponent')
+@include('Components.EditUserComponent')
 @section('Content')
     <div class="table-wrapper"> 
         <table class="table table-2 list" id="Table">
@@ -155,4 +157,11 @@
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>
+    <script src="{{ asset('Js/Edit/Users.js') }}"></script>
+    <script>
+        let ExportButton = document.querySelector('.ExportToExcel');
+        ExportButton.addEventListener('click', () => {
+            window.location = '/Users/Export/'; 
+        });
+    </script>
 @endsection

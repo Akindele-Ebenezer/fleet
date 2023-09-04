@@ -42,6 +42,7 @@ ShowRecord_X_Edit.forEach(CardNumber => {
             window.location = '/Delete/Deposits/Master/Cards/' + DepositsId_X.value + '/' + CardNumber_X.value + '/' + Amount_X.value;  
         });
     });
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
     
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
@@ -70,6 +71,7 @@ AddMonthlyDepositsButton.forEach(Button => {
             }   
         });
     }); 
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
   
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {

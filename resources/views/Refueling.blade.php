@@ -2,6 +2,7 @@
 
 @section('Title', 'REFUELING') 
 @section('Heading', 'FUEL HISTORY') 
+@include('Components.ReadOnly.RefuelingComponent')
 
 @section('Content')
     <div class="table-wrapper"> 
@@ -214,4 +215,11 @@
         </div>
         @endisset
     </div>
+    <script src="{{ asset('Js/ReadOnly/Refueling.js') }}"></script>
+    <script>
+        let ExportButton = document.querySelector('.ExportToExcel');
+        ExportButton.addEventListener('click', () => {
+            window.location = '/Refueling/Export/all'; 
+        });
+    </script>
 @endsection

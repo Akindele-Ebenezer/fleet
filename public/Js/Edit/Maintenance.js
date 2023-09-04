@@ -71,6 +71,7 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
             window.location = '/Delete/Maintenance/' + MaintenanceId_X.value; 
         });
     });
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
     
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
@@ -104,6 +105,7 @@ AddMaintenanceButton.forEach(Button => {
             }  
         });
     }); 
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
 
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {

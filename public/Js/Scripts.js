@@ -163,6 +163,8 @@ Cars.forEach(Car => {
             window.location = '/Cars/Inspections/General/Report?FilterValue=' + RegistrationNo_X.textContent;
         });
     }); 
+    
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
 
     CancelModalIcons.forEach(CancelModalIcon => {
         CancelModalIcon.addEventListener('click', () => {
