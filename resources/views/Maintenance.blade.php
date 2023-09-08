@@ -1,7 +1,7 @@
 @extends('Layouts.Layout2')
 
 @section('Title', 'MAINTENANCE') 
-@section('Heading', 'MAINTENANCE') 
+@section('Heading', 'MAINTENANCE')  
 @include('Components.ReadOnly.MaintenanceComponent')
 
 @section('Content')

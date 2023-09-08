@@ -1,7 +1,7 @@
 @extends('Layouts.Layout2')
 
 @section('Title', 'REFUELING') 
-@section('Heading', 'FUEL HISTORY') 
+@section('Heading', 'FUEL HISTORY')  
 @include('Components.ReadOnly.RefuelingComponent')
 
 @section('Content')

@@ -11,7 +11,7 @@
         Fleet Management | @yield('Title')
     </title>
 
-    <link rel="shortcut icon" href="{{ asset('Images/car.jpg') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('Images/car.jpg') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@900&display=swap" rel="stylesheet"> 
@@ -52,11 +52,7 @@
         @include('Components.VehicleDataComponent')
         @include('Components.EditVehicleDataComponent')
     @endif   
-    
-    @if (Route::is('Deposits_MasterCard'))
-        @include('Components.ReadOnly.Deposits_MasterCardComponent')
-    @endif  
-
+     
     @include('Components.AlertComponent')   
 
     @if (Route::is('Analytics'))
@@ -543,7 +539,10 @@
                         } 
                     @endphp
                     <div class="search">
-                        <h2>Master Card No: 00454874</h2>
+                        @php
+                            $MasterCardNumber = \App\Models\MasterCard::select('CardNumber')->orderBy('Date', 'DESC')->first();
+                        @endphp
+                        <h2>Master Card No: {{ $MasterCardNumber->CardNumber ?? 'Empty' }}</h2>
                             <form action="" class="search">
                                 <input type="text" placeholder="Search..." id="SearchInput" name="FilterValue" autocomplete="off" class="datalist-input">
                                 @include('Components.Datalist.VehicleListComponent')
@@ -649,9 +648,9 @@
     <footer>
         Developed by Akindele Ebenezer, Version 2.{{ date('md.hi') }} 
     </footer>
-    <script src="{{ asset('Js/SortTables.js') }}"></script>
+    <script defer src="{{ asset('Js/SortTables.js') }}"></script>
     @unless (Route::is('Analytics'))
-    <script> 
+    <script defer> 
         @for($i = 0; $i < count($SearchInputs); $i++)
             function Filter{{ $SearchInputs[$i] }}() {
                 var input, filter, table, tr, td, i, txtValue;
@@ -716,10 +715,10 @@
                 }
             @endfor
         @endif
-        </script>
-        @endunless  
+    </script>
+    @endunless  
         @if (Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling'))
-        <script>
+        <script defer>
             let VehicleFilterButton = document.querySelector('.Filter-X');
             let VehicleFilterDropdown = document.querySelector('.FilterWrapper .inner-filter');
             let VehicleFilterWrapper = document.querySelector('.FilterWrapper');
@@ -732,22 +731,22 @@
         </script>
         @endif
         @if (Route::is('Cars') || Route::is('VehicleReport'))
-        <script>
+        <script defer>
             let ExportButton = document.querySelector('.ExportToExcel');
             ExportButton.addEventListener('click', () => {
                 window.location = '/Cars/Export'; 
             });
         </script>
         @endif
-        <script src="{{ asset('Js/Scripts.js') }}"></script>
+        <script defer src="{{ asset('Js/Scripts.js') }}"></script>
         @if (Route::is('Cars_Registration'))
-            <script src="{{ asset('Js/Edit/CarsRegistration.js') }}"></script>
+            <script defer src="{{ asset('Js/Edit/CarsRegistration.js') }}"></script>
         @endif     
         {{--  --}}   
-        <script src="{{ asset('Js/Loader.js') }}"></script> 
-        <script src="{{ asset('Js/Tooltips.js') }}"></script> 
+        <script defer src="{{ asset('Js/Loader.js') }}"></script> 
+        <script defer src="{{ asset('Js/Tooltips.js') }}"></script> 
         @yield('JS')
-        <script src="{{ asset('Js/Datalist.js') }}"></script> 
+        <script defer src="{{ asset('Js/Datalist.js') }}"></script> 
 </body>
 </html>
 @endif
