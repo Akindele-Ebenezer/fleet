@@ -37,11 +37,13 @@
                             $Quantity_Today = \App\Models\Refueling::select('Quantity')->where('Date', date('Y-m-d'))->sum('Quantity');
                             $FuelConsumption_Today = \App\Models\Refueling::select('Consumption')->where('Date', date('Y-m-d'))->sum('Consumption');
                         @endphp
-                        <td class="Today Hide HistoryTitle">{{ number_format($NumberOfRecords_Today) ?? 0 }} :: Today</td>
-                        <td class="DistanceTraveled_Today Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_Today ?? 0 }} KM</td>
-                        <td class="Cost_Today Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_Today) ?? 0 }}</td>
-                        <td class="Quantity_Today Hide HistoryTableData">Quantity => {{ $Quantity_Today ?? 0 }} LITER(S)</td>
-                        <td class="FuelConsumption_Today Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_Today, 1) ?? 0 }}</td>
+                        <td class="Today Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_Today) ?? 0 }} :: Today</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="DistanceTraveled_Today Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_Today ?? 0 }} KM</td>
+                                <td class="Cost_Today Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_Today) ?? 0 }}</td>
+                                <td class="Quantity_Today Hide HistoryTableData">Quantity => {{ $Quantity_Today ?? 0 }} LITER(S)</td>
+                                <td class="FuelConsumption_Today Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_Today, 1) ?? 0 }}</td>
+                            @endif
                         @break 
                     @case($Refueling->Date >= date('Y-m-d', strtotime("this week")))
                         @php
@@ -51,11 +53,13 @@
                             $Quantity_ThisWeek = \App\Models\Refueling::select('Quantity')->where('Date', '>=', date('Y-m-d', strtotime("this week")))->sum('Quantity');
                             $FuelConsumption_ThisWeek = \App\Models\Refueling::select('Consumption')->where('Date', '>=', date('Y-m-d', strtotime("this week")))->sum('Consumption');
                         @endphp
-                        <td class="ThisWeek Hide HistoryTitle">{{ number_format($NumberOfRecords_ThisWeek) ?? 0 }} :: This week</td>
-                        <td class="DistanceTraveled_ThisWeek Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_ThisWeek ?? 0 }} KM</td>
-                        <td class="Cost_ThisWeek Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_ThisWeek) ?? 0 }}</td>
-                        <td class="Quantity_ThisWeek Hide HistoryTableData">Quantity => {{ $Quantity_ThisWeek ?? 0 }} LITER(S)</td>
-                        <td class="FuelConsumption_ThisWeek Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_ThisWeek, 1) ?? 0 }}</td>
+                        <td class="ThisWeek Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_ThisWeek) ?? 0 }} :: This week</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="DistanceTraveled_ThisWeek Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_ThisWeek ?? 0 }} KM</td>
+                                <td class="Cost_ThisWeek Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_ThisWeek) ?? 0 }}</td>
+                                <td class="Quantity_ThisWeek Hide HistoryTableData">Quantity => {{ $Quantity_ThisWeek ?? 0 }} LITER(S)</td>
+                                <td class="FuelConsumption_ThisWeek Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_ThisWeek, 1) ?? 0 }}</td>
+                            @endif
                         @break 
                     @case(($Refueling->Date >= date('Y-m-d', strtotime("last week")))) 
                         @php
@@ -65,11 +69,13 @@
                             $Quantity_LastWeek = \App\Models\Refueling::select('Quantity')->where('Date', '>=', date('Y-m-d', strtotime("last week")))->sum('Quantity');
                             $FuelConsumption_LastWeek = \App\Models\Refueling::select('Consumption')->where('Date', '>=', date('Y-m-d', strtotime("last week")))->sum('Consumption');
                         @endphp
-                        <td class="OneWeekAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_LastWeek) ?? 0 }} :: Last week</td>
-                        <td class="DistanceTraveled_LastWeek Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_LastWeek ?? 0 }} KM</td>
-                        <td class="Cost_LastWeek Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_LastWeek) ?? 0 }}</td>
-                        <td class="Quantity_LastWeek Hide HistoryTableData">Quantity => {{ $Quantity_LastWeek ?? 0 }} LITER(S)</td>
-                        <td class="FuelConsumption_LastWeek Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_LastWeek, 1) ?? 0 }}</td>
+                        <td class="OneWeekAgo Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_LastWeek) ?? 0 }} :: Last week</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="DistanceTraveled_LastWeek Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_LastWeek ?? 0 }} KM</td>
+                                <td class="Cost_LastWeek Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_LastWeek) ?? 0 }}</td>
+                                <td class="Quantity_LastWeek Hide HistoryTableData">Quantity => {{ $Quantity_LastWeek ?? 0 }} LITER(S)</td>
+                                <td class="FuelConsumption_LastWeek Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_LastWeek, 1) ?? 0 }}</td>
+                            @endif
                         @break
                     @case(($Refueling->Date >= date('Y-m-d', strtotime("-2 weeks"))))
                         @php
@@ -79,11 +85,13 @@
                             $Quantity_TwoWeeksAgo = \App\Models\Refueling::select('Quantity')->where('Date', '>=', date('Y-m-d', strtotime("-2 weeks")))->sum('Quantity');
                             $FuelConsumption_TwoWeeksAgo = \App\Models\Refueling::select('Consumption')->where('Date', '>=', date('Y-m-d', strtotime("-2 weeks")))->sum('Consumption');
                         @endphp
-                        <td class="TwoWeeksAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_TwoWeeksAgo) ?? 0 }} :: Two weeks ago</td>
-                        <td class="DistanceTraveled_TwoWeeksAgo Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_TwoWeeksAgo ?? 0 }} KM</td>
-                        <td class="Cost_TwoWeeksAgo Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_TwoWeeksAgo) ?? 0 }}</td>
-                        <td class="Quantity_TwoWeeksAgo Hide HistoryTableData">Quantity => {{ $Quantity_TwoWeeksAgo ?? 0 }} LITER(S)</td>
-                        <td class="FuelConsumption_TwoWeeksAgo Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_TwoWeeksAgo, 1) ?? 0 }}</td>
+                        <td class="TwoWeeksAgo Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_TwoWeeksAgo) ?? 0 }} :: Two weeks ago</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="DistanceTraveled_TwoWeeksAgo Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_TwoWeeksAgo ?? 0 }} KM</td>
+                                <td class="Cost_TwoWeeksAgo Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_TwoWeeksAgo) ?? 0 }}</td>
+                                <td class="Quantity_TwoWeeksAgo Hide HistoryTableData">Quantity => {{ $Quantity_TwoWeeksAgo ?? 0 }} LITER(S)</td>
+                                <td class="FuelConsumption_TwoWeeksAgo Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_TwoWeeksAgo, 1) ?? 0 }}</td>
+                            @endif
                         @break
                     @case(($Refueling->Date >= date('Y-m-d', strtotime("-3 weeks"))))
                         @php
@@ -93,11 +101,13 @@
                             $Quantity_ThreeWeeksAgo = \App\Models\Refueling::select('Quantity')->where('Date', '>=', date('Y-m-d', strtotime("-3 weeks")))->sum('Quantity');
                             $FuelConsumption_ThreeWeeksAgo = \App\Models\Refueling::select('Consumption')->where('Date', '>=', date('Y-m-d', strtotime("-3 weeks")))->sum('Consumption');
                         @endphp
-                        <td class="ThreeWeeksAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_ThreeWeeksAgo) ?? 0 }} :: Three weeks ago</td>
-                        <td class="DistanceTraveled_ThreeWeeksAgo Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_ThreeWeeksAgo ?? 0 }} KM</td>
-                        <td class="Cost_ThreeWeeksAgo Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_ThreeWeeksAgo) ?? 0 }}</td>
-                        <td class="Quantity_ThreeWeeksAgo Hide HistoryTableData">Quantity => {{ $Quantity_ThreeWeeksAgo ?? 0 }} LITER(S)</td>
-                        <td class="FuelConsumption_ThreeWeeksAgo Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_ThreeWeeksAgo, 1) ?? 0 }}</td>
+                        <td class="ThreeWeeksAgo Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_ThreeWeeksAgo) ?? 0 }} :: Three weeks ago</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="DistanceTraveled_ThreeWeeksAgo Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_ThreeWeeksAgo ?? 0 }} KM</td>
+                                <td class="Cost_ThreeWeeksAgo Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_ThreeWeeksAgo) ?? 0 }}</td>
+                                <td class="Quantity_ThreeWeeksAgo Hide HistoryTableData">Quantity => {{ $Quantity_ThreeWeeksAgo ?? 0 }} LITER(S)</td>
+                                <td class="FuelConsumption_ThreeWeeksAgo Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_ThreeWeeksAgo, 1) ?? 0 }}</td>
+                            @endif
                         @break
                     @case(($Refueling->Date >= date('Y-m-d', strtotime("-1 month"))))
                         @php
@@ -107,11 +117,13 @@
                             $Quantity_OneMonthAgo = \App\Models\Refueling::select('Quantity')->where('Date', '>=', date('Y-m-d', strtotime("-1 month")))->sum('Quantity');
                             $FuelConsumption_OneMonthAgo = \App\Models\Refueling::select('Consumption')->where('Date', '>=', date('Y-m-d', strtotime("-1 month")))->sum('Consumption');
                         @endphp
-                        <td class="OneMonthAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_OneMonthAgo) ?? 0 }} :: Last month</td>
-                        <td class="DistanceTraveled_OneMonthAgo Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_OneMonthAgo ?? 0 }} KM</td>
-                        <td class="Cost_OneMonthAgo Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_OneMonthAgo) ?? 0 }}</td>
-                        <td class="Quantity_OneMonthAgo Hide HistoryTableData">Quantity => {{ $Quantity_OneMonthAgo ?? 0 }} LITER(S)</td>
-                        <td class="FuelConsumption_OneMonthAgo Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_OneMonthAgo, 1) ?? 0 }}</td>
+                        <td class="OneMonthAgo Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_OneMonthAgo) ?? 0 }} :: Last month</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="DistanceTraveled_OneMonthAgo Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_OneMonthAgo ?? 0 }} KM</td>
+                                <td class="Cost_OneMonthAgo Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_OneMonthAgo) ?? 0 }}</td>
+                                <td class="Quantity_OneMonthAgo Hide HistoryTableData">Quantity => {{ $Quantity_OneMonthAgo ?? 0 }} LITER(S)</td>
+                                <td class="FuelConsumption_OneMonthAgo Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_OneMonthAgo, 1) ?? 0 }}</td>
+                            @endif
                         @break
                     @case(($Refueling->Date >= date('Y-m-d', strtotime("-2 month"))))
                         @php
@@ -121,11 +133,13 @@
                             $Quantity_TwoMonthsAgo = \App\Models\Refueling::select('Quantity')->where('Date', '>=', date('Y-m-d', strtotime("-2 month")))->sum('Quantity');
                             $FuelConsumption_TwoMonthsAgo = \App\Models\Refueling::select('Consumption')->where('Date', '>=', date('Y-m-d', strtotime("-2 month")))->sum('Consumption');
                         @endphp
-                        <td class="TwoMonthsAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_TwoMonthsAgo) ?? 0 }} :: Two months ago</td>
-                        <td class="DistanceTraveled_TwoMonthsAgo Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_TwoMonthsAgo ?? 0 }} KM</td>
-                        <td class="Cost_TwoMonthsAgo Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_TwoMonthsAgo) ?? 0 }}</td>
-                        <td class="Quantity_TwoMonthsAgo Hide HistoryTableData">Quantity => {{ $Quantity_TwoMonthsAgo ?? 0 }} LITER(S)</td>
-                        <td class="FuelConsumption_TwoMonthsAgo Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_TwoMonthsAgo, 1) ?? 0 }}</td>
+                        <td class="TwoMonthsAgo Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_TwoMonthsAgo) ?? 0 }} :: Two months ago</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="DistanceTraveled_TwoMonthsAgo Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_TwoMonthsAgo ?? 0 }} KM</td>
+                                <td class="Cost_TwoMonthsAgo Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_TwoMonthsAgo) ?? 0 }}</td>
+                                <td class="Quantity_TwoMonthsAgo Hide HistoryTableData">Quantity => {{ $Quantity_TwoMonthsAgo ?? 0 }} LITER(S)</td>
+                                <td class="FuelConsumption_TwoMonthsAgo Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_TwoMonthsAgo, 1) ?? 0 }}</td>
+                            @endif
                         @break
                     @case(($Refueling->Date < date('Y-m-d', strtotime("-2 month"))))
                         @php
@@ -135,15 +149,17 @@
                             $Quantity_Older = \App\Models\Refueling::select('Quantity')->where('Date', '<', date('Y-m-d', strtotime("-2 month")))->sum('Quantity');
                             $FuelConsumption_Older = \App\Models\Refueling::select('Consumption')->where('Date', '<', date('Y-m-d', strtotime("-2 month")))->sum('Consumption');
                         @endphp
-                        <td class="Older Hide HistoryTitle">{{ number_format($NumberOfRecords_Older) ?? 0 }} :: Older</td>
-                        <td class="DistanceTraveled_Older Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_Older ?? 0 }} KM</td>
-                        <td class="Cost_Older Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_Older) ?? 0 }}</td>
-                        <td class="Quantity_Older Hide HistoryTableData">Quantity => {{ $Quantity_Older ?? 0 }} LITER(S)</td>
-                        <td class="FuelConsumption_Older Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_Older, 1) ?? 0 }}</td>
+                        <td class="Older Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_Older) ?? 0 }} :: Older</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="DistanceTraveled_Older Hide HistoryTableData">Distance traveled => {{ $DistanceTraveled_Older ?? 0 }} KM</td>
+                                <td class="Cost_Older Hide HistoryTableData">Fuel cost => ₦ {{ number_format($Cost_Older) ?? 0 }}</td>
+                                <td class="Quantity_Older Hide HistoryTableData">Quantity => {{ $Quantity_Older ?? 0 }} LITER(S)</td>
+                                <td class="FuelConsumption_Older Hide HistoryTableData">Fuel consumption => {{ round($FuelConsumption_Older, 1) ?? 0 }}</td>
+                            @endif
                         @break
                     @default 
                 @endswitch 
-            </tr>
+            </tr> 
             <tr>
                 @php
                     $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Refueling->VehicleNumber)->first(); 
