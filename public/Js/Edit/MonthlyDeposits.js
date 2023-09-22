@@ -72,6 +72,8 @@ AddMonthlyDepositsButton.forEach(Button => {
             } else {
                 Error.style.backgroundColor = '#21a911';
                 Error.textContent = 'Processing transaction.. Please wait!';
+                AddDepositsButton_X.style.backgroundColor = '#DF2E38';
+                AddDepositsButton_X.textContent = '+ Processing..';
                 AddDepositsForm.setAttribute('action', '/Add/Deposits/' + VehicleNumber_DEPOSITS.value);
                 AddDepositsForm.submit();
             }   
@@ -122,6 +124,8 @@ AddMasterCardDepositsButton_X.addEventListener('click', () => {
     } else {
         Error.style.backgroundColor = '#21a911';
         Error.textContent = 'Processing transaction.. Please wait!';
+        AddMasterCardDepositsButton_X.style.backgroundColor = '#DF2E38';
+        AddMasterCardDepositsButton_X.textContent = '+ Processing..';
         AddMasterCardDepositsForm.setAttribute('action', '/Add/Deposits/Master/Cards/' + CardNumber_MasterCard_DEPOSITS.value);
         AddMasterCardDepositsForm.submit();
     }   

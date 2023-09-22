@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 class AnalyticsController extends Controller
 {
     public function config() { 
-        $NumberOfCars = \App\Models\Car::select('VehicleNumber')->whereNotNull('VehicleNumber')->distinct()->count();
+        $NumberOfCars = \App\Models\Car::select('id')->whereNotNull('VehicleNumber')->distinct()->count();
 
-        $NumberOfCarRepairs = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'REPAIR')->count();
-        $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'MAINTENANCE')->count();
-        $NumberOfCarDeposits = \App\Models\Deposits::select('VehicleNumber')->count();
-        $NumberOfCarRefueling = \App\Models\Refueling::select('VehicleNumber')->count();
-        $NumberOfCarAccidents = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'ACCIDENT')->count();
+        $NumberOfCarRepairs = \App\Models\Maintenance::select('id')->where('IncidentType', 'REPAIR')->count();
+        $NumberOfCarMaintenance = \App\Models\Maintenance::select('id')->where('IncidentType', 'MAINTENANCE')->count();
+        $NumberOfCarDeposits = \App\Models\Deposits::select('id')->count();
+        $NumberOfCarRefueling = \App\Models\Refueling::select('id')->count();
+        $NumberOfCarAccidents = \App\Models\Maintenance::select('id')->where('IncidentType', 'ACCIDENT')->count();
     
         $SumOfCarRepairs = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'REPAIR')->sum('Cost');
         $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')->sum('Cost');
@@ -33,7 +33,7 @@ class AnalyticsController extends Controller
         $NumberNumberOfCars_ACTIVE_PERCENTAGE = $NumberOfCars == 0 ? 0 : $NumberOfCars_ACTIVE / $NumberOfCars * 100;
         $NumberNumberOfCars_INACTIVE_PERCENTAGE = $NumberOfCars == 0 ? 0 : $NumberOfCars_INACTIVE / $NumberOfCars * 100;
     
-        $NumberOfDrivers = \App\Models\Car::select('Driver')->whereNotNull('Driver')->count();
+        $NumberOfDrivers = \App\Models\Car::select('id')->whereNotNull('Driver')->count();
         
         $NumberOfCars_MAINTENANCE = \App\Models\Maintenance::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
                                                             ->groupBy('VehicleNumber')

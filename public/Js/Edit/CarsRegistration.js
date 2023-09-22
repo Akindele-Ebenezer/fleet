@@ -167,6 +167,8 @@ AddCarButton.forEach(Button => {
             if (AddCarForm.children[0].lastElementChild.value === '') {
                 Error.textContent = 'Please fill out vehicle number for new Car';
             } else {
+                AddCarButton_X.style.backgroundColor = '#DF2E38';
+                AddCarButton_X.textContent = '+ Processing..';
                 AddCarForm.setAttribute('action', '/Add/Car/' + VehicleNumber_CAR.value);
                 AddCarForm.setAttribute('enctype', 'multipart/form-data'); 
                 AddCarForm.setAttribute('method', 'POST'); 

@@ -10,35 +10,17 @@
     $Cars_GearType = DB::table('gear_types')->select('GearType')->get();
     $Cars_Organisation = \App\Models\organisation::select(['CompanyCode', 'CompanyName'])->distinct()->get();
     $CardVendors = DB::table('card_vendors')->select('CardVendors')->get();
-    $NumberOfInspections = \DB::table('inspection_report')->count();
+    $NumberOfInspections = \DB::table('inspection_report')->select('id')->count();
 
     $NumberOfCarOwners = \App\Models\Car::selectRaw("id, TRIM(CarOwner) AS CarOwner, VehicleNumber")->groupBy('CarOwner')->get()->count(); 
     $NumberOfFleetUsers = \App\Models\User::select('id')->count();
-    $NumberOfCars = \App\Models\Car::select('VehicleNumber')->whereNotNull('VehicleNumber')->distinct()->count();
-    $NumberOfCars_ACTIVE = \App\Models\Car::select('Status')->whereNotNull('VehicleNumber')->where('Status', 'ACTIVE')->count();
-    $NumberOfCars_INACTIVE = \App\Models\Car::select('Status')->whereNotNull('VehicleNumber')->where('Status', 'INACTIVE')->count();
-    $NumberOfDrivers = \App\Models\Car::select('Driver')->whereNotNull('Driver')->distinct()->count();
-    $NumberOfCarMaintenance = \App\Models\Maintenance::select('VehicleNumber')->count();
-    $NumberOfCarDeposits = \App\Models\Deposits::select('VehicleNumber')->count();
-    $NumberOfCarRefueling = \App\Models\Refueling::select('VehicleNumber')->count();
-
-    $NumberOfCars_MyRecords = \App\Models\Car::select(['VehicleNumber', 'UserId'])
-                                                        ->whereNotNull('VehicleNumber')
-                                                        ->where('UserId', request()->session()
-                                                        ->get('Id'))
-                                                        ->count(); 
-    $NumberOfCarMaintenance_MyRecords = \App\Models\Maintenance::select(['VehicleNumber', 'UserId'])
-                                                        ->where('UserId', request()->session()
-                                                        ->get('Id'))
-                                                        ->count();
-    $NumberOfCarDeposits_MyRecords = \App\Models\Deposits::select(['VehicleNumber', 'UserId'])
-                                                        ->where('UserId', request()->session()
-                                                        ->get('Id'))
-                                                        ->count();
-    $NumberOfCarRefueling_MyRecords = \App\Models\Refueling::select(['VehicleNumber', 'UserId'])
-                                                        ->where('UserId', request()->session()
-                                                        ->get('Id'))
-                                                        ->count();
+    $NumberOfCars = \App\Models\Car::select('id')->whereNotNull('VehicleNumber')->distinct()->count();
+    $NumberOfCars_ACTIVE = \App\Models\Car::select('id')->whereNotNull('VehicleNumber')->where('Status', 'ACTIVE')->count();
+    $NumberOfCars_INACTIVE = \App\Models\Car::select('id')->whereNotNull('VehicleNumber')->where('Status', 'INACTIVE')->count();
+    $NumberOfDrivers = \App\Models\Car::select('id')->whereNotNull('Driver')->distinct()->count();
+    $NumberOfCarMaintenance = \App\Models\Maintenance::select('id')->count();
+    $NumberOfCarDeposits = \App\Models\Deposits::select('id')->count();
+    $NumberOfCarRefueling = \App\Models\Refueling::select('id')->count();
 
     function MyRecords_TOTAL() {
         $MyRecords_Cars = \App\Models\Car::select(['VehicleNumber', 'UserId'])

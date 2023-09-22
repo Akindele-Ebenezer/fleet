@@ -97,7 +97,9 @@ AddMaintenanceButton.forEach(Button => {
                 Error.textContent = 'Please fill out vehicle number for new Maintenance';
             } else {
                 Error.style.backgroundColor = '#21a911';
+                AddMaintenanceButton_X.style.backgroundColor = '#DF2E38';
                 Error.textContent = 'Processing maintenance.. Please wait!';
+                AddMaintenanceButton_X.textContent = '+ Processing..';
                 AddMaintenanceForm.setAttribute('action', '/Add/Maintenance/' + VehicleNumber_MAINTENANCE.value); 
                 AddMaintenanceForm.setAttribute('enctype', 'multipart/form-data'); 
                 AddMaintenanceForm.setAttribute('method', 'POST'); 

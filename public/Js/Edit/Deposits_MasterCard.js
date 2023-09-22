@@ -65,7 +65,9 @@ AddMonthlyDepositsButton.forEach(Button => {
         AddDepositsButton_X.addEventListener('click', () => {   
             if (AddDepositsForm.children[1].children[1].value === '') {
                 Error.textContent = 'Please fill out card number for new Deposits';
-            } else {
+            } else { 
+                AddDepositsButton_X.style.backgroundColor = '#DF2E38';
+                AddDepositsButton_X.textContent = '+ Processing..';
                 AddDepositsForm.setAttribute('action', '/Add/Deposits/Master/Cards/' + CardNumber_DEPOSITS.value);
                 AddDepositsForm.submit();
             }   
