@@ -33,64 +33,80 @@
                             $NumberOfRecords_Today = \App\Models\Maintenance::select('id')->where('Date', date('Y-m-d'))->count();
                             $MaintenanceCost_Today = \App\Models\Maintenance::select('Cost')->where('Date', date('Y-m-d'))->sum('Cost');
                         @endphp
-                        <td class="Today Hide HistoryTitle">{{ number_format($NumberOfRecords_Today) ?? 0 }} :: Today</td>
-                        <td class="Cost_Today Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_Today) ?? 0 }}</td>
+                        <td class="Today Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_Today) ?? 0 }} :: Today</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="Cost_Today Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_Today) ?? 0 }}</td>
+                            @endif  
                         @break 
                     @case($Maintenancee->Date >= date('Y-m-d', strtotime("this week")))
                         @php
                             $NumberOfRecords_ThisWeek = \App\Models\Maintenance::select('id')->where('Date', '>=', date('Y-m-d', strtotime("this week")))->count();
                             $MaintenanceCost_ThisWeek = \App\Models\Maintenance::select('Cost')->where('Date', '>=', date('Y-m-d', strtotime("this week")))->sum('Cost');
                         @endphp
-                        <td class="ThisWeek Hide HistoryTitle">{{ number_format($NumberOfRecords_ThisWeek) ?? 0 }} :: This week</td>
-                        <td class="Cost_ThisWeek Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_ThisWeek) ?? 0 }}</td>
+                        <td class="ThisWeek Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_ThisWeek) ?? 0 }} :: This week</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="Cost_ThisWeek Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_ThisWeek) ?? 0 }}</td>
+                            @endif
                         @break 
                     @case(($Maintenancee->Date >= date('Y-m-d', strtotime("last week")))) 
                         @php
                             $NumberOfRecords_LastWeek = \App\Models\Maintenance::select('id')->where('Date', '>=', date('Y-m-d', strtotime("last week")))->where('Date', '<', date('Y-m-d', strtotime("this week")))->count();
                             $MaintenanceCost_LastWeek = \App\Models\Maintenance::select('Cost')->where('Date', '>=', date('Y-m-d', strtotime("last week")))->where('Date', '<', date('Y-m-d', strtotime("this week")))->sum('Cost');
                         @endphp
-                        <td class="OneWeekAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_LastWeek) ?? 0 }} :: Last week</td>
-                        <td class="Cost_LastWeek Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_LastWeek) ?? 0 }}</td>
+                        <td class="OneWeekAgo Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_LastWeek) ?? 0 }} :: Last week</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="Cost_LastWeek Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_LastWeek) ?? 0 }}</td>
+                            @endif
                         @break
                     @case(($Maintenancee->Date >= date('Y-m-d', strtotime("-2 weeks"))))
                         @php
                             $NumberOfRecords_TwoWeeksAgo = \App\Models\Maintenance::select('id')->where('Date', '>=', date('Y-m-d', strtotime("-2 weeks")))->where('Date', '<', date('Y-m-d', strtotime("last week")))->count();
                             $MaintenanceCost_TwoWeeksAgo = \App\Models\Maintenance::select('Cost')->where('Date', '>=', date('Y-m-d', strtotime("-2 weeks")))->where('Date', '<', date('Y-m-d', strtotime("last week")))->sum('Cost');
                         @endphp
-                        <td class="TwoWeeksAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_TwoWeeksAgo) ?? 0 }} :: Two weeks ago</td>
-                        <td class="Cost_TwoWeeksAgo Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_TwoWeeksAgo) ?? 0 }}</td>
+                        <td class="TwoWeeksAgo Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_TwoWeeksAgo) ?? 0 }} :: Two weeks ago</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="Cost_TwoWeeksAgo Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_TwoWeeksAgo) ?? 0 }}</td>
+                            @endif
                         @break
                     @case(($Maintenancee->Date >= date('Y-m-d', strtotime("-3 weeks"))))
                         @php
                             $NumberOfRecords_ThreeWeeksAgo = \App\Models\Maintenance::select('id')->where('Date', '>=', date('Y-m-d', strtotime("-3 weeks")))->where('Date', '<', date('Y-m-d', strtotime("-2 weeks")))->count();
                             $MaintenanceCost_ThreeWeeksAgo = \App\Models\Maintenance::select('Cost')->where('Date', '>=', date('Y-m-d', strtotime("-3 weeks")))->where('Date', '<', date('Y-m-d', strtotime("-2 weeks")))->sum('Cost');
                         @endphp
-                        <td class="ThreeWeeksAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_ThreeWeeksAgo) ?? 0 }} :: Three weeks ago</td>
-                        <td class="Cost_ThreeWeeksAgo Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_ThreeWeeksAgo) ?? 0 }}</td>
+                        <td class="ThreeWeeksAgo Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_ThreeWeeksAgo) ?? 0 }} :: Three weeks ago</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="Cost_ThreeWeeksAgo Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_ThreeWeeksAgo) ?? 0 }}</td>
+                            @endif
                         @break
                     @case(($Maintenancee->Date >= date('Y-m-d', strtotime("-1 month"))))
                         @php
                             $NumberOfRecords_OneMonthAgo = \App\Models\Maintenance::select('id')->where('Date', '>=', date('Y-m-d', strtotime("-1 month")))->where('Date', '<', date('Y-m-d', strtotime("-3 weeks")))->count();
                             $MaintenanceCost_OneMonthAgo = \App\Models\Maintenance::select('Cost')->where('Date', '>=', date('Y-m-d', strtotime("-1 month")))->where('Date', '<', date('Y-m-d', strtotime("-3 weeks")))->sum('Cost');
                         @endphp
-                        <td class="OneMonthAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_OneMonthAgo) ?? 0 }} :: Last month</td>
-                        <td class="Cost_OneMonthAgo Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_OneMonthAgo) ?? 0 }}</td>
+                        <td class="OneMonthAgo Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_OneMonthAgo) ?? 0 }} :: Last month</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="Cost_OneMonthAgo Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_OneMonthAgo) ?? 0 }}</td>
+                            @endif
                         @break
                     @case(($Maintenancee->Date >= date('Y-m-d', strtotime("-2 month"))))
                         @php
                             $NumberOfRecords_TwoMonthsAgo = \App\Models\Maintenance::select('id')->where('Date', '>=', date('Y-m-d', strtotime("-2 month")))->where('Date', '<', date('Y-m-d', strtotime("-1 month")))->count();
                             $MaintenanceCost_TwoMonthsAgo = \App\Models\Maintenance::select('Cost')->where('Date', '>=', date('Y-m-d', strtotime("-2 month")))->where('Date', '<', date('Y-m-d', strtotime("-1 month")))->sum('Cost');
                         @endphp
-                        <td class="TwoMonthsAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_TwoMonthsAgo) ?? 0 }} :: Two months ago</td>
-                        <td class="Cost_TwoMonthsAgo Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_TwoMonthsAgo) ?? 0 }}</td>
+                        <td class="TwoMonthsAgo Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_TwoMonthsAgo) ?? 0 }} :: Two months ago</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="Cost_TwoMonthsAgo Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_TwoMonthsAgo) ?? 0 }}</td>
+                            @endif
                         @break
                     @case(($Maintenancee->Date < date('Y-m-d', strtotime("-2 month"))))
                         @php
                             $NumberOfRecords_Older = \App\Models\Maintenance::select('id')->where('Date', '<', date('Y-m-d', strtotime("-2 month")))->count();
                             $MaintenanceCost_Older = \App\Models\Maintenance::select('Cost')->where('Date', '<', date('Y-m-d', strtotime("-2 month")))->sum('Cost');
                         @endphp
-                        <td class="Older Hide HistoryTitle">{{ number_format($NumberOfRecords_Older) ?? 0 }} :: Older</td>
-                        <td class="Cost_Older Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_Older) ?? 0 }}</td>
+                        <td class="Older Hide HistoryTitle">{{ isset($_GET['FilterValue']) ? '' : number_format($NumberOfRecords_Older) ?? 0 }} :: Older</td>
+                            @if (!isset($_GET['FilterValue']))
+                                <td class="Cost_Older Hide HistoryTableData">Maintenance cost => ₦ {{ number_format($MaintenanceCost_Older) ?? 0 }}</td>
+                            @endif
                         @break
                     @default 
                 @endswitch 
