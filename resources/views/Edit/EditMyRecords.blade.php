@@ -2,6 +2,7 @@
 
 @section('Title', 'REGISTERATION') 
 @section('Heading', 'REGISTERATION') 
+@include('Components.EditCarPropertiesComponent')
 
 @section('Content')
     <div class="table-wrapper"> 
@@ -208,4 +209,28 @@
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>
+    <script>
+        let OpenCarPropertiesForm_Button = document.querySelector('.open-vehicle-properties-form-button');
+        let AddCarProperties = document.querySelector('.add-vehicle-properties');
+        let AddCarPropertiesForm = document.querySelector('.AddCarPropertiesForm');
+        let ManageCarProperties_Button = document.querySelector('.manage-vehicle-properties-button');
+
+        OpenCarPropertiesForm_Button.addEventListener('click', () => {
+            AddCarProperties.style.display = 'block';
+
+            let CancelModalIcons = document.querySelectorAll('.cancel-modal');
+
+            CancelModalIcons.forEach(CancelModalIcon => {
+                CancelModalIcon.addEventListener('click', () => {
+                    AddCarProperties.style.display = 'none';
+                });
+            });
+
+            ManageCarProperties_Button.addEventListener('click', () => { 
+                AddCarPropertiesForm.setAttribute('method', 'POST');
+                AddCarPropertiesForm.setAttribute('action', 'Add/Properties');
+                AddCarPropertiesForm.submit(); 
+            });
+        });
+    </script>
 @endsection

@@ -61,6 +61,8 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         IncidentAttachment_FILE.textContent = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
  
         EditMaintenanceButton.addEventListener('click', () => {
+            EditMaintenanceButton.style.backgroundColor = '#21a911';
+            EditMaintenanceButton.textContent = '+ Updating..';
             EditMaintenanceForm.setAttribute('action', '/Update/Maintenance/' + MaintenanceId_X.value);
             EditMaintenanceForm.setAttribute('enctype', 'multipart/form-data'); 
             EditMaintenanceForm.setAttribute('method', 'POST'); 
@@ -68,6 +70,8 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         });
  
         DeleteMaintenanceButton.addEventListener('click', () => {
+            DeleteMaintenanceButton.style.backgroundColor = '#DF2E38';
+            DeleteMaintenanceButton.textContent = '+ Deleting..';
             window.location = '/Delete/Maintenance/' + MaintenanceId_X.value; 
         });
     });

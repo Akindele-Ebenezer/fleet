@@ -950,7 +950,7 @@ form select option {
   justify-content: center;
   margin-bottom: 0.5em;
   padding: 0.5em 0 0 0;
-  width: 20rem;
+  width: 35rem;
 }
 .report-inner .action .inner button {
   background: #333;
@@ -1055,10 +1055,11 @@ form select option {
   translate: -3em;
 }
 .report-inner .table.list .car-info .info-inner .inner-x {
+  align-items: center;
   display: flex;
   justify-content: space-between;
   padding: 0.3em;
-  width: 16em;
+  width: 20em;
 }
 .report-inner .table.list .car-info .info-inner .inner-x span:first-of-type {
   border-radius: 0.2em;
@@ -1068,7 +1069,9 @@ form select option {
   padding-inline: 0.3em;
 }
 .report-inner .table.list .car-info .info-inner .inner-x span:last-of-type {
-  color: #ccc;
+  color: #aaa;
+  font-size: smaller;
+  text-align: right;
 }
 .report-inner .table.list .car-info .info-inner img.icon {
   margin-inline: 0.5em;
@@ -1520,6 +1523,94 @@ form select option {
   display: block;
   margin-block: 1em;
   width: 100%;
+}
+
+.edit-car-properties-wrapper {
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: absolute;
+  width: 100vw;
+  z-index: 1000;
+}
+.edit-car-properties-wrapper .EditCarPropertiesForm {
+  background: #fff;
+  border-radius: 1em;
+  padding: 2em;
+  width: 50em;
+}
+.edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons {
+  display: flex;
+  justify-content: end;
+}
+.edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons button {
+  padding-inline: 1em;
+}
+.edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons button:first-of-type {
+  margin-right: 0.5em;
+}
+.edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons button:last-of-type {
+  background-color: #3034b5;
+}
+.edit-car-properties-wrapper .EditCarPropertiesForm h1 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+.edit-car-properties-wrapper .EditCarPropertiesForm h1 span {
+  font-size: 2.3em;
+  font-weight: normal;
+}
+.edit-car-properties-wrapper .EditCarPropertiesForm h1 span:last-of-type {
+  cursor: pointer;
+}
+.edit-car-properties-wrapper .EditCarPropertiesForm hr {
+  border: 1px solid #eee;
+}
+.edit-car-properties-wrapper .EditCarPropertiesForm input {
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #333;
+  margin-block: 1.5em;
+  width: 100%;
+}
+
+.car-properties-table {
+  border-collapse: collapse;
+  margin-block: 1em;
+  width: 100%;
+}
+.car-properties-table td, .car-properties-table th {
+  border: 1px solid #333;
+  color: #fff;
+  padding: 0.5em;
+  font-family: system-ui;
+  text-align: left;
+}
+.car-properties-table td:hover, .car-properties-table th:hover {
+  background-color: #333;
+}
+.car-properties-table td button, .car-properties-table th button {
+  margin: unset;
+  width: 4em;
+}
+.car-properties-table td button.delete, .car-properties-table th button.delete {
+  background-color: #DF2E38 !important;
+}
+.car-properties-table td button.edit, .car-properties-table th button.edit {
+  background-color: #41a341 !important;
+}
+.car-properties-table th {
+  background-color: #111;
+  position: sticky;
+  top: -1px;
+}
+.car-properties-table-wrapper {
+  max-height: 22em;
+  overflow-y: scroll;
 }
 
 .analytics {

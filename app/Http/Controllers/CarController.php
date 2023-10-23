@@ -762,9 +762,71 @@ class CarController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function store_car_properties(Request $request)
+    { 
+        if(!empty($request->CarProperties_Maker)) {
+            \DB::table('makers')->insert([
+                'Maker' => $request->CarProperties_Maker, 
+            ]);
+        } 
+        if(!empty($request->CarProperties_EngineType)) {
+            \DB::table('engine_types')->insert([
+                'EngineType' => $request->CarProperties_EngineType, 
+            ]);
+        }
+        if(!empty($request->CarProperties_GearType)) {
+            \DB::table('gear_types')->insert([
+                'GearType' => $request->CarProperties_GearType, 
+            ]);
+        }
+        if(!empty($request->CarProperties_OrganisationCode)) {
+            \DB::table('organisations')->insert([
+                'CompanyCode' => $request->CarProperties_OrganisationCode, 
+                'CompanyName' => $request->CarProperties_OrganisationName, 
+            ]);
+        } 
+
+        return back();  
+    }
+
+    public function update_car_properties($Id, $Name, $DBTable, Request $request) {
+        if($DBTable === 'makers') { 
+            \DB::table('makers')
+                    ->where('id', $Id) 
+                    ->update([ 
+                        'Maker' => $Name,  
+                    ]); 
+         }
+        if($DBTable === 'engine_types') { 
+            \DB::table('engine_types')
+                    ->where('id', $Id) 
+                    ->update([ 
+                        'EngineType' => $Name,  
+                    ]); 
+         }
+        if($DBTable === 'gear_types') { 
+            \DB::table('gear_types')
+                    ->where('id', $Id) 
+                    ->update([ 
+                        'GearType' => $Name,  
+                    ]); 
+         }
+        if($DBTable === 'organisations') { 
+            \DB::table('organisations')
+                    ->where('id', $Id) 
+                    ->update([ 
+                        'CompanyCode' => $request->EditCarPropertiseModal_Code,  
+                        'CompanyName' => $request->EditCarPropertiseModal_Name,  
+                    ]); 
+         }
+
+        return back();
+    }
+
+    public function destroy_car_properties($Id, $DBTable) {  
+        \DB::table($DBTable)->where('id', $Id)->delete();  
+        
+        return back();
     }
 
     /**

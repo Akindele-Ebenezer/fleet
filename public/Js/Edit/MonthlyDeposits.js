@@ -37,11 +37,15 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         DepositsId_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
  
         EditDepositsButton.addEventListener('click', () => {
+            EditDepositsButton.style.backgroundColor = '#21a911';
+            EditDepositsButton.textContent = '+ Updating..';
             EditDepositsForm.setAttribute('action', '/Update/Deposits/' + DepositsId_X.value);
             EditDepositsForm.submit();
         });
  
         ReverseDepositsButton.addEventListener('click', () => {
+            ReverseDepositsButton.style.backgroundColor = '#DF2E38';
+            ReverseDepositsButton.textContent = '- Reversing..';
             window.location = '/Reverse/Deposits/' + DepositsId_X.value + '/' + CardNumber.value + '/' + Amount_X.value;  
         });
     });
@@ -144,11 +148,15 @@ ShowMasterCardRecord_X_Edit.forEach(CardNumber => {
         DepositsId_MasterCard_X.value = CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
  
         EditMasterCardDepositsButton.addEventListener('click', () => {
+            EditMasterCardDepositsButton.style.backgroundColor = '#21a911';
+            EditMasterCardDepositsButton.textContent = '+ Updating..';
             EditMasterCardDepositsForm.setAttribute('action', '/Update/Deposits/Master/Cards/' + DepositsId_MasterCard_X.value);
             EditMasterCardDepositsForm.submit();
         });
  
         ReverseMasterCardDepositsButton.addEventListener('click', () => {
+            ReverseMasterCardDepositsButton.style.backgroundColor = '#DF2E38';
+            ReverseMasterCardDepositsButton.textContent = '- Reversing..';
             window.location = '/Reverse/Deposits/Master/Cards/' + DepositsId_MasterCard_X.value + '/' + CardNumber_MasterCard_X.value + '/' + Amount_MasterCard_X.value;  
         });
     });

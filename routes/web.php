@@ -37,6 +37,10 @@ Route::post('/Delete/Documents/Car/{Car}/{Document}', [CarController::class, 'ca
 Route::post('/Add/Car/{Car}', [CarController::class, 'store'])->name('store_MyRecords'); 
 Route::get('/Update/Car/{Car}', [CarController::class, 'update'])->name('UpdateCar');
 Route::get('/Delete/Car/{Car}', [CarController::class, 'destroy'])->name('DeleteCar');
+
+Route::post('/Cars/Add/Properties', [CarController::class, 'store_car_properties'])->name('store_CarProperties'); 
+Route::get('/Update/Car/Properties/{Id}/{Name}/{DBTable}', [CarController::class, 'update_car_properties'])->name('UpdateCarProperties');
+Route::get('/Delete/Car/Properties/{Id}/{DBTable}', [CarController::class, 'destroy_car_properties'])->name('DeleteCarProperties');
   
 Route::get('/Edit/Maintenance', [MaintenanceController::class, 'my_records_maintenance'])->name('EditMaintenance'); 
 Route::post('/Add/Maintenance/{Maintenance}', [MaintenanceController::class, 'store'])->name('store_Maintenance'); 

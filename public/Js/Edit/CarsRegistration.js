@@ -196,3 +196,66 @@ PermissionDeniedButton.forEach(Button => {
         }, 5000);
     });
 });
+
+let CarProperties_EditButton = document.querySelectorAll('.car-properties-table-wrapper .edit');
+let CarProperties_DeleteButton = document.querySelectorAll('.car-properties-table-wrapper .delete');
+let CarProperties_EditModal = document.querySelector('.edit-car-properties-wrapper');
+let CarProperties_EditModal_CloseIcon = document.querySelectorAll('.CarProperties_EditModal_CloseIcon');
+let CarProperties_EditModal_Title = document.querySelector('.EditCarPropertiseModal_Title');
+let CarProperties_EditModal_Id = document.querySelector('.edit-car-properties-wrapper input[name=EditCarPropertiseModal_Id]');
+let CarProperties_EditModal_Name = document.querySelector('.edit-car-properties-wrapper input[name=EditCarPropertiseModal_Name]');
+let UpdateCarProperties = document.querySelector('.edit-car-properties-wrapper button[name=UpdateCarProperties]');
+let EditCarPropertiesForm = document.querySelector('.EditCarPropertiesForm');
+let Organisation_ = document.querySelectorAll('.Organisation_');
+
+CarProperties_EditButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        CarProperties_EditModal.style.display = 'flex';
+        CarProperties_EditModal_Title.textContent = 'Edit ' + Button.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        CarProperties_EditModal_Id.value = Button.nextElementSibling.textContent;
+        CarProperties_EditModal_Name.value = Button.nextElementSibling.nextElementSibling.textContent; 
+        let DBTableName = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+
+        if(DBTableName === 'organisations') {
+            Organisation_.forEach(Organisation => {
+                Organisation.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+                Organisation.classList.remove('Hide');
+
+                CarProperties_EditModal_CloseIcon.forEach(CloseButton => {
+                    CloseButton.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        Organisation.classList.add('Hide');
+                    });
+                });
+            });
+        }
+
+        CarProperties_EditModal_CloseIcon.forEach(CloseButton => {
+            CloseButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                CarProperties_EditModal.style.display = 'none'; 
+            });
+        });
+
+        UpdateCarProperties.addEventListener('click', (e) => {
+            UpdateCarProperties.textContent = 'Updating...';
+            UpdateCarProperties.style.backgroundColor = '#21a911';
+            e.preventDefault();
+            EditCarPropertiesForm.setAttribute('action', '/Update/Car/Properties/' + CarProperties_EditModal_Id.value + '/' + CarProperties_EditModal_Name.value + '/' + DBTableName);             
+            EditCarPropertiesForm.submit();
+        });
+    });
+});
+
+CarProperties_DeleteButton.forEach(Button => {
+    Button.addEventListener('click', () => {
+        Button.textContent = 'Deleting...';
+        Button.style.width = 'fit-content';
+
+        let CarProperties_DeleteModal_Id = Button.nextElementSibling.textContent;
+        let DBTableName = Button.nextElementSibling.nextElementSibling.textContent;
+         
+        EditCarPropertiesForm.setAttribute('action', '/Delete/Car/Properties/' + CarProperties_DeleteModal_Id + '/' + DBTableName);             
+        EditCarPropertiesForm.submit(); 
+    });
+});

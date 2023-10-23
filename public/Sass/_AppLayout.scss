@@ -356,7 +356,7 @@
                 justify-content: center;
                 margin-bottom: 0.5em;
                 padding: .5em 0 0 0;
-                width: 20rem;
+                width: 35rem;
 
                 button {
                     background: $Color-1;
@@ -491,10 +491,11 @@
                             }
 
                             &-x {
+                                align-items: center;
                                 display: flex;
                                 justify-content: space-between;
                                 padding: 0.3em;
-                                width: 16em;
+                                width: 20em;
 
                                 span {
                                     &:first-of-type { 
@@ -506,7 +507,9 @@
                                     }
 
                                     &:last-of-type {
-                                        color: #ccc;
+                                        color: #aaa;
+                                        font-size: smaller;
+                                        text-align: right;
                                     }
                                 }
                             }
@@ -1093,3 +1096,109 @@
         }
     }
 }
+
+.edit-car-properties-wrapper {
+    background: rgba(0, 0, 0, .5);
+    display: flex;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: absolute;
+    width: 100vw;
+    z-index: 1000;
+
+    .EditCarPropertiesForm {
+        background: #fff;
+        border-radius: 1em;
+        padding: 2em;
+        width: 50em;
+
+        .EditCarPropertiesButtons {
+            display: flex;
+            justify-content: end;
+
+            button {
+                padding-inline: 1em;
+
+                &:first-of-type {
+                    margin-right: .5em;
+                }
+
+                &:last-of-type {
+                    background-color: $Color-4;
+                }
+            }
+        }
+
+        h1 {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2em;
+
+            span {
+                font-size: 2.3em;
+                font-weight: normal;
+
+                &:last-of-type {
+                    cursor: pointer;
+                }
+            }
+        }
+ 
+        hr {
+            border: 1px solid #eee;
+        }
+
+        input {
+            background: #fff;
+            border: 1px solid #ddd;
+            color: #333;
+            margin-block: 1.5em;
+            width: 100%; 
+        }
+    }
+}
+
+.car-properties-table {
+    border-collapse: collapse;
+    margin-block: 1em;
+    width: 100%;
+
+    td, th {
+        border: 1px solid #333;
+        color: #fff;
+        padding: .5em;
+        font-family: system-ui;
+        text-align: left;
+
+        &:hover {
+            background-color: #333;
+        }
+
+        button {
+            margin: unset;
+            width: 4em;
+
+            &.delete {
+                background-color: $Color-2 !important;
+            }
+
+            &.edit {
+                background-color: $Color-3 !important;
+            }
+        }
+    }
+
+    th { 
+        background-color: #111;
+        position: sticky;
+        top: -1px;
+     }
+
+    &-wrapper {
+        max-height: 22em;
+        overflow-y: scroll;
+    }
+}
+

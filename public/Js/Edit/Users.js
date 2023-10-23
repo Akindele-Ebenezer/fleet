@@ -83,11 +83,15 @@ ShowRecord_X_Edit.forEach(Email => {
             });
 
             EditUserButton.addEventListener('click', () => {
+                EditUserButton.style.backgroundColor = '#21a911';
+                EditUserButton.textContent = '+ Updating..';
                 EditUserForm.setAttribute('action', '/Update/User/' + UserId_X.value);
                 EditUserForm.submit();
             });
 
             DeleteUserButton.addEventListener('click', () => {
+                DeleteUserButton.style.backgroundColor = '#DF2E38';
+                DeleteUserButton.textContent = '- Deleting..';
                 window.location = '/Delete/User/' + UserId_X.value;  
             });
         });
@@ -170,6 +174,10 @@ AddUserButton.forEach(Button => {
             } else if (AddUserForm.children[4].lastElementChild.value === '') {
                 Error.textContent = 'Assign a password to new user';
             } else {
+                Error.style.backgroundColor = '#21a911';
+                Error.textContent = 'Adding User.. Please wait!';
+                AddUserButton_X.style.backgroundColor = '#DF2E38';
+                AddUserButton_X.textContent = '+ Processing..';
                 AddUserForm.submit();
             }
         });

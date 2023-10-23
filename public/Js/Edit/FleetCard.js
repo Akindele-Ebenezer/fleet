@@ -63,11 +63,15 @@ ShowRecord_X_Edit.forEach(CardNumber => {
         DepositsId_X.value = CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
  
         EditDepositsButton.addEventListener('click', () => {
+            EditDepositsButton.style.backgroundColor = '#21a911';
+            EditDepositsButton.textContent = '+ Updating..';
             EditDepositsForm.setAttribute('action', '/Update/Deposits/Fleet/Cards/' + DepositsId_X.value);
             EditDepositsForm.submit();
         });
  
         DeleteDepositsButton.addEventListener('click', () => {
+            DeleteDepositsButton.style.backgroundColor = '#DF2E38';
+            DeleteDepositsButton.textContent = '- Deleting..';
             window.location = '/Delete/Deposits/Fleet/Cards/' + DepositsId_X.value + '/' + CardNumber_X.value + '/' + Amount_X.value;  
         });
     });
@@ -107,11 +111,15 @@ ManageButton.forEach(Button => {
     }); 
 
     EditFleetCard.addEventListener('click', () => {
+        EditFleetCard.style.backgroundColor = '#21a911';
+        EditFleetCard.textContent = '+ Updating..';
         EditFleetCardForm_X.setAttribute('action', '/Update/Car/' + CardNumber_X.value);
         EditFleetCardForm_X.submit(); 
     });
 
     DeleteFleetCard.addEventListener('click', () => { 
+        DeleteFleetCard.style.backgroundColor = '#DF2E38';
+        DeleteFleetCard.textContent = '- Deleting..';
         EditFleetCardForm_X.setAttribute('action', '/Delete/Car/' + FleetCardId_X.value);
         EditFleetCardForm_X.submit(); 
     });
@@ -172,11 +180,15 @@ ManageMasterCardButton.forEach(Button => {
     }); 
 
     EditMasterCard.addEventListener('click', () => {
+        EditMasterCard.style.backgroundColor = '#21a911';
+        EditMasterCard.textContent = '+ Updating..';
         EditMasterCardForm_X.setAttribute('action', '/Management/Update/Master/Cards/' + CardNumber_MasterCard_X.value);
         EditMasterCardForm_X.submit(); 
     });
 
     DeleteMasterCard.addEventListener('click', () => { 
+        DeleteMasterCard.style.backgroundColor = '#DF2E38';
+        DeleteMasterCard.textContent = '- Deleting..';
         EditMasterCardForm_X.setAttribute('action', '/Management/Delete/Master/Cards/' + MasterCardId_X.value);
         EditMasterCardForm_X.submit(); 
     });

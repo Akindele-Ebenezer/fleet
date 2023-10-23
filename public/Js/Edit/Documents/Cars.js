@@ -40,6 +40,8 @@ ManageDocumentButtons.forEach(ManageDocumentButton => {
         CarDocument_VehicleNumber.value = ManageDocumentButton.nextElementSibling.textContent; 
 
         EditCarDocumentButton.addEventListener('click', () => {
+            EditCarDocumentButton.textContent = 'Updating...';
+            EditCarDocumentButton.style.backgroundColor = '#21a911';
             EditCarDocumentForm.setAttribute('action', '/Update/Documents/Car/' + CarDocument_VehicleNumber.value);
             EditCarDocumentForm.setAttribute('enctype', 'multipart/form-data'); 
             EditCarDocumentForm.setAttribute('method', 'POST'); 

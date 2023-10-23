@@ -50,11 +50,15 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         RefuelingId_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
  
         EditRefuelingButton.addEventListener('click', () => {
+            EditRefuelingButton.style.backgroundColor = '#21a911';
+            EditRefuelingButton.textContent = '+ Updating..';
             EditRefuelingForm.setAttribute('action', '/Update/Refueling/' + RefuelingId_X.value);
             EditRefuelingForm.submit();
         }); 
  
         ReverseRefuelingButton.addEventListener('click', () => {
+            ReverseRefuelingButton.style.backgroundColor = '#DF2E38';
+            ReverseRefuelingButton.textContent = '- Reversing..';
             window.location = '/Reverse/Refueling/' + CardNumber_X.value + '/' + Amount_X.value + '/' + RefuelingId_X.value;   
         });
     });
