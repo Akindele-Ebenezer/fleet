@@ -18,6 +18,7 @@ ShowDocument_X.forEach(Element => {
                     AlertComponent.style.display = 'none';
                 }, 5000);
             } else {
+                Button.textContent = 'Deleting...';
                 DeleteCarDocumentForm.setAttribute('action', '/Delete/Documents/Car/' + Button.nextElementSibling.textContent + '/' + Button.nextElementSibling.nextElementSibling.textContent);
                 DeleteCarDocumentForm.setAttribute('method', 'POST');
                 DeleteCarDocumentForm.submit(); 
