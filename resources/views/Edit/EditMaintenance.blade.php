@@ -70,11 +70,11 @@
                 <span><input type="text" id="SearchInput10" placeholder="Filter By Weeks" onkeyup="FilterSupplierNo()"></span>  
             </div>
         </table>
-        {{ $Maintenance__MyRecords->onEachSide(5)->links() }}
         @unless (count($Maintenance__MyRecords) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>
+    {{ $Maintenance__MyRecords->onEachSide(5)->links() }}
     <script src="{{ asset('Js/Edit/Maintenance.js') }}"></script>
     <script>
         let ExportButton = document.querySelector('.ExportToExcel');

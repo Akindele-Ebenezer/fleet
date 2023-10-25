@@ -67,11 +67,11 @@
                 <span><input type="text" id="SearchInput10" placeholder="Filter By KM " onkeyup="FilterKM()"></span>   
             </div>
         </table>
-        {{ $Refueling__MyRecords->onEachSide(5)->links() }}
         @unless (count($Refueling__MyRecords) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>
+    {{ $Refueling__MyRecords->onEachSide(5)->links() }}
     <script src="{{ asset('Js/Edit/Refueling.js') }}"></script>
     <script>
         let ExportButton = document.querySelector('.ExportToExcel');

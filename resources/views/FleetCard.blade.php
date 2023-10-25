@@ -133,10 +133,10 @@
                 <span><input type="text" id="SearchInput5" placeholder="Filter By Brought Forward" onkeyup="FilterBroughtForward()"></span>  
             </div>
         </table>
-        {{ $Cars->onEachSide(5)->links() }}
         @unless (count($Cars) > 0 AND count($MasterCards) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>
+    {{ $Cars->onEachSide(5)->links() }}
     <script src="{{ asset('Js/Edit/FleetCard.js') }}"></script>
 @endsection

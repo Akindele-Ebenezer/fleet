@@ -225,11 +225,11 @@
             </tr>
             @endforeach
         </table>
-        {{ $Cars->onEachSide(5)->links() }}
         @unless (count($Cars) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>
+    {{ $Cars->onEachSide(5)->links() }}
     <script src="{{ asset('Js/Edit/Documents/Cars.js') }}"></script>
     <script>
         let ExportButton = document.querySelector('.ExportToExcel');

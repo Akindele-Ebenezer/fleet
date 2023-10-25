@@ -186,15 +186,11 @@
                 <span><input type="text" id="SearchInput9" placeholder="Filter By Weeks" onkeyup="FilterSupplierNo()"></span>  
             </div>
         </table>
-        {{ $Maintenance->onEachSide(5)->links() }} 
         @if(!isset($_GET['Filter_All_Maintenance']) AND !isset($_GET['Filter_Maintenance_Yearly']) AND !isset($_GET['Filter_Maintenance_Range']))
         @php
             $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')->sum('Cost');
             $Date_from = \App\Models\Maintenance::select('Date')->whereNotNull('Date')->orderBy('Date', 'ASC')->first();
         @endphp
-        <div class="total-spent">
-            <p>Total amount spent on Maintenance from "{{ $Date_from->Date ?? 'NULL' }}" till date = ₦ {{ number_format($SumOfCarMaintenance) }}</p>
-        </div>
         @endif
         @isset($_GET['Filter_All_Maintenance'])
         <div class="total-spent">
@@ -211,6 +207,10 @@
             <p>Total amount spent on Maintenance for VEHICLE "{{ $_GET['VehicleNo'] }}", from "{{ $_GET['Date_From'] }}" to "{{ $_GET['Date_To'] }}" = ₦ {{ number_format($SumOfCarMaintenance) }}</p>
         </div>
         @endisset
+    </div>
+    {{ $Maintenance->onEachSide(5)->links() }} 
+    <div class="total-spent">
+        <p>Total amount spent on Maintenance from "{{ $Date_from->Date ?? 'NULL' }}" till date = ₦ {{ number_format($SumOfCarMaintenance) }}</p>
     </div>
     <script src="{{ asset('Js/ReadOnly/Maintenance.js') }}"></script>
     <script>

@@ -152,11 +152,11 @@
                 <span><input type="text" id="SearchInput6" placeholder="Filter By Cars Registered" onkeyup="FilterCarsRegistered()"></span>  
             </div>
         </table>
-        {{ $Users->onEachSide(5)->links() }}
         @unless (count($Users) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>
+    {{ $Users->onEachSide(5)->links() }}
     <script src="{{ asset('Js/Edit/Users.js') }}"></script>
     <script>
         let ExportButton = document.querySelector('.ExportToExcel');

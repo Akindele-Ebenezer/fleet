@@ -136,6 +136,6 @@
                 <span><input type="text" id="SearchInput3" placeholder="Filter By Registration Number" onkeyup="FilterRegistrationNumber()"></span>  
             </div>
         </table>
-        {{ $CarOwners->onEachSide(5)->links() }} 
     </div>
+    {{ $CarOwners->onEachSide(5)->links() }} 
 @endsection

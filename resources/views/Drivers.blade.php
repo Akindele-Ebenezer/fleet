@@ -35,8 +35,8 @@
             </tr>   
             @endforeach
         </table>
-        {{ $Drivers->onEachSide(5)->links() }} 
     </div>
+    {{ $Drivers->onEachSide(5)->links() }} 
     <script src="{{ asset('Js/Edit/Drivers.js') }}"></script>
     <script>
         let ExportButton = document.querySelector('.ExportToExcel');

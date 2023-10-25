@@ -204,16 +204,12 @@
                 <span><input type="text" id="SearchInput9" placeholder="Filter By Receipt No" onkeyup="FilterReceiptNo()"></span>  
                 <span><input type="text" id="SearchInput10" placeholder="Filter By KM " onkeyup="FilterKM()"></span>   
             </div>
-        </table>
-        {{ $Refuelings->onEachSide(5)->links() }} 
+        </table> 
         @if(!isset($_GET['Filter_All_Refueling']) AND !isset($_GET['Filter_Refueling_Yearly']) AND !isset($_GET['Filter_Refueling_Range']))
         @php
             $SumOfCarRefueling = \App\Models\Refueling::select('Amount')->sum('Amount');
             $Date_from = \App\Models\Refueling::select('Date')->whereNotNull('Date')->orderBy('Date', 'ASC')->first();
-        @endphp
-        <div class="total-spent">
-            <p>Total amount spent on Refueling from "{{ $Date_from->Date ?? 'NULL' }}" till date = ₦ {{ number_format($SumOfCarRefueling) }}</p>
-        </div>
+        @endphp 
         @endif
         @isset($_GET['Filter_All_Refueling'])
         <div class="total-spent">
@@ -230,6 +226,10 @@
             <p>Total amount spent on Refueling for VEHICLE "{{ $_GET['VehicleNo'] }}", from "{{ $_GET['Date_From'] }}" to "{{ $_GET['Date_To'] }}" = ₦ {{ number_format($SumOfCarRefueling) }}</p>
         </div>
         @endisset
+    </div>
+    {{ $Refuelings->onEachSide(5)->links() }} 
+    <div class="total-spent">
+        <p>Total amount spent on Refueling from "{{ $Date_from->Date ?? 'NULL' }}" till date = ₦ {{ number_format($SumOfCarRefueling) }}</p>
     </div>
     <script src="{{ asset('Js/ReadOnly/Refueling.js') }}"></script>
     <script>

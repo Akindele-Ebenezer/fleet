@@ -13,6 +13,56 @@
     }
 }
  
+nav {
+    &[aria-label] {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+
+        span, div p {
+            color: #fff;
+        }
+
+        .flex, .hidden { 
+            background: #111;
+            padding-inline: .5em;
+        }
+
+        .flex {
+            a {
+                background: $Color-4;
+                border-radius: .2em;
+                color: #fff;
+                padding-inline: .5em;
+                margin-inline: .24em;
+            }
+        }
+
+        .leading-5 {
+            background: #000;
+            color: #fff;
+        }
+
+        span[aria-current] {
+            span {
+                background: $Color-3;
+                border-radius: 0.1em;
+                margin-inline: .2em;
+                padding-inline: .45em;
+            }
+        }
+    }
+}
+
+.total-spent {
+    display: flex;
+    justify-content: center;
+
+    p {
+        color: #ddd;
+    }
+}
+
 .text-center { text-align: center !important; }
 
 .fuel-consumption {
@@ -937,51 +987,10 @@
         }
 
         .table-wrapper {
-            height: 60%;
+            height: 55%;
             margin-left: 2rem;
             overflow-y: scroll;
-            padding-bottom: 4rem;
-             
-            nav {
-                &[aria-label] {
-                    align-items: center;
-                    display: flex;
-                    justify-content: space-between;
-
-                    span, div p {
-                        color: #fff;
-                    }
-
-                    .flex, .hidden { 
-                        background: #111;
-                        padding-inline: .5em;
-                    }
-
-                    .flex {
-                        a {
-                            background: $Color-4;
-                            border-radius: .2em;
-                            color: #fff;
-                            padding-inline: .5em;
-                            margin-inline: .24em;
-                        }
-                    }
-
-                    .leading-5 {
-                        background: #000;
-                        color: #fff;
-                    }
-
-                    span[aria-current] {
-                        span {
-                            background: $Color-3;
-                            border-radius: 0.1em;
-                            margin-inline: .2em;
-                            padding-inline: .45em;
-                        }
-                    }
-                }
-            }
+            padding-bottom: 4rem; 
 
             .table-title {
                 background: #ddd;
@@ -990,15 +999,6 @@
                 display: inline-block;
                 margin-block: 0.5em;
                 padding: 0.5em; 
-            }
-
-            .total-spent {
-                display: flex;
-                justify-content: center;
-
-                p {
-                    color: #ddd;
-                }
             }
         }
 

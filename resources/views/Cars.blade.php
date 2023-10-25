@@ -101,10 +101,10 @@
                 <span><input type="text" id="SearchInput3" placeholder="Filter By Refueling" onkeyup="FilterRefueling()"></span>  
                 <span><input type="text" id="SearchInput4" placeholder="Filter By Balance" onkeyup="FilterBalance()"></span>   
             </div>
-            {{ $Cars->onEachSide(1)->links() }}
         </table> 
         @unless (count($Cars) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>
+    {{ $Cars->onEachSide(1)->links() }}
 @endsection

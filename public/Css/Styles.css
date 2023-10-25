@@ -654,6 +654,44 @@ form select option {
   translate: 0 -0.7em;
 }
 
+nav[aria-label] {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+nav[aria-label] span, nav[aria-label] div p {
+  color: #fff;
+}
+nav[aria-label] .flex, nav[aria-label] .hidden {
+  background: #111;
+  padding-inline: 0.5em;
+}
+nav[aria-label] .flex a {
+  background: #3034b5;
+  border-radius: 0.2em;
+  color: #fff;
+  padding-inline: 0.5em;
+  margin-inline: 0.24em;
+}
+nav[aria-label] .leading-5 {
+  background: #000;
+  color: #fff;
+}
+nav[aria-label] span[aria-current] span {
+  background: #41a341;
+  border-radius: 0.1em;
+  margin-inline: 0.2em;
+  padding-inline: 0.45em;
+}
+
+.total-spent {
+  display: flex;
+  justify-content: center;
+}
+.total-spent p {
+  color: #ddd;
+}
+
 .text-center {
   text-align: center !important;
 }
@@ -1407,39 +1445,10 @@ form select option {
   border-left: 3px solid;
 }
 .report-inner .table-wrapper {
-  height: 60%;
+  height: 55%;
   margin-left: 2rem;
   overflow-y: scroll;
   padding-bottom: 4rem;
-}
-.report-inner .table-wrapper nav[aria-label] {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-}
-.report-inner .table-wrapper nav[aria-label] span, .report-inner .table-wrapper nav[aria-label] div p {
-  color: #fff;
-}
-.report-inner .table-wrapper nav[aria-label] .flex, .report-inner .table-wrapper nav[aria-label] .hidden {
-  background: #111;
-  padding-inline: 0.5em;
-}
-.report-inner .table-wrapper nav[aria-label] .flex a {
-  background: #3034b5;
-  border-radius: 0.2em;
-  color: #fff;
-  padding-inline: 0.5em;
-  margin-inline: 0.24em;
-}
-.report-inner .table-wrapper nav[aria-label] .leading-5 {
-  background: #000;
-  color: #fff;
-}
-.report-inner .table-wrapper nav[aria-label] span[aria-current] span {
-  background: #41a341;
-  border-radius: 0.1em;
-  margin-inline: 0.2em;
-  padding-inline: 0.45em;
 }
 .report-inner .table-wrapper .table-title {
   background: #ddd;
@@ -1448,13 +1457,6 @@ form select option {
   display: inline-block;
   margin-block: 0.5em;
   padding: 0.5em;
-}
-.report-inner .table-wrapper .total-spent {
-  display: flex;
-  justify-content: center;
-}
-.report-inner .table-wrapper .total-spent p {
-  color: #ddd;
 }
 .report-inner .table-head.filter {
   display: flex;

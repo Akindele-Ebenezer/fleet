@@ -129,6 +129,6 @@
                 <span><input type="text" id="SearchInput5" placeholder="Filter By Comments.." onkeyup="FilterComments()"></span> 
             </div>
         </table>
-        {{ $Cars->onEachSide(5)->links() }} 
     </div> 
+    {{ $Cars->onEachSide(5)->links() }} 
 @endsection
