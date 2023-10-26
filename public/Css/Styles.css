@@ -1997,6 +1997,9 @@ nav[aria-label] span[aria-current] span {
   width: 2em;
   border-radius: 0.5em;
 }
+.analytics .inner-4 .x--inner .custom-chart {
+  width: 44em;
+}
 .analytics .inner-4 .x--inner .custom-chart .chart-label {
   color: #ddd;
 }
