@@ -55,6 +55,7 @@
         ${'CostOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'MAINTENANCE')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Cost');
         ${'CostOfCarDeposits_' . $MonthNames[$i]} = \App\Models\Deposits::select('Amount')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Amount');
         ${'CostOfCarRefueling_' . $MonthNames[$i]} = \App\Models\Refueling::select('Amount')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Amount');
+        ${'FleetSurveyCost_TOTAL_' . $MonthNames[$i]} = ${'CostOfCarRepairs_' . $MonthNames[$i]} + ${'CostOfCarMaintenance_' . $MonthNames[$i]} + ${'CostOfCarDeposits_' . $MonthNames[$i]} + ${'CostOfCarRefueling_' . $MonthNames[$i]};
     } 
 @endphp
 
@@ -770,14 +771,14 @@
                             <div class="custom-chart-inner">
                                 <div class="chart-label">{{ $MonthNames[$i] }}</div><div class="chart-data Total tooltip-x" style="width: {{ ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} }}%">
                                     <div class="tooltip-inner">
-                                        <h3><span class="legend-total"></span> Total</h3>
+                                        <h3><span class="legend-total"></span> Total :: ₦ {{ number_format(${'FleetSurveyCost_TOTAL_' . $MonthNames[$i]}) }}</h3>
                                         <span class="legend-data">100% / {{ ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} }}</span>
                                     </div>
                                 </div>
                                     @unless (empty(${'NumberOfCarMaintenance_' . $MonthNames[$i]}))
                                         <div class="chart-label chart-label-2"></div><div class="chart-data chart-data-2 Maintenance tooltip-x" style="width: {{ ${'NumberOfCarMaintenance_' . $MonthNames[$i]} }}%">
                                             <div class="tooltip-inner">
-                                                <h3><span class="legend-maintenance"></span> Maintenance</h3>
+                                                <h3><span class="legend-maintenance"></span> Maintenance :: ₦ {{ number_format(${'CostOfCarMaintenance_' . $MonthNames[$i]}) }}</h3>
                                                 <span class="legend-data">{{ round(${'FleetSurvey_Maintenance_PERCENTAGE_' . $MonthNames[$i]}, 0) }}% / {{ ${'NumberOfCarMaintenance_' . $MonthNames[$i]} }}</span>
                                             </div>
                                         </div>
@@ -785,7 +786,7 @@
                                     @unless (empty(${'NumberOfCarDeposits_' . $MonthNames[$i]}))
                                     <div class="chart-label chart-label-2"></div><div class="chart-data chart-data-2 Deposits tooltip-x" style="width: {{ ${'NumberOfCarDeposits_' . $MonthNames[$i]} }}%">
                                         <div class="tooltip-inner">
-                                            <h3><span class="legend-deposits"></span> Deposits</h3>
+                                            <h3><span class="legend-deposits"></span> Deposits :: ₦ {{ number_format(${'CostOfCarDeposits_' . $MonthNames[$i]}) }}</h3>
                                             <span class="legend-data">{{ round(${'FleetSurvey_Deposits_PERCENTAGE_' . $MonthNames[$i]}, 0) }}% / {{ ${'NumberOfCarDeposits_' . $MonthNames[$i]} }}</span>
                                         </div>
                                     </div>
@@ -793,7 +794,7 @@
                                     @unless (empty(${'NumberOfCarRefueling_' . $MonthNames[$i]}))
                                     <div class="chart-label chart-label-2"></div><div class="chart-data chart-data-2 Refueling tooltip-x" style="width: {{ ${'NumberOfCarRefueling_' . $MonthNames[$i]} }}%">
                                         <div class="tooltip-inner">
-                                            <h3><span class="legend-refueling"></span> Refueling</h3>
+                                            <h3><span class="legend-refueling"></span> Refueling :: ₦ {{ number_format(${'CostOfCarRefueling_' . $MonthNames[$i]}) }}</h3>
                                             <span class="legend-data">{{ round(${'FleetSurvey_Refueling_PERCENTAGE_' . $MonthNames[$i]}, 0) }}% / {{ ${'NumberOfCarRefueling_' . $MonthNames[$i]} }}</span>
                                         </div>
                                     </div>
@@ -801,7 +802,7 @@
                                     @unless (empty(${'NumberOfCarRepairs_' . $MonthNames[$i]}))
                                     <div class="chart-label chart-label-2"></div><div class="chart-data chart-data-2 Repairs tooltip-x" style="width: {{ ${'NumberOfCarRepairs_' . $MonthNames[$i]} }}%">
                                         <div class="tooltip-inner">
-                                            <h3><span class="legend-repairs"></span> Repairs</h3>
+                                            <h3><span class="legend-repairs"></span> Repairs :: ₦ {{ number_format(${'CostOfCarRepairs_' . $MonthNames[$i]}) }}</h3>
                                             <span class="legend-data">{{ round(${'FleetSurvey_Repairs_PERCENTAGE_' . $MonthNames[$i]}, 0) }}% / {{ ${'NumberOfCarRepairs_' . $MonthNames[$i]} }}</span>
                                         </div>
                                     </div>
