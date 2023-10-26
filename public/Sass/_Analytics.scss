@@ -412,9 +412,27 @@
             font-size: 1.55em;
             padding-bottom: 1em;
 
-            small {
+            small {    
+                align-items: center;
                 color: #fff;
+                display: flex;
                 font-family: system-ui;
+                margin-top: 1em;
+
+                form {
+                    align-items: center;
+                    display: flex;
+
+                    button {
+                        margin: unset;
+                    }
+
+                    select {
+                        background: #333;
+                        margin-block: unset;
+                        margin-inline: 1em;
+                    }
+                }
             }
         }
 

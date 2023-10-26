@@ -1951,8 +1951,23 @@ nav[aria-label] span[aria-current] span {
   padding-bottom: 1em;
 }
 .analytics .inner-4 h2 small {
+  align-items: center;
   color: #fff;
+  display: flex;
   font-family: system-ui;
+  margin-top: 1em;
+}
+.analytics .inner-4 h2 small form {
+  align-items: center;
+  display: flex;
+}
+.analytics .inner-4 h2 small form button {
+  margin: unset;
+}
+.analytics .inner-4 h2 small form select {
+  background: #333;
+  margin-block: unset;
+  margin-inline: 1em;
 }
 .analytics .inner-4 .x--inner {
   background: #111;

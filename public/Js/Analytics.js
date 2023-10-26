@@ -13,3 +13,4 @@ AutomaticFilterButton.addEventListener('click', () => {
 ClearFilterButton.addEventListener('click', () => {
     window.location = '/Analytics'; 
 });
+ 

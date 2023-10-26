@@ -27,14 +27,20 @@
     $LastDaysOfEachMonths = [];
 
     for ($i = 0; $i < count($MonthNames); $i++) {   
-        ${"Timestamp_" . $MonthNames[$i]} = strtotime("" . $MonthNames[$i] . '' . "2023");           
+        $Year = date('Y');
+
+        if (isset($_GET['MonthlyAnalysis_YEAR_VALUE'])) {
+            $Year = $_GET['MonthlyAnalysis_YEAR_VALUE'];
+        }
+
+        ${"Timestamp_" . $MonthNames[$i]} = strtotime("" . $MonthNames[$i] . '' . $Year);           
         ${$MonthNames[$i] . '_First'} = date('Y-m-01', ${"Timestamp_" . $MonthNames[$i]});
         ${$MonthNames[$i] . '_Last'} = date('Y-m-t', ${"Timestamp_" . $MonthNames[$i]}); 
         array_push($FirstDaysOfEachMonths, ${$MonthNames[$i] . '_First'});
         array_push($LastDaysOfEachMonths, ${$MonthNames[$i] . '_Last'});
     
         ${'NumberOfCarRepairs_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'REPAIR')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->count();
-        ${'NumberOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count();
+        ${'NumberOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'MAINTENANCE')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count();
         ${'NumberOfCarDeposits_' . $MonthNames[$i]} = \App\Models\Deposits::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count();
         ${'NumberOfCarRefueling_' . $MonthNames[$i]} = \App\Models\Refueling::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count(); 
 
@@ -44,6 +50,11 @@
         ${'FleetSurvey_Maintenance_PERCENTAGE_' . $MonthNames[$i]} = ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} == 0 ? 0 : ${'NumberOfCarMaintenance_' . $MonthNames[$i]} / ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} * 100;
         ${'FleetSurvey_Deposits_PERCENTAGE_' . $MonthNames[$i]} = ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} == 0 ? 0 : ${'NumberOfCarDeposits_' . $MonthNames[$i]} / ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} * 100;
         ${'FleetSurvey_Refueling_PERCENTAGE_' . $MonthNames[$i]} = ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} == 0 ? 0 : ${'NumberOfCarRefueling_' . $MonthNames[$i]} / ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} * 100;
+
+        ${'CostOfCarRepairs_' . $MonthNames[$i]} = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'REPAIR')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Cost');
+        ${'CostOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'MAINTENANCE')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Cost');
+        ${'CostOfCarDeposits_' . $MonthNames[$i]} = \App\Models\Deposits::select('Amount')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Amount');
+        ${'CostOfCarRefueling_' . $MonthNames[$i]} = \App\Models\Refueling::select('Amount')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Amount');
     } 
 @endphp
 
@@ -732,7 +743,18 @@
                     <h2>
                         Monthly Analysis
                         <br>
-                        <small>Year {{ date('Y') }}</small>
+                        <small>
+                            Year {{ $Year }}
+                            <form>
+                                <select name="MonthlyAnalysis_YEAR_VALUE"> 
+                                    <option>Choose Year &nbsp;&nbsp;&nbsp;</option>
+                                    @for ($Year = 2000; $Year <= date('Y'); $Year++)
+                                        <option value="{{ $Year }}">{{ $Year }}
+                                    @endfor
+                                </select>
+                                <button name="MonthlyAnalysis_YEAR_FILTER">go</button>
+                            </form>
+                        </small>
                     </h2>
                     <div class="legend">
                         <div class="legend-x"> <span class="legend-1"></span> Maintenance</div>
