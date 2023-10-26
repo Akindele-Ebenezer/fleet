@@ -1962,6 +1962,7 @@ nav[aria-label] span[aria-current] span {
   display: flex;
 }
 .analytics .inner-4 h2 small form button {
+  background-color: #DF2E38;
   margin: unset;
 }
 .analytics .inner-4 h2 small form select {

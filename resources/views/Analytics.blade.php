@@ -769,7 +769,7 @@
                     @for ($i = 0; $i < count($MonthNames); $i++) 
                         @unless (empty(${'NumberOfCarMaintenance_' . $MonthNames[$i]}) AND empty(${'NumberOfCarDeposits_' . $MonthNames[$i]}) AND empty(${'NumberOfCarRefueling_' . $MonthNames[$i]}) AND empty(${'NumberOfCarRepairs_' . $MonthNames[$i]}))
                             <div class="custom-chart-inner">
-                                <div class="chart-label">{{ $MonthNames[$i] }}</div><div class="chart-data Total tooltip-x" style="width: {{ ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} }}%">
+                                <div class="chart-label">{{ $MonthNames[$i] }}</span></div><div class="chart-data Total tooltip-x" style="width: {{ ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} }}%">
                                     <div class="tooltip-inner">
                                         <h3><span class="legend-total"></span> Overall Cost :: ₦ {{ number_format(${'FleetSurveyCost_TOTAL_' . $MonthNames[$i]}) }}</h3>
                                         <span class="legend-data">Records :: {{ ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} }} (100%)</span>
@@ -781,6 +781,7 @@
                                                 <h3><span class="legend-maintenance"></span> Maintenance :: ₦ {{ number_format(${'CostOfCarMaintenance_' . $MonthNames[$i]}) }}</h3>
                                                 <span class="legend-data">Records :: {{ ${'NumberOfCarMaintenance_' . $MonthNames[$i]} }} ({{ round(${'FleetSurvey_Maintenance_PERCENTAGE_' . $MonthNames[$i]}, 0) }})%</span>
                                             </div>
+                                            <span class="Hide">{{ $FirstDaysOfEachMonths[$i] }}</span><span class="Hide">{{ $LastDaysOfEachMonths[$i] }}
                                         </div>
                                     @endunless
                                     @unless (empty(${'NumberOfCarDeposits_' . $MonthNames[$i]}))
@@ -789,6 +790,7 @@
                                             <h3><span class="legend-deposits"></span> Deposits :: ₦ {{ number_format(${'CostOfCarDeposits_' . $MonthNames[$i]}) }}</h3>
                                             <span class="legend-data">Records :: {{ ${'NumberOfCarDeposits_' . $MonthNames[$i]} }} ({{ round(${'FleetSurvey_Deposits_PERCENTAGE_' . $MonthNames[$i]}, 0) }}%)</span>
                                         </div>
+                                        <span class="Hide">{{ $FirstDaysOfEachMonths[$i] }}</span><span class="Hide">{{ $LastDaysOfEachMonths[$i] }}
                                     </div>
                                     @endunless
                                     @unless (empty(${'NumberOfCarRefueling_' . $MonthNames[$i]}))
@@ -797,7 +799,8 @@
                                             <h3><span class="legend-refueling"></span> Refueling :: ₦ {{ number_format(${'CostOfCarRefueling_' . $MonthNames[$i]}) }}</h3>
                                             <span class="legend-data">Records :: {{ ${'NumberOfCarRefueling_' . $MonthNames[$i]} }} ({{ round(${'FleetSurvey_Refueling_PERCENTAGE_' . $MonthNames[$i]}, 0) }}%)</span>
                                         </div>
-                                    </div>
+                                        <span class="Hide">{{ $FirstDaysOfEachMonths[$i] }}</span><span class="Hide">{{ $LastDaysOfEachMonths[$i] }}
+                                    </div> 
                                     @endunless
                                     @unless (empty(${'NumberOfCarRepairs_' . $MonthNames[$i]}))
                                     <div class="chart-label chart-label-2"></div><div class="chart-data chart-data-2 Repairs tooltip-x" style="width: {{ ${'NumberOfCarRepairs_' . $MonthNames[$i]} }}%">
@@ -805,6 +808,7 @@
                                             <h3><span class="legend-repairs"></span> Repairs :: ₦ {{ number_format(${'CostOfCarRepairs_' . $MonthNames[$i]}) }}</h3>
                                             <span class="legend-data">Records :: {{ ${'NumberOfCarRepairs_' . $MonthNames[$i]} }} ({{ round(${'FleetSurvey_Repairs_PERCENTAGE_' . $MonthNames[$i]}, 0) }}%)</span>
                                         </div>
+                                        <span class="Hide">{{ $FirstDaysOfEachMonths[$i] }}</span><span class="Hide">{{ $LastDaysOfEachMonths[$i] }}
                                     </div>
                                     @endunless 
                             </div>
