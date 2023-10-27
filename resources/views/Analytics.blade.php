@@ -28,9 +28,9 @@
 
     for ($i = 0; $i < count($MonthNames); $i++) {   
         $Year = date('Y');
-
+        
         if (isset($_GET['MonthlyAnalysis_YEAR_VALUE'])) {
-            $Year = $_GET['MonthlyAnalysis_YEAR_VALUE'];
+            $Year = $_GET['MonthlyAnalysis_YEAR_VALUE']; 
         }
 
         ${"Timestamp_" . $MonthNames[$i]} = strtotime("" . $MonthNames[$i] . '' . $Year);           
@@ -38,11 +38,11 @@
         ${$MonthNames[$i] . '_Last'} = date('Y-m-t', ${"Timestamp_" . $MonthNames[$i]}); 
         array_push($FirstDaysOfEachMonths, ${$MonthNames[$i] . '_First'});
         array_push($LastDaysOfEachMonths, ${$MonthNames[$i] . '_Last'});
-    
-        ${'NumberOfCarRepairs_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'REPAIR')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->count();
-        ${'NumberOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'MAINTENANCE')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count();
-        ${'NumberOfCarDeposits_' . $MonthNames[$i]} = \App\Models\Deposits::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count();
-        ${'NumberOfCarRefueling_' . $MonthNames[$i]} = \App\Models\Refueling::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count(); 
+ 
+        isset($_GET['VehicleNo']) ? (${'NumberOfCarRepairs_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->where('VehicleNumber', $VehicleNumber)->where('IncidentType', 'REPAIR')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->count()) : (${'NumberOfCarRepairs_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'REPAIR')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->count());
+        isset($_GET['VehicleNo']) ? (${'NumberOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->where('VehicleNumber', $VehicleNumber)->where('IncidentType', 'MAINTENANCE')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count()) : (${'NumberOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('VehicleNumber')->where('IncidentType', 'MAINTENANCE')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->count());
+        isset($_GET['VehicleNo']) ? (${'NumberOfCarDeposits_' . $MonthNames[$i]} = \App\Models\Deposits::select('VehicleNumber')->where('VehicleNumber', $VehicleNumber)->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->count()) : (${'NumberOfCarDeposits_' . $MonthNames[$i]} = \App\Models\Deposits::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count());
+        isset($_GET['VehicleNo']) ? (${'NumberOfCarRefueling_' . $MonthNames[$i]} = \App\Models\Refueling::select('VehicleNumber')->where('VehicleNumber', $VehicleNumber)->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->count()) : (${'NumberOfCarRefueling_' . $MonthNames[$i]} = \App\Models\Refueling::select('VehicleNumber')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]] )->count());
 
         ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} = ${'NumberOfCarRepairs_' . $MonthNames[$i]} + ${'NumberOfCarMaintenance_' . $MonthNames[$i]} + ${'NumberOfCarDeposits_' . $MonthNames[$i]} + ${'NumberOfCarRefueling_' . $MonthNames[$i]};
         ${'FleetSurvey_TOTAL_PERCENTAGE' . $MonthNames[$i]} = $FleetSurvey_TOTAL == 0 ? 0 : ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} / $FleetSurvey_TOTAL * 100;
@@ -51,10 +51,10 @@
         ${'FleetSurvey_Deposits_PERCENTAGE_' . $MonthNames[$i]} = ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} == 0 ? 0 : ${'NumberOfCarDeposits_' . $MonthNames[$i]} / ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} * 100;
         ${'FleetSurvey_Refueling_PERCENTAGE_' . $MonthNames[$i]} = ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} == 0 ? 0 : ${'NumberOfCarRefueling_' . $MonthNames[$i]} / ${'FleetSurvey_TOTAL_' . $MonthNames[$i]} * 100;
 
-        ${'CostOfCarRepairs_' . $MonthNames[$i]} = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'REPAIR')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Cost');
-        ${'CostOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'MAINTENANCE')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Cost');
-        ${'CostOfCarDeposits_' . $MonthNames[$i]} = \App\Models\Deposits::select('Amount')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Amount');
-        ${'CostOfCarRefueling_' . $MonthNames[$i]} = \App\Models\Refueling::select('Amount')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Amount');
+        isset($_GET['VehicleNo']) ? (${'CostOfCarRepairs_' . $MonthNames[$i]} = \App\Models\Maintenance::select('Cost')->where('VehicleNumber', $VehicleNumber)->where('IncidentType', 'REPAIR')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Cost')) : (${'CostOfCarRepairs_' . $MonthNames[$i]} = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'REPAIR')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Cost'));
+        isset($_GET['VehicleNo']) ? (${'CostOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('Cost')->where('VehicleNumber', $VehicleNumber)->where('IncidentType', 'MAINTENANCE')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Cost')) : (${'CostOfCarMaintenance_' . $MonthNames[$i]} = \App\Models\Maintenance::select('Cost')->where('IncidentType', 'MAINTENANCE')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Cost'));
+        isset($_GET['VehicleNo']) ? (${'CostOfCarDeposits_' . $MonthNames[$i]} = \App\Models\Deposits::select('Amount')->where('VehicleNumber', $VehicleNumber)->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Amount')) : (${'CostOfCarDeposits_' . $MonthNames[$i]} = \App\Models\Deposits::select('Amount')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Amount'));
+        isset($_GET['VehicleNo']) ? (${'CostOfCarRefueling_' . $MonthNames[$i]} = \App\Models\Refueling::select('Amount')->where('VehicleNumber', $VehicleNumber)->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Amount')) : (${'CostOfCarRefueling_' . $MonthNames[$i]} = \App\Models\Refueling::select('Amount')->whereBetween('Date', [$FirstDaysOfEachMonths[$i], $LastDaysOfEachMonths[$i]])->sum('Amount'));
         ${'FleetSurveyCost_TOTAL_' . $MonthNames[$i]} = ${'CostOfCarRepairs_' . $MonthNames[$i]} + ${'CostOfCarMaintenance_' . $MonthNames[$i]} + ${'CostOfCarDeposits_' . $MonthNames[$i]} + ${'CostOfCarRefueling_' . $MonthNames[$i]};
     } 
 @endphp
@@ -738,22 +738,22 @@
            </div>
            
         </div>
-        <div class="inner-4">
+        <div id="MonthlyAnalysis" class="inner-4">
             <div class="x--inner">
                 <div class="chart-heading">
                     <h2>
                         Monthly Analysis
                         <br>
                         <small>
-                            Year {{ $Year }}
-                            <form>
+                            Year {{ !isset($_GET['Year']) ? $Year : $_GET['Year'] }}
+                            <form action="#MonthlyAnalysis">
                                 <select name="MonthlyAnalysis_YEAR_VALUE"> 
                                     <option>Choose Year &nbsp;&nbsp;&nbsp;</option>
                                     @for ($Year = 2000; $Year <= date('Y'); $Year++)
                                         <option value="{{ $Year }}">{{ $Year }}
                                     @endfor
                                 </select>
-                                <button name="MonthlyAnalysis_YEAR_FILTER">go</button>
+                                <button>go</button>
                             </form>
                         </small>
                     </h2>
