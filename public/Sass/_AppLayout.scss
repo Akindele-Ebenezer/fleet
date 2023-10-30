@@ -693,11 +693,31 @@ nav {
                     display: flex;
                     justify-content: space-between;
                     height: 4em;
-                    padding-block: .5em;
+                    padding: .5em;
+
+                    &.VehicleLicense { background: #333; }
 
                     button {
                         background-color: $Color-2;
                         margin: unset;
+                    }
+
+                    .expired {
+                        background: $Color-2;
+                    }
+
+                    .not-registered {
+                        background: $Color-5;
+                    }
+
+                    .up-to-date {
+                        background: $Color-3;
+                    }
+
+                    .expired, .up-to-date, .not-registered {
+                        border-radius: 0.2em;
+                        color: #fff;
+                        padding-inline: 0.5em;
                     }
 
                     &:hover {

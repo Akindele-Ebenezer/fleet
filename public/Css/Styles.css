@@ -1217,11 +1217,28 @@ nav[aria-label] span[aria-current] span {
   display: flex;
   justify-content: space-between;
   height: 4em;
-  padding-block: 0.5em;
+  padding: 0.5em;
+}
+.report-inner .table td .document.VehicleLicense {
+  background: #333;
 }
 .report-inner .table td .document button {
   background-color: #DF2E38;
   margin: unset;
+}
+.report-inner .table td .document .expired {
+  background: #DF2E38;
+}
+.report-inner .table td .document .not-registered {
+  background: #787500;
+}
+.report-inner .table td .document .up-to-date {
+  background: #41a341;
+}
+.report-inner .table td .document .expired, .report-inner .table td .document .up-to-date, .report-inner .table td .document .not-registered {
+  border-radius: 0.2em;
+  color: #fff;
+  padding-inline: 0.5em;
 }
 .report-inner .table td .document:hover {
   background: #333;

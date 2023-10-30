@@ -194,8 +194,20 @@
                         </div>
                     @endforeach  
                     @foreach ($CarDocuments_DRIVING_LICENCE as $Document_)
-                        <div class="document">
-                                Driving Licence
+                        @php
+                            $VehicleLicense = \DB::table('cars')->select(['VehicleNumber', 'LicenceExpiryDate'])->where('VehicleNumber', $Document->VehicleNumber)->first();
+                        @endphp
+                        <div class="document VehicleLicense">
+                            Vehicle License <span class="@if ($VehicleLicense->LicenceExpiryDate < date('Y-m-d') AND !empty($VehicleLicense->LicenceExpiryDate)) expired @endif {{ empty($VehicleLicense->LicenceExpiryDate) ? 'not-registered' : '' }} {{ $VehicleLicense->LicenceExpiryDate > date('Y-m-d') ? 'up-to-date' : '' }}">
+                                @if (empty($VehicleLicense->LicenceExpiryDate))
+                                    not-registered
+                                @endif
+                                @if ($VehicleLicense->LicenceExpiryDate < date('Y-m-d') AND !empty($VehicleLicense->LicenceExpiryDate))
+                                    expired 
+                                @endif
+                                @if ($VehicleLicense->LicenceExpiryDate > date('Y-m-d'))
+                                    up-to-date
+                                @endif
                         </div>
                     @endforeach  
                     @foreach ($CarDocuments_PUC_CERTIFICATE as $Document_)

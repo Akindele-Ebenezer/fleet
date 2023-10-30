@@ -9,6 +9,10 @@ use File;
 
 class CarController extends Controller
 {
+    public function bd() {
+        return view('bd');
+    }
+    
     public function config() {  
         $Cars = Car::whereNotNull('VehicleNumber')->orderBy('PurchaseDate', 'DESC')->paginate(14);
         $Cars__MyRecords = Car::whereNotNull('VehicleNumber')->selectRaw("*, TRIM(VehicleNumber) AS VehicleNumber")->where('UserId', self::USER_ID())->orderBy('PurchaseDate', 'DESC')->paginate(7); 
