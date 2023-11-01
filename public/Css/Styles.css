@@ -882,13 +882,29 @@ nav[aria-label] span[aria-current] span {
   padding-inline: 0.5em;
 }
 .report-data-heading .inner-x.filter-x button.expired {
+  background: #333;
+  border: 1px solid #DF2E38;
+}
+.report-data-heading .inner-x.filter-x button.expired:hover {
   background: #DF2E38;
 }
 .report-data-heading .inner-x.filter-x button.not-registered {
+  background: #333;
+  border: 1px solid #787500;
+}
+.report-data-heading .inner-x.filter-x button.not-registered:hover {
   background: #787500;
 }
 .report-data-heading .inner-x.filter-x button.up-to-date {
+  background: #333;
+  border: 1px solid #41a341;
+}
+.report-data-heading .inner-x.filter-x button.up-to-date:hover {
   background: #41a341;
+}
+.report-data-heading .inner-x.filter-x span {
+  color: #fff;
+  margin-left: 1em;
 }
 .report-data-heading .inner-x p {
   align-items: center;

@@ -274,17 +274,36 @@ nav {
                         padding-inline: 0.5em;
 
                         &.expired {
-                            background: $Color-2;
+                            background: $Color-1;
+                            border: 1px solid $Color-2;
+                            
+                            &:hover {
+                                background: $Color-2;
+                            }
                         }
     
                         &.not-registered {
-                            background: $Color-5;
+                            background: $Color-1;
+                            border: 1px solid $Color-5;
+                            
+                            &:hover {
+                                background: $Color-5;
+                            }
                         }
     
                         &.up-to-date {
-                            background: $Color-3;
-                        }
-    
+                            background: $Color-1;
+                            border: 1px solid $Color-3;
+                            
+                            &:hover {
+                                background: $Color-3;
+                            }
+                        } 
+                    }
+
+                    span {
+                        color: #fff;
+                        margin-left: 1em;
                     }
                 }
 

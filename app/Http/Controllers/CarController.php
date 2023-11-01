@@ -971,10 +971,10 @@ class CarController extends Controller
             'InsuranceExpiryDate' => $request->InsuranceExpiryDate,
             'FuelTankCapacity' => $request->FuelTankCapacity, 
         ]);
-             
+           
         \DB::table('car_documents')->insert([
             'VehicleNumber' => $request->VehicleNumber_CAR, 
-        ]);
+        ]); 
 
         return back();  
     }

@@ -546,6 +546,7 @@
                             $NumberOfDocuments_NotRegistered = \DB::table('cars')->whereNotNull('VehicleNumber')->whereNull('LicenceExpiryDate')->count();
                         @endphp
                         <div class="inner-x filter-x">
+                            <span>Vehicle License</span>
                             <button class="up-to-date">up-to-date ({{ $NumberOfDocuments_UpToDate }})</button>
                             <button class="expired">expired ({{ $NumberOfDocuments_Expired }})</button>
                             <button class="not-registered">not-registered ({{ $NumberOfDocuments_NotRegistered }})</button>
