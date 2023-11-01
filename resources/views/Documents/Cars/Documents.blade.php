@@ -203,7 +203,7 @@
                 <td class="td-2">
                     @foreach ($CarDocuments_REGISTRATION_CERTIFICATE as $Document_)
                         <div class="document">
-                                Registration Certificate
+                            Driver's License 
                         </div>
                     @endforeach  
                     @foreach ($CarDocuments_DRIVING_LICENCE as $Document_)
