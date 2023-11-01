@@ -871,6 +871,25 @@ nav[aria-label] span[aria-current] span {
   padding-block: 1rem;
   padding-left: 0.5em;
 }
+.report-data-heading .inner-x.filter-x {
+  background: #222;
+  border-radius: 1em;
+}
+.report-data-heading .inner-x.filter-x button {
+  border-radius: 0.2em;
+  color: #fff;
+  margin: 1em;
+  padding-inline: 0.5em;
+}
+.report-data-heading .inner-x.filter-x button.expired {
+  background: #DF2E38;
+}
+.report-data-heading .inner-x.filter-x button.not-registered {
+  background: #787500;
+}
+.report-data-heading .inner-x.filter-x button.up-to-date {
+  background: #41a341;
+}
 .report-data-heading .inner-x p {
   align-items: center;
   color: #fff;

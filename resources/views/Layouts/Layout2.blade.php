@@ -539,6 +539,18 @@
                             ];
                         } 
                     @endphp
+                    @if (Route::is('Documents'))
+                        @php
+                            $NumberOfDocuments_UpToDate = \DB::table('cars')->whereNotNull('VehicleNumber')->where('LicenceExpiryDate', '>', date('Y-m-d'))->count();
+                            $NumberOfDocuments_Expired = \DB::table('cars')->whereNotNull(['VehicleNumber', 'LicenceExpiryDate'])->where('LicenceExpiryDate', '<', date('Y-m-d'))->count();
+                            $NumberOfDocuments_NotRegistered = \DB::table('cars')->whereNotNull('VehicleNumber')->whereNull('LicenceExpiryDate')->count();
+                        @endphp
+                        <div class="inner-x filter-x">
+                            <button class="up-to-date">up-to-date ({{ $NumberOfDocuments_UpToDate }})</button>
+                            <button class="expired">expired ({{ $NumberOfDocuments_Expired }})</button>
+                            <button class="not-registered">not-registered ({{ $NumberOfDocuments_NotRegistered }})</button>
+                        </div>
+                    @endif
                     <div class="search">
                         @php
                             $MasterCardNumber = \App\Models\MasterCard::select('CardNumber')->orderBy('Date', 'DESC')->first();

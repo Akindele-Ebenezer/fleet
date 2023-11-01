@@ -18,7 +18,20 @@
                 $DocumentManagement_USER = \DB::table('user_privileges')
                                                 ->select('DocumentManagement')
                                                 ->where('UserId', session()->get('Id'))
-                                                ->first();   
+                                                ->first();  
+ 
+                if (isset($_GET['UpToDate'])) {
+                    $Cars = \DB::table('cars')->whereNotNull('VehicleNumber')->where('LicenceExpiryDate', '>', date('Y-m-d'))->orderBy('PurchaseDate', 'DESC')->paginate(14);
+                    $Cars->withPath($_SERVER['REQUEST_URI']);       
+                }
+                if (isset($_GET['Expired'])) {
+                    $Cars = \DB::table('cars')->whereNotNull(['VehicleNumber', 'LicenceExpiryDate'])->where('LicenceExpiryDate', '<', date('Y-m-d'))->orderBy('PurchaseDate', 'DESC')->paginate(14);
+                    $Cars->withPath($_SERVER['REQUEST_URI']);       
+                }
+                if (isset($_GET['NotRegistered'])) {
+                    $Cars = \DB::table('cars')->whereNotNull('VehicleNumber')->whereNull('LicenceExpiryDate')->orderBy('PurchaseDate', 'DESC')->paginate(14);
+                    $Cars->withPath($_SERVER['REQUEST_URI']);       
+                } 
             @endphp
             @unless (count($Cars) > 0)
             <tr>
@@ -26,7 +39,7 @@
             </tr>    
             @endunless
             @foreach ($Cars as $Document)
-            @php
+            @php 
                 $CarDocuments_REGISTRATION_CERTIFICATE = \DB::table('car_documents')->select(['VehicleNumber', 'RegistrationCertificate', 'RegistrationCertificateSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
                 $CarDocuments_DRIVING_LICENCE = \DB::table('car_documents')->select(['VehicleNumber', 'DrivingLicence', 'DrivingLicenceSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();
                 $CarDocuments_PUC_CERTIFICATE = \DB::table('car_documents')->select(['VehicleNumber', 'PUCCertificate', 'PUCCertificateSize'])->where('VehicleNumber', $Document->VehicleNumber)->get();

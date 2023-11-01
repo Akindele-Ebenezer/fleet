@@ -71,3 +71,19 @@ PermissionDeniedButton.forEach(Button => {
         }, 5000);
     });
 });
+
+let UpToDate_Button = document.querySelector('.up-to-date');
+let Expired_Button = document.querySelector('.expired');
+let NotRegistered_Button = document.querySelector('.not-registered');
+
+UpToDate_Button.addEventListener('click', () => {
+    window.location = '/Cars/Documents?UpToDate=';
+});
+
+Expired_Button.addEventListener('click', () => {
+    window.location = '/Cars/Documents?Expired=';
+});
+
+NotRegistered_Button.addEventListener('click', () => {
+    window.location = '/Cars/Documents?NotRegistered=';
+});

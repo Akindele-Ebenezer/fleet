@@ -263,6 +263,31 @@ nav {
                     padding-left: 0.5em;
                 }
 
+                &.filter-x {
+                    background: #222;
+                    border-radius: 1em;
+
+                    button {
+                        border-radius: 0.2em;
+                        color: #fff;
+                        margin: 1em;
+                        padding-inline: 0.5em;
+
+                        &.expired {
+                            background: $Color-2;
+                        }
+    
+                        &.not-registered {
+                            background: $Color-5;
+                        }
+    
+                        &.up-to-date {
+                            background: $Color-3;
+                        }
+    
+                    }
+                }
+
                 p {
                     align-items: center;   
                     color: #fff;
