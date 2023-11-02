@@ -34,8 +34,8 @@ class AnalyticsController extends Controller
         $NumberNumberOfCars_INACTIVE_PERCENTAGE = $NumberOfCars == 0 ? 0 : $NumberOfCars_INACTIVE / $NumberOfCars * 100;
     
         $NumberOfDrivers = \App\Models\Car::select('id')->whereNotNull('Driver')->count();
-        
-        $NumberOfCars_MAINTENANCE = \App\Models\Maintenance::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
+         
+        $NumberOfCars_MAINTENANCE = \App\Models\Maintenance::select('VehicleNumber')
                                                             ->groupBy('VehicleNumber')
                                                             ->get();
         $NumberOfCars_MAINTENANCE_ = [];
@@ -44,7 +44,7 @@ class AnalyticsController extends Controller
         }
         $NumberOfCars_MAINTENANCE = count($NumberOfCars_MAINTENANCE_);
     
-        $NumberOfCars_REPAIRS = \App\Models\Maintenance::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
+        $NumberOfCars_REPAIRS = \App\Models\Maintenance::select('VehicleNumber')
                                                             ->groupBy('VehicleNumber')
                                                             ->where('IncidentType', 'REPAIR')
                                                             ->get();
@@ -54,7 +54,7 @@ class AnalyticsController extends Controller
         } 
         $NumberOfCars_REPAIRS = count($NumberOfCars_REPAIRS_); 
     
-        $NumberOfCars_REEFUELING = \App\Models\Refueling::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
+        $NumberOfCars_REEFUELING = \App\Models\Refueling::select('VehicleNumber')
                                                             ->groupBy('VehicleNumber') 
                                                             ->get();
      
@@ -64,7 +64,7 @@ class AnalyticsController extends Controller
         } 
         $NumberOfCars_REEFUELING = count($NumberOfCars_REEFUELING_); 
          
-        $NumberOfCars_DEPOSITS = \App\Models\Deposits::selectRaw("REPLACE(VehicleNumber, ' ', '') ")
+        $NumberOfCars_DEPOSITS = \App\Models\Deposits::select('VehicleNumber')
                                                             ->groupBy('VehicleNumber')
                                                             ->get();
         $NumberOfCars_DEPOSITS_ = [];
