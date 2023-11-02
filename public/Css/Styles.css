@@ -318,6 +318,10 @@ footer {
   display: block !important;
 }
 
+.ActiveDocument {
+  background: #333 !important;
+}
+
 .TableRow {
   display: table-row !important;
 }

@@ -2,8 +2,13 @@ let ShowDocument_X = document.querySelectorAll('.report-inner .table td.td-x .x-
 let DeleteCarDocumentButtons = document.querySelectorAll('.delete-document-btn');
 let DeleteCarDocumentForm = document.querySelector('.DeleteCarDocumentForm');
 
+ShowDocument_X[0].parentElement.classList.add('ActiveDocument');
+ShowDocument_X[0].parentElement.parentElement.nextElementSibling.classList.add('TableRow'); 
+ShowDocument_X[0].parentElement.parentElement.nextElementSibling.nextElementSibling.classList.add('TableRow');
+
 ShowDocument_X.forEach(Element => {
     Element.addEventListener('click', () => { 
+        Element.parentElement.classList.toggle('ActiveDocument');
         Element.parentElement.parentElement.nextElementSibling.classList.toggle('TableRow'); 
         Element.parentElement.parentElement.nextElementSibling.nextElementSibling.classList.toggle('TableRow');
     });
