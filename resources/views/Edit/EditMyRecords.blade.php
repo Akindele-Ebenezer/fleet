@@ -28,37 +28,37 @@
                                 </div>
                                 <div class="inner">
                                     <div class="inner-x">
-                                        <span>Monthly Budget</span>
+                                        <span class="MonthlyBudget-"></span>
                                         <span>₦ {{ empty($Car->MonthlyBudget) ? '' : number_format($Car->MonthlyBudget) }}</span>
                                     </div>
                                     <div class="inner-x">
-                                        <span>CARD Number</span>
+                                        <span class="CardNumber-"></span>
                                         <span>{{ $Car->CardNumber }}</span>
                                     </div>
                                     <div class="inner-x">
-                                        <span>Model</span>
+                                        <span class="Model-"></span>
                                         <span>{{ $Car->Model }}</span>
                                     </div>
                                     <div class="inner-x">
-                                        <span>Total Deposits</span>
+                                        <span class="Deposits-"></span>
                                         <span>₦ {{ empty($Car->TotalDeposits) ? '' : number_format($Car->TotalDeposits) }}</span>
                                     </div>
                                 </div>
                                 <div class="inner">
                                     <div class="inner-x">
-                                        <span>Registration No</span>
+                                        <span class="RegistrationNo-"></span>
                                         <span>{{ $Car->VehicleNumber }}</span>
                                     </div>
                                     <div class="inner-x">
-                                        <span>Chassis Number</span>
+                                        <span class="ChassisNumber-"></span>
                                         <span>{{ $Car->ChassisNumber }}</span>
                                     </div>
                                     <div class="inner-x">
-                                        <span>PIN Code</span>
+                                        <span class="PinCode-"></span>
                                         <span>{{ $Car->PinCode }}</span>
                                     </div>
                                     <div class="inner-x">
-                                        <span>Purchase Date</span>
+                                        <span class="PurchaseDate-"></span>
                                         <span>{{ $Car->PurchaseDate }}</span>
                                     </div>
                                 </div>

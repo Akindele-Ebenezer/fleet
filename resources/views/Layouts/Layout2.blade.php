@@ -552,6 +552,47 @@
                             <button class="not-registered">not-registered ({{ $NumberOfDocuments_NotRegistered }})</button>
                         </div>
                     @endif
+                    @if (Route::is('Cars_Registration'))
+                    <div class="inner-x legend-x"> 
+                        <div class="legend-inner"><span class="CardNumber-"></span> Card Number</div>
+                        <div class="legend-inner"><span class="MonthlyBudget-"></span> Monthly Budget</div>
+                        <div class="legend-inner"><span class="ChassisNumber-"></span> Chassis Number</div>
+                        <div class="legend-inner"><span class="Deposits-"></span> Deposits</div>
+                        <div class="legend-inner"><span class="Model-"></span> Model</div>
+                        <div class="legend-inner"><span class="PurchaseDate-"></span> Purchase Date</div>
+                        <div class="legend-inner"><span class="Maker-"></span> Maker</div>
+                        <div class="legend-inner"><span class="PinCode-"></span> Pin Code</div>
+                    </div>
+                    @endif
+                    @if (Route::is('VehicleReport'))
+                    <div class="inner-x legend-x"> 
+                        <div class="legend-inner"><span class="CardNumber-"></span> Card Number</div>
+                        <div class="legend-inner"><span class="MonthlyBudget-"></span> Monthly Budget</div>
+                        <div class="legend-inner"><span class="ChassisNumber-"></span> Chassis Number</div>
+                        <div class="legend-inner"><span class="Driver-"></span> Driver</div>
+                        <div class="legend-inner"><span class="Deposits-"></span> Deposits</div>
+                        <div class="legend-inner"><span class="Model-"></span> Model</div>
+                        <div class="legend-inner"><span class="Maker-"></span> Maker</div>
+                        <div class="legend-inner"><span class="PinCode-"></span> Pin Code</div>
+                    </div>
+                    @endif
+                    @if (Route::is('CarOwners'))
+                    <div class="inner-x legend-x"> 
+                        <div class="legend-inner"><span class="maintenance-x-2"></span> Maintenance</div>
+                        <div class="legend-inner"><span class="repairs-x-2"></span> Repairs</div>
+                        <div class="legend-inner"><span class="refuelings-x"></span> Refuelings</div>
+                        <div class="legend-inner"><span class="deposits-x"></span> Deposits</div>
+                        <div class="legend-inner"><span class="aggregate-x"></span> Total</div>
+                    </div>
+                    @endif
+                    @if (Route::is('Users'))
+                    <div class="inner-x legend-x"> 
+                        <div class="legend-inner"><span class="maintenance-x-2"></span> Maintenance</div>
+                        <div class="legend-inner"><span class="repairs-x-2"></span> Repairs</div>
+                        <div class="legend-inner"><span class="refuelings-x"></span> Refuelings</div>
+                        <div class="legend-inner"><span class="deposits-x"></span> Deposits</div>
+                    </div>
+                    @endif
                     <div class="search">
                         @php
                             $MasterCardNumber = \App\Models\MasterCard::select('CardNumber')->orderBy('Date', 'DESC')->first();

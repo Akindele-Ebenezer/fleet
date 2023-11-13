@@ -9,7 +9,7 @@ let TerminalNo_X_DATA_Edit = document.querySelector('.TerminalNo_X_DATA_Edit');
 let CardNumber_X_DATA_Edit = document.querySelector('.CardNumber_X_DATA_Edit');
 let Quantity_X_DATA_Edit = document.querySelector('.Quantity_X_DATA_Edit');
 let Amount_X_DATA_Edit = document.querySelector('.Amount_X_DATA_Edit');
-let ReceiptNo_X_DATA_Edit = document.querySelector('.ReceiptNo_X_DATA_Edit');
+// let ReceiptNo_X_DATA_Edit = document.querySelector('.ReceiptNo_X_DATA_Edit');
 let KMLITER_X_DATA_Edit = document.querySelector('.KMLITER_X_DATA_Edit');
 
 let VehicleNumber_X = document.querySelector('.VehicleNumber_X');
@@ -19,7 +19,7 @@ let TerminalNo_X = document.querySelector('.TerminalNo_X');
 let CardNumber_X = document.querySelector('.CardNumber_X');
 let Quantity_X = document.querySelector('.Quantity_X');
 let Amount_X = document.querySelector('.Amount_X');
-let ReceiptNo_X = document.querySelector('.ReceiptNo_X');
+// let ReceiptNo_X = document.querySelector('.ReceiptNo_X');
 let KMLITER_X = document.querySelector('.KMLITER_X');
 let RefuelingId_X = document.querySelector('.RefuelingId_X');
 let CardType = document.querySelector('.CardType'); 
@@ -46,7 +46,7 @@ ShowRecord_X_Edit.forEach(VehicleNumber => {
         CardNumber_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Quantity_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Amount_X.value = BigInt(VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent.replace(/₦/g, '').replace(/,/g, ''));
-        ReceiptNo_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
+        // ReceiptNo_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
         RefuelingId_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
  
         EditRefuelingButton.addEventListener('click', () => {

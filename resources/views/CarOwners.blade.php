@@ -82,30 +82,30 @@
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
-                                    <span class="maintenance-x-2 underline">Maintenance</span>
+                                    <span class="maintenance-x-2 underline"></span>
                                     <span class="Hide">{{ $CarOwner->VehicleNumber }}</span>
                                     <span>₦ {{ number_format($SumOfMaintenance) }} ({{ $CarOwners_MAINTENANCE }})</span> 
                                 </div>
                                 <div class="inner-x">
-                                    <span>Repairs</span>
+                                    <span class="repairs-x-2"></span>
                                     {{-- <span class="Hide">repair</span> --}}
                                     <span>₦ {{ number_format($SumOfRepair) }} ({{ $CarOwners_REPAIRS }})</span>
                                 </div>
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
-                                    <span class="deposits-x underline">Deposits</span>
+                                    <span class="deposits-x underline"></span>
                                     <span class="Hide">{{ $CarOwner->CardNumber ?? 'null' }}</span>
                                     <span>₦ {{ number_format($SumOfDeposits) }} ({{ $CarOwners_DEPOSITS }})</span>
                                 </div>
                                 <div class="inner-x">
-                                    <span class="refuelings-x underline">Refueling</span>
+                                    <span class="refuelings-x underline"></span>
                                     <span class="Hide">{{ $CarOwner->VehicleNumber }}</span>
                                     <span>₦ {{ number_format($SumOfRefueling) }} ({{ $CarOwners_REFUELING }})</span>
                                 </div>
                                 <hr>
                                 <div class="inner-x">
-                                    <span>Aggregate</span>
+                                    <span class="aggregate-x"></span>
                                     <span>₦ {{ number_format($AggregateSum) }} ({{ $Aggregate }})</span>
                                 </div>
                                 <hr>

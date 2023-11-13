@@ -115,21 +115,21 @@
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
-                                    <span>Maintenance</span>
+                                    <span class="maintenance-x-2"></span>
                                     <span>{{ $HandleNumbers($NumberOfMaintenance_CURRENT_USER) }}</span> 
                                 </div>
                                 <div class="inner-x">
-                                    <span>Repairs</span>
+                                    <span class="repairs-x-2"></span>
                                     <span>{{ $HandleNumbers($NumberOfRepairs_CURRENT_USER) }}</span>
                                 </div>
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
-                                    <span>Deposits</span>
+                                    <span class="deposits-x"></span>
                                     <span>{{ $HandleNumbers($NumberOfDeposits_CURRENT_USER) }}</span>
                                 </div>
                                 <div class="inner-x">
-                                    <span>Refueling</span>
+                                    <span class="refuelings-x"></span>
                                     <span>{{ $HandleNumbers($NumberOfRefueling_CURRENT_USER) }}</span>
                                 </div>
                             </div> 

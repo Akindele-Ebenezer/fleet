@@ -42,37 +42,37 @@
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
-                                    <span>Card Number</span>
+                                    <span class="CardNumber-"></span>
                                     <span class="card-numbers-x underline">{{ $Car->CardNumber }}</span>
                                 </div>
                                 <div class="inner-x">
-                                    <span>Monthly Budget</span>
+                                    <span class="MonthlyBudget-"></span>
                                     <span>₦ {{ empty($Car->MonthlyBudget) ? '' : number_format($Car->MonthlyBudget) }}</span>
                                 </div>
                                 <div class="inner-x">
-                                    <span>Chassis Number</span>
+                                    <span class="ChassisNumber-"></span>
                                     <span>{{ $Car->ChassisNumber }}</span>
                                 </div>
                                 <div class="inner-x">
-                                    <span>Driver</span>
+                                    <span class="Driver-"> </span>
                                     <span class="drivers-x underline">{{ $Car->Driver }}</span>
                                 </div>
                             </div>
                             <div class="inner">
                                 <div class="inner-x">
-                                    <span>Model</span>
+                                    <span class="Model-"></span>
                                     <span class="models-x underline">{{ $Car->Model }}</span>
                                 </div>
                                 <div class="inner-x">
-                                    <span>Deposits</span>
+                                    <span class="Deposits-"></span>
                                     <span>₦ {{ empty($TotalDeposits) ? '' : number_format($TotalDeposits) }}</span>
                                 </div>
                                 <div class="inner-x">
-                                    <span>PIN Code</span>
+                                    <span class="PinCode-"></span>
                                     <span> {{ $Car->PinCode }}</span>
                                 </div>
                                 <div class="inner-x">
-                                    <span>Maker</span>
+                                    <span class="Maker-"></span>
                                     <span class="make-x underline">{{ $Car->Maker }}</span>
                                 </div>
                             </div>

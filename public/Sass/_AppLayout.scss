@@ -307,6 +307,39 @@ nav {
                     }
                 }
 
+                &.legend-x {
+                    background: #111; 
+                    border-radius: 0.5em;
+                    padding-block: 1em;
+                    justify-content: space-between;
+                    width: 40em;
+
+                    .legend-inner {
+                        align-items: center; 
+                        color: #ddd;
+                        display: flex;
+                        margin-inline: 0.5em;
+                        padding-inline: 0.5em;
+
+                        span {
+                            border-radius: 50%;
+                            display: block;
+                            height: 0.65em;
+                            margin-right: 0.5em;
+                            width: 0.65em;
+
+                            &.CardNumber-, &.maintenance-x-2 { background: #EC8F5E; }
+                            &.MonthlyBudget-, &.repairs-x-2 { background: #1640D6; }
+                            &.Driver-, &.PurchaseDate-,  &.refuelings-x { background: #C3ACD0; }
+                            &.Deposits-, &.deposits-x { background: #eeff00; }
+                            &.Model-, &.aggregate-x { background: #FF5B22; }
+                            &.PinCode- { background: #ffffff; }
+                            &.ChassisNumber- { background: #A6CF98; }
+                            &.Maker- { background: rgb(191, 8, 224); }
+                        }
+                    }
+                }
+
                 p {
                     align-items: center;   
                     color: #fff;
@@ -589,15 +622,26 @@ nav {
                                 display: flex;
                                 justify-content: space-between;
                                 padding: 0.3em;
-                                width: 20em;
+                                width: 13em;
 
                                 span {
-                                    &:first-of-type { 
-                                        border-radius: 0.2em;
+                                    &:first-of-type {  
                                         color: #eee;
                                         font-family: system-ui;
+                                        height: .3em;
                                         margin-right: 0.5em;
                                         padding-inline: 0.3em;
+                                        width: 2em;
+
+                                        &.CardNumber-, &.maintenance-x-2 { background: #EC8F5E; }
+                                        &.MonthlyBudget-, &.repairs-x-2 { background: #1640D6; }
+                                        &.ChassisNumber- { background: #A6CF98; }
+                                        &.Driver-, &.PurchaseDate-, &.refuelings-x { background: #C3ACD0; }
+                                        &.Model-, &.aggregate-x { background: #FF5B22; }
+                                        &.Deposits-, &.deposits-x { background: #eeff00; }
+                                        &.PinCode- { background: #ffffff; }
+                                        &.Maker- { background: rgb(191, 8, 224); }
+                                        &.RegistrationNo- { background: rgb(137, 14, 57); }
                                     }
 
                                     &:last-of-type {
@@ -1176,7 +1220,7 @@ nav {
         background: #fff;
         border-radius: 1em;
         padding: 2em;
-        width: 50em;
+        width: 30em;
 
         .EditCarPropertiesButtons {
             display: flex;

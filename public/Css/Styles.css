@@ -910,6 +910,51 @@ nav[aria-label] span[aria-current] span {
   color: #fff;
   margin-left: 1em;
 }
+.report-data-heading .inner-x.legend-x {
+  background: #111;
+  border-radius: 0.5em;
+  padding-block: 1em;
+  justify-content: space-between;
+  width: 40em;
+}
+.report-data-heading .inner-x.legend-x .legend-inner {
+  align-items: center;
+  color: #ddd;
+  display: flex;
+  margin-inline: 0.5em;
+  padding-inline: 0.5em;
+}
+.report-data-heading .inner-x.legend-x .legend-inner span {
+  border-radius: 50%;
+  display: block;
+  height: 0.65em;
+  margin-right: 0.5em;
+  width: 0.65em;
+}
+.report-data-heading .inner-x.legend-x .legend-inner span.CardNumber-, .report-data-heading .inner-x.legend-x .legend-inner span.maintenance-x-2 {
+  background: #EC8F5E;
+}
+.report-data-heading .inner-x.legend-x .legend-inner span.MonthlyBudget-, .report-data-heading .inner-x.legend-x .legend-inner span.repairs-x-2 {
+  background: #1640D6;
+}
+.report-data-heading .inner-x.legend-x .legend-inner span.Driver-, .report-data-heading .inner-x.legend-x .legend-inner span.PurchaseDate-, .report-data-heading .inner-x.legend-x .legend-inner span.refuelings-x {
+  background: #C3ACD0;
+}
+.report-data-heading .inner-x.legend-x .legend-inner span.Deposits-, .report-data-heading .inner-x.legend-x .legend-inner span.deposits-x {
+  background: #eeff00;
+}
+.report-data-heading .inner-x.legend-x .legend-inner span.Model-, .report-data-heading .inner-x.legend-x .legend-inner span.aggregate-x {
+  background: #FF5B22;
+}
+.report-data-heading .inner-x.legend-x .legend-inner span.PinCode- {
+  background: #ffffff;
+}
+.report-data-heading .inner-x.legend-x .legend-inner span.ChassisNumber- {
+  background: #A6CF98;
+}
+.report-data-heading .inner-x.legend-x .legend-inner span.Maker- {
+  background: rgb(191, 8, 224);
+}
 .report-data-heading .inner-x p {
   align-items: center;
   color: #fff;
@@ -1136,14 +1181,42 @@ nav[aria-label] span[aria-current] span {
   display: flex;
   justify-content: space-between;
   padding: 0.3em;
-  width: 20em;
+  width: 13em;
 }
 .report-inner .table.list .car-info .info-inner .inner-x span:first-of-type {
-  border-radius: 0.2em;
   color: #eee;
   font-family: system-ui;
+  height: 0.3em;
   margin-right: 0.5em;
   padding-inline: 0.3em;
+  width: 2em;
+}
+.report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.CardNumber-, .report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.maintenance-x-2 {
+  background: #EC8F5E;
+}
+.report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.MonthlyBudget-, .report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.repairs-x-2 {
+  background: #1640D6;
+}
+.report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.ChassisNumber- {
+  background: #A6CF98;
+}
+.report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.Driver-, .report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.PurchaseDate-, .report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.refuelings-x {
+  background: #C3ACD0;
+}
+.report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.Model-, .report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.aggregate-x {
+  background: #FF5B22;
+}
+.report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.Deposits-, .report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.deposits-x {
+  background: #eeff00;
+}
+.report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.PinCode- {
+  background: #ffffff;
+}
+.report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.Maker- {
+  background: rgb(191, 8, 224);
+}
+.report-inner .table.list .car-info .info-inner .inner-x span:first-of-type.RegistrationNo- {
+  background: rgb(137, 14, 57);
 }
 .report-inner .table.list .car-info .info-inner .inner-x span:last-of-type {
   color: #aaa;
@@ -1598,7 +1671,7 @@ nav[aria-label] span[aria-current] span {
   background: #fff;
   border-radius: 1em;
   padding: 2em;
-  width: 50em;
+  width: 30em;
 }
 .edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons {
   display: flex;

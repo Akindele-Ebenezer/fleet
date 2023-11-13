@@ -29,7 +29,7 @@ class FleetReportController extends Controller
     }
 
     public function get_maintenance_report_data_count($Column, $Value) {
-        $Data = Maintenance::select('id')->where($Column, $Value)->count(); 
+        $Data = \App\Models\Maintenance::select('Cost')->where($Column, $Value)->sum('Cost'); 
         return $Data;
     } 
 
@@ -82,7 +82,7 @@ class FleetReportController extends Controller
         $fpdf->Ln(8); 
         $fpdf->Cell(35, 6, 'Maintenance', 0, 0, ''); 
         $fpdf->SetDrawColor(220, 220, 220);
-        $fpdf->Cell(50, 6, self::get_maintenance_report_data_count('VehicleNumber', $CarReportId), 1);
+        $fpdf->Cell(50, 6, 'N ' . number_format(self::get_maintenance_report_data_count('VehicleNumber', $CarReportId)), 1);
         $fpdf->Cell(20, 6, '');
         $fpdf->Cell(35, 6, 'Used By', 0, 0, ''); 
         $fpdf->Cell(50, 6, self::get_car_report_data('VehicleNumber', $CarReportId, 'CarOwner'), 1);
@@ -481,28 +481,24 @@ class FleetReportController extends Controller
         $fpdf->Cell(50, 6, ': ' . $Request->TerminalNo);
         $fpdf->Cell(20, 6, '');  
          
-        $fpdf->Cell(35, 6, 'Receipt No.', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . $Request->ReceiptNo);
+        $fpdf->Cell(35, 6, 'Quantity', 0, 0, ''); 
+        $fpdf->Cell(50, 6, ': ' . $Request->Quantity);
         $fpdf->Cell(20, 6, '');  
          
         $fpdf->Cell(35, 6, 'KM', 0, 0, ''); 
         $fpdf->Cell(50, 6, ': ' . $Request->KM);
-        $fpdf->Cell(20, 6, '');  
-         
+        $fpdf->Cell(20, 6, '');   
+
         $fpdf->Ln(8);
-        $fpdf->Cell(35, 6, 'KMLITER', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . $Request->KMLITER);
+        $fpdf->Cell(35, 6, 'Distance Traveled', 0, 0, ''); 
+        $fpdf->Cell(50, 6, ': ' . $Request->DistanceTraveled);
         $fpdf->Cell(20, 6, '');  
-         
-        $fpdf->Ln(8);
+          
         $fpdf->Cell(35, 6, 'Terminal No.', 0, 0, ''); 
         $fpdf->Cell(50, 6, ': ' . $Request->TerminalNo);
         $fpdf->Cell(20, 6, '');  
         $fpdf->Ln(8);
-        
-        $fpdf->Cell(35, 6, 'Quantity', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . $Request->Quantity);
-        $fpdf->Cell(20, 6, '');   
+           
         $fpdf->Ln(112); 
         $fpdf->Cell(50, 6, request()->session()->get('Name'));
         $fpdf->Cell(20, 6, '');  

@@ -17,8 +17,8 @@
                 <th onclick="sortTable(6)">Card No</th>
                 <th onclick="sortTable(7)">Quantity</th>
                 <th onclick="sortTable(8)">Amount</th>
-                <th onclick="sortTable(9)">Receipt No</th>
-                <th onclick="sortTable(10)">KM</th> 
+                {{-- <th onclick="sortTable(9)">Receipt No</th> --}}
+                <th onclick="sortTable(10)">Distance</th> 
                 <th class="text-center" onclick="sortTable(11)">Fuel Consumption</th> 
             </tr> 
             @unless (count($Refuelings) > 0)
@@ -174,7 +174,7 @@
                 <span class="CardNumber_X_DATA_Edit Hide">{{ $Refueling->CardNumber }}</span>
                 <span class="Quantity_X_DATA_Edit Hide">₦ {{ empty($Refueling->Quantity) ? '' : number_format($Refueling->Quantity) }}</span>
                 <span class="Amount_X_DATA_Edit Hide">{{ $Refueling->Amount }}</span>
-                <span class="ReceiptNo_X_DATA_Edit Hide">{{ $Refueling->ReceiptNo }}</span>
+                {{-- <span class="ReceiptNo_X_DATA_Edit Hide">{{ $Refueling->ReceiptNo }}</span> --}}
                 <span class="Hide"></span>
                 <span class="KMLITER_X_DATA_Edit Hide">{{ $Refueling->KMLITER }}</span>
                 <td>{{ $Refueling->Date }}</td>
@@ -184,9 +184,9 @@
                 <td class="card-numbers-x underline">{{ $Refueling->CardNumber }}</td>
                 <td>{{ $Refueling->Quantity }}</td>
                 <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
-                <td>{{ $Refueling->ReceiptNumber }}</td> 
+                {{-- <td>{{ $Refueling->ReceiptNumber }}</td>  --}}
                 <td> 
-                    {{ $Refueling->KM }}  
+                    {{ $Refueling->KM }} km
                 </td> 
                 <td class="fuel-consumption">{{ round($Refueling->Consumption, 1) }}</td>
             </tr>

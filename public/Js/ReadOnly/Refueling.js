@@ -9,7 +9,7 @@ let TerminalNo_X_DATA = document.querySelector('.TerminalNo_X_DATA');
 let CardNumber_X_DATA = document.querySelector('.CardNumber_X_DATA');
 let Quantity_X_DATA = document.querySelector('.Quantity_X_DATA');
 let Amount_X_DATA = document.querySelector('.Amount_X_DATA');
-let ReceiptNo_X_DATA = document.querySelector('.ReceiptNo_X_DATA');
+// let ReceiptNo_X_DATA = document.querySelector('.ReceiptNo_X_DATA');
 let KMLITER_X_DATA = document.querySelector('.KMLITER_X_DATA');
 
 let VehicleNumber_X = document.querySelector('.VehicleNumber_X');
@@ -18,9 +18,9 @@ let Time_X = document.querySelector('.Time_X');
 let TerminalNo_X = document.querySelector('.TerminalNo_X');
 let CardNumber_X = document.querySelector('.CardNumber_X');
 let Quantity_X = document.querySelector('.Quantity_X');
-let Amount_X = document.querySelector('.Amount_X');
-let ReceiptNo_X = document.querySelector('.ReceiptNo_X'); 
+let Amount_X = document.querySelector('.Amount_X'); 
 let KMLITER_X = document.querySelector('.KMLITER_X');
+let DistanceTraveled_X;
 
 ShowRecord_X.forEach(VehicleNumber => {
     VehicleNumber.addEventListener('click', () => {
@@ -34,7 +34,7 @@ ShowRecord_X.forEach(VehicleNumber => {
         CardNumber_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Quantity_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         Amount_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
-        ReceiptNo_X.value = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
+        DistanceTraveled_X = VehicleNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
     });
     let CancelModalIcons = document.querySelectorAll('.cancel-modal');
     
@@ -47,6 +47,6 @@ ShowRecord_X.forEach(VehicleNumber => {
     let PrintRefuelingButton = document.querySelector('.PrintRefueling');
 
     PrintRefuelingButton.addEventListener('click', () => {
-        window.open('/Cars/Refueling/Report/' + VehicleNumber_X.value + '?Date=' + Date_X.value + '&Time=' + Time_X.value + '&Mileage=' + Mileage_X.value + '&TerminalNo=' + TerminalNo_X.value + '&CardNumber=' + CardNumber_X.value + '&Quantity=' + Quantity_X.value + '&ReceiptNo=' + ReceiptNo_X.value + '&Amount=' + Amount_X.value, '_blank');
+        window.open('/Cars/Refueling/Report/' + VehicleNumber_X.value + '?Date=' + Date_X.value + '&Time=' + Time_X.value + '&Mileage=' + Mileage_X.value + '&TerminalNo=' + TerminalNo_X.value + '&CardNumber=' + CardNumber_X.value + '&Quantity=' + Quantity_X.value + '&Amount=' + Amount_X.value + '&DistanceTraveled=' + DistanceTraveled_X, '_blank');
     });
 });

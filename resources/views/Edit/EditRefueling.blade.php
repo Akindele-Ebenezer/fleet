@@ -37,7 +37,7 @@
                 <span class="CardNumber_X_DATA_Edit Hide">{{ $Refueling->CardNumber }}</span>
                 <span class="Quantity_X_DATA_Edit Hide">₦ {{ empty($Refueling->Quantity) ? '' : number_format($Refueling->Quantity) }}</span>
                 <span class="Amount_X_DATA_Edit Hide">{{ $Refueling->Amount }}</span>
-                <span class="ReceiptNo_X_DATA_Edit Hide">{{ $Refueling->ReceiptNo }}</span>
+                {{-- <span class="ReceiptNo_X_DATA_Edit Hide">{{ $Refueling->ReceiptNo }}</span> --}}
                 <span class="Hide"></span>
                 <span class="KMLITER_X_DATA_Edit Hide">{{ $Refueling->KMLITER }}</span>
                 <td>{{ $Refueling->Date }}</td>

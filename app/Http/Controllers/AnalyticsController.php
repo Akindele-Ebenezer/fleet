@@ -36,6 +36,7 @@ class AnalyticsController extends Controller
         $NumberOfDrivers = \App\Models\Car::select('id')->whereNotNull('Driver')->count();
          
         $NumberOfCars_MAINTENANCE = \App\Models\Maintenance::select('VehicleNumber')
+                                                            ->where('IncidentType', 'MAINTENANCE')
                                                             ->groupBy('VehicleNumber')
                                                             ->get();
         $NumberOfCars_MAINTENANCE_ = [];
