@@ -145,7 +145,7 @@
                         <img src="{{ asset('Images/balance-brought-forward.png') }}">
                     </div>
                     <div class="inner">
-                        <span>₦ {{ number_format($BalanceBroughtForward) }}</span>
+                        <span>₦ {{ $BalanceBroughtForward < 0 ? 0 : number_format($BalanceBroughtForward) }}</span>
                         <br>
                         <span>Brought Forward</span>
                     </div>

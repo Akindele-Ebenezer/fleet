@@ -90,6 +90,7 @@ class MaintenanceExport implements
             'REG NO.',
             '', 
             'Incident Action',
+            '', 
             'Details',
             'Date',
             'Time',
