@@ -49,7 +49,7 @@ class MaintenanceExport implements
                     ], 
                 'alignment' => [
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                 ],
                 // 'fill' => [
                 //     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
@@ -79,7 +79,7 @@ class MaintenanceExport implements
     public function columnFormats(): array
     {
         return [
-            'J' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER, 
+            'K' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER, 
         ];
     }
     
@@ -91,6 +91,7 @@ class MaintenanceExport implements
             '', 
             'Incident Action', 
             'Details',
+            '', 
             'Date',
             'Time',
             'Release Date',
@@ -98,6 +99,7 @@ class MaintenanceExport implements
             'Cost', 
             'Invoice Number', 
             'Week', 
+            'Attachment', 
             'User Id', 
             'Date In', 
             'Time In', 
@@ -109,8 +111,13 @@ class MaintenanceExport implements
     {
         return [
             'C' => 0,            
-            'P' => 0,            
-            'Q' => 0,            
+            'F' => 0,        
+            'R' => 0,          
+            'O' => 0,                  
+            'P' => 0,                  
+            'Q' => 0,                  
+            'R' => 0,            
+            'S' => 0,            
         ];
     }
 }

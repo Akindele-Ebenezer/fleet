@@ -49,7 +49,7 @@ class RefuelingExport implements
                     ], 
                 'alignment' => [
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                 ],
                 // 'fill' => [
                 //     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
@@ -111,7 +111,9 @@ class RefuelingExport implements
     {
         return [
             'C' => 0,             
+            'G' => 0,             
             'H' => 0,            
+            'I' => 0,             
             'R' => 0,            
             'S' => 0,            
         ];
