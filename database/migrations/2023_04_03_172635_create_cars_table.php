@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('EngineNumber')->nullable();
             $table->string('ChassisNumber')->nullable();
             $table->string('ModelYear')->nullable();
+            $table->string('Odometer')->nullable();
             $table->string('EngineVolume')->nullable();
             $table->text('Comments')->nullable();
             $table->string('PIC')->nullable();

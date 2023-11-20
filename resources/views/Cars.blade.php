@@ -80,6 +80,7 @@
                         <span class="Status_X_DATA Hide">{{ $Car->Status  === 'ACTIVE' ? 'This CAR is active since ' . $Car->PurchaseDate . '. Licence Expires on ' . $Car->LicenceExpiryDate . '.'  : 'This CAR is inactive. Licence Expires on ' . $Car->LicenceExpiryDate . '..' }}</span>
                         <span class="BalanceBroughtForward_X_DATA Hide">{{ ($Car->MonthlyBudget - $Car->Balance) < 0 ? 0 : $Car->MonthlyBudget - $Car->Balance }}</span>
                         <span class="Mileage_X_DATA Hide">{{ $Mileage->Mileage ?? 'PENDING' }}</span> 
+                        <span class="Odometer_X_DATA Hide">{{ $Car->Odometer ?? '' }}</span> 
                     </td>
                     <td class="engine-volume">{{ $Car->EngineVolume }}</td>  
                     <td class="car-owners-x underline">{{ $Car->CarOwner }}</td>

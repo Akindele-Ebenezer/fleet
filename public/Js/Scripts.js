@@ -56,6 +56,7 @@ let Driver_X = document.querySelector('.Driver_X');
 let Status_X = document.querySelector('.Status_X');
 let BalanceBroughtForward_X = document.querySelector('.BalanceBroughtForward_X');
 let Mileage_X = document.querySelector('.Mileage_X');
+let Odometer_X = document.querySelector('.Odometer_X');
  
 let Cars = document.querySelectorAll('.car-info'); 
 
@@ -92,6 +93,7 @@ Cars.forEach(Car => {
         let Status_X_DATA = Car.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         let BalanceBroughtForward_X_DATA = Car.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
         let Mileage_X_DATA = Car.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        let Odometer_X_DATA = Car.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
     
         Deposits_X.textContent = Deposits_X_DATA; 
         Refueling_X.textContent = Refueling_X_DATA;
@@ -122,6 +124,7 @@ Cars.forEach(Car => {
         Status_X.innerHTML = Status_X_DATA;  
         BalanceBroughtForward_X.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'NGN' }).format(BalanceBroughtForward_X_DATA); 
         Mileage_X.innerHTML = Mileage_X_DATA;  
+        Odometer_X.textContent = Odometer_X_DATA;
 
         let PrintButton = document.querySelectorAll('.Print');
         let ExcelMaintenanceButton = document.querySelector('.modal-vehicle-data .inner .links .excel-maintenance');
