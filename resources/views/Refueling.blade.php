@@ -163,6 +163,7 @@
             <tr>
                 @php
                     $CarStatus = \App\Models\Car::select('Status')->where('VehicleNumber', $Refueling->VehicleNumber)->first(); 
+                    $CarOdometer = \App\Models\Car::select('Odometer')->where('VehicleNumber', $Refueling->VehicleNumber)->first(); 
                 @endphp
                 <td>{{ $loop->iteration  + (($Refuelings->currentPage() -1) * $Refuelings->perPage()) }}</td>
                 <td class="show-record-x show-record-x-2"><span class="{{ $CarStatus->Status ?? 'INACTIVE' }}"></span>{{ $Refueling->VehicleNumber }} <img src="{{ asset('Images/focus.png') }}" alt=""></td>
@@ -186,9 +187,9 @@
                 <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
                 {{-- <td>{{ $Refueling->ReceiptNumber }}</td>  --}}
                 <td> 
-                    {{ $Refueling->KM }} km
+                    {{ $Refueling->KM }} {{ $CarOdometer->Odometer === 'Mileage' ? 'miles' : '' }}{{ $CarOdometer->Odometer === 'Kilometer' ? 'km' : '' }}
                 </td> 
-                <td class="fuel-consumption">{{ round($Refueling->Consumption, 1) }}</td>
+                <td class="fuel-consumption">{{ round($Refueling->Consumption, 1) }} <small>{{ $CarOdometer->Odometer === 'Kilometer' ? 'km/liter' : '' }}{{ $CarOdometer->Odometer === 'Mileage' ? 'mpg' : '' }}</em></td>
             </tr>
             @endforeach  
             <div class="table-head filter"> 

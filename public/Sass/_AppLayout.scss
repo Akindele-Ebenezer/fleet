@@ -1002,6 +1002,11 @@ nav {
             td.car { cursor: pointer; }
             td.pdf img { width: 3em; }
 
+            td.fuel-consumption small { 
+                font-family: unset;
+                font-weight: 100;
+             }
+
             td, 
             th {
                 background: #111;
