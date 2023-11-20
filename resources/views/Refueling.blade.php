@@ -189,7 +189,7 @@
                 <td> 
                     {{ $Refueling->KM }} {{ $CarOdometer->Odometer === 'Mileage' ? 'miles' : '' }}{{ $CarOdometer->Odometer === 'Kilometer' ? 'km' : '' }}
                 </td> 
-                <td class="fuel-consumption">{{ round($Refueling->Consumption, 1) }} <small>{{ $CarOdometer->Odometer === 'Kilometer' ? 'km/liter' : '' }}{{ $CarOdometer->Odometer === 'Mileage' ? 'mpg' : '' }}</em></td>
+                <td class="fuel-consumption">{{ round($Refueling->Consumption, 1) }} <small>{{ $CarOdometer->Odometer === 'Kilometer' ? 'km/liter' : '' }}{{ $CarOdometer->Odometer === 'Mileage' ? 'mpl' : '' }}</em></td>
             </tr>
             @endforeach  
             <div class="table-head filter"> 
