@@ -37,7 +37,14 @@ class FleetReportController extends Controller
         $fpdf->SetTitle('Vehicle Report - ' . $CarReportId . ' | Fleet Management System');
 
         $fpdf->AddPage();
-        $fpdf->SetFont('Arial', '', 10);
+
+        $fpdf->SetTextColor(223, 46, 56);
+        $fpdf->SetFont('Arial', '', 8);
+        $fpdf->Cell(50, -11, 'Powered By - http://www.fleet.depasamarine.com');
+        $fpdf->SetFont('Arial', 'B', 10); 
+        $fpdf->Ln(0); 
+        $fpdf->SetTextColor(0,0,0);
+        
         $fpdf->Cell(50, 25, 'Reg No: ' . $CarReportId . '');
         $fpdf->Cell(33, 25, '');
         $fpdf->SetFont('Arial', 'B', 15);
@@ -110,7 +117,7 @@ class FleetReportController extends Controller
         $fpdf->Ln(10);
 
         $fpdf->Cell(35, 6, 'Brought Forward', 0, 0, ''); 
-        $fpdf->Cell(50, 6, 'N ' . number_format(self::get_car_report_data('VehicleNumber', $CarReportId, 'MonthlyBudget') - self::get_car_report_data('VehicleNumber', $CarReportId, 'Balance')), 1);
+        $fpdf->Cell(50, 6, 'N ' . number_format((self::get_car_report_data('VehicleNumber', $CarReportId, 'MonthlyBudget') - self::get_car_report_data('VehicleNumber', $CarReportId, 'Balance')) < 0 ? 0 : (self::get_car_report_data('VehicleNumber', $CarReportId, 'MonthlyBudget') - self::get_car_report_data('VehicleNumber', $CarReportId, 'Balance'))), 1);
         $fpdf->Cell(20, 6, '');  
           
         $fpdf->Ln(10);
@@ -216,8 +223,12 @@ class FleetReportController extends Controller
         $fpdf->Ln(7); 
         $fpdf->Cell(50, 6, date('Y-m-d'));
         $fpdf->Cell(20, 6, '');  
-
+        
         $fpdf->Image('../public/Images/depasa-signature.png', 11, 270, 30, 20);
+          
+        $fpdf->SetTextColor(223, 46, 56);
+        $fpdf->SetFont('Arial', '', 7);
+        $fpdf->Cell(50, 6, 'http://192.168.20.100');
 
         $fpdf->Output();
         exit;
@@ -228,6 +239,13 @@ class FleetReportController extends Controller
 
         $fpdf->AddPage();
 
+        $fpdf->SetTextColor(223, 46, 56);
+        $fpdf->SetFont('Arial', '', 8);
+        $fpdf->Cell(50, -11, 'Powered By - http://www.fleet.depasamarine.com');
+        $fpdf->SetFont('Arial', 'B', 10); 
+        $fpdf->Ln(0); 
+        $fpdf->SetTextColor(0,0,0);
+        
         $fpdf->SetFont('Arial', '', 10);
         $fpdf->Cell(50, 25, 'Reg No: ' . $MaintenanceReportId . '');
         $fpdf->Cell(33, 25, '');
@@ -250,7 +268,7 @@ class FleetReportController extends Controller
         $fpdf->SetFillColor(207, 184, 24);
         $fpdf->SetTextColor(255, 255, 255);
         $fpdf->SetFont('Arial', 'B', 10);
-        $fpdf->Cell(50, 10, 'REPAIR', 0, 0, 'C', true);
+        $fpdf->Cell(50, 10, 'MAINTENANCE', 0, 0, 'C', true);
         $fpdf->Cell(70, 25, '');
         $fpdf->Image('../public/Images/depasa-logo.png', 163, 30, 40, 20);
 
@@ -318,8 +336,11 @@ class FleetReportController extends Controller
         $fpdf->Cell(20, 6, '');  
 
         $fpdf->Image('../public/Images/depasa-signature.png', 11, 270, 30, 20);
+          
+        $fpdf->SetTextColor(223, 46, 56);
+        $fpdf->SetFont('Arial', '', 7);
+        $fpdf->Cell(50, 6, 'http://192.168.20.100');
 
-         
         $fpdf->Output();
         exit; 
     }
@@ -328,6 +349,13 @@ class FleetReportController extends Controller
         $fpdf->SetTitle('Deposit Report - ' . $DepositReportId . ' | Fleet Management System');
 
         $fpdf->AddPage();
+
+        $fpdf->SetTextColor(223, 46, 56);
+        $fpdf->SetFont('Arial', '', 8);
+        $fpdf->Cell(50, -11, 'Powered By - http://www.fleet.depasamarine.com');
+        $fpdf->SetFont('Arial', 'B', 10); 
+        $fpdf->Ln(0); 
+        $fpdf->SetTextColor(0,0,0);
 
         $fpdf->SetFont('Arial', '', 10);
         $fpdf->Cell(50, 25, 'Reg No: ' . $DepositReportId . '');
@@ -397,7 +425,7 @@ class FleetReportController extends Controller
         $fpdf->Cell(35, 6, 'Month', 0, 0, ''); 
         $fpdf->Cell(50, 6, ': ' . $Request->Month);
         $fpdf->Cell(20, 6, '');   
-        $fpdf->Ln(112); 
+        $fpdf->Ln(140); 
         $fpdf->Cell(50, 6, request()->session()->get('Name'));
         $fpdf->Cell(20, 6, '');  
         $fpdf->Ln(7); 
@@ -405,7 +433,10 @@ class FleetReportController extends Controller
         $fpdf->Cell(20, 6, '');  
 
         $fpdf->Image('../public/Images/depasa-signature.png', 11, 270, 30, 20);
-
+          
+        $fpdf->SetTextColor(223, 46, 56);
+        $fpdf->SetFont('Arial', '', 7);
+        $fpdf->Cell(50, 6, 'http://192.168.20.100');
          
         $fpdf->Output();
         exit; 
@@ -415,6 +446,14 @@ class FleetReportController extends Controller
         $fpdf->SetTitle('Refueling Report - ' . $RefuelingReportId . ' | Fleet Management System');
 
         $fpdf->AddPage();
+
+        $fpdf->SetTextColor(223, 46, 56);
+        $fpdf->SetFont('Arial', '', 8);
+        $fpdf->Cell(50, -11, 'Powered By - http://www.fleet.depasamarine.com');
+        $fpdf->SetFont('Arial', 'B', 10); 
+        $fpdf->Ln(0); 
+        $fpdf->SetTextColor(0,0,0);
+        
 
         $fpdf->SetFont('Arial', '', 10);
         $fpdf->Cell(50, 25, 'Reg No: ' . $RefuelingReportId . '');
@@ -507,8 +546,11 @@ class FleetReportController extends Controller
         $fpdf->Cell(20, 6, '');  
 
         $fpdf->Image('../public/Images/depasa-signature.png', 11, 270, 30, 20);
+          
+        $fpdf->SetTextColor(223, 46, 56);
+        $fpdf->SetFont('Arial', '', 7);
+        $fpdf->Cell(50, 6, 'http://192.168.20.100');
 
-         
         $fpdf->Output();
         exit; 
     }

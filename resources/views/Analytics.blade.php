@@ -2,13 +2,13 @@
 @php 
     $HandleNumbers = fn($Value) => 
                         ($Value > 999 AND $Value < 1000000) ? number_format($Value / 1000) . 'K' : 
-                        ($Value > 999999 ? number_format($Value / 1000000) . 'M' : $Value); 
+                        ($Value > 999999 ? number_format($Value / 1000000) . 'M' : ceil($Value)); 
 
                         
     function get_average_cost($Sum, $Count) {
         $HandleNumbers = fn($Value) => 
                             ($Value > 999 AND $Value < 1000000) ? number_format($Value / 1000) . 'K' : 
-                            ($Value > 999999 ? number_format($Value / 1000000) . 'M' : $Value); 
+                            ($Value > 999999 ? number_format($Value / 1000000) . 'M' : ceil($Value)); 
 
         $Result = $Count === 0 ? 0 : $Sum / $Count;
         $Result = $HandleNumbers($Result);
