@@ -22,10 +22,13 @@
                 <th onclick="sortTable(7)">Quantity</th>
                 <th onclick="sortTable(8)">Amount</th>
                 <th onclick="sortTable(9)">Receipt No</th>
-                <th onclick="sortTable(10)">KM</th> 
+                <th onclick="sortTable(10)">Distance</th> 
                 <th class="text-center"  onclick="sortTable(11)">Fuel Consumption</th> 
             </tr>
             @foreach ($Refueling__MyRecords as $Refueling)
+            @php
+                    $CarOdometer = \App\Models\Car::select('Odometer')->where('VehicleNumber', $Refueling->VehicleNumber)->first(); 
+            @endphp
             <tr> 
                 <td>{{ $loop->iteration  + (($Refueling__MyRecords->currentPage() -1) * $Refueling__MyRecords->perPage()) }}</td>
                 <td class="show-record-x-edit"><img src="{{ asset('Images/oil.png') }}" alt="">{{ $Refueling->VehicleNumber }}</td>
@@ -48,9 +51,9 @@
                 <td>{{ $Refueling->Quantity }}</td>
                 <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
                 <td>{{ $Refueling->ReceiptNumber }}</td> 
-                <td>{{ $Refueling->KM }}</td> 
+                <td>{{ $Refueling->KM }} {{ $CarOdometer->Odometer === 'Mileage' ? 'miles' : '' }}{{ $CarOdometer->Odometer === 'Kilometer' ? 'km' : '' }}</td> 
                 <td class="Hide">{{ $Refueling->id }}</td>
-                <td class="fuel-consumption">{{ round($Refueling->Consumption, 1) }}</td>
+                <td class="fuel-consumption">{{ round($Refueling->Consumption, 1) }} <small>{{ $CarOdometer->Odometer === 'Kilometer' ? 'km/liter' : '' }}{{ $CarOdometer->Odometer === 'Mileage' ? 'mpl' : '' }}</em></td>
             </tr> 
             @endforeach  
             <div class="table-head filter"> 
