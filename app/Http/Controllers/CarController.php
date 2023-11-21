@@ -1049,7 +1049,19 @@ class CarController extends Controller
      */
     public function destroy($Car, Car $car)
     {
-        $DeleteCar = Car::where('id', $Car)->delete();
+        $VehicleNumber = Car::where('id', $Car)->first();
+
+        Car::where('id', $Car)->delete();
+        \DB::table('maintenances')->where('VehicleNumber', $VehicleNumber->VehicleNumber)->delete();
+        \DB::table('refuelings')->where('VehicleNumber', $VehicleNumber->VehicleNumber)->delete();
+        \DB::table('inspection_report')->where('VehicleNumber', $VehicleNumber->VehicleNumber)->delete();
+        \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber->VehicleNumber)->delete();
+        \DB::table('deposits')->where('VehicleNumber', $VehicleNumber->VehicleNumber)->delete();
+        \DB::table('exterior_inspection')->where('VehicleNumber', $VehicleNumber->VehicleNumber)->delete();
+        \DB::table('interior_inspection')->where('VehicleNumber', $VehicleNumber->VehicleNumber)->delete();
+        \DB::table('fluid_levels')->where('VehicleNumber', $VehicleNumber->VehicleNumber)->delete();
+        \DB::table('mechanical_inspection')->where('VehicleNumber', $VehicleNumber->VehicleNumber)->delete();
+        \DB::table('safety_equipment')->where('VehicleNumber', $VehicleNumber->VehicleNumber)->delete(); 
 
         return back();
     }

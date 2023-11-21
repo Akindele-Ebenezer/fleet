@@ -101,7 +101,7 @@ class RefuelingExport implements
             'UserId', 
             'DateIn', 
             'TimeIn', 
-            'KM',  
+            'Distance',  
             'Consumption',  
             '',
             '',

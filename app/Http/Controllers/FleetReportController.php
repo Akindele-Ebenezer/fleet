@@ -109,6 +109,10 @@ class FleetReportController extends Controller
         $fpdf->Cell(50, 6, 'N ' . number_format(self::get_sum_of_refueling('VehicleNumber', $CarReportId)), 1);
         $fpdf->Cell(20, 6, '');    
         
+        $fpdf->Cell(35, 6, 'Odometer', 0, 0, ''); 
+        $fpdf->Cell(50, 6, self::get_car_report_data('VehicleNumber', $CarReportId, 'Odometer'), 1);
+        $fpdf->Cell(20, 6, '');
+        
         $fpdf->Ln(8);
         $fpdf->Cell(35, 6, 'Deposits', 0, 0, ''); 
         $fpdf->Cell(50, 6, 'N ' . number_format(self::get_sum_of_deposits('VehicleNumber', $CarReportId)), 1);
@@ -530,7 +534,7 @@ class FleetReportController extends Controller
 
         $fpdf->Ln(8);
         $fpdf->Cell(35, 6, 'Distance Traveled', 0, 0, ''); 
-        $fpdf->Cell(50, 6, ': ' . $Request->DistanceTraveled);
+        $fpdf->Cell(50, 6, ': ' . preg_replace('/\s+/', ' ', $Request->DistanceTraveled));
         $fpdf->Cell(20, 6, '');  
           
         $fpdf->Cell(35, 6, 'Terminal No.', 0, 0, ''); 
