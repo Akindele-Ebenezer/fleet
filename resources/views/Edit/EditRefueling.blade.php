@@ -51,9 +51,9 @@
                 <td>{{ $Refueling->Quantity }}</td>
                 <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
                 <td>{{ $Refueling->ReceiptNumber }}</td> 
-                <td>{{ $Refueling->KM }} {{ $CarOdometer->Odometer ?? '' === 'Mileage' ? 'miles' : '' }}{{ $CarOdometer->Odometer ?? '' === 'Kilometer' ? 'km' : '' }}</td> 
+                <td>{{ $Refueling->KM }} {{ $CarOdometer->Odometer === 'Mileage' ? 'miles' : '' }}{{ $CarOdometer->Odometer === 'Kilometer' ? 'km' : '' }}</td> 
                 <td class="Hide">{{ $Refueling->id }}</td>
-                <td class="fuel-consumption">{{ round($Refueling->Consumption, 1) }} <small>{{ $CarOdometer->Odometer ?? '' === 'Kilometer' ? 'km/liter' : '' }}{{ $CarOdometer->Odometer ?? '' === 'Mileage' ? 'mpl' : '' }}</em></td>
+                <td class="fuel-consumption">{{ round($Refueling->Consumption, 1) }} <small>{{ $CarOdometer->Odometer === 'Kilometer' ? 'km/liter' : '' }}{{ $CarOdometer->Odometer === 'Mileage' ? 'mpl' : '' }}</em></td>
             </tr> 
             @endforeach  
             <div class="table-head filter"> 
