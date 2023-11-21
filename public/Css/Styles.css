@@ -1509,7 +1509,17 @@ nav[aria-label] span[aria-current] span {
 .report-inner .table td.pdf img {
   width: 3em;
 }
-.report-inner .table td.fuel-consumption small {
+.report-inner .table td.fuel-consumption select, .report-inner .table td.distance select {
+  background: #111;
+  border: none;
+  color: #fff;
+  outline: none;
+  width: 8em;
+}
+.report-inner .table td.fuel-consumption select option, .report-inner .table td.distance select option {
+  color: #fff;
+}
+.report-inner .table td small {
   font-family: unset;
   font-weight: 100;
 }

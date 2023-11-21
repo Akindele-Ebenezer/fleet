@@ -186,10 +186,31 @@
                 <td>{{ $Refueling->Quantity }}</td>
                 <td>₦ {{ empty($Refueling->Amount) ? '' : number_format($Refueling->Amount) }}</td>
                 {{-- <td>{{ $Refueling->ReceiptNumber }}</td>  --}}
-                <td> 
-                    {{ $Refueling->KM }} {{ $CarOdometer->Odometer === 'Mileage' ? 'miles' : '' }}{{ $CarOdometer->Odometer === 'Kilometer' ? 'km' : '' }}
+                <td class="distance"> 
+                    <select>
+                        <option>
+                            {{ $Refueling->KM }} {{ $CarOdometer->Odometer === 'Mileage' ? 'miles' : '' }}{{ $CarOdometer->Odometer === 'Kilometer' ? 'km' : '' }}
+                        </option>
+                        <option>
+                            {{ $CarOdometer->Odometer === 'Mileage' ? ceil($Refueling->KM * 1.60934) . ' km' : ceil($Refueling->KM * 0.621371) . ' miles' }}
+                        </option>
+                    </select>
                 </td> 
-                <td class="fuel-consumption">{{ round($Refueling->Consumption, 1) }} <small>{{ $CarOdometer->Odometer === 'Kilometer' ? 'km/liter' : '' }}{{ $CarOdometer->Odometer === 'Mileage' ? 'mpl' : '' }}</em></td>
+                <td class="fuel-consumption">
+                    <select>
+                        <option>
+                            {{ round($Refueling->Consumption, 1) }} <small>{{ $CarOdometer->Odometer === 'Kilometer' ? 'km/liter' : '' }}{{ $CarOdometer->Odometer === 'Mileage' ? 'mpl' : '' }}</em>
+                        </option>
+                        <option>
+                            @if ($CarOdometer->Odometer === 'Kilometer')
+                                {{ round($Refueling->KM * 1.60934 / $Refueling->Quantity, 1) . ' mpl' }}
+                            @endif
+                            @if ($CarOdometer->Odometer === 'Mileage')
+                                {{ round($Refueling->KM * 0.621371 / $Refueling->Quantity, 1) . ' km/liter' }}
+                            @endif
+                        </option>
+                    </select> 
+                </td>
             </tr>
             @endforeach  
             <div class="table-head filter"> 
