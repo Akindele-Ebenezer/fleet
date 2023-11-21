@@ -28,9 +28,18 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->SetTextColor(245, 37, 95);
         $this->fpdf->SetFillColor(227, 232, 243);
         $this->fpdf->AddPage();
+
+        $this->fpdf->SetTextColor(223, 46, 56);
+        $this->fpdf->SetFont('Arial', '', 8);
+        $this->fpdf->Cell(50, -11, 'Powered By - http://' . $_SERVER['HTTP_HOST']);
+        $this->fpdf->SetFont('Arial', 'B', 10); 
+        $this->fpdf->Ln(0); 
         $this->fpdf->SetDrawColor(49, 52, 56);
         $this->fpdf->SetFont('Arial', '', 8);  
+        $this->fpdf->SetTextColor(78,85,211);
         $this->fpdf->Cell(190, 8,'Depasa Marine International', 0, 0, 'R'); 
+        $this->fpdf->SetTextColor(0,0,0);
+        
         $this->fpdf->Ln();    
         $this->fpdf->SetFont('Arial', 'B', 15);   
         $this->fpdf->SetTextColor(49, 52, 56);
@@ -301,6 +310,15 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->SetFont('Arial', '', 11);
         $this->fpdf->Ln();    
         $this->fpdf->MultiCell(190, 7, $MyInspectionReport->AdditionalNotes ?? 'No remarks for this inspection.', 'B'); 
+        
+        $this->fpdf->Ln(130);  
+        $this->fpdf->Cell(80, 6, '');  
+        $this->fpdf->Image('../public/Images/depasa-signature.png', 11, 270, 30, 20);
+            
+        $this->fpdf->SetTextColor(223, 46, 56);
+        $this->fpdf->SetFont('Arial', '', 7);
+        $this->fpdf->Cell(50, 6, 'http://' . $_SERVER['HTTP_HOST']);
+
         $this->fpdf->Output();
 
         exit;
@@ -314,8 +332,15 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->SetTextColor(245, 37, 95);
         $this->fpdf->SetFillColor(227, 232, 243);
         $this->fpdf->AddPage();
-        $this->fpdf->SetDrawColor(123, 123, 123);
+
+        $this->fpdf->SetTextColor(223, 46, 56);
+        $this->fpdf->SetFont('Arial', '', 8);
+        $this->fpdf->Cell(50, -11, 'Powered By - http://' . $_SERVER['HTTP_HOST']);
+        $this->fpdf->SetFont('Arial', 'B', 10); 
+        $this->fpdf->Ln(0); 
+        $this->fpdf->SetDrawColor(49, 52, 56);
         $this->fpdf->SetFont('Arial', '', 8);  
+        $this->fpdf->SetTextColor(78,85,211);
         $this->fpdf->Cell(190, 8,'Depasa Marine International', 0, 0, 'R'); 
         $this->fpdf->Ln();    
         $this->fpdf->SetFont('Arial', 'B', 15);   
@@ -600,7 +625,15 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->Cell(190, 7, '', 'B'); 
         $this->fpdf->Ln();    
         $this->fpdf->Cell(190, 7, '', 'B'); 
-        $this->fpdf->Ln();    
+        $this->fpdf->Ln(70);    
+         
+        $this->fpdf->Cell(80, 6, '');  
+        $this->fpdf->Image('../public/Images/depasa-signature.png', 11, 250, 30, 20);
+            
+        $this->fpdf->SetTextColor(223, 46, 56);
+        $this->fpdf->SetFont('Arial', '', 7);
+        $this->fpdf->Cell(30, 6, $_SERVER['HTTP_HOST']);
+
 
         $this->fpdf->Output();
 

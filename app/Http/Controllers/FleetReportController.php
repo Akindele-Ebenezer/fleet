@@ -40,7 +40,7 @@ class FleetReportController extends Controller
 
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 8);
-        $fpdf->Cell(50, -11, 'Powered By - http://www.fleet.depasamarine.com');
+        $fpdf->Cell(50, -11, 'Powered By - http://' . $_SERVER['HTTP_HOST']);
         $fpdf->SetFont('Arial', 'B', 10); 
         $fpdf->Ln(0); 
         $fpdf->SetTextColor(0,0,0);
@@ -228,7 +228,7 @@ class FleetReportController extends Controller
           
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 7);
-        $fpdf->Cell(50, 6, 'http://192.168.20.100');
+        $fpdf->Cell(50, 6, 'http://' . $_SERVER['HTTP_HOST']);
 
         $fpdf->Output();
         exit;
@@ -241,7 +241,7 @@ class FleetReportController extends Controller
 
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 8);
-        $fpdf->Cell(50, -11, 'Powered By - http://www.fleet.depasamarine.com');
+        $fpdf->Cell(50, -11, 'Powered By - http://' . $_SERVER['HTTP_HOST']);
         $fpdf->SetFont('Arial', 'B', 10); 
         $fpdf->Ln(0); 
         $fpdf->SetTextColor(0,0,0);
@@ -339,7 +339,7 @@ class FleetReportController extends Controller
           
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 7);
-        $fpdf->Cell(50, 6, 'http://192.168.20.100');
+        $fpdf->Cell(50, 6, 'http://' . $_SERVER['HTTP_HOST']);
 
         $fpdf->Output();
         exit; 
@@ -352,7 +352,7 @@ class FleetReportController extends Controller
 
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 8);
-        $fpdf->Cell(50, -11, 'Powered By - http://www.fleet.depasamarine.com');
+        $fpdf->Cell(50, -11, 'Powered By - http://' . $_SERVER['HTTP_HOST']);
         $fpdf->SetFont('Arial', 'B', 10); 
         $fpdf->Ln(0); 
         $fpdf->SetTextColor(0,0,0);
@@ -436,7 +436,7 @@ class FleetReportController extends Controller
           
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 7);
-        $fpdf->Cell(50, 6, 'http://192.168.20.100');
+        $fpdf->Cell(50, 6, 'http://' . $_SERVER['HTTP_HOST']);
          
         $fpdf->Output();
         exit; 
@@ -449,7 +449,7 @@ class FleetReportController extends Controller
 
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 8);
-        $fpdf->Cell(50, -11, 'Powered By - http://www.fleet.depasamarine.com');
+        $fpdf->Cell(50, -11, 'Powered By - http://' . $_SERVER['HTTP_HOST']);
         $fpdf->SetFont('Arial', 'B', 10); 
         $fpdf->Ln(0); 
         $fpdf->SetTextColor(0,0,0);
@@ -549,7 +549,7 @@ class FleetReportController extends Controller
           
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 7);
-        $fpdf->Cell(50, 6, 'http://192.168.20.100');
+        $fpdf->Cell(50, 6, 'http://' . $_SERVER['HTTP_HOST']);
 
         $fpdf->Output();
         exit; 
