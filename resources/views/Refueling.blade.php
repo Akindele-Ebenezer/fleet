@@ -202,7 +202,7 @@
                             {{ round($Refueling->Consumption, 1) }} <small>{{ $CarOdometer->Odometer === 'Kilometer' ? 'km/liter' : '' }}{{ $CarOdometer->Odometer === 'Mileage' ? 'mpl' : '' }}</em>
                         </option>
                         <option> 
-                            {{ $CarOdometer->Odometer === 'Mileage' ? round($Refueling->KM * 0.621371 / $Refueling->Quantity, 1) . ' mpl' : round($Refueling->KM * 1.60934 / $Refueling->Quantity, 1) . ' km/liter' }}
+                            {{ $CarOdometer->Odometer === 'Mileage' ? round($Refueling->KM * 0.621371 / $Refueling->Quantity, 1) . ' km/liter' : round($Refueling->KM * 1.60934 / $Refueling->Quantity, 1) . ' mpl' }}
                             {{-- @if ($CarOdometer->Odometer === 'Mileage')
                                 {{ round($Refueling->KM * 0.621371 / $Refueling->Quantity, 1) . ' km/liter' }}
                             @endif --}}
