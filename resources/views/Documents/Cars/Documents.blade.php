@@ -115,7 +115,7 @@
                             <span class="Hide">{{ $Document_->DrivingLicence }}</span>
                         </div>
                     @endforeach
-                    @foreach ($CarDocuments_PUC_CERTIFICATE as $Document_)
+                    {{-- @foreach ($CarDocuments_PUC_CERTIFICATE as $Document_)
                         <div class="document">
                             @if (empty($Document_->PUCCertificate))
                                 <p>No File..</p>
@@ -127,7 +127,7 @@
                             <span class="Hide">{{ $Document_->VehicleNumber }}</span>
                             <span class="Hide">{{ $Document_->PUCCertificate }}</span>
                         </div>
-                    @endforeach
+                    @endforeach --}}
                     @foreach ($CarDocuments_PROOF_OF_OWNERSHIP as $Document_)
                         <div class="document">
                             @if (empty($Document_->ProofOfOwnership))
@@ -179,11 +179,11 @@
                             <span>{{ round($Document_->DrivingLicenceSize) }} KB</span>
                         </div>
                     @endforeach 
-                    @foreach ($CarDocuments_PUC_CERTIFICATE as $Document_)
+                    {{-- @foreach ($CarDocuments_PUC_CERTIFICATE as $Document_)
                         <div class="document">
                             <span> {{ round($Document_->PUCCertificateSize) }} KB</span>
                         </div>
-                    @endforeach 
+                    @endforeach  --}}
                     @foreach ($CarDocuments_PROOF_OF_OWNERSHIP as $Document_)
                         <div class="document">
                             <span>{{ round($Document_->ProofOfOwnershipSize) }} KB</span>
