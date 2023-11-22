@@ -1351,6 +1351,7 @@ nav[aria-label] span[aria-current] span {
   border-radius: 0.2em;
   color: #fff;
   padding-inline: 0.5em;
+  text-align: center;
 }
 .report-inner .table td .document:hover {
   background: #333;
@@ -1522,6 +1523,12 @@ nav[aria-label] span[aria-current] span {
 .report-inner .table td small {
   font-family: unset;
   font-weight: 100;
+}
+.report-inner .table td.DocumentType .document span:first-of-type {
+  width: 10em;
+}
+.report-inner .table td.DocumentType .document span:last-of-type {
+  width: 7.35em;
 }
 .report-inner .table td,
 .report-inner .table th {

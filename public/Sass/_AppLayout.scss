@@ -806,6 +806,7 @@ nav {
                         border-radius: 0.2em;
                         color: #fff;
                         padding-inline: 0.5em;
+                        text-align: center;
                     }
 
                     &:hover {
@@ -1022,6 +1023,21 @@ nav {
                     font-family: unset;
                     font-weight: 100;
                  }
+            }
+
+            td {
+                &.DocumentType {
+                    .document {
+                        span {
+                            &:first-of-type {
+                                width: 10em;
+                            }
+                            &:last-of-type {
+                                width: 7.35em;
+                            }
+                        }
+                    }
+                }
             }
 
             td, 

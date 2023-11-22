@@ -200,47 +200,96 @@
                         </div>
                     @endforeach
                 </td>
-                <td class="td-2">
+                <td class="td-2 DocumentType">
                     @foreach ($CarDocuments_REGISTRATION_CERTIFICATE as $Document_)
+                        @php
+                            $DriverLicenseExpiryDate = \DB::table('car_documents')->select(['DriverLicenseExpiryDate'])->where('VehicleNumber', $Document->VehicleNumber)->first();
+                        @endphp
                         <div class="document">
-                            Driver's License 
+                            <span>Driver's License</span> <span>{{ $DriverLicenseExpiryDate->DriverLicenseExpiryDate }}</span> <span class="@if ($DriverLicenseExpiryDate->DriverLicenseExpiryDate < date('Y-m-d') AND !empty($DriverLicenseExpiryDate->DriverLicenseExpiryDate)) expired @endif {{ empty($DriverLicenseExpiryDate->DriverLicenseExpiryDate) ? 'not-registered' : '' }} {{ $DriverLicenseExpiryDate->DriverLicenseExpiryDate > date('Y-m-d') ? 'up-to-date' : '' }}">
+                                @if (empty($DriverLicenseExpiryDate->DriverLicenseExpiryDate))
+                                    not-registered
+                                @endif
+                                @if ($DriverLicenseExpiryDate->DriverLicenseExpiryDate < date('Y-m-d') AND !empty($DriverLicenseExpiryDate->DriverLicenseExpiryDate))
+                                    expired 
+                                @endif
+                                @if ($DriverLicenseExpiryDate->DriverLicenseExpiryDate > date('Y-m-d'))
+                                    up-to-date
+                                @endif
                         </div>
                     @endforeach  
                     @foreach ($CarDocuments_DRIVING_LICENCE as $Document_)
                         @php
                             $VehicleLicense = \DB::table('cars')->select(['VehicleNumber', 'LicenceExpiryDate'])->where('VehicleNumber', $Document->VehicleNumber)->first();
+                            $VehicleLicenseExpiryDate = \DB::table('car_documents')->select(['VehicleLicenseExpiryDate'])->where('VehicleNumber', $Document->VehicleNumber)->first();
                         @endphp
                         <div class="document VehicleLicense">
-                            Vehicle License <span class="@if ($VehicleLicense->LicenceExpiryDate < date('Y-m-d') AND !empty($VehicleLicense->LicenceExpiryDate)) expired @endif {{ empty($VehicleLicense->LicenceExpiryDate) ? 'not-registered' : '' }} {{ $VehicleLicense->LicenceExpiryDate > date('Y-m-d') ? 'up-to-date' : '' }}">
-                                @if (empty($VehicleLicense->LicenceExpiryDate))
+                            <span>Vehicle License</span> <span>{{ $VehicleLicenseExpiryDate->VehicleLicenseExpiryDate }}</span> <span class="@if ($VehicleLicenseExpiryDate->VehicleLicenseExpiryDate < date('Y-m-d') AND !empty($VehicleLicenseExpiryDate->VehicleLicenseExpiryDate)) expired @endif {{ empty($VehicleLicenseExpiryDate->VehicleLicenseExpiryDate) ? 'not-registered' : '' }} {{ $VehicleLicenseExpiryDate->VehicleLicenseExpiryDate > date('Y-m-d') ? 'up-to-date' : '' }}">
+                                @if (empty($VehicleLicenseExpiryDate->VehicleLicenseExpiryDate))
                                     not-registered
                                 @endif
-                                @if ($VehicleLicense->LicenceExpiryDate < date('Y-m-d') AND !empty($VehicleLicense->LicenceExpiryDate))
+                                @if ($VehicleLicenseExpiryDate->VehicleLicenseExpiryDate < date('Y-m-d') AND !empty($VehicleLicenseExpiryDate->VehicleLicenseExpiryDate))
                                     expired 
                                 @endif
-                                @if ($VehicleLicense->LicenceExpiryDate > date('Y-m-d'))
+                                @if ($VehicleLicenseExpiryDate->VehicleLicenseExpiryDate > date('Y-m-d'))
                                     up-to-date
                                 @endif
                         </div>
                     @endforeach  
-                    @foreach ($CarDocuments_PUC_CERTIFICATE as $Document_)
+                    {{-- @foreach ($CarDocuments_PUC_CERTIFICATE as $Document_)
                         <div class="document">
                             PUC Certificate
                         </div>
-                    @endforeach  
+                    @endforeach   --}}
                     @foreach ($CarDocuments_PROOF_OF_OWNERSHIP as $Document_)
+                        @php
+                            $ProofOfOwnershipExpiryDate = \DB::table('car_documents')->select(['ProofOfOwnershipExpiryDate'])->where('VehicleNumber', $Document->VehicleNumber)->first();
+                        @endphp
                         <div class="document">
-                            Proof Of Ownership
+                            <span>Proof Of Ownership</span>  <span>{{ $ProofOfOwnershipExpiryDate->ProofOfOwnershipExpiryDate }}</span><span class="@if ($ProofOfOwnershipExpiryDate->ProofOfOwnershipExpiryDate < date('Y-m-d') AND !empty($ProofOfOwnershipExpiryDate->ProofOfOwnershipExpiryDate)) expired @endif {{ empty($ProofOfOwnershipExpiryDate->ProofOfOwnershipExpiryDate) ? 'not-registered' : '' }} {{ $ProofOfOwnershipExpiryDate->ProofOfOwnershipExpiryDate > date('Y-m-d') ? 'up-to-date' : '' }}">
+                                @if (empty($ProofOfOwnershipExpiryDate->ProofOfOwnershipExpiryDate))
+                                    not-registered
+                                @endif
+                                @if ($ProofOfOwnershipExpiryDate->ProofOfOwnershipExpiryDate < date('Y-m-d') AND !empty($ProofOfOwnershipExpiryDate->ProofOfOwnershipExpiryDate))
+                                    expired 
+                                @endif
+                                @if ($ProofOfOwnershipExpiryDate->ProofOfOwnershipExpiryDate > date('Y-m-d'))
+                                    up-to-date
+                                @endif
                         </div>
                     @endforeach  
                     @foreach ($CarDocuments_CERTIFICATE_OF_ROAD_WORTHINESS as $Document_)
+                        @php
+                            $CertificateOfRoadWorthinessExpiryDate = \DB::table('car_documents')->select(['CertificateOfRoadWorthinessExpiryDate'])->where('VehicleNumber', $Document->VehicleNumber)->first();
+                        @endphp
                         <div class="document">
-                            Certificate Of Road Worthiness
+                            <span>Certificate Of Road Worthiness</span>  <span>{{ $CertificateOfRoadWorthinessExpiryDate->CertificateOfRoadWorthinessExpiryDate }}</span><span class="@if ($CertificateOfRoadWorthinessExpiryDate->CertificateOfRoadWorthinessExpiryDate < date('Y-m-d') AND !empty($CertificateOfRoadWorthinessExpiryDate->CertificateOfRoadWorthinessExpiryDate)) expired @endif {{ empty($CertificateOfRoadWorthinessExpiryDate->CertificateOfRoadWorthinessExpiryDate) ? 'not-registered' : '' }} {{ $CertificateOfRoadWorthinessExpiryDate->CertificateOfRoadWorthinessExpiryDate > date('Y-m-d') ? 'up-to-date' : '' }}">
+                                @if (empty($CertificateOfRoadWorthinessExpiryDate->CertificateOfRoadWorthinessExpiryDate))
+                                    not-registered
+                                @endif
+                                @if ($CertificateOfRoadWorthinessExpiryDate->CertificateOfRoadWorthinessExpiryDate < date('Y-m-d') AND !empty($CertificateOfRoadWorthinessExpiryDate->CertificateOfRoadWorthinessExpiryDate))
+                                    expired 
+                                @endif
+                                @if ($CertificateOfRoadWorthinessExpiryDate->CertificateOfRoadWorthinessExpiryDate > date('Y-m-d'))
+                                    up-to-date
+                                @endif
                         </div>
                     @endforeach  
                     @foreach ($CarDocuments_INSURANCE_CERTIFICATE as $Document_)
+                        @php
+                            $InsuranceCertificateExpiryDate = \DB::table('car_documents')->select(['InsuranceCertificateExpiryDate'])->where('VehicleNumber', $Document->VehicleNumber)->first();
+                        @endphp
                         <div class="document">
-                            Insurance Certificate
+                            <span>Insurance Certificate</span>  <span>{{ $InsuranceCertificateExpiryDate->InsuranceCertificateExpiryDate }}</span><span class="@if ($InsuranceCertificateExpiryDate->InsuranceCertificateExpiryDate < date('Y-m-d') AND !empty($InsuranceCertificateExpiryDate->InsuranceCertificateExpiryDate)) expired @endif {{ empty($InsuranceCertificateExpiryDate->InsuranceCertificateExpiryDate) ? 'not-registered' : '' }} {{ $InsuranceCertificateExpiryDate->InsuranceCertificateExpiryDate > date('Y-m-d') ? 'up-to-date' : '' }}">
+                                @if (empty($InsuranceCertificateExpiryDate->InsuranceCertificateExpiryDate))
+                                    not-registered
+                                @endif
+                                @if ($InsuranceCertificateExpiryDate->InsuranceCertificateExpiryDate < date('Y-m-d') AND !empty($InsuranceCertificateExpiryDate->InsuranceCertificateExpiryDate))
+                                    expired 
+                                @endif
+                                @if ($InsuranceCertificateExpiryDate->InsuranceCertificateExpiryDate > date('Y-m-d'))
+                                    up-to-date
+                                @endif
                         </div>
                     @endforeach
                 </td>

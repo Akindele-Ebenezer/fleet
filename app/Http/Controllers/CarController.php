@@ -527,6 +527,42 @@ class CarController extends Controller
 
             $InsuranceCertificateFile->move($DestinationPath, $InsuranceCertificateFile->getClientOriginalName());
         }
+// ///////////////////////////////////
+        if ($request->filled('DriverLicenseExpiryDate')) {
+            \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
+            ->update([
+                'VehicleNumber' => $VehicleNumber, 
+                'DriverLicenseExpiryDate' => $request->DriverLicenseExpiryDate, 
+            ]); 
+        }
+        if ($request->filled('VehicleLicenseExpiryDate')) {
+            \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
+            ->update([
+                'VehicleNumber' => $VehicleNumber, 
+                'VehicleLicenseExpiryDate' => $request->VehicleLicenseExpiryDate, 
+            ]); 
+        }
+        if ($request->filled('ProofOfOwnershipExpiryDate')) {
+            \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
+            ->update([
+                'VehicleNumber' => $VehicleNumber, 
+                'ProofOfOwnershipExpiryDate' => $request->ProofOfOwnershipExpiryDate, 
+            ]); 
+        }
+        if ($request->filled('CertificateOfRoadWorthinessExpiryDate')) {
+            \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
+            ->update([
+                'VehicleNumber' => $VehicleNumber,  
+                'CertificateOfRoadWorthinessExpiryDate' => $request->CertificateOfRoadWorthinessExpiryDate, 
+            ]); 
+        } 
+        if ($request->filled('InsuranceCertificateExpiryDate')) {
+            \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
+            ->update([
+                'VehicleNumber' => $VehicleNumber, 
+                'InsuranceCertificateExpiryDate' => $request->InsuranceCertificateExpiryDate,
+            ]); 
+        }
 
         return back(); 
     }
