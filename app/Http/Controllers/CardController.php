@@ -166,9 +166,11 @@ class CardController extends Controller
     }
 
     public function add_vendor(Request $request) {
-        \DB::table('card_vendors')->insert([  
-            'CardVendors' => $request->FleetCardVendor_Name,   
-        ]);
+        if(!empty($request->FleetCardVendor_Name)) { 
+            \DB::table('card_vendors')->insert([  
+                'CardVendors' => $request->FleetCardVendor_Name,   
+            ]);
+        } 
 
         return back();  
     }
