@@ -9,6 +9,9 @@
     @include('Components.AddMasterCardComponent')
     @include('Components.EditMasterCardComponent')
 @endsection --}}
+@include('Components.AddFleetCardVendorComponent')
+@include('Components.EditFleetCardVendorComponent')
+
 @section('Content')
     <div class="table-wrapper"> 
         <table class="table table-2 list" id="Table">

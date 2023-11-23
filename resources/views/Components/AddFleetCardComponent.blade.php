@@ -67,7 +67,7 @@
                         <option value="{{ $Vendor->CardVendors }}">{{ $Vendor->CardVendors }}  
                     @endforeach
                 </select>
-            </div> 
+            </div>  @csrf
         </form>
         <button class="AddFleetCard">+ Add Fleet Card</button>
         

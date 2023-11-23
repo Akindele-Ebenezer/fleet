@@ -1677,7 +1677,8 @@ nav[aria-label] span[aria-current] span {
   width: 100%;
 }
 
-.edit-car-properties-wrapper {
+.edit-car-properties-wrapper,
+.edit-fleet-card-vendor-wrapper {
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   display: none;
@@ -1688,41 +1689,87 @@ nav[aria-label] span[aria-current] span {
   width: 100vw;
   z-index: 1000;
 }
-.edit-car-properties-wrapper .EditCarPropertiesForm {
+.edit-car-properties-wrapper .EditCarPropertiesForm,
+.edit-car-properties-wrapper .EditFleetCardVendorForm,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm {
   background: #fff;
   border-radius: 1em;
   padding: 2em;
   width: 30em;
 }
-.edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons {
+.edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons,
+.edit-car-properties-wrapper .EditCarPropertiesForm .EditFleetCardVendorButtons,
+.edit-car-properties-wrapper .EditFleetCardVendorForm .EditCarPropertiesButtons,
+.edit-car-properties-wrapper .EditFleetCardVendorForm .EditFleetCardVendorButtons,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm .EditFleetCardVendorButtons,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm .EditCarPropertiesButtons,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm .EditFleetCardVendorButtons {
   display: flex;
   justify-content: end;
 }
-.edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons button {
+.edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons button,
+.edit-car-properties-wrapper .EditCarPropertiesForm .EditFleetCardVendorButtons button,
+.edit-car-properties-wrapper .EditFleetCardVendorForm .EditCarPropertiesButtons button,
+.edit-car-properties-wrapper .EditFleetCardVendorForm .EditFleetCardVendorButtons button,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons button,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm .EditFleetCardVendorButtons button,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm .EditCarPropertiesButtons button,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm .EditFleetCardVendorButtons button {
   padding-inline: 1em;
 }
-.edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons button:first-of-type {
+.edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons button:first-of-type,
+.edit-car-properties-wrapper .EditCarPropertiesForm .EditFleetCardVendorButtons button:first-of-type,
+.edit-car-properties-wrapper .EditFleetCardVendorForm .EditCarPropertiesButtons button:first-of-type,
+.edit-car-properties-wrapper .EditFleetCardVendorForm .EditFleetCardVendorButtons button:first-of-type,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons button:first-of-type,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm .EditFleetCardVendorButtons button:first-of-type,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm .EditCarPropertiesButtons button:first-of-type,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm .EditFleetCardVendorButtons button:first-of-type {
   margin-right: 0.5em;
 }
-.edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons button:last-of-type {
+.edit-car-properties-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons button:last-of-type,
+.edit-car-properties-wrapper .EditCarPropertiesForm .EditFleetCardVendorButtons button:last-of-type,
+.edit-car-properties-wrapper .EditFleetCardVendorForm .EditCarPropertiesButtons button:last-of-type,
+.edit-car-properties-wrapper .EditFleetCardVendorForm .EditFleetCardVendorButtons button:last-of-type,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm .EditCarPropertiesButtons button:last-of-type,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm .EditFleetCardVendorButtons button:last-of-type,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm .EditCarPropertiesButtons button:last-of-type,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm .EditFleetCardVendorButtons button:last-of-type {
   background-color: #3034b5;
 }
-.edit-car-properties-wrapper .EditCarPropertiesForm h1 {
+.edit-car-properties-wrapper .EditCarPropertiesForm h1,
+.edit-car-properties-wrapper .EditFleetCardVendorForm h1,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm h1,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm h1 {
   display: flex;
   justify-content: space-between;
   margin-bottom: 2em;
 }
-.edit-car-properties-wrapper .EditCarPropertiesForm h1 span {
+.edit-car-properties-wrapper .EditCarPropertiesForm h1 span,
+.edit-car-properties-wrapper .EditFleetCardVendorForm h1 span,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm h1 span,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm h1 span {
   font-size: 2.3em;
   font-weight: normal;
 }
-.edit-car-properties-wrapper .EditCarPropertiesForm h1 span:last-of-type {
+.edit-car-properties-wrapper .EditCarPropertiesForm h1 span:last-of-type,
+.edit-car-properties-wrapper .EditFleetCardVendorForm h1 span:last-of-type,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm h1 span:last-of-type,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm h1 span:last-of-type {
   cursor: pointer;
 }
-.edit-car-properties-wrapper .EditCarPropertiesForm hr {
+.edit-car-properties-wrapper .EditCarPropertiesForm hr,
+.edit-car-properties-wrapper .EditFleetCardVendorForm hr,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm hr,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm hr {
   border: 1px solid #eee;
 }
-.edit-car-properties-wrapper .EditCarPropertiesForm input {
+.edit-car-properties-wrapper .EditCarPropertiesForm input,
+.edit-car-properties-wrapper .EditFleetCardVendorForm input,
+.edit-fleet-card-vendor-wrapper .EditCarPropertiesForm input,
+.edit-fleet-card-vendor-wrapper .EditFleetCardVendorForm input {
   background: #fff;
   border: 1px solid #ddd;
   color: #333;
@@ -1730,37 +1777,50 @@ nav[aria-label] span[aria-current] span {
   width: 100%;
 }
 
-.car-properties-table {
+.car-properties-table,
+.fleet-card-vendor-table {
   border-collapse: collapse;
   margin-block: 1em;
   width: 100%;
 }
-.car-properties-table td, .car-properties-table th {
+.car-properties-table td, .car-properties-table th,
+.fleet-card-vendor-table td,
+.fleet-card-vendor-table th {
   border: 1px solid #333;
   color: #fff;
   padding: 0.5em;
   font-family: system-ui;
   text-align: left;
 }
-.car-properties-table td:hover, .car-properties-table th:hover {
+.car-properties-table td:hover, .car-properties-table th:hover,
+.fleet-card-vendor-table td:hover,
+.fleet-card-vendor-table th:hover {
   background-color: #333;
 }
-.car-properties-table td button, .car-properties-table th button {
+.car-properties-table td button, .car-properties-table th button,
+.fleet-card-vendor-table td button,
+.fleet-card-vendor-table th button {
   margin: unset;
   width: 4em;
 }
-.car-properties-table td button.delete, .car-properties-table th button.delete {
+.car-properties-table td button.delete, .car-properties-table th button.delete,
+.fleet-card-vendor-table td button.delete,
+.fleet-card-vendor-table th button.delete {
   background-color: #DF2E38 !important;
 }
-.car-properties-table td button.edit, .car-properties-table th button.edit {
+.car-properties-table td button.edit, .car-properties-table th button.edit,
+.fleet-card-vendor-table td button.edit,
+.fleet-card-vendor-table th button.edit {
   background-color: #41a341 !important;
 }
-.car-properties-table th {
+.car-properties-table th,
+.fleet-card-vendor-table th {
   background-color: #111;
   position: sticky;
   top: -1px;
 }
-.car-properties-table-wrapper {
+.car-properties-table-wrapper,
+.fleet-card-vendor-table-wrapper {
   max-height: 22em;
   overflow-y: scroll;
 }

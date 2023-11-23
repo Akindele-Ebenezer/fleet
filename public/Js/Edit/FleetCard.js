@@ -15,6 +15,7 @@ AddFleetCardButton.forEach(Button => {
                 Error.textContent = 'Please fill out CARD number for new Fleet Card';
             } else {
                 let CardNumber_FleetCard = AddFleetCardForm.children[1].children[1].value;
+                AddFleetCardForm.setAttribute('method', 'POST'); 
                 AddFleetCardForm.setAttribute('action', '/Add/Car/' + CardNumber_FleetCard);
                 AddFleetCardForm.submit();
             }   

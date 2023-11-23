@@ -690,6 +690,10 @@
                                                 ->first(); 
                 @endphp
                 <div class="inner">
+                    @if (Route::is('FleetCard') AND request()->session()->get('Role') === 'ADMIN')
+                        <button class="action-x open-fleet-card-vendor-form-button">+ Manage Vendors</button>
+                        <script src="/Js/Edit/ManageVendors.js"></script>
+                    @endif
                     @if (Route::is('Cars_Registration') AND request()->session()->get('Role') === 'ADMIN')
                         <button class="action-x open-vehicle-properties-form-button">+ Manage vehicle properties</button>
                     @endif

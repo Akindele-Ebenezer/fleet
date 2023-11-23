@@ -11,7 +11,7 @@
 @php 
     date_default_timezone_set('Africa/Lagos');
     $Cars_Absolute = \App\Models\Car::whereNotNull('VehicleNumber')->get();
-    $Drivers = \App\Models\Car::select('Driver')->get();
+    $Drivers = \App\Models\Car::select('Driver')->whereNotNull('Driver')->get();
 @endphp
     <div class="daily-checklist">
         <form action="{{ route('Add_Inspection_Report') }}" method="POST" enctype="multipart/form-data">@csrf 

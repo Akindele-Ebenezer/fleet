@@ -1243,7 +1243,8 @@ nav {
     }
 }
 
-.edit-car-properties-wrapper {
+.edit-car-properties-wrapper,
+.edit-fleet-card-vendor-wrapper {
     background: rgba(0, 0, 0, .5);
     display: flex;
     display: none;
@@ -1254,13 +1255,15 @@ nav {
     width: 100vw;
     z-index: 1000;
 
-    .EditCarPropertiesForm {
+    .EditCarPropertiesForm,
+    .EditFleetCardVendorForm {
         background: #fff;
         border-radius: 1em;
         padding: 2em;
         width: 30em;
 
-        .EditCarPropertiesButtons {
+        .EditCarPropertiesButtons,
+        .EditFleetCardVendorButtons {
             display: flex;
             justify-content: end;
 
@@ -1306,7 +1309,8 @@ nav {
     }
 }
 
-.car-properties-table {
+.car-properties-table,
+.fleet-card-vendor-table {
     border-collapse: collapse;
     margin-block: 1em;
     width: 100%;
@@ -1340,7 +1344,7 @@ nav {
         background-color: #111;
         position: sticky;
         top: -1px;
-     }
+    }
 
     &-wrapper {
         max-height: 22em;

@@ -164,6 +164,28 @@ class CardController extends Controller
 
         return back();  
     }
+
+    public function add_vendor(Request $request) {
+        \DB::table('card_vendors')->insert([  
+            'CardVendors' => $request->FleetCardVendor_Name,   
+        ]);
+
+        return back();  
+    }
+
+    public function update_vendor(Request $request) { 
+        \DB::table('card_vendors')->where('id', $request->EditFleetCardVendorModal_Id)
+        ->update([
+            'CardVendors' => $request->EditFleetCardVendorModal_Name,  
+        ]);
+        return back();  
+    }
+
+    public function destroy_vendor($FleetCardVendorId, Request $request) {
+        \DB::table('card_vendors')->where('id', $FleetCardVendorId)->delete();
+        return back();  
+    }
+
     /**
      * Display the specified resource.
      */
