@@ -12,12 +12,14 @@
         </div> 
         @php
             $MasterCardBalance = \App\Models\MasterCard::select('Balance')->orderBy('Date', 'DESC')->first();
+            $VoucherCardBalance = \DB::table('voucher_cards')->select('Balance')->orderBy('Date', 'DESC')->first();
         @endphp
         <div class="car-data">
             <div class="data-x">Previous Mileage <br> <span class="Car-Data-Mileage">0</span></div>
             <div class="data-x">Balance <br> <span class="Car-Data-Balance">₦ 0</span></div>
             <div class="data-x">Driver <br> <span class="Car-Data-Driver">Null</span></div>
-            <div class="data-x">Balance (Master) <br> <span>₦ {{ number_format($MasterCardBalance->Balance) ?? 0 }}</span></div>
+            <div class="data-x">Balance (MASTER) <br> <span>₦ {{ number_format($MasterCardBalance->Balance) ?? 0 }}</span></div>
+            <div class="data-x">Balance (VOUCHER) <br> <span>₦ {{ number_format($VoucherCardBalance->Balance) ?? 0 }}</span></div>
         </div>
         <form class="AddRefuelingForm">
             <div class="cancel-modal">✖</div>
