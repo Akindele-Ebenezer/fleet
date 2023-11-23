@@ -156,6 +156,14 @@ class RefuelingController extends Controller
             $Balance = \App\Models\MasterCard::whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->first();  
             $Balance->Balance = $Balance->Balance - $request->Amount;
             $Balance->save();
+        } elseif ($request->CardType === 'voucher-card') {
+            $Balance = \DB::table('voucher_cards')->whereNotNull('CardNumber')->where('CardNumber', $request->CardNumber)->first();  
+            $VoucherBalance = $Balance->Balance - $request->Amount;
+            
+            \DB::table('voucher_cards')->where('CardNumber', $request->CardNumber)
+            ->update([ 
+                'Balance' => $VoucherBalance,  
+            ]);
         }
 
         Refueling::insert([ 
@@ -223,11 +231,26 @@ class RefuelingController extends Controller
     public function reverse($CardNumber, $Amount, $RefuelingId)
     {
         $Balance = \App\Models\Car::whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first()
-                    ?? \App\Models\MasterCard::whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first();  
-        $Balance->Balance = $Balance->Balance + $Amount;  
-        $Balance->save();
-        $ReverseRefueling = Refueling::where('id', $RefuelingId)->delete();
+                    ?? \App\Models\MasterCard::whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first();
+        
+        if (empty($Balance)) { 
+            $Balance = \DB::table('voucher_cards')->whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first();
+            $ReverseVoucherCardBalance = $Balance->Balance + $Amount; 
+            \DB::table('voucher_cards')->where('CardNumber', $CardNumber)
+                ->update([
+                    'Balance' => $ReverseVoucherCardBalance,  
+                ]); 
+            $ReverseRefueling = Refueling::where('id', $RefuelingId)->delete();
+        } else {
+            $Balance = \App\Models\Car::whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first()
+            ?? \App\Models\MasterCard::whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first();
 
+            $Balance->Balance = $Balance->Balance + $Amount; 
+            $Balance->save();
+            $ReverseRefueling = Refueling::where('id', $RefuelingId)->delete();
+        } 
+        
         return back();
+
     }
 }

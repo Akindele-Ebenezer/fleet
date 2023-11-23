@@ -29,7 +29,7 @@
 
     <link rel="stylesheet" href="{{ asset('Css/Styles.css') }}">
 </head>
-<body> 
+<body>  
     @include('Components.LoaderComponent')
     @yield('Content') 
     <footer>

@@ -1386,15 +1386,15 @@ nav[aria-label] span[aria-current] span {
 .report-inner .table td.show-record-x-edit .manage-user strong.online {
   background: #42b142;
 }
-.report-inner .table td.show-record-x-edit, .report-inner .table td.show-master-card-record-x-edit {
+.report-inner .table td.show-record-x-edit, .report-inner .table td.show-master-card-record-x-edit, .report-inner .table td.show-voucher-card-record-x-edit {
   display: flex;
 }
-.report-inner .table td.show-record-x-edit img, .report-inner .table td.show-master-card-record-x-edit img {
+.report-inner .table td.show-record-x-edit img, .report-inner .table td.show-master-card-record-x-edit img, .report-inner .table td.show-voucher-card-record-x-edit img {
   border-radius: 0.15em;
   margin-right: 1em;
   width: 1.5em;
 }
-.report-inner .table td.show-record-x-edit, .report-inner .table td.show-record-x, .report-inner .table td.show-master-card-record-x-edit {
+.report-inner .table td.show-record-x-edit, .report-inner .table td.show-record-x, .report-inner .table td.show-master-card-record-x-edit, .report-inner .table td.show-voucher-card-record-x-edit {
   cursor: pointer;
 }
 .report-inner .table td.show-record-x-2 {

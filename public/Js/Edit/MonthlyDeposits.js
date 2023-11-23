@@ -168,3 +168,68 @@ ShowMasterCardRecord_X_Edit.forEach(CardNumber => {
         });
     });
 });
+
+let AddVoucherCardDepositsForm = document.querySelector('.AddVoucherCardDepositsForm');
+let AddVoucherCardDepositsButton_X = document.querySelector('.AddVoucherCardDeposits');
+let CardNumber_VoucherCard_DEPOSITS = document.querySelector('.CardNumber_VoucherCard_DEPOSITS'); 
+
+let VoucherCardMonthlyDepositsModal_Edit = document.querySelector('.edit-voucher-card-deposits-form');
+let EditVoucherCardDepositsForm = document.querySelector('.EditVoucherCardDepositsForm');
+let ShowVoucherCardRecord_X_Edit = document.querySelectorAll('.show-voucher-card-record-x-edit');
+let EditVoucherCardDepositsButton = document.querySelector('.EditVoucherCardDeposits');
+let ReverseVoucherCardDepositsButton = document.querySelector('.ReverseVoucherCardDeposits');
+
+let Date_VoucherCard_X = document.querySelector('.Date_VoucherCard_X');
+let CardNumber_VoucherCard_X = document.querySelector('.CardNumber_VoucherCard_X');
+let  Amount_VoucherCard_X = document.querySelector('.Amount_VoucherCard_X');
+let Year_VoucherCard_X = document.querySelector('.Year_VoucherCard_X'); 
+let Week_VoucherCard_X = document.querySelector('.Week_VoucherCard_X');
+let Month_VoucherCard_X = document.querySelector('.Month_VoucherCard_X');
+let DepositsId_VoucherCard_X = document.querySelector('.DepositsId_VoucherCard_X');
+
+AddVoucherCardDepositsButton_X.addEventListener('click', () => {  
+    if (AddVoucherCardDepositsForm.children[1].children[1].value === '') {
+        Error.textContent = 'Please fill out card number for Voucher Card Deposits';
+    } else {
+        Error.style.backgroundColor = '#21a911';
+        Error.textContent = 'Processing transaction.. Please wait!';
+        AddVoucherCardDepositsButton_X.style.backgroundColor = '#DF2E38';
+        AddVoucherCardDepositsButton_X.textContent = '+ Processing..';
+        AddVoucherCardDepositsForm.setAttribute('action', '/Add/Deposits/Voucher/Cards/' + CardNumber_VoucherCard_DEPOSITS.value);
+        AddVoucherCardDepositsForm.submit();
+    }   
+});
+    
+ShowVoucherCardRecord_X_Edit.forEach(CardNumber => {
+    CardNumber.addEventListener('click', () => { 
+        VoucherCardMonthlyDepositsModal_Edit.style.display = 'block';
+ 
+        CardNumber_VoucherCard_X.value = CardNumber.nextElementSibling.nextElementSibling.textContent;
+        Date_VoucherCard_X.value = CardNumber.nextElementSibling.textContent; 
+        Amount_VoucherCard_X.value = BigInt(CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.textContent.replace(/₦/g, '').replace(/,/g, ''));
+        Year_VoucherCard_X.value = CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        Week_VoucherCard_X.value = CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        Month_VoucherCard_X.value = CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
+        DepositsId_VoucherCard_X.value = CardNumber.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
+ 
+        EditVoucherCardDepositsButton.addEventListener('click', () => {
+            EditVoucherCardDepositsButton.style.backgroundColor = '#21a911';
+            EditVoucherCardDepositsButton.textContent = '+ Updating..';
+            EditVoucherCardDepositsForm.setAttribute('action', '/Update/Deposits/Voucher/Cards/' + DepositsId_VoucherCard_X.value);
+            EditVoucherCardDepositsForm.submit();
+        });
+ 
+        ReverseVoucherCardDepositsButton.addEventListener('click', () => {
+            ReverseVoucherCardDepositsButton.style.backgroundColor = '#DF2E38';
+            ReverseVoucherCardDepositsButton.textContent = '- Reversing..';
+            window.location = '/Reverse/Deposits/Voucher/Cards/' + DepositsId_VoucherCard_X.value + '/' + CardNumber_VoucherCard_X.value + '/' + Amount_VoucherCard_X.value;  
+        });
+    });
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
+    
+    CancelModalIcons.forEach(CancelModalIcon => {
+        CancelModalIcon.addEventListener('click', () => {
+            VoucherCardMonthlyDepositsModal_Edit.style.display = 'none';
+        });
+    });
+});

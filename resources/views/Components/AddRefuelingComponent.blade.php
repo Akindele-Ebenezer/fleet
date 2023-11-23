@@ -67,6 +67,9 @@
                     @foreach (\App\Models\MasterCard::select('CardNumber')->groupBy('CardNumber')->get() as $MasterCard)
                         <option value="{{ $MasterCard->CardNumber }}" class="master-card">MASTER CARD :: {{ $MasterCard->CardNumber }}</option>
                     @endforeach
+                    @foreach (\DB::table('voucher_cards')->select('CardNumber')->groupBy('CardNumber')->get() as $VoucherCard)
+                        <option value="{{ $VoucherCard->CardNumber }}" class="voucher-card">VOUCHER CARD :: {{ $VoucherCard->CardNumber }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="new-car-inputs">

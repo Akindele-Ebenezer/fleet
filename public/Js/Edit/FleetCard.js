@@ -202,6 +202,78 @@ ManageMasterCardButton.forEach(Button => {
     });
 });
 
+/// VOUCHER CARD //////////////////////////////////
+
+let CardNumber_VoucherCard_X = document.querySelector('.CardNumber_VoucherCard_X');
+let Date_VoucherCard_X = document.querySelector('.Date_VoucherCard_X');
+let MonthlyBudget_VoucherCard_X = document.querySelector('.MonthlyBudget_VoucherCard_X');
+let Balance_VoucherCard_X = document.querySelector('.Balance_VoucherCard_X');
+let Status_VoucherCard_X = document.querySelector('.Status_VoucherCard_X');
+
+let ManageVoucherCardButton = document.querySelectorAll('.manage-voucher-card');
+let EditVoucherCardForm = document.querySelector('.edit-voucher-card-form');
+let EditVoucherCardForm_X = document.querySelector('.EditVoucherCardForm');
+ 
+let VoucherCardId_X = document.querySelector('.VoucherCardId_X');
+let CardVendor_VoucherCard_X = document.querySelector('.CardVendor_VoucherCard_X');
+let EditVoucherCard = document.querySelector('.EditVoucherCard');
+let DeleteVoucherCard = document.querySelector('.DeleteVoucherCard');
+
+let ModalAddVoucherCard = document.querySelector('.add-voucher-card-form');
+let AddVoucherCardButton = document.querySelectorAll('.add-voucher-card'); 
+
+let AddVoucherCardForm = document.querySelector('.AddVoucherCardForm');
+let AddVoucherCardButton_X = document.querySelector('.AddVoucherCard');
+let Error_VoucherCard = document.querySelector('.error-voucher-card');
+
+AddVoucherCardButton_X.addEventListener('click', () => {  
+    if (AddVoucherCardForm.children[1].children[1].value === '') {
+        Error.textContent = 'Please fill out CARD number for new Voucher Card';
+    } else {
+        let CardNumber_VoucherCard = AddVoucherCardForm.children[1].children[1].value;
+        AddVoucherCardForm.setAttribute('action', '/Add/Voucher/Cards/' + CardNumber_VoucherCard);
+        AddVoucherCardForm.submit();
+    }   
+});
+
+ManageVoucherCardButton.forEach(Button => {
+    Button.classList.remove('permission-denied');
+    Button.addEventListener('click', () => {
+        EditVoucherCardForm.style.display = 'block';
+ 
+        CardNumber_VoucherCard_X.value = Button.nextElementSibling.textContent;
+        Date_VoucherCard_X.value = Button.nextElementSibling.nextElementSibling.textContent;
+        MonthlyBudget_VoucherCard_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        Balance_VoucherCard_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        Status_VoucherCard_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        VoucherCardId_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent;
+        CardVendor_VoucherCard_X.value = Button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent; 
+    }); 
+
+    EditVoucherCard.addEventListener('click', () => {
+        EditVoucherCard.style.backgroundColor = '#21a911';
+        EditVoucherCard.textContent = '+ Updating..';
+        EditVoucherCardForm_X.setAttribute('action', '/Management/Update/Voucher/Cards/' + CardNumber_VoucherCard_X.value);
+        EditVoucherCardForm_X.submit(); 
+    });
+
+    DeleteVoucherCard.addEventListener('click', () => { 
+        DeleteVoucherCard.style.backgroundColor = '#DF2E38';
+        DeleteVoucherCard.textContent = '- Deleting..';
+        EditVoucherCardForm_X.setAttribute('action', '/Management/Delete/Voucher/Cards/' + VoucherCardId_X.value);
+        EditVoucherCardForm_X.submit(); 
+    });
+    let CancelModalIcons = document.querySelectorAll('.cancel-modal');
+  
+    CancelModalIcons.forEach(CancelModalIcon => {
+        CancelModalIcon.addEventListener('click', () => {
+            EditVoucherCardForm.style.display = 'none';
+        });
+    });
+});
+
+/// VOUCHER CARD -- //////////////////////////////////
+
 let CardNumber_ = document.querySelectorAll('.card-number');
 CardNumber_.forEach(CardNumber => {
     CardNumber.addEventListener('click', () => {

@@ -64,6 +64,9 @@ Route::get('/Reverse/Deposits/{Deposits}/{CardNumber}/{Amount}', [DepositsContro
 Route::get('/Add/Deposits/Master/Cards/{MasterCard}', [CardController::class, 'store_deposits_master_card'])->name('store_Deposits_MasterCard'); 
 Route::get('/Update/Deposits/Master/Cards/{MasterCard}', [CardController::class, 'update_deposits_master_card'])->name('UpdateDeposits_MasterCard');
 Route::get('/Reverse/Deposits/Master/Cards/{MasterCard}/{CardNumber}/{Amount}', [CardController::class, 'reverse_deposits_master_card'])->name('DeleteDeposits_MasterCard');
+Route::get('/Add/Deposits/Voucher/Cards/{VoucherCard}', [CardController::class, 'store_deposits_voucher_card'])->name('store_Deposits_VoucherCard'); 
+Route::get('/Update/Deposits/Voucher/Cards/{VoucherCard}', [CardController::class, 'update_deposits_voucher_card'])->name('UpdateDeposits_VoucherCard');
+Route::get('/Reverse/Deposits/Voucher/Cards/{VoucherCard}/{CardNumber}/{Amount}', [CardController::class, 'reverse_deposits_voucher_card'])->name('DeleteDeposits_VoucherCard');
 
 Route::get('/Edit/Refueling', [RefuelingController::class, 'my_records_refueling'])->name('EditRefueling'); 
 Route::get('/Add/Refueling/{Refueling}', [RefuelingController::class, 'store'])->name('store_Refueling'); 
@@ -102,4 +105,8 @@ Route::get('/Delete/Fuel/Vendors/{Id}', [CardController::class, 'destroy_vendor'
 Route::get('/Add/Master/Cards/{MasterCard}', [CardController::class, 'store_master_card'])->name('store_MasterCard'); 
 Route::get('/Management/Update/Master/Cards/{MasterCard}', [CardController::class, 'update_master_card'])->name('update_MasterCard'); 
 Route::get('/Management/Delete/Master/Cards/{MasterCard}', [CardController::class, 'destroy_master_card'])->name('destroy_MasterCard'); 
+
+Route::get('/Add/Voucher/Cards/{VoucherCard}', [CardController::class, 'store_voucher_card'])->name('store_VoucherCard'); 
+Route::get('/Management/Update/Voucher/Cards/{VoucherCard}', [CardController::class, 'update_voucher_card'])->name('update_VoucherCard'); 
+Route::get('/Management/Delete/Voucher/Cards/{VoucherCard}', [CardController::class, 'destroy_voucher_card'])->name('destroy_VoucherCard'); 
   

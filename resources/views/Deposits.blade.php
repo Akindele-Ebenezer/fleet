@@ -288,6 +288,122 @@
             <div class="empty-records" style="background: url('{{ asset('Images/empty-records.png') }}')"></div> 
         </center>
         @endunless
+        
+        <table class="table" id="Table2">
+            <h1 class="table-title">VOUCHER CARDS</h1>
+            <tr class="table-head">
+                {{-- <th onclick="sortTable(0)">LNO</th> --}}
+                <th onclick="sortTable2(0)">Card Type</th>
+                <th onclick="sortTable2(1)">Date</th>
+                <th onclick="sortTable2(2)">Card No</th>
+                <th onclick="sortTable2(3)">Amount</th>
+                <th onclick="sortTable2(4)">Year</th>
+                <th onclick="sortTable2(5)">Week</th>
+                <th onclick="sortTable2(6)">Month</th>
+                <th onclick="sortTable2(7)">Comments</th>
+            </tr>  
+            @unless (count(\DB::table('deposits_voucher_cards')->get()) > 0)
+            <tr>
+                <td>No Deposits for voucher cards.</td>
+            </tr>   
+            @endunless
+            @foreach ($Deposits_VoucherCards as $Deposits_VoucherCard) 
+            <tr class="HistoryTableRow"> 
+                @switch($Deposits_VoucherCard->Date)
+                    @case(date('Y-m-d'))
+                        @php
+                            $NumberOfRecords_Today = \DB::table('deposits_voucher_cards')->select('id')->where('Date', date('Y-m-d'))->count();
+                            $Cost_Today = \DB::table('deposits_voucher_cards')->select('Amount')->where('Date', date('Y-m-d'))->sum('Amount');
+                        @endphp
+                        <td class="Today Hide HistoryTitle">{{ number_format($NumberOfRecords_Today) ?? 0 }} :: Today</td>
+                        <td class="Cost_Today Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_Today) ?? 0 }}</td>
+                        @break 
+                    @case($Deposits_VoucherCard->Date >= date('Y-m-d', strtotime("this week")))
+                        @php
+                            $NumberOfRecords_ThisWeek = \DB::table('deposits_voucher_cards')->select('id')->where('Date', '>=', date('Y-m-d', strtotime("this week")))->count();
+                            $Cost_ThisWeek = \DB::table('deposits_voucher_cards')->select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("this week")))->sum('Amount');
+                        @endphp
+                        <td class="ThisWeek Hide HistoryTitle">{{ number_format($NumberOfRecords_ThisWeek) ?? 0 }} :: This week</td>
+                        <td class="Cost_ThisWeek Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_ThisWeek) ?? 0 }}</td>
+                        @break 
+                    @case(($Deposits_VoucherCard->Date >= date('Y-m-d', strtotime("last week")))) 
+                        @php
+                            $NumberOfRecords_LastWeek = \DB::table('deposits_voucher_cards')->select('id')->where('Date', '>=', date('Y-m-d', strtotime("last week")))->where('Date', '<', date('Y-m-d', strtotime("this week")))->count();
+                            $Cost_LastWeek = \DB::table('deposits_voucher_cards')->select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("last week")))->where('Date', '<', date('Y-m-d', strtotime("this week")))->sum('Amount');
+                        @endphp
+                        <td class="OneWeekAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_LastWeek) ?? 0 }} :: Last week</td>
+                        <td class="Cost_LastWeek Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_LastWeek) ?? 0 }}</td>
+                        @break
+                    @case(($Deposits_VoucherCard->Date >= date('Y-m-d', strtotime("-2 weeks"))))
+                        @php
+                            $NumberOfRecords_TwoWeeksAgo = \DB::table('deposits_voucher_cards')->select('id')->where('Date', '>=', date('Y-m-d', strtotime("-2 weeks")))->where('Date', '<', date('Y-m-d', strtotime("last week")))->count();
+                            $Cost_TwoWeeksAgo = \DB::table('deposits_voucher_cards')->select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("-2 weeks")))->where('Date', '<', date('Y-m-d', strtotime("last week")))->sum('Amount');
+                        @endphp
+                        <td class="TwoWeeksAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_TwoWeeksAgo) ?? 0 }} :: Two weeks ago</td>
+                        <td class="Cost_TwoWeeksAgo Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_TwoWeeksAgo) ?? 0 }}</td>
+                        @break
+                    @case(($Deposits_VoucherCard->Date >= date('Y-m-d', strtotime("-3 weeks"))))
+                        @php
+                            $NumberOfRecords_ThreeWeeksAgo = \DB::table('deposits_voucher_cards')->select('id')->where('Date', '>=', date('Y-m-d', strtotime("-3 weeks")))->where('Date', '<', date('Y-m-d', strtotime("-2 weeks")))->count();
+                            $Cost_ThreeWeeksAgo = \DB::table('deposits_voucher_cards')->select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("-3 weeks")))->where('Date', '<', date('Y-m-d', strtotime("-2 weeks")))->sum('Amount');
+                        @endphp
+                        <td class="ThreeWeeksAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_ThreeWeeksAgo) ?? 0 }} :: Three weeks ago</td>
+                        <td class="Cost_ThreeWeeksAgo Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_ThreeWeeksAgo) ?? 0 }}</td>
+                        @break
+                    @case(($Deposits_VoucherCard->Date >= date('Y-m-d', strtotime("-1 month"))))
+                        @php
+                            $NumberOfRecords_OneMonthAgo = \DB::table('deposits_voucher_cards')->select('id')->where('Date', '>=', date('Y-m-d', strtotime("-1 month")))->where('Date', '<', date('Y-m-d', strtotime("-3 weeks")))->count();
+                            $Cost_OneMonthAgo = \DB::table('deposits_voucher_cards')->select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("-1 month")))->where('Date', '<', date('Y-m-d', strtotime("-3 weeks")))->sum('Amount');
+                        @endphp
+                        <td class="OneMonthAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_OneMonthAgo) ?? 0 }} :: Last month</td>
+                        <td class="Cost_OneMonthAgo Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_OneMonthAgo) ?? 0 }}</td>
+                        @break
+                    @case(($Deposits_VoucherCard->Date >= date('Y-m-d', strtotime("-2 month"))))
+                        @php
+                            $NumberOfRecords_TwoMonthsAgo = \DB::table('deposits_voucher_cards')->select('id')->where('Date', '>=', date('Y-m-d', strtotime("-2 month")))->where('Date', '<', date('Y-m-d', strtotime("-1 month")))->count();
+                            $Cost_TwoMonthsAgo = \DB::table('deposits_voucher_cards')->select('Amount')->where('Date', '>=', date('Y-m-d', strtotime("-2 month")))->where('Date', '<', date('Y-m-d', strtotime("-1 month")))->sum('Amount');
+                        @endphp
+                        <td class="TwoMonthsAgo Hide HistoryTitle">{{ number_format($NumberOfRecords_TwoMonthsAgo) ?? 0 }} :: Two months ago</td>
+                        <td class="Cost_TwoMonthsAgo Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_TwoMonthsAgo) ?? 0 }}</td>
+                        @break
+                    @case(($Deposits_VoucherCard->Date < date('Y-m-d', strtotime("-2 month"))))
+                        @php
+                            $NumberOfRecords_Older = \DB::table('deposits_voucher_cards')->select('id')->where('Date', '<', date('Y-m-d', strtotime("-2 month")))->count();
+                            $Cost_Older = \DB::table('deposits_voucher_cards')->select('Amount')->where('Date', '<', date('Y-m-d', strtotime("-2 month")))->sum('Amount');
+                        @endphp
+                        <td class="Older Hide HistoryTitle">{{ number_format($NumberOfRecords_Older) ?? 0 }} :: Older</td>
+                        <td class="Cost_Older Hide HistoryTableData">Total deposits => ₦ {{ number_format($Cost_Older) ?? 0 }}</td>
+                        @break
+                    @default 
+                @endswitch 
+            </tr>
+            <tr>   
+                @php
+                    $Status = \DB::table('voucher_cards')->select('Status')->where('CardNumber', $Deposits_VoucherCard->CardNumber)->first();
+                @endphp
+                <td class="show-record-x show-record-x-2"><img src="{{ asset('Images/deposit_.png') }}" alt=""> VOUCHER<span class="{{ $Status->Status ?? 'INACTIVE' }}"></span></td>  
+                <td>{{ $Deposits_VoucherCard->Date }}</td>
+                <td class="card-numbers-x underline">{{ $Deposits_VoucherCard->CardNumber }}</td>
+                <td>₦ {{ empty($Deposits_VoucherCard->Amount) ? '' : number_format($Deposits_VoucherCard->Amount) }}</td> 
+                <td>{{ $Deposits_VoucherCard->Year }}</td>
+                <td>{{ $Deposits_VoucherCard->Week }}</td>
+                <td>{{ $Deposits_VoucherCard->Month }}</td> 
+                {{-- <td>{{ $Deposits_VoucherCard->Comments }}</td>  --}}
+            </tr> 
+            @endforeach  
+            <div class="table-head filter"> 
+                {{-- <span><input type="text" id="SearchInput0" placeholder="Filter By LNO" onkeyup="FilterLNO()"></span>  --}}
+                <span><input type="text" id="SearchInputX0" placeholder="Filter By Card Type" onkeyup="Filter2CardType()"></span> 
+                <span><input type="text" id="SearchInputX1" placeholder="Filter By Date" onkeyup="Filter2Date()"></span> 
+                <span><input type="text" id="SearchInputX2" placeholder="Filter By Card No" onkeyup="Filter2CardNo()"></span> 
+                <span><input type="text" id="SearchInputX3" placeholder="Filter By Amount" onkeyup="Filter2Amount()"></span> 
+                <span><input type="text" id="SearchInputX4" placeholder="Filter By Year" onkeyup="Filter2Year()"></span> 
+                <span><input type="text" id="SearchInputX5" placeholder="Filter By Week " onkeyup="Filter2Week()"></span> 
+                <span><input type="text" id="SearchInputX6" placeholder="Filter By Month" onkeyup="Filter2Month()"></span> 
+                <span><input type="text" id="SearchInputX7" placeholder="Filter By Comments" onkeyup="Filter2Comments()"></span> 
+            </div>
+        </table>
+        {{ $Deposits_VoucherCards->onEachSide(5)->links() }}
     </div>
     <script src="{{ asset('Js/ReadOnly/Deposits.js') }}"></script>
     <script>

@@ -11,10 +11,12 @@ class CardController extends Controller
 {
     public function config() {
         $Deposits_MasterCards = DepositsMasterCard::orderBy('Date', 'DESC')->paginate(14); 
+        $Deposits_VoucherCards = \DB::table('deposits_voucher_cards')->orderBy('Date', 'DESC')->paginate(14); 
         $DepositsMasterCard__MyRecords = DepositsMasterCard::where('UserId', self::USER_ID())->orderBy('Date', 'DESC')->paginate(14);
  
         return [
             'Deposits_MasterCards' => $Deposits_MasterCards,
+            'Deposits_VoucherCards' => $Deposits_VoucherCards,
             'DepositsMasterCard__MyRecords' => $DepositsMasterCard__MyRecords,
         ];
     }
@@ -28,6 +30,7 @@ class CardController extends Controller
 
         $Cars = Car::orderBy('DateIn', 'DESC')->paginate(7);
         $MasterCards = MasterCard::orderBy('Date', 'DESC')->paginate(7);
+        $VoucherCards = \DB::table('voucher_cards')->orderBy('Date', 'DESC')->paginate(7);
         
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
@@ -75,15 +78,24 @@ class CardController extends Controller
                         ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Vendor', 'LIKE', '%' . $FilterValue . '%') 
                         ->paginate(7);
+                        
+            $VoucherCards = \DB::table('voucher_cards')->where('CardNumber', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('MonthlyBudget', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Balance', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('Vendor', 'LIKE', '%' . $FilterValue . '%') 
+                        ->paginate(7);
 
                 $Cars->withPath($_SERVER['REQUEST_URI']);
 
-            return view('FleetCard', $Config)->with('Cars', $Cars)->with('Deposits_MasterCards', $Deposits_MasterCards)->with('MasterCards', $MasterCards);
+            return view('FleetCard', $Config)->with('Cars', $Cars)->with('Deposits_MasterCards', $Deposits_MasterCards)->with('MasterCards', $MasterCards)->with('VoucherCards', $VoucherCards);
         } 
 
         return view('FleetCard', [
             'Cars' => $Cars,
             'MasterCards' => $MasterCards,
+            'VoucherCards' => $VoucherCards,
         ]);
     } 
 
@@ -151,6 +163,45 @@ class CardController extends Controller
         $Balance->save();
         
         DepositsMasterCard::insert([  
+            'CardNumber' => $request->CardNumber_DEPOSITS, 
+            'Date' => $request->Date, 
+            'Amount' => $request->Amount, 
+            'UserId' => request()->session()->get('Id'), 
+            'DateIn' => date('F j, Y'), 
+            'TimeIn' => date("g:i a"),  
+            'Year' => $request->Year, 
+            'Month' => $request->Month, 
+            'Week' => $request->Week, 
+        ]);
+
+        return back();  
+    }
+  
+    public function store_voucher_card(Request $request)
+    {
+        \DB::table('voucher_cards')->insert([  
+            'CardNumber' => $request->CardNumber, 
+            'Date' => $request->Date, 
+            'MonthlyBudget' => $request->MonthlyBudget, 
+            'Balance' => $request->Balance, 
+            'Status' => $request->Status,  
+            'Vendor' => $request->Vendor,  
+            'UserId' => request()->session()->get('Id'),  
+        ]);
+
+        return back();  
+    }
+
+    public function store_deposits_voucher_card($Voucher, Request $request)
+    {
+        $Balance = \DB::table('voucher_cards')->where('CardNumber', $request->CardNumber_DEPOSITS)->first(); 
+        $VoucherDeposit = $request->Amount + $Balance->Balance;
+        \DB::table('voucher_cards')->where('CardNumber', $request->CardNumber_DEPOSITS)
+        ->update([
+            'Balance' => $VoucherDeposit,  
+        ]);
+        
+        \DB::table('deposits_voucher_cards')->insert([  
             'CardNumber' => $request->CardNumber_DEPOSITS, 
             'Date' => $request->Date, 
             'Amount' => $request->Amount, 
@@ -237,6 +288,36 @@ class CardController extends Controller
         return back(); 
     }
 
+    public function update_voucher_card(Request $request, string $id)
+    { 
+        \DB::table('voucher_cards')->where('id', $request->VoucherCardId)
+        ->update([
+            'CardNumber' => $request->CardNumber, 
+            'Date' => $request->Date, 
+            'MonthlyBudget' => $request->MonthlyBudget, 
+            'Balance' => $request->Balance, 
+            'Status' => $request->Status,    
+            'Vendor' => $request->Vendor,  
+        ]);
+
+        return back();  
+    }
+
+    public function update_deposits_voucher_card($VoucherCards, Request $request)
+    {  
+        \DB::table('deposits_voucher_cards')->where('id', $VoucherCards)
+            ->update([
+                'CardNumber' => $request->CardNumber, 
+                'Date' => $request->Date, 
+                'Amount' => $request->Amount,  
+                'Year' => $request->Year, 
+                'Month' => $request->Month, 
+                'Week' => $request->Week, 
+            ]);
+
+        return back(); 
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -250,12 +331,36 @@ class CardController extends Controller
         return back();
     }
 
+    public function destroy_voucher_card($VoucherCardId)
+    {
+        // $Balance = \App\Models\DepositsVoucherCard::where('CardNumber', $CardNumber)->first(); 
+        // $Balance->Balance = $Amount - $Balance->Balance;
+        // $Balance->save();  
+        $DeleteVoucherCard = \DB::table('voucher_cards')->where('id', $VoucherCardId)->delete();
+
+        return back();
+    }
+
     public function reverse_deposits_master_card($MasterCardId, $CardNumber, $Amount, DepositsMasterCard $MasterCards)
     { 
         $Reverse = \App\Models\MasterCard::whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first();; 
         $Reverse->Balance = $Reverse->Balance - $Amount;
         $Reverse->save();  
         $DeleteDepositsMasterCard = DepositsMasterCard::where('id', $MasterCardId)->delete();
+
+        return back();
+    }
+    
+    public function reverse_deposits_voucher_card($VoucherCardId, $CardNumber, $Amount)
+    { 
+        $Reverse = \DB::table('voucher_cards')->whereNotNull('CardNumber')->where('CardNumber', $CardNumber)->first();; 
+        $ReverseVoucherCardBalance = $Reverse->Balance - $Amount;
+        \DB::table('voucher_cards')->where('CardNumber', $CardNumber)
+            ->update([
+                'Balance' => $ReverseVoucherCardBalance,  
+            ]);
+
+        \DB::table('deposits_voucher_cards')->where('id', $VoucherCardId)->delete();
 
         return back();
     }

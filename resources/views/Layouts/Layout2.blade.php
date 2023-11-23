@@ -44,7 +44,8 @@
         @include('Components.AddFleetCardComponent')
         @include('Components.EditFleetCardComponent')
         @include('Components.AddMasterCardComponent')
-        @include('Components.EditMasterCardComponent')
+        @include('Components.EditMasterCardComponent') 
+        @include('Components.EditVoucherCardComponent')
     @endif
     @if (Route::is('Cars_Registration') || Route::is('Cars') || Route::is('VehicleReport'))
         @include('Components.EditCarComponent')

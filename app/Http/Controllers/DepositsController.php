@@ -13,13 +13,17 @@ class DepositsController extends Controller
         $Deposits = Deposits::orderBy('Date', 'DESC')->paginate(6); 
         $Deposits__MyRecords = Deposits::where('UserId', self::USER_ID())->orderBy('Date', 'DESC')->paginate(6);
         $Deposits_MasterCards = DepositsMasterCard::orderBy('Date', 'DESC')->paginate(6); 
+        $Deposits_VoucherCards = \DB::table('deposits_voucher_cards')->orderBy('Date', 'DESC')->paginate(14); 
         $DepositsMasterCard__MyRecords = DepositsMasterCard::where('UserId', self::USER_ID())->orderBy('Date', 'DESC')->paginate(6);
+        $DepositsVoucherCard__MyRecords = \DB::table('deposits_voucher_cards')->where('UserId', self::USER_ID())->orderBy('Date', 'DESC')->paginate(6);
  
         return [
             'Deposits' => $Deposits,
             'Deposits__MyRecords' => $Deposits__MyRecords,
             'Deposits_MasterCards' => $Deposits_MasterCards,
+            'Deposits_VoucherCards' => $Deposits_VoucherCards,
             'DepositsMasterCard__MyRecords' => $DepositsMasterCard__MyRecords,
+            'DepositsVoucherCard__MyRecords' => $DepositsVoucherCard__MyRecords,
         ];
     }
  

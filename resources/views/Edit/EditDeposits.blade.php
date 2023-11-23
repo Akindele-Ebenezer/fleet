@@ -7,6 +7,7 @@
     @include('Components.AddMonthlyDepositsComponent')
     @include('Components.EditMonthlyDepositsComponent')
     @include('Components.EditDeposits_MasterCardComponent')
+    @include('Components.EditDeposits_VoucherCardComponent')
 @endsection
 @section('Content')
     <div class="table-wrapper"> 
@@ -105,7 +106,55 @@
             </div>
         </table>
         {{ $DepositsMasterCard__MyRecords->onEachSide(5)->links() }}
-        @unless (count($Deposits__MyRecords) > 0 || count($DepositsMasterCard__MyRecords) > 0)
+        
+        <table class="table" id="Table2">
+            <h1 class="table-title">VOUHER CARDS</h1>
+            <tr class="table-head">
+                {{-- <th onclick="sortTable(0)">LNO</th> --}}
+                <th onclick="sortTable2(0)">Card Type</th>
+                <th onclick="sortTable2(1)">Date</th>
+                <th onclick="sortTable2(2)">Card No</th>
+                <th onclick="sortTable2(3)">Amount</th>
+                <th onclick="sortTable2(4)">Year</th>
+                <th onclick="sortTable2(5)">Week</th>
+                <th onclick="sortTable2(6)">Month</th>
+            </tr> 
+            @unless (count(\DB::table('deposits_voucher_cards')->where('UserId', session()->get('Id'))->get()) > 0)
+            <tr>
+                <td>You don't have Deposits for voucher cards.</td>
+            </tr>    
+            @endunless
+            @foreach ($DepositsVoucherCard__MyRecords as $Deposits_VoucherCard)
+            <tr>  
+                <td class="show-voucher-card-record-x-edit"><img src="{{ asset('Images/edit.png') }}" alt="">VOUCHER</td> 
+                <span class="Date_X_DATA_Edit Hide">{{ $Deposits_VoucherCard->Date }}</span>
+                <span class="CardNumber_X_DATA_Edit Hide">{{ $Deposits_VoucherCard->CardNumber }}</span>
+                <span class="Amount_X_DATA_Edit Hide">{{ $Deposits_VoucherCard->Amount }}</span>
+                <span class="Year_X_DATA_Edit Hide">{{ $Deposits_VoucherCard->Year }}</span>
+                <span class="Week_X_DATA_Edit Hide">{{ $Deposits_VoucherCard->Week }}</span> 
+                <span class="Month_X_DATA_Edit Hide">{{ $Deposits_VoucherCard->Month }}</span> 
+                <td>{{ $Deposits_VoucherCard->Date }}</td> 
+                <td class="card-numbers-x underline">{{ $Deposits_VoucherCard->CardNumber }}</td> 
+                <td>₦ {{ empty($Deposits_VoucherCard->Amount) ? '' : number_format($Deposits_VoucherCard->Amount) }}</td>
+                <td>{{ $Deposits_VoucherCard->Year }}</td>
+                <td>{{ $Deposits_VoucherCard->Week }}</td>
+                <td>{{ $Deposits_VoucherCard->Month }}</td> 
+                <td class="Hide">{{ $Deposits_VoucherCard->id }}</td>
+            </tr> 
+            @endforeach  
+            <div class="table-head filter"> 
+                {{-- <span><input type="text" id="SearchInput0" placeholder="Filter By LNO" onkeyup="FilterLNO()"></span>  --}}
+                <span><input type="text" id="SearchInputX0" placeholder="Filter By Card Type no" onkeyup="Filter2CardType()"></span> 
+                <span><input type="text" id="SearchInputX1" placeholder="Filter By Date" onkeyup="Filter2Date()"></span> 
+                <span><input type="text" id="SearchInputX2" placeholder="Filter By Card No" onkeyup="Filter2CardNo()"></span> 
+                <span><input type="text" id="SearchInputX3" placeholder="Filter By Amount" onkeyup="Filter2Amount()"></span> 
+                <span><input type="text" id="SearchInputX4" placeholder="Filter By Year" onkeyup="Filter2Year()"></span> 
+                <span><input type="text" id="SearchInputX5" placeholder="Filter By Week " onkeyup="Filter2Week()"></span> 
+                <span><input type="text" id="SearchInputX6" placeholder="Filter By Month" onkeyup="Filter2Month()"></span> 
+            </div>
+        </table>
+        {{ $DepositsVoucherCard__MyRecords->onEachSide(5)->links() }}
+        @unless (count($Deposits__MyRecords) > 0 || count($DepositsVoucherCard__MyRecords) > 0)
         @include('Includes.EmptyProjectTemplate') 
         @endunless
     </div>

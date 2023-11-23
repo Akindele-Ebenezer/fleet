@@ -31,6 +31,53 @@
                                                 ->where('UserId', session()->get('Id'))
                                                 ->first();   
             @endphp
+            @foreach ($VoucherCards as $VoucherCard)  
+            @if (empty($VoucherCard->CardNumber)) @continue; @endif
+            <tr> 
+                {{-- <td>{{ $VoucherCard->id }}</td> --}}
+                <td>
+                    <div class="car-info">
+                        <div class="info-inner">
+                            <div class="inner">
+                                <h1 class="card-number">{{ $VoucherCard->CardNumber }}</h1> 
+                                <span class="type">Voucher Card</span>
+                                <span class="{{ $VoucherCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $VoucherCard->Status === 'INACTIVE' ? 'inactive' : '' }} status">{{ $VoucherCard->Status === 'ACTIVE' ? 'active' : '' }}{{ $VoucherCard->Status === 'INACTIVE' ? 'inactive' : '' }}</span> <br>
+                                <span class="used-by">VOUCHER</span>  {{ $VoucherCard->Date }} :: {{ $VoucherCard->Vendor }}
+                            </div>   
+                        </div>  
+                    </div> 
+                 </td> 
+                <td>  
+                    ₦ {{ number_format($VoucherCard->MonthlyBudget) }}
+                </td> 
+                @php
+                    $Deposits = \DB::table('deposits_voucher_cards')->where('CardNumber', $VoucherCard->CardNumber)->sum('Amount');
+                    $Refueling = \App\Models\Refueling::where('CardNumber', $VoucherCard->CardNumber)->sum('Amount');
+                @endphp
+                <td>  
+                    ₦ {{ number_format($Deposits) }}
+                </td> 
+                <td>  
+                    ₦ {{ number_format($Refueling) }}
+                </td> 
+                <td>  
+                    ₦ {{ number_format($VoucherCard->Balance) }}
+                </td> 
+                <td>  
+                    ₦ {{ number_format(($VoucherCard->MonthlyBudget - $VoucherCard->Balance) < 0 ? 0 : $VoucherCard->MonthlyBudget - $VoucherCard->Balance) }}
+                </td> 
+                <td>  
+                    <button class="action-x {{ $CardManagement_USER->CardManagement ?? 'off' === 'on' ? 'manage-voucher-card' : 'permission-denied' }}">MANAGE</button>
+                    <span class="Hide">{{ $VoucherCard->CardNumber }}</span>
+                    <span class="Hide">{{ $VoucherCard->Date }}</span>
+                    <span class="Hide">{{ $VoucherCard->MonthlyBudget }}</span>
+                    <span class="Hide">{{ $VoucherCard->Balance }}</span>
+                    <span class="Hide">{{ $VoucherCard->Status }}</span>
+                    <span class="Hide">{{ $VoucherCard->id }}</span>
+                    <span class="Hide">{{ $VoucherCard->Vendor }}</span>
+                </td> 
+            </tr> 
+            @endforeach 
             @foreach ($MasterCards as $MasterCard)  
             @if (empty($MasterCard->CardNumber)) @continue; @endif
             <tr> 

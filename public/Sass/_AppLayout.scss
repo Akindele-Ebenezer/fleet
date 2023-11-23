@@ -852,7 +852,8 @@ nav {
                 }
 
                 &.show-record-x-edit,
-                &.show-master-card-record-x-edit {
+                &.show-master-card-record-x-edit,
+                &.show-voucher-card-record-x-edit {
                     display: flex;
 
                     img { 
@@ -864,7 +865,8 @@ nav {
 
                 &.show-record-x-edit,
                 &.show-record-x,
-                &.show-master-card-record-x-edit  {
+                &.show-master-card-record-x-edit,
+                &.show-voucher-card-record-x-edit {
                     cursor: pointer; 
                 } 
                 
