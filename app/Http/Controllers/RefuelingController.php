@@ -80,7 +80,110 @@ class RefuelingController extends Controller
         ///////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
-            $Refuelings = Refueling::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+
+            if ($FilterValue === 'active') {
+                $Refuelings = Refueling::join('cars', 'cars.VehicleNumber', '=', 'refuelings.VehicleNumber')
+                    ->select([
+                        'cars.VehicleNumber', 
+                        'refuelings.VehicleNumber', 
+                        'refuelings.Date', 
+                        'refuelings.Time', 
+                        'refuelings.Mileage', 
+                        'refuelings.TERNO', 
+                        'refuelings.Quantity', 
+                        'refuelings.Amount', 
+                        'refuelings.CardNumber', 
+                        'refuelings.KM', 
+                        'refuelings.Consumption'
+                    ])->where('Status', 'ACTIVE')->orderBy('Date', 'DESC')->paginate(14);
+ 
+                $Refuelings->withPath($_SERVER['REQUEST_URI']);
+            } else if ($FilterValue === 'inactive') {
+                $Refuelings = Refueling::join('cars', 'cars.VehicleNumber', '=', 'refuelings.VehicleNumber')
+                    ->select([
+                        'cars.VehicleNumber', 
+                        'refuelings.VehicleNumber', 
+                        'refuelings.Date', 
+                        'refuelings.Time', 
+                        'refuelings.Mileage', 
+                        'refuelings.TERNO', 
+                        'refuelings.Quantity', 
+                        'refuelings.Amount', 
+                        'refuelings.CardNumber', 
+                        'refuelings.KM', 
+                        'refuelings.Consumption'
+                    ])->where('Status', 'INACTIVE')->orderBy('Date', 'DESC')->paginate(14);
+ 
+                $Refuelings->withPath($_SERVER['REQUEST_URI']);
+            } else {
+                $Refuelings = Refueling::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Mileage', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('TERNO', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Quantity', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orWhere('ReceiptNumber', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orWhere('KM', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orderBy('Date', 'DESC')
+                    ->orderBy('Time', 'DESC')
+                    ->paginate(7);
+
+                    $Refuelings->withPath($_SERVER['REQUEST_URI']);
+            }
+            return view('Refueling', $Config)->with('Refuelings', $Refuelings);
+        } 
+        return view('Refueling', $Config);
+    }
+
+    public function my_records_refueling()
+    {
+        $Config = self::config();
+
+        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
+            $FilterValue = $_GET['FilterValue']; 
+
+            if ($FilterValue === 'active') {
+                $Refueling__MyRecords = Refueling::join('cars', 'cars.VehicleNumber', '=', 'refuelings.VehicleNumber')
+                    ->select([
+                        'cars.VehicleNumber', 
+                        'refuelings.VehicleNumber', 
+                        'refuelings.Date', 
+                        'refuelings.Time', 
+                        'refuelings.Mileage', 
+                        'refuelings.TERNO', 
+                        'refuelings.Quantity', 
+                        'refuelings.Amount', 
+                        'refuelings.CardNumber', 
+                        'refuelings.KM', 
+                        'refuelings.Consumption'
+                    ])->where('refuelings.UserId', self::USER_ID())
+                    ->where('Status', 'ACTIVE')->orderBy('Date', 'DESC')->paginate(14);
+ 
+                $Refueling__MyRecords->withPath($_SERVER['REQUEST_URI']);
+            } else if ($FilterValue === 'inactive') {
+                $Refueling__MyRecords = Refueling::join('cars', 'cars.VehicleNumber', '=', 'refuelings.VehicleNumber')
+                    ->select([
+                        'cars.VehicleNumber', 
+                        'refuelings.VehicleNumber', 
+                        'refuelings.Date', 
+                        'refuelings.Time', 
+                        'refuelings.Mileage', 
+                        'refuelings.TERNO', 
+                        'refuelings.Quantity', 
+                        'refuelings.Amount', 
+                        'refuelings.CardNumber', 
+                        'refuelings.KM', 
+                        'refuelings.Consumption'
+                    ])->where('refuelings.UserId', self::USER_ID())
+                    ->where('Status', 'INACTIVE')->orderBy('Date', 'DESC')->paginate(14);
+ 
+                $Refueling__MyRecords->withPath($_SERVER['REQUEST_URI']);
+            }  else {
+                $Refueling__MyRecords = Refueling::where('UserId', self::USER_ID())
+                        ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
@@ -94,38 +197,9 @@ class RefuelingController extends Controller
                         ->orderBy('Date', 'DESC')
                         ->orderBy('Time', 'DESC')
                         ->paginate(7);
-  
-                        $Refuelings->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Refueling', $Config)->with('Refuelings', $Refuelings);
-        } 
-        return view('Refueling', $Config);
-    }
-
-    public function my_records_refueling()
-    {
-        $Config = self::config();
-
-        if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
-            $FilterValue = $_GET['FilterValue']; 
-            $Refueling__MyRecords = Refueling::where('UserId', self::USER_ID())
-                                                ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
-                                                ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
-                                                ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
-                                                ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
-                                                ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
-                                                ->orWhere('Mileage', 'LIKE', '%' . $FilterValue . '%')
-                                                ->orWhere('TERNO', 'LIKE', '%' . $FilterValue . '%')
-                                                ->orWhere('Quantity', 'LIKE', '%' . $FilterValue . '%')
-                                                ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%') 
-                                                ->orWhere('ReceiptNumber', 'LIKE', '%' . $FilterValue . '%') 
-                                                ->orWhere('KM', 'LIKE', '%' . $FilterValue . '%') 
-                                                ->orderBy('Date', 'DESC')
-                                                ->orderBy('Time', 'DESC')
-                                                ->paginate(7);
-  
-            $Refueling__MyRecords->withPath($_SERVER['REQUEST_URI']);
-
+                $Refueling__MyRecords->withPath($_SERVER['REQUEST_URI']);
+            }
             return view('Edit.EditRefueling', $Config)->with('Refueling__MyRecords', $Refueling__MyRecords);
         } 
         return view('Edit.EditRefueling', $Config);

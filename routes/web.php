@@ -97,7 +97,7 @@ Route::get('Deposits/Export/{Car}', [DepositsExportController::class, 'ExportCar
 Route::get('Refueling/Export/{Car}', [RefuelingExportController::class, 'ExportCarFuelHistory'])->name('Refueling_ExportToExcel');
 Route::get('Users/Export/', [UsersExportController::class, 'ExportUsers'])->name('Users_ExportToExcel'); 
 
-Route::get('/Management/Fleet/Cards', [CardController::class, 'credit_card_index'])->name('FleetCard');
+Route::get('/Management/Fleet/Cards', [CardController::class, 'fleet_card_index'])->name('FleetCard');
 Route::post('/Management/Fleet/Add/Fuel/Vendors', [CardController::class, 'add_vendor'])->name('AddVendor'); 
 Route::get('/Update/Fuel/Vendors/{Id}', [CardController::class, 'update_vendor'])->name('UpdateVendor');
 Route::get('/Delete/Fuel/Vendors/{Id}', [CardController::class, 'destroy_vendor'])->name('DeleteVendor');

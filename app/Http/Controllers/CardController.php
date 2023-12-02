@@ -24,7 +24,7 @@ class CardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function credit_card_index()
+    public function fleet_card_index()
     {
         $Config = self::config();
 
@@ -34,7 +34,13 @@ class CardController extends Controller
         
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
-            $Cars = Car::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+
+            if ($FilterValue === 'active') {
+                $Cars = Car::where('Status', 'ACTIVE')->paginate(14);
+
+                $Cars->withPath($_SERVER['REQUEST_URI']);
+            } else {
+                $Cars = Car::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Model', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('SubModel', 'LIKE', '%' . $FilterValue . '%')
@@ -64,7 +70,7 @@ class CardController extends Controller
                         ->orWhere('FuelTankCapacity', 'LIKE', '%' . $FilterValue . '%')
                         ->orderBy('PurchaseDate', 'DESC') 
                         ->paginate(7);
-
+            }
             $Deposits_MasterCards = DepositsMasterCard::where('CardNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
@@ -323,20 +329,20 @@ class CardController extends Controller
      */
     public function destroy_master_card($MasterCardId)
     {
-        // $Balance = \App\Models\DepositsMasterCard::where('CardNumber', $CardNumber)->first(); 
-        // $Balance->Balance = $Amount - $Balance->Balance;
-        // $Balance->save();  
+        $MasterCardNumber = MasterCard::where('id', $MasterCardId)->first();
+ 
         $DeleteMasterCard = MasterCard::where('id', $MasterCardId)->delete();
+        \DB::table('deposits_master_cards')->where('CardNumber', $MasterCardNumber->CardNumber)->delete();
 
         return back();
     }
 
     public function destroy_voucher_card($VoucherCardId)
     {
-        // $Balance = \App\Models\DepositsVoucherCard::where('CardNumber', $CardNumber)->first(); 
-        // $Balance->Balance = $Amount - $Balance->Balance;
-        // $Balance->save();  
+        $VoucherCardNumber = \DB::table('voucher_cards')->where('id', $VoucherCardId)->first();
+
         $DeleteVoucherCard = \DB::table('voucher_cards')->where('id', $VoucherCardId)->delete();
+        \DB::table('deposits_voucher_cards')->where('CardNumber', $VoucherCardNumber->CardNumber)->delete();
 
         return back();
     }

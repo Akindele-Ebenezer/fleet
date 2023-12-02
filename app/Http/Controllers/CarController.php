@@ -91,6 +91,28 @@ class CarController extends Controller
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = trim($_GET['FilterValue']); 
+            
+            if ($FilterValue === 'active') {
+                $MyInspectionReport = \DB::table('inspection_report')
+                ->join('cars', 'cars.VehicleNumber', '=', 'inspection_report.VehicleNumber')
+                ->select([
+                    'cars.VehicleNumber', 
+                    'inspection_report.VehicleNumber', 
+                    'inspection_report.InspectionNumber', 
+                    'inspection_report.Mileage', 
+                    'inspection_report.DateInspected', 
+                    'inspection_report.InspectedBy', 
+                    'inspection_report.AdditionalNotes', 
+                    'inspection_report.Attachment', 
+                    'inspection_report.Status', 
+                    'inspection_report.Mechanic', 
+                    'inspection_report.SubmitTime',
+                    'inspection_report.Week', 
+                ])->where('inspection_report.UserId', self::USER_ID())
+                ->where('cars.Status', 'ACTIVE')->paginate(14);
+
+                $MyInspectionReport->withPath($_SERVER['REQUEST_URI']);
+            } else {
             $MyInspectionReport = \DB::table('inspection_report')
                         ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('InspectionNumber', 'LIKE', '%' . $FilterValue . '%')
@@ -106,7 +128,7 @@ class CarController extends Controller
                         ->paginate(14);
  
                         $MyInspectionReport->withPath($_SERVER['REQUEST_URI']);
-
+            }
             return view('InspectionReport', $Config)->with('MyInspectionReport', $MyInspectionReport);
         } 
         return view('InspectionReport', $Config);
@@ -117,22 +139,44 @@ class CarController extends Controller
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = trim($_GET['FilterValue']); 
-            $General_Inspection_Report = \DB::table('inspection_report')
-                        ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
-                        ->orWhere('InspectionNumber', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Mileage', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('DateInspected', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('InspectedBy', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('AdditionalNotes', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Attachment', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Mechanic', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('SubmitTime', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
-                        ->paginate(14);
-                      
-                        $General_Inspection_Report->withPath($_SERVER['REQUEST_URI']);
+            
+            if ($FilterValue === 'active') {
+                $General_Inspection_Report = \DB::table('inspection_report')
+                ->join('cars', 'cars.VehicleNumber', '=', 'inspection_report.VehicleNumber')
+                ->select([
+                    'cars.VehicleNumber', 
+                    'inspection_report.VehicleNumber', 
+                    'inspection_report.InspectionNumber', 
+                    'inspection_report.Mileage', 
+                    'inspection_report.DateInspected', 
+                    'inspection_report.InspectedBy', 
+                    'inspection_report.AdditionalNotes', 
+                    'inspection_report.Attachment', 
+                    'inspection_report.Status', 
+                    'inspection_report.Mechanic', 
+                    'inspection_report.SubmitTime',
+                    'inspection_report.Week', 
+                ])->where('cars.Status', 'ACTIVE')->paginate(14);
 
+                $General_Inspection_Report->withPath($_SERVER['REQUEST_URI']);
+            } else {
+                $General_Inspection_Report = \DB::table('inspection_report')
+                    ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orWhere('InspectionNumber', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Mileage', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('DateInspected', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('InspectedBy', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('AdditionalNotes', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Attachment', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Mechanic', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('SubmitTime', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%')
+                    ->where('UserId', self::USER_ID()) 
+                    ->paginate(14);
+                    
+                    $General_Inspection_Report->withPath($_SERVER['REQUEST_URI']);
+                }
             return view('GeneralInspectionReport', $Config)->with('General_Inspection_Report', $General_Inspection_Report);
         } 
         return view('GeneralInspectionReport', $Config);
@@ -380,40 +424,46 @@ class CarController extends Controller
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = trim($_GET['FilterValue']); 
-            $Cars = Car::whereNotNull('VehicleNumber')
-                        ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
-                        ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Model', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('SubModel', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('GearType', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('EngineType', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('EngineNumber', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('ChassisNumber', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('ModelYear', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Odometer', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('EngineVolume', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Comments', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('PurchaseDate', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Price', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Supplier', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('CarOwner', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Driver', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('MonthlyBudget', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('CompanyCode', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('TotalDeposits', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('TotalRefueling', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Balance', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('PinCode', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('StopDate', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('LicenceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('InsuranceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('FuelTankCapacity', 'LIKE', '%' . $FilterValue . '%')
-                        ->paginate(14);
- 
-                        $Cars->withPath($_SERVER['REQUEST_URI']);
+            
+            if ($FilterValue === 'active') {
+                $Cars = Car::where('Status', 'ACTIVE')->paginate(14);
 
+                $Cars->withPath($_SERVER['REQUEST_URI']);
+            } else {
+                $Cars = Car::whereNotNull('VehicleNumber')
+                    ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Model', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('SubModel', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('GearType', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('EngineType', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('EngineNumber', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('ChassisNumber', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('ModelYear', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Odometer', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('EngineVolume', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Comments', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('PurchaseDate', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Price', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Supplier', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('CarOwner', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Driver', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('MonthlyBudget', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('CompanyCode', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('TotalDeposits', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('TotalRefueling', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Balance', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('PinCode', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Status', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('StopDate', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('LicenceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('InsuranceExpiryDate', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('FuelTankCapacity', 'LIKE', '%' . $FilterValue . '%')
+                    ->paginate(14);
+
+                    $Cars->withPath($_SERVER['REQUEST_URI']);
+            }
             return view('Documents.Cars.Documents', $Config)->with('Cars', $Cars);
         } 
         return view('Documents.Cars.Documents', $Config);
@@ -625,6 +675,12 @@ class CarController extends Controller
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = trim($_GET['FilterValue']); 
+
+            if ($FilterValue === 'active') {
+                $CarOwners = Car::where('Status', 'ACTIVE')->paginate(14);
+
+                $CarOwners->withPath($_SERVER['REQUEST_URI']);
+            } else {
             $CarOwners = Car::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Model', 'LIKE', '%' . $FilterValue . '%')
@@ -657,7 +713,7 @@ class CarController extends Controller
                         ->paginate(7);
  
                         $CarOwners->withPath($_SERVER['REQUEST_URI']);
-
+            }
             return view('CarOwners', $Config)->with('CarOwners', $CarOwners);
         } 
 
@@ -673,6 +729,12 @@ class CarController extends Controller
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = trim($_GET['FilterValue']); 
+
+            if ($FilterValue === 'active') {
+                $Drivers = Car::whereNotNull('Driver')->where('Status', 'ACTIVE')->paginate(14);
+
+                $Drivers->withPath($_SERVER['REQUEST_URI']);
+            } else {
             $Drivers = Car::whereNotNull('Driver')
                         ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
@@ -706,7 +768,7 @@ class CarController extends Controller
                         ->paginate(7);
  
                         $Drivers->withPath($_SERVER['REQUEST_URI']);
-
+            }
             return view('Drivers', $Config)->with('Drivers', $Drivers);
         } 
 
@@ -719,7 +781,14 @@ class CarController extends Controller
  
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = trim($_GET['FilterValue']); 
-            $Cars__MyRecords = Car::where('UserId', self::USER_ID())
+
+            if ($FilterValue === 'active') {
+                $Cars__MyRecords = Car::where('UserId', self::USER_ID())
+                                        ->where('Status', 'ACTIVE')->paginate(14);
+
+                $Cars__MyRecords->withPath($_SERVER['REQUEST_URI']);
+            } else {
+                $Cars__MyRecords = Car::where('UserId', self::USER_ID())
                         ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Model', 'LIKE', '%' . $FilterValue . '%')
@@ -752,7 +821,7 @@ class CarController extends Controller
                         ->paginate(7);
  
                         $Cars__MyRecords->withPath($_SERVER['REQUEST_URI']);
- 
+            }
             return view('Edit.EditMyRecords', $Config)->with('Cars__MyRecords', $Cars__MyRecords);
         }
         
@@ -765,6 +834,12 @@ class CarController extends Controller
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = trim($_GET['FilterValue']); 
+
+            if ($FilterValue === 'active') {
+                $Cars = Car::where('Status', 'ACTIVE')->paginate(14);
+
+                $Cars->withPath($_SERVER['REQUEST_URI']);
+            } else {
             $Cars = Car::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Maker', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('Model', 'LIKE', '%' . $FilterValue . '%')
@@ -798,7 +873,7 @@ class CarController extends Controller
                         ->paginate(7);
  
                         $Cars->withPath($_SERVER['REQUEST_URI']);
-
+            }
             return view('VehicleReport', $Config)->with('Cars', $Cars);
         } 
 

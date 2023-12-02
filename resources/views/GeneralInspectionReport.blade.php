@@ -8,7 +8,7 @@
 @section('Button_2', '+ Inspection Form') 
 
 @section('Components')
-    @include('Components.EditVehicleInspectionReportComponent')
+    @include('Components.Readonly.VehicleInspectionReportComponent')
 @endsection
 
 @section('Content')

@@ -203,10 +203,10 @@
                         </option>
                         <option>  
                             @if ($CarOdometer->Odometer === 'Mileage') 
-                                {{ round($Refueling->KM * 1.60934 / $Refueling->Quantity, 1) . ' km/liter' }}
+                                {{ $Refueling->Quantity == 0 ? 1 : round($Refueling->KM * 1.60934 / $Refueling->Quantity, 1) . ' km/liter' }}
                             @endif
                             @if ($CarOdometer->Odometer === 'Kilometer') 
-                                {{ round($Refueling->KM * 0.621371 / $Refueling->Quantity, 1) . ' mpl' }}
+                                {{ $Refueling->Quantity == 0 ? 1 :  round($Refueling->KM * 0.621371 / $Refueling->Quantity, 1) . ' mpl' }}
                             @endif
                         </option>
                     </select> 

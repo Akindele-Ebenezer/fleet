@@ -598,7 +598,7 @@
                         @php
                             $MasterCardNumber = \App\Models\MasterCard::select('CardNumber')->orderBy('Date', 'DESC')->first();
                         @endphp
-                        <h2>Master Card No: {{ $MasterCardNumber->CardNumber ?? 'Empty' }}</h2>
+                        <h2>Master Card No: {{ empty($MasterCardNumber) ? 0 :  $MasterCardNumber->CardNumber ?? 'Empty' }}</h2>
                             <form action="" class="search">
                                 <input type="text" placeholder="Search..." id="SearchInput" name="FilterValue" autocomplete="off" class="datalist-input">
                                 @include('Components.Datalist.VehicleListComponent')

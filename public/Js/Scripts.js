@@ -272,13 +272,101 @@ InspectionFormButton.forEach(Button => {
 
 ActiveCarsRouteButton.forEach(Button => {
     Button.addEventListener('click', () => {
-        window.location = '/Cars?FilterValue=active';
+        if (
+            window.location.pathname == '/Cars' ||
+            window.location.pathname == '/Cars/Inspections/Daily/Checklist' ||
+            window.location.pathname == '/Management/Fleet/Deposits/Entries' ||
+            window.location.pathname == '/Users' ||
+            window.location.pathname == '/Deposits'
+        ) {
+            window.location = '/Cars?FilterValue=active';
+        }
+        if (window.location.pathname == '/Cars/Inspections/Report') {
+            window.location = '/Cars/Inspections/Report?FilterValue=active';
+        }
+        if (window.location.pathname == '/Cars/Inspections/General/Report') {
+            window.location = '/Cars/Inspections/General/Report?FilterValue=active';
+        }
+        if (window.location.pathname == '/Cars/Documents') {
+            window.location = '/Cars/Documents?FilterValue=active';
+        }
+        if (window.location.pathname == '/Cars/Registration') {
+            window.location = '/Cars/Registration?FilterValue=active';
+        }
+        if (window.location.pathname == '/Edit/Maintenance') {
+            window.location = '/Edit/Maintenance?FilterValue=active';
+        }
+        if (window.location.pathname == '/Edit/Refueling') {
+            window.location = '/Edit/Refueling?FilterValue=active';
+        }
+        if (window.location.pathname == '/Cars/Report') {
+            window.location = '/Cars/Report?FilterValue=active';
+        }
+        if (window.location.pathname == '/Cars/Owners') {
+            window.location = '/Cars/Owners?FilterValue=active';
+        }
+        if (window.location.pathname == '/Cars/Drivers') {
+            window.location = '/Cars/Drivers?FilterValue=active';
+        }
+        if (window.location.pathname == '/Management/Fleet/Cards') {
+            window.location = '/Management/Fleet/Cards?FilterValue=active';
+        }
+        if (window.location.pathname == '/Maintenance') {
+            window.location = '/Maintenance?FilterValue=active';
+        }
+        if (window.location.pathname == '/Refueling') {
+            window.location = '/Refueling?FilterValue=active';
+        }
     });
 }); 
 
 InactiveCarsRouteButton.forEach(Button => {
     Button.addEventListener('click', () => {
-        window.location = '/Cars?FilterValue=inactive';
+        if (
+            window.location.pathname == '/Cars' ||
+            window.location.pathname == '/Cars/Inspections/Daily/Checklist' ||
+            window.location.pathname == '/Management/Fleet/Deposits/Entries' ||
+            window.location.pathname == '/Users' ||
+            window.location.pathname == '/Deposits'
+        ) {
+            window.location = '/Cars?FilterValue=inactive';
+        }
+        if (window.location.pathname == '/Cars/Inspections/Report') {
+            window.location = '/Cars/Inspections/Report?FilterValue=inactive';
+        }
+        if (window.location.pathname == '/Cars/Inspections/General/Report') {
+            window.location = '/Cars/Inspections/General/Report?FilterValue=inactive';
+        }
+        if (window.location.pathname == '/Cars/Documents') {
+            window.location = '/Cars/Documents?FilterValue=inactive';
+        }
+        if (window.location.pathname == '/Cars/Registration') {
+            window.location = '/Cars/Registration?FilterValue=inactive';
+        }
+        if (window.location.pathname == '/Edit/Maintenance') {
+            window.location = '/Edit/Maintenance?FilterValue=inactive';
+        }
+        if (window.location.pathname == '/Edit/Refueling') {
+            window.location = '/Edit/Refueling?FilterValue=inactive';
+        }
+        if (window.location.pathname == '/Cars/Report') {
+            window.location = '/Cars/Report?FilterValue=inactive';
+        }
+        if (window.location.pathname == '/Cars/Owners') {
+            window.location = '/Cars/Owners?FilterValue=inactive';
+        }
+        if (window.location.pathname == '/Cars/Drivers') {
+            window.location = '/Cars/Drivers?FilterValue=inactive';
+        }
+        if (window.location.pathname == '/Management/Fleet/Cards') {
+            window.location = '/Management/Fleet/Cards?FilterValue=inactive';
+        }
+        if (window.location.pathname == '/Maintenance') {
+            window.location = '/Maintenance?FilterValue=inactive';
+        }
+        if (window.location.pathname == '/Refueling') {
+            window.location = '/Refueling?FilterValue=inactive';
+        }
     });
 }); 
 

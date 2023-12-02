@@ -80,22 +80,62 @@ class MaintenanceController extends Controller
   //////////////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
-            $Maintenance = Maintenance::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
-                        ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('IncidentType', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('IncidentAction', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('ReleaseDate', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('ReleaseTime', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('InvoiceNumber', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
-                        ->orderBy('Date', 'DESC')
-                        ->orderBy('Time', 'DESC')
-                        ->paginate(7);
- 
-                        $Maintenance->withPath($_SERVER['REQUEST_URI']);
 
+            if ($FilterValue === 'active') {
+                $Maintenance = Maintenance::join('cars', 'cars.VehicleNumber', '=', 'maintenances.VehicleNumber')
+                    ->select([
+                        'cars.VehicleNumber', 
+                        'maintenances.VehicleNumber', 
+                        'maintenances.Date', 
+                        'maintenances.Time', 
+                        'maintenances.IncidentType', 
+                        'maintenances.IncidentAction', 
+                        'maintenances.Details', 
+                        'maintenances.ReleaseDate', 
+                        'maintenances.ReleaseTime', 
+                        'maintenances.Cost', 
+                        'maintenances.InvoiceNumber',
+                        'maintenances.Week',
+                        'maintenances.IncidentAttachment'
+                    ])->where('Status', 'ACTIVE')->orderBy('Date', 'DESC')->paginate(14);
+ 
+                $Maintenance->withPath($_SERVER['REQUEST_URI']);
+            } else if ($FilterValue === 'inactive') {
+                $Maintenance = Maintenance::join('cars', 'cars.VehicleNumber', '=', 'maintenances.VehicleNumber')
+                    ->select([
+                        'cars.VehicleNumber', 
+                        'maintenances.VehicleNumber', 
+                        'maintenances.Date', 
+                        'maintenances.Time', 
+                        'maintenances.IncidentType', 
+                        'maintenances.IncidentAction', 
+                        'maintenances.Details', 
+                        'maintenances.ReleaseDate', 
+                        'maintenances.ReleaseTime', 
+                        'maintenances.Cost', 
+                        'maintenances.InvoiceNumber',
+                        'maintenances.Week',
+                        'maintenances.IncidentAttachment'
+                    ])->where('Status', 'INACTIVE')->orderBy('Date', 'DESC')->paginate(14);
+ 
+                $Maintenance->withPath($_SERVER['REQUEST_URI']);
+            } else {
+                $Maintenance = Maintenance::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('IncidentType', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('IncidentAction', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('ReleaseDate', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('ReleaseTime', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('InvoiceNumber', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orderBy('Date', 'DESC')
+                    ->orderBy('Time', 'DESC')
+                    ->paginate(7);
+
+                    $Maintenance->withPath($_SERVER['REQUEST_URI']);
+            }
             return view('Maintenance', $Config)->with('Maintenance', $Maintenance);
         } 
         return view('Maintenance', $Config);
@@ -107,23 +147,65 @@ class MaintenanceController extends Controller
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
-            $Maintenance__MyRecords = Maintenance::where('UserId', self::USER_ID())
-                                                    ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
-                                                    ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
-                                                    ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
-                                                    ->orWhere('IncidentType', 'LIKE', '%' . $FilterValue . '%')
-                                                    ->orWhere('IncidentAction', 'LIKE', '%' . $FilterValue . '%')
-                                                    ->orWhere('ReleaseDate', 'LIKE', '%' . $FilterValue . '%')
-                                                    ->orWhere('ReleaseTime', 'LIKE', '%' . $FilterValue . '%')
-                                                    ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
-                                                    ->orWhere('InvoiceNumber', 'LIKE', '%' . $FilterValue . '%')
-                                                    ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%')
-                                                    ->orderBy('Date', 'DESC')
-                                                    ->orderBy('Time', 'DESC') 
-                                                    ->paginate(7);
-                            
-            $Maintenance__MyRecords->withPath($_SERVER['REQUEST_URI']);
 
+            if ($FilterValue === 'active') {
+                $Maintenance__MyRecords = Maintenance::join('cars', 'cars.VehicleNumber', '=', 'maintenances.VehicleNumber')
+                    ->select([
+                        'cars.VehicleNumber', 
+                        'maintenances.VehicleNumber', 
+                        'maintenances.Date', 
+                        'maintenances.Time', 
+                        'maintenances.IncidentType', 
+                        'maintenances.IncidentAction', 
+                        'maintenances.Details', 
+                        'maintenances.ReleaseDate', 
+                        'maintenances.ReleaseTime', 
+                        'maintenances.Cost', 
+                        'maintenances.InvoiceNumber',
+                        'maintenances.Week',
+                        'maintenances.IncidentAttachment'
+                    ])->where('maintenances.UserId', self::USER_ID())
+                    ->where('Status', 'ACTIVE')->orderBy('Date', 'DESC')->paginate(14);
+ 
+                $Maintenance__MyRecords->withPath($_SERVER['REQUEST_URI']);
+            } else if ($FilterValue === 'inactive') {
+                $Maintenance__MyRecords = Maintenance::join('cars', 'cars.VehicleNumber', '=', 'maintenances.VehicleNumber')
+                    ->select([
+                        'cars.VehicleNumber', 
+                        'maintenances.VehicleNumber', 
+                        'maintenances.Date', 
+                        'maintenances.Time', 
+                        'maintenances.IncidentType', 
+                        'maintenances.IncidentAction', 
+                        'maintenances.Details', 
+                        'maintenances.ReleaseDate', 
+                        'maintenances.ReleaseTime', 
+                        'maintenances.Cost', 
+                        'maintenances.InvoiceNumber',
+                        'maintenances.Week',
+                        'maintenances.IncidentAttachment'
+                    ])->where('maintenances.UserId', self::USER_ID())
+                    ->where('Status', 'INACTIVE')->orderBy('Date', 'DESC')->paginate(14);
+ 
+                $Maintenance__MyRecords->withPath($_SERVER['REQUEST_URI']);
+            } else {
+            $Maintenance__MyRecords = Maintenance::where('UserId', self::USER_ID())
+                    ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('IncidentType', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('IncidentAction', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('ReleaseDate', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('ReleaseTime', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('InvoiceNumber', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%')
+                    ->orderBy('Date', 'DESC')
+                    ->orderBy('Time', 'DESC') 
+                    ->paginate(7);
+
+                $Maintenance__MyRecords->withPath($_SERVER['REQUEST_URI']);
+            }
             return view('Edit.EditMaintenance', $Config)->with('Maintenance__MyRecords', $Maintenance__MyRecords);
         } 
         return view('Edit.EditMaintenance', $Config);
