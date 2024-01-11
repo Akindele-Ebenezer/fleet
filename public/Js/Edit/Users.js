@@ -31,6 +31,7 @@ let FuelManagement_PRIVILEGE = document.querySelector('.FuelManagement_PRIVILEGE
 let MakeDeposits_PRIVILEGE = document.querySelector('.MakeDeposits_PRIVILEGES');
 let CardManagement_PRIVILEGES = document.querySelector('.CardManagement_PRIVILEGES');
 let DocumentManagement_PRIVILEGES = document.querySelector('.DocumentManagement_PRIVILEGES');
+let CreateInspections_PRIVILEGES = document.querySelector('.CreateInspections_PRIVILEGES');
 let PrivilegeMessage = document.querySelector('.privilege-message')
 
 ShowRecord_X_Edit.forEach(Email => {
@@ -148,7 +149,12 @@ ShowRecord_X_Edit.forEach(Email => {
             DocumentManagement_PRIVILEGES.setAttribute('checked', Email.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent);
         } else {
             DocumentManagement_PRIVILEGES.removeAttribute('checked');
-        }   
+        }
+        if (Email.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent == 'on') {
+            CreateInspections_PRIVILEGES.setAttribute('checked', Email.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent);
+        } else {
+            CreateInspections_PRIVILEGES.removeAttribute('checked');
+        }      
      });
 
     let CancelModalIcons = document.querySelectorAll('.cancel-modal');

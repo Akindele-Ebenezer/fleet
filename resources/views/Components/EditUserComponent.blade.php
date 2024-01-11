@@ -84,11 +84,15 @@
                         <div class="inner-x-x"><svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M880 316v520q0 24-18 42t-42 18H140q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42ZM140 425h680V316H140v109Zm0 129v282h680V554H140Zm0 282V316v520Z"></path></svg>+ Manage Documents</div>
                         <div class="inner-x-x"><input type="checkbox" name="DocumentManagement_PRIVILEGES" class="DocumentManagement_PRIVILEGES"></div>
                     </div> 
+                    <div class="inner-x">
+                        <div class="inner-x-x"><svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>+ Create Inspections</div>
+                        <div class="inner-x-x"><input type="checkbox" name="CreateInspections_PRIVILEGES" class="CreateInspections_PRIVILEGES"> <br></div>
+                    </div>
                 </div>
                 <input type="hidden" name="UserId" class="UserId_X">
             </div>
         </form>
         <button class="AllPrivileges action-x" name="AllPrivileges">* Grant All Privileges</button>
-        <button class="UpdatePrivileges action-x" name="UpdatePrivileges">+ Update Privileges</button>
+        <button class="UpdatePrivileges action-x" name="UpdatePrivileges">+ Apply Changes</button>
     </div>
 </div>

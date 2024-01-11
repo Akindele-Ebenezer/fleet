@@ -71,8 +71,11 @@ class CarsExport implements
     public function columnFormats(): array
     {
         return [
-            'O' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER,
-            'W' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER,
+            'P' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER,
+            'X' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER,
+            'Z' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER,
+            'AA' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER,
+            'AC' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER,
         ];
     }
 
@@ -89,6 +92,7 @@ class CarsExport implements
             'Engine Number',
             'Chassis Number',
             'Model Year',
+            'Odometer',
             'Engine Volume',
             'Comments',
             '',
@@ -105,33 +109,33 @@ class CarsExport implements
             'Company Code',
             'Total Deposits',
             'Total Refueling',
-            'Total Refueling Car',
+            '',
             'Balance',
             'Pin Code',
             'Total Master',
             'Status',
+            '',
             'Stop Date',
             'Licence Expiry Date',
             'Insurance Expiry Date',
-            'FIN',
+            '',
             'Fuel Tank Capacity', 
         ];
     }
     public function columnWidths(): array
     {
         return [
-            'L' => 25.71,
-            'M' => 0,
-            'Y' => 0,
+            'M' => 25.71,
+            'N' => 0,
             'Z' => 0,
-            'AA' => 0, 
-            'AD' => 0, 
-            'AI' => 0,            
-            'AJ' => 0,            
-            'AK' => 0,            
-            'AL' => 0,            
+            'AA' => 0,
+            'AB' => 0,           
+            'AG' => 0,           
+            'AK' => 0,           
             'AM' => 0,            
             'AN' => 0,            
+            'AO' => 0,            
+            'AP' => 0,              
         ];
     }
 }

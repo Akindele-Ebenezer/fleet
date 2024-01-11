@@ -1316,6 +1316,9 @@ nav[aria-label] span[aria-current] span {
 .report-inner .table td button {
   background: #3034b5;
 }
+.report-inner .table td button.permission-denied {
+  background-color: #DF2E38;
+}
 .report-inner .table td div {
   color: #ddd;
 }

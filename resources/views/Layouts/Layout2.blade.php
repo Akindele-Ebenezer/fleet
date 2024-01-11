@@ -154,12 +154,18 @@
                         </li> 
                     </a>
                     <div class="sub-nav {{ Route::is('DailyCheckList') || Route::is('Inspection_Report') || Route::is('General_Inspection_Report') ? 'Show' : '' }}">
+                        @php
+                            $CreateInspetionPrivilege = \DB::table('user_privileges')->select('CreateInspections')
+                                                        ->where('UserId', request()->session()->get('Id'))->first();
+                        @endphp
+                        @if ($CreateInspetionPrivilege->CreateInspections === 'on')
                         <a href='{{ route('DailyCheckList') }}'>
                             <li class="{{ Route::is('DailyCheckList') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
                                 Daily Checklist 
                             </li>
                         </a>  
+                        @endif
                         <a href='{{ route('Inspection_Report') }}'>
                             <li class="{{ Route::is('Inspection_Report') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                
@@ -608,6 +614,13 @@
                     </div>
                 </div> 
             </div>
+            @php
+                $CreateInspetionPrivilege = \DB::table('user_privileges')->select('CreateInspections')
+                                            ->where('UserId', request()->session()->get('Id'))->first();
+            @endphp
+            @if (!($CreateInspetionPrivilege === 'on') &&
+                (!(Route::is('Inspection_Report')) || !(Route::is('General_Inspection_Report'))) 
+            )
             <div class="action">
                 @unless (!(Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling'))) 
                 <div class="FilterWrapper">
@@ -698,12 +711,17 @@
                     @if (Route::is('Cars_Registration') AND request()->session()->get('Role') === 'ADMIN')
                         <button class="action-x open-vehicle-properties-form-button">+ Manage vehicle properties</button>
                     @endif
+                    @php
+                        $CreateInspetionPrivilege = \DB::table('user_privileges')->select('CreateInspections')
+                                                    ->where('UserId', request()->session()->get('Id'))->first();
+                    @endphp 
                     <button class="action-x {{ (Route::is('Cars_Registration') AND $CarRegistration_USER->CarRegistration ?? 'off' === 'on') ? 'add-car' : 'permission-denied' }}  {{ (Route::is('EditMaintenance') AND $AddMaintenance_USER->AddMaintenance ?? 'off' === 'on') ? 'add-maintenance' : 'permission-denied' }} {{ (Route::is('EditDeposits') AND $MakeDeposits_USER->MakeDeposits ?? 'off' === 'on') ? 'add-monthly-deposits' : 'permission-denied' }} {{ Route::is('EditDeposits_MasterCard') ? 'add-master-card-deposits' : '' }} {{ (Route::is('EditRefueling') AND $FuelManagement_USER->FuelManagement ?? 'off' === 'on') ? 'add-refueling' : 'permission-denied' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? 'add-user' : '' }}{{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'cars-route' : '' }}{{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Documents') || Route::is('Drivers') ? 'cars-route' : '' }} {{ (Route::is('FleetCard') AND $CardManagement_USER->CardManagement ?? 'off' === 'on') ? 'add-fleet-card' : 'permission-denied' }} @yield('Button_1_Link')" > {{ Route::is('Cars_Registration') ? '+ Add Vehicle' : '' }} {{ Route::is('EditMaintenance') ? '+ Add Maintenance' : '' }} {{ Route::is('EditDeposits') ? '+ Add Deposits' : '' }} {{ Route::is('EditDeposits_MasterCard') ? '+ Add Deposits' : '' }} {{ Route::is('EditRefueling') ? '+ Add Refueling' : '' }} {{ Route::is('Users') && Session::get('Role') === 'ADMIN' ? '+ Add User' : '' }} {{ Route::is('Users') && !(Session::get('Role') === 'ADMIN') ? 'Explore Cars' : '' }} {{ Route::is('Cars') || Route::is('VehicleReport') || Route::is('CarOwners') || Route::is('Maintenance') || Route::is('Deposits') || Route::is('Refueling') || Route::is('Documents')|| Route::is('Drivers') ? 'Explore Cars' : '' }} {{ Route::is('FleetCard') ? '+ New Fleet Card' : '' }}
                         @yield('Button_1')
                     </button>
-                    <button class="ExportToExcel @yield('Button_2_Link')" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">@yield('Button_2', 'Export to EXCEL')</button>
+                    <button class="ExportToExcel @yield('Button_2_Link')" style="{{ Route::is('CarOwners') ? 'display: none' : '' }}">@yield('Button_2', 'Export to EXCEL')</button> 
                 </div>
             </div> 
+            @endif
             @endunless
             @yield('Content') 
         </div>

@@ -26,7 +26,15 @@
             @unless (count($MyInspectionReport) > 0)
             <tr>
                 <td>You have not created vehicle inspections (report). &nbsp;&nbsp;
+                    @php
+                        $CreateInspetionPrivilege = \DB::table('user_privileges')->select('CreateInspections')
+                                                    ->where('UserId', request()->session()->get('Id'))->first();
+                    @endphp 
+                    @if ($CreateInspetionPrivilege->CreateInspections === 'on')
                     <button class="daily-checklist-route">+ Create Inspection</button>
+                    @else
+                    <button class="permission-denied">PERMISSION DENIED:</button> Contact an Admin to grant you privilege to create and manage vehicle inspections.
+                    @endif
                 </td>
             </tr>    
             @endunless 

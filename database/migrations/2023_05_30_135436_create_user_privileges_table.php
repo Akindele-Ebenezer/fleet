@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('MakeDeposits')->nullable();
             $table->string('CardManagement')->nullable();
             $table->string('DocumentManagement')->nullable();
+            $table->string('CreateInspections')->nullable();
             $table->string('Date')->nullable();
             $table->string('TimeIn')->nullable();
             $table->timestamps();
