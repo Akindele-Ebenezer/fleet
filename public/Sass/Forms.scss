@@ -3,7 +3,7 @@ form {
     
     position: relative;
 
-    input, select {
+    input, select, textarea {
         background: #222;
         border: none;
         border-radius: 0.5em;
@@ -29,8 +29,11 @@ form {
     top: 0;
     width: 100vw;
     z-index: 100;
+    ///////////////////////
+    // &.notification-readonly { display: block; } 
+    ///////////////////////
 
-    input, select { margin-left: 2em; }
+    input, select, textarea { margin-left: 2em; }
 
     &.privileges { 
         height: unset;
@@ -118,6 +121,49 @@ form {
         position: fixed;
         right: 0;
         width: 60rem;
+
+        .inner-x {
+            background: #333;
+            display: flex;
+            margin-block: 1em;
+            padding: 1em;
+            
+            .color-x {
+                border-radius: 0.2em;
+                padding-inline: 0.5em;
+                margin-inline: 0.5em;
+            }
+
+            .color-a { background-color: $Color-2; }
+            .color-b { background-color: $Color-3;  }
+            .color-c { background-color: $Color-5;  }
+
+            img {
+                height: 2em;
+                width: 2em;
+            }
+
+
+            p {
+                color: #ccc;
+                line-height: 2em;
+                margin-inline: 1em;
+                margin-right: 8em;
+                width: 70%;
+            }
+
+            small {
+                color: #fff;
+            }
+
+            .vehicle-number {
+                background-color: #111;
+                color: #eee;
+                font-family: system-ui;
+                font-weight: bold;
+                padding: .8em;
+            }
+        }
     
         .attachment {
             margin-block: 2em;
@@ -217,8 +263,13 @@ form {
 }
 
 .readonly {
-    input {
+    input, textarea {
         background-color: unset !important;
         pointer-events: none;
+    }
+
+    textarea { 
+        pointer-events: all; 
+        resize: none;
     }
 }

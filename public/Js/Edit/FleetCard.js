@@ -3,7 +3,7 @@ let AddFleetCardButton = document.querySelectorAll('.add-fleet-card');
 
 let AddFleetCardForm = document.querySelector('.AddFleetCardForm');
 let AddFleetCardButton_X = document.querySelector('.AddFleetCard');
-let Error = document.querySelector('.error');
+let Error = document.querySelector('.fleet-card-error');
 
 AddFleetCardButton.forEach(Button => {
     Button.classList.remove('permission-denied');
@@ -11,9 +11,19 @@ AddFleetCardButton.forEach(Button => {
         ModalAddFleetCard.style.display = 'block';
          
         AddFleetCardButton_X.addEventListener('click', () => {  
-            if (AddFleetCardForm.children[1].children[1].value === '') {
+            if (AddFleetCardForm.children[1].children[1].value === '' &&
+                AddFleetCardForm.children[1].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.children[1].value === 'Normal') 
+            {
                 Error.textContent = 'Please fill out CARD number for new Fleet Card';
-            } else {
+            } else if(AddFleetCardForm.children[1].children[1].value === '' &&
+            AddFleetCardForm.children[1].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.children[1].value === 'Master') 
+            {
+                Error.textContent = 'Please fill out CARD number for new Master Card';
+            } else if(AddFleetCardForm.children[1].children[1].value === '' &&
+                AddFleetCardForm.children[1].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.children[1].value === 'Voucher') 
+            {
+                Error.textContent = 'Please fill out CARD number for new Voucher Card';
+            }  else {
                 let CardNumber_FleetCard = AddFleetCardForm.children[1].children[1].value;
                 AddFleetCardForm.setAttribute('method', 'POST'); 
                 AddFleetCardForm.setAttribute('action', '/Add/Car/' + CardNumber_FleetCard);
@@ -133,7 +143,6 @@ ManageButton.forEach(Button => {
     });
 });
 
-
 let CardNumber_MasterCard_X = document.querySelector('.CardNumber_MasterCard_X');
 let Date_MasterCard_X = document.querySelector('.Date_MasterCard_X');
 let MonthlyBudget_MasterCard_X = document.querySelector('.MonthlyBudget_MasterCard_X');
@@ -148,24 +157,7 @@ let MasterCardId_X = document.querySelector('.MasterCardId_X');
 let CardVendor_MasterCard_X = document.querySelector('.CardVendor_MasterCard_X');
 let EditMasterCard = document.querySelector('.EditMasterCard');
 let DeleteMasterCard = document.querySelector('.DeleteMasterCard');
-
-let ModalAddMasterCard = document.querySelector('.add-master-card-form');
-let AddMasterCardButton = document.querySelectorAll('.add-master-card'); 
-
-let AddMasterCardForm = document.querySelector('.AddMasterCardForm');
-let AddMasterCardButton_X = document.querySelector('.AddMasterCard');
-let Error_MasterCard = document.querySelector('.error-master-card');
-
-AddMasterCardButton_X.addEventListener('click', () => {  
-    if (AddMasterCardForm.children[1].children[1].value === '') {
-        Error.textContent = 'Please fill out CARD number for new Master Card';
-    } else {
-        let CardNumber_MasterCard = AddMasterCardForm.children[1].children[1].value;
-        AddMasterCardForm.setAttribute('action', '/Add/Master/Cards/' + CardNumber_MasterCard);
-        AddMasterCardForm.submit();
-    }   
-});
-
+ 
 ManageMasterCardButton.forEach(Button => {
     Button.classList.remove('permission-denied');
     Button.addEventListener('click', () => {
@@ -218,24 +210,7 @@ let VoucherCardId_X = document.querySelector('.VoucherCardId_X');
 let CardVendor_VoucherCard_X = document.querySelector('.CardVendor_VoucherCard_X');
 let EditVoucherCard = document.querySelector('.EditVoucherCard');
 let DeleteVoucherCard = document.querySelector('.DeleteVoucherCard');
-
-let ModalAddVoucherCard = document.querySelector('.add-voucher-card-form');
-let AddVoucherCardButton = document.querySelectorAll('.add-voucher-card'); 
-
-let AddVoucherCardForm = document.querySelector('.AddVoucherCardForm');
-let AddVoucherCardButton_X = document.querySelector('.AddVoucherCard');
-let Error_VoucherCard = document.querySelector('.error-voucher-card');
-
-AddVoucherCardButton_X.addEventListener('click', () => {  
-    if (AddVoucherCardForm.children[1].children[1].value === '') {
-        Error.textContent = 'Please fill out CARD number for new Voucher Card';
-    } else {
-        let CardNumber_VoucherCard = AddVoucherCardForm.children[1].children[1].value;
-        AddVoucherCardForm.setAttribute('action', '/Add/Voucher/Cards/' + CardNumber_VoucherCard);
-        AddVoucherCardForm.submit();
-    }   
-});
-
+ 
 ManageVoucherCardButton.forEach(Button => {
     Button.classList.remove('permission-denied');
     Button.addEventListener('click', () => {

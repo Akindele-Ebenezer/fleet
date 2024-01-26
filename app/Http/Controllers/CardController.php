@@ -146,21 +146,7 @@ class CardController extends Controller
     }
     /**
      * Store a newly created resource in storage.
-     */
-    public function store_master_card(Request $request)
-    {
-        MasterCard::insert([  
-            'CardNumber' => $request->CardNumber, 
-            'Date' => $request->Date, 
-            'MonthlyBudget' => $request->MonthlyBudget, 
-            'Balance' => $request->Balance, 
-            'Status' => $request->Status,  
-            'Vendor' => $request->Vendor,  
-            'UserId' => request()->session()->get('Id'),  
-        ]);
-
-        return back();  
-    }
+     */ 
 
     public function store_deposits_master_card($Deposits, Request $request)
     {
@@ -181,22 +167,7 @@ class CardController extends Controller
         ]);
 
         return back();  
-    }
-  
-    public function store_voucher_card(Request $request)
-    {
-        \DB::table('voucher_cards')->insert([  
-            'CardNumber' => $request->CardNumber, 
-            'Date' => $request->Date, 
-            'MonthlyBudget' => $request->MonthlyBudget, 
-            'Balance' => $request->Balance, 
-            'Status' => $request->Status,  
-            'Vendor' => $request->Vendor,  
-            'UserId' => request()->session()->get('Id'),  
-        ]);
-
-        return back();  
-    }
+    } 
 
     public function store_deposits_voucher_card($Voucher, Request $request)
     {

@@ -204,6 +204,7 @@ let CarsRouteButton = document.querySelectorAll('.cars-route');
 let DailyChecklistRouteButton = document.querySelectorAll('.daily-checklist-route');
 let InspectionFormButton = document.querySelectorAll('.daily-vehicle-inspection-form');
 let CarsRegistrationRouteButton = document.querySelectorAll('.cars-registration-route');
+let NotificationsButton = document.querySelector('.notifications');
 
 CarsRegistrationRouteButton.forEach(Button => {
     Button.addEventListener('click', () => {
@@ -375,6 +376,17 @@ DriversRouteButton.forEach(Button => {
         window.location = '/Cars/Drivers';
     });
 }); 
+
+let NotificationList = document.querySelector('.notification-readonly');
+let CloseNotificationButton = document.querySelector('.cancel-modal-notification');
+
+NotificationsButton.addEventListener('click', () => {
+    NotificationList.style.display = 'block';
+
+    CloseNotificationButton.addEventListener('click', () => {
+        NotificationList.style.display = 'none';
+    });
+});
 
 let CarOwnersX = document.querySelectorAll('.car-owners-x');
 
@@ -558,5 +570,27 @@ HistoryArr.forEach(History => {
     if (History[0] !== undefined) {
         History[0].classList.remove('Hide'); 
         History[0].style.display = 'inline-block !important';
+    }
+});
+
+let DailyInspectionCheckList_Form = document.querySelector('.DailyInspectionCheckList_Form'); 
+let DailyInspectionCheckList_VehicleNumber = document.querySelector('.daily-checklist input[name="VehicleNumber"]'); 
+let DailyInspectionCheckList_Mileage = document.querySelector('.daily-checklist input[name="Mileage"]'); 
+let DailyInspectionCheckList_InspectedBy = document.querySelector('.daily-checklist input[name="InspectedBy"]'); 
+let InspectionSubmitButton = document.querySelector('.InspectionSubmitButton');
+let DailyInspectionCheckList_Error = document.querySelector('.DailyInspectionCheckList_Error');
+
+InspectionSubmitButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    if(DailyInspectionCheckList_VehicleNumber.value === '') {
+        DailyInspectionCheckList_Error.textContent = 'Please, input the Vehicle Number';
+    } else if(DailyInspectionCheckList_Mileage.value === '') {
+        DailyInspectionCheckList_Error.textContent = 'Please, input the Vehicle Mileage';
+    } else if(DailyInspectionCheckList_InspectedBy.value === '') {
+        DailyInspectionCheckList_Error.textContent = 'Please, input the Driver who did the inspection';
+    } else { 
+        InspectionSubmitButton.textContent = 'Processing Inspection..';
+        InspectionSubmitButton.style.backgroundColor = '#21a911';
+        DailyInspectionCheckList_Form.submit(); 
     }
 });

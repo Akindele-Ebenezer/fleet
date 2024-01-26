@@ -224,6 +224,12 @@ nav {
 
             &.wrapper {  
                 background: #000;
+                
+                .inner-x- {
+                    height: 6em;
+                    overflow-y: scroll;
+                }
+
                 .search {
                     background: #111;  
                     margin-right: 1em;
@@ -497,6 +503,14 @@ nav {
                     }
                 }
             }
+        }
+
+        .DailyInspectionCheckList_Error { 
+            background: #fff;
+            color: red; 
+            font-weight: unset;
+            padding: 0.2em;
+            width: fit-content;
         }
 
         h1 {
@@ -1213,6 +1227,7 @@ nav {
             } 
             
         }
+
     }
 
     .left-nav { 

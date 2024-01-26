@@ -357,7 +357,7 @@ form {
 form.form {
   margin-left: 2.5em;
 }
-form input, form select {
+form input, form select, form textarea {
   background: #222;
   border: none;
   border-radius: 0.5em;
@@ -380,7 +380,7 @@ form select option {
   width: 100vw;
   z-index: 100;
 }
-.form input, .form select {
+.form input, .form select, .form textarea {
   margin-left: 2em;
 }
 .form.privileges {
@@ -458,6 +458,47 @@ form select option {
   position: fixed;
   right: 0;
   width: 60rem;
+}
+.form .inner .inner-x {
+  background: #333;
+  display: flex;
+  margin-block: 1em;
+  padding: 1em;
+}
+.form .inner .inner-x .color-x {
+  border-radius: 0.2em;
+  padding-inline: 0.5em;
+  margin-inline: 0.5em;
+}
+.form .inner .inner-x .color-a {
+  background-color: #DF2E38;
+}
+.form .inner .inner-x .color-b {
+  background-color: #41a341;
+}
+.form .inner .inner-x .color-c {
+  background-color: #787500;
+}
+.form .inner .inner-x img {
+  height: 2em;
+  width: 2em;
+}
+.form .inner .inner-x p {
+  color: #ccc;
+  line-height: 2em;
+  margin-inline: 1em;
+  margin-right: 8em;
+  width: 70%;
+}
+.form .inner .inner-x small {
+  color: #fff;
+}
+.form .inner .inner-x .vehicle-number {
+  background-color: #111;
+  color: #eee;
+  font-family: system-ui;
+  font-weight: bold;
+  padding: 0.8em;
 }
 .form .inner .attachment {
   margin-block: 2em;
@@ -537,9 +578,13 @@ form select option {
   font-size: 1.5em;
 }
 
-.readonly input {
+.readonly input, .readonly textarea {
   background-color: unset !important;
   pointer-events: none;
+}
+.readonly textarea {
+  pointer-events: all;
+  resize: none;
 }
 
 .datalist {
@@ -842,6 +887,10 @@ nav[aria-label] span[aria-current] span {
 .report-data-heading .inner.wrapper {
   background: #000;
 }
+.report-data-heading .inner.wrapper .inner-x- {
+  height: 6em;
+  overflow-y: scroll;
+}
 .report-data-heading .inner.wrapper .search {
   background: #111;
   margin-right: 1em;
@@ -1083,6 +1132,13 @@ nav[aria-label] span[aria-current] span {
   border: 1px solid #aaa;
   border-radius: unset;
   color: #eee;
+}
+.report-inner .DailyInspectionCheckList_Error {
+  background: #fff;
+  color: red;
+  font-weight: unset;
+  padding: 0.2em;
+  width: fit-content;
 }
 .report-inner h1 {
   color: #eee;

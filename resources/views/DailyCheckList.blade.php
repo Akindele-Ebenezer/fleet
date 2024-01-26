@@ -14,7 +14,7 @@
     $Drivers = \App\Models\Car::select('Driver')->whereNotNull('Driver')->get();
 @endphp
     <div class="daily-checklist">
-        <form action="{{ route('Add_Inspection_Report') }}" method="POST" enctype="multipart/form-data">@csrf 
+        <form class="DailyInspectionCheckList_Form" action="{{ route('Add_Inspection_Report') }}" method="POST" enctype="multipart/form-data">@csrf 
             <div class="daily-checklist-inner">
                 <h1>Daily Vehicle Inspection Form</h1>
                 <div class="inner-wrapper-1"> 
@@ -501,8 +501,9 @@
                 </div>
             </div>
             <input type="hidden" value="{{ date('W') }}" name="Week">
-            <input type="hidden" value="{{ date('h:i a') }}" name="SubmitTime">
-            <button>Submit</button>
+            <input type="hidden" value="{{ date('h:i a') }}" name="SubmitTime"> <br>
+            <h1 class="DailyInspectionCheckList_Error"></h1>
+            <button class="InspectionSubmitButton action-x">Submit</button>
         </form>
     </div>
 @endsection

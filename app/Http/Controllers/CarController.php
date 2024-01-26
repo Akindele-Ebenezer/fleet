@@ -1054,6 +1054,34 @@ class CarController extends Controller
             ]); 
 
             $InsuranceCertificateFile->move($DestinationPath, $InsuranceCertificateFile->getClientOriginalName());
+        } 
+
+        if($request->CardType === 'Master') {
+            \App\Models\MasterCard::insert([  
+                'CardNumber' => $request->CardNumber, 
+                'Date' => $request->Date, 
+                'MonthlyBudget' => $request->MonthlyBudget, 
+                'Balance' => $request->Balance, 
+                'Status' => $request->Status,  
+                'Vendor' => $request->Vendor,  
+                'UserId' => request()->session()->get('Id'),  
+            ]);
+    
+            return back();  
+        }
+
+        if($request->CardType === 'Voucher') { 
+            \DB::table('voucher_cards')->insert([  
+                'CardNumber' => $request->CardNumber, 
+                'Date' => $request->Date, 
+                'MonthlyBudget' => $request->MonthlyBudget, 
+                'Balance' => $request->Balance, 
+                'Status' => $request->Status,  
+                'Vendor' => $request->Vendor,  
+                'UserId' => request()->session()->get('Id'),  
+            ]);
+    
+            return back();  
         }
         
         Car::insert([

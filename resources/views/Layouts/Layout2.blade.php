@@ -37,6 +37,7 @@
 <body>  
     @php include '../resources/views/Includes/Globals.php'; @endphp
     @include('Components.LoaderComponent')
+    @include('Components.ReadOnly.NotificationComponent')
 
     @yield('Components')
 
@@ -349,6 +350,10 @@
                             <img src="{{ asset('Images/driver.png') }}" alt="">
                             Drivers ({{ number_format($NumberOfDrivers) }})
                         </p>
+                        <p class="notifications">
+                            <img src="{{ asset('Images/notification-bell.png') }}" alt="">
+                            Reminders 
+                        </p>
                     </div>
                     @endunless
                 </div>
@@ -548,15 +553,58 @@
                     @endphp
                     @if (Route::is('Documents'))
                         @php
+                            $NumberOfDocuments_UpToDate_DriversLicense = \DB::table('car_documents')->whereNotNull('VehicleNumber')->where('DriverLicenseExpiryDate', '>', date('Y-m-d'))->count();
+                            $NumberOfDocuments_Expired_DriversLicense = \DB::table('car_documents')->whereNotNull('VehicleNumber')->where('DriverLicenseExpiryDate', '<', date('Y-m-d'))->count();
+                            $NumberOfDocuments_NotRegistered_DriversLicense = \DB::table('car_documents')->whereNotNull('VehicleNumber')->whereNull('DriverLicenseExpiryDate')->count();
+
                             $NumberOfDocuments_UpToDate = \DB::table('cars')->whereNotNull('VehicleNumber')->where('LicenceExpiryDate', '>', date('Y-m-d'))->count();
                             $NumberOfDocuments_Expired = \DB::table('cars')->whereNotNull(['VehicleNumber', 'LicenceExpiryDate'])->where('LicenceExpiryDate', '<', date('Y-m-d'))->count();
                             $NumberOfDocuments_NotRegistered = \DB::table('cars')->whereNotNull('VehicleNumber')->whereNull('LicenceExpiryDate')->count();
+                            
+                            $NumberOfDocuments_UpToDate_ProofOfOwnership = \DB::table('car_documents')->whereNotNull('VehicleNumber')->where('ProofOfOwnershipExpiryDate', '>', date('Y-m-d'))->count();
+                            $NumberOfDocuments_Expired_ProofOfOwnership = \DB::table('car_documents')->whereNotNull('VehicleNumber')->where('ProofOfOwnershipExpiryDate', '<', date('Y-m-d'))->count();
+                            $NumberOfDocuments_NotRegistered_ProofOfOwnership = \DB::table('car_documents')->whereNotNull('VehicleNumber')->whereNull('ProofOfOwnershipExpiryDate')->count();
+
+                            $NumberOfDocuments_UpToDate_CertificateOfRoadWorthiness = \DB::table('car_documents')->whereNotNull('VehicleNumber')->where('CertificateOfRoadWorthinessExpiryDate', '>', date('Y-m-d'))->count();
+                            $NumberOfDocuments_Expired_CertificateOfRoadWorthiness = \DB::table('car_documents')->whereNotNull('VehicleNumber')->where('CertificateOfRoadWorthinessExpiryDate', '<', date('Y-m-d'))->count();
+                            $NumberOfDocuments_NotRegistered_CertificateOfRoadWorthiness = \DB::table('car_documents')->whereNotNull('VehicleNumber')->whereNull('CertificateOfRoadWorthinessExpiryDate')->count();
+
+                            $NumberOfDocuments_UpToDate_InsuranceCertificate = \DB::table('car_documents')->whereNotNull('VehicleNumber')->where('InsuranceCertificateExpiryDate', '>', date('Y-m-d'))->count();
+                            $NumberOfDocuments_Expired_InsuranceCertificate = \DB::table('car_documents')->whereNotNull('VehicleNumber')->where('InsuranceCertificateExpiryDate', '<', date('Y-m-d'))->count();
+                            $NumberOfDocuments_NotRegistered_InsuranceCertificate = \DB::table('car_documents')->whereNotNull('VehicleNumber')->whereNull('InsuranceCertificateExpiryDate')->count();
+
                         @endphp
-                        <div class="inner-x filter-x">
-                            <span>Vehicle License</span>
-                            <button class="up-to-date">up-to-date ({{ $NumberOfDocuments_UpToDate }})</button>
-                            <button class="expired">expired ({{ $NumberOfDocuments_Expired }})</button>
-                            <button class="not-registered">not-registered ({{ $NumberOfDocuments_NotRegistered }})</button>
+                        <div class="inner-x-">
+                            <div class="inner-x filter-x">
+                                <span>Driver's License</span>
+                                <button class="up-to-date">up-to-date ({{ $NumberOfDocuments_UpToDate_DriversLicense }})</button>
+                                <button class="expired">expired ({{ $NumberOfDocuments_Expired_DriversLicense }})</button>
+                                <button class="not-registered">not-registered ({{ $NumberOfDocuments_NotRegistered_DriversLicense }})</button>
+                            </div>
+                            <div class="inner-x filter-x">
+                                <span>Vehicle License</span>
+                                <button class="up-to-date">up-to-date ({{ $NumberOfDocuments_UpToDate }})</button>
+                                <button class="expired">expired ({{ $NumberOfDocuments_Expired }})</button>
+                                <button class="not-registered">not-registered ({{ $NumberOfDocuments_NotRegistered }})</button>
+                            </div>
+                            <div class="inner-x filter-x">
+                                <span>Proof Of Ownership</span>
+                                <button class="up-to-date">up-to-date ({{ $NumberOfDocuments_UpToDate_ProofOfOwnership }})</button>
+                                <button class="expired">expired ({{ $NumberOfDocuments_Expired_ProofOfOwnership }})</button>
+                                <button class="not-registered">not-registered ({{ $NumberOfDocuments_NotRegistered_ProofOfOwnership }})</button>
+                            </div>
+                            <div class="inner-x filter-x">
+                                <span>Proof Of Ownership</span>
+                                <button class="up-to-date">up-to-date ({{ $NumberOfDocuments_UpToDate_CertificateOfRoadWorthiness }})</button>
+                                <button class="expired">expired ({{ $NumberOfDocuments_Expired_CertificateOfRoadWorthiness }})</button>
+                                <button class="not-registered">not-registered ({{ $NumberOfDocuments_NotRegistered_CertificateOfRoadWorthiness }})</button>
+                            </div>
+                            <div class="inner-x filter-x">
+                                <span>Insurance Certificate</span>
+                                <button class="up-to-date">up-to-date ({{ $NumberOfDocuments_UpToDate_InsuranceCertificate }})</button>
+                                <button class="expired">expired ({{ $NumberOfDocuments_Expired_InsuranceCertificate }})</button>
+                                <button class="not-registered">not-registered ({{ $NumberOfDocuments_NotRegistered_InsuranceCertificate }})</button>
+                            </div>
                         </div>
                     @endif
                     @if (Route::is('Cars_Registration'))
