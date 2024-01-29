@@ -49,19 +49,23 @@
             </div>
             @endif
             @if ( 
+                !empty($ActiveCars_Maintenance->Date) &&
+                $ActiveCars_Maintenance->Date <= date('Y-m-d', strtotime('-3 months')) && 
                 ($ActiveCars_Refueling_Mileage >= 3000) && 
                 $Car->Odometer === 'Kilometer'
             )
             <div class="inner-x">
-                <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $ActiveCars_Refueling->VehicleNumber ?? '' }}</small> has reached the 3,000 km mark! "{{ number_format($ActiveCars_Refueling_Mileage) }} km" :: It's time to give it some attention and schedule a maintenance check. Regular maintenance helps keep your vehicle in top shape and ensures its longevity. Don't forget to take care of your cars so they can take care of you on the road!<small class="color-c color-x">serious damage soon</small></p> <small>{{ $ActiveCars_Refueling_Mileage_->Date }}</small>
+                <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $ActiveCars_Refueling->VehicleNumber ?? '' }}</small> has reached the 3,000 km mark! "{{ number_format($ActiveCars_Refueling_Mileage) }} km" :: It's time to give it some attention and schedule a maintenance check. Regular maintenance helps keep your vehicle in top shape and ensures its longevity. Don't forget to take care of your cars so they can take care of you on the road!<small class="color-c color-x">due for servicing</small></p> <small>{{ $ActiveCars_Refueling_Mileage_->Date }}</small>
             </div>
             @endif
             @if ( 
+                !empty($ActiveCars_Maintenance->Date) &&
+                $ActiveCars_Maintenance->Date <= date('Y-m-d', strtotime('-3 months')) && 
                 ($ActiveCars_Refueling_Mileage >= 1864) && 
                 $Car->Odometer === 'Mileage'
             )
             <div class="inner-x">
-                <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $ActiveCars_Refueling->VehicleNumber ?? '' }}</small> has reached the 3,000 km mark! "{{ number_format($ActiveCars_Refueling_Mileage) }} miles" :: It's time to give it some attention and schedule a maintenance check. Regular maintenance helps keep your vehicle in top shape and ensures its longevity. Don't forget to take care of your cars so they can take care of you on the road!<small class="color-c color-x">serious damage soon</small></p> <small>{{ $ActiveCars_Refueling_Mileage_->Date }}</small>
+                <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $ActiveCars_Refueling->VehicleNumber ?? '' }}</small> has reached the 3,000 km mark! "{{ number_format($ActiveCars_Refueling_Mileage) }} miles" :: It's time to give it some attention and schedule a maintenance check. Regular maintenance helps keep your vehicle in top shape and ensures its longevity. Don't forget to take care of your cars so they can take care of you on the road!<small class="color-c color-x">due for servicing</small></p> <small>{{ $ActiveCars_Refueling_Mileage_->Date }}</small>
             </div>
             @endif
         @endforeach 
