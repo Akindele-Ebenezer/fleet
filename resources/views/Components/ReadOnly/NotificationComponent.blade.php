@@ -13,37 +13,39 @@
         @php
             $ActiveCars = \DB::table('cars')->select(['VehicleNumber', 'Odometer'])->whereNotNull('VehicleNumber')->where('Status', 'ACTIVE')->get();
         @endphp
-        @foreach ($ActiveCars as $Car) 
+        @foreach ($ActiveCars as $Car)  
             @php
                 $ActiveCars_Refueling = \DB::table('refuelings')->select(['Date', 'VehicleNumber', 'Consumption', 'Mileage'])->where('VehicleNumber', $Car->VehicleNumber)->orderBy('Date', 'DESC')->first();
                 $ActiveCars_Maintenance = \DB::table('maintenances')->select('Date')->where('VehicleNumber', $Car->VehicleNumber)->orderBy('Date', 'DESC')->first();
                 $ActiveCars_Refueling_Mileage = \DB::table('refuelings')->select('Mileage', 'Date')->where('VehicleNumber', $Car->VehicleNumber)->whereBetween('Date', [date('Y-m-d', strtotime('-3 months')), date('Y-m-d')])->orderBy('Date', 'DESC')->sum('KM');
                 $ActiveCars_Refueling_Mileage_ = \DB::table('refuelings')->select('Date')->where('VehicleNumber', $Car->VehicleNumber)->whereBetween('Date', [date('Y-m-d', strtotime('-3 months')), date('Y-m-d')])->orderBy('Date', 'DESC')->first();
-            @endphp
+            @endphp 
             @if (
-                $ActiveCars_Maintenance->Date ?? date('Y-m-d') >= date('Y-m-d', strtotime('-3 months')) &&
-                !empty($ActiveCars_Maintenance)
+                !empty($ActiveCars_Maintenance->Date) &&
+                $ActiveCars_Maintenance->Date <= date('Y-m-d', strtotime('-3 months'))
             )
             <div class="inner-x"> 
                 <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $Car->VehicleNumber }}</small> is ready for some maintenance. Don't forget to schedule a check-up to keep it running like a champ and serving its purpose. <small class="color-b color-x">maintenance</small></p> <small>{{ $ActiveCars_Maintenance->Date }}</small>
             </div>
             @endif
             @if (
-                $ActiveCars_Refueling->Consumption ?? 0 <= 3 &&
+                !empty($ActiveCars_Refueling->Date) &&
+                $ActiveCars_Refueling->Consumption <= 3 &&
                 !empty($ActiveCars_Refueling->VehicleNumber) &&
                 $Car->Odometer === 'Kilometer'
             )
             <div class="inner-x">
-                <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $ActiveCars_Refueling->VehicleNumber }}</small> is consuming fuel more than normal. Just a friendly reminder that it's time to check your vehicle's fuel consumption.<small class="color-a color-x">fuel efficiency</small></p> <small>{{ $ActiveCars_Refueling->Date }}</small>
+                <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $ActiveCars_Refueling->VehicleNumber }}</small> is consuming fuel more than normal. Just a friendly reminder that it's time to check your vehicle's fuel consumption.<small class="color-a color-x">fuel efficiency</small> <br>* ODOMETER :: {{ $Car->Odometer }}  <br>* LAST CONSUMPTION RATE :: @ {{ round($ActiveCars_Refueling->Consumption, 1) }}</p> <small>{{ $ActiveCars_Refueling->Date }}</small>
             </div>
             @endif
             @if (
-                $ActiveCars_Refueling->Consumption ?? 0 <= 1.7 &&
+                !empty($ActiveCars_Refueling->Date) &&
+                $ActiveCars_Refueling->Consumption <= 1.7 &&
                 !empty($ActiveCars_Refueling->VehicleNumber) &&
                 $Car->Odometer === 'Mileage'
             )
             <div class="inner-x">
-                <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $ActiveCars_Refueling->VehicleNumber }}</small> is consuming fuel more than normal. Just a friendly reminder that it's time to check your vehicle's fuel consumption.<small class="color-a color-x">fuel efficiency</small></p> <small>{{ $ActiveCars_Refueling->Date }}</small>
+                <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $ActiveCars_Refueling->VehicleNumber }}</small> is consuming fuel more than normal. Just a friendly reminder that it's time to check your vehicle's fuel consumption.<small class="color-a color-x">fuel efficiency</small> <br> * ODOMETER :: {{ $Car->Odometer }}  <br>  * LAST CONSUMPTION RATE :: @ {{ round($ActiveCars_Refueling->Consumption, 1) }}</p> <small>{{ $ActiveCars_Refueling->Date }}</small>
             </div>
             @endif
             @if ( 
@@ -51,7 +53,7 @@
                 $Car->Odometer === 'Kilometer'
             )
             <div class="inner-x">
-                <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $ActiveCars_Refueling->VehicleNumber ?? '' }}</small> has reached the 3,000 km mark! "{{ number_format($ActiveCars_Refueling_Mileage) }} km" :: It's time to give it some attention and schedule a maintenance check. Regular maintenance helps keep your vehicle in top shape and ensures its longevity. Don't forget to take care of your cars so they can take care of you on the road!<small class="color-c color-x"></small></p> <small>{{ $ActiveCars_Refueling_Mileage_->Date }}</small>
+                <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $ActiveCars_Refueling->VehicleNumber ?? '' }}</small> has reached the 3,000 km mark! "{{ number_format($ActiveCars_Refueling_Mileage) }} km" :: It's time to give it some attention and schedule a maintenance check. Regular maintenance helps keep your vehicle in top shape and ensures its longevity. Don't forget to take care of your cars so they can take care of you on the road!<small class="color-c color-x">serious damage soon</small></p> <small>{{ $ActiveCars_Refueling_Mileage_->Date }}</small>
             </div>
             @endif
             @if ( 
