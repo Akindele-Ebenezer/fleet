@@ -25,7 +25,7 @@
                 $ActiveCars_Maintenance->Date <= date('Y-m-d', strtotime('-3 months'))
             )
             <div class="inner-x"> 
-                <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $Car->VehicleNumber }}</small> is ready for some maintenance. Don't forget to schedule a check-up to keep it running like a champ and serving its purpose. <small class="color-b color-x">maintenance</small></p> <small>{{ $ActiveCars_Maintenance->Date }}</small>
+                <img src="{{ asset('Images/service.png') }}"> <p><small class="vehicle-number color-x">{{ $Car->VehicleNumber }}</small> is ready for some maintenance. Don't forget to schedule a check-up to keep it running like a champ and serving its purpose. <small class="color-b color-x">due for maintenance</small></p> <small>{{ $ActiveCars_Maintenance->Date }}</small>
             </div>
             @endif
             @if (
