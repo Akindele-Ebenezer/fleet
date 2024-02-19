@@ -4,6 +4,8 @@
     \DB::statement("SET SQL_MODE=''"); 
 
     $Cars_Absolute = \App\Models\Car::whereNotNull('VehicleNumber')->get();
+    $MasterCards = \DB::table('master_cards')->orderBy('Date', 'DESC')->get();
+    $VoucherCards = \DB::table('voucher_cards')->orderBy('Date', 'DESC')->get();
     $CardNumbers = \App\Models\Car::select('CardNumber')->whereNotNull('VehicleNumber')->get();
     $Cars_Maker = DB::table('makers')->select('Maker')->get();
     $Cars_EngineType = DB::table('engine_types')->select('EngineType')->get();

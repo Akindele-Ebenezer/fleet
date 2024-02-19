@@ -684,11 +684,14 @@
                             <button class="action-x" name="Filter_All_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}">Apply</button>
                         </form>
                         <form action="">
+                            @if (Route::is('Deposits'))
+                            <p>:: VN - Vehicle Number ::<br> :: CN - Card Number ::</p>
+                            @endif
                             <h3>Vehicle Time Period</h3>
                             <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  Yearly</p>
                             <ul>
                                 <li>
-                                    Vehicle No.: 
+                                    {{ Route::is('Deposits') ? 'VN/CN' : 'Vehicle No' }}.:
                                     <input type="text" name="VehicleNo" list="Vehicles" autocomplete="off">
                                     <datalist id="Vehicles">
                                         @foreach ($Cars_Absolute as $Car)
@@ -703,11 +706,14 @@
                             <button class="action-x" name="Filter_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Yearly">Apply</button>
                         </form>
                         <form action="">
+                            @if (Route::is('Deposits'))
+                            <p>:: VN - Vehicle Number ::<br> :: CN - Card Number ::</p>
+                            @endif
                             <h3>Time Period</h3>
                             <p>{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  (Range)</p>
                             <ul>
                                 <li>
-                                    Vehicle No.:
+                                    {{ Route::is('Deposits') ? 'VN/CN' : 'Vehicle No' }}.:
                                     <input type="text" name="VehicleNo" list="Vehicles" autocomplete="off">
                                     <datalist id="Vehicles">
                                         @foreach ($Cars_Absolute as $Car)

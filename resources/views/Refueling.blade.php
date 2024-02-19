@@ -258,6 +258,6 @@
         let ExportButton = document.querySelector('.ExportToExcel');
         ExportButton.addEventListener('click', () => {
             window.location = '/Refueling/Export/all'; 
-        });
+        });  
     </script>
 @endsection

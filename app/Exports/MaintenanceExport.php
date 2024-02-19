@@ -32,12 +32,12 @@ class MaintenanceExport implements
     * @return \Illuminate\Support\Collection
     */
     public function query()
-    { 
-        if($this->VehicleNumber === 'all') {
-            return Maintenance::query()->whereNotNull('VehicleNumber');
+    {  
+        if($this->VehicleNumber === 'all') { 
+            return \DB::query()->from('maintenances_export')->whereNotNull('VehicleNumber')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
         } else {
-            return Maintenance::query()->where('VehicleNumber', $this->VehicleNumber);
-        }
+            return \DB::query()->from('maintenances_export')->where('VehicleNumber', $this->VehicleNumber)->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
+        } 
     }
     
     public function styles(Worksheet $sheet)

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Maintenance;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 
 class MaintenanceController extends Controller
@@ -21,12 +23,60 @@ class MaintenanceController extends Controller
     public function index()
     {
         $Config = self::config();
-  //////////////
+        Schema::dropIfExists('maintenances_export');
+  
         if (isset($_GET['Filter_All_Maintenance'])) {
             if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
                 return back();
             }
 
+                // CREATE NEW TABLE FOR EXPORT DATA
+                Schema::create('maintenances_export', function (Blueprint $table) {
+                    $table->id();
+                    $table->string('VehicleNumber')->nullable();
+                    $table->string('RFLNO')->nullable();
+                    $table->string('IncidentType')->nullable();
+                    $table->string('IncidentAction')->nullable();
+                    $table->string('Details')->nullable();
+                    $table->string('Date')->nullable();
+                    $table->string('Time')->nullable();
+                    $table->string('ReleaseDate')->nullable();
+                    $table->string('ReleaseTime')->nullable();
+                    $table->string('Cost')->nullable();
+                    $table->string('InvoiceNumber')->nullable();
+                    $table->string('Week')->nullable();
+                    $table->string('IncidentAttachment')->nullable();
+                    $table->string('UserId')->nullable();
+                    $table->string('DateIn')->nullable();
+                    $table->string('TimeIn')->nullable();
+                    $table->timestamps();
+                });
+                /////
+                $MaintenancesExport_Filter = \DB::table('maintenances')  
+                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                        ->get()->toArray();  
+
+                        foreach ($MaintenancesExport_Filter as $FilterData) {
+                            \DB::table('maintenances_export')->insert([
+                                'VehicleNumber' => $FilterData->VehicleNumber, 
+                                'RFLNO' => $FilterData->RFLNO, 
+                                'IncidentType' => $FilterData->IncidentType, 
+                                'IncidentAction' => $FilterData->IncidentAction, 
+                                'Details' => $FilterData->Details, 
+                                'Date' => $FilterData->Date, 
+                                'Time' => $FilterData->Time, 
+                                'ReleaseDate' => $FilterData->ReleaseDate, 
+                                'ReleaseTime' => $FilterData->ReleaseTime, 
+                                'Cost' => $FilterData->Cost, 
+                                'InvoiceNumber' => $FilterData->InvoiceNumber,  
+                                'Week' => $FilterData->Week,  
+                                'IncidentAttachment' => $FilterData->IncidentAttachment, 
+                                'UserId' => $FilterData->UserId, 
+                                'DateIn' => $FilterData->DateIn, 
+                                'TimeIn' => $FilterData->TimeIn, 
+                            ]); 
+                        } 
+                ////////////////
             $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                         ->sum('Cost'); 
@@ -44,6 +94,54 @@ class MaintenanceController extends Controller
                 return back();
             }
 
+                // CREATE NEW TABLE FOR EXPORT DATA
+                Schema::create('maintenances_export', function (Blueprint $table) {
+                    $table->id();
+                    $table->string('VehicleNumber')->nullable();
+                    $table->string('RFLNO')->nullable();
+                    $table->string('IncidentType')->nullable();
+                    $table->string('IncidentAction')->nullable();
+                    $table->string('Details')->nullable();
+                    $table->string('Date')->nullable();
+                    $table->string('Time')->nullable();
+                    $table->string('ReleaseDate')->nullable();
+                    $table->string('ReleaseTime')->nullable();
+                    $table->string('Cost')->nullable();
+                    $table->string('InvoiceNumber')->nullable();
+                    $table->string('Week')->nullable();
+                    $table->string('IncidentAttachment')->nullable();
+                    $table->string('UserId')->nullable();
+                    $table->string('DateIn')->nullable();
+                    $table->string('TimeIn')->nullable();
+                    $table->timestamps();
+                });
+                /////
+                $MaintenancesExport_Filter = \DB::table('maintenances')  
+                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%') 
+                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                        ->get()->toArray();  
+
+                        foreach ($MaintenancesExport_Filter as $FilterData) {
+                            \DB::table('maintenances_export')->insert([
+                                'VehicleNumber' => $FilterData->VehicleNumber, 
+                                'RFLNO' => $FilterData->RFLNO, 
+                                'IncidentType' => $FilterData->IncidentType, 
+                                'IncidentAction' => $FilterData->IncidentAction, 
+                                'Details' => $FilterData->Details, 
+                                'Date' => $FilterData->Date, 
+                                'Time' => $FilterData->Time, 
+                                'ReleaseDate' => $FilterData->ReleaseDate, 
+                                'ReleaseTime' => $FilterData->ReleaseTime, 
+                                'Cost' => $FilterData->Cost, 
+                                'InvoiceNumber' => $FilterData->InvoiceNumber,  
+                                'Week' => $FilterData->Week,  
+                                'IncidentAttachment' => $FilterData->IncidentAttachment, 
+                                'UserId' => $FilterData->UserId, 
+                                'DateIn' => $FilterData->DateIn, 
+                                'TimeIn' => $FilterData->TimeIn, 
+                            ]); 
+                        } 
+                ////////////////
             $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
                                                         ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                                         ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
@@ -63,6 +161,54 @@ class MaintenanceController extends Controller
                 return back();
             }
 
+                // CREATE NEW TABLE FOR EXPORT DATA
+                Schema::create('maintenances_export', function (Blueprint $table) {
+                    $table->id();
+                    $table->string('VehicleNumber')->nullable();
+                    $table->string('RFLNO')->nullable();
+                    $table->string('IncidentType')->nullable();
+                    $table->string('IncidentAction')->nullable();
+                    $table->string('Details')->nullable();
+                    $table->string('Date')->nullable();
+                    $table->string('Time')->nullable();
+                    $table->string('ReleaseDate')->nullable();
+                    $table->string('ReleaseTime')->nullable();
+                    $table->string('Cost')->nullable();
+                    $table->string('InvoiceNumber')->nullable();
+                    $table->string('Week')->nullable();
+                    $table->string('IncidentAttachment')->nullable();
+                    $table->string('UserId')->nullable();
+                    $table->string('DateIn')->nullable();
+                    $table->string('TimeIn')->nullable();
+                    $table->timestamps();
+                });
+                /////
+                $MaintenancesExport_Filter = \DB::table('maintenances')  
+                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                        ->get()->toArray();  
+
+                        foreach ($MaintenancesExport_Filter as $FilterData) {
+                            \DB::table('maintenances_export')->insert([
+                                'VehicleNumber' => $FilterData->VehicleNumber, 
+                                'RFLNO' => $FilterData->RFLNO, 
+                                'IncidentType' => $FilterData->IncidentType, 
+                                'IncidentAction' => $FilterData->IncidentAction, 
+                                'Details' => $FilterData->Details, 
+                                'Date' => $FilterData->Date, 
+                                'Time' => $FilterData->Time, 
+                                'ReleaseDate' => $FilterData->ReleaseDate, 
+                                'ReleaseTime' => $FilterData->ReleaseTime, 
+                                'Cost' => $FilterData->Cost, 
+                                'InvoiceNumber' => $FilterData->InvoiceNumber,  
+                                'Week' => $FilterData->Week,  
+                                'IncidentAttachment' => $FilterData->IncidentAttachment, 
+                                'UserId' => $FilterData->UserId, 
+                                'DateIn' => $FilterData->DateIn, 
+                                'TimeIn' => $FilterData->TimeIn, 
+                            ]); 
+                        } 
+                ////////////////
             $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
                                                         ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])

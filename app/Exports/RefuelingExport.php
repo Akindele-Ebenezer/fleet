@@ -33,11 +33,11 @@ class RefuelingExport implements
     */
     public function query()
     {
-        if($this->VehicleNumber === 'all') {
-            return Refueling::query()->whereNotNull('VehicleNumber');
+        if($this->VehicleNumber === 'all') { 
+            return \DB::query()->from('refuelings_export')->whereNotNull('VehicleNumber')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
         } else {
-            return Refueling::query()->where('VehicleNumber', $this->VehicleNumber);
-        }
+            return \DB::query()->from('refuelings_export')->where('VehicleNumber', $this->VehicleNumber)->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
+        } 
     } 
     
     public function styles(Worksheet $sheet)

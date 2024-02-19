@@ -68,10 +68,19 @@ class DepositsController extends Controller
                                         ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
+
+            $SumOfCarDeposits_MasterCard = \App\Models\DepositsMasterCard::select('Amount')
+                                                        ->where('CardNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
+                                                        ->sum('Amount'); 
+            $Deposits_MasterCards = DepositsMasterCard::where('CardNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
                                         
             $Deposits->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits);
+            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits)->with('SumOfCarDeposits_MasterCard', $SumOfCarDeposits_MasterCard)->with('Deposits_MasterCards', $Deposits_MasterCards);
         }
 
         if (isset($_GET['Filter_Deposits_Range'])) {
@@ -88,9 +97,18 @@ class DepositsController extends Controller
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
                                         
+            $SumOfCarDeposits_MasterCard = \App\Models\DepositsMasterCard::select('Amount')
+                                                        ->where('CardNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Amount'); 
+            $Deposits_MasterCards = DepositsMasterCard::where('CardNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])   
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+
             $Deposits->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits);
+            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits)->with('SumOfCarDeposits_MasterCard', $SumOfCarDeposits_MasterCard)->with('Deposits_MasterCards', $Deposits_MasterCards);
         }
         ///////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
