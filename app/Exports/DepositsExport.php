@@ -34,10 +34,10 @@ class DepositsExport implements
     public function query()
     {
         if($this->VehicleNumber === 'all') {
-            return Deposits::query()->whereNotNull('VehicleNumber');
+            return \DB::query()->from('deposits_export')->whereNotNull('VehicleNumber')->orderBy('Date', 'DESC')->orderBy('TimeIn', 'DESC');
         } else {
-            return Deposits::query()->where('VehicleNumber', $this->VehicleNumber);
-        }
+            return \DB::query()->from('deposits_export')->where('VehicleNumber', $this->VehicleNumber)->orderBy('Date', 'DESC')->orderBy('TimeIn', 'DESC');
+        } 
     }
     
     public function styles(Worksheet $sheet)

@@ -34,7 +34,7 @@ class MaintenanceExport implements
     public function query()
     {  
         if($this->VehicleNumber === 'all') { 
-            return \DB::query()->from('maintenances_export')->whereNotNull('VehicleNumber')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
+            return \DB::query()->from('maintenances')->whereNotNull('VehicleNumber')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
         } else {
             return \DB::query()->from('maintenances_export')->where('VehicleNumber', $this->VehicleNumber)->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
         } 
