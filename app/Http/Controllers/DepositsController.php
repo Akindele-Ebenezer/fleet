@@ -145,9 +145,16 @@ class DepositsController extends Controller
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
                                         
+            $SumOfCarDeposits_VoucherCard = \DB::table('deposits_voucher_cards')->select('Amount')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                                                        ->sum('Amount'); 
+            $Deposits_VoucherCards = \DB::table('deposits_voucher_cards')->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) 
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+
             $Deposits->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits)->with('Deposits_MasterCards', $Deposits_MasterCards)->with('SumOfCarDeposits_MasterCard', $SumOfCarDeposits_MasterCard);
+            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits)->with('Deposits_MasterCards', $Deposits_MasterCards)->with('SumOfCarDeposits_MasterCard', $SumOfCarDeposits_MasterCard)->with('SumOfCarDeposits_VoucherCard', $SumOfCarDeposits_VoucherCard)->with('Deposits_VoucherCards', $Deposits_VoucherCards);
         }
 
         if (isset($_GET['Filter_Deposits_Yearly'])) {
@@ -224,9 +231,17 @@ class DepositsController extends Controller
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
                                         
+            $SumOfCarDeposits_VoucherCard = \DB::table('deposits_voucher_cards')->select('Amount')
+                                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
+                                                        ->sum('Amount'); 
+            $Deposits_VoucherCards = \DB::table('deposits_voucher_cards') 
+                                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+                                        
             $Deposits->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits)->with('SumOfCarDeposits_MasterCard', $SumOfCarDeposits_MasterCard)->with('Deposits_MasterCards', $Deposits_MasterCards);
+            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits)->with('SumOfCarDeposits_MasterCard', $SumOfCarDeposits_MasterCard)->with('Deposits_MasterCards', $Deposits_MasterCards)->with('SumOfCarDeposits_VoucherCard', $SumOfCarDeposits_VoucherCard)->with('Deposits_VoucherCards', $Deposits_VoucherCards);
         }
 
         if (isset($_GET['Filter_Deposits_Range'])) {
@@ -303,10 +318,19 @@ class DepositsController extends Controller
                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])   
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
+                                        
+            $SumOfCarDeposits_VoucherCard = \DB::table('deposits_voucher_cards')->select('Amount')
+                                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])   
+                                                        ->sum('Amount'); 
+            $Deposits_VoucherCards = \DB::table('deposits_voucher_cards') 
+                                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])   
+                                        ->orderBy('Date', 'DESC')
+                                        ->paginate(7);
+
 
             $Deposits->withPath($_SERVER['REQUEST_URI']);
 
-            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits)->with('SumOfCarDeposits_MasterCard', $SumOfCarDeposits_MasterCard)->with('Deposits_MasterCards', $Deposits_MasterCards);
+            return view('Deposits', $Config)->with('Deposits', $Deposits)->with('SumOfCarDeposits', $SumOfCarDeposits)->with('SumOfCarDeposits_MasterCard', $SumOfCarDeposits_MasterCard)->with('Deposits_MasterCards', $Deposits_MasterCards)->with('SumOfCarDeposits_VoucherCard', $SumOfCarDeposits_VoucherCard)->with('Deposits_VoucherCards', $Deposits_VoucherCards);
         }
         ///////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
@@ -332,6 +356,52 @@ class DepositsController extends Controller
     public function my_records_deposits()
     {
         $Config = self::config();
+        Schema::dropIfExists('deposits_export');
+
+        // CREATE NEW TABLE FOR EXPORT DATA
+        Schema::create('deposits_export', function (Blueprint $table) {
+            $table->id();
+            $table->string('VehicleNumber')->nullable();
+            $table->string('LNO')->nullable();
+            $table->string('CardNumber')->nullable(); 
+            $table->string('Date')->nullable();
+            $table->string('Amount')->nullable();
+            $table->string('UserId')->nullable();
+            $table->string('DateIn')->nullable();
+            $table->string('TimeIn')->nullable();
+            $table->string('Year')->nullable();
+            $table->string('Month')->nullable();
+            $table->string('Week')->nullable();
+            $table->string('TP')->nullable();
+            $table->string('Comments')->nullable();
+            $table->timestamps();
+        });
+        /////
+        $DepositsExport_Filter = \DB::table('deposits')->where('UserId', self::USER_ID())   
+                ->get()->toArray();  
+        $MasterCardDepositsExport_Filter = \DB::table('deposits_master_cards')->where('UserId', self::USER_ID())  
+                ->get()->toArray(); 
+        $VoucherCardDepositsExport_Filter = \DB::table('deposits_voucher_cards')->where('UserId', self::USER_ID())  
+                ->get()->toArray(); 
+                
+        $AllDepositsExport_Filter = [...$DepositsExport_Filter, ...$MasterCardDepositsExport_Filter, ...$VoucherCardDepositsExport_Filter];
+
+                foreach ($AllDepositsExport_Filter as $FilterData) {
+                    \DB::table('deposits_export')->insert([
+                        'VehicleNumber' => $FilterData->VehicleNumber ?? 'MASTER/VOUCHER', 
+                        'CardNumber' => $FilterData->CardNumber, 
+                        'Date' => $FilterData->Date, 
+                        'Amount' => $FilterData->Amount, 
+                        'Year' => $FilterData->Year, 
+                        'Month' => $FilterData->Month, 
+                        'Week' => $FilterData->Week, 
+                        'DateIn' => date('F j, Y'), 
+                        'TimeIn' => date("g:i a"), 
+                        'Comments' => $FilterData->Comments ?? '', 
+                        'UserId' => request()->session()->get('Id'), 
+                    ]); 
+                } 
+        ////////////////
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
