@@ -219,7 +219,12 @@
             ExportButton.addEventListener('click', () => {
                 window.location = '/Maintenance/Export/all'; 
             });  
-        } else {
+        } else if (new URLSearchParams(window.location.search).has('FilterValue')) {  
+            let ExportButton = document.querySelector('.ExportToExcel');
+            ExportButton.addEventListener('click', () => {
+                window.location = '/Maintenance/Export/{{ $_GET["FilterValue"] ?? '' }}'; 
+            });  
+        }  else {
             let ExportButton = document.querySelector('.ExportToExcel');
             ExportButton.addEventListener('click', () => {
                 window.location = '/Maintenance/Export/one'; 

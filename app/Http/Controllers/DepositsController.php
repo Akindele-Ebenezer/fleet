@@ -335,6 +335,73 @@ class DepositsController extends Controller
         ///////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
+            Schema::dropIfExists('deposits_export');
+            // CREATE NEW TABLE FOR EXPORT DATA
+            Schema::create('deposits_export', function (Blueprint $table) {
+                $table->id();
+                $table->string('VehicleNumber')->nullable();
+                $table->string('LNO')->nullable();
+                $table->string('CardNumber')->nullable(); 
+                $table->string('Date')->nullable();
+                $table->string('Amount')->nullable();
+                $table->string('UserId')->nullable();
+                $table->string('DateIn')->nullable();
+                $table->string('TimeIn')->nullable();
+                $table->string('Year')->nullable();
+                $table->string('Month')->nullable();
+                $table->string('Week')->nullable();
+                $table->string('TP')->nullable();
+                $table->string('Comments')->nullable();
+                $table->timestamps();
+            });
+            /////
+            $DepositsExport_Filter = \DB::table('deposits')  
+                    ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Year', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Month', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orderBy('Date', 'DESC')  
+                    ->get()->toArray();  
+            $MasterCardDepositsExport_Filter = \DB::table('deposits_master_cards')  
+                    ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Year', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Month', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orderBy('Date', 'DESC')  
+                    ->get()->toArray(); 
+            $VoucherCardDepositsExport_Filter = \DB::table('deposits_voucher_cards')  
+                    ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Year', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Month', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orderBy('Date', 'DESC')  
+                    ->get()->toArray();  
+
+            $AllDepositsExport_Filter = [...$DepositsExport_Filter, ...$MasterCardDepositsExport_Filter, ...$VoucherCardDepositsExport_Filter];
+
+                    foreach ($AllDepositsExport_Filter as $FilterData) {
+                        \DB::table('deposits_export')->insert([
+                            'VehicleNumber' => $FilterData->VehicleNumber ?? 'MASTER/VOUCHER', 
+                            'CardNumber' => $FilterData->CardNumber, 
+                            'Date' => $FilterData->Date, 
+                            'Amount' => $FilterData->Amount, 
+                            'Year' => $FilterData->Year, 
+                            'Month' => $FilterData->Month, 
+                            'Week' => $FilterData->Week, 
+                            'DateIn' => date('F j, Y'), 
+                            'TimeIn' => date("g:i a"), 
+                            'Comments' => $FilterData->Comments ?? '', 
+                            'UserId' => request()->session()->get('Id'), 
+                        ]); 
+                    } 
+            ////////////////
             $Deposits = Deposits::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                         ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
                         ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')

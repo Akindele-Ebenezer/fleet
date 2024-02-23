@@ -37,7 +37,9 @@ class MaintenanceExport implements
             return \DB::query()->from('maintenances')->whereNotNull('VehicleNumber')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
         } else if($this->VehicleNumber === 'one') {
             return \DB::query()->from('maintenances_export')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
-        }  
+        } else {
+            return \DB::query()->from('maintenances_export')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
+        }   
     }
     
     public function styles(Worksheet $sheet)

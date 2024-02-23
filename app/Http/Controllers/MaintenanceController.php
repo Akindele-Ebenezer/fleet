@@ -226,7 +226,66 @@ class MaintenanceController extends Controller
   //////////////
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
+            
+                Schema::dropIfExists('maintenances_export');
+                // CREATE NEW TABLE FOR EXPORT DATA
+                Schema::create('maintenances_export', function (Blueprint $table) {
+                    $table->id();
+                    $table->string('VehicleNumber')->nullable();
+                    $table->string('RFLNO')->nullable();
+                    $table->string('IncidentType')->nullable();
+                    $table->string('IncidentAction')->nullable();
+                    $table->string('Details')->nullable();
+                    $table->string('Date')->nullable();
+                    $table->string('Time')->nullable();
+                    $table->string('ReleaseDate')->nullable();
+                    $table->string('ReleaseTime')->nullable();
+                    $table->string('Cost')->nullable();
+                    $table->string('InvoiceNumber')->nullable();
+                    $table->string('Week')->nullable();
+                    $table->string('IncidentAttachment')->nullable();
+                    $table->string('UserId')->nullable();
+                    $table->string('DateIn')->nullable();
+                    $table->string('TimeIn')->nullable();
+                    $table->timestamps();
+                });
+                /////
+                $MaintenancesExport_Filter = \DB::table('maintenances')  
+                        ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('IncidentType', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('IncidentAction', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('ReleaseDate', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('ReleaseTime', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('InvoiceNumber', 'LIKE', '%' . $FilterValue . '%')
+                        ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                        ->orderBy('Date', 'DESC')
+                        ->orderBy('Time', 'DESC')
+                        ->get()->toArray();  
 
+                        foreach ($MaintenancesExport_Filter as $FilterData) {
+                            \DB::table('maintenances_export')->insert([
+                                'VehicleNumber' => $FilterData->VehicleNumber, 
+                                'RFLNO' => $FilterData->RFLNO, 
+                                'IncidentType' => $FilterData->IncidentType, 
+                                'IncidentAction' => $FilterData->IncidentAction, 
+                                'Details' => $FilterData->Details, 
+                                'Date' => $FilterData->Date, 
+                                'Time' => $FilterData->Time, 
+                                'ReleaseDate' => $FilterData->ReleaseDate, 
+                                'ReleaseTime' => $FilterData->ReleaseTime, 
+                                'Cost' => $FilterData->Cost, 
+                                'InvoiceNumber' => $FilterData->InvoiceNumber,  
+                                'Week' => $FilterData->Week,  
+                                'IncidentAttachment' => $FilterData->IncidentAttachment, 
+                                'UserId' => $FilterData->UserId, 
+                                'DateIn' => $FilterData->DateIn, 
+                                'TimeIn' => $FilterData->TimeIn, 
+                            ]); 
+                        } 
+                ////////////////
             if ($FilterValue === 'active') {
                 $Maintenance = Maintenance::join('cars', 'cars.VehicleNumber', '=', 'maintenances.VehicleNumber')
                     ->select([
