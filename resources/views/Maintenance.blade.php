@@ -213,10 +213,17 @@
         <p>Total amount spent on Maintenance from "{{ $Date_from->Date ?? 'NULL' }}" till date = ₦ {{ number_format($SumOfCarMaintenance) }}</p>
     </div>
     <script src="{{ asset('Js/ReadOnly/Maintenance.js') }}"></script>
-    <script>
-        let ExportButton = document.querySelector('.ExportToExcel');
-        ExportButton.addEventListener('click', () => {
-            window.location = '/Maintenance/Export/all'; 
-        });
+    <script> 
+        if (!(window.location.search)) {
+            let ExportButton = document.querySelector('.ExportToExcel');
+            ExportButton.addEventListener('click', () => {
+                window.location = '/Maintenance/Export/all'; 
+            });  
+        } else {
+            let ExportButton = document.querySelector('.ExportToExcel');
+            ExportButton.addEventListener('click', () => {
+                window.location = '/Maintenance/Export/one'; 
+            });  
+        }
     </script>
 @endsection

@@ -255,9 +255,16 @@
     </div>
     <script src="{{ asset('Js/ReadOnly/Refueling.js') }}"></script>
     <script>
-        let ExportButton = document.querySelector('.ExportToExcel');
-        ExportButton.addEventListener('click', () => {
-            window.location = '/Refueling/Export/all'; 
-        });  
+        if (!(window.location.search)) {
+            let ExportButton = document.querySelector('.ExportToExcel');
+            ExportButton.addEventListener('click', () => {
+                window.location = '/Refueling/Export/all'; 
+            });  
+        } else {
+            let ExportButton = document.querySelector('.ExportToExcel');
+            ExportButton.addEventListener('click', () => {
+                window.location = '/Refueling/Export/one'; 
+            });  
+        }
     </script>
 @endsection

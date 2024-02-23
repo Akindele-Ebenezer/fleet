@@ -34,9 +34,9 @@ class RefuelingExport implements
     public function query()
     {
         if($this->VehicleNumber === 'all') { 
-            return \DB::query()->from('refuelings_export')->whereNotNull('VehicleNumber')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
-        } else {
-            return \DB::query()->from('refuelings_export')->where('VehicleNumber', $this->VehicleNumber)->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
+            return \DB::query()->from('refuelings')->whereNotNull('VehicleNumber')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
+        } else if($this->VehicleNumber === 'one') {
+            return \DB::query()->from('refuelings_export')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
         } 
     } 
     

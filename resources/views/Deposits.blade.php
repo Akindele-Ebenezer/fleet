@@ -406,10 +406,17 @@
         {{ $Deposits_VoucherCards->onEachSide(5)->links() }}
     </div>
     <script src="{{ asset('Js/ReadOnly/Deposits.js') }}"></script>
-    <script>
-        let ExportButton = document.querySelector('.ExportToExcel');
-        ExportButton.addEventListener('click', () => {
-            window.location = '/Deposits/Export/all'; 
-        });
+    <script> 
+        if (!(window.location.search)) {
+            let ExportButton = document.querySelector('.ExportToExcel');
+            ExportButton.addEventListener('click', () => {
+                window.location = '/Deposits/Export/all'; 
+            });  
+        } else {
+            let ExportButton = document.querySelector('.ExportToExcel');
+            ExportButton.addEventListener('click', () => {
+                window.location = '/Deposits/Export/one'; 
+            });  
+        }
     </script>
 @endsection
