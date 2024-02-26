@@ -35,48 +35,48 @@ class DepositsController extends Controller
         Schema::dropIfExists('deposits_export');
 
         // CREATE NEW TABLE FOR EXPORT DATA
-        // Schema::create('deposits_export', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('VehicleNumber')->nullable();
-        //     $table->string('LNO')->nullable();
-        //     $table->string('CardNumber')->nullable(); 
-        //     $table->string('Date')->nullable();
-        //     $table->string('Amount')->nullable();
-        //     $table->string('UserId')->nullable();
-        //     $table->string('DateIn')->nullable();
-        //     $table->string('TimeIn')->nullable();
-        //     $table->string('Year')->nullable();
-        //     $table->string('Month')->nullable();
-        //     $table->string('Week')->nullable();
-        //     $table->string('TP')->nullable();
-        //     $table->string('Comments')->nullable();
-        //     $table->timestamps();
-        // });
-        // /////
-        // $DepositsExport_Filter = \DB::table('deposits')   
-        //         ->get()->toArray();  
-        // $MasterCardDepositsExport_Filter = \DB::table('deposits_master_cards')  
-        //         ->get()->toArray(); 
-        // $VoucherCardDepositsExport_Filter = \DB::table('deposits_voucher_cards')  
-        //         ->get()->toArray(); 
+        Schema::create('deposits_export', function (Blueprint $table) {
+            $table->id();
+            $table->string('VehicleNumber')->nullable();
+            $table->string('LNO')->nullable();
+            $table->string('CardNumber')->nullable(); 
+            $table->string('Date')->nullable();
+            $table->string('Amount')->nullable();
+            $table->string('UserId')->nullable();
+            $table->string('DateIn')->nullable();
+            $table->string('TimeIn')->nullable();
+            $table->string('Year')->nullable();
+            $table->string('Month')->nullable();
+            $table->string('Week')->nullable();
+            $table->string('TP')->nullable();
+            $table->string('Comments')->nullable();
+            $table->timestamps();
+        });
+        /////
+        $DepositsExport_Filter = \DB::table('deposits')   
+                ->get()->toArray();  
+        $MasterCardDepositsExport_Filter = \DB::table('deposits_master_cards')  
+                ->get()->toArray(); 
+        $VoucherCardDepositsExport_Filter = \DB::table('deposits_voucher_cards')  
+                ->get()->toArray(); 
                 
-        // $AllDepositsExport_Filter = [...$DepositsExport_Filter, ...$MasterCardDepositsExport_Filter, ...$VoucherCardDepositsExport_Filter];
+        $AllDepositsExport_Filter = [...$DepositsExport_Filter, ...$MasterCardDepositsExport_Filter, ...$VoucherCardDepositsExport_Filter];
 
-        //         foreach ($AllDepositsExport_Filter as $FilterData) {
-        //             \DB::table('deposits_export')->insert([
-        //                 'VehicleNumber' => $FilterData->VehicleNumber ?? 'MASTER/VOUCHER', 
-        //                 'CardNumber' => $FilterData->CardNumber, 
-        //                 'Date' => $FilterData->Date, 
-        //                 'Amount' => $FilterData->Amount, 
-        //                 'Year' => $FilterData->Year, 
-        //                 'Month' => $FilterData->Month, 
-        //                 'Week' => $FilterData->Week, 
-        //                 'DateIn' => date('F j, Y'), 
-        //                 'TimeIn' => date("g:i a"), 
-        //                 'Comments' => $FilterData->Comments ?? '', 
-        //                 'UserId' => request()->session()->get('Id'), 
-        //             ]); 
-        //         } 
+                foreach ($AllDepositsExport_Filter as $FilterData) {
+                    \DB::table('deposits_export')->insert([
+                        'VehicleNumber' => $FilterData->VehicleNumber ?? 'MASTER/VOUCHER', 
+                        'CardNumber' => $FilterData->CardNumber, 
+                        'Date' => $FilterData->Date, 
+                        'Amount' => $FilterData->Amount, 
+                        'Year' => $FilterData->Year, 
+                        'Month' => $FilterData->Month, 
+                        'Week' => $FilterData->Week, 
+                        'DateIn' => date('F j, Y'), 
+                        'TimeIn' => date("g:i a"), 
+                        'Comments' => $FilterData->Comments ?? '', 
+                        'UserId' => request()->session()->get('Id'), 
+                    ]); 
+                } 
         ////////////////
         if (isset($_GET['Filter_All_Deposits'])) { 
             if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
@@ -426,48 +426,48 @@ class DepositsController extends Controller
         Schema::dropIfExists('deposits_export');
 
         // CREATE NEW TABLE FOR EXPORT DATA
-        Schema::create('deposits_export', function (Blueprint $table) {
-            $table->id();
-            $table->string('VehicleNumber')->nullable();
-            $table->string('LNO')->nullable();
-            $table->string('CardNumber')->nullable(); 
-            $table->string('Date')->nullable();
-            $table->string('Amount')->nullable();
-            $table->string('UserId')->nullable();
-            $table->string('DateIn')->nullable();
-            $table->string('TimeIn')->nullable();
-            $table->string('Year')->nullable();
-            $table->string('Month')->nullable();
-            $table->string('Week')->nullable();
-            $table->string('TP')->nullable();
-            $table->string('Comments')->nullable();
-            $table->timestamps();
-        });
-        /////
-        $DepositsExport_Filter = \DB::table('deposits')->where('UserId', self::USER_ID())   
-                ->get()->toArray();  
-        $MasterCardDepositsExport_Filter = \DB::table('deposits_master_cards')->where('UserId', self::USER_ID())  
-                ->get()->toArray(); 
-        $VoucherCardDepositsExport_Filter = \DB::table('deposits_voucher_cards')->where('UserId', self::USER_ID())  
-                ->get()->toArray(); 
+        // Schema::create('deposits_export', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('VehicleNumber')->nullable();
+        //     $table->string('LNO')->nullable();
+        //     $table->string('CardNumber')->nullable(); 
+        //     $table->string('Date')->nullable();
+        //     $table->string('Amount')->nullable();
+        //     $table->string('UserId')->nullable();
+        //     $table->string('DateIn')->nullable();
+        //     $table->string('TimeIn')->nullable();
+        //     $table->string('Year')->nullable();
+        //     $table->string('Month')->nullable();
+        //     $table->string('Week')->nullable();
+        //     $table->string('TP')->nullable();
+        //     $table->string('Comments')->nullable();
+        //     $table->timestamps();
+        // });
+        // /////
+        // $DepositsExport_Filter = \DB::table('deposits')->where('UserId', self::USER_ID())   
+        //         ->get()->toArray();  
+        // $MasterCardDepositsExport_Filter = \DB::table('deposits_master_cards')->where('UserId', self::USER_ID())  
+        //         ->get()->toArray(); 
+        // $VoucherCardDepositsExport_Filter = \DB::table('deposits_voucher_cards')->where('UserId', self::USER_ID())  
+        //         ->get()->toArray(); 
                 
-        $AllDepositsExport_Filter = [...$DepositsExport_Filter, ...$MasterCardDepositsExport_Filter, ...$VoucherCardDepositsExport_Filter];
+        // $AllDepositsExport_Filter = [...$DepositsExport_Filter, ...$MasterCardDepositsExport_Filter, ...$VoucherCardDepositsExport_Filter];
 
-                foreach ($AllDepositsExport_Filter as $FilterData) {
-                    \DB::table('deposits_export')->insert([
-                        'VehicleNumber' => $FilterData->VehicleNumber ?? 'MASTER/VOUCHER', 
-                        'CardNumber' => $FilterData->CardNumber, 
-                        'Date' => $FilterData->Date, 
-                        'Amount' => $FilterData->Amount, 
-                        'Year' => $FilterData->Year, 
-                        'Month' => $FilterData->Month, 
-                        'Week' => $FilterData->Week, 
-                        'DateIn' => date('F j, Y'), 
-                        'TimeIn' => date("g:i a"), 
-                        'Comments' => $FilterData->Comments ?? '', 
-                        'UserId' => request()->session()->get('Id'), 
-                    ]); 
-                } 
+        //         foreach ($AllDepositsExport_Filter as $FilterData) {
+        //             \DB::table('deposits_export')->insert([
+        //                 'VehicleNumber' => $FilterData->VehicleNumber ?? 'MASTER/VOUCHER', 
+        //                 'CardNumber' => $FilterData->CardNumber, 
+        //                 'Date' => $FilterData->Date, 
+        //                 'Amount' => $FilterData->Amount, 
+        //                 'Year' => $FilterData->Year, 
+        //                 'Month' => $FilterData->Month, 
+        //                 'Week' => $FilterData->Week, 
+        //                 'DateIn' => date('F j, Y'), 
+        //                 'TimeIn' => date("g:i a"), 
+        //                 'Comments' => $FilterData->Comments ?? '', 
+        //                 'UserId' => request()->session()->get('Id'), 
+        //             ]); 
+        //         } 
         ////////////////
 
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
