@@ -80,7 +80,7 @@
                     @if (
                         (count($CarDocuments_REGISTRATION_CERTIFICATE) < 1) AND
                         (count($CarDocuments_DRIVING_LICENCE) < 1) AND
-                        (count($CarDocuments_PUC_CERTIFICATE) < 1) AND
+                        (count($CarDocuments_CENTRAL_MOTOR_REGISTRY) < 1) AND
                         (count($CarDocuments_PROOF_OF_OWNERSHIP) < 1) AND
                         (count($CarDocuments_CERTIFICATE_OF_ROAD_WORTHINESS) < 1) AND
                         (count($CarDocuments_INSURANCE_CERTIFICATE) < 1)
