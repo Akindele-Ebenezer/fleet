@@ -42,7 +42,7 @@
             @php 
                 $CarDocuments_REGISTRATION_CERTIFICATE = \DB::table('car_documents')->select(['VehicleNumber', 'RegistrationCertificate', 'RegistrationCertificateSize'])->where('VehicleNumber', $Document->VehicleNumber)->groupBy('VehicleNumber')->get();
                 $CarDocuments_DRIVING_LICENCE = \DB::table('car_documents')->select(['VehicleNumber', 'DrivingLicence', 'DrivingLicenceSize'])->where('VehicleNumber', $Document->VehicleNumber)->groupBy('VehicleNumber')->get();
-                $CarDocuments_PUC_CERTIFICATE = \DB::table('car_documents')->select(['VehicleNumber', 'PUCCertificate', 'PUCCertificateSize'])->where('VehicleNumber', $Document->VehicleNumber)->groupBy('VehicleNumber')->get();
+                $CarDocuments_CENTRAL_MOTOR_REGISTRY = \DB::table('car_documents')->select(['VehicleNumber', 'CentralMotorRegistry', 'CentralMotorRegistrySize'])->where('VehicleNumber', $Document->VehicleNumber)->groupBy('VehicleNumber')->get();
                 $CarDocuments_PROOF_OF_OWNERSHIP = \DB::table('car_documents')->select(['VehicleNumber', 'ProofOfOwnership', 'ProofOfOwnershipSize'])->where('VehicleNumber', $Document->VehicleNumber)->groupBy('VehicleNumber')->get();
                 $CarDocuments_CERTIFICATE_OF_ROAD_WORTHINESS = \DB::table('car_documents')->select(['VehicleNumber', 'CertificateOfRoadWorthiness', 'CertificateOfRoadWorthinessSize'])->where('VehicleNumber', $Document->VehicleNumber)->groupBy('VehicleNumber')->get();
                 $CarDocuments_INSURANCE_CERTIFICATE = \DB::table('car_documents')->select(['VehicleNumber', 'InsuranceCertificate', 'InsuranceCertificateSize'])->where('VehicleNumber', $Document->VehicleNumber)->groupBy('VehicleNumber')->get();
@@ -115,19 +115,19 @@
                             <span class="Hide">{{ $Document_->DrivingLicence }}</span>
                         </div>
                     @endforeach
-                    {{-- @foreach ($CarDocuments_PUC_CERTIFICATE as $Document_)
+                    @foreach ($CarDocuments_CENTRAL_MOTOR_REGISTRY as $Document_)
                         <div class="document">
-                            @if (empty($Document_->PUCCertificate))
+                            @if (empty($Document_->CentralMotorRegistry))
                                 <p>No File..</p>
                             @endif
-                            <a href="/Documents/Cars/{{ $Document->VehicleNumber }}/{{ $Document_->PUCCertificate }}" target="blank">
-                                {{ $Document_->PUCCertificate }}
+                            <a href="/Documents/Cars/{{ $Document->VehicleNumber }}/{{ $Document_->CentralMotorRegistry }}" target="blank">
+                                {{ $Document_->CentralMotorRegistry }}
                             </a>
                             <button class="action-x delete-document-btn">Delete</button>
                             <span class="Hide">{{ $Document_->VehicleNumber }}</span>
-                            <span class="Hide">{{ $Document_->PUCCertificate }}</span>
+                            <span class="Hide">{{ $Document_->CentralMotorRegistry }}</span>
                         </div>
-                    @endforeach --}}
+                    @endforeach
                     @foreach ($CarDocuments_PROOF_OF_OWNERSHIP as $Document_)
                         <div class="document">
                             @if (empty($Document_->ProofOfOwnership))
@@ -179,11 +179,11 @@
                             <span>{{ round($Document_->DrivingLicenceSize) }} KB</span>
                         </div>
                     @endforeach 
-                    {{-- @foreach ($CarDocuments_PUC_CERTIFICATE as $Document_)
+                    @foreach ($CarDocuments_CENTRAL_MOTOR_REGISTRY as $Document_)
                         <div class="document">
-                            <span> {{ round($Document_->PUCCertificateSize) }} KB</span>
+                            <span> {{ round($Document_->CentralMotorRegistrySize) }} KB</span>
                         </div>
-                    @endforeach  --}}
+                    @endforeach 
                     @foreach ($CarDocuments_PROOF_OF_OWNERSHIP as $Document_)
                         <div class="document">
                             <span>{{ round($Document_->ProofOfOwnershipSize) }} KB</span>
@@ -235,12 +235,24 @@
                                     up-to-date
                                 @endif
                         </div>
-                    @endforeach  
-                    {{-- @foreach ($CarDocuments_PUC_CERTIFICATE as $Document_)
-                        <div class="document">
-                            PUC Certificate
+                    @endforeach   
+                    @foreach ($CarDocuments_CENTRAL_MOTOR_REGISTRY as $Document_)
+                        @php 
+                            $CentralMotorRegistryExpiryDate = \DB::table('car_documents')->select(['CentralMotorRegistryExpiryDate'])->where('VehicleNumber', $Document->VehicleNumber)->first();
+                        @endphp
+                        <div class="document CentralMotorRegistry">
+                            <span>Central Motor Registry</span> <span>{{ $CentralMotorRegistryExpiryDate->CentralMotorRegistryExpiryDate }}</span> <span class="@if ($CentralMotorRegistryExpiryDate->CentralMotorRegistryExpiryDate < date('Y-m-d') AND !empty($CentralMotorRegistryExpiryDate->CentralMotorRegistryExpiryDate)) expired @endif {{ empty($CentralMotorRegistryExpiryDate->CentralMotorRegistryExpiryDate) ? 'not-registered' : '' }} {{ $CentralMotorRegistryExpiryDate->CentralMotorRegistryExpiryDate > date('Y-m-d') ? 'up-to-date' : '' }}">
+                                @if (empty($CentralMotorRegistryExpiryDate->CentralMotorRegistryExpiryDate))
+                                    not-registered
+                                @endif
+                                @if ($CentralMotorRegistryExpiryDate->CentralMotorRegistryExpiryDate < date('Y-m-d') AND !empty($CentralMotorRegistryExpiryDate->CentralMotorRegistryExpiryDate))
+                                    expired 
+                                @endif
+                                @if ($CentralMotorRegistryExpiryDate->CentralMotorRegistryExpiryDate > date('Y-m-d'))
+                                    up-to-date
+                                @endif
                         </div>
-                    @endforeach   --}}
+                    @endforeach   
                     @foreach ($CarDocuments_PROOF_OF_OWNERSHIP as $Document_)
                         @php
                             $ProofOfOwnershipExpiryDate = \DB::table('car_documents')->select(['ProofOfOwnershipExpiryDate'])->where('VehicleNumber', $Document->VehicleNumber)->first();

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('RegistrationCertificateSize')->nullable();
             $table->string('DrivingLicence')->nullable();
             $table->string('DrivingLicenceSize')->nullable();
-            $table->string('PUCCertificate')->nullable();
-            $table->string('PUCCertificateSize')->nullable();
+            $table->string('CentralMotorRegistry')->nullable();
+            $table->string('CentralMotorRegistrySize')->nullable();
             $table->string('ProofOfOwnership')->nullable();
             $table->string('ProofOfOwnershipSize')->nullable();
             $table->string('CertificateOfRoadWorthiness')->nullable();
@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('InsuranceCertificateSize')->nullable();
             $table->string('DriverLicenseExpiryDate')->nullable();
             $table->string('VehicleLicenseExpiryDate')->nullable();
+            $table->string('VehicleLicenseExpiryDate')->nullable();
+            $table->string('CentralMotorRegistryExpiryDate')->nullable();
             $table->string('ProofOfOwnershipExpiryDate')->nullable();
             $table->string('CertificateOfRoadWorthinessExpiryDate')->nullable();
             $table->string('InsuranceCertificateExpiryDate')->nullable();

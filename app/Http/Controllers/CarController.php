@@ -505,23 +505,23 @@ class CarController extends Controller
      
             $DrivingLicenceFile->move($DestinationPath, $DrivingLicenceFile->getClientOriginalName());  
         }
-        
         if ( 
-            $request->hasFile('PUCCertificate')  
+            $request->hasFile('CentralMotorRegistry')  
         ) {
             $DestinationPath = public_path().'/Documents/Cars/' . $VehicleNumber;
             File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
      
-            $PUCCertificateFile = $request->file('PUCCertificate');  
+            $CentralMotorRegistryFile = $request->file('CentralMotorRegistry');  
      
+            // dd(\DB::table('car_documents'));
             \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
             ->update([
                 'VehicleNumber' => $VehicleNumber, 
-                'PUCCertificate' => $PUCCertificateFile->getClientOriginalName(),
-                'PUCCertificateSize' => $PUCCertificateFile->getSize() / 1024, 
+                'CentralMotorRegistry' => $CentralMotorRegistryFile->getClientOriginalName(),
+                'CentralMotorRegistrySize' => $CentralMotorRegistryFile->getSize() / 1024, 
             ]);
      
-            $PUCCertificateFile->move($DestinationPath, $PUCCertificateFile->getClientOriginalName()); 
+            $CentralMotorRegistryFile->move($DestinationPath, $CentralMotorRegistryFile->getClientOriginalName()); 
         }
         
         if ( 
@@ -592,6 +592,13 @@ class CarController extends Controller
                 'VehicleLicenseExpiryDate' => $request->VehicleLicenseExpiryDate, 
             ]); 
         }
+        if ($request->filled('CentralMotorRegistryExpiryDate')) {
+            \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
+            ->update([
+                'VehicleNumber' => $VehicleNumber, 
+                'CentralMotorRegistryExpiryDate' => $request->CentralMotorRegistryExpiryDate, 
+            ]); 
+        }
         if ($request->filled('ProofOfOwnershipExpiryDate')) {
             \DB::table('car_documents')->where('VehicleNumber', $VehicleNumber)
             ->update([
@@ -636,10 +643,10 @@ class CarController extends Controller
 
         \DB::table('car_documents')
         ->where('VehicleNumber', $Car)
-        ->where('PUCCertificate', $Document) 
+        ->where('CentralMotorRegistry', $Document) 
             ->update([ 
-                'PUCCertificate' => '', 
-                'PUCCertificateSize' => '0', 
+                'CentralMotorRegistry' => '', 
+                'CentralMotorRegistrySize' => '0', 
             ]); 
 
         \DB::table('car_documents')
@@ -990,19 +997,19 @@ class CarController extends Controller
         }
         
         if ( 
-            $request->hasFile('PUCCertificate')  
+            $request->hasFile('CentralMotorRegistry')  
         ) {
             $DestinationPath = public_path().'/Documents/Cars/' . $request->VehicleNumber_CAR;
             File::makeDirectory($DestinationPath, $mode = 0777, true, true); 
      
-            $PUCCertificateFile = $request->file('PUCCertificate');  
+            $CentralMotorRegistryFile = $request->file('CentralMotorRegistry');  
      
             \DB::table('car_documents')->insert([
                 'VehicleNumber' => $request->VehicleNumber_CAR, 
-                'PUCCertificateSize' => $PUCCertificateFile->getSize() / 1024, 
+                'CentralMotorRegistrySize' => $CentralMotorRegistryFile->getSize() / 1024, 
             ]);
      
-            $PUCCertificateFile->move($DestinationPath, $PUCCertificateFile->getClientOriginalName()); 
+            $CentralMotorRegistryFile->move($DestinationPath, $CentralMotorRegistryFile->getClientOriginalName()); 
         }
         
         if ( 
