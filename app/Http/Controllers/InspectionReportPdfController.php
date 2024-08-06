@@ -314,7 +314,7 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->Ln(54.75); 
         $this->fpdf->SetFont('Arial', '', 8);  
         $this->fpdf->Cell(30, 7, '', 0, 0, 'B'); 
-        $this->fpdf->Cell(20, 7, $MyInspectionReport->DateInspected, 0, 0, 'C'); 
+        // $this->fpdf->Cell(20, 7, $MyInspectionReport->DateInspected, 0, 0, 'C'); 
         $this->fpdf->SetFont('Arial', '', 11);
         $this->fpdf->Image('../public/Images/transport-manager-signature.png', 10, 172, 50, 33);
         $this->fpdf->Image('../public/Images/fleet-supervisor-signature.png', 169, 185, 29, 19);
