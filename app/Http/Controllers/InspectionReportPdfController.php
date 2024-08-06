@@ -311,9 +311,22 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->Ln();    
         $this->fpdf->MultiCell(190, 7, $MyInspectionReport->AdditionalNotes ?? 'No remarks for this inspection.', 'B'); 
         
-        $this->fpdf->Ln(130);  
+
+        $this->fpdf->Ln(60);   
+        $this->fpdf->Image('../public/Images/transport-manager-signature.png', 10, 172, 50, 25);
+        $this->fpdf->Image('../public/Images/fleet-supervisor-signature.png', 169, 185, 26, 10);
+        $this->fpdf->Cell(10, 7, '............................................', 0, 0, 'B');   
+        $this->fpdf->Cell(145, 7, '', 0, 0, 'B'); 
+        $this->fpdf->Cell(10, 7, '..............................', 0, 0, 'B'); 
+        $this->fpdf->Ln();
+        $this->fpdf->Cell(6, 7, '', 0, 0, 'B');        
+        $this->fpdf->Cell(10, 7, 'Transport Manager', 0, 0, 'B');   
+        $this->fpdf->Cell(140, 7, '', 0, 0, 'B'); 
+        $this->fpdf->Cell(10, 7, 'Fleet Supervisor', 0, 0, 'B');  
+        $this->fpdf->Ln(15); 
+  
         $this->fpdf->Cell(80, 6, '');  
-        $this->fpdf->Image('../public/Images/depasa-signature.png', 11, 270, 30, 20);
+        $this->fpdf->Image('../public/Images/depasa-signature.png', 11, 220, 30, 20);
             
         $this->fpdf->SetTextColor(223, 46, 56);
         $this->fpdf->SetFont('Arial', '', 7);
@@ -625,7 +638,18 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->Cell(190, 7, '', 'B'); 
         $this->fpdf->Ln();    
         $this->fpdf->Cell(190, 7, '', 'B'); 
-        $this->fpdf->Ln(70);    
+        $this->fpdf->Ln(40);   
+        $this->fpdf->Image('../public/Images/transport-manager-signature.png', 10, 202, 50, 25);
+        $this->fpdf->Image('../public/Images/fleet-supervisor-signature.png', 171, 212, 26, 10);
+        $this->fpdf->Cell(10, 7, '............................................', 0, 0, 'B');   
+        $this->fpdf->Cell(145, 7, '', 0, 0, 'B'); 
+        $this->fpdf->Cell(10, 7, '..............................', 0, 0, 'B'); 
+        $this->fpdf->Ln();
+        $this->fpdf->Cell(6, 7, '', 0, 0, 'B');        
+        $this->fpdf->Cell(10, 7, 'Transport Manager', 0, 0, 'B');   
+        $this->fpdf->Cell(140, 7, '', 0, 0, 'B'); 
+        $this->fpdf->Cell(10, 7, 'Fleet Supervisor', 0, 0, 'B');  
+        $this->fpdf->Ln(15);    
          
         $this->fpdf->Cell(80, 6, '');  
         $this->fpdf->Image('../public/Images/depasa-signature.png', 11, 250, 30, 20);
