@@ -5,7 +5,11 @@
         <div class="wrapper-inner">
             <div class="login-inner"> 
                 <p class="company-logo">
+                    @if ($_SERVER['HTTP_HOST'] == 'fleet.seylekschools.com.ng')
+                    <img src="{{ asset('Images/seylekschools-logo.png') }}" alt="">
+                    @elseif ($_SERVER['HTTP_HOST'] == 'fleet.depasamarine.com' || $_SERVER['HTTP_HOST'] == '192.168.20.100')
                     <img src="{{ asset('Images/depasa-logo.png') }}" alt="">
+                    @endif
                 </p>
                 <form action="/Login" method="POST">
                 @csrf
