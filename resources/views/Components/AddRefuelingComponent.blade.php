@@ -66,10 +66,10 @@
                 </div> 
                 <select name="CardNumber" class="CardNumber_Select">
                     <option value="" class="fleet-card"></option>
-                    @foreach (\App\Models\MasterCard::select('CardNumber')->groupBy('CardNumber')->get() as $MasterCard)
+                    @foreach (\App\Models\MasterCard::select('CardNumber')->where('Status', 'ACTIVE')->groupBy('CardNumber')->get() as $MasterCard)
                         <option value="{{ $MasterCard->CardNumber }}" class="master-card">MASTER CARD :: {{ $MasterCard->CardNumber }}</option>
                     @endforeach
-                    @foreach (\DB::table('voucher_cards')->select('CardNumber')->groupBy('CardNumber')->get() as $VoucherCard)
+                    @foreach (\DB::table('voucher_cards')->select('CardNumber')->where('Status', 'ACTIVE')->groupBy('CardNumber')->get() as $VoucherCard)
                         <option value="{{ $VoucherCard->CardNumber }}" class="voucher-card">VOUCHER CARD :: {{ $VoucherCard->CardNumber }}</option>
                     @endforeach
                 </select>
