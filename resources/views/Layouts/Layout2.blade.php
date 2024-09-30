@@ -125,7 +125,7 @@
             <center>
                 @if ($_SERVER['HTTP_HOST'] == 'fleet.seylekschools.com.ng')
                 <img src="{{ asset('Images/seylekschools-logo-2.png') }}" alt="">
-                @elseif ($_SERVER['HTTP_HOST'] == 'fleet.depasamarine.com' || $_SERVER['HTTP_HOST'] == '192.168.20.100')
+                @elseif (($_SERVER['HTTP_HOST'] == 'fleet.depasamarine.com') || ($_SERVER['HTTP_HOST'] == '192.168.20.100'))
                 <img src="{{ asset('Images/depasa-logo.png') }}" alt="">
                 @endif
             </center>
