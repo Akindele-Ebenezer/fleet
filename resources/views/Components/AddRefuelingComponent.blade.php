@@ -12,14 +12,17 @@
         </div> 
         @php
             $MasterCardBalance = \App\Models\MasterCard::select('Balance')->orderBy('Date', 'DESC')->first();
-            $VoucherCardBalance = \DB::table('voucher_cards')->select('Balance')->orderBy('Date', 'DESC')->first();
+            // $VoucherCardBalance = \DB::table('voucher_cards')->select('Balance')->orderBy('Date', 'DESC')->first();
+            $VoucherCardBalance = \DB::table('voucher_cards')->select(['CardNumber', 'Balance'])->orderBy('Date', 'DESC')->get();
         @endphp
         <div class="car-data">
             <div class="data-x">Previous Mileage <br> <span class="Car-Data-Mileage">0</span></div>
             <div class="data-x">Balance <br> <span class="Car-Data-Balance">₦ 0</span></div>
             <div class="data-x">Driver <br> <span class="Car-Data-Driver">Null</span></div>
             <div class="data-x">Balance (MASTER) <br> <span>₦ {{ empty($MasterCardBalance) ? 0 : number_format($MasterCardBalance->Balance) ?? 0 }}</span></div>
-            <div class="data-x">Balance (VOUCHER) <br> <span>₦ {{ empty($VoucherCardBalance) ? 0 : number_format($VoucherCardBalance->Balance) ?? 0 }}</span></div>
+            @foreach ($VoucherCardBalance as $VoucherCard)
+            <div class="data-x">Balance (VOUCHER) <br> <span>{{ $VoucherCard->CardNumber }}: ₦ {{ empty($VoucherCardBalance) ? 0 : number_format($VoucherCard->Balance) ?? 0 }}</span></div>
+            @endforeach
         </div>
         <form class="AddRefuelingForm">
             <div class="cancel-modal">✖</div>

@@ -237,10 +237,11 @@ form {
             background: #000;
             border: 1px solid;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: left;
 
             .data-x, .data-x span {
                 color: #fff;
+                margin-right: 2em;
             }
         }
 
