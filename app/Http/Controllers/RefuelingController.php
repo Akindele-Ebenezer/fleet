@@ -63,11 +63,12 @@ class RefuelingController extends Controller
                                  \DB::raw('SUM(refuelings.Amount) as Amount'), 
                                  \DB::raw('SUM(refuelings.Consumption) as Consumption'), 
                                  \DB::raw('SUM(refuelings.Quantity) as Quantity'),
+                                 \DB::raw('SUM(refuelings.KM) as KM'),
                                  'cars.CarOwner', 'refuelings.CardNumber', 'refuelings.Time', 'refuelings.Date', 
                                  'refuelings.Mileage', 'refuelings.TERNO', 'refuelings.ReceiptNumber', 'cars.CarOwner',
                                  'refuelings.KM', 'refuelings.DateIn', 'refuelings.TimeIn', 'refuelings.UserId')
                         ->whereBetween('refuelings.Date', [$_GET['Date_From'], $_GET['Date_To']])
-                        ->groupBy('refuelings.VehicleNumber', 'cars.CarOwner')->get()->toArray(); 
+                        ->groupBy('refuelings.VehicleNumber', 'cars.CarOwner')->orderBy('Amount', 'DESC')->get()->toArray(); 
 
                         foreach ($RefuelingsExport_Filter as $FilterData) {
                             \DB::table('refuelings_export')->insert([

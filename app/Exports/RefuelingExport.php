@@ -38,7 +38,7 @@ class RefuelingExport implements
         } else if($this->VehicleNumber === 'one') {
             return \DB::query()->from('refuelings_export')->orderBy('Amount', 'DESC');
         }  else {
-            return \DB::query()->from('refuelings_export')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
+            return \DB::query()->from('refuelings_export')->orderBy('Amount', 'DESC');
         } 
     } 
     
