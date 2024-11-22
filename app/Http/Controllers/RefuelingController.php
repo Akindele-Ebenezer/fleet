@@ -63,7 +63,7 @@ class RefuelingController extends Controller
                                  \DB::raw('SUM(refuelings.Amount) as Amount'), 
                                  \DB::raw('SUM(refuelings.Consumption) as Consumption'), 
                                  \DB::raw('SUM(refuelings.Quantity) as Quantity'),
-                                 \DB::raw('SUM(refuelings.KM) as KM'),
+                                 \DB::raw('SUM(refuelings.KM) as TotalKM'),
                                  'cars.CarOwner', 'refuelings.CardNumber', 'refuelings.Time', 'refuelings.Date', 
                                  'refuelings.Mileage', 'refuelings.TERNO', 'refuelings.ReceiptNumber', 'cars.CarOwner',
                                  'refuelings.KM', 'refuelings.DateIn', 'refuelings.TimeIn', 'refuelings.UserId')
@@ -83,7 +83,7 @@ class RefuelingController extends Controller
                                 'Quantity' => $FilterData->Quantity, 
                                 'Amount' => $FilterData->Amount, 
                                 'ReceiptNumber' => $FilterData->ReceiptNumber, 
-                                'KM' => $FilterData->KM,  
+                                'KM' => $FilterData->TotalKM,  
                                 'Consumption' => $FilterData->Consumption,  
                                 'DateIn' => $FilterData->DateIn, 
                                 'TimeIn' => $FilterData->TimeIn, 
