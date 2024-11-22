@@ -113,17 +113,17 @@ class RefuelingExport implements
     public function columnWidths(): array
     {
         return [
-            'D' => 0,             
-            'E' => 0,             
-            'F' => 0,             
-            'G' => 0,             
-            'H' => 0,            
-            'I' => 0,             
-            'J' => 0,             
-            'M' => 0,             
-            'N' => 0,             
-            'O' => 0,            
-            'P' => 0,            
+            // 'D' => 0,             
+            // 'E' => 0,             
+            // 'F' => 0,             
+            // 'G' => 0,             
+            // 'H' => 0,            
+            // 'I' => 0,             
+            // 'J' => 0,             
+            // 'M' => 0,             
+            // 'N' => 0,             
+            // 'O' => 0,            
+            // 'P' => 0,            
         ];
     }
 }
