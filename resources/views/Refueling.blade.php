@@ -263,6 +263,11 @@
         } else if (new URLSearchParams(window.location.search).has('FilterValue')) {  
             let ExportButton = document.querySelector('.ExportToExcel');
             ExportButton.addEventListener('click', () => {
+                window.location = '/Refueling/Export/MonthlyReport'; 
+            });  
+        } else if (new URLSearchParams(window.location.search).has('FilterValue')) {  
+            let ExportButton = document.querySelector('.ExportToExcel');
+            ExportButton.addEventListener('click', () => {
                 window.location = '/Refueling/Export/{{ $_GET["FilterValue"] ?? '' }}'; 
             });  
         } else { 

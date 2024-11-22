@@ -36,7 +36,7 @@ class RefuelingExport implements
         if($this->VehicleNumber === 'all') { 
             return \DB::query()->from('refuelings')->whereNotNull('VehicleNumber')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
         } else if($this->VehicleNumber === 'one') {
-            return \DB::query()->from('refuelings_export')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
+            return \DB::query()->from('refuelings_export')->orderBy('Amount', 'DESC');
         }  else {
             return \DB::query()->from('refuelings_export')->orderBy('Date', 'DESC')->orderBy('Time', 'DESC');
         } 
@@ -53,17 +53,17 @@ class RefuelingExport implements
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                 ],
-                // 'fill' => [
-                //     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                //     'startColor' => [
-                //         'argb' => 'FF000000',
-                //     ],
-                //     'endColor' => [
-                //         'argb' => 'FF000000',
-                //     ],
-                // ],
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'startColor' => [
+                        'argb' => 'dae9f8',
+                    ],
+                    'endColor' => [
+                        'argb' => 'dae9f8',
+                    ],
+                ],
             ], 
-           'B'  => ['font' => ['size' => 16]], 
+        //    'B'  => ['font' => ['size' => 16]], 
         ];
     }
 

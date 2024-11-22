@@ -52,16 +52,28 @@ class RefuelingController extends Controller
                     $table->timestamps();
                 });
                 /////
+                \DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
                 $RefuelingsExport_Filter = \DB::table('refuelings')  
-                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
-                        ->get()->toArray();  
+                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])->groupBy('VehicleNumber')
+                        ->get()->toArray();
+                        $RefuelingsExport_Filter = \DB::table('refuelings')
+                        ->join('cars', 'refuelings.VehicleNumber', '=', 'cars.VehicleNumber')
+                        ->select('refuelings.VehicleNumber', 
+                                 \DB::raw('SUM(refuelings.Amount) as Amount'), 
+                                 \DB::raw('SUM(refuelings.Consumption) as Consumption'), 
+                                 \DB::raw('SUM(refuelings.Quantity) as Quantity'),
+                                 'cars.CarOwner', 'refuelings.CardNumber', 'refuelings.Time', 'refuelings.Date', 
+                                 'refuelings.Mileage', 'refuelings.TERNO', 'refuelings.ReceiptNumber',
+                                 'refuelings.KM', 'refuelings.DateIn', 'refuelings.TimeIn', 'refuelings.UserId')
+                        ->whereBetween('refuelings.Date', [$_GET['Date_From'], $_GET['Date_To']])
+                        ->groupBy('refuelings.VehicleNumber', 'cars.CarOwner')->get()->toArray(); 
 
                         foreach ($RefuelingsExport_Filter as $FilterData) {
                             \DB::table('refuelings_export')->insert([
                                 'VehicleNumber' => $FilterData->VehicleNumber, 
+                                'Date' => $FilterData->Date, 
                                 'CardNumber' => $FilterData->CardNumber, 
                                 'Amount' => $FilterData->Amount, 
-                                'Date' => $FilterData->Date, 
                                 'Time' => $FilterData->Time, 
                                 'Mileage' => $FilterData->Mileage, 
                                 'TERNO' => $FilterData->TERNO, 
