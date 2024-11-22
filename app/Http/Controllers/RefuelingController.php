@@ -34,6 +34,7 @@ class RefuelingController extends Controller
                 Schema::create('refuelings_export', function (Blueprint $table) {
                     $table->id();
                     $table->string('VehicleNumber')->nullable();
+                    $table->string('CarOwner')->nullable();
                     $table->string('RFLNO')->nullable();
                     $table->string('Date')->nullable();
                     $table->string('Time')->nullable();
@@ -63,7 +64,7 @@ class RefuelingController extends Controller
                                  \DB::raw('SUM(refuelings.Consumption) as Consumption'), 
                                  \DB::raw('SUM(refuelings.Quantity) as Quantity'),
                                  'cars.CarOwner', 'refuelings.CardNumber', 'refuelings.Time', 'refuelings.Date', 
-                                 'refuelings.Mileage', 'refuelings.TERNO', 'refuelings.ReceiptNumber',
+                                 'refuelings.Mileage', 'refuelings.TERNO', 'refuelings.ReceiptNumber', 'cars.CarOwner',
                                  'refuelings.KM', 'refuelings.DateIn', 'refuelings.TimeIn', 'refuelings.UserId')
                         ->whereBetween('refuelings.Date', [$_GET['Date_From'], $_GET['Date_To']])
                         ->groupBy('refuelings.VehicleNumber', 'cars.CarOwner')->get()->toArray(); 
@@ -71,6 +72,7 @@ class RefuelingController extends Controller
                         foreach ($RefuelingsExport_Filter as $FilterData) {
                             \DB::table('refuelings_export')->insert([
                                 'VehicleNumber' => $FilterData->VehicleNumber, 
+                                'CarOwner' => $FilterData->CarOwner, 
                                 'Date' => $FilterData->Date, 
                                 'CardNumber' => $FilterData->CardNumber, 
                                 'Amount' => $FilterData->Amount, 

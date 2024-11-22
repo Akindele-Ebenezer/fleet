@@ -81,7 +81,7 @@ class RefuelingExport implements
     public function columnFormats(): array
     {
         return [
-            'K' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER, 
+            'L' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER, 
         ];
     }
     
@@ -89,7 +89,8 @@ class RefuelingExport implements
     {
         return [
             '#',
-            'REG NO.',
+            'Vehicle Number',
+            'Used By',
             '', 
             'Date', 
             'Time',
@@ -112,12 +113,17 @@ class RefuelingExport implements
     public function columnWidths(): array
     {
         return [
-            'C' => 0,             
+            'D' => 0,             
+            'E' => 0,             
+            'F' => 0,             
             'G' => 0,             
             'H' => 0,            
             'I' => 0,             
-            'R' => 0,            
-            'S' => 0,            
+            'J' => 0,             
+            'M' => 0,             
+            'N' => 0,             
+            'O' => 0,            
+            'P' => 0,            
         ];
     }
 }
