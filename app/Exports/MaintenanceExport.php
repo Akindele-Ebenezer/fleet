@@ -53,17 +53,22 @@ class MaintenanceExport implements
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
                 ],
-                // 'fill' => [
-                //     'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                //     'startColor' => [
-                //         'argb' => 'FF000000',
-                //     ],
-                //     'endColor' => [
-                //         'argb' => 'FF000000',
-                //     ],
-                // ],
+                'fill' => [
+                    'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                    'startColor' => [
+                        'argb' => 'dae9f8',
+                    ],
+                    'endColor' => [
+                        'argb' => 'dae9f8',
+                    ],
+                ],
             ], 
-           'B'  => ['font' => ['size' => 16]], 
+        //    'B'  => ['font' => ['size' => 16]], 
+           'E' => [
+               'alignment' => [
+                   'wrapText' => true,
+               ],
+           ],
         ];
     }
 
@@ -112,8 +117,14 @@ class MaintenanceExport implements
     public function columnWidths(): array
     {
         return [
-            'C' => 0,            
+            'A' => 0,              
+            'C' => 0,              
+            'E' => 25,        
             'F' => 0,        
+            'I' => 0,        
+            'J' => 0,        
+            'M' => 0,        
+            'N' => 0,        
             'R' => 0,          
             'O' => 0,                  
             'P' => 0,                  
