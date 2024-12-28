@@ -27,7 +27,7 @@
             </tr>    
             @endunless
             @foreach ($Cars as $Car)
-                @php 
+                @php  
                     include('../resources/views/Includes/CompanyName.php'); 
                     $TotalDeposits = \DB::table('deposits')->where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
                     $TotalRefueling = \DB::table('refuelings')->where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');

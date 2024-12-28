@@ -132,7 +132,7 @@ button {
 .edit-modal-vehicle-data .inner ul li input,
 .edit-modal-vehicle-data .inner ul li select {
   background: unset;
-  border: 1px solid #c2c3ef;
+  border: 1px solid rgb(194.1397379913, 195.4847161572, 238.8602620087);
   color: #3034b5;
   outline: none;
   padding-inline: 0.5em;
@@ -225,7 +225,6 @@ footer {
 }
 .modal-vehicle-data .inner {
   background: #fff;
-  border-radius: 1em;
   height: 80%;
   overflow-y: scroll;
   padding: 1em;
@@ -253,8 +252,8 @@ footer {
 }
 .modal-vehicle-data .inner .heading h1 {
   align-items: center;
-  border-bottom: 5px solid #c2c3ef;
-  color: #494dcf;
+  border-bottom: 5px solid rgb(194.1397379913, 195.4847161572, 238.8602620087);
+  color: rgb(73.2096069869, 77.2270742358, 206.7903930131);
   display: flex;
   font-family: "Bitter", serif !important;
   font-size: 2em;
@@ -283,7 +282,7 @@ footer {
 }
 .modal-vehicle-data .inner .links .link {
   align-items: center;
-  border-bottom: 4px solid #7275d9;
+  border-bottom: 4px solid rgb(113.519650655, 116.6462882096, 217.480349345);
   display: flex;
   cursor: pointer;
   padding-bottom: 0.45em;
@@ -300,17 +299,17 @@ footer {
 }
 .modal-vehicle-data .inner ul li {
   align-items: center;
-  border-bottom: 1px solid #d6d7f4;
+  border-bottom: 1px solid rgb(214.2947598253, 215.1943231441, 244.2052401747);
   display: flex;
   justify-content: space-between;
   padding: 0.8em 0.5em;
 }
 .modal-vehicle-data .inner ul li span {
-  color: #494dcf;
+  color: rgb(73.2096069869, 77.2270742358, 206.7903930131);
 }
 .modal-vehicle-data .inner ul li span:first-of-type {
   align-items: center;
-  color: #9a9ce4;
+  color: rgb(153.8296943231, 156.0655021834, 228.1703056769);
   display: flex;
 }
 
@@ -558,10 +557,11 @@ form select option {
   background: #000;
   border: 1px solid;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: left;
 }
 .form .inner .car-data .data-x, .form .inner .car-data .data-x span {
   color: #fff;
+  margin-right: 2em;
 }
 .form .inner .heading {
   align-items: center;
@@ -655,7 +655,7 @@ form select option {
 .login-wrapper .wrapper-inner .login-inner {
   background-color: #fff;
   border-radius: 1rem;
-  padding: 2rem;
+  padding: 1rem;
   translate: 0 -4rem;
   width: 26rem;
 }
@@ -1200,7 +1200,7 @@ nav[aria-label] span[aria-current] span {
   justify-content: space-between;
 }
 .report-inner .table.list .car-info .stats-heading button {
-  background-color: #3236bd;
+  background-color: rgb(50.1379912664, 54.3161572052, 189.0620087336);
   padding: 0 0.5em;
 }
 .report-inner .table.list .engine-volume, .report-inner .table.list .fuel-consumption {
@@ -1696,7 +1696,7 @@ nav[aria-label] span[aria-current] span {
   padding-inline: 0.25em;
 }
 .report-inner ul input {
-  background: #1a1a1a;
+  background: rgb(25.5, 25.5, 25.5);
   border: none;
   border-radius: 0.5rem;
   color: #fff;
@@ -1712,7 +1712,7 @@ nav[aria-label] span[aria-current] span {
   -webkit-text-fill-color: #eee !important;
 }
 .report .left-nav {
-  background: #0d0d0d;
+  background: rgb(12.75, 12.75, 12.75);
   overflow-y: scroll;
   padding-bottom: 4em;
   padding-inline: 0.5rem;

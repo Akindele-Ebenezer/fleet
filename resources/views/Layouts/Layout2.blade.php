@@ -678,6 +678,84 @@
                 <div class="FilterWrapper">
                     <button class="action-x Filter-X">Vehicle {{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}  :: (Specify)<svg class="arrow" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 696 280 497h400L480 696Z"></path></svg></button>
                     <div class="inner-filter">
+                        
+                        <h3>Monthly Report</h3>
+                        <p>All Vehicles</p>
+                        <ul>
+                            <li>Month 
+                                @php
+                                    $Months = [
+                                        'January',
+                                        'February',
+                                        'March',
+                                        'April',
+                                        'May',
+                                        'June',
+                                        'July',
+                                        'August',
+                                        'September',
+                                        'October',
+                                        'November',
+                                        'December',
+                                    ];
+                                @endphp
+                                <select name="Month_REPORT">
+                                    @foreach ($Months as $Month)
+                                        <option value="{{ $loop->iteration }}">{{ $Month }}</option>
+                                    @endforeach
+                                </select> 
+                            </li>
+                            <li>Year 
+                                <select name="Year_REPORT" id="">
+                                    @for ($Year = 2023; $Year <= date('Y'); $Year++)
+                                        <option value="{{ $Year }}">{{ $Year }}</option>
+                                    @endfor
+                                </select>
+                            </li>
+                        </ul>
+                        <button class="action-x" name="Filter_All_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Report">Generate</button>
+                        <h3>Monthly Report</h3>
+                        <p>Each Vehicle</p>
+                        <ul>
+                            <li>Vehicle
+                                <select name="Each_Vehicle_List" id="">
+                                    @foreach (\DB::table('cars')->select('VehicleNumber')->get() as $Car)
+                                    <option value="{{ $Car->VehicleNumber }}">{{ $Car->VehicleNumber }}</option>
+                                    @endforeach
+                                </select>
+                            </li>
+                            <li>Month 
+                                @php
+                                    $Months = [
+                                        'January',
+                                        'February',
+                                        'March',
+                                        'April',
+                                        'May',
+                                        'June',
+                                        'July',
+                                        'August',
+                                        'September',
+                                        'October',
+                                        'November',
+                                        'December',
+                                    ];
+                                @endphp
+                                <select name="Month_REPORT_Each_Vehicle">
+                                    @foreach ($Months as $Month)
+                                        <option value="{{ $loop->iteration }}">{{ $Month }}</option>
+                                    @endforeach
+                                </select> 
+                            </li>
+                            <li>Year 
+                                <select name="Year_REPORT_Each_Vehicle" id="">
+                                    @for ($Year = 2023; $Year <= date('Y'); $Year++)
+                                        <option value="{{ $Year }}">{{ $Year }}</option>
+                                    @endfor
+                                </select>
+                            </li>
+                        </ul>
+                        <button class="action-x" name="Filter_All_{{ Route::is('Maintenance') ? 'Maintenance' : '' }}{{ Route::is('Deposits') ? 'Deposits' : '' }}{{ Route::is('Refueling') ? 'Refueling' : '' }}_Report_Each_Vehicle">Generate</button>
                         <form action="">
                             <h3>Global Time Period</h3>
                             <p>All Vehicles</p>
@@ -887,6 +965,7 @@
         <script defer src="{{ asset('Js/Tooltips.js') }}"></script> 
         @yield('JS')
         <script defer src="{{ asset('Js/Datalist.js') }}"></script> 
+        <script defer src="{{ asset('Js/Report/Monthly.js') }}"></script> 
 </body>
 </html>
 @endif
