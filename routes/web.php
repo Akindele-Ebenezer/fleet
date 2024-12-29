@@ -16,7 +16,8 @@ use App\Http\Controllers\RefuelingExportController;
 use App\Http\Controllers\UsersExportController; 
 use App\Http\Controllers\CardController; 
 use App\Http\Controllers\InspectionReportPdfController; 
-use App\Http\Controllers\FleetPeriodicReportPdfController; 
+use App\Http\Controllers\FleetPeriodicRefuelingReportPdfController; 
+use App\Http\Controllers\FleetPeriodicMaintenanceReportPdfController; 
  
 Route::view('/', 'Login');
 // Route::get('/Awadhesh/Suprise', [CarController::class, 'bd']);
@@ -111,5 +112,6 @@ Route::get('/Add/Voucher/Cards/{VoucherCard}', [CardController::class, 'store_vo
 Route::get('/Management/Update/Voucher/Cards/{VoucherCard}', [CardController::class, 'update_voucher_card'])->name('update_VoucherCard'); 
 Route::get('/Management/Delete/Voucher/Cards/{VoucherCard}', [CardController::class, 'destroy_voucher_card'])->name('destroy_VoucherCard'); 
 
-Route::get('/Vehicle/Report', [FleetPeriodicReportPdfController::class, 'fleet_periodic_report'])->name('vessel_availability_report');
+Route::get('/Vehicle/Report', [FleetPeriodicRefuelingReportPdfController::class, 'fleet_periodic_report']);
+Route::get('/Vehicle/Maintenance/Report', [FleetPeriodicMaintenanceReportPdfController::class, 'fleet_periodic_report']);
 

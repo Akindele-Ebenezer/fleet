@@ -965,7 +965,8 @@
         <script defer src="{{ asset('Js/Tooltips.js') }}"></script> 
         @yield('JS')
         <script defer src="{{ asset('Js/Datalist.js') }}"></script> 
-        <script defer src="{{ asset('Js/Report/Monthly.js') }}"></script> 
+        <script defer src="{{ asset('Js/Report/Monthly/Maintenance.js') }}"></script> 
+        <script defer src="{{ asset('Js/Report/Monthly/Refueling.js') }}"></script> 
 </body>
 </html>
 @endif

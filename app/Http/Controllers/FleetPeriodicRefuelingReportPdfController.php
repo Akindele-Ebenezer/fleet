@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;  
 
-class FleetPeriodicReportPdfController extends Controller
+class FleetPeriodicRefuelingReportPdfController extends Controller
 { 
     public function fleet_periodic_report(Fpdf $fpdf, Request $Request) {  
         $fpdf->AddPage();    
@@ -14,7 +14,7 @@ class FleetPeriodicReportPdfController extends Controller
  
         $Month = strtoupper(\Carbon\Carbon::create()->month($Request->Month)->format('F'));
         $Year = $Request->Year;
-        $fpdf->SetTitle('Vehicle Report - ' . $Month . ' ' . $Year);
+        $fpdf->SetTitle('Vehicle Fuel Cost Report - ' . $Month . ' ' . $Year);
 
         $fpdf->Image('../public/images/depasa-logo.png', 10, 7, 60);    
 
@@ -22,7 +22,7 @@ class FleetPeriodicReportPdfController extends Controller
         
         $fpdf->SetFont('Arial', 'B', 15); 
         $fpdf->SetFillColor(217, 242, 255);  
-        $fpdf->Cell(190, 10, 'VEHICLE REPORT', 0, 1, 1, 'L');
+        $fpdf->Cell(190, 10, 'VEHICLE REPORT - Fuel Cost', 0, 1, 1, 'L');
         $fpdf->SetFont('Arial', '', 10);   
 
         $fpdf->Ln(6);     
