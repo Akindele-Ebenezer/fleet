@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="{{ asset('Css/Styles.css') }}">
 </head>
 <body>  
-    @php include '../resources/views/Includes/Globals.php'; @endphp
+    @php include base_path().'/resources/views/Includes/Globals.php'; @endphp
     @include('Components.LoaderComponent')
     @include('Components.ReadOnly.NotificationComponent')
 

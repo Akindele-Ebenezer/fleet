@@ -9,6 +9,7 @@ class FleetPeriodicMaintenanceReportPdfController extends Controller
 { 
     public function fleet_periodic_report(Fpdf $fpdf, Request $Request) {  
         $fpdf->AddPage();    
+
         // $fpdf->SetAutoPageBreak(false);
         $fpdf->SetFont('Arial', '', 10);  
  
