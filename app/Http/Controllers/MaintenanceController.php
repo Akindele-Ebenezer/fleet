@@ -55,11 +55,22 @@ class MaintenanceController extends Controller
                 $MaintenancesExport_Filter = \DB::table('maintenances')  
                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                         ->get()->toArray();  
-
+ 
+                        \DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+                        $MaintenancesExport_Filter = \DB::table('maintenances')
+                        ->join('cars', 'maintenances.VehicleNumber', '=', 'cars.VehicleNumber')
+                        ->select('maintenances.VehicleNumber', 
+                                 \DB::raw('SUM(maintenances.Cost) as Cost'),  
+                                 'cars.CarOwner', 'maintenances.Time', 'maintenances.Date', 
+                                 'maintenances.IncidentType', 'maintenances.IncidentAction',  'maintenances.InvoiceNumber', 'cars.CarOwner',
+                                 'maintenances.Details', 'maintenances.ReleaseDate',   'maintenances.IncidentAttachment', 'maintenances.Week', 'maintenances.ReleaseTime', 'maintenances.DateIn', 'maintenances.TimeIn', 'maintenances.UserId')
+                        ->whereBetween('maintenances.Date', [$_GET['Date_From'], $_GET['Date_To']])
+                        ->groupBy('maintenances.VehicleNumber', 'cars.CarOwner')->orderBy('Cost', 'DESC')->get()->toArray(); 
+        
                         foreach ($MaintenancesExport_Filter as $FilterData) {
                             \DB::table('maintenances_export')->insert([
                                 'VehicleNumber' => $FilterData->VehicleNumber, 
-                                'RFLNO' => $FilterData->RFLNO, 
+                                // 'RFLNO' => $FilterData->RFLNO, 
                                 'IncidentType' => $FilterData->IncidentType, 
                                 'IncidentAction' => $FilterData->IncidentAction, 
                                 'Details' => $FilterData->Details, 

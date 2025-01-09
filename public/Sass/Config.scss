@@ -389,6 +389,31 @@ svg {
     * {
         font-size: 10px;
     }
+
+    // .left-nav {
+    //     display: none !important;
+    // }    
+    // .report {
+    //     &-inner {
+    //         width: 100% !important;
+    //         .table-head {
+    //             display: none !important;
+    //         }
+    //         .inner-x.deposit {
+    //             display: none !important;
+    //         }
+    //     }
+    //     table {
+    //         .info-inner {
+    //             justify-content: space-around !important;
+    //         }
+    //         th, td {
+    //             &:not(&:nth-child(2)) {
+    //                 display: none;
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 @media (max-width: 1176px) {
