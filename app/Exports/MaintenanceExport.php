@@ -86,7 +86,7 @@ class MaintenanceExport implements
     public function columnFormats(): array
     {
         return [
-            'K' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER, 
+            'L' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER, 
         ];
     }
     
@@ -95,6 +95,7 @@ class MaintenanceExport implements
         return [
             '#',
             'REG NO.',
+            'Used By',
             '', 
             'Incident Action', 
             'Details',
@@ -118,9 +119,12 @@ class MaintenanceExport implements
     {
         return [
             'A' => 0,              
-            'C' => 0,              
+            'D' => 0,              
             'E' => 25,        
-            'F' => 0,        
+            'F' => 0,    
+            'G' => 0,            
+            'H' => 0,             
+            'K' => 0,              
             'I' => 0,        
             'J' => 0,        
             'M' => 0,        

@@ -34,6 +34,7 @@ class MaintenanceController extends Controller
                 Schema::create('maintenances_export', function (Blueprint $table) {
                     $table->id();
                     $table->string('VehicleNumber')->nullable();
+                    $table->string('CarOwner')->nullable();
                     $table->string('RFLNO')->nullable();
                     $table->string('IncidentType')->nullable();
                     $table->string('IncidentAction')->nullable();
@@ -63,13 +64,14 @@ class MaintenanceController extends Controller
                                  \DB::raw('SUM(maintenances.Cost) as Cost'),  
                                  'cars.CarOwner', 'maintenances.Time', 'maintenances.Date', 
                                  'maintenances.IncidentType', 'maintenances.IncidentAction',  'maintenances.InvoiceNumber', 'cars.CarOwner',
-                                 'maintenances.Details', 'maintenances.ReleaseDate',   'maintenances.IncidentAttachment', 'maintenances.Week', 'maintenances.ReleaseTime', 'maintenances.DateIn', 'maintenances.TimeIn', 'maintenances.UserId')
+                                 'cars.CarOwner', 'maintenances.Details', 'maintenances.ReleaseDate',   'maintenances.IncidentAttachment', 'maintenances.Week', 'maintenances.ReleaseTime', 'maintenances.DateIn', 'maintenances.TimeIn', 'maintenances.UserId')
                         ->whereBetween('maintenances.Date', [$_GET['Date_From'], $_GET['Date_To']])
                         ->groupBy('maintenances.VehicleNumber', 'cars.CarOwner')->orderBy('Cost', 'DESC')->get()->toArray(); 
         
                         foreach ($MaintenancesExport_Filter as $FilterData) {
                             \DB::table('maintenances_export')->insert([
                                 'VehicleNumber' => $FilterData->VehicleNumber, 
+                                'CarOwner' => $FilterData->CarOwner, 
                                 // 'RFLNO' => $FilterData->RFLNO, 
                                 'IncidentType' => $FilterData->IncidentType, 
                                 'IncidentAction' => $FilterData->IncidentAction, 
