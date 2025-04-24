@@ -65,7 +65,7 @@ class RefuelingController extends Controller
                                  \DB::raw('AVG(refuelings.Consumption) as Consumption'), 
                                  \DB::raw('SUM(refuelings.Quantity) as Quantity'),
                                  \DB::raw('SUM(refuelings.KM) as TotalKM'),
-                                 'cars.CarOwner', 'cars.Driver', 'refuelings.CardNumber', 'refuelings.Time', 'refuelings.Date', 
+                                 'cars.CarOwner', 'cars.Driver','cars.Odometer', 'refuelings.CardNumber', 'refuelings.Time', 'refuelings.Date', 
                                  'refuelings.Mileage', 'refuelings.TERNO', 'refuelings.ReceiptNumber', 'cars.CarOwner',
                                  'refuelings.KM', 'refuelings.DateIn', 'refuelings.TimeIn', 'refuelings.UserId')
                         ->whereBetween('refuelings.Date', [$_GET['Date_From'], $_GET['Date_To']])
