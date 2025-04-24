@@ -91,7 +91,7 @@ class RefuelingExport implements
             '#',
             'Vehicle Number',
             'Used By',
-            '', 
+            'Driver', 
             'Date', 
             'Time',
             'Mileage', 
@@ -112,8 +112,7 @@ class RefuelingExport implements
     }
     public function columnWidths(): array
     {
-        return [
-            'D' => 0,             
+        return [             
             'E' => 0,             
             'F' => 0,             
             'G' => 0,             
