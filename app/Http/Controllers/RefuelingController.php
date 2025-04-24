@@ -76,6 +76,7 @@ class RefuelingController extends Controller
                                 'VehicleNumber' => $FilterData->VehicleNumber, 
                                 'CarOwner' => $FilterData->CarOwner, 
                                 'Driver' => $FilterData->Driver, 
+                                'Odometer' => $FilterData->Odometer, 
                                 'Date' => $FilterData->Date, 
                                 'CardNumber' => $FilterData->CardNumber, 
                                 'Amount' => $FilterData->Amount, 
