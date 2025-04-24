@@ -121,6 +121,7 @@ class RefuelingExport implements
             'I' => 0,             
             'J' => 0,             
             'K' => 0,               
+            'L' => 0,             
             'N' => 0,             
             'O' => 0,            
             'P' => 0,            
