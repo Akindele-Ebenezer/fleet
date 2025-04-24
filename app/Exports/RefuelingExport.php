@@ -81,7 +81,7 @@ class RefuelingExport implements
     public function columnFormats(): array
     {
         return [
-            'L' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER, 
+            'M' => NumberFormat::FORMAT_CURRENCY_NGN_INTEGER, 
         ];
     }
     
@@ -120,6 +120,7 @@ class RefuelingExport implements
             'H' => 0,            
             'I' => 0,             
             'J' => 0,             
+            'K' => 0,             
             'M' => 0,             
             'N' => 0,             
             'O' => 0,            
