@@ -90,8 +90,8 @@ class RefuelingExport implements
         return [
             '#',
             'Vehicle Number',
-            'Used By',
             'Driver', 
+            'Used By',
             'Date', 
             'Time',
             'Mileage', 
@@ -115,7 +115,7 @@ class RefuelingExport implements
         return [             
             'E' => 0,             
             'F' => 0,             
-            'G' => 0,             
+            // 'G' => 0,             
             'H' => 0,            
             'I' => 0,             
             'J' => 0,             
