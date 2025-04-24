@@ -99,6 +99,7 @@ class RefuelingExport implements
             'KM/LITER', 
             '', 
             'Receipt Number', 
+            '', 
             'Quantity', 
             'Amount',
             'Card Number', 
