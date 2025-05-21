@@ -316,7 +316,7 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->Cell(30, 7, '', 0, 0, 'B'); 
         // $this->fpdf->Cell(20, 7, $MyInspectionReport->DateInspected, 0, 0, 'C'); 
         $this->fpdf->SetFont('Arial', '', 11);
-        $this->fpdf->Image('../public/Images/transport-manager-signature.png', 10, 172, 50, 33);
+        // $this->fpdf->Image('../public/Images/transport-manager-signature.png', 10, 172, 50, 33);
         $this->fpdf->Image('../public/Images/fleet-supervisor-signature.png', 169, 185, 29, 19);
         // $this->fpdf->Cell(10, 7, '............................................', 0, 0, 'B');   
         // $this->fpdf->Cell(145, 7, '', 0, 0, 'B'); 
@@ -646,7 +646,7 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->Cell(30, 7, '', 0, 0, 'B'); 
         $this->fpdf->Cell(20, 7, date('Y-m-d'), 0, 0, 'C'); 
         $this->fpdf->SetFont('Arial', '', 11);
-        $this->fpdf->Image('../public/Images/transport-manager-signature.png', 10, 207, 50, 33);
+        // $this->fpdf->Image('../public/Images/transport-manager-signature.png', 10, 207, 50, 33);
         $this->fpdf->Image('../public/Images/fleet-supervisor-signature.png', 169, 220, 29, 19);
         // $this->fpdf->Cell(10, 7, '............................................', 0, 0, 'B');   
         // $this->fpdf->Cell(145, 7, '', 0, 0, 'B'); 
