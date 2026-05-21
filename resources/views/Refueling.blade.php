@@ -263,17 +263,15 @@
         } else if (new URLSearchParams(window.location.search).has('FilterValue')) {  
             let ExportButton = document.querySelector('.ExportToExcel');
             ExportButton.addEventListener('click', () => {
-                window.location = '/Refueling/Export/MonthlyReport'; 
-            });  
-        } else if (new URLSearchParams(window.location.search).has('FilterValue')) {  
-            let ExportButton = document.querySelector('.ExportToExcel');
-            ExportButton.addEventListener('click', () => {
-                window.location = '/Refueling/Export/{{ $_GET["FilterValue"] ?? '' }}'; 
+                window.location = '/Refueling/Export/{{ $_GET["FilterValue"] ?? '' }}/2024-01-01/{{ date("Y-m-d") }}'; 
             });  
         } else { 
             let ExportButton = document.querySelector('.ExportToExcel');
+            let DateFrom = new URLSearchParams(window.location.search).get('Date_From');
+            let DateTo = new URLSearchParams(window.location.search).get('Date_To');
+
             ExportButton.addEventListener('click', () => {
-                window.location = '/Refueling/Export/one'; 
+                window.location = '/Refueling/Export/one/' + DateFrom + '/' + DateTo; 
             });  
         }
     </script>

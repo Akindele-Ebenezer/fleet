@@ -20,6 +20,72 @@ class RefuelingController extends Controller
         ];
     }
 
+    public function create_schema() {
+        Schema::create('refuelings_export', function (Blueprint $table) {
+            $table->id();
+            
+            // Vehicle Details
+            $table->string('VehicleNumber')->nullable();
+            $table->string('Maker')->nullable();
+            $table->string('Model')->nullable();
+            $table->string('SubModel')->nullable();
+            $table->string('GearType')->nullable();
+            $table->string('EngineType')->nullable();
+            $table->string('EngineNumber')->nullable();
+            $table->string('ChassisNumber')->nullable();
+            $table->string('ModelYear')->nullable();
+            
+            // Stakeholders
+            $table->string('Supplier')->nullable();
+            $table->string('CarOwner')->nullable();
+            $table->string('Driver')->nullable();
+            
+            // Refueling Data
+            $table->string('CardNumber')->nullable(); // Handles CardNumber or CarCardNumber
+            $table->string('Odometer')->nullable();
+            $table->string('Date')->nullable();
+            $table->string('Time')->nullable();
+            $table->string('Mileage')->nullable();
+            $table->string('KMLITER')->nullable();
+            $table->string('ReceiptNumber')->nullable(); 
+            $table->string('Quantity')->nullable();
+            $table->string('Amount')->nullable();
+            $table->string('UserId')->nullable();
+            
+            // Tracking/System Fields
+            $table->string('DateIn')->nullable();
+            $table->string('TimeIn')->nullable();
+            $table->string('KM')->nullable();
+            $table->string('Consumption')->nullable();
+            $table->string('TERNO')->nullable();
+            
+            $table->timestamps();
+        });
+    }
+
+    public function refuelingsExport_filter($RefuelingsExport_Filter) {
+        foreach ($RefuelingsExport_Filter as $FilterData) {
+            \DB::table('refuelings_export')->insert([
+                'VehicleNumber' => $FilterData->VehicleNumber, 
+                'CarOwner' => $FilterData->CarOwner, 
+                'Date' => $FilterData->Date, 
+                'CardNumber' => $FilterData->CardNumber, 
+                'Amount' => $FilterData->Amount, 
+                'Time' => $FilterData->Time, 
+                'Mileage' => $FilterData->Mileage, 
+                'TERNO' => $FilterData->TERNO, 
+                'Quantity' => $FilterData->Quantity, 
+                'Amount' => $FilterData->Amount, 
+                'ReceiptNumber' => $FilterData->ReceiptNumber, 
+                'KM' => $FilterData->TotalKM,  
+                'Consumption' => $FilterData->Consumption,  
+                'DateIn' => $FilterData->DateIn, 
+                'TimeIn' => $FilterData->TimeIn, 
+                'UserId' => $FilterData->UserId, 
+            ]); 
+        } 
+    }
+
     public function index()
     {
         $Config = self::config();
@@ -29,113 +95,38 @@ class RefuelingController extends Controller
             if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
                 return back();  
             }
-
-                // CREATE NEW TABLE FOR EXPORT DATA
-                Schema::create('refuelings_export', function (Blueprint $table) {
-                    $table->id();
-                    $table->string('VehicleNumber')->nullable();
-                    $table->string('Driver')->nullable();
-                    $table->string('CarOwner')->nullable();
-                    $table->string('Odometer')->nullable();
-                    $table->string('RFLNO')->nullable();
-                    $table->string('Date')->nullable();
-                    $table->string('Time')->nullable();
-                    $table->string('Mileage')->nullable();
-                    $table->string('KMLITER')->nullable();
-                    $table->string('TERNO')->nullable();
-                    $table->string('ReceiptNumber')->nullable(); 
-                    $table->string('Quantity')->nullable();
-                    $table->string('Amount')->nullable();
-                    $table->string('CardNumber')->nullable();
-                    $table->string('UserId')->nullable();
-                    $table->string('DateIn')->nullable();
-                    $table->string('TimeIn')->nullable();
-                    $table->string('KM')->nullable();
-                    $table->string('Consumption')->nullable();
-                    $table->timestamps();
-                });
-                /////
-                \DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-                $RefuelingsExport_Filter = \DB::table('refuelings')  
-                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])->groupBy('VehicleNumber')
-                        ->get()->toArray();
-                        $RefuelingsExport_Filter = \DB::table('refuelings')
-                        ->join('cars', 'refuelings.VehicleNumber', '=', 'cars.VehicleNumber')
-                        ->select('refuelings.VehicleNumber', 
-                                 \DB::raw('SUM(refuelings.Amount) as Amount'), 
-                                 \DB::raw('AVG(refuelings.Consumption) as Consumption'), 
-                                 \DB::raw('SUM(refuelings.Quantity) as Quantity'),
-                                 \DB::raw('SUM(refuelings.KM) as TotalKM'),
-                                 'cars.CarOwner', 'cars.Driver', 'cars.Odometer', 'refuelings.CardNumber', 'refuelings.Time', 'refuelings.Date', 
-                                 'refuelings.Mileage', 'refuelings.TERNO', 'refuelings.ReceiptNumber', 'cars.CarOwner',
-                                 'refuelings.KM', 'refuelings.DateIn', 'refuelings.TimeIn', 'refuelings.UserId')
-                        ->whereBetween('refuelings.Date', [$_GET['Date_From'], $_GET['Date_To']])
-                        ->groupBy('refuelings.VehicleNumber', 'cars.CarOwner')->orderBy('Amount', 'DESC')->get()->toArray(); 
-
-                        foreach ($RefuelingsExport_Filter as $FilterData) {
-                            \DB::table('refuelings_export')->insert([
-                                'VehicleNumber' => $FilterData->VehicleNumber, 
-                                'CarOwner' => $FilterData->CarOwner, 
-                                'Driver' => $FilterData->Driver, 
-                                'Odometer' => $FilterData->Odometer, 
-                                'Date' => $FilterData->Date, 
-                                'CardNumber' => $FilterData->CardNumber, 
-                                'Amount' => $FilterData->Amount, 
-                                'Time' => $FilterData->Time, 
-                                'Mileage' => $FilterData->Mileage, 
-                                'TERNO' => $FilterData->TERNO, 
-                                'Quantity' => $FilterData->Quantity, 
-                                'Amount' => $FilterData->Amount, 
-                                'ReceiptNumber' => $FilterData->ReceiptNumber, 
-                                'KM' => $FilterData->TotalKM,  
-                                'Consumption' => $FilterData->Consumption,  
-                                'DateIn' => $FilterData->DateIn, 
-                                'TimeIn' => $FilterData->TimeIn, 
-                                'UserId' => $FilterData->UserId, 
-                            ]); 
-                        } 
-                ////////////////
+            $this->create_schema(); 
+            \DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+            $RefuelingsExport_Filter = \DB::table('refuelings')
+            ->join('cars', 'refuelings.VehicleNumber', '=', 'cars.VehicleNumber')
+            ->select('refuelings.VehicleNumber', 
+                        \DB::raw('SUM(refuelings.Amount) as Amount'), 
+                        \DB::raw('AVG(refuelings.Consumption) as Consumption'), 
+                        \DB::raw('SUM(refuelings.Quantity) as Quantity'),
+                        \DB::raw('SUM(refuelings.KM) as TotalKM'),
+                        'cars.CarOwner', 'cars.Driver', 'cars.Odometer', 'refuelings.CardNumber', 'refuelings.Time', 'refuelings.Date', 
+                        'refuelings.Mileage', 'refuelings.TERNO', 'refuelings.ReceiptNumber', 'cars.CarOwner',
+                        'refuelings.KM', 'refuelings.DateIn', 'refuelings.TimeIn', 'refuelings.UserId')
+            ->whereBetween('refuelings.Date', [$_GET['Date_From'], $_GET['Date_To']])
+            ->groupBy('refuelings.VehicleNumber', 'cars.CarOwner')->orderBy('Amount', 'DESC')->get()->toArray(); 
+            $this->refuelingsExport_filter($RefuelingsExport_Filter);
             $SumOfCarRefueling = \App\Models\Refueling::select('Amount')
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                         ->sum('Amount'); 
             $Refueling = Refueling::whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) 
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
-                                        
             $Refueling->withPath($_SERVER['REQUEST_URI']);
-
             return view('Refueling', $Config)->with('Refuelings', $Refueling)->with('SumOfCarRefueling', $SumOfCarRefueling);
-        }
+        } 
 
         if (isset($_GET['Filter_Refueling_Yearly'])) {
             if(empty($_GET['VehicleNo']) || empty($_GET['Year'])) {
                 return back();
             }
-
-                // CREATE NEW TABLE FOR EXPORT DATA
-                Schema::create('refuelings_export', function (Blueprint $table) {
-                    $table->id();
-                    $table->string('VehicleNumber')->nullable();
-                    $table->string('CarOwner')->nullable();
-                    $table->string('RFLNO')->nullable();
-                    $table->string('Date')->nullable();
-                    $table->string('Time')->nullable();
-                    $table->string('Mileage')->nullable();
-                    $table->string('KMLITER')->nullable();
-                    $table->string('TERNO')->nullable();
-                    $table->string('ReceiptNumber')->nullable(); 
-                    $table->string('Quantity')->nullable();
-                    $table->string('Amount')->nullable();
-                    $table->string('CardNumber')->nullable();
-                    $table->string('UserId')->nullable();
-                    $table->string('DateIn')->nullable();
-                    $table->string('TimeIn')->nullable();
-                    $table->string('KM')->nullable();
-                    $table->string('Consumption')->nullable();
-                    $table->timestamps();
-                });
-                \DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-                $RefuelingsExport_Filter = \DB::table('refuelings')
+            $this->create_schema();
+            \DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+            $RefuelingsExport_Filter = \DB::table('refuelings')
                 ->where('refuelings.VehicleNumber', 'LIKE', '%' . $_GET['VehicleNo'] . '%')
                 ->whereBetween('refuelings.Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
                 ->join('cars', 'refuelings.VehicleNumber', '=', 'cars.VehicleNumber')
@@ -155,27 +146,7 @@ class RefuelingController extends Controller
                 ->orderBy('Amount', 'DESC')
                 ->get()
                 ->toArray();
-                        foreach ($RefuelingsExport_Filter as $FilterData) {
-                            \DB::table('refuelings_export')->insert([
-                                'VehicleNumber' => $FilterData->VehicleNumber, 
-                                'CarOwner' => $FilterData->CarOwner, 
-                                'Date' => $FilterData->Date, 
-                                'CardNumber' => $FilterData->CardNumber, 
-                                'Amount' => $FilterData->Amount, 
-                                'Time' => $FilterData->Time, 
-                                'Mileage' => $FilterData->Mileage, 
-                                'TERNO' => $FilterData->TERNO, 
-                                'Quantity' => $FilterData->Quantity, 
-                                'Amount' => $FilterData->Amount, 
-                                'ReceiptNumber' => $FilterData->ReceiptNumber, 
-                                'KM' => $FilterData->TotalKM,  
-                                'Consumption' => $FilterData->Consumption,  
-                                'DateIn' => $FilterData->DateIn, 
-                                'TimeIn' => $FilterData->TimeIn, 
-                                'UserId' => $FilterData->UserId, 
-                            ]); 
-                        } 
-                ////////////////
+            $this->refuelingsExport_filter($RefuelingsExport_Filter);
             $SumOfCarRefueling = \App\Models\Refueling::select('Amount')
                                                         ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                                         ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
@@ -184,9 +155,7 @@ class RefuelingController extends Controller
                                         ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
-                                        
             $Refueling->withPath($_SERVER['REQUEST_URI']);
-
             return view('Refueling', $Config)->with('Refuelings', $Refueling)->with('SumOfCarRefueling', $SumOfCarRefueling);
         }
 
@@ -194,32 +163,9 @@ class RefuelingController extends Controller
             if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
                 return back();
             }
-
-                // CREATE NEW TABLE FOR EXPORT DATA
-                Schema::create('refuelings_export', function (Blueprint $table) {
-                    $table->id();
-                    $table->string('VehicleNumber')->nullable();
-                    $table->string('CarOwner')->nullable();
-                    $table->string('RFLNO')->nullable();
-                    $table->string('Date')->nullable();
-                    $table->string('Time')->nullable();
-                    $table->string('Mileage')->nullable();
-                    $table->string('KMLITER')->nullable();
-                    $table->string('TERNO')->nullable();
-                    $table->string('ReceiptNumber')->nullable(); 
-                    $table->string('Quantity')->nullable();
-                    $table->string('Amount')->nullable();
-                    $table->string('CardNumber')->nullable();
-                    $table->string('UserId')->nullable();
-                    $table->string('DateIn')->nullable();
-                    $table->string('TimeIn')->nullable();
-                    $table->string('KM')->nullable();
-                    $table->string('Consumption')->nullable();
-                    $table->timestamps();
-                });
-                /////
-                \DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-                $RefuelingsExport_Filter = \DB::table('refuelings')
+            $this->create_schema();
+            \DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+            $RefuelingsExport_Filter = \DB::table('refuelings')
                 ->where('refuelings.VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                 ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                 ->join('cars', 'refuelings.VehicleNumber', '=', 'cars.VehicleNumber')
@@ -233,110 +179,36 @@ class RefuelingController extends Controller
                             'refuelings.KM', 'refuelings.DateIn', 'refuelings.TimeIn', 'refuelings.UserId')
                 ->whereBetween('refuelings.Date', [$_GET['Date_From'], $_GET['Date_To']])
                 ->groupBy('refuelings.VehicleNumber', 'cars.CarOwner')->orderBy('Amount', 'DESC')->get()->toArray(); 
- 
-                        foreach ($RefuelingsExport_Filter as $FilterData) {
-                            \DB::table('refuelings_export')->insert([
-                                'VehicleNumber' => $FilterData->VehicleNumber, 
-                                'CarOwner' => $FilterData->CarOwner, 
-                                'Date' => $FilterData->Date, 
-                                'CardNumber' => $FilterData->CardNumber, 
-                                'Amount' => $FilterData->Amount, 
-                                'Time' => $FilterData->Time, 
-                                'Mileage' => $FilterData->Mileage, 
-                                'TERNO' => $FilterData->TERNO, 
-                                'Quantity' => $FilterData->Quantity, 
-                                'Amount' => $FilterData->Amount, 
-                                'ReceiptNumber' => $FilterData->ReceiptNumber, 
-                                'KM' => $FilterData->TotalKM,  
-                                'Consumption' => $FilterData->Consumption,  
-                                'DateIn' => $FilterData->DateIn, 
-                                'TimeIn' => $FilterData->TimeIn, 
-                                'UserId' => $FilterData->UserId, 
-                            ]); 
-                        } 
-                ////////////////
+            $this->refuelingsExport_filter($RefuelingsExport_Filter);
             $SumOfCarRefueling = \App\Models\Refueling::select('Amount')
                                                         ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                         ->sum('Amount'); 
             $Refueling = Refueling::where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) //ANY DATE
-                                        // ->orWhereBetween('Date', ['2021-01-01', '2021-12-31']) //YEARLY
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
-                                        
             $Refueling->withPath($_SERVER['REQUEST_URI']);
-
             return view('Refueling', $Config)->with('Refuelings', $Refueling)->with('SumOfCarRefueling', $SumOfCarRefueling);
         }
-        ///////
+    
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
 
             if ($FilterValue === 'active') {
-                // CREATE NEW TABLE FOR EXPORT DATA
-                Schema::create('refuelings_export', function (Blueprint $table) {
-                    $table->id();
-                    $table->string('VehicleNumber')->nullable();
-                    $table->string('RFLNO')->nullable();
-                    $table->string('Date')->nullable();
-                    $table->string('Time')->nullable();
-                    $table->string('Mileage')->nullable();
-                    $table->string('KMLITER')->nullable();
-                    $table->string('TERNO')->nullable();
-                    $table->string('ReceiptNumber')->nullable(); 
-                    $table->string('Quantity')->nullable();
-                    $table->string('Amount')->nullable();
-                    $table->string('CardNumber')->nullable();
-                    $table->string('UserId')->nullable();
-                    $table->string('DateIn')->nullable();
-                    $table->string('TimeIn')->nullable();
-                    $table->string('KM')->nullable();
-                    $table->string('Consumption')->nullable();
-                    $table->timestamps();
-                });
-                /////
+                $this->create_schema();
                 $RefuelingsExport_Filter = \DB::table('refuelings')->join('cars', 'cars.VehicleNumber', '=', 'refuelings.VehicleNumber')
                                             ->select([
-                                                'cars.VehicleNumber', 
-                                                'refuelings.VehicleNumber', 
-                                                'refuelings.Date', 
-                                                'refuelings.Time', 
-                                                'refuelings.Mileage', 
-                                                'refuelings.TERNO', 
-                                                'refuelings.Quantity', 
-                                                'refuelings.Amount', 
-                                                'refuelings.CardNumber', 
-                                                'refuelings.KM', 
-                                                'refuelings.ReceiptNumber',
-                                                'refuelings.Consumption',
-                                                'refuelings.DateIn',
-                                                'refuelings.TimeIn',
-                                                'refuelings.UserId',
+                                                'cars.VehicleNumber', 'cars.CarOwner', 'cars.Driver', 
+                                                'cars.Odometer', 'refuelings.CardNumber', 'refuelings.Time', 
+                                                'refuelings.Date', 'refuelings.Mileage', 'refuelings.TERNO', 
+                                                'refuelings.ReceiptNumber', 'cars.CarOwner',
+                                                'refuelings.KM', 'refuelings.DateIn', 'refuelings.TimeIn', 
+                                                'refuelings.UserId'
                                             ])  
                                             ->where('Status', 'ACTIVE')
                                             ->get()->toArray();  
-
-                        foreach ($RefuelingsExport_Filter as $FilterData) {
-                            \DB::table('refuelings_export')->insert([
-                                'VehicleNumber' => $FilterData->VehicleNumber, 
-                                'CardNumber' => $FilterData->CardNumber, 
-                                'Amount' => $FilterData->Amount, 
-                                'Date' => $FilterData->Date, 
-                                'Time' => $FilterData->Time, 
-                                'Mileage' => $FilterData->Mileage, 
-                                'TERNO' => $FilterData->TERNO, 
-                                'Quantity' => $FilterData->Quantity, 
-                                'Amount' => $FilterData->Amount, 
-                                'ReceiptNumber' => $FilterData->ReceiptNumber, 
-                                'KM' => $FilterData->KM,  
-                                'Consumption' => $FilterData->Consumption,  
-                                'DateIn' => $FilterData->DateIn, 
-                                'TimeIn' => $FilterData->TimeIn, 
-                                'UserId' => $FilterData->UserId, 
-                            ]); 
-                        } 
-                ////////////////
+                $this->refuelingsExport_filter($RefuelingsExport_Filter);
                 $Refuelings = Refueling::join('cars', 'cars.VehicleNumber', '=', 'refuelings.VehicleNumber')
                     ->select([
                         'cars.VehicleNumber', 
@@ -351,72 +223,21 @@ class RefuelingController extends Controller
                         'refuelings.KM', 
                         'refuelings.Consumption'
                     ])->where('Status', 'ACTIVE')->orderBy('Date', 'DESC')->paginate(14);
- 
                 $Refuelings->withPath($_SERVER['REQUEST_URI']);
             } else if ($FilterValue === 'inactive') {
-                // CREATE NEW TABLE FOR EXPORT DATA
-                Schema::create('refuelings_export', function (Blueprint $table) {
-                    $table->id();
-                    $table->string('VehicleNumber')->nullable();
-                    $table->string('RFLNO')->nullable();
-                    $table->string('Date')->nullable();
-                    $table->string('Time')->nullable();
-                    $table->string('Mileage')->nullable();
-                    $table->string('KMLITER')->nullable();
-                    $table->string('TERNO')->nullable();
-                    $table->string('ReceiptNumber')->nullable(); 
-                    $table->string('Quantity')->nullable();
-                    $table->string('Amount')->nullable();
-                    $table->string('CardNumber')->nullable();
-                    $table->string('UserId')->nullable();
-                    $table->string('DateIn')->nullable();
-                    $table->string('TimeIn')->nullable();
-                    $table->string('KM')->nullable();
-                    $table->string('Consumption')->nullable();
-                    $table->timestamps();
-                });
-                /////
+                $this->create_schema();
                 $RefuelingsExport_Filter = \DB::table('refuelings')->join('cars', 'cars.VehicleNumber', '=', 'refuelings.VehicleNumber')
                                             ->select([
-                                                'cars.VehicleNumber', 
-                                                'refuelings.VehicleNumber', 
-                                                'refuelings.Date', 
-                                                'refuelings.Time', 
-                                                'refuelings.Mileage', 
-                                                'refuelings.TERNO', 
-                                                'refuelings.Quantity', 
-                                                'refuelings.Amount', 
-                                                'refuelings.CardNumber', 
-                                                'refuelings.KM', 
-                                                'refuelings.ReceiptNumber',
-                                                'refuelings.Consumption',
-                                                'refuelings.DateIn',
-                                                'refuelings.TimeIn',
-                                                'refuelings.UserId',
+                                                'cars.VehicleNumber', 'cars.CarOwner', 'cars.Driver', 
+                                                'cars.Odometer', 'refuelings.CardNumber', 'refuelings.Time', 
+                                                'refuelings.Date', 'refuelings.Mileage', 'refuelings.TERNO', 
+                                                'refuelings.ReceiptNumber', 'cars.CarOwner',
+                                                'refuelings.KM', 'refuelings.DateIn', 'refuelings.TimeIn', 
+                                                'refuelings.UserId'
                                             ])  
                                             ->where('Status', 'INACTIVE')
                                             ->get()->toArray();  
-
-                        foreach ($RefuelingsExport_Filter as $FilterData) {
-                            \DB::table('refuelings_export')->insert([
-                                'VehicleNumber' => $FilterData->VehicleNumber, 
-                                'CardNumber' => $FilterData->CardNumber, 
-                                'Amount' => $FilterData->Amount, 
-                                'Date' => $FilterData->Date, 
-                                'Time' => $FilterData->Time, 
-                                'Mileage' => $FilterData->Mileage, 
-                                'TERNO' => $FilterData->TERNO, 
-                                'Quantity' => $FilterData->Quantity, 
-                                'Amount' => $FilterData->Amount, 
-                                'ReceiptNumber' => $FilterData->ReceiptNumber, 
-                                'KM' => $FilterData->KM,  
-                                'Consumption' => $FilterData->Consumption,  
-                                'DateIn' => $FilterData->DateIn, 
-                                'TimeIn' => $FilterData->TimeIn, 
-                                'UserId' => $FilterData->UserId, 
-                            ]); 
-                        } 
-                ////////////////
+                $this->refuelingsExport_filter($RefuelingsExport_Filter);
                 $Refuelings = Refueling::join('cars', 'cars.VehicleNumber', '=', 'refuelings.VehicleNumber')
                     ->select([
                         'cars.VehicleNumber', 
@@ -433,64 +254,42 @@ class RefuelingController extends Controller
                     ])->where('Status', 'INACTIVE')->orderBy('Date', 'DESC')->paginate(14);
  
                 $Refuelings->withPath($_SERVER['REQUEST_URI']);
-            } else {
-                // CREATE NEW TABLE FOR EXPORT DATA
-                Schema::create('refuelings_export', function (Blueprint $table) {
-                    $table->id();
-                    $table->string('VehicleNumber')->nullable();
-                    $table->string('RFLNO')->nullable();
-                    $table->string('Date')->nullable();
-                    $table->string('Time')->nullable();
-                    $table->string('Mileage')->nullable();
-                    $table->string('KMLITER')->nullable();
-                    $table->string('TERNO')->nullable();
-                    $table->string('ReceiptNumber')->nullable(); 
-                    $table->string('Quantity')->nullable();
-                    $table->string('Amount')->nullable();
-                    $table->string('CardNumber')->nullable();
-                    $table->string('UserId')->nullable();
-                    $table->string('DateIn')->nullable();
-                    $table->string('TimeIn')->nullable();
-                    $table->string('KM')->nullable();
-                    $table->string('Consumption')->nullable();
-                    $table->timestamps();
-                });
-                /////
-                $RefuelingsExport_Filter = \DB::table('refuelings')  
-                        ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
-                        ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Mileage', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('TERNO', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Quantity', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Amount', 'LIKE', '%' . $FilterValue . '%') 
-                        ->orWhere('ReceiptNumber', 'LIKE', '%' . $FilterValue . '%') 
-                        ->orWhere('KM', 'LIKE', '%' . $FilterValue . '%') 
-                        ->get()->toArray();  
-
-                        foreach ($RefuelingsExport_Filter as $FilterData) {
-                            \DB::table('refuelings_export')->insert([
-                                'VehicleNumber' => $FilterData->VehicleNumber, 
-                                'CardNumber' => $FilterData->CardNumber, 
-                                'Amount' => $FilterData->Amount, 
-                                'Date' => $FilterData->Date, 
-                                'Time' => $FilterData->Time, 
-                                'Mileage' => $FilterData->Mileage, 
-                                'TERNO' => $FilterData->TERNO, 
-                                'Quantity' => $FilterData->Quantity, 
-                                'Amount' => $FilterData->Amount, 
-                                'ReceiptNumber' => $FilterData->ReceiptNumber, 
-                                'KM' => $FilterData->KM,  
-                                'Consumption' => $FilterData->Consumption,  
-                                'DateIn' => $FilterData->DateIn, 
-                                'TimeIn' => $FilterData->TimeIn, 
-                                'UserId' => $FilterData->UserId, 
-                            ]); 
-                        } 
-                ////////////////
-
+            } else { 
+                $this->create_schema();
+                $RefuelingsExport_Filter = \DB::table('refuelings')
+                    ->join('cars', 'cars.VehicleNumber', '=', 'refuelings.VehicleNumber')
+                    ->select([
+                        'cars.VehicleNumber', 
+                        'cars.CarOwner', 
+                        'cars.Driver', 
+                        'cars.Odometer', 
+                        'refuelings.CardNumber', 
+                        'refuelings.Amount', 
+                        'refuelings.Quantity',  
+                        'refuelings.Time', 
+                        'refuelings.Date', 
+                        'refuelings.Mileage', 
+                        'refuelings.TERNO', 
+                        'refuelings.ReceiptNumber',
+                        'refuelings.KM as TotalKM', 
+                        'refuelings.DateIn', 
+                        'refuelings.Consumption', 
+                        'refuelings.TimeIn', 
+                        'refuelings.UserId'
+                    ])   
+                    ->where('refuelings.VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orWhere('refuelings.CardNumber', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('refuelings.Date', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('refuelings.Time', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('refuelings.Amount', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('refuelings.Mileage', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('refuelings.TERNO', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('refuelings.Quantity', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('refuelings.ReceiptNumber', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orWhere('refuelings.KM', 'LIKE', '%' . $FilterValue . '%') 
+                    ->get()
+                    ->toArray();  
+                $this->refuelingsExport_filter($RefuelingsExport_Filter);
                 $Refuelings = Refueling::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
                     ->orWhere('CardNumber', 'LIKE', '%' . $FilterValue . '%')
                     ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
@@ -505,14 +304,13 @@ class RefuelingController extends Controller
                     ->orderBy('Date', 'DESC')
                     ->orderBy('Time', 'DESC')
                     ->paginate(7);
-
                     $Refuelings->withPath($_SERVER['REQUEST_URI']);
             }
             return view('Refueling', $Config)->with('Refuelings', $Refuelings);
-        } 
+        }  
         return view('Refueling', $Config);
     }
-
+ 
     public function my_records_refueling()
     {
         $Config = self::config();

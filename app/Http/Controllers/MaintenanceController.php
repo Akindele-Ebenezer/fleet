@@ -20,6 +20,56 @@ class MaintenanceController extends Controller
         ];
     }
 
+    public function create_schema() {
+        Schema::create('maintenances_export', function (Blueprint $table) {
+            $table->id();
+            
+            // Vehicle & Reference
+            $table->string('VehicleNumber')->nullable();
+            $table->string('RFLNO')->nullable();
+            
+            // Incident Details
+            $table->string('IncidentType')->nullable();
+            $table->string('IncidentAction')->nullable();
+            $table->text('Details')->nullable(); // Changed to text for longer descriptions
+            
+            // Primary Schedule
+            $table->string('Date')->nullable(); // Or $table->date('Date')->nullable();
+            $table->string('Time')->nullable(); // Or $table->time('Time')->nullable();
+            
+            // Release Schedule
+            $table->string('ReleaseDate')->nullable();
+            $table->string('ReleaseTime')->nullable();
+            
+            // Financials & Tracking
+            $table->string('Cost')->nullable(); // Or $table->decimal('Cost', 15, 2)->nullable();
+            $table->string('InvoiceNumber')->nullable();
+            $table->string('Week')->nullable();
+            $table->string('IncidentAttachment')->nullable();
+            
+            // Audit Trail
+            $table->string('UserId')->nullable();
+            $table->string('DateIn')->nullable();
+            $table->string('TimeIn')->nullable();
+            
+            $table->timestamps();
+        });
+    }
+
+    public function maintenancesExport_filter($MaintenancesExport_Filter) {
+        foreach ($MaintenancesExport_Filter as $FilterData) {
+            \DB::table('maintenances_export')->insert([
+                'VehicleNumber' => $FilterData->VehicleNumber, 
+                'Date' => $FilterData->Date, 
+                'Cost' => $FilterData->Cost, 
+                'Time' => $FilterData->Time,  
+                'DateIn' => $FilterData->DateIn, 
+                'TimeIn' => $FilterData->TimeIn, 
+                'UserId' => $FilterData->UserId, 
+            ]); 
+        } 
+    }
+
     public function index()
     {
         $Config = self::config();
@@ -29,76 +79,28 @@ class MaintenanceController extends Controller
             if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
                 return back();
             }
+            $this->create_schema(); 
+            $MaintenancesExport_Filter = \DB::table('maintenances')  
+                    ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                    ->get()->toArray();  
 
-                // CREATE NEW TABLE FOR EXPORT DATA
-                Schema::create('maintenances_export', function (Blueprint $table) {
-                    $table->id();
-                    $table->string('VehicleNumber')->nullable();
-                    $table->string('CarOwner')->nullable();
-                    $table->string('RFLNO')->nullable();
-                    $table->string('IncidentType')->nullable();
-                    $table->string('IncidentAction')->nullable();
-                    $table->string('Details')->nullable();
-                    $table->string('Date')->nullable();
-                    $table->string('Time')->nullable();
-                    $table->string('ReleaseDate')->nullable();
-                    $table->string('ReleaseTime')->nullable();
-                    $table->string('Cost')->nullable();
-                    $table->string('InvoiceNumber')->nullable();
-                    $table->string('Week')->nullable();
-                    $table->string('IncidentAttachment')->nullable();
-                    $table->string('UserId')->nullable();
-                    $table->string('DateIn')->nullable();
-                    $table->string('TimeIn')->nullable();
-                    $table->timestamps();
-                });
-                /////
-                $MaintenancesExport_Filter = \DB::table('maintenances')  
-                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
-                        ->get()->toArray();  
- 
-                        \DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
-                        $MaintenancesExport_Filter = \DB::table('maintenances')
-                        ->join('cars', 'maintenances.VehicleNumber', '=', 'cars.VehicleNumber')
-                        ->select('maintenances.VehicleNumber', 
-                                 \DB::raw('SUM(maintenances.Cost) as Cost'),  
-                                 'cars.CarOwner', 'maintenances.Time', 'maintenances.Date', 
-                                 'maintenances.IncidentType', 'maintenances.IncidentAction',  'maintenances.InvoiceNumber', 'cars.CarOwner',
-                                 'cars.CarOwner', 'maintenances.Details', 'maintenances.ReleaseDate',   'maintenances.IncidentAttachment', 'maintenances.Week', 'maintenances.ReleaseTime', 'maintenances.DateIn', 'maintenances.TimeIn', 'maintenances.UserId')
-                        ->whereBetween('maintenances.Date', [$_GET['Date_From'], $_GET['Date_To']])
-                        ->groupBy('maintenances.VehicleNumber', 'cars.CarOwner')->orderBy('Cost', 'DESC')->get()->toArray(); 
-        
-                        foreach ($MaintenancesExport_Filter as $FilterData) {
-                            \DB::table('maintenances_export')->insert([
-                                'VehicleNumber' => $FilterData->VehicleNumber, 
-                                'CarOwner' => $FilterData->CarOwner, 
-                                // 'RFLNO' => $FilterData->RFLNO, 
-                                'IncidentType' => $FilterData->IncidentType, 
-                                'IncidentAction' => $FilterData->IncidentAction, 
-                                'Details' => $FilterData->Details, 
-                                'Date' => $FilterData->Date, 
-                                'Time' => $FilterData->Time, 
-                                'ReleaseDate' => $FilterData->ReleaseDate, 
-                                'ReleaseTime' => $FilterData->ReleaseTime, 
-                                'Cost' => $FilterData->Cost, 
-                                'InvoiceNumber' => $FilterData->InvoiceNumber,  
-                                'Week' => $FilterData->Week,  
-                                'IncidentAttachment' => $FilterData->IncidentAttachment, 
-                                'UserId' => $FilterData->UserId, 
-                                'DateIn' => $FilterData->DateIn, 
-                                'TimeIn' => $FilterData->TimeIn, 
-                            ]); 
-                        } 
-                ////////////////
+                    \DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+                    $MaintenancesExport_Filter = \DB::table('maintenances')
+                    ->join('cars', 'maintenances.VehicleNumber', '=', 'cars.VehicleNumber')
+                    ->select('maintenances.VehicleNumber', 
+                                \DB::raw('SUM(maintenances.Cost) as Cost'),  
+                                'cars.CarOwner', 'cars.CardNumber', 'maintenances.Time', 'maintenances.Date', 
+                                'maintenances.IncidentType', 'maintenances.IncidentAction',  'maintenances.InvoiceNumber', 'cars.CarOwner', 'maintenances.Details', 'maintenances.ReleaseDate',   'maintenances.IncidentAttachment', 'maintenances.Week', 'maintenances.ReleaseTime', 'maintenances.DateIn', 'maintenances.TimeIn', 'maintenances.UserId')
+                    ->whereBetween('maintenances.Date', [$_GET['Date_From'], $_GET['Date_To']])
+                    ->groupBy('maintenances.VehicleNumber', 'cars.CarOwner')->orderBy('Cost', 'DESC')->get()->toArray(); 
+                    $this->maintenancesExport_filter($MaintenancesExport_Filter);
             $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                         ->sum('Cost'); 
             $Maintenance = Maintenance::whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) 
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
-                                        
             $Maintenance->withPath($_SERVER['REQUEST_URI']);
-
             return view('Maintenance', $Config)->with('Maintenance', $Maintenance)->with('SumOfCarMaintenance', $SumOfCarMaintenance);
         }
 
@@ -106,55 +108,12 @@ class MaintenanceController extends Controller
             if(empty($_GET['VehicleNo']) || empty($_GET['Year'])) {
                 return back();
             }
-
-                // CREATE NEW TABLE FOR EXPORT DATA
-                Schema::create('maintenances_export', function (Blueprint $table) {
-                    $table->id();
-                    $table->string('VehicleNumber')->nullable();
-                    $table->string('RFLNO')->nullable();
-                    $table->string('IncidentType')->nullable();
-                    $table->string('IncidentAction')->nullable();
-                    $table->string('Details')->nullable();
-                    $table->string('Date')->nullable();
-                    $table->string('Time')->nullable();
-                    $table->string('ReleaseDate')->nullable();
-                    $table->string('ReleaseTime')->nullable();
-                    $table->string('Cost')->nullable();
-                    $table->string('InvoiceNumber')->nullable();
-                    $table->string('Week')->nullable();
-                    $table->string('IncidentAttachment')->nullable();
-                    $table->string('UserId')->nullable();
-                    $table->string('DateIn')->nullable();
-                    $table->string('TimeIn')->nullable();
-                    $table->timestamps();
-                });
-                /////
-                $MaintenancesExport_Filter = \DB::table('maintenances')  
-                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%') 
-                        ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
-                        ->get()->toArray();  
-
-                        foreach ($MaintenancesExport_Filter as $FilterData) {
-                            \DB::table('maintenances_export')->insert([
-                                'VehicleNumber' => $FilterData->VehicleNumber, 
-                                'RFLNO' => $FilterData->RFLNO, 
-                                'IncidentType' => $FilterData->IncidentType, 
-                                'IncidentAction' => $FilterData->IncidentAction, 
-                                'Details' => $FilterData->Details, 
-                                'Date' => $FilterData->Date, 
-                                'Time' => $FilterData->Time, 
-                                'ReleaseDate' => $FilterData->ReleaseDate, 
-                                'ReleaseTime' => $FilterData->ReleaseTime, 
-                                'Cost' => $FilterData->Cost, 
-                                'InvoiceNumber' => $FilterData->InvoiceNumber,  
-                                'Week' => $FilterData->Week,  
-                                'IncidentAttachment' => $FilterData->IncidentAttachment, 
-                                'UserId' => $FilterData->UserId, 
-                                'DateIn' => $FilterData->DateIn, 
-                                'TimeIn' => $FilterData->TimeIn, 
-                            ]); 
-                        } 
-                ////////////////
+            $this->create_schema();
+            $MaintenancesExport_Filter = \DB::table('maintenances')  
+                    ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%') 
+                    ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
+                    ->get()->toArray();  
+            $this->maintenancesExport_filter($MaintenancesExport_Filter);
             $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
                                                         ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                                         ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31'])
@@ -163,9 +122,7 @@ class MaintenanceController extends Controller
                                         ->whereBetween('Date', [$_GET['Year'] . '-01-01', $_GET['Year'] . '-12-31']) 
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
-                                        
             $Maintenance->withPath($_SERVER['REQUEST_URI']);
-
             return view('Maintenance', $Config)->with('Maintenance', $Maintenance)->with('SumOfCarMaintenance', $SumOfCarMaintenance);
         }
 
@@ -173,132 +130,42 @@ class MaintenanceController extends Controller
             if(empty($_GET['Date_From']) || empty($_GET['Date_To'])) {
                 return back();
             }
-
-                // CREATE NEW TABLE FOR EXPORT DATA
-                Schema::create('maintenances_export', function (Blueprint $table) {
-                    $table->id();
-                    $table->string('VehicleNumber')->nullable();
-                    $table->string('RFLNO')->nullable();
-                    $table->string('IncidentType')->nullable();
-                    $table->string('IncidentAction')->nullable();
-                    $table->string('Details')->nullable();
-                    $table->string('Date')->nullable();
-                    $table->string('Time')->nullable();
-                    $table->string('ReleaseDate')->nullable();
-                    $table->string('ReleaseTime')->nullable();
-                    $table->string('Cost')->nullable();
-                    $table->string('InvoiceNumber')->nullable();
-                    $table->string('Week')->nullable();
-                    $table->string('IncidentAttachment')->nullable();
-                    $table->string('UserId')->nullable();
-                    $table->string('DateIn')->nullable();
-                    $table->string('TimeIn')->nullable();
-                    $table->timestamps();
-                });
-                /////
-                $MaintenancesExport_Filter = \DB::table('maintenances')  
-                        ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
-                        ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
-                        ->get()->toArray();  
-
-                        foreach ($MaintenancesExport_Filter as $FilterData) {
-                            \DB::table('maintenances_export')->insert([
-                                'VehicleNumber' => $FilterData->VehicleNumber, 
-                                'RFLNO' => $FilterData->RFLNO, 
-                                'IncidentType' => $FilterData->IncidentType, 
-                                'IncidentAction' => $FilterData->IncidentAction, 
-                                'Details' => $FilterData->Details, 
-                                'Date' => $FilterData->Date, 
-                                'Time' => $FilterData->Time, 
-                                'ReleaseDate' => $FilterData->ReleaseDate, 
-                                'ReleaseTime' => $FilterData->ReleaseTime, 
-                                'Cost' => $FilterData->Cost, 
-                                'InvoiceNumber' => $FilterData->InvoiceNumber,  
-                                'Week' => $FilterData->Week,  
-                                'IncidentAttachment' => $FilterData->IncidentAttachment, 
-                                'UserId' => $FilterData->UserId, 
-                                'DateIn' => $FilterData->DateIn, 
-                                'TimeIn' => $FilterData->TimeIn, 
-                            ]); 
-                        } 
-                ////////////////
+            $this->create_schema();
+            $MaintenancesExport_Filter = \DB::table('maintenances')  
+                    ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
+                    ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
+                    ->get()->toArray();  
+            $this->maintenancesExport_filter($MaintenancesExport_Filter);
             $SumOfCarMaintenance = \App\Models\Maintenance::select('Cost')
                                                         ->where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']])
                                                         ->sum('Cost'); 
             $Maintenance = Maintenance::where('VehicleNumber', 'LIKE', '%' .  $_GET['VehicleNo'] . '%')
                                         ->whereBetween('Date', [$_GET['Date_From'], $_GET['Date_To']]) //ANY DATE
-                                        // ->orWhereBetween('Date', ['2021-01-01', '2021-12-31']) //YEARLY
                                         ->orderBy('Date', 'DESC')
                                         ->paginate(7);
-                                        
             $Maintenance->withPath($_SERVER['REQUEST_URI']);
-
             return view('Maintenance', $Config)->with('Maintenance', $Maintenance)->with('SumOfCarMaintenance', $SumOfCarMaintenance);
         }
-  //////////////
+  
         if (isset($_GET['Filter']) || isset($_GET['FilterValue'])) {
             $FilterValue = $_GET['FilterValue']; 
-            
-                Schema::dropIfExists('maintenances_export');
-                // CREATE NEW TABLE FOR EXPORT DATA
-                Schema::create('maintenances_export', function (Blueprint $table) {
-                    $table->id();
-                    $table->string('VehicleNumber')->nullable();
-                    $table->string('RFLNO')->nullable();
-                    $table->string('IncidentType')->nullable();
-                    $table->string('IncidentAction')->nullable();
-                    $table->string('Details')->nullable();
-                    $table->string('Date')->nullable();
-                    $table->string('Time')->nullable();
-                    $table->string('ReleaseDate')->nullable();
-                    $table->string('ReleaseTime')->nullable();
-                    $table->string('Cost')->nullable();
-                    $table->string('InvoiceNumber')->nullable();
-                    $table->string('Week')->nullable();
-                    $table->string('IncidentAttachment')->nullable();
-                    $table->string('UserId')->nullable();
-                    $table->string('DateIn')->nullable();
-                    $table->string('TimeIn')->nullable();
-                    $table->timestamps();
-                });
-                /////
-                $MaintenancesExport_Filter = \DB::table('maintenances')  
-                        ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
-                        ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('IncidentType', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('IncidentAction', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('ReleaseDate', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('ReleaseTime', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('InvoiceNumber', 'LIKE', '%' . $FilterValue . '%')
-                        ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
-                        ->orderBy('Date', 'DESC')
-                        ->orderBy('Time', 'DESC')
-                        ->get()->toArray();  
-
-                        foreach ($MaintenancesExport_Filter as $FilterData) {
-                            \DB::table('maintenances_export')->insert([
-                                'VehicleNumber' => $FilterData->VehicleNumber, 
-                                'RFLNO' => $FilterData->RFLNO, 
-                                'IncidentType' => $FilterData->IncidentType, 
-                                'IncidentAction' => $FilterData->IncidentAction, 
-                                'Details' => $FilterData->Details, 
-                                'Date' => $FilterData->Date, 
-                                'Time' => $FilterData->Time, 
-                                'ReleaseDate' => $FilterData->ReleaseDate, 
-                                'ReleaseTime' => $FilterData->ReleaseTime, 
-                                'Cost' => $FilterData->Cost, 
-                                'InvoiceNumber' => $FilterData->InvoiceNumber,  
-                                'Week' => $FilterData->Week,  
-                                'IncidentAttachment' => $FilterData->IncidentAttachment, 
-                                'UserId' => $FilterData->UserId, 
-                                'DateIn' => $FilterData->DateIn, 
-                                'TimeIn' => $FilterData->TimeIn, 
-                            ]); 
-                        } 
-                ////////////////
+            $this->create_schema();
+            $MaintenancesExport_Filter = \DB::table('maintenances')  
+                    ->where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orWhere('Date', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Time', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('IncidentType', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('IncidentAction', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('ReleaseDate', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('ReleaseTime', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Cost', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('InvoiceNumber', 'LIKE', '%' . $FilterValue . '%')
+                    ->orWhere('Week', 'LIKE', '%' . $FilterValue . '%') 
+                    ->orderBy('Date', 'DESC')
+                    ->orderBy('Time', 'DESC')
+                    ->get()->toArray();  
+            $this->maintenancesExport_filter($MaintenancesExport_Filter);
             if ($FilterValue === 'active') {
                 $Maintenance = Maintenance::join('cars', 'cars.VehicleNumber', '=', 'maintenances.VehicleNumber')
                     ->select([
@@ -316,7 +183,6 @@ class MaintenanceController extends Controller
                         'maintenances.Week',
                         'maintenances.IncidentAttachment'
                     ])->where('Status', 'ACTIVE')->orderBy('Date', 'DESC')->paginate(14);
- 
                 $Maintenance->withPath($_SERVER['REQUEST_URI']);
             } else if ($FilterValue === 'inactive') {
                 $Maintenance = Maintenance::join('cars', 'cars.VehicleNumber', '=', 'maintenances.VehicleNumber')
@@ -335,7 +201,6 @@ class MaintenanceController extends Controller
                         'maintenances.Week',
                         'maintenances.IncidentAttachment'
                     ])->where('Status', 'INACTIVE')->orderBy('Date', 'DESC')->paginate(14);
- 
                 $Maintenance->withPath($_SERVER['REQUEST_URI']);
             } else {
                 $Maintenance = Maintenance::where('VehicleNumber', 'LIKE', '%' . $FilterValue . '%') 
@@ -351,7 +216,6 @@ class MaintenanceController extends Controller
                     ->orderBy('Date', 'DESC')
                     ->orderBy('Time', 'DESC')
                     ->paginate(7);
-
                     $Maintenance->withPath($_SERVER['REQUEST_URI']);
             }
             return view('Maintenance', $Config)->with('Maintenance', $Maintenance);
@@ -441,46 +305,29 @@ class MaintenanceController extends Controller
      * Store a newly created resource in storage.
      */
     public function store($Maintenance, Request $request)
-    {
+    { 
+        $data = [
+            'VehicleNumber' => $request->VehicleNumber_MAINTENANCE, 
+            'IncidentType' => $request->IncidentType, 
+            'IncidentAction' => $request->IncidentAction, 
+            'Date' => $request->Date, 
+            'Time' => $request->Time, 
+            'ReleaseDate' => $request->ReleaseDate, 
+            'ReleaseTime' => $request->ReleaseTime, 
+            'Cost' => $request->Cost, 
+            'InvoiceNumber' => $request->InvoiceNumber, 
+            'Week' => $request->Week, 
+            'DateIn' => date('F j, Y'), 
+            'TimeIn' => date("g:i a"), 
+            'UserId' => request()->session()->get('Id'), 
+        ];
         if ($request->hasFile('IncidentAttachment')) {
             $IncidentFile = $request->file('IncidentAttachment'); 
             $DestinationPath = 'Images/Maintenance';
             $IncidentFile->move($DestinationPath, $IncidentFile->getClientOriginalName());
-     
-            Maintenance::insert([ 
-                'VehicleNumber' => $Maintenance, 
-                'IncidentType' => $request->IncidentType, 
-                'IncidentAction' => $request->IncidentAction, 
-                'Date' => $request->Date, 
-                'Time' => $request->Time, 
-                'ReleaseDate' => $request->ReleaseDate, 
-                'ReleaseTime' => $request->ReleaseTime, 
-                'Cost' => $request->Cost, 
-                'IncidentAttachment' => $IncidentFile->getClientOriginalName(),
-                'InvoiceNumber' => $request->InvoiceNumber, 
-                'Week' => $request->Week, 
-                'DateIn' => date('F j, Y'), 
-                'TimeIn' => date("g:i a"), 
-                'UserId' => request()->session()->get('Id'), 
-            ]);
-        } else {
-            Maintenance::insert([ 
-                'VehicleNumber' => $Maintenance, 
-                'IncidentType' => $request->IncidentType, 
-                'IncidentAction' => $request->IncidentAction, 
-                'Date' => $request->Date, 
-                'Time' => $request->Time, 
-                'ReleaseDate' => $request->ReleaseDate, 
-                'ReleaseTime' => $request->ReleaseTime, 
-                'Cost' => $request->Cost,  
-                'InvoiceNumber' => $request->InvoiceNumber, 
-                'Week' => $request->Week, 
-                'DateIn' => date('F j, Y'), 
-                'TimeIn' => date("g:i a"), 
-                'UserId' => request()->session()->get('Id'), 
-            ]);
-        }
-
+            $data['IncidentAttachment'] = $IncidentFile->getClientOriginalName();
+        } 
+        Maintenance::insert($data);
         return back();  
     }
 
@@ -505,41 +352,25 @@ class MaintenanceController extends Controller
      */
     public function update(Request $request, Maintenance $maintenance)
     {
-        if ($request->hasFile('IncidentAttachment')) {
-            $IncidentFile_UPDATED = $request->file('IncidentAttachment'); 
-            $DestinationPath = 'Images/Maintenance';
-            $IncidentFile_UPDATED->move($DestinationPath, $IncidentFile_UPDATED->getClientOriginalName());
-            
-            Maintenance::where('id', $request->MaintenanceId)
-            ->update([
-                'VehicleNumber' => $request->VehicleNumber,
-                'Date' => $request->Date,
-                'Time' => $request->Time,
-                'IncidentType' => $request->IncidentType,
-                'IncidentAction' => $request->IncidentAction,
-                'ReleaseDate' => $request->ReleaseDate,
-                'ReleaseTime' => $request->ReleaseTime,
-                'Cost' => $request->Cost,
-                'InvoiceNumber' => $request->InvoiceNumber,
-                'Week' => $request->Week, 
-                'IncidentAttachment' => $IncidentFile_UPDATED->getClientOriginalName(),
-            ]);
-        } else {
-            Maintenance::where('id', $request->MaintenanceId)
-                ->update([
-                    'VehicleNumber' => $request->VehicleNumber,
-                    'Date' => $request->Date,
-                    'Time' => $request->Time,
-                    'IncidentType' => $request->IncidentType,
-                    'IncidentAction' => $request->IncidentAction,
-                    'ReleaseDate' => $request->ReleaseDate,
-                    'ReleaseTime' => $request->ReleaseTime,
-                    'Cost' => $request->Cost,
-                    'InvoiceNumber' => $request->InvoiceNumber,
-                    'Week' => $request->Week,  
-                ]); 
+        $data = [
+            'VehicleNumber' => $request->VehicleNumber,
+            'Date' => $request->Date,
+            'Time' => $request->Time,
+            'IncidentType' => $request->IncidentType,
+            'IncidentAction' => $request->IncidentAction,
+            'ReleaseDate' => $request->ReleaseDate,
+            'ReleaseTime' => $request->ReleaseTime,
+            'Cost' => $request->Cost,
+            'InvoiceNumber' => $request->InvoiceNumber,
+            'Week' => $request->Week, 
+        ];
+       if ($request->hasFile('IncidentAttachment')) {
+            $file = $request->file('IncidentAttachment'); 
+            $filename = $file->getClientOriginalName();
+            $file->move('Images/Maintenance', $filename);
+            $data['IncidentAttachment'] = $filename;
         }
-
+        Maintenance::where('id', $request->MaintenanceId)->update($data);
         return back(); 
     }
 

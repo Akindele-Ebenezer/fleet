@@ -123,11 +123,7 @@
                 </h1>
             </div>
             <center>
-                @if ($_SERVER['HTTP_HOST'] == 'fleet.seylekschools.com.ng')
-                <img src="{{ asset('Images/seylekschools-logo-2.png') }}" alt="">
-                @elseif (($_SERVER['HTTP_HOST'] == 'fleet.depasamarine.com') || ($_SERVER['HTTP_HOST'] == 'www.fleet.depasamarine.com') || ($_SERVER['HTTP_HOST'] == '192.168.20.100'))
                 <img src="{{ asset('Images/depasa-logo.png') }}" alt="">
-                @endif
             </center>
             <ul>
                 <li>
@@ -163,7 +159,7 @@
                             $CreateInspetionPrivilege = \DB::table('user_privileges')->select('CreateInspections')
                                                         ->where('UserId', request()->session()->get('Id'))->first();
                         @endphp
-                        @if ($CreateInspetionPrivilege->CreateInspections === 'on')
+                        @if (($CreateInspetionPrivilege->CreateInspections ?? 'off') === 'on')
                         <a href='{{ route('DailyCheckList') }}'>
                             <li class="{{ Route::is('DailyCheckList') ? 'active' : '' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M309 435q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0 171q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h462l198 198v462q0 24-18 42t-42 18H180Zm0-60h600V447.429H609V276H180v600Zm0-600v171.429V276v600-600Z"></path></svg>                

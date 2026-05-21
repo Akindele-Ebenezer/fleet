@@ -28,7 +28,6 @@ return new class extends Migration
             $table->string('InsuranceCertificateSize')->nullable();
             $table->string('DriverLicenseExpiryDate')->nullable();
             $table->string('VehicleLicenseExpiryDate')->nullable();
-            $table->string('VehicleLicenseExpiryDate')->nullable();
             $table->string('CentralMotorRegistryExpiryDate')->nullable();
             $table->string('ProofOfOwnershipExpiryDate')->nullable();
             $table->string('CertificateOfRoadWorthinessExpiryDate')->nullable();

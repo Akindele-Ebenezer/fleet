@@ -14,6 +14,68 @@
             $ActiveCars = \DB::table('cars')->select(['VehicleNumber', 'Odometer'])->whereNotNull('VehicleNumber')->where('Status', 'ACTIVE')->get();
         @endphp
         @foreach ($ActiveCars as $Car)  
+        <!---->
+       
+       @php
+    $documents = \DB::table('car_documents')
+        ->where('VehicleNumber', $Car->VehicleNumber)
+        ->first([
+            'DriverLicenseExpiryDate',
+            'VehicleLicenseExpiryDate',
+            'CentralMotorRegistryExpiryDate',
+            'ProofOfOwnershipExpiryDate',
+            'CertificateOfRoadWorthinessExpiryDate',
+            'InsuranceCertificateExpiryDate'
+        ]);
+
+    $expiryFields = [
+        'DriverLicenseExpiryDate' => 'Driver’s License',
+        'VehicleLicenseExpiryDate' => 'Vehicle License',
+        'CentralMotorRegistryExpiryDate' => 'Central Motor Registry',
+        'ProofOfOwnershipExpiryDate' => 'Proof of Ownership',
+        'CertificateOfRoadWorthinessExpiryDate' => 'Road Worthiness',
+        'InsuranceCertificateExpiryDate' => 'Insurance Certificate',
+    ];
+@endphp
+
+@foreach ($expiryFields as $field => $label)
+    @php
+        $expiry = $documents->$field ?? null;
+        $expiryDate = $expiry ? \Carbon\Carbon::parse($expiry) : null;
+        $now = \Carbon\Carbon::now();
+        $isExpiringSoon = $expiryDate && $expiryDate->isFuture() && $expiryDate->lte($now->copy()->addMonth());
+        $isExpired = $expiryDate && $expiryDate->isPast();
+    @endphp
+
+    @if ($isExpiringSoon)
+        <div class="inner-x"> 
+            <img src="{{ asset('Images/service.png') }}"> 
+            <p>
+                The <strong style="text-transform: uppercase; font-weight: unset; background: orange; color: #fff; padding: .1em 1em;">{{ $label }}</strong> for vehicle 
+                <span class="vehicle-number color-x">{{ $Car->VehicleNumber }}</span> 
+                will expire on <br>
+                <strong style="text-transform: uppercase; font-weight: unset; background: #222; color: #fff; padding: .1em 1em;">{{ $expiryDate->format('F j, Y') }}</strong>. 
+                Kindly renew before the due date.
+            </p>
+        </div>
+    @endif
+
+    @if ($isExpired)
+        <div class="inner-x"> 
+            <img src="{{ asset('Images/service.png') }}"> 
+            <p>
+                ALERT! The <strong style="text-transform: uppercase; font-weight: unset; background: darkred; color: #fff; padding: .1em 1em;">{{ $label }}</strong> for vehicle 
+                <span class="vehicle-number color-x">{{ $Car->VehicleNumber }}</span> 
+                expired on <br> 
+                <strong style="text-transform: uppercase; font-weight: unset; background: #000; color: #fff; padding: .1em 1em;">{{ $expiryDate->format('F j, Y') }}</strong>. 
+                Immediate renewal is required.
+            </p>
+        </div>
+    @endif
+@endforeach
+
+
+        <!---->
             @php
                 $ActiveCars_Refueling = \DB::table('refuelings')->select(['Date', 'VehicleNumber', 'Consumption', 'Mileage'])->where('VehicleNumber', $Car->VehicleNumber)->orderBy('Date', 'DESC')->first();
                 $ActiveCars_Maintenance = \DB::table('maintenances')->select('Date')->where('VehicleNumber', $Car->VehicleNumber)->orderBy('Date', 'DESC')->first();
