@@ -21,7 +21,7 @@
             @endunless
             @foreach ($Cars as $Car)
             @php 
-                include('../resources/views/Includes/CompanyName.php');
+                @include('Includes.CompanyName');
                 $TotalDeposits = \App\Models\Deposits::where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
                 $TotalRefueling = \App\Models\Refueling::where('VehicleNumber', $Car->VehicleNumber)->sum('Amount');
                 $Mileage = \App\Models\Refueling::select('Mileage')->where('VehicleNumber', $Car->VehicleNumber)->orderBy('id', 'DESC')->first();

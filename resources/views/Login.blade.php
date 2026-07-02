@@ -5,7 +5,7 @@
         <div class="wrapper-inner">
             <div class="login-inner"> 
                 <p class="company-logo">
-                    <img src="{{ asset('Images/depasa-logo.png') }}" alt="">
+                    <img src="{{ asset('Images/company-logo.png') }}" alt="">
                 </p>
                 <form action="/Login" method="POST">
                 @csrf

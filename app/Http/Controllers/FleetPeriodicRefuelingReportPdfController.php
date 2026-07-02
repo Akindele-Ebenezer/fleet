@@ -16,7 +16,7 @@ class FleetPeriodicRefuelingReportPdfController extends Controller
         $Year = $Request->Year;
         $fpdf->SetTitle('Vehicle Fuel Cost Report - ' . $Month . ' ' . $Year);
 
-        $fpdf->Image('../public/images/depasa-logo.png', 10, 7, 60);    
+        $fpdf->Image('../public/images/company-logo.png', 10, 7, 60);    
 
         $fpdf->Ln(35);      
         

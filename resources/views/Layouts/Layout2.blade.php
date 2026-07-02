@@ -123,7 +123,7 @@
                 </h1>
             </div>
             <center>
-                <img src="{{ asset('Images/depasa-logo.png') }}" alt="">
+                <img src="{{ asset('Images/company-logo.png') }}" alt="">
             </center>
             <ul>
                 <li>

@@ -15,7 +15,7 @@
                 <th onclick="sortTable(4)">Balance</th>
             </tr>  
             @foreach ($Cars__MyRecords as $Car)
-                @php include('../resources/views/Includes/CompanyName.php') @endphp
+                @php @include('Includes.CompanyName') @endphp
                 <tr>  
                     <td class="id">{{ $Car->id }}</td>
                     <td>
