@@ -17,7 +17,7 @@ class FleetPeriodicMaintenanceReportPdfController extends Controller
         $Year = $Request->Year;
         $fpdf->SetTitle('Vehicle Maintenance Cost Report - ' . $Month . ' ' . $Year);
 
-        $fpdf->Image(asset('images/company-logo.png'), 10, 7, 60);    
+        $fpdf->Image(asset('Images/company-logo.png'), 10, 7, 60);    
 
         $fpdf->Ln(35);      
         
