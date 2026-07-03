@@ -168,7 +168,7 @@ class FleetPeriodicRefuelingReportPdfController extends Controller
         $fpdf->SetFont('Arial', 'B', 7); 
   
         $fpdf->Ln(5);   
-        $fpdf->Image('../public/Images/depasa-signature.png', 11, 270, 30, 20);
+        $fpdf->Image(asset('Images/depasa-signature.png.png'), 11, 270, 30, 20);
           
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 7);

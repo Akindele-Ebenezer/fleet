@@ -329,7 +329,7 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->Ln(15); 
   
         $this->fpdf->Cell(80, 6, '');  
-        $this->fpdf->Image('../public/Images/depasa-signature.png', 11, 220, 30, 20);
+        $this->fpdf->Image(asset('Images/depasa-signature.png.png'), 11, 220, 30, 20);
             
         $this->fpdf->SetTextColor(223, 46, 56);
         $this->fpdf->SetFont('Arial', '', 7);
@@ -659,7 +659,7 @@ class InspectionReportPdfController extends Controller
         $this->fpdf->Ln(15); 
          
         $this->fpdf->Cell(80, 6, '');  
-        $this->fpdf->Image('../public/Images/depasa-signature.png', 11, 250, 30, 20);
+        $this->fpdf->Image(asset('Images/depasa-signature.png.png'), 11, 250, 30, 20);
             
         $this->fpdf->SetTextColor(223, 46, 56);
         $this->fpdf->SetFont('Arial', '', 7);
