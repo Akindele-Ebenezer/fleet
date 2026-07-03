@@ -68,7 +68,7 @@ class FleetReportController extends Controller
         $fpdf->SetFont('Arial', 'B', 10);
         $fpdf->Cell(50, 10, 'INFORMATION RESOURCES', 0, 0, 'C', true);
         $fpdf->Cell(70, 25, '');
-        $fpdf->Image('../public/Images/company-logo.png', 163, 30, 40, 20);
+        $fpdf->Image(public_path('images/company-logo.png'), 163, 30, 40, 20);
 
         $fpdf->SetTextColor(0, 0, 0);
         $fpdf->SetFont('Arial', '', 9);
@@ -274,7 +274,7 @@ class FleetReportController extends Controller
         $fpdf->SetFont('Arial', 'B', 10);
         $fpdf->Cell(50, 10, 'MAINTENANCE', 0, 0, 'C', true);
         $fpdf->Cell(70, 25, '');
-        $fpdf->Image('../public/Images/company-logo.png', 163, 30, 40, 20);
+        $fpdf->Image(public_path('images/company-logo.png'), 163, 30, 40, 20);
 
         $fpdf->SetTextColor(0, 0, 0);
         $fpdf->SetFont('Arial', '', 9);
@@ -385,7 +385,7 @@ class FleetReportController extends Controller
         $fpdf->SetFont('Arial', 'B', 10);
         $fpdf->Cell(50, 10, 'DEPOSIT', 0, 0, 'C', true);
         $fpdf->Cell(70, 25, '');
-        $fpdf->Image('../public/Images/company-logo.png', 163, 30, 40, 20);
+        $fpdf->Image(public_path('images/company-logo.png'), 163, 30, 40, 20);
 
         $fpdf->SetTextColor(0, 0, 0);
         $fpdf->SetFont('Arial', '', 9);
@@ -483,7 +483,7 @@ class FleetReportController extends Controller
         $fpdf->SetFont('Arial', 'B', 10);
         $fpdf->Cell(50, 10, 'REFUEL', 0, 0, 'C', true);
         $fpdf->Cell(70, 25, '');
-        $fpdf->Image('../public/Images/company-logo.png', 163, 30, 40, 20);
+        $fpdf->Image(public_path('images/company-logo.png'), 163, 30, 40, 20);
 
         $fpdf->SetTextColor(0, 0, 0);
         $fpdf->SetFont('Arial', '', 9);
