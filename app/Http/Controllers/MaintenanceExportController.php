@@ -32,7 +32,7 @@ class MaintenanceExportController extends Controller
         ->get()
         ->toArray();
         $MaintenanceController->maintenancesExport_filter($MaintenancesExport_Filter); 
-        $fileName = 'Maintenance_Report_DEPASA_MARINE - ' . now()->format('Y-m-d') . '.xlsx';
+        $fileName = 'Maintenance_Report_' . config('app.name') . ' - ' . now()->format('Y-m-d') . '.xlsx';
         return Excel::download(new MaintenanceExport('all', null, null), $fileName);
         return back();
     }

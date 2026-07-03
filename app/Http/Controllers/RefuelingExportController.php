@@ -14,7 +14,7 @@ class RefuelingExportController extends Controller
 {
     public function ExportCarFuelHistory($Car, $DateFrom, $DateTo) 
     {
-        $fileName = 'Refueling_Report_DEPASA_MARINE - ' . now()->format('Y-m-d') . '.xlsx';
+        $fileName = 'Refueling_Report_' . config('app.name') . ' - ' . now()->format('Y-m-d') . '.xlsx';
         return Excel::download(new RefuelingExport($Car, $DateFrom, $DateTo), $fileName);
     }
 
@@ -41,7 +41,7 @@ class RefuelingExportController extends Controller
         ->get()
         ->toArray();
         $RefuelingController->refuelingsExport_filter($RefuelingsExport_Filter); 
-        $fileName = 'Refueling_Report_DEPASA_MARINE - ' . now()->format('Y-m-d') . '.xlsx';
+        $fileName = 'Refueling_Report_' . config('app.name') . ' - ' . now()->format('Y-m-d') . '.xlsx';
         return Excel::download(new RefuelingExport('all', null, null), $fileName);
         return back();
     }
