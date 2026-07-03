@@ -228,7 +228,7 @@ class FleetReportController extends Controller
         $fpdf->Cell(50, 6, date('Y-m-d'));
         $fpdf->Cell(20, 6, '');  
         
-        $fpdf->Image(asset('Images/depasa-signature.png.png'), 11, 270, 30, 20);
+        $fpdf->Image(asset('Images/depasa-signature.png'), 11, 270, 30, 20);
           
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 7);
@@ -339,7 +339,7 @@ class FleetReportController extends Controller
         $fpdf->Cell(50, 6, date('Y-m-d'));
         $fpdf->Cell(20, 6, '');  
 
-        $fpdf->Image(asset('Images/depasa-signature.png.png'), 11, 270, 30, 20);
+        $fpdf->Image(asset('Images/depasa-signature.png'), 11, 270, 30, 20);
           
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 7);
@@ -436,7 +436,7 @@ class FleetReportController extends Controller
         $fpdf->Cell(50, 6, date('Y-m-d'));
         $fpdf->Cell(20, 6, '');  
 
-        $fpdf->Image(asset('Images/depasa-signature.png.png'), 11, 270, 30, 20);
+        $fpdf->Image(asset('Images/depasa-signature.png'), 11, 270, 30, 20);
           
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 7);
@@ -549,7 +549,7 @@ class FleetReportController extends Controller
         $fpdf->Cell(50, 6, date('Y-m-d'));
         $fpdf->Cell(20, 6, '');  
 
-        $fpdf->Image(asset('Images/depasa-signature.png.png'), 11, 270, 30, 20);
+        $fpdf->Image(asset('Images/depasa-signature.png'), 11, 270, 30, 20);
           
         $fpdf->SetTextColor(223, 46, 56);
         $fpdf->SetFont('Arial', '', 7);
