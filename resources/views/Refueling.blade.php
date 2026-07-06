@@ -213,12 +213,16 @@
                             {{ $CarOdometer?->Odometer === 'Kilometer' ? 'km/liter' : '' }}
                             {{ $CarOdometer?->Odometer === 'Mileage' ? 'mpl' : '' }}
                         </small>
-                        <option>  
-                            @if ($CarOdometer->Odometer === 'Mileage') 
-                                {{ $Refueling->Quantity == 0 ? 1 : round($Refueling->KM * 1.60934 / $Refueling->Quantity, 1) . ' km/liter' }}
-                            @endif
-                            @if ($CarOdometer->Odometer === 'Kilometer') 
-                                {{ $Refueling->Quantity == 0 ? 1 :  round($Refueling->KM * 0.621371 / $Refueling->Quantity, 1) . ' mpl' }}
+                        @php
+                            $unit = $CarOdometer->Odometer ?? 'Kilometer';
+                        @endphp
+
+                        <option>
+                            @if($Refueling->Quantity > 0)
+                                {{ round($Refueling->KM / $Refueling->Quantity, 1) }}
+                                {{ $unit === 'Kilometer' ? 'km/liter' : 'mpl' }}
+                            @else
+                                0
                             @endif
                         </option>
                     </select> 
