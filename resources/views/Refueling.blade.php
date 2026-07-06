@@ -188,12 +188,22 @@
                 {{-- <td>{{ $Refueling->ReceiptNumber }}</td>  --}}
                 <td class="distance"> 
                     <select>
-                        <option>
-                            {{ $Refueling->KM }} {{ $CarOdometer->Odometer === 'Mileage' ? 'miles' : '' }}{{ $CarOdometer->Odometer === 'Kilometer' ? 'km' : '' }}
-                        </option>
-                        <option>
-                            {{ $CarOdometer->Odometer === 'Mileage' ? ceil($Refueling->KM * 1.60934) . ' km' : ceil($Refueling->KM * 0.621371) . ' miles' }}
-                        </option>
+                        @if($CarOdometer)
+                            <option>
+                                {{ $Refueling->KM }}
+                                {{ $CarOdometer->Odometer === 'Mileage' ? 'miles' : 'km' }}
+                            </option>
+
+                            <option>
+                                {{
+                                    $CarOdometer->Odometer === 'Mileage'
+                                        ? ceil($Refueling->KM * 1.60934) . ' km'
+                                        : ceil($Refueling->KM * 0.621371) . ' miles'
+                                }}
+                            </option>
+                        @else
+                            <option>{{ $Refueling->KM }}</option>
+                        @endif
                     </select>
                 </td> 
                 <td class="fuel-consumption">
