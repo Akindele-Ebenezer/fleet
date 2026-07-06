@@ -208,9 +208,11 @@
                 </td> 
                 <td class="fuel-consumption">
                     <select>
-                        <option>
-                            {{ round($Refueling->Consumption, 1) }} <small>{{ $CarOdometer->Odometer === 'Kilometer' ? 'km/liter' : '' }}{{ $CarOdometer->Odometer === 'Mileage' ? 'mpl' : '' }}</em>
-                        </option>
+                        {{ round($Refueling->Consumption, 1) }}
+                        <small>
+                            {{ $CarOdometer?->Odometer === 'Kilometer' ? 'km/liter' : '' }}
+                            {{ $CarOdometer?->Odometer === 'Mileage' ? 'mpl' : '' }}
+                        </small>
                         <option>  
                             @if ($CarOdometer->Odometer === 'Mileage') 
                                 {{ $Refueling->Quantity == 0 ? 1 : round($Refueling->KM * 1.60934 / $Refueling->Quantity, 1) . ' km/liter' }}
